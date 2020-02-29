@@ -7,7 +7,7 @@ const patientAdmin = new PatientAdmin();
 const View = () => (
   <div>
     <RenderList admin={patientAdmin} />
-    <RenderDetail admin={patientAdmin} />
+    <RenderDetail admin={patientAdmin} objectID="100"/>
   </div>
 );
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { BaseAdmin } from "../admin/typings";
 import Table from "react-bootstrap/Table";
 
@@ -9,7 +9,10 @@ const LineRender: FunctionComponent<{ object: any }> = ({ object }) => (
 );
 
 const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
-  const objects: any[] = [];
+  const [objects, setObjects] = useState<Object[]>([]);
+  
+  useEffect(() => setObjects(admin.provider.getList()));
+
   return (
     <Table>
       <thead></thead>
