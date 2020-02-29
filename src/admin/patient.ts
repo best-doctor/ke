@@ -1,5 +1,5 @@
-import { BaseAdmin } from "./base_admin";
-import { StringField, IntegerField, ForeignKeyField } from "./base_fields";
+import { StringField, IntegerField, ForeignKeyField } from "./typings/fields";
+import { BaseAdmin } from "./typings";
 
 export {PatientAdmin };
 
