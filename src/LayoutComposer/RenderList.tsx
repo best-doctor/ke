@@ -2,23 +2,38 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { BaseAdmin } from "../admin/typings";
 import Table from "react-bootstrap/Table";
 
-const LineRender: FunctionComponent<{ object: any }> = ({ object }) => (
+const LineRender: FunctionComponent<{ fieldNames: string[]; object: any }> = ({
+  object,
+  fieldNames
+}) => (
   <tr>
-    <td>This is some object</td>
+    {fieldNames.map((fName, index) => (
+      <td key={index}>{object[fName]}</td>
+    ))}
   </tr>
 );
 
 const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
   const [objects, setObjects] = useState<Object[]>([]);
-  
-  useEffect(() => setObjects(admin.provider.getList()));
+
+  useEffect(() => {
+    admin.provider.getList().then(setObjects);
+  }, [objects.length]);
+
+  const fields = admin.fields.map(field => field.name);
 
   return (
     <Table>
-      <thead></thead>
+      <thead>
+        <tr>
+          {fields.map((fName, index) => (
+            <th key={index}>{fName}</th>
+          ))}
+        </tr>
+      </thead>
       <tbody>
         {objects.map((object, index) => (
-          <LineRender key={index} object={object} />
+          <LineRender key={index} object={object} fieldNames={fields} />
         ))}
       </tbody>
     </Table>
