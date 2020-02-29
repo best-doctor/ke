@@ -5,7 +5,7 @@ const FieldRender: FunctionComponent<{ field: FieldDescription }> = ({ field }) 
   <li>{field.name}: some dummy value</li>
 );
 
-const Render: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => (
+const RenderDetail: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => (
   <div>
     <ul>
       {admin.fields.map((field, index) => (
@@ -15,4 +15,4 @@ const Render: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => (
   </div>
 );
 
-export default Render;
+export default RenderDetail;
