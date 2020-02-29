@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { BaseAdmin } from "../typings";
+import { BaseAdmin } from "../admin/typings";
 
 const Render: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => (
   <div>
