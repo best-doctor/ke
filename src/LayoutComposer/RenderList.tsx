@@ -1,22 +1,25 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { BaseAdmin } from "../admin/typings";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-bootstrap/lib/Navbar";
+import { Link } from "react-router-dom";
 
 const LineRender: FunctionComponent<{ fieldNames: string[]; object: any }> = ({
   object,
   fieldNames
 }) => {
-  const fieldWidget = (fName: string) => fName == 'id' ? Link : React.createElement('span');
-  return <tr>
-    {fieldNames.map((fName, index) => (
-      <td key={index}>
-        {fieldRender(fName)}
-        </td>
-    ))}
-  </tr>
-}
-);
+  const fieldWidget = (fName: string) => {
+    const element =
+      fName === "id" ? <Link to={object.id}>{object.id.toString()}</Link> : object[fName];
+    return element;
+  };
+  return (
+    <tr>
+      {fieldNames.map((fName, index) => (
+        <td key={index}>{fieldWidget(fName)}</td>
+      ))}
+    </tr>
+  );
+};
 
 const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
   const [objects, setObjects] = useState<any[]>([]);
