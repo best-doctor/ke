@@ -6,7 +6,7 @@ type FieldPosition = {
   lowRight: number[];
 };
 
-abstract class FieldDescription {
+export abstract class FieldDescription {
   name!: string;
   readOnly!: boolean;
   fieldType!: BaseField;

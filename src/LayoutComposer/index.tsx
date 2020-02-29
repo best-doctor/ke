@@ -1,7 +1,14 @@
 import React from "react";
 import { PatientAdmin } from "../admin/patient";
-import Render from "./Render";
+import RenderDetail from "./RenderDetail";
+import RenderList from "./RenderList";
 
-const View = () => <Render admin={new PatientAdmin()} />;
+const patientAdmin = new PatientAdmin();
+const View = () => (
+  <div>
+    <RenderList admin={patientAdmin} />
+    <RenderDetail admin={patientAdmin} />
+  </div>
+);
 
 export default View;
