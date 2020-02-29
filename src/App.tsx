@@ -1,14 +1,6 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import LayoutComposer from "./LayoutComposer";
 
-function App() {
-  return <Container>
-    <Row>
-      <Col>Hello world</Col>
-    </Row>
-  </Container>;
-}
+const App = () => <LayoutComposer />;
 
 export default App;
