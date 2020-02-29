@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const backendURL = 'http://localhost:8000'
-const backendAPIURL = backendURL + '/api'
+const backendAPIURL = '/api'
 
 
 abstract class BaseProvider {
