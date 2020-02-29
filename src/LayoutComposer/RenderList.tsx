@@ -18,7 +18,7 @@ const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
 
   useEffect(() => {
     admin.provider.getList().then(setObjects);
-  }, [objects.length]);
+  }, []);
 
   const fields = admin.fields.map(field => field.name);
 
