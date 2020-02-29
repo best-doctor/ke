@@ -1,6 +1,7 @@
 import React from "react";
+import PatientAdmin from './PatientAdmin.sample'
+import Render from './Render'
 
-
-const View = () => <div>Returns composed HTML</div>;
+const View = () => <Render admin={new PatientAdmin()}/>
 
 export default View;
