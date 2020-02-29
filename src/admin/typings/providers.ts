@@ -1,13 +1,22 @@
-export abstract class BaseProvider {
+import axios from 'axios';
+
+const backendURL = 'http://localhost:8000'
+const backendAPIURL = backendURL + '/api'
+
+
+abstract class BaseProvider {
     url!: string;
     writableFields!: string[];
     readOnlyFields!: string[];
 
-    abstract getList: () => Object[];
-    abstract getObject: (objectId: string) => Object;
-
-    abstract create = (data: Object) => Object;
-    abstract update = (data: Object) => Object;
-    abstract delete = (data: Object) => Object;
+    getList = async () => {
+        let response = await axios.get(backendAPIURL + this.url );
+        return response.data;
+    }
+    getObject = async (objectId: string) => {
+        let response = await axios.get(backendAPIURL + this.url + objectId + '/');
+        return response.data;
+    }
 };
 
+export { BaseProvider };

@@ -1,7 +1,9 @@
 import { StringField, IntegerField, ForeignKeyField } from "./typings/fields";
+import { PatientProvider } from '../providers/patient';
 import { BaseAdmin } from "./typings";
 
 export class PatientAdmin extends BaseAdmin {
+  provider = new PatientProvider();
   fields = [
     {
       name: "firstName",
