@@ -1,20 +1,24 @@
 import React, { FunctionComponent } from "react";
 import { BaseAdmin } from "../admin/typings";
+import Table from "react-bootstrap/Table";
 
 const LineRender: FunctionComponent<{ object: any }> = ({ object }) => (
-  <li>This is some object</li>
+  <tr>
+    <td>This is some object</td>
+  </tr>
 );
 
 const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
   const objects: any[] = [];
   return (
-    <div>
-      <ul>
+    <Table>
+      <thead></thead>
+      <tbody>
         {objects.map((object, index) => (
           <LineRender key={index} object={object} />
         ))}
-      </ul>
-    </div>
+      </tbody>
+    </Table>
   );
 };
 

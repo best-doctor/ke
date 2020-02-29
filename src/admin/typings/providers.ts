@@ -1,4 +1,4 @@
-abstract class BaseProvider {
+export abstract class BaseProvider {
     url!: string;
     writableFields!: string[];
     readOnlyFields!: string[];
@@ -11,4 +11,3 @@ abstract class BaseProvider {
     abstract delete = (data: Object) => Object;
 };
 
-export { BaseProvider };
