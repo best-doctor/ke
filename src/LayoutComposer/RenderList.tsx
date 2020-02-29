@@ -1,26 +1,31 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { BaseAdmin } from "../admin/typings";
 import Table from "react-bootstrap/Table";
+import { Link } from "react-bootstrap/lib/Navbar";
 
 const LineRender: FunctionComponent<{ fieldNames: string[]; object: any }> = ({
   object,
   fieldNames
-}) => (
-  <tr>
+}) => {
+  const fieldWidget = (fName: string) => fName == 'id' ? Link : React.createElement('span');
+  return <tr>
     {fieldNames.map((fName, index) => (
-      <td key={index}>{object[fName]}</td>
+      <td key={index}>
+        {fieldRender(fName)}
+        </td>
     ))}
   </tr>
+}
 );
 
 const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
-  const [objects, setObjects] = useState<Object[]>([]);
+  const [objects, setObjects] = useState<any[]>([]);
 
   useEffect(() => {
     admin.provider.getList().then(setObjects);
   }, []);
 
-  const fields = admin.fields.map(field => field.name);
+  const fields = ["id", ...admin.fields.map(field => field.name)];
 
   return (
     <Table>
@@ -32,8 +37,8 @@ const RenderList: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
         </tr>
       </thead>
       <tbody>
-        {objects.map((object, index) => (
-          <LineRender key={index} object={object} fieldNames={fields} />
+        {objects.map(object => (
+          <LineRender key={object.id} object={object} fieldNames={fields} />
         ))}
       </tbody>
     </Table>
