@@ -7,11 +7,14 @@ const LineRender: FunctionComponent<{ fieldNames: string[]; object: any }> = ({
   object,
   fieldNames
 }) => {
-  const fieldWidget = (fName: string) => {
-    const element =
-      fName === "id" ? <Link to={object.id}>{object.id.toString()}</Link> : object[fName];
-    return element;
-  };
+  const fieldWidget = (fName: string) =>
+    fName === "id" ? (
+      <Link to={location => location.pathname + "/" + object.id}>
+        {object.id}
+      </Link>
+    ) : (
+      object[fName]
+    );
   return (
     <tr>
       {fieldNames.map((fName, index) => (
