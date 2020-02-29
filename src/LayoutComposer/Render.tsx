@@ -1,11 +1,15 @@
 import React, { FunctionComponent } from "react";
-import { BaseAdmin } from "../admin/typings";
+import { BaseAdmin, FieldDescription } from "../admin/typings";
+
+const FieldRender: FunctionComponent<{ field: FieldDescription }> = ({ field }) => (
+  <li>{field.name}: some dummy value</li>
+);
 
 const Render: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => (
   <div>
     <ul>
       {admin.fields.map((field, index) => (
-        <li key={index}>{field.name}: some dummy value</li>
+        <FieldRender key={index} field={field} />
       ))}
     </ul>
   </div>
