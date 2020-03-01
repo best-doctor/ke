@@ -1,7 +1,9 @@
 {
-  "name": "ke",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@bestdoctor/ke",
+  "version": "0.0.1",
+  "description": "BestDoctor back-office UI constructor",
+  "author": "pro100filipp",
+  "main": "index.tsx",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -41,5 +43,13 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000"
+  "proxy": "http://localhost:8000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/best-doctor/ke.git"
+  },
+  "bugs": {
+    "url": "https://github.com/best-doctor/ke/issues"
+  },
+  "homepage": "https://github.com/best-doctor/ke#readme"
 }
