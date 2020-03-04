@@ -5,4 +5,3 @@ export class PatientProvider extends BaseProvider {
   writableFields = ["first_name", "last_name", "birth_date", "age", "user"];
   readOnlyFields = [];
 }
-
