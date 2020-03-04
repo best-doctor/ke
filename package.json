@@ -12,6 +12,7 @@
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
+    "@bestdoctor/eslint-config": "^0.5.4",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
@@ -19,25 +20,19 @@
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-optimize-regex": "^1.1.7",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "eslint-plugin-sonarjs": "^0.5.0",
     "prettier": "^1.19.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx src",
+    "lint": "eslint --cache --ext .ts,.tsx src",
     "prepare": "yarn build",
-    "preversion": "yarn lint",
+    "preversion": "yarn lint ",
     "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "@bestdoctor"
   },
   "browserslist": {
     "production": [
@@ -58,5 +53,12 @@
   "bugs": {
     "url": "https://github.com/best-doctor/ke/issues"
   },
-  "homepage": "https://github.com/best-doctor/ke#readme"
+  "homepage": "https://github.com/best-doctor/ke#readme",
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  }
 }
