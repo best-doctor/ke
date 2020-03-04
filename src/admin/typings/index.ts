@@ -1,20 +1,10 @@
-import { BaseProvider } from "./providers";
-import { BaseField } from "./fields";
+import BaseProvider from './providers'
+import FieldDescription from './FieldDescription'
 
-type FieldPosition = {
-  topLeft: number[];
-  lowRight: number[];
-};
+abstract class BaseAdmin {
+  provider!: BaseProvider
 
-export abstract class FieldDescription {
-  name!: string;
-  readOnly!: boolean;
-  fieldType!: BaseField;
-  position?: FieldPosition;
-  className?: string;
+  fields!: FieldDescription[]
 }
 
-export abstract class BaseAdmin {
-  provider!: BaseProvider;
-  fields!: FieldDescription[];
-}
+export default BaseAdmin

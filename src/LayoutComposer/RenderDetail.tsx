@@ -1,37 +1,39 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { BaseAdmin, FieldDescription } from '../admin/typings'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
+
+import BaseAdmin from '../admin/typings'
+import FieldDescription from '../admin/typings/FieldDescription'
 
 const FieldRender: FunctionComponent<{
-	field: FieldDescription
-	value: any
-}> = ({ field, value }) =>
-	<li>
-		{field.name}: {value}
-	</li>
-
+  field: FieldDescription
+  value: string | number
+}> = ({ field, value }) => (
+  <li>
+    {field.name}: {value}
+  </li>
+)
 
 const RenderDetail: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
-	const [object, setObject] = useState<any>()
-	const { id } = useParams<{ id: string }>()
+  const [object, setObject] = useState<Model>()
+  const { id } = useParams<{ id: string }>()
 
-	useEffect(() => {
-		admin.provider.getObject(id).then(res => setObject(res))
-	}, [])
+  useEffect(() => {
+    admin.provider.getObject(id).then(res => setObject(res))
+  })
 
-	return (
-		<div>
-			{object ?
-				<ul>
-					{admin.fields.map((field, index) =>
-						<FieldRender key={index} field={field} value={object[field.name]} />
-					)}
-				</ul>
-				:
-				''
-			}
-		</div>
-	)
+  return (
+    <div>
+      {object ? (
+        <ul>
+          {admin.fields.map(field => (
+            <FieldRender key={field.name} field={field} value={object[field.name]} />
+          ))}
+        </ul>
+      ) : (
+        ''
+      )}
+    </div>
+  )
 }
 
 export default RenderDetail

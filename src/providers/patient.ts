@@ -1,7 +1,11 @@
-import { BaseProvider } from "../admin/typings/providers";
+import BaseProvider from '../admin/typings/providers'
 
-export class PatientProvider extends BaseProvider {
-  url = "/patients/";
-  writableFields = ["first_name", "last_name", "birth_date", "age", "user"];
-  readOnlyFields = [];
+class PatientProvider extends BaseProvider {
+  url = '/patients/'
+
+  writableFields = ['first_name', 'last_name', 'birth_date', 'age', 'user']
+
+  readOnlyFields = []
 }
+
+export default PatientProvider

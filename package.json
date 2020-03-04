@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint --cache --ext .ts,.tsx src",
+    "lint": "eslint --ext .ts,.tsx src --quiet",
+    "format": "prettier --write 'src/**/*'",
     "prepare": "yarn build",
     "preversion": "yarn lint ",
     "version": "yarn format && git add -A src",
@@ -55,8 +56,9 @@
   },
   "homepage": "https://github.com/best-doctor/ke#readme",
   "prettier": {
+    "parser": "typescript",
     "printWidth": 120,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "es5"
