@@ -19,7 +19,7 @@ const RenderDetail: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
 
   useEffect(() => {
     admin.provider.getObject(id).then(res => setObject(res))
-  })
+  }, [admin.provider, id])
 
   return (
     <div>
