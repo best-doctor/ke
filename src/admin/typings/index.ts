@@ -1,5 +1,5 @@
-import BaseProvider from './providers'
-import FieldDescription from './FieldDescription'
+import type BaseProvider from './providers'
+import type FieldDescription from './FieldDescription'
 
 abstract class BaseAdmin {
   provider!: BaseProvider

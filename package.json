@@ -21,7 +21,8 @@
     "@typescript-eslint/parser": "^2.22.0",
     "eslint": "^6.8.0",
     "prettier": "^1.19.1",
-    "typescript": "~3.7.2"
+    "tslib": "^1.11.1",
+    "typescript": "~3.8.3"
   },
   "scripts": {
     "build": "tsc",
@@ -31,9 +32,6 @@
     "preversion": "yarn lint ",
     "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags"
-  },
-  "eslintConfig": {
-    "extends": "@bestdoctor"
   },
   "browserslist": {
     "production": [

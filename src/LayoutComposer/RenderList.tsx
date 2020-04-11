@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import BaseAdmin from '../admin/typings'
+import type BaseAdmin from 'admin/typings'
 
 const LineRender: FunctionComponent<{ fieldNames: string[]; object: Model }> = ({ object, fieldNames }) => {
   const fieldWidget = (fName: string) => {

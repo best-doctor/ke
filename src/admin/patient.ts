@@ -1,4 +1,4 @@
-import PatientProvider from '../providers/patient'
+import PatientProvider from 'providers/patient'
 
 import BaseAdmin from './typings'
 import StringField from './typings/StringField'

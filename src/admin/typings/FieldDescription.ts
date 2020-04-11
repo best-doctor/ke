@@ -1,4 +1,4 @@
-import BaseField from './BaseField'
+import type BaseField from './BaseField'
 
 type FieldPosition = {
   topLeft: number[]

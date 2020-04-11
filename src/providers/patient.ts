@@ -1,4 +1,4 @@
-import BaseProvider from '../admin/typings/providers'
+import BaseProvider from 'admin/typings/providers'
 
 class PatientProvider extends BaseProvider {
   url = '/patients/'

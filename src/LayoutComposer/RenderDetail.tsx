@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import BaseAdmin from '../admin/typings'
-import FieldDescription from '../admin/typings/FieldDescription'
+import type BaseAdmin from 'admin/typings'
+import type FieldDescription from 'admin/typings/FieldDescription'
 
 const FieldRender: FunctionComponent<{
   field: FieldDescription
