@@ -1,11 +1,11 @@
-import type BaseField from './BaseField'
+import type { BaseField } from './BaseField'
 
 type FieldPosition = {
   topLeft: number[]
   lowRight: number[]
 }
 
-abstract class FieldDescription {
+export abstract class FieldDescription {
   name!: string
 
   readOnly!: boolean
@@ -16,5 +16,3 @@ abstract class FieldDescription {
 
   className?: string
 }
-
-export default FieldDescription

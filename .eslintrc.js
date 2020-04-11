@@ -24,13 +24,11 @@ module.exports = {
       { allowExpressions: true, allowTypedFunctionExpressions: true },
     ],
     // Just because of hoising
-    "no-use-before-define": [
-      "error",
-      { functions: false, classes: true, variables: true },
-    ],
+    'no-use-before-define': ['error', { functions: false, classes: true, variables: true }],
     '@typescript-eslint/no-use-before-define': [
       'error',
       { functions: false, classes: true, variables: true, typedefs: true },
     ],
+    'react/prop-types': 'off',
   },
 }

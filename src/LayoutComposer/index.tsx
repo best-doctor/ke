@@ -1,13 +1,12 @@
 import React from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
-import PatientAdmin from 'admin/patient'
-
-import RenderDetail from './RenderDetail'
-import RenderList from './RenderList'
+import { PatientAdmin } from 'examples/patients/admin'
+import { RenderDetail } from './RenderDetail'
+import { RenderList } from './RenderList'
 
 const patientAdmin = new PatientAdmin()
-const View = () => (
+export const LayoutComposer = (): JSX.Element => (
   <Router>
     <Switch>
       <Route exact path="/patients">
@@ -19,5 +18,3 @@ const View = () => (
     </Switch>
   </Router>
 )
-
-export default View

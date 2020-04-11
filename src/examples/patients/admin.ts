@@ -1,11 +1,10 @@
-import PatientProvider from 'providers/patient'
+import { BaseAdmin } from 'admin'
+import { StringField } from 'admin/fields/StringField'
+import { IntegerField } from 'admin/fields/IntegerField'
+import { ForeignKeyField } from 'admin/fields/ForeignKeyField'
+import { PatientProvider } from './provider'
 
-import BaseAdmin from './typings'
-import StringField from './typings/StringField'
-import IntegerField from './typings/IntegerField'
-import ForeignKeyField from './typings/ForeignKeyField'
-
-class PatientAdmin extends BaseAdmin {
+export class PatientAdmin extends BaseAdmin {
   provider = new PatientProvider()
 
   fields = [
@@ -22,5 +21,3 @@ class PatientAdmin extends BaseAdmin {
     { name: 'user__email', fieldType: StringField, readOnly: true },
   ]
 }
-
-export default PatientAdmin

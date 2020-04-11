@@ -1,7 +1,5 @@
 import React from 'react'
 
-import LayoutComposer from './LayoutComposer'
+import { LayoutComposer } from './LayoutComposer'
 
-const App = () => <LayoutComposer />
-
-export default App
+export const App = (): JSX.Element => <LayoutComposer />

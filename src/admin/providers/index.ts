@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const backendAPIURL = '/api'
 
-abstract class BaseProvider {
+export abstract class BaseProvider {
   url!: string
 
   writableFields!: string[]
@@ -19,5 +19,3 @@ abstract class BaseProvider {
     return response.data
   }
 }
-
-export default BaseProvider

@@ -1,31 +1,33 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import type BaseAdmin from 'admin/typings'
-import type FieldDescription from 'admin/typings/FieldDescription'
+import type { BaseAdmin } from 'admin'
+import type { FieldDescription } from 'admin/fields/FieldDescription'
 
-const FieldRender: FunctionComponent<{
+type FieldComponentProps = {
   field: FieldDescription
   value: string | number
-}> = ({ field, value }) => (
+}
+
+const FieldRender: React.FC<FieldComponentProps> = ({ field, value }) => (
   <li>
     {field.name}: {value}
   </li>
 )
 
-const RenderDetail: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
+export const RenderDetail: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
-    admin.provider.getObject(id).then(res => setObject(res))
+    admin.provider.getObject(id).then((res) => setObject(res))
   }, [admin.provider, id])
 
   return (
     <div>
       {object ? (
         <ul>
-          {admin.fields.map(field => (
+          {admin.fields.map((field) => (
             <FieldRender key={field.name} field={field} value={object[field.name]} />
           ))}
         </ul>
@@ -35,5 +37,3 @@ const RenderDetail: FunctionComponent<{ admin: BaseAdmin }> = ({ admin }) => {
     </div>
   )
 }
-
-export default RenderDetail
