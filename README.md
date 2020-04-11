@@ -1,5 +1,5 @@
 # ke
-![](https://github.com/best-doctor/ke/workflows/.github/workflows/CI/badge.svg)
+![](https://github.com/best-doctor/ke/workflows/CI/badge.svg)
 
 React admin framework done by and for backenders
 
