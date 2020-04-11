@@ -1,6 +1,6 @@
 {
   "name": "@bestdoctor/ke",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "BestDoctor back-office UI constructor",
   "author": "pro100filipp",
   "main": "dist/index.js",
@@ -12,7 +12,6 @@
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "@bestdoctor/eslint-config": "^0.5.4",
     "@types/node": "^13.11.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
@@ -21,6 +20,7 @@
     "@typescript-eslint/parser": "^2.27.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
@@ -34,7 +34,7 @@
     "lint": "eslint --ext .ts,.tsx src",
     "format": "prettier --write 'src/**/*'",
     "prepare": "yarn build",
-    "preversion": "yarn lint ",
+    "preversion": "yarn lint",
     "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags"
   },
