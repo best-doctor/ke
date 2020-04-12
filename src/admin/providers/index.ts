@@ -3,11 +3,11 @@ import axios from 'axios'
 const backendAPIURL = '/api'
 
 export abstract class BaseProvider {
-  url!: string
+  abstract url: string
 
-  writableFields!: string[]
+  abstract writableFields: string[]
 
-  readOnlyFields!: string[]
+  abstract readOnlyFields: string[]
 
   getList = async (): Promise<Model[]> => {
     const response = await axios.get(backendAPIURL + this.url)

@@ -2,9 +2,9 @@ import type { BaseProvider } from './providers'
 import type { FieldDescription } from './fields/FieldDescription'
 
 export abstract class BaseAdmin {
-  provider!: BaseProvider
+  abstract provider: BaseProvider
 
-  list_fields!: FieldDescription[]
+  abstract list_fields: FieldDescription[]
 
-  detail_fields!: FieldDescription[]
+  abstract detail_fields: FieldDescription[]
 }
