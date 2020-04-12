@@ -1,6 +1,6 @@
 import type { Component } from 'react'
 import type { BaseAdmin } from 'admin'
-import type { LayoutData } from '../typing'
+import type { LayoutData } from 'typing'
 
 type adminSettingsElement = {
   flat_data: string
