@@ -33,6 +33,7 @@
   },
   "scripts": {
     "build": "ttsc",
+    "start": "ttsc --watch",
     "lint": "eslint --ext .ts,.tsx src",
     "format": "prettier --write 'src/**/*'",
     "prepare": "yarn build",
