@@ -1,6 +1,6 @@
-import type { Component } from 'react';
-import type { BaseField } from './BaseField';
-import type { LayoutData } from '../../typing';
+import type { Component } from 'react'
+import type { BaseField } from './BaseField'
+import type { LayoutData } from '../../typing'
 
 type FieldPosition = {
   topLeft: number[]
