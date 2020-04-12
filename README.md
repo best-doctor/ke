@@ -17,7 +17,7 @@ It uses the `url` attribute, which determines the required resource, to fetch da
 ```ts
 // providers.ts
 
-import {BaseProvider} from '@bestdoctor/ke';
+import { BaseProvider } from '@bestdoctor/ke';
 
 class PatientProvider extends BaseProvider {
   url = '/patients/'
@@ -35,7 +35,7 @@ import {
   BaseAdmin, LinkField, TableRowWidget,
   StringField, SelectWidget, NestedStructure, InfoWidget,
 } from '@bestdoctor/ke';
-import {Patient} from './providers';
+import { PatientProvider } from './providers';
 
 class PatientAdmin extends BaseAdmin {
   provider = new PatientProvider()
@@ -88,7 +88,7 @@ Attributes in fields description:
 After that you can use component `LayoutComposer`, which makes all magic under the hood and get your user component.
 
 ```ts
-import {LayoutComponent} from '@bestdoctor/ke';
+import { LayoutComponent } from '@bestdoctor/ke';
 
 const PatientComponent = () => <LayoutComposer data={new PatientAdmin()}/>
 ```
