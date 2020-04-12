@@ -32,5 +32,7 @@ module.exports = {
     'react/prop-types': 'off',
     // Non-null assertion operator makes strict typechecking useless
     '@typescript-eslint/no-non-null-assertion': 'error',
+    // TypeScript handles it better
+    'consistent-return': 'off',
   },
 }
