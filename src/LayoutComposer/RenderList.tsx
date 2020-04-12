@@ -34,7 +34,7 @@ export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
     admin.provider.getList().then(setObjects)
   }, [admin.provider])
 
-  const fields = ['id', ...admin.fields.map((field) => field.name)]
+  const fields = ['id', ...admin.list_fields.map((field) => field.name)]
 
   return (
     <table>

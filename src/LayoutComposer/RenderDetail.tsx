@@ -27,7 +27,7 @@ export const RenderDetail: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
     <div>
       {object ? (
         <ul>
-          {admin.fields.map((field) => (
+          {admin.detail_fields.map((field) => (
             <FieldRender key={field.name} field={field} value={object[field.name]} />
           ))}
         </ul>
