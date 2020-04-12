@@ -1,5 +1,5 @@
 type LayoutData = {
-    x: number,
+  x: number
 }
 
-export { LayoutData };
+export { LayoutData }
