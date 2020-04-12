@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { Component } from 'react'
-import { parseAdminSettings } from './adminSettingsParser'
-import { BaseAdmin } from '/admin'
+import { parseAdminSettings } from '../src/utils/adminSettingsParser'
+import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
 
 class TestProvider extends BaseProvider {
