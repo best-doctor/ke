@@ -1,6 +1,6 @@
-import type { Component } from 'react'
 import type { LayoutData } from 'typing'
 import type { BaseField } from './BaseField'
+import type { ReactNode } from 'react'
 
 type FieldPosition = {
   topLeft: number[]
@@ -14,7 +14,7 @@ export abstract class FieldDescription {
 
   fieldType!: typeof BaseField
 
-  widget!: Component
+  widget!: ReactNode
 
   layout!: LayoutData
 

@@ -1,10 +1,10 @@
-import type { Component } from 'react'
+import type { ReactNode } from 'react'
 import type { BaseAdmin } from 'admin'
 import type { LayoutData } from 'typing'
 
 type adminSettingsElement = {
   flat_data: string
-  widget: Component
+  widget: ReactNode
   layout_data: LayoutData
 }
 
