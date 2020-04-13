@@ -4,12 +4,14 @@
   ],
   "compilerOptions": {
     "baseUrl": "src",
-    "lib": [],
+    "lib": [
+      "DOM",
+    ],
     "module": "commonjs",
     "target": "es5",
     "outDir": "dist",
     "allowJs": false,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "declaration": true,
