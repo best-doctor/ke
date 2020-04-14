@@ -7,18 +7,12 @@ type FieldPosition = {
   lowRight: number[]
 }
 
-export abstract class FieldDescription {
-  name!: string
-
-  readOnly!: boolean
-
-  fieldType!: typeof BaseField
-
-  widget!: ReactNode
-
-  layout!: LayoutData
-
+export type FieldDescription = {
+  name: string
+  readOnly: boolean
+  fieldType: typeof BaseField
+  widget: ReactNode
+  layout: LayoutData
   position?: FieldPosition
-
   className?: string
 }

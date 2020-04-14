@@ -11,7 +11,7 @@
     "target": "es5",
     "outDir": "dist",
     "allowJs": false,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "declaration": true,
@@ -26,7 +26,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths",
