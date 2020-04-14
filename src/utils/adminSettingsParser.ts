@@ -1,14 +1,5 @@
-import type { ReactNode } from 'react'
 import type { BaseAdmin } from 'admin'
-import type { LayoutData } from 'typing'
-
-type adminSettingsElement = {
-  flat_data: string
-  widget: ReactNode
-  layout_data: LayoutData
-}
-
-type adminSettings = Array<adminSettingsElement>
+import type { adminSettings } from 'typing'
 
 const getNestedData = (fieldPath: Array<string>, data: any): any => {
   let dataToUnpack = data
@@ -17,7 +8,7 @@ const getNestedData = (fieldPath: Array<string>, data: any): any => {
     dataToUnpack = dataToUnpack[path]
   })
 
-  return data
+  return dataToUnpack
 }
 
 const parseAdminSettings = (admin: BaseAdmin, data: any): adminSettings => {
@@ -38,6 +29,7 @@ const parseAdminSettings = (admin: BaseAdmin, data: any): adminSettings => {
     }
 
     parsedSettings.push({
+      name: element.name,
       flat_data: fieldData,
       widget: element.widget,
       layout_data: element.layout,

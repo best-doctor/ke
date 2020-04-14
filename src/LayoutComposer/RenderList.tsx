@@ -1,31 +1,33 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import * as ReactGridLayout from 'react-grid-layout'
+import type { ReactNode } from 'react'
 
+import { parseAdminSettings } from 'utils/adminSettingsParser'
+import type { adminSettings, adminSettingsElement } from 'typing'
 import type { BaseAdmin } from 'admin'
 
-type LineProps = { fieldNames: string[]; object: Model }
-const LineRender: React.FC<LineProps> = ({ object, fieldNames }) => {
-  const fieldWidget = (fName: string): JSX.Element => {
-    let component = null
-    const value = object[fName]
-    switch (fName) {
-      case 'id':
-        component = <Link to={`/patients/${value}`}>{value}</Link>
-        break
-      default:
-        component = <span>{value}</span>
-    }
-    return component
-  }
+const mountComponents = (objects: any, admin: BaseAdmin): any => {
+  const settings: Array<adminSettings> = []
+  const components: Array<ReactNode> = []
 
-  return (
-    <tr>
-      {fieldNames.map((fName) => (
-        <td key={fName}>{fieldWidget(fName)}</td>
-      ))}
-    </tr>
-  )
+  objects.forEach((element: any) => {
+    settings.push(parseAdminSettings(admin, element))
+  })
+
+  settings.forEach((settingsElement: adminSettings) => {
+    settingsElement.forEach((adminElement: adminSettingsElement) => {
+      const MyComponent: any = adminElement.widget
+
+      components.push(
+        <MyComponent key={adminElement.name} data-grid={adminElement.layout_data}>
+          {adminElement.flat_data}
+        </MyComponent>
+      )
+    })
+  })
+
+  return components
 }
 
 export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
@@ -35,22 +37,9 @@ export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
     admin.provider.getList().then(setObjects)
   }, [admin.provider])
 
-  const fields = ['id', ...admin.list_fields.map((field) => field.name)]
-
   return (
-    <table>
-      <thead>
-        <tr>
-          {fields.map((fName) => (
-            <th key={fName}>{fName}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {objects.map((object) => (
-          <LineRender key={object.id} fieldNames={fields} object={object} />
-        ))}
-      </tbody>
-    </table>
+    <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
+      {mountComponents(objects, admin)}
+    </ReactGridLayout>
   )
 }
