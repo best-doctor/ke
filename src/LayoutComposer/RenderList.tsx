@@ -7,7 +7,7 @@ import { parseAdminSettings } from 'utils/adminSettingsParser'
 import type { adminSettings, adminSettingsElement } from 'typing'
 import type { BaseAdmin } from 'admin'
 
-const mountComponents = (objects: any, admin: BaseAdmin): any => {
+const mountComponents = (objects: any, admin: BaseAdmin): Array<ReactNode> => {
   const settings: Array<adminSettings> = []
   const components: Array<ReactNode> = []
 
