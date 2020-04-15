@@ -1,34 +1,11 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import * as ReactGridLayout from 'react-grid-layout'
-import type { ReactNode } from 'react'
+import * as GridLayout from 'react-grid-layout'
 
-import { parseAdminSettings } from 'utils/adminSettingsParser'
-import type { adminSettings, adminSettingsElement } from 'typing'
+import { mountComponents } from 'utils/mountComponents'
 import type { BaseAdmin } from 'admin'
 
-const mountComponents = (objects: any, admin: BaseAdmin): Array<ReactNode> => {
-  const settings: Array<adminSettings> = []
-  const components: Array<ReactNode> = []
-
-  objects.forEach((element: any) => {
-    settings.push(parseAdminSettings(admin, element))
-  })
-
-  settings.forEach((settingsElement: adminSettings) => {
-    settingsElement.forEach((adminElement: adminSettingsElement) => {
-      const MyComponent: any = adminElement.widget
-
-      components.push(
-        <MyComponent key={adminElement.name} data-grid={adminElement.layout_data}>
-          {adminElement.flat_data}
-        </MyComponent>
-      )
-    })
-  })
-
-  return components
-}
+const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
 export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   const [objects, setObjects] = useState<Model[]>([])
@@ -39,7 +16,7 @@ export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
 
   return (
     <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
-      {mountComponents(objects, admin)}
+      {mountComponents(objects, admin.list_fields)}
     </ReactGridLayout>
   )
 }
