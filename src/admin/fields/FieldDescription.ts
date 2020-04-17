@@ -12,6 +12,7 @@ export type FieldDescription = {
   readOnly: boolean
   fieldType: typeof BaseField
   widget: ReactNode
+  widget_attrs: any
   layout: LayoutData
   position?: FieldPosition
   className?: string

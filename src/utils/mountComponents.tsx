@@ -25,13 +25,14 @@ const mountComponents = (objects: any, adminFields: FieldDescription[]): Array<R
   }
 
   const settings = matchResponseWithAdminFields(objects, adminFields)
+  const components: Array<ReactNode> = []
 
-  const components: Array<ReactNode> = settings.map((settingsElement: adminSettings) => {
-    return settingsElement.map((adminElement: adminSettingsElement) => {
+  settings.forEach((settingsElement: adminSettings) => {
+    settingsElement.forEach((adminElement: adminSettingsElement) => {
       const MyComponent: any = adminElement.widget
 
-      return (
-        <MyComponent key={adminElement.name} data-grid={adminElement.layout_data}>
+      components.push(
+        <MyComponent key={adminElement.name} data-grid={adminElement.layout_data} {...adminElement.widget_attrs}>
           {adminElement.flat_data}
         </MyComponent>
       )

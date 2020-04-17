@@ -17,7 +17,7 @@ export const RenderDetail: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   }, [admin.provider, id])
 
   return (
-    <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
+    <ReactGridLayout className="layout" cols={12} rowHeight={30}>
       {mountComponents(object, admin.detail_fields)}
     </ReactGridLayout>
   )

@@ -28,9 +28,10 @@ const parseAdminSettings = (adminFields: FieldDescription[], data: any): adminSe
     }
 
     parsedSettings.push({
-      name: element.name,
+      name: data.id + element.name,
       flat_data: fieldData,
       widget: element.widget,
+      widget_attrs: element.widget_attrs,
       layout_data: element.layout,
     })
   })

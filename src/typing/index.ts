@@ -8,6 +8,7 @@ type adminSettingsElement = {
   name: string
   flat_data: string
   widget: ReactNode
+  widget_attrs: any
   layout_data: LayoutData
 }
 

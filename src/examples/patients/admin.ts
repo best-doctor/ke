@@ -13,6 +13,7 @@ export class PatientAdmin extends BaseAdmin {
       readOnly: false,
       className: 'md-col-5',
       widget: Button,
+      widget_attrs: {},
       layout: { x: 10, y: 10, w: 1, h: 2 },
     },
     {
@@ -21,6 +22,7 @@ export class PatientAdmin extends BaseAdmin {
       readOnly: false,
       className: 'md-col-5',
       widget: Heading,
+      widget_attrs: {},
       layout: { x: 0, y: 40, w: 5, h: 2 },
     },
   ]
@@ -32,6 +34,7 @@ export class PatientAdmin extends BaseAdmin {
       readOnly: false,
       className: 'md-col-5',
       widget: Button,
+      widget_attrs: {},
       layout: { x: 100 },
     },
   ]
