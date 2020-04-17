@@ -32,6 +32,7 @@ const mountComponents = (objects: any, adminFields: FieldDescription[]): Array<R
       const MyComponent: any = adminElement.widget
 
       components.push(
+        // eslint-disable-next-line
         <MyComponent key={adminElement.name} data-grid={adminElement.layout_data} {...adminElement.widget_attrs}>
           {adminElement.flat_data}
         </MyComponent>
