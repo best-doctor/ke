@@ -10,10 +10,10 @@ export const LayoutComposer = (props: any): JSX.Element => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/patients">
+        <Route exact path="/appeals">
           <RenderList admin={customAdminClass} />
         </Route>
-        <Route exact path="/patients/:id">
+        <Route exact path="/appeals/:id">
           <RenderDetail admin={customAdminClass} />
         </Route>
       </Switch>
