@@ -1,5 +1,5 @@
 import type { adminSettings } from 'typing'
-import type { FieldDescription } from 'admin/fields/FieldDescription'
+import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
 const getNestedData = (fieldPath: Array<string>, data: any): any => {
   let dataToUnpack = data
@@ -11,12 +11,11 @@ const getNestedData = (fieldPath: Array<string>, data: any): any => {
   return dataToUnpack
 }
 
-const parseAdminSettings = (adminFields: FieldDescription[], data: any): adminSettings => {
+const parseAdminSettings = (adminFields: DetailFieldDescription[], data: any): adminSettings => {
   const parsedSettings: adminSettings = []
+  const relatedFieldSeparator = '__'
 
   adminFields.forEach((element) => {
-    const relatedFieldSeparator = '__'
-
     const fieldPath = element.name.split(relatedFieldSeparator)
     let fieldData: any = null
 

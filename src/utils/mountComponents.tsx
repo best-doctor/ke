@@ -2,10 +2,10 @@ import * as React from 'react'
 import type { ReactNode } from 'react'
 
 import type { adminSettings, adminSettingsElement } from 'typing'
-import type { FieldDescription } from 'admin/fields/FieldDescription'
+import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { parseAdminSettings } from 'utils/adminSettingsParser'
 
-const matchResponseWithAdminFields = (objects: any, adminFields: FieldDescription[]): Array<adminSettings> => {
+const matchResponseWithAdminFields = (objects: any, adminFields: DetailFieldDescription[]): Array<adminSettings> => {
   const settings: Array<adminSettings> = []
 
   if (objects instanceof Array) {
@@ -19,7 +19,7 @@ const matchResponseWithAdminFields = (objects: any, adminFields: FieldDescriptio
   return settings
 }
 
-const mountComponents = (objects: any, adminFields: FieldDescription[]): Array<ReactNode> => {
+const mountComponents = (objects: any, adminFields: DetailFieldDescription[]): Array<ReactNode> => {
   if (!objects) {
     return []
   }
