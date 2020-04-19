@@ -30,6 +30,8 @@ module.exports = {
       { functions: false, classes: true, variables: true, typedefs: true },
     ],
     'react/prop-types': 'off',
+    // We need this to write generic code in components mounting
+    'react/jsx-props-no-spreading': 'off',
     // Non-null assertion operator makes strict typechecking useless
     '@typescript-eslint/no-non-null-assertion': 'error',
     // TypeScript handles it better
