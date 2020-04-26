@@ -20,37 +20,49 @@ const Styles = styled.div`
   }
 
   table {
-    /* Make sure the inner table is always as wide as needed */
-    width: 100%;
     border-spacing: 0;
+    border: 1px solid #ededed;
+  }
+  table tr:last-child td {
+    border-bottom: 0;
+  }
+  table th,
+  table td {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+    position: relative;
+  }
+  table th:last-child,
+  table td:last-child {
+    border-right: 0;
+  }
+  table tr:nth-child(even) {
+    background-color: #fafafa;
+  }
 
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
+  table th::before {
+    position: absolute;
+    right: 15px;
+    top: 16px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+  table th.sort-asc::before {
+    border-bottom: 5px solid #22543d;
+  }
+  table th.sort-desc::before {
+    border-top: 5px solid #22543d;
+  }
 
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-
-      /* The secret sauce */
-      /* Each cell should grow equally */
-      width: 1%;
-      /* But "collapsed" cells should be as small as possible */
-      &.collapse {
-        width: 0.0000000001%;
-      }
-
-      :last-child {
-        border-right: 0;
-      }
-    }
+  .TableConstructor {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
   }
 
   .pagination {
@@ -102,7 +114,7 @@ const Table = (props: any): JSX.Element => {
 
   return (
     <Styles>
-      <TableConstructor columns={columns} data={data} />
+      <TableConstructor className="TableConstructor" columns={columns} data={data} />
     </Styles>
   )
 }
