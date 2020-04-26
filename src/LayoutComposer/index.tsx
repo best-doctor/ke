@@ -5,7 +5,7 @@ import { RenderDetail } from './RenderDetail'
 import { RenderList } from './RenderList'
 
 export const LayoutComposer = (props: any): JSX.Element => {
-  const { customAdminClass } = props
+  const { customAdminClass, additionalComponents } = props
 
   return (
     <Router>
@@ -14,7 +14,7 @@ export const LayoutComposer = (props: any): JSX.Element => {
           <RenderList admin={customAdminClass} />
         </Route>
         <Route exact path="/appeals/:id">
-          <RenderDetail admin={customAdminClass} />
+          <RenderDetail admin={customAdminClass} additionalComponents={additionalComponents} />
         </Route>
       </Switch>
     </Router>

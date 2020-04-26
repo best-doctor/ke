@@ -5,10 +5,14 @@ import * as GridLayout from 'react-grid-layout'
 
 import { mountComponents } from 'utils/mountComponents'
 import type { BaseAdmin } from 'admin'
+import type { ReactNode } from 'react'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
-export const RenderDetail: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
+export const RenderDetail: React.FC<{ admin: BaseAdmin; additionalComponents: Array<ReactNode> }> = ({
+  admin,
+  additionalComponents,
+}) => {
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
 
@@ -17,8 +21,13 @@ export const RenderDetail: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   }, [admin.provider, id])
 
   return (
-    <ReactGridLayout className="layout" cols={12} rowHeight={30}>
-      {mountComponents(object, admin.detail_fields)}
-    </ReactGridLayout>
+    <div>
+      <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
+        {mountComponents(object, admin.detail_fields)}
+      </ReactGridLayout>
+      {additionalComponents.map((MyComponent: any) => (
+        <MyComponent detailObject={object} />
+      ))}
+    </div>
   )
 }

@@ -7,11 +7,11 @@ import { StringField } from 'admin/fields/StringField'
 import { LayoutComposer } from './LayoutComposer'
 
 const App = (props: any): JSX.Element => {
-  const { admin } = props
+  const { admin, additionalComponents } = props
 
   return (
     <ThemeProvider>
-      <LayoutComposer customAdminClass={admin} />
+      <LayoutComposer customAdminClass={admin} additionalComponents={additionalComponents} />
     </ThemeProvider>
   )
 }
