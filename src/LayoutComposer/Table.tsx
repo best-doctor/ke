@@ -39,7 +39,7 @@ const Styles = styled.div`
     border-right: 0;
   }
   table tr:nth-child(even) {
-    background-color: #fafafa;
+    background-color: #f2f2f2;
   }
 
   table th::before {
