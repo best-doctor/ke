@@ -25,7 +25,7 @@ export const RenderDetail: React.FC<{ admin: BaseAdmin; additionalComponents: Ar
       <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
         {mountComponents(object, admin.detail_fields)}
       </ReactGridLayout>
-      {additionalComponents.map((MyComponent: any) => (
+      {object && additionalComponents.map((MyComponent: any) => (
         <MyComponent detailObject={object} />
       ))}
     </div>
