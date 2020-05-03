@@ -16,10 +16,12 @@
     "emotion-theming": "^10.0.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-feather": "^2.0.8",
     "react-grid-layout": "0.16.6",
     "react-router-dom": "^5.1.2",
     "react-table": "^7.0.4",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "@babel/plugin-transform-typescript": "^7.9.4",
