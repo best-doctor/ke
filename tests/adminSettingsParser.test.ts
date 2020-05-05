@@ -1,31 +1,48 @@
 /* eslint-disable */
-import { Component } from 'react'
+import { Button } from '@chakra-ui/core'
+
 import { parseAdminSettings } from '../src/utils/adminSettingsParser'
-import { BaseAdmin } from 'admin'
-import { BaseProvider } from 'admin/providers'
+import { BaseAdmin } from '../src/admin/index'
+import { BaseProvider } from '../src/admin/providers/index'
 
 class TestProvider extends BaseProvider {
   url = '/tests/'
 }
 
-class TestComponent extends Component {}
-
 class TestAdmin extends BaseAdmin {
   provider = new TestProvider()
 
-  list_fields = [{ name: 'first_name', widget: TestComponent, layout: { x: 100500 } }]
+  list_fields = [
+    {
+      Header: 'Test',
+      columns: [
+        {
+          Header: 'Id',
+          accessor: 'id',
+        },
+      ],
+    },
+  ]
 
-  detail_fields = [{ name: 'last_name', widget: TestComponent, layout: { x: 100600 } }]
+  detail_fields = [{ name: 'last_name', widget: Button, layout: { x: 100600 } }]
 }
 
-test('Get array of parsed admin settings', () => {
+const data = {
+  id: 100500,
+  last_name: 'Some test name',
+}
+
+test('Parse admin detail fields', () => {
   const admin = new TestAdmin()
-  const testData = {
-    first_name: 'Test',
-    last_name: 'Test',
-  }
+  const expected_result = [{
+    name: `100500last_name`,
+    flat_data: 'Some test name',
+    widget: Button,
+    widget_attrs: undefined,
+    layout_data: { x: 100600 },
+  }]
 
-  const result = parseAdminSettings(admin, testData)
+  const result = parseAdminSettings(admin.detail_fields, data)
 
-  expect(result).toBe([])
+  expect(result).toEqual(expected_result)
 })
