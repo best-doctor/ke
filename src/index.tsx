@@ -5,6 +5,7 @@ import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
 import { StringField } from 'admin/fields/StringField'
 import { LayoutComposer } from './LayoutComposer'
+import { Table } from './LayoutComposer/components/Table'
 
 const App = (props: any): JSX.Element => {
   const { admin, additionalComponents } = props
@@ -16,4 +17,4 @@ const App = (props: any): JSX.Element => {
   )
 }
 
-export { App, BaseAdmin, BaseProvider, StringField }
+export { App, BaseAdmin, BaseProvider, StringField, Table }
