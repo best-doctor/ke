@@ -36,5 +36,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'error',
     // TypeScript handles it better
     'consistent-return': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
   },
 }

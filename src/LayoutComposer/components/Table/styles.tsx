@@ -1,5 +1,6 @@
+import * as React from 'react'
 import styled from 'styled-components'
-import { Flex } from '@chakra-ui/core'
+import { Flex, IconButton } from '@chakra-ui/core'
 import { color, justifyContent, space, SpaceProps } from 'styled-system'
 
 const StyledTable = styled.div<SpaceProps>`
@@ -41,4 +42,29 @@ const TableRow = styled(Flex)`
   }
 `
 
-export { StyledTable, TableCell, TableHead, TableRow }
+type TableIconButtonProps = SpaceProps & {
+  icon: any
+  onClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined
+  isDisabled: boolean
+  children: JSX.Element
+  variantColor?: string
+}
+
+const TableIconButton: any = ({ icon, onClick, isDisabled, children, variantColor, ...rest }: TableIconButtonProps) => {
+  return (
+    <IconButton
+      size="sm"
+      {...rest}
+      icon={icon}
+      borderWidth={1}
+      onClick={onClick}
+      variantColor={variantColor}
+      isDisabled={isDisabled}
+      aria-label="Table Icon button"
+    >
+      {children}
+    </IconButton>
+  )
+}
+
+export { StyledTable, TableCell, TableHead, TableRow, TableIconButton }
