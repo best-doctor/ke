@@ -1,6 +1,5 @@
 import { Button } from '@chakra-ui/core'
 import { BaseAdmin } from 'admin'
-import { StringField } from 'admin/fields/StringField'
 import { PatientProvider } from './provider'
 
 export class PatientAdmin extends BaseAdmin {
@@ -28,9 +27,6 @@ export class PatientAdmin extends BaseAdmin {
   detail_fields = [
     {
       name: 'first_name',
-      fieldType: StringField,
-      readOnly: false,
-      className: 'md-col-5',
       widget: Button,
       widget_attrs: {},
       layout: { x: 100 },
