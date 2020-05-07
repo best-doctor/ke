@@ -1,12 +1,9 @@
 import axios from 'axios'
 
 const backendAPIURL = process.env.API_URL
-const authHeader = process.env.AUTH_HEADER
 
 const HTTP = axios.create({
-  headers: {
-    Authorization: authHeader,
-  },
+  withCredentials: true,
 })
 
 export abstract class BaseProvider {
