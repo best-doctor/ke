@@ -1,9 +1,12 @@
 # ke
-![](https://github.com/best-doctor/ke/workflows/CI/badge.svg)
+
+[![Build Status](https://travis-ci.org/best-doctor/ke.svg?branch=master)](https://travis-ci.org/best-doctor/ke)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ab2c95e8362410f4f079/maintainability)](https://codeclimate.com/github/best-doctor/ke/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ab2c95e8362410f4f079/test_coverage)](https://codeclimate.com/github/best-doctor/ke/test_coverage)
 
 React admin framework done by and for backenders
 
-**ALPHA VERSION – NOT FOR PRODUCTION USE**
+ALPHA VERSION – NOT FOR PRODUCTION USE
 
 ## Usage example
 
@@ -12,7 +15,8 @@ This is an example of the future API
 To use `ke` you should implement several base classes.
 
 First of all you should extend `BaseProvider` class.
-It uses the `url` attribute, which determines the required resource, to fetch data from your backend.
+It uses the `url` attribute, which determines the required resource, to
+fetch data from your backend.
 
 ```ts
 // providers.ts
@@ -67,14 +71,15 @@ class PatientAdmin extends BaseAdmin {
     },
   ]
 }
-
 ```
 
 BaseAdmin class uses attributes to build custom component:
 
 * `provider` - for fetching data from backend
-* `list_fields` - settings for displaying a list view table with specific field styles
-* `detail_fields` - settings for displaying a detail page view with specific field styles
+* `list_fields` - settings for displaying a list view table with specific
+  field styles
+* `detail_fields` - settings for displaying a detail page view with specific
+  field styles
 
 Attributes in fields description:
 
@@ -84,8 +89,8 @@ Attributes in fields description:
 * `className` - CSS style title
 * `layout` - setting for the grid to display the widget in the user interface
 
-
-After that you can use component `LayoutComposer`, which makes all magic under the hood and get your user component.
+After that you can use component `LayoutComposer`, which makes all magic under
+the hood and get your user component.
 
 ```ts
 import { LayoutComponent } from '@bestdoctor/ke';
@@ -93,4 +98,5 @@ import { LayoutComponent } from '@bestdoctor/ke';
 const PatientComponent = () => <LayoutComposer data={new PatientAdmin()}/>
 ```
 
-`PatientComponent` will have routes for the list and detail view with the settings and widgets you set.
+`PatientComponent` will have routes for the list and detail view with the
+settings and widgets you set.
