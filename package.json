@@ -30,6 +30,7 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.1",
     "@types/node": "^13.11.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
@@ -45,12 +46,12 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "jest": "^25.3.0",
+    "jest": "^26.0.1",
     "prettier": "^2.0.4",
     "react-test-renderer": "^16.13.1",
     "tslib": "^1.11.1",
     "ttypescript": "^1.5.10",
-    "typescript": "~3.8.3"
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "build": "ttsc",

@@ -1,12 +1,14 @@
 /* eslint-disable */
 import { Button } from '@chakra-ui/core'
 
-import { parseAdminSettings } from '@utils/adminSettingsParser'
-import { BaseAdmin } from '@admin/index'
-import { BaseProvider } from '@admin/providers/index'
+import { parseAdminSettings } from '../adminSettingsParser'
+import { BaseAdmin } from '../../admin/index'
+import { BaseProvider } from '../../admin/providers/index'
 
 class TestProvider extends BaseProvider {
   url = '/tests/'
+  writableFields = ['test']
+  readOnlyFields = ['test']
 }
 
 class TestAdmin extends BaseAdmin {
@@ -24,7 +26,7 @@ class TestAdmin extends BaseAdmin {
     },
   ]
 
-  detail_fields = [{ name: 'last_name', widget: Button, layout: { x: 100600 } }]
+  detail_fields = [{ name: 'last_name', widget: Button, layout: { x: 100600 }, widget_attrs: { color: 'red' } }]
 }
 
 const data = {
@@ -34,13 +36,15 @@ const data = {
 
 test('Parse admin detail fields', () => {
   const admin = new TestAdmin()
-  const expected_result = [{
-    name: `100500last_name`,
-    flat_data: 'Some test name',
-    widget: Button,
-    widget_attrs: undefined,
-    layout_data: { x: 100600 },
-  }]
+  const expected_result = [
+    {
+      name: `100500last_name`,
+      flat_data: 'Some test name',
+      widget: Button,
+      widget_attrs: { color: 'red' },
+      layout_data: { x: 100600 },
+    },
+  ]
 
   const result = parseAdminSettings(admin.detail_fields, data)
 
