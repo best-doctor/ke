@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { Button } from '@chakra-ui/core'
 
-import { parseAdminSettings } from '../src/utils/adminSettingsParser'
-import { BaseAdmin } from '../src/admin/index'
-import { BaseProvider } from '../src/admin/providers/index'
+import { parseAdminSettings } from '@utils/adminSettingsParser'
+import { BaseAdmin } from '@admin/index'
+import { BaseProvider } from '@admin/providers/index'
 
 class TestProvider extends BaseProvider {
   url = '/tests/'
