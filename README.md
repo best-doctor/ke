@@ -5,6 +5,10 @@ React admin framework done by and for backenders
 
 **ALPHA VERSION – NOT FOR PRODUCTION USE**
 
+## Installation
+
+`$ yarn add @bestdoctor/ke`
+
 ## Usage example
 
 This is an example of the future API
@@ -94,3 +98,20 @@ const PatientComponent = () => <LayoutComposer data={new PatientAdmin()}/>
 ```
 
 `PatientComponent` will have routes for the list and detail view with the settings and widgets you set.
+
+## Contributing
+
+We would love you to contribute to our project. It's simple:
+
+* Create an issue with bug you found or proposal you have.
+  Wait for approve from maintainer.
+* Create a pull request. Make sure all checks are green.
+* Fix review comments if any.
+* Be awesome.
+
+Here are useful tips:
+
+* You can run all checks and tests with `yarn make-check`.
+  Please do it before TravisCI does.
+* We respect [Django CoC](https://www.djangoproject.com/conduct/).
+  Make soft, not bullshit.
