@@ -102,7 +102,8 @@ import { LayoutComponent } from '@bestdoctor/ke';
 const PatientComponent = () => <LayoutComposer data={new PatientAdmin()}/>
 ```
 
-`PatientComponent` will have routes for the list and detail view with the settings and widgets you set.
+`PatientComponent` will have routes for the list and detail view with the
+settings and widgets you set.
 
 ## Contributing
 
