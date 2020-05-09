@@ -58,7 +58,7 @@
     "lint": "eslint --ext .ts,.tsx src",
     "test": "jest",
     "format": "prettier --write 'src/**/*'",
-    "make-check": "yarn format && yarn lint && yarn test",
+    "make-check": "yarn format && yarn lint && yarn test && mdl README.md",
     "prepare": "yarn build",
     "preversion": "yarn lint",
     "version": "yarn format && git add -A src",
