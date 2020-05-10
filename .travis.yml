@@ -11,7 +11,7 @@ before_script:
 script:
   - yarn lint
   - yarn test --coverageDirectory=. --coverage
-  - yarn build
+  - yarn typecheck
   - mdl README.md
 after_script:
   - ./cc-test-reporter after-build --coverage-input-type=clover --exit-code $TRAVIS_TEST_RESULT

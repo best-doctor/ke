@@ -1,96 +1,112 @@
 {
-  "name": "@bestdoctor/ke",
-  "version": "0.0.11",
-  "description": "BestDoctor back-office UI constructor",
-  "author": "pro100filipp",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@chakra-ui/core": "^0.7.0",
-    "@emotion/core": "^10.0.28",
-    "@emotion/styled": "^10.0.27",
-    "@types/react-grid-layout": "^0.17.1",
-    "@types/react-table": "^7.0.16",
-    "@types/styled-components": "^5.1.0",
-    "axios": "^0.19.2",
-    "emotion-theming": "^10.0.27",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-feather": "^2.0.8",
-    "react-grid-layout": "0.16.6",
-    "react-router-dom": "^5.1.2",
-    "react-table": "^7.0.4",
-    "styled-components": "^5.1.0",
-    "styled-system": "^5.1.5"
-  },
-  "devDependencies": {
-    "@babel/plugin-transform-typescript": "^7.9.4",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
-    "@babel/preset-typescript": "^7.9.0",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.1",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-router-dom": "^5.1.4",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.27.0",
-    "@zerollup/ts-transform-paths": "^1.7.17",
-    "babel-jest": "^25.3.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-typescript": "^7.2.1",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^3.0.0",
-    "jest": "^26.0.1",
-    "prettier": "^2.0.4",
-    "react-test-renderer": "^16.13.1",
-    "tslib": "^1.11.1",
-    "ttypescript": "^1.5.10",
-    "typescript": "^3.8.3"
-  },
-  "scripts": {
-    "build": "ttsc",
-    "start": "ttsc --watch",
-    "lint": "eslint --ext .ts,.tsx src",
-    "test": "jest",
-    "format": "prettier --write 'src/**/*'",
-    "make-check": "yarn format && yarn lint && yarn test && mdl README.md",
-    "prepare": "yarn build",
-    "preversion": "yarn lint",
-    "version": "yarn format && git add -A src",
-    "postversion": "git push && git push --tags"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/best-doctor/ke.git"
-  },
-  "bugs": {
-    "url": "https://github.com/best-doctor/ke/issues"
-  },
-  "homepage": "https://github.com/best-doctor/ke#readme",
-  "prettier": {
-    "parser": "typescript",
-    "printWidth": 120,
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5"
-  }
+    "name": "@bestdoctor/ke",
+    "version": "0.0.11",
+    "description": "BestDoctor back-office UI constructor",
+    "author": "pro100filipp",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "dependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-transform-runtime": "^7.9.6",
+        "@chakra-ui/core": "^0.7.0",
+        "@emotion/core": "^10.0.28",
+        "@emotion/styled": "^10.0.27",
+        "@types/react-grid-layout": "^0.17.1",
+        "@types/react-table": "^7.0.16",
+        "@types/styled-components": "^5.1.0",
+        "axios": "^0.19.2",
+        "emotion-theming": "^10.0.27",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-feather": "^2.0.8",
+        "react-grid-layout": "0.16.6",
+        "react-router-dom": "^5.1.2",
+        "react-table": "^7.0.4",
+        "styled-components": "^5.1.0",
+        "styled-system": "^5.1.5"
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-typescript": "^7.9.4",
+        "@babel/preset-env": "^7.9.5",
+        "@babel/preset-react": "^7.9.4",
+        "@babel/preset-typescript": "^7.9.0",
+        "@types/jest": "^25.2.1",
+        "@types/node": "^13.11.1",
+        "@types/react": "^16.9.34",
+        "@types/react-dom": "^16.9.6",
+        "@types/react-router-dom": "^5.1.4",
+        "@typescript-eslint/eslint-plugin": "^2.24.0",
+        "@typescript-eslint/parser": "^2.27.0",
+        "@zerollup/ts-transform-paths": "^1.7.17",
+        "babel-jest": "^25.3.0",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-typescript": "^7.2.1",
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.19.0",
+        "eslint-plugin-react-hooks": "^3.0.0",
+        "husky": "^4.2.5",
+        "jest": "^26.0.1",
+        "lint-staged": "^10.2.2",
+        "prettier": "^2.0.4",
+        "react-test-renderer": "^16.13.1",
+        "tslib": "^1.11.1",
+        "ttypescript": "^1.5.10",
+        "typescript": "^3.8.3"
+    },
+    "scripts": {
+        "build": "ttsc",
+        "start": "ttsc --watch",
+        "lint": "eslint --ext .ts,.tsx src",
+        "test": "jest",
+        "format": "prettier --write 'src/**/*'",
+        "typecheck": "yarn ttsc --noEmit",
+        "makecheck": "yarn typecheck && yarn lint && yarn test && mdl README.md",
+        "prepare": "yarn build",
+        "preversion": "yarn lint",
+        "version": "yarn format && git add -A src",
+        "postversion": "git push && git push --tags"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn format"
+        }
+    },
+    "lint-staged": {
+        "linters": {
+            "src/**/*": [
+                "yarn format",
+                "git add"
+            ]
+        }
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/best-doctor/ke.git"
+    },
+    "bugs": {
+        "url": "https://github.com/best-doctor/ke/issues"
+    },
+    "homepage": "https://github.com/best-doctor/ke#readme",
+    "prettier": {
+        "parser": "typescript",
+        "printWidth": 120,
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5"
+    }
 }
