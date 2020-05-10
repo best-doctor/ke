@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 import type { adminSettings, adminSettingsElement } from 'typing'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
-import { parseAdminSettings } from 'utils/adminSettingsParser'
+import { parseAdminSettings } from './adminSettingsParser'
 
 const matchResponseWithAdminFields = (objects: any, adminFields: DetailFieldDescription[]): Array<adminSettings> => {
   const settings: Array<adminSettings> = []
