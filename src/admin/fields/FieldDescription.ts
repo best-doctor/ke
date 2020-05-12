@@ -16,7 +16,7 @@ type DetailFieldDescription = {
 
 type ListFieldDescription = {
   Header: string
-  columns?: Array<ListFieldColumType>
+  columns: Array<ListFieldColumType>
 }
 
 export { DetailFieldDescription, ListFieldDescription }
