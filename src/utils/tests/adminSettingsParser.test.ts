@@ -16,13 +16,8 @@ class TestAdmin extends BaseAdmin {
 
   list_fields = [
     {
-      Header: 'Test',
-      columns: [
-        {
-          Header: 'Id',
-          accessor: 'id',
-        },
-      ],
+      Header: 'Id',
+      accessor: 'id',
     },
   ]
 
