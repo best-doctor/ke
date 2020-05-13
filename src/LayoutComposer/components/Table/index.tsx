@@ -3,14 +3,15 @@ import { Flex, Text } from '@chakra-ui/core'
 import { usePagination, useTable } from 'react-table'
 
 import type { ReactNode } from 'react'
-import type { Row, HeaderGroup, Column } from 'react-table'
+import type { Row, HeaderGroup } from 'react-table'
+import type { ListFieldDescription } from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
 
 type TableProps = {
   data: any
-  columns: Column[]
+  columns: ListFieldDescription[]
 }
 
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba

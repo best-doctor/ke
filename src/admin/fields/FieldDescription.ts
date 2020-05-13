@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 import type { LayoutData } from 'typing'
 
-type ListFieldColumType = {
+type ListFieldDescription = {
   Header: string
-  accessor?: string
+  accessor?: any
   Cell?: Function
 }
 
@@ -12,11 +12,6 @@ type DetailFieldDescription = {
   widget: ReactNode
   widget_attrs: any
   layout: LayoutData
-}
-
-type ListFieldDescription = {
-  Header: string
-  columns: Array<ListFieldColumType>
 }
 
 export { DetailFieldDescription, ListFieldDescription }

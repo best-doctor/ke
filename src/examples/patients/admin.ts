@@ -7,20 +7,15 @@ export class PatientAdmin extends BaseAdmin {
 
   list_fields = [
     {
-      Header: 'Test',
-      columns: [
-        {
-          Header: 'Id',
-          accessor: 'id',
-        },
-        {
-          Header: 'name',
-          Cell: ({ row }: { row: any }) => {
-            const output = `${row.original.patient.last_name} ${row.original.patient.first_name} ${row.original.patient.middle_name}`
-            return output
-          },
-        },
-      ],
+      Header: 'Id',
+      accessor: 'id',
+    },
+    {
+      Header: 'name',
+      Cell: ({ row }: { row: any }) => {
+        const output = `${row.original.patient.last_name} ${row.original.patient.first_name} ${row.original.patient.middle_name}`
+        return output
+      },
     },
   ]
 
