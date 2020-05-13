@@ -20,6 +20,7 @@ const TableCell = styled.div`
   ${color};
   ${justifyContent};
   flex: 1;
+  height: 30px;
   display: flex;
   min-width: 150px;
   align-items: center;
