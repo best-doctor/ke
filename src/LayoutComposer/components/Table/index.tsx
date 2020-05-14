@@ -27,7 +27,7 @@ declare module 'react-table' {
 
 const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
   return headerGroups.map((headerGroup: HeaderGroup) => (
-    <Flex key={headerGroup.id} flex={1} flexDirection="row" {...headerGroup.getHeaderGroupProps()}>
+    <Flex flex={1} flexDirection="row" {...headerGroup.getHeaderGroupProps()}>
       {headerGroup.headers.map((column: any) => (
         <TableCell p={4} key={column.id} bg="gray.100" {...column.getHeaderProps()} justifyContent="space-between">
           <Text fontWeight="bold">{column.render('Header')}</Text>
@@ -38,12 +38,12 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
 }
 
 const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
-  return rows.map((row: Row, key: number) => {
+  return rows.map((row: Row) => {
     prepareRow(row)
 
     return (
       // eslint-disable-next-line
-      <TableRow key={key} flexDirection="row" {...row.getRowProps()} data-testid="table-row">
+      <TableRow flexDirection="row" {...row.getRowProps()} data-testid="table-row">
         {row.cells.map((cell: any) => {
           return (
             <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
