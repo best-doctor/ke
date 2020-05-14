@@ -3,7 +3,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: { main: './src/index' },
+  entry: { index: './src/index' },
   mode: 'production',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -29,7 +29,9 @@ module.exports = {
   output: {
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].chunk.js',
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd',
+    library: 'ke',
+    umdNamedDefine: true,
   },
 }

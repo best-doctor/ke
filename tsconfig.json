@@ -26,14 +26,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
-    "skipLibCheck": true,
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths",
-        "exclude": [
-          "*"
-        ]
-      }
-    ]
+    "sourceMap": true,
+    "skipLibCheck": true
   }
 }

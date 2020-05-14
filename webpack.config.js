@@ -1,14 +1,14 @@
-const path = require("path");
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require('path')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: { main: "./src/index" },
-  mode: "development",
-  devtool: "inline-source-map",
+  entry: { index: './src/index' },
+  mode: 'development',
+  devtool: 'inline-source-map',
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
-    plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
+    extensions: ['.ts', '.tsx', '.js'],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
   module: {
     rules: [
@@ -16,17 +16,17 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "ts-loader",
+          loader: 'ts-loader',
         },
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin({ watch: true }),
-  ],
+  plugins: [new CleanWebpackPlugin({ watch: true })],
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "build"),
-    publicPath: "/",
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd',
+    library: 'ke',
+    umdNamedDefine: true,
   },
-};
+}
