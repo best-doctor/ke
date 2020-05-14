@@ -117,7 +117,7 @@ We would love you to contribute to our project. It's simple:
 
 Here are useful tips:
 
-* You can run all checks and tests with `yarn make-check`.
+* You can run all checks and tests with `yarn makecheck`.
   Please do it before TravisCI does.
 * We respect [Django CoC](https://www.djangoproject.com/conduct/).
   Make soft, not bullshit.
