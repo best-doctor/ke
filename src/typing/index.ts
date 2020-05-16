@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { FunctionComponent } from 'react'
 
 type LayoutData = {
   x: number
@@ -7,7 +7,7 @@ type LayoutData = {
 type adminSettingsElement = {
   name: string
   flat_data: string
-  widget: ReactNode
+  widget: FunctionComponent<any>
   widget_attrs: any
   layout_data: LayoutData
 }

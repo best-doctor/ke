@@ -6,14 +6,9 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "dependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/plugin-transform-runtime": "^7.9.6",
         "@chakra-ui/core": "^0.7.0",
         "@emotion/core": "^10.0.28",
         "@emotion/styled": "^10.0.27",
-        "@types/react-grid-layout": "^0.17.1",
-        "@types/react-table": "^7.0.16",
-        "@types/styled-components": "^5.1.0",
         "axios": "^0.19.2",
         "emotion-theming": "^10.0.27",
         "react": "^16.13.1",
@@ -26,19 +21,16 @@
         "styled-system": "^5.1.5"
     },
     "devDependencies": {
-        "@babel/plugin-transform-typescript": "^7.9.4",
-        "@babel/preset-env": "^7.9.5",
-        "@babel/preset-react": "^7.9.4",
-        "@babel/preset-typescript": "^7.9.0",
-        "@types/jest": "^25.2.1",
+        "@types/jest": "^25.2.2",
         "@types/node": "^13.11.1",
         "@types/react": "^16.9.34",
         "@types/react-dom": "^16.9.6",
+        "@types/react-grid-layout": "^0.17.1",
         "@types/react-router-dom": "^5.1.4",
+        "@types/react-table": "^7.0.16",
+        "@types/styled-components": "^5.1.0",
         "@typescript-eslint/eslint-plugin": "^2.24.0",
         "@typescript-eslint/parser": "^2.27.0",
-        "@zerollup/ts-transform-paths": "^1.7.17",
-        "babel-jest": "^25.3.0",
         "clean-webpack-plugin": "^3.0.0",
         "eslint": "^6.8.0",
         "eslint-config-airbnb-typescript": "^7.2.1",
@@ -52,6 +44,7 @@
         "lint-staged": "^10.2.2",
         "prettier": "^2.0.4",
         "react-test-renderer": "^16.13.1",
+        "ts-jest": "^26.0.0",
         "ts-loader": "^7.0.4",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
         "tslib": "^1.11.1",
@@ -84,18 +77,6 @@
                 "git add"
             ]
         }
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
     },
     "repository": {
         "type": "git",

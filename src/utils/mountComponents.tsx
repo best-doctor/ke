@@ -1,6 +1,4 @@
 import * as React from 'react'
-import type { ReactNode } from 'react'
-
 import type { adminSettings, adminSettingsElement } from 'typing'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { parseAdminSettings } from './adminSettingsParser'
@@ -19,17 +17,17 @@ const matchResponseWithAdminFields = (objects: any, adminFields: DetailFieldDesc
   return settings
 }
 
-const mountComponents = (objects: any, adminFields: DetailFieldDescription[]): Array<ReactNode> => {
+const mountComponents = (objects: any, adminFields: DetailFieldDescription[]): Array<JSX.Element> => {
   if (!objects) {
     return []
   }
 
   const settings = matchResponseWithAdminFields(objects, adminFields)
-  const components: Array<ReactNode> = []
+  const components: Array<JSX.Element> = []
 
   settings.forEach((settingsElement: adminSettings) => {
     settingsElement.forEach((adminElement: adminSettingsElement) => {
-      const MyComponent: any = adminElement.widget
+      const MyComponent = adminElement.widget
 
       components.push(
         // eslint-disable-next-line

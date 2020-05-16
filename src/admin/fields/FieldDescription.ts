@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { FunctionComponent } from 'react'
 import type { LayoutData } from 'typing'
 
 type ListFieldDescription = {
@@ -9,7 +9,7 @@ type ListFieldDescription = {
 
 type DetailFieldDescription = {
   name: string
-  widget: ReactNode
+  widget: FunctionComponent<any>
   widget_attrs: any
   layout: LayoutData
 }
