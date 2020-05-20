@@ -33,7 +33,4 @@ module.exports = ['source-map'].map((devtool) => ({
     react: 'react',
     'react-dom': 'react-dom',
   },
-  optimization: {
-    runtimeChunk: true,
-  },
 }))
