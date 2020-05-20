@@ -57,7 +57,7 @@
         "react-dom": "^16.13.1"
     },
     "scripts": {
-        "build": "webpack --config webpack.prod.js",
+        "build": "webpack",
         "start": "webpack --watch",
         "lint": "eslint --ext .ts,.tsx src",
         "test": "jest",
