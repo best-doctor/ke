@@ -115,6 +115,15 @@ We would love you to contribute to our project. It's simple:
 * Fix review comments if any.
 * Be awesome.
 
+### Installation for local development
+
+After cloning this repo if you'd like to use it in another project using React (placed at e.g. `/path/to/your/awesome/project/`) you should follow these steps:
+
+* install all deps: `yarn install`
+* create link to `@bestdoctor/ke`: `yarn link`
+* link existing React in order to prevent hooks [problem](https://ru.reactjs.org/warnings/invalid-hook-call-warning.html): `npm link /path/to/your/awesome/project/node_modules/react`
+* link `@bestdoctor/ke` to your project: `yarn link "@bestdoctor/ke"` (must be run in your project's folder)
+
 Here are useful tips:
 
 * You can run all checks and tests with `yarn makecheck`.
