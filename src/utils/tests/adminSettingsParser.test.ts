@@ -7,8 +7,7 @@ import { BaseProvider } from '../../admin/providers/index'
 
 class TestProvider extends BaseProvider {
   url = '/tests/'
-  writableFields = ['test']
-  readOnlyFields = ['test']
+  http = ''
 }
 
 class TestAdmin extends BaseAdmin {
