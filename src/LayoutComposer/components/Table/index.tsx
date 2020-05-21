@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
-import { usePagination, useTable } from 'react-table'
+import { usePagination, useTable, useFilters } from 'react-table'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
@@ -12,6 +12,7 @@ import { Bottom } from './Bottom'
 type TableProps = {
   data: any
   columns: ListFieldDescription[]
+  setBackendFilters: Function | undefined
 }
 
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba
@@ -20,7 +21,7 @@ declare module 'react-table' {
 
   export interface TableInstance<D extends object = {}> extends UsePaginationInstanceProps<D> {}
 
-  export interface TableState<D extends object = {}> extends UsePaginationState<D> {}
+  export interface TableState<D extends object = {}> extends UsePaginationState<D>, UseFiltersState<D> {}
 
   export interface ColumnInstance<D extends object = {}> extends UseSortByColumnProps<D> {}
 }
@@ -31,6 +32,7 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
       {headerGroup.headers.map((column: any) => (
         <TableCell p={4} key={column.id} bg="gray.100" {...column.getHeaderProps()} justifyContent="space-between">
           <Text fontWeight="bold">{column.render('Header')}</Text>
+          {column.Filter ? column.render('Filter') : null}
         </TableCell>
       ))}
     </Flex>
@@ -56,7 +58,7 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
-const Table = ({ columns, data }: TableProps): JSX.Element => {
+const Table = ({ columns, data, setBackendFilters }: TableProps): JSX.Element => {
   const {
     getTableProps,
     headerGroups,
@@ -75,7 +77,14 @@ const Table = ({ columns, data }: TableProps): JSX.Element => {
       columns,
       data,
       initialState: { pageIndex: 0 },
+      stateReducer: (newState: any, action: any, _) => {
+        if (action.type === 'setFilter' && setBackendFilters) {
+          setBackendFilters(newState.filters)
+          return newState
+        }
+      },
     },
+    useFilters,
     usePagination
   )
 

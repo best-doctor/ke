@@ -9,15 +9,17 @@ import { SideBar } from './components/SideBar'
 export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   const [objects, setObjects] = useState<Model[]>([])
 
+  const [filters, setFilters] = useState([])
+
   useEffect(() => {
-    admin.provider.getList().then(setObjects)
-  }, [admin.provider])
+    admin.provider.getList(filters).then(setObjects)
+  }, [admin.provider, filters])
 
   return (
     <>
       <Flex>
         <SideBar />
-        {objects && <Table data={objects} columns={admin.list_fields} />}
+        {objects && <Table data={objects} columns={admin.list_fields} setBackendFilters={setFilters} />}
       </Flex>
     </>
   )
