@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
+import { Link } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
@@ -49,7 +50,11 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
         {row.cells.map((cell: any) => {
           return (
             <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
-              {cell.render('Cell')}
+              {
+                cell.column.toDetailRoute
+                  ? <Link to={{pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}`}}>{cell.render('Cell')}</Link>
+                  : cell.render('Cell')
+              }
             </TableCell>
           )
         })}

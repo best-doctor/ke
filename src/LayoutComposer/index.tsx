@@ -5,16 +5,16 @@ import { RenderDetail } from './RenderDetail'
 import { RenderList } from './RenderList'
 
 export const LayoutComposer = (props: any): JSX.Element => {
-  const { customAdminClass, additionalComponents } = props
+  const { customAdminClass, additionalDetailComponents } = props
 
   return (
     <Router>
       <Switch>
-        <Route exact path="/appeals">
+        <Route exact path="/appeals/">
           <RenderList admin={customAdminClass} />
         </Route>
         <Route exact path="/appeals/:id">
-          <RenderDetail admin={customAdminClass} additionalComponents={additionalComponents} />
+          <RenderDetail admin={customAdminClass} additionalComponents={additionalDetailComponents} />
         </Route>
       </Switch>
     </Router>

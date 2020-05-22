@@ -8,11 +8,15 @@ import { LayoutComposer } from './LayoutComposer'
 import { Table } from './LayoutComposer/components/Table'
 
 const App = (props: any): JSX.Element => {
-  const { admin, additionalComponents } = props
+  const { admin, additionalListComponents, additionalDetailComponents } = props
 
   return (
     <ThemeProvider>
-      <LayoutComposer customAdminClass={admin} additionalComponents={additionalComponents} />
+      <LayoutComposer
+        customAdminClass={admin}
+        additionalListComponents={additionalListComponents}
+        additionalDetailComponents={additionalDetailComponents}
+      />
     </ThemeProvider>
   )
 }
