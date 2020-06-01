@@ -6,8 +6,9 @@ import { BaseAdmin } from '../../admin/index'
 import { BaseProvider } from '../../admin/providers/index'
 
 class TestProvider extends BaseProvider {
-  url = '/tests/'
-  http = ''
+  constructor() {
+    super('https://test.com/tests/')
+  }
 }
 
 class TestAdmin extends BaseAdmin {

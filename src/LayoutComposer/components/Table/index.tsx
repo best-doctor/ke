@@ -9,11 +9,15 @@ import type { ListFieldDescription } from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
+import type { Pagination } from '../../../admin/providers'
 
 type TableProps = {
   data: any
   columns: ListFieldDescription[]
+  pageCount: number | undefined
+  backendPagination: Pagination | undefined
   setBackendFilters: Function | undefined
+  setBackendPage: Function | undefined
 }
 
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba
@@ -50,11 +54,13 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
         {row.cells.map((cell: any) => {
           return (
             <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
-              {
-                cell.column.toDetailRoute
-                  ? <Link to={{pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}`}}>{cell.render('Cell')}</Link>
-                  : cell.render('Cell')
-              }
+              {cell.column.toDetailRoute ? (
+                <Link to={{ pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}` }}>
+                  {cell.render('Cell')}
+                </Link>
+              ) : (
+                cell.render('Cell')
+              )}
             </TableCell>
           )
         })}
@@ -63,7 +69,13 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
-const Table = ({ columns, data, setBackendFilters }: TableProps): JSX.Element => {
+const Table = ({
+  columns,
+  data,
+  pageCount: controlledPageCount,
+  setBackendFilters,
+  setBackendPage,
+}: TableProps): JSX.Element => {
   const {
     getTableProps,
     headerGroups,
@@ -72,21 +84,27 @@ const Table = ({ columns, data, setBackendFilters }: TableProps): JSX.Element =>
     canPreviousPage,
     canNextPage,
     pageOptions,
-    pageCount,
     gotoPage,
     nextPage,
     previousPage,
+    pageCount,
     state: { pageIndex },
   } = useTable(
     {
       columns,
       data,
+      manualPagination: true,
       initialState: { pageIndex: 0 },
+      pageCount: controlledPageCount,
+      autoResetPage: false,
       stateReducer: (newState: any, action: any, _) => {
         if (action.type === 'setFilter' && setBackendFilters) {
           setBackendFilters(newState.filters)
-          return newState
         }
+        if (action.type === 'gotoPage' && setBackendPage) {
+          setBackendPage(newState.pageIndex + 1)
+        }
+        return newState
       },
     },
     useFilters,

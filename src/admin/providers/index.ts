@@ -1,18 +1,43 @@
-type Filter = {
+import type { AxiosInstance } from 'axios'
+import axios from 'axios'
+
+export type Filter = {
   name: string
   value: string
   filterOperation: string | undefined
 }
 
-type TableFilter = {
+export type TableFilter = {
   id: string
   value: Filter
 }
 
-export abstract class BaseProvider {
-  abstract url: string
+export type Pagination = {
+  page: number
+  perPage: number
+  count: number | undefined
+  nextUrl: string | undefined
+  prevUrl: string | undefined
+}
 
-  abstract http: any
+export abstract class BaseProvider {
+  private resourceUrl: string
+
+  private resourceFilters: Array<Filter>
+
+  constructor(baseUrl: string, private readonly http: AxiosInstance = axios.create({})) {
+    ;[this.resourceUrl, this.resourceFilters] = this.parseUrl(baseUrl)
+  }
+
+  parseUrl = (baseUrl: string): [string, Filter[]] => {
+    const filters: Array<Filter> = []
+    const url = new URL(baseUrl)
+    url.searchParams.forEach((value, param) => {
+      const [name, filterOperation] = param.split('__', 1)
+      filters.push({ name, value, filterOperation })
+    })
+    return [`${url.origin}${url.pathname}`, filters]
+  }
 
   getFilterQuery = (filter: Filter): [string, string] => {
     const { name, value, filterOperation } = filter
@@ -27,14 +52,19 @@ export abstract class BaseProvider {
   }
 
   getUrl = (filters: Array<TableFilter> | null = null, page: number | null = null): string => {
-    const url = new URL(`${this.http.defaults.baseURL}${this.url}`)
+    const url = new URL(this.resourceUrl)
 
     if (filters) {
-      filters.forEach((element: TableFilter) => {
-        const [filter, value] = this.getFilterQuery(element.value)
-        url.searchParams.set(filter, value)
+      filters.forEach(({ value }: TableFilter) => {
+        const [queryParam, queryValue] = this.getFilterQuery(value)
+        url.searchParams.set(queryParam, queryValue)
       })
     }
+
+    this.resourceFilters.forEach((element: Filter) => {
+      const [queryParam, queryValue] = this.getFilterQuery(element)
+      url.searchParams.set(queryParam, queryValue)
+    })
 
     if (page) {
       url.searchParams.set('page', page.toString())
@@ -43,15 +73,36 @@ export abstract class BaseProvider {
     return url.href
   }
 
-  getList = async (filters: Array<TableFilter> | null = null, page: number | null = null): Promise<Model[]> => {
-    const url = this.getUrl(filters, page)
+  getList = async (
+    filters: Array<TableFilter> | null = null,
+    page: number | null = null
+  ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
+    return this.navigate(this.getUrl(filters, page))
+  }
 
+  navigate = async (url: string): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const response = await this.http.get(url)
-    return response.data.data
+    const { data, meta } = response.data
+    const [tableFilters, pagination] = this.getFiltersAndPagination(meta)
+    return [data, tableFilters, pagination]
   }
 
   getObject = async (objectId: string): Promise<Model> => {
-    const response = await this.http.get(this.url + objectId)
+    const response = await this.http.get(this.resourceUrl + objectId)
     return response.data.data
+  }
+
+  getFiltersAndPagination = (meta: any): [Array<TableFilter>, Pagination] => {
+    const { page, per_page: perPage, total: count, url, next_url: nextUrl, prev_url: prevUrl } = meta
+    const [, backendFilters] = this.parseUrl(url)
+    const pagination: Pagination = { page, perPage, nextUrl, prevUrl, count }
+    const excludeNames = ['page', 'per_page', ...this.resourceFilters.map(({ name }: Filter) => name)]
+    const tableFilters: Array<TableFilter> = []
+    backendFilters.forEach((filter: Filter) => {
+      if (!excludeNames.includes(filter.name)) {
+        tableFilters.push({ id: filter.name, value: filter })
+      }
+    })
+    return [tableFilters, pagination]
   }
 }

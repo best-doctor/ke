@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { BaseProvider } from '../providers/index'
 
 const filterWithOperation = {
@@ -12,14 +13,13 @@ const defaultFilter = {
   filterOperation: undefined,
 }
 
-const mockedHTTP = {
-  defaults: { baseURL: 'https://test.com/' },
-}
+const mockedHTTP = axios.create({})
+mockedHTTP.defaults = { baseURL: 'https://test.com/' }
 
 class TestProvider extends BaseProvider {
-  url = 'test-url/'
-
-  http = mockedHTTP
+  constructor() {
+    super('https://test.com/test-url/', mockedHTTP)
+  }
 }
 
 const provider = new TestProvider()
