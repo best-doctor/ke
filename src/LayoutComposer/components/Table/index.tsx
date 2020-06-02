@@ -104,10 +104,7 @@ const Table = ({
           const toUpdateFilters = [...prevState.filters, ...newState.filters]
           const uniqueFilters = new Set(toUpdateFilters)
 
-          console.log('debug filters')
-          console.log(uniqueFilters)
-
-          setBackendFilters(toUpdateFilters)
+          setBackendFilters(uniqueFilters)
         }
         if (action.type === 'gotoPage' && setBackendPage) {
           setBackendPage(newState.pageIndex + 1)
