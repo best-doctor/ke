@@ -35,20 +35,18 @@ export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   }, [admin.provider, filters, page])
 
   return (
-    <>
-      <Flex>
-        <SideBar />
-        {objects && (
-          <Table
-            data={objects}
-            columns={admin.list_fields}
-            pageCount={pageCount}
-            backendPagination={pagination}
-            setBackendFilters={setFilters}
-            setBackendPage={setPage}
-          />
-        )}
-      </Flex>
-    </>
+    <Flex>
+      <SideBar />
+      {objects && (
+        <Table
+          data={objects}
+          columns={admin.list_fields}
+          pageCount={pageCount}
+          backendPagination={pagination}
+          setBackendFilters={setFilters}
+          setBackendPage={setPage}
+        />
+      )}
+    </Flex>
   )
 }
