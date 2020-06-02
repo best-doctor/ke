@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Flex, Text } from '@chakra-ui/core'
+import { Flex, Text, Box } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
 import { Link } from 'react-router-dom'
 
@@ -36,8 +36,10 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
     <Flex flex={1} flexDirection="row" {...headerGroup.getHeaderGroupProps()}>
       {headerGroup.headers.map((column: any) => (
         <TableCell p={4} key={column.id} bg="gray.100" {...column.getHeaderProps()} justifyContent="space-between">
-          <Text fontWeight="bold">{column.render('Header')}</Text>
-          {column.Filter ? column.render('Filter') : null}
+          <Flex flexDirection="column">
+            <Text fontWeight="bold">{column.render('Header')}</Text>
+            <Box>{column.Filter ? column.render('Filter') : null}</Box>
+          </Flex>
         </TableCell>
       ))}
     </Flex>
@@ -97,9 +99,15 @@ const Table = ({
       initialState: { pageIndex: 0 },
       pageCount: controlledPageCount,
       autoResetPage: false,
-      stateReducer: (newState: any, action: any, _) => {
+      stateReducer: (newState: any, action: any, prevState: any) => {
         if (action.type === 'setFilter' && setBackendFilters) {
-          setBackendFilters(newState.filters)
+          const toUpdateFilters = [...prevState.filters, ...newState.filters]
+          const uniqueFilters = new Set(toUpdateFilters)
+
+          console.log('debug filters')
+          console.log(uniqueFilters)
+
+          setBackendFilters(toUpdateFilters)
         }
         if (action.type === 'gotoPage' && setBackendPage) {
           setBackendPage(newState.pageIndex + 1)
