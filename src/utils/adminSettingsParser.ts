@@ -4,9 +4,13 @@ import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 const getNestedData = (fieldPath: Array<string>, data: any): any => {
   let dataToUnpack = data
 
-  fieldPath.forEach((path) => {
+  for (let pathIndex = 0; pathIndex < fieldPath.length; pathIndex++) {
+    if (dataToUnpack === null) {
+      break
+    }
+    const path = fieldPath[pathIndex]
     dataToUnpack = dataToUnpack[path]
-  })
+  }
 
   return dataToUnpack
 }
