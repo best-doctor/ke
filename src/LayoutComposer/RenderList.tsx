@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react'
 import { Flex } from '@chakra-ui/core'
 
 import type { BaseAdmin } from 'admin'
+import type { BaseProvider } from 'admin/providers'
 import type { Pagination, TableFilter } from '../admin/providers'
 import { Table } from './components/Table'
 import { SideBar } from './components/SideBar'
 
-export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
+export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> = ({ admin, provider }) => {
   const [objects, setObjects] = useState<Model[]>([])
 
   const [filters, setFilters] = useState([])
@@ -31,8 +32,8 @@ export const RenderList: React.FC<{ admin: BaseAdmin }> = ({ admin }) => {
   }
 
   useEffect(() => {
-    admin.provider.getList(filters, page).then(processBackendResponse)
-  }, [admin.provider, filters, page])
+    provider.getList(admin.baseUrl, filters, page).then(processBackendResponse)
+  }, [admin.baseUrl, provider, filters, page])
 
   return (
     <Flex>

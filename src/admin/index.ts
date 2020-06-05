@@ -1,8 +1,7 @@
-import type { BaseProvider } from './providers'
 import type { DetailFieldDescription, ListFieldDescription } from './fields/FieldDescription'
 
 export abstract class BaseAdmin {
-  abstract provider: BaseProvider
+  abstract baseUrl: string
 
   abstract list_fields: ListFieldDescription[]
 

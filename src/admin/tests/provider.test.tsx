@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BaseProvider } from '../providers/index'
+import { BaseProvider, Filter } from '../providers/index'
 
 const filterWithOperation = {
   name: 'id',
@@ -18,7 +18,7 @@ mockedHTTP.defaults = { baseURL: 'https://test.com/' }
 
 class TestProvider extends BaseProvider {
   constructor() {
-    super('https://test.com/test-url/', mockedHTTP)
+    super(mockedHTTP)
   }
 }
 
@@ -44,7 +44,9 @@ test.each([
   [[{ id: 'id', value: filterWithOperation }], 'https://test.com/test-url/?id__equals=test12345'],
   [[{ id: 'id', value: defaultFilter }], 'https://test.com/test-url/?first_name=Test'],
 ])('Provider get url', (tableFilterObject, expectedResult) => {
-  const result = provider.getUrl(tableFilterObject)
+  const resourceUrl = 'https://test.com/test-url/'
+  const resourceFilters: Filter[] = []
+  const result = provider.getUrl(resourceUrl, resourceFilters, tableFilterObject)
 
   expect(result).toBe(expectedResult)
 })

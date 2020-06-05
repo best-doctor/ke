@@ -3,16 +3,9 @@ import { Button } from '@chakra-ui/core'
 
 import { parseAdminSettings } from '../adminSettingsParser'
 import { BaseAdmin } from '../../admin/index'
-import { BaseProvider } from '../../admin/providers/index'
-
-class TestProvider extends BaseProvider {
-  constructor() {
-    super('https://test.com/tests/')
-  }
-}
 
 class TestAdmin extends BaseAdmin {
-  provider = new TestProvider()
+  baseUrl = 'https://test.com/test'
 
   list_fields = [
     {
