@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Flex, Text, Box } from '@chakra-ui/core'
+import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
 import { Link } from 'react-router-dom'
 
@@ -18,6 +18,7 @@ type TableProps = {
   backendPagination: Pagination | undefined
   setBackendFilters: Function | undefined
   setBackendPage: Function | undefined
+  filterable: boolean
 }
 
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba
@@ -38,7 +39,6 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
         <TableCell p={4} key={column.id} bg="gray.100" {...column.getHeaderProps()} justifyContent="space-between">
           <Flex flexDirection="column">
             <Text fontWeight="bold">{column.render('Header')}</Text>
-            <Box>{column.Filter ? column.render('Filter') : null}</Box>
           </Flex>
         </TableCell>
       ))}
@@ -71,12 +71,40 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
+const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Element => {
+  const [show, setShow] = React.useState<boolean>(false)
+  const handleToggle = (): void => setShow(!show)
+
+  const mountFilters = (): ReactNode => {
+    return headerGroups.map((headerGroup: HeaderGroup) =>
+      headerGroup.headers.map((column: any) => (
+        <Flex flexDirection="column" m={2}>
+          <Text fontWeight="bold">{column.Filter ? column.render('Header') : null}</Text>
+          <Box>{column.Filter ? column.render('Filter') : null}</Box>
+        </Flex>
+      ))
+    )
+  }
+
+  return (
+    <>
+      <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
+        Фильтровать
+      </Button>
+      <Collapse mt={19} isOpen={show}>
+        {mountFilters()}
+      </Collapse>
+    </>
+  )
+}
+
 const Table = ({
   columns,
   data,
   pageCount: controlledPageCount,
   setBackendFilters,
   setBackendPage,
+  filterable = false,
 }: TableProps): JSX.Element => {
   const {
     getTableProps,
@@ -128,6 +156,8 @@ const Table = ({
         borderWidth="1px"
         onClick={() => false}
       >
+        {filterable && <FilterBlock headerGroups={headerGroups} />}
+
         <StyledTable {...getTableProps()}>
           <TableHead>{mountHeader(headerGroups)}</TableHead>
           <Flex flexDirection="column">{mountRows(page, prepareRow)}</Flex>

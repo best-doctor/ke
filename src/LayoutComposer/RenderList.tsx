@@ -46,6 +46,7 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> 
           backendPagination={pagination}
           setBackendFilters={setFilters}
           setBackendPage={setPage}
+          filterable
         />
       )}
     </Flex>
