@@ -2,13 +2,13 @@ import axios from 'axios'
 import { BaseProvider, Filter } from '../providers/index'
 
 const filterWithOperation = {
-  name: 'id',
+  filterName: 'id',
   value: 'test12345',
   filterOperation: 'equals',
 }
 
 const defaultFilter = {
-  name: 'first_name',
+  filterName: 'first_name',
   value: 'Test',
   filterOperation: undefined,
 }

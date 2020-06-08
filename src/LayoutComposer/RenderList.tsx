@@ -11,7 +11,7 @@ import { SideBar } from './components/SideBar'
 export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> = ({ admin, provider }) => {
   const [objects, setObjects] = useState<Model[]>([])
 
-  const [filters, setFilters] = useState([])
+  const [backendFilters, setBackendFilters] = useState([])
 
   const [pagination, setPagination] = useState<Pagination>()
 
@@ -26,14 +26,15 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> 
   ]): void => {
     setObjects(backendData)
     setPagination(backendPagination)
+
     if (backendPagination?.count) {
       setPageCount(Math.ceil(backendPagination.count / backendPagination.perPage))
     }
   }
 
   useEffect(() => {
-    provider.getList(admin.baseUrl, filters, page).then(processBackendResponse)
-  }, [admin.baseUrl, provider, filters, page])
+    provider.getList(admin.baseUrl, backendFilters, page).then(processBackendResponse)
+  }, [admin.baseUrl, provider, backendFilters, page])
 
   return (
     <Flex>
@@ -42,9 +43,10 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> 
         <Table
           data={objects}
           columns={admin.list_fields}
+          backendFilters={backendFilters}
           pageCount={pageCount}
           backendPagination={pagination}
-          setBackendFilters={setFilters}
+          setBackendFilters={setBackendFilters}
           setBackendPage={setPage}
           filterable
         />

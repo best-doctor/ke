@@ -9,11 +9,12 @@ import type { ListFieldDescription } from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
-import type { Pagination } from '../../../admin/providers'
+import type { Pagination, Filter } from '../../../admin/providers'
 
 type TableProps = {
   data: any
   columns: ListFieldDescription[]
+  backendFilters: Filter[] | undefined
   pageCount: number | undefined
   backendPagination: Pagination | undefined
   setBackendFilters: Function | undefined
@@ -78,9 +79,13 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
   const mountFilters = (): ReactNode => {
     return headerGroups.map((headerGroup: HeaderGroup) =>
       headerGroup.headers.map((column: any) => (
-        <Flex flexDirection="column" m={2}>
-          <Text fontWeight="bold">{column.Filter ? column.render('Header') : null}</Text>
-          <Box>{column.Filter ? column.render('Filter') : null}</Box>
+        <Flex flexDirection="column" m={2} key={column.id}>
+          {column.Filter && (
+            <>
+              <Text fontWeight="bold">{column.render('Header')}</Text>
+              <Box>{column.render('Filter')}</Box>
+            </>
+          )}
         </Flex>
       ))
     )
@@ -100,6 +105,7 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
 
 const Table = ({
   columns,
+  backendFilters,
   data,
   pageCount: controlledPageCount,
   setBackendFilters,
@@ -127,9 +133,11 @@ const Table = ({
       initialState: { pageIndex: 0 },
       pageCount: controlledPageCount,
       autoResetPage: false,
-      stateReducer: (newState: any, action: any, prevState: any) => {
+      stateReducer: (newState: any, action: any) => {
         if (action.type === 'setFilter' && setBackendFilters) {
-          const toUpdateFilters = [...prevState.filters, ...newState.filters]
+          const backendFiltersList = backendFilters ? Array.from(backendFilters) : []
+
+          const toUpdateFilters = [...backendFiltersList, ...newState.filters]
           const uniqueFilters = new Set(toUpdateFilters)
 
           setBackendFilters(uniqueFilters)

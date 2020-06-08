@@ -2,7 +2,7 @@ import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 
 export type Filter = {
-  name: string
+  filterName: string
   value: string
   filterOperation: string | undefined
 }
@@ -62,19 +62,19 @@ export abstract class BaseProvider {
     const filters: Array<Filter> = []
     const url = new URL(baseUrl)
     url.searchParams.forEach((value, param) => {
-      const [name, filterOperation] = param.split('__', 1)
-      filters.push({ name, value, filterOperation })
+      const [filterName, filterOperation] = param.split('__', 1)
+      filters.push({ filterName, value, filterOperation })
     })
     return [`${url.origin}${url.pathname}`, filters]
   }
 
   getFilterQuery = (filter: Filter): [string, string] => {
-    const { name, value, filterOperation } = filter
+    const { filterName, value, filterOperation } = filter
 
-    let filterQuery = name.toString()
+    let filterQuery = filterName.toString()
 
     if (filterOperation) {
-      filterQuery = `${name}__${filterOperation}`
+      filterQuery = `${filterName}__${filterOperation}`
     }
 
     return [filterQuery, value]
@@ -119,12 +119,12 @@ export abstract class BaseProvider {
     const { page, per_page: perPage, total: count, url, next_url: nextUrl, prev_url: prevUrl } = meta
     const [, backendFilters] = this.parseUrl(url)
     const pagination: Pagination = { page, perPage, nextUrl, prevUrl, count }
-    const excludeNames = ['page', 'per_page', ...resourceFilters.map(({ name }: Filter) => name)]
+    const excludeNames = ['page', 'per_page', ...resourceFilters.map(({ filterName }: Filter) => filterName)]
     const tableFilters: Array<TableFilter> = []
 
     backendFilters.forEach((filter: Filter) => {
-      if (!excludeNames.includes(filter.name)) {
-        tableFilters.push({ id: filter.name, value: filter })
+      if (!excludeNames.includes(filter.filterName)) {
+        tableFilters.push({ id: filter.filterName, value: filter })
       }
     })
     return [tableFilters, pagination]
