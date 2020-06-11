@@ -31,7 +31,7 @@ export const RenderDetail: React.FC<{
       </ReactGridLayout>
       {object &&
         additionalComponents.map((MyComponent: any) => (
-          <MyComponent detailObject={object} toast={toast} provider={provider} />
+          <MyComponent detailObject={object} setObject={setObject} toast={toast} provider={provider} />
         ))}
     </>
   )
