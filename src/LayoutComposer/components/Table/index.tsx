@@ -77,18 +77,18 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
   const handleToggle = (): void => setShow(!show)
 
   const mountFilters = (): ReactNode => {
-    return headerGroups.map((headerGroup: HeaderGroup) =>
-      headerGroup.headers.map((column: any) => (
-        <Flex flexDirection="column" m={2} key={column.id}>
-          {column.Filter && (
-            <>
+    return headerGroups.map((headerGroup: HeaderGroup) => (
+      <Flex flexDirection="row" flexWrap="wrap">
+        {headerGroup.headers
+          .filter((column: any) => column.Filter !== undefined)
+          .map((column: any) => (
+            <Flex flexDirection="column" m={2} key={column.id}>
               <Text fontWeight="bold">{column.render('Header')}</Text>
               <Box>{column.render('Filter')}</Box>
-            </>
-          )}
-        </Flex>
-      ))
-    )
+            </Flex>
+          ))}
+      </Flex>
+    ))
   }
 
   return (
