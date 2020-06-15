@@ -1,25 +1,8 @@
-import * as React from 'react'
-import { ThemeProvider } from '@chakra-ui/core'
-
 import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
-import { StringField } from 'admin/fields/StringField'
-import { LayoutComposer } from './LayoutComposer'
-import { Table } from './LayoutComposer/components/Table'
+import { ResourceComposer, Resource } from 'ResourceComposer'
+import { RenderList } from 'ResourceComposer/RenderList'
+import { RenderDetail } from 'ResourceComposer/RenderDetail'
+import { Table } from './ResourceComposer/components/Table'
 
-const App = (props: any): JSX.Element => {
-  const { admin, additionalListComponents, additionalDetailComponents, provider } = props
-
-  return (
-    <ThemeProvider>
-      <LayoutComposer
-        customAdminClass={admin}
-        additionalListComponents={additionalListComponents}
-        additionalDetailComponents={additionalDetailComponents}
-        provider={provider}
-      />
-    </ThemeProvider>
-  )
-}
-
-export { App, BaseAdmin, BaseProvider, StringField, Table }
+export { BaseAdmin, BaseProvider, Table, ResourceComposer, Resource, RenderList, RenderDetail }
