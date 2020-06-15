@@ -29,12 +29,10 @@ const Resource = ({
   </Switch>
 )
 
-const ResourceComposer = ({children}: { children: JSX.Element[] }): JSX.Element => {
+const ResourceComposer = ({ children }: { children: JSX.Element[] }): JSX.Element => {
   return (
     <ThemeProvider>
-      <Router>
-        {children}
-      </Router>
+      <Router>{children}</Router>
     </ThemeProvider>
   )
 }
