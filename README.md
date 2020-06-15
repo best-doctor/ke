@@ -19,16 +19,26 @@ This is an example of the future API
 To use `ke` you should implement several base classes.
 
 First of all you should extend `BaseProvider` class.
-It uses the `url` attribute, which determines the required resource, to
-fetch data from your backend.
+It implements the basic methods for HTTP interaction using an axios instance.
+Thus, you should have an axios instance with the required headers and pass
+it to the provider class.
 
 ```ts
-// providers.ts
+// client.ts
+
+const httpClient = axios.create({
+  baseURL: process.env.API_URL,
+})
+
+// provider.ts
 
 import { BaseProvider } from '@bestdoctor/ke';
+import { httpClient } from 'client';
 
 class PatientProvider extends BaseProvider {
-  url = '/patients/'
+  constructor() {
+    super(httpClient)
+  }
 }
 
 ```
@@ -36,41 +46,38 @@ class PatientProvider extends BaseProvider {
 After that you should extend BaseAdmin class.
 Here you can declaratively describe your component.
 
-```ts
-// admin.ts
+```tsx
+// admin.tsx
 
-import {
-  BaseAdmin, LinkField, TableRowWidget,
-  StringField, SelectWidget, NestedStructure, InfoWidget,
-} from '@bestdoctor/ke';
+import { BaseAdmin } from '@bestdoctor/ke';
+import { Link, Text } from 'custom-ui-ket';
 import { PatientProvider } from './providers';
 
 class PatientAdmin extends BaseAdmin {
-  provider = new PatientProvider()
+  baseUrl = `${process.env.API_URL}patients/`
 
   list_fields = [
     {
-      name: 'id',
-      fieldType: LinkField,
-      widget: TableRowWidget,
-      className: 'tableRowElement',
-      layout: {x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
+      id: 'id',
+      Header: 'ID',
+      toDetailRoute: '/patients',
+      accessor: (row: any) => row.id,
+      filterName: 'id',
+      filterOperation
+      Filter: BaseFilter,
     },
   ]
 
   detail_fields = [
     {
       name: 'full_name',
-      fieldType: StringField,
-      widget: SelectWidget,
-      className: 'patientFirstName',
-      layout: {x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
+      widget: Link,
+      widget_attrs: { color: 'teal.500' },
+      layout: { x: 2, y: 1, w: 2, h: 1, static: true },
     },
     {
       name: 'user__email',
-      fieldType: NestedStructure,
-      widget: InfoWidget,
-      className: 'userEmail',
+      widget: Text,
       layout: {x: 0, y: 0, w: 1, h: 2, static: true}
     },
   ]
@@ -79,30 +86,63 @@ class PatientAdmin extends BaseAdmin {
 
 BaseAdmin class uses attributes to build custom component:
 
-* `provider` - for fetching data from backend
+* `baseUrl` - admin class resource
 * `list_fields` - settings for displaying a list view table with specific
-  field styles
+  field styles. It uses [react-table](https://github.com/tannerlinsley/react-table)
+  under the hood.
 * `detail_fields` - settings for displaying a detail page view with specific
   field styles
 
-Attributes in fields description:
+Attributes in list fields description:
+
+It uses react-table settings format with some additions. For example:
+
+* `toDetailRoute` – (optional) tells the table to use this column as
+  detail route with a given url
+* `filterName` – (optional) name to generate server side filtering request.
+  With `id` value it will generate `/api/patients/?id=100500`
+* filterOperation – (optional) filter operation for server side filtering.
+  With `filterName = date` and `filterOperation = 'gte'`
+  it will generate `/api/patients/?date__gte=20.01.20`
+* Filter – (optional) filter widget. It uses react-table formatunder the hood
+
+Attributes in detail fields description:
 
 * `name` - field title in json response from backend
-* `fieldType` - field type definition for deserializing data from backend
 * `widget` - React Component for rendering data in user interface
-* `className` - CSS style title
+* `widget_attrs` – (optional) custom props for widget
 * `layout` - setting for the grid to display the widget in the user interface
 
-After that you can use component `LayoutComposer`, which makes all magic under
-the hood and get your user component.
+After that you can use `ResourceComposer` and `Resource` components,
+which makes all magic under the hood and get your user component.
+
+`Resource` component takes the following arguments:
+
+* `admin` – instance of your admin class
+* `provider` – instance of your provider implementation
+* `additionalDetailComponents` – (optional) you can pass in ke your
+  custom components which it will render
 
 ```ts
-import { LayoutComponent } from '@bestdoctor/ke';
+import { ResourceComposer } from '@bestdoctor/ke';
 
-const PatientComponent = () => <LayoutComposer data={new PatientAdmin()}/>
+import { Provider } from 'provider';
+
+const provider = new Provider()
+
+const App = () => (
+  <ResourceComposer>
+    <Resource
+      name="patients"
+      admin={new PatientAdmin()}
+      provider={provider}
+      additionalDetailComponents={[]}
+    />
+  </ResourceComposer>
+)
 ```
 
-`PatientComponent` will have routes for the list and detail view with the
+`App` will have routes for the list and detail view with the
 settings and widgets you set.
 
 ## Contributing
