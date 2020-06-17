@@ -3,6 +3,20 @@ import { BaseProvider } from 'admin/providers'
 import { ResourceComposer, Resource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'ResourceComposer/RenderDetail'
+import { StoreManager } from 'store'
 import { Table } from './ResourceComposer/components/Table'
+import { SelectFilter, MultiSelectFilter, BaseFilter } from './ResourceComposer/components/Table/filters'
 
-export { BaseAdmin, BaseProvider, Table, ResourceComposer, Resource, RenderList, RenderDetail }
+export {
+  BaseAdmin,
+  BaseProvider,
+  Table,
+  ResourceComposer,
+  Resource,
+  RenderList,
+  RenderDetail,
+  SelectFilter,
+  MultiSelectFilter,
+  BaseFilter,
+  StoreManager,
+}

@@ -24,6 +24,7 @@ module.exports = {
       'error',
       { allowExpressions: true, allowTypedFunctionExpressions: true },
     ],
+    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true }],
     // Just because of hoising
     'no-use-before-define': ['error', { functions: false, classes: true, variables: true }],
     '@typescript-eslint/no-use-before-define': [
