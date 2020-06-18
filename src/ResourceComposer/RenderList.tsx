@@ -5,8 +5,8 @@ import { Flex } from '@chakra-ui/core'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { Pagination, TableFilter } from '../admin/providers'
-import { Table } from './components/Table'
-import { SideBar } from './components/SideBar'
+import { Table } from '../components/Table'
+import { SideBar } from '../components/SideBar'
 
 export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> = ({ admin, provider }) => {
   const [objects, setObjects] = useState<Model[]>([])

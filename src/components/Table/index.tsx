@@ -9,7 +9,7 @@ import type { ListFieldDescription } from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
-import type { Pagination, Filter } from '../../../admin/providers'
+import type { Pagination, Filter } from '../../admin/providers'
 
 type TableProps = {
   data: any

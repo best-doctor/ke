@@ -3,7 +3,7 @@ import { DebounceInput } from 'react-debounce-input'
 import Select from 'react-select'
 import styled from 'styled-components'
 
-import { StoreManager } from '../../../store'
+import { StoreManager } from '../../store'
 
 const StyledFilter = styled.div`
   .base-styled-filter {

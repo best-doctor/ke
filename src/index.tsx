@@ -4,8 +4,9 @@ import { ResourceComposer, Resource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'ResourceComposer/RenderDetail'
 import { StoreManager } from 'store'
-import { Table } from './ResourceComposer/components/Table'
-import { SelectFilter, MultiSelectFilter, BaseFilter } from './ResourceComposer/components/Table/filters'
+import { Table } from './components/Table'
+import { SelectFilter, MultiSelectFilter, BaseFilter } from './components/Table/filters'
+import { ForeignKeySelect } from './components/ForeignKeySelect'
 
 export {
   BaseAdmin,
@@ -19,4 +20,5 @@ export {
   MultiSelectFilter,
   BaseFilter,
   StoreManager,
+  ForeignKeySelect,
 }
