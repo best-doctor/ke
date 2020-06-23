@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom'
 import { useToast } from '@chakra-ui/core'
 import * as GridLayout from 'react-grid-layout'
 
-import { mountComponents } from 'utils/mountComponents'
+import type { ReactNode } from 'react'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
-import type { ReactNode } from 'react'
+
+import { mountComponents } from '../utils/mountComponents'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 

@@ -1,5 +1,6 @@
-import axios from 'axios'
-import { BaseProvider, Filter } from '../providers/index'
+import { testProvider } from '../../setupTests'
+
+import type { Filter } from '../providers/index'
 
 const filterWithOperation = {
   filterName: 'id',
@@ -13,21 +14,10 @@ const defaultFilter = {
   filterOperation: undefined,
 }
 
-const mockedHTTP = axios.create({})
-mockedHTTP.defaults = { baseURL: 'https://test.com/' }
-
-class TestProvider extends BaseProvider {
-  constructor() {
-    super(mockedHTTP)
-  }
-}
-
-const provider = new TestProvider()
-
 test('Provider get filter query with filter operation', () => {
   const expectedResult = ['id__equals', 'test12345']
 
-  const result = provider.getFilterQuery(filterWithOperation)
+  const result = testProvider.getFilterQuery(filterWithOperation)
 
   expect(result).toEqual(expectedResult)
 })
@@ -35,7 +25,7 @@ test('Provider get filter query with filter operation', () => {
 test('Provder get filter query without filter operation', () => {
   const expectedResult = ['first_name', 'Test']
 
-  const result = provider.getFilterQuery(defaultFilter)
+  const result = testProvider.getFilterQuery(defaultFilter)
 
   expect(result).toEqual(expectedResult)
 })
@@ -46,7 +36,7 @@ test.each([
 ])('Provider get url', (tableFilterObject, expectedResult) => {
   const resourceUrl = 'https://test.com/test-url/'
   const resourceFilters: Filter[] = []
-  const result = provider.getUrl(resourceUrl, resourceFilters, tableFilterObject)
+  const result = testProvider.getUrl(resourceUrl, resourceFilters, tableFilterObject)
 
   expect(result).toBe(expectedResult)
 })

@@ -5,8 +5,8 @@ import { ThemeProvider } from '@chakra-ui/core'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 
-import { RenderList } from 'ResourceComposer/RenderList'
-import { RenderDetail } from 'ResourceComposer/RenderDetail'
+import { RenderList } from './RenderList'
+import { RenderDetail } from './RenderDetail'
 
 const Resource = ({
   name,

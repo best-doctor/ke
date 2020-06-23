@@ -1,32 +1,20 @@
 /* eslint-disable */
 import { Button } from '@chakra-ui/core'
 
+import { testAdmin } from '../../setupTests'
 import { parseAdminSettings } from '../adminSettingsParser'
-import { BaseAdmin } from '../../admin/index'
-
-class TestAdmin extends BaseAdmin {
-  baseUrl = 'https://test.com/test'
-
-  list_fields = [
-    {
-      Header: 'Id',
-      accessor: 'id',
-    },
-  ]
-
-  detail_fields = [{ name: 'last_name', widget: Button, layout: { x: 100600 }, widget_attrs: { color: 'red' } }]
-}
 
 const data = {
   id: 100500,
-  last_name: 'Some test name',
+  patient: {
+    last_name: 'Some test name',
+  },
 }
 
 test('Parse admin detail fields', () => {
-  const admin = new TestAdmin()
   const expected_result = [
     {
-      name: `100500last_name`,
+      name: `100500patient__last_name`,
       flat_data: 'Some test name',
       widget: Button,
       widget_attrs: { color: 'red' },
@@ -34,7 +22,7 @@ test('Parse admin detail fields', () => {
     },
   ]
 
-  const result = parseAdminSettings(admin.detail_fields, data)
+  const result = parseAdminSettings(testAdmin.detail_fields, data)
 
   expect(result).toEqual(expected_result)
 })

@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     'no-prototype-builtins': 'off',
     'no-plusplus': 'off',
+    'max-classes-per-file': 0,
     // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
     'import/prefer-default-export': 'off',
     'import/no-default-export': 'error',
