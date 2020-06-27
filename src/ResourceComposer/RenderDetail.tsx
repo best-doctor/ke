@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/core'
 import * as GridLayout from 'react-grid-layout'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { BaseAdmin } from 'admin'
