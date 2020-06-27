@@ -24,7 +24,7 @@ const Resource = ({
       <RenderList admin={admin} provider={provider} />
     </Route>
     <Route exact path={`/${name}/:id`}>
-      <RenderDetail admin={admin} additionalComponents={additionalDetailComponents} provider={provider} />
+      <RenderDetail name={name} admin={admin} additionalComponents={additionalDetailComponents} provider={provider} />
     </Route>
   </Switch>
 )
