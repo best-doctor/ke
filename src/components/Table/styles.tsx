@@ -22,7 +22,7 @@ const TableCell = styled.div`
   flex: 1;
   height: 30px;
   display: flex;
-  min-width: 150px;
+  min-width: 200px;
   align-items: center;
   border-bottom-width: 1px;
   overflow: hidden;
@@ -33,7 +33,9 @@ const TableHead = styled.div<SpaceProps>`
   ${space};
   display: flex;
   flex-direction: row;
-  background-color: #edf2f7;
+  & > div[role='row'] {
+    background-color: #edf2f7;
+  }
 `
 
 const TableRow = styled(Flex)`
