@@ -1,3 +1,5 @@
+/* eslint max-classes-per-file: 0 */
+
 import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import { Button } from '@chakra-ui/core'
