@@ -27,7 +27,7 @@ export abstract class BaseProvider {
 
   getList = async (
     url: string,
-    filters: Array<TableFilter> | null = null,
+    filters: Filter[] | null = null,
     page: number | null = null
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const [resourceUrl, resourceFilters] = this.parseUrl(url)
@@ -83,14 +83,14 @@ export abstract class BaseProvider {
   getUrl = (
     resourceUrl: string,
     resourceFilters: Filter[] | null = null,
-    filters: Array<TableFilter> | null = null,
+    filters: Filter[] | null = null,
     page: number | null = null
   ): string => {
     const url = new URL(resourceUrl)
 
     if (filters) {
-      filters.forEach(({ value }: TableFilter) => {
-        const [queryParam, queryValue] = this.getFilterQuery(value)
+      filters.forEach((filter: Filter) => {
+        const [queryParam, queryValue] = this.getFilterQuery(filter)
         url.searchParams.set(queryParam, queryValue)
       })
     }

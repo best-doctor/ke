@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
@@ -9,15 +9,14 @@ import type { ListFieldDescription } from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
-import type { Pagination, Filter } from '../../admin/providers'
+import type { Pagination } from '../../admin/providers'
+import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
   data: any
   columns: ListFieldDescription[]
-  backendFilters: Filter[] | undefined
   pageCount: number | undefined
   backendPagination: Pagination | undefined
-  setBackendFilters: Function | undefined
   setBackendPage: Function | undefined
   filterable: boolean
 }
@@ -105,13 +104,14 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
 
 const Table = ({
   columns,
-  backendFilters,
   data,
   pageCount: controlledPageCount,
-  setBackendFilters,
   setBackendPage,
   filterable = false,
 }: TableProps): JSX.Element => {
+  const history = useHistory()
+  const location = useLocation()
+
   const {
     getTableProps,
     headerGroups,
@@ -134,13 +134,11 @@ const Table = ({
       pageCount: controlledPageCount,
       autoResetPage: false,
       stateReducer: (newState: any, action: any) => {
-        if (action.type === 'setFilter' && setBackendFilters) {
-          const backendFiltersList = backendFilters ? Array.from(backendFilters) : []
-
-          const toUpdateFilters = [...backendFiltersList, ...newState.filters]
-          const uniqueFilters = new Set(toUpdateFilters)
-
-          setBackendFilters(uniqueFilters)
+        if (action.type === 'setFilter') {
+          const filters = FilterManager.extractTableFilters(newState.filters)
+          const query = new URLSearchParams(location.search)
+          FilterManager.setQueryFilters(query, filters)
+          history.replace({...history.location, search: query.toString()})
         }
         if (action.type === 'gotoPage' && setBackendPage) {
           setBackendPage(newState.pageIndex + 1)

@@ -31,8 +31,8 @@ test('Provder get filter query without filter operation', () => {
 })
 
 test.each([
-  [[{ id: 'id', value: filterWithOperation }], 'https://test.com/test-url/?id__equals=test12345'],
-  [[{ id: 'id', value: defaultFilter }], 'https://test.com/test-url/?first_name=Test'],
+  [[filterWithOperation], 'https://test.com/test-url/?id__equals=test12345'],
+  [[defaultFilter], 'https://test.com/test-url/?first_name=Test'],
 ])('Provider get url', (tableFilterObject, expectedResult) => {
   const resourceUrl = 'https://test.com/test-url/'
   const resourceFilters: Filter[] = []
