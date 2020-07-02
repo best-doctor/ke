@@ -12,7 +12,7 @@ import { SideBar } from '../components/SideBar'
 import { FilterManager } from '../utils/filterManager'
 
 export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> = ({ admin, provider }) => {
-  const location = useLocation();
+  const location = useLocation()
 
   const [objects, setObjects] = useState<Model[]>([])
   const [pagination, setPagination] = useState<Pagination>()

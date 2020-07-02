@@ -8,7 +8,7 @@ class FilterManager {
   static convertQueryStringToObject(queryFilters: string): QueryFilter {
     // eslint-disable-next-line
     // @ts-ignore
-    return Object.fromEntries(new URLSearchParams(queryFilters));
+    return Object.fromEntries(new URLSearchParams(queryFilters))
   }
 
   static parseQueryFilters(queryFiltersObject: QueryFilter): Filter[] {
@@ -24,10 +24,8 @@ class FilterManager {
 
   static removeDuplicates(filtersList: Filter[], uniquePropertyName: keyof Filter = 'filterName'): Filter[] {
     return filtersList.filter((obj: Filter, pos: number, arr: Filter[]) => {
-      return arr.map(
-        (mapObj: Filter) => mapObj[uniquePropertyName]
-      ).indexOf(obj[uniquePropertyName]) === pos;
-    });
+      return arr.map((mapObj: Filter) => mapObj[uniquePropertyName]).indexOf(obj[uniquePropertyName]) === pos
+    })
   }
 
   static getQueryFilters(queryFilters: string): Filter[] {

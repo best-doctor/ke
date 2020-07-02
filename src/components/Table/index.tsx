@@ -138,7 +138,7 @@ const Table = ({
           const filters = FilterManager.extractTableFilters(newState.filters)
           const query = new URLSearchParams(location.search)
           FilterManager.setQueryFilters(query, filters)
-          history.replace({...history.location, search: query.toString()})
+          history.replace({ ...history.location, search: query.toString() })
         }
         if (action.type === 'gotoPage' && setBackendPage) {
           setBackendPage(newState.pageIndex + 1)
