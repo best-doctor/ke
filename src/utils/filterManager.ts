@@ -5,10 +5,20 @@ type QueryFilter = {
 }
 
 class FilterManager {
-  static convertQueryStringToObject(queryFilters: string): QueryFilter {
+  static getUrlSearchParamsObject(queryFilters: string): URLSearchParams {
+    return new URLSearchParams(queryFilters)
+  }
+
+  static convertSearchParamsToObject(searchParams: URLSearchParams): QueryFilter {
     // eslint-disable-next-line
     // @ts-ignore
-    return Object.fromEntries(new URLSearchParams(queryFilters))
+    return Object.fromEntries(searchParams)
+  }
+
+  static convertQueryStringToObject(queryFilters: string): QueryFilter {
+    const searchParams = FilterManager.getUrlSearchParamsObject(queryFilters)
+
+    return FilterManager.convertSearchParamsToObject(searchParams)
   }
 
   static parseQueryFilters(queryFiltersObject: QueryFilter): Filter[] {
