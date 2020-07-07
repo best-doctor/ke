@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Button } from '@chakra-ui/core'
+import { Text } from '@chakra-ui/core'
 
 import { testAdmin } from '../../setupTests'
 import { parseAdminSettings } from '../adminSettingsParser'
@@ -16,9 +16,9 @@ test('Parse admin detail fields', () => {
     {
       name: `100500patient__last_name`,
       flat_data: 'Some test name',
-      widget: Button,
+      widget: Text,
       widget_attrs: { color: 'red' },
-      layout_data: { x: 100600 },
+      layout_data: { x: 1, y: 3, w: 1, h: 2, static: true },
     },
   ]
 

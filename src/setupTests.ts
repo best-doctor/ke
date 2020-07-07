@@ -2,7 +2,7 @@
 
 import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
-import { Button } from '@chakra-ui/core'
+import { Text } from '@chakra-ui/core'
 import axios from 'axios'
 
 import { BaseAdmin } from './admin/index'
@@ -21,7 +21,12 @@ class TestAdmin extends BaseAdmin {
   ]
 
   detail_fields = [
-    { name: 'patient__last_name', widget: Button, layout: { x: 100600 }, widget_attrs: { color: 'red' } },
+    {
+      name: 'patient__last_name',
+      widget: Text,
+      widget_attrs: { color: 'red' },
+      layout: { x: 1, y: 3, w: 1, h: 2, static: true },
+    },
   ]
 }
 
