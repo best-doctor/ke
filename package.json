@@ -9,6 +9,7 @@
         "@chakra-ui/core": "^0.7.0",
         "@emotion/core": "^10.0.28",
         "@emotion/styled": "^10.0.27",
+        "@sentry/react": "^5.19.0",
         "@types/enzyme": "^3.10.5",
         "@types/enzyme-adapter-react-16": "^1.0.6",
         "axios": "^0.19.2",

@@ -4,6 +4,7 @@ import { ResourceComposer, Resource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'ResourceComposer/RenderDetail'
 import { StoreManager } from 'store'
+import { EnableSentry } from 'integration/EnableSentry'
 import { Table } from './components/Table'
 import { SelectFilter, MultiSelectFilter, BaseFilter } from './components/Table/filters'
 import { ForeignKeySelect } from './components/ForeignKeySelect'
@@ -21,4 +22,5 @@ export {
   BaseFilter,
   StoreManager,
   ForeignKeySelect,
+  EnableSentry,
 }
