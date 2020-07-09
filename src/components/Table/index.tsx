@@ -76,8 +76,9 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
   const handleToggle = (): void => setShow(!show)
 
   const mountFilters = (): ReactNode => {
-    return headerGroups.map((headerGroup: HeaderGroup) => (
-      <Flex flexDirection="row" flexWrap="wrap">
+    return headerGroups.map((headerGroup: HeaderGroup, key: number) => (
+      // eslint-disable-next-line
+      <Flex flexDirection="row" flexWrap="wrap" key={key}>
         {headerGroup.headers
           .filter((column: any) => column.Filter !== undefined)
           .map((column: any) => (
