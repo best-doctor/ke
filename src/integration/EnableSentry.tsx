@@ -9,8 +9,10 @@ type EnableSentryProps = {
 
 const EnableSentry = ({ sentryDSN, user }: EnableSentryProps): JSX.Element => {
   useEffect(() => {
-    Sentry.init({ dsn: sentryDSN })
-    Sentry.configureScope((scope: any) => scope.setUser({ email: user && user.email }))
+    if (sentryDSN) {
+      Sentry.init({ dsn: sentryDSN })
+      Sentry.configureScope((scope: any) => scope.setUser({ email: user && user.email }))
+    }
   }, [user, sentryDSN])
 
   return <></>
