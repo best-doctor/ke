@@ -10,7 +10,7 @@ type ListFieldDescription = {
 type DetailFieldDescription = {
   name: string
   widget: FunctionComponent<any>
-  widget_attrs: any
+  widget_attrs?: any
   layout: LayoutData
 }
 
