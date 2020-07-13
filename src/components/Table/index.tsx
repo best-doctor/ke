@@ -104,7 +104,7 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
         </Button>
       </Flex>
       <Collapse mt={19} isOpen={show}>
-      {mountFilters()}
+        {mountFilters()}
       </Collapse>
     </>
   )

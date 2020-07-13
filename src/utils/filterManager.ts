@@ -76,7 +76,7 @@ class FilterManager {
 
   static resetFilters(history: any): void {
     history.push({
-      search: ''
+      search: '',
     })
   }
 }
