@@ -72,6 +72,8 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
 }
 
 const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Element => {
+  const history = useHistory()
+
   const [show, setShow] = React.useState<boolean>(false)
   const handleToggle = (): void => setShow(!show)
 
@@ -93,11 +95,16 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
 
   return (
     <>
-      <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
-        Фильтровать
-      </Button>
+      <Flex flexDirection="row">
+        <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
+          Фильтровать
+        </Button>
+        <Button variantColor="teal" onClick={() => FilterManager.resetFilters(history)} maxWidth={130} m={2}>
+          Сбросить
+        </Button>
+      </Flex>
       <Collapse mt={19} isOpen={show}>
-        {mountFilters()}
+      {mountFilters()}
       </Collapse>
     </>
   )
@@ -137,9 +144,7 @@ const Table = ({
       stateReducer: (newState: any, action: any) => {
         if (action.type === 'setFilter') {
           const filters = FilterManager.extractTableFilters(newState.filters)
-          const query = new URLSearchParams(location.search)
-          FilterManager.setQueryFilters(query, filters)
-          history.replace({ ...history.location, search: query.toString() })
+          FilterManager.setFilters(location, filters, history)
         }
         if (action.type === 'gotoPage' && setBackendPage) {
           setBackendPage(newState.pageIndex + 1)

@@ -1,3 +1,5 @@
+import type { Location } from 'history'
+
 import type { Filter, TableFilter } from 'admin/providers'
 
 type QueryFilter = {
@@ -61,6 +63,20 @@ class FilterManager {
       } else {
         query.set(filter.filterName, filter.value)
       }
+    })
+  }
+
+  static setFilters(location: Location, filters: Filter[], history: any): void {
+    const query = new URLSearchParams(location.search)
+
+    FilterManager.setQueryFilters(query, filters)
+
+    history.replace({ ...history.location, search: query.toString() })
+  }
+
+  static resetFilters(history: any): void {
+    history.push({
+      search: ''
     })
   }
 }
