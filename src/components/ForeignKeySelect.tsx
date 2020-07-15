@@ -3,7 +3,7 @@ import AsyncSelect from 'react-select/async'
 import { Box, FormLabel } from '@chakra-ui/core'
 import * as debouncePromise from 'debounce-promise'
 
-import { getData } from '../utils/dataAccess'
+import { getData, getWidgetContent } from '../utils/dataAccess'
 import type { BaseProvider } from '../admin/providers'
 
 const ForeignKeySelect = ({
@@ -44,6 +44,7 @@ const ForeignKeySelect = ({
 }
 
 type ForeignKeySelectWidgetProps = {
+  name: string
   detailObject: any
   provider: BaseProvider
   helpText: string
@@ -59,6 +60,7 @@ type ForeignKeySelectWidgetProps = {
 }
 
 const ForeignKeySelectWidget = ({
+  name,
   detailObject,
   provider,
   helpText,
@@ -72,8 +74,8 @@ const ForeignKeySelectWidget = ({
   notifier,
   style,
 }: ForeignKeySelectWidgetProps): JSX.Element => {
-  const placeholder = getData(displayValue, detailObject)
-  const targetUrl = getData(dataTarget, detailObject)
+  const placeholder = getWidgetContent(name, detailObject, displayValue)
+  const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
   const handleChange = (value: any): void => {
     provider.put(targetUrl, targetPayload(value)).then(
