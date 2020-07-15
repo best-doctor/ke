@@ -1,21 +1,23 @@
 import * as React from 'react'
 import AsyncSelect from 'react-select/async'
+import { Box, FormLabel } from '@chakra-ui/core'
 import * as debouncePromise from 'debounce-promise'
 
+import { getData } from '../utils/dataAccess'
 import type { BaseProvider } from '../admin/providers'
 
 const ForeignKeySelect = ({
   provider,
   dataResourceUrl,
-  placeholder,
   handleChange,
+  placeholder,
   getOptionLabel,
   getOptionValue,
 }: {
   provider: BaseProvider
   dataResourceUrl: string
-  placeholder: string
   handleChange: Function
+  placeholder: string
   getOptionLabel: Function
   getOptionValue: Function
 }): JSX.Element => {
@@ -41,4 +43,61 @@ const ForeignKeySelect = ({
   )
 }
 
-export { ForeignKeySelect }
+type ForeignKeySelectWidgetProps = {
+  detailObject: any
+  provider: BaseProvider
+  helpText: string
+  displayValue: string | Function
+  targetPayload: Function
+  dataSource: string
+  dataTarget: string | Function
+  optionLabel: Function
+  optionValue: Function
+  setObject: Function
+  notifier: Function
+  style: any
+}
+
+const ForeignKeySelectWidget = ({
+  detailObject,
+  provider,
+  helpText,
+  setObject,
+  displayValue,
+  dataSource,
+  dataTarget,
+  targetPayload,
+  optionLabel,
+  optionValue,
+  notifier,
+  style,
+}: ForeignKeySelectWidgetProps): JSX.Element => {
+  const placeholder = getData(displayValue, detailObject)
+  const targetUrl = getData(dataTarget, detailObject)
+
+  const handleChange = (value: any): void => {
+    provider.put(targetUrl, targetPayload(value)).then(
+      (updatedObject: any) => {
+        setObject(updatedObject)
+        notifier('success')
+      },
+      () => notifier('error')
+    )
+  }
+
+  return (
+    <Box {...style}>
+      <FormLabel>{helpText}</FormLabel>
+      <ForeignKeySelect
+        provider={provider}
+        dataResourceUrl={dataSource}
+        handleChange={handleChange}
+        placeholder={placeholder}
+        getOptionLabel={optionLabel}
+        getOptionValue={optionValue}
+      />
+    </Box>
+  )
+}
+
+export { ForeignKeySelect, ForeignKeySelectWidget }
