@@ -130,9 +130,32 @@ const DateFilter = ({ column }: { column: any }): JSX.Element => {
         className="styled-filter base-styled-filter"
         onChange={(value: any) => handleChange(value)}
         selected={currentDate}
+        dateFormat="yyyy-MM-dd"
       />
     </StyledFilter>
   )
 }
 
-export { BaseFilter, MultiSelectFilter, SelectFilter, DateFilter }
+const DateTimeFilter = ({ column }: { column: any }): JSX.Element => {
+  const [currentDate, setCurrentDate] = React.useState<any>()
+
+  const handleChange = (value: any): void => {
+    const filterValue = value ? moment(value).format('YYYY-MM-DDThh:mm:ss') : ''
+    setFilterValue(column, filterValue)
+    setCurrentDate(value)
+  }
+
+  return (
+    <StyledFilter>
+      <DatePicker
+        className="styled-filter base-styled-filter"
+        onChange={(value: any) => handleChange(value)}
+        showTimeSelect
+        selected={currentDate}
+        dateFormat="yyyy-MM-dd hh:mm:ss"
+      />
+    </StyledFilter>
+  )
+}
+
+export { BaseFilter, MultiSelectFilter, SelectFilter, DateFilter, DateTimeFilter }

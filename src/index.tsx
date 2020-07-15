@@ -8,7 +8,7 @@ import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { TextWidget, LinkWidget, SelectWidget, ForeignKeySelectWidget } from './components'
 import { Table } from './components/Table'
-import { SelectFilter, MultiSelectFilter, BaseFilter, DateFilter } from './components/Table/filters'
+import { SelectFilter, MultiSelectFilter, BaseFilter, DateFilter, DateTimeFilter } from './components/Table/filters'
 import { ForeignKeySelect } from './components/ForeignKeySelect'
 
 export {
@@ -22,6 +22,7 @@ export {
   SelectFilter,
   MultiSelectFilter,
   DateFilter,
+  DateTimeFilter,
   BaseFilter,
   StoreManager,
   ForeignKeySelect,
