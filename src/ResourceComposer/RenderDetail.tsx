@@ -23,6 +23,34 @@ export const RenderDetail: React.FC<{
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
 
+  const notifier = (eventType: string): void => {
+    const defaultNotification = {
+      notificationTitle: 'Обновлено',
+      notificationStatus: 'success',
+    }
+    const errorNotification = {
+      notificationTitle: 'Ошибка',
+      notificationStatus: 'error',
+    }
+
+    const statusMapping = new Map([
+      ['success', defaultNotification],
+      ['error', errorNotification],
+    ])
+    const { notificationTitle, notificationStatus }: { notificationTitle: string; notificationStatus: string } =
+      statusMapping.get(eventType) || defaultNotification
+
+    return toast({
+      title: notificationTitle,
+      position: 'top',
+      // eslint-disable-next-line
+      // @ts-ignore
+      status: notificationStatus,
+      duration: 9000,
+      isClosable: true,
+    })
+  }
+
   useEffect(() => {
     provider.getObject(admin.baseUrl, id).then((res) => setObject(res))
   }, [id, provider, admin.baseUrl])
@@ -31,11 +59,11 @@ export const RenderDetail: React.FC<{
     <>
       <ToListViewLink name={name} />
       <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
-        {mountComponents(object, admin.detail_fields)}
+        {mountComponents(object, admin.detail_fields, provider, setObject, notifier)}
       </ReactGridLayout>
       {object &&
         additionalComponents.map((MyComponent: any) => (
-          <MyComponent detailObject={object} setObject={setObject} toast={toast} provider={provider} />
+          <MyComponent detailObject={object} setObject={setObject} notifier={notifier} provider={provider} />
         ))}
     </>
   )
