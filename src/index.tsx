@@ -6,7 +6,7 @@ import { RenderDetail } from 'ResourceComposer/RenderDetail'
 import { StoreManager } from 'store'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
-import { TextWidget } from './components'
+import { TextWidget, LinkWidget, SelectWidget, ForeignKeySelectWidget } from './components'
 import { Table } from './components/Table'
 import { SelectFilter, MultiSelectFilter, BaseFilter } from './components/Table/filters'
 import { ForeignKeySelect } from './components/ForeignKeySelect'
@@ -27,4 +27,7 @@ export {
   EnableSentry,
   EnableELK,
   TextWidget,
+  LinkWidget,
+  SelectWidget,
+  ForeignKeySelectWidget,
 }
