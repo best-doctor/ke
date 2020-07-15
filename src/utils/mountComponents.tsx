@@ -1,44 +1,34 @@
 import * as React from 'react'
-import type { adminSettings, adminSettingsElement } from 'typing'
+
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
-import { parseAdminSettings } from './adminSettingsParser'
+import type { BaseProvider } from '../admin/providers'
 
-const matchResponseWithAdminFields = (objects: any, adminFields: DetailFieldDescription[]): Array<adminSettings> => {
-  const settings: Array<adminSettings> = []
-
-  if (objects instanceof Array) {
-    objects.forEach((element: any) => {
-      settings.push(parseAdminSettings(adminFields, element))
-    })
-  } else {
-    settings.push(parseAdminSettings(adminFields, objects))
-  }
-
-  return settings
-}
-
-const mountComponents = (objects: any, adminFields: DetailFieldDescription[]): Array<JSX.Element> => {
-  if (!objects) {
+const mountComponents = (
+  object: any,
+  adminFields: DetailFieldDescription[],
+  provider: BaseProvider,
+  setObject: Function,
+  notifier: Function
+): JSX.Element[] => {
+  if (!object) {
     return []
   }
 
-  const settings = matchResponseWithAdminFields(objects, adminFields)
-  const components: Array<JSX.Element> = []
+  return adminFields.map((adminElement: DetailFieldDescription) => {
+    const { widget: MyComponent, name, layout } = adminElement
 
-  settings.forEach((settingsElement: adminSettings) => {
-    settingsElement.forEach((adminElement: adminSettingsElement) => {
-      const MyComponent = adminElement.widget
-
-      components.push(
-        // eslint-disable-next-line
-        <MyComponent key={adminElement.name} data-grid={adminElement.layout_data} {...adminElement.widget_attrs}>
-          {adminElement.flat_data}
-        </MyComponent>
-      )
-    })
+    return (
+      <MyComponent
+        key={name}
+        detailObject={object}
+        data-grid={layout}
+        provider={provider}
+        setObject={setObject}
+        notifier={notifier}
+        {...adminElement}
+      />
+    )
   })
-
-  return components
 }
 
 export { mountComponents }

@@ -2,9 +2,9 @@
 
 import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
-import { Text } from '@chakra-ui/core'
 import axios from 'axios'
 
+import { TextWidget } from './components/TextWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
 
@@ -22,9 +22,9 @@ class TestAdmin extends BaseAdmin {
 
   detail_fields = [
     {
-      name: 'patient__last_name',
-      widget: Text,
-      widget_attrs: { color: 'red' },
+      name: 'patient.last_name',
+      helpText: 'Test help text',
+      widget: TextWidget,
       layout: { x: 1, y: 3, w: 1, h: 2, static: true },
     },
   ]
