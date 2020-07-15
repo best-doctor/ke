@@ -2,6 +2,10 @@ import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import Select from 'react-select'
 import styled from 'styled-components'
+import DatePicker from 'react-datepicker'
+import * as moment from 'moment'
+
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { StoreManager } from '../../store'
 
@@ -111,4 +115,24 @@ const SelectFilter = ({ column }: { column: any }): JSX.Element => {
   )
 }
 
-export { BaseFilter, MultiSelectFilter, SelectFilter }
+const DateFilter = ({ column }: { column: any }): JSX.Element => {
+  const [currentDate, setCurrentDate] = React.useState<any>()
+
+  const handleChange = (value: any): void => {
+    const filterValue = value ? moment(value).format('YYYY-MM-DD') : ''
+    setFilterValue(column, filterValue)
+    setCurrentDate(value)
+  }
+
+  return (
+    <StyledFilter>
+      <DatePicker
+        className="styled-filter base-styled-filter"
+        onChange={(value: any) => handleChange(value)}
+        selected={currentDate}
+      />
+    </StyledFilter>
+  )
+}
+
+export { BaseFilter, MultiSelectFilter, SelectFilter, DateFilter }

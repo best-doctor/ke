@@ -26,6 +26,10 @@ module.exports = ['source-map'].map((devtool) => ({
           loader: 'ts-loader',
         },
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [new CleanWebpackPlugin({ watch: true })],

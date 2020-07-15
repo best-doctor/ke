@@ -7,7 +7,7 @@ import { StoreManager } from 'store'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { Table } from './components/Table'
-import { SelectFilter, MultiSelectFilter, BaseFilter } from './components/Table/filters'
+import { SelectFilter, MultiSelectFilter, BaseFilter, DateFilter } from './components/Table/filters'
 import { ForeignKeySelect } from './components/ForeignKeySelect'
 
 export {
@@ -20,6 +20,7 @@ export {
   RenderDetail,
   SelectFilter,
   MultiSelectFilter,
+  DateFilter,
   BaseFilter,
   StoreManager,
   ForeignKeySelect,
