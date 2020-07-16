@@ -1,8 +1,8 @@
 import { get } from 'lodash'
 
-type WidgetDataHandler = string | Function | undefined
+import type { GenericAccessor } from '../typing'
 
-const getData = (handler: WidgetDataHandler, detailObject: any): any => {
+const getData = (handler: GenericAccessor, detailObject: any): any => {
   if (typeof handler === 'function') {
     return handler(detailObject)
   }
@@ -14,8 +14,20 @@ const getData = (handler: WidgetDataHandler, detailObject: any): any => {
   return null
 }
 
-const getWidgetContent = (name: string, detailObject: any, handler: WidgetDataHandler): any => {
+const getWidgetContent = (name: string, detailObject: any, handler: GenericAccessor): any => {
   return getData(handler, detailObject) || get(detailObject, name)
 }
 
-export { getData, getWidgetContent }
+const getPayload = (
+  e: any,
+  name: string,
+  targetPayload: GenericAccessor
+): string | { [key: string]: string } | null => {
+  if (targetPayload) {
+    return getData(targetPayload, e)
+  }
+
+  return { [name]: e.target.value }
+}
+
+export { getData, getWidgetContent, getPayload }
