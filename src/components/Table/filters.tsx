@@ -131,6 +131,7 @@ const DateFilter = ({ column }: { column: any }): JSX.Element => {
         onChange={(value: any) => handleChange(value)}
         selected={currentDate}
         dateFormat="yyyy-MM-dd"
+        placeholderText={`Фильтр по ${column.Header}`}
       />
     </StyledFilter>
   )
@@ -153,6 +154,7 @@ const DateTimeFilter = ({ column }: { column: any }): JSX.Element => {
         showTimeSelect
         selected={currentDate}
         dateFormat="yyyy-MM-dd hh:mm:ss"
+        placeholderText={`Фильтр по ${column.Header}`}
       />
     </StyledFilter>
   )
