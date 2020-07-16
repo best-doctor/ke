@@ -56,15 +56,18 @@ import { PatientProvider } from './providers';
 class PatientAdmin extends BaseAdmin {
   baseUrl = `${process.env.API_URL}patients/`
 
+  list_filters = {
+    name: 'id',
+    label: 'ID',
+    Filter: BaseFilter,
+  }
+
   list_fields = [
     {
       id: 'id',
       Header: 'ID',
       toDetailRoute: '/patients',
       accessor: (row: any) => row.id,
-      filterName: 'id',
-      filterOperation
-      Filter: BaseFilter,
     },
   ]
 
@@ -87,11 +90,19 @@ class PatientAdmin extends BaseAdmin {
 BaseAdmin class uses attributes to build custom component:
 
 * `baseUrl` - admin class resource
+* `list_filters` - settings for displaying a list filters
 * `list_fields` - settings for displaying a list view table with specific
   field styles. It uses [react-table](https://github.com/tannerlinsley/react-table)
   under the hood.
 * `detail_fields` - settings for displaying a detail page view with specific
   field styles
+
+Attributes in list filters description:
+
+* `name` - Name to generate server side filtering request.
+  With `id` value it will generate `/api/patients/?id=100500`
+* `label` - Filter title
+* `Filter` – Filter widget. It uses react-table formatunder the hood
 
 Attributes in list fields description:
 
@@ -99,12 +110,6 @@ It uses react-table settings format with some additions. For example:
 
 * `toDetailRoute` – (optional) tells the table to use this column as
   detail route with a given url
-* `filterName` – (optional) name to generate server side filtering request.
-  With `id` value it will generate `/api/patients/?id=100500`
-* filterOperation – (optional) filter operation for server side filtering.
-  With `filterName = date` and `filterOperation = 'gte'`
-  it will generate `/api/patients/?date__gte=20.01.20`
-* Filter – (optional) filter widget. It uses react-table formatunder the hood
 
 Attributes in detail fields description:
 

@@ -7,6 +7,11 @@ type ListFieldDescription = {
   Cell?: Function
 }
 
+type ListFiltersDescription = {
+    name: string
+    label: string
+}
+
 type LayoutData = {
   x: number
   y: number
@@ -27,4 +32,4 @@ type DetailFieldDescription = {
   layout: LayoutData
 }
 
-export { DetailFieldDescription, ListFieldDescription }
+export { DetailFieldDescription, ListFieldDescription, ListFiltersDescription }

@@ -43,6 +43,7 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> 
       {objects && (
         <Table
           data={objects}
+          listFilters={admin.list_filters}
           columns={admin.list_fields}
           pageCount={pageCount}
           backendPagination={pagination}

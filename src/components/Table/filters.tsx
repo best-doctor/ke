@@ -4,10 +4,12 @@ import Select from 'react-select'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import * as moment from 'moment'
+import {useHistory, useLocation} from "react-router-dom";
 
 import 'react-datepicker/dist/react-datepicker.css'
 
 import { StoreManager } from '../../store'
+import { FilterManager } from "../../utils/filterManager";
 
 const StyledFilter = styled.div`
   .base-styled-filter {
@@ -22,20 +24,21 @@ const StyledFilter = styled.div`
   }
 `
 
-const setFilterValue = (column: any, filterValue: any): void => {
-  column.setFilter(
-    // eslint-disable-next-line
-    { filterName: column.filterName, value: filterValue, filterOperation: column.filterOperation } || undefined // Set undefined to remove the filter entirely
-  )
+const setFilterValue = (location: any, filterName: any, filterValue: any, history: any): void => {
+    const filters = FilterManager.getFilters(location.search)
+    filters.push({"filterName": filterName, "filterOperation": undefined, "value": filterValue})
+    FilterManager.setFilters(location, filters, history)
 }
 
-const BaseFilter = (columnObject: any): JSX.Element => {
-  const { column }: { column: any } = columnObject
+const BaseFilter = (params: any): JSX.Element => {
+  const history = useHistory()
+  const location = useLocation()
+
   const handleChange = (event: any): void => {
     // eslint-disable-next-line
     const value = event.target.value
 
-    setFilterValue(column, value)
+    setFilterValue(location, params.name, value, history)
   }
 
   return (
@@ -44,15 +47,17 @@ const BaseFilter = (columnObject: any): JSX.Element => {
         className="styled-filter base-styled-filter"
         debounceTimeout={1000}
         onChange={(e: any) => handleChange(e)}
-        placeholder={`Фильтр по ${column.Header}`}
+        placeholder={`Фильтр по ${params.label}`}
       />
     </StyledFilter>
   )
 }
 
-const MultiSelectFilter = ({ column }: { column: any }): JSX.Element => {
+const MultiSelectFilter = (params: any): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
-  const storedOptions = StoreManager.getResource(column.filterResource)
+  const storedOptions = StoreManager.getResource(params.filterResource)
+  const history = useHistory()
+  const location = useLocation()
 
   React.useEffect(() => {
     setOptions(storedOptions)
@@ -75,7 +80,7 @@ const MultiSelectFilter = ({ column }: { column: any }): JSX.Element => {
       setOptions(storedOptions)
     }
 
-    setFilterValue(column, selectedValueId)
+    setFilterValue(location, params.name, selectedValueId, history)
   }
 
   return (
@@ -88,16 +93,19 @@ const MultiSelectFilter = ({ column }: { column: any }): JSX.Element => {
         options={options}
         getOptionLabel={(option: any) => option.text}
         getOptionValue={(option: any) => option.id}
-        placeholder={`Фильтр по ${column.Header}`}
+        placeholder={`Фильтр по ${params.label}`}
       />
     </StyledFilter>
   )
 }
 
-const SelectFilter = ({ column }: { column: any }): JSX.Element => {
+const SelectFilter = (params: any): JSX.Element => {
+  const history = useHistory()
+  const location = useLocation()
+
   const handleChange = (value: any): void => {
     const filterValue = value ? value.value : ''
-    setFilterValue(column, filterValue)
+    setFilterValue(location, params.name, filterValue, history)
   }
 
   return (
@@ -105,22 +113,24 @@ const SelectFilter = ({ column }: { column: any }): JSX.Element => {
       <Select
         className="styled-filter"
         onChange={(value: any) => handleChange(value)}
-        options={StoreManager.getResource(column.filterResource)}
+        options={StoreManager.getResource(params.filterResource)}
         isClearable
         getOptionLabel={(option: any) => option.text}
         getOptionValue={(option: any) => option.value}
-        placeholder={`Фильтр по ${column.Header}`}
+        placeholder={`Фильтр по ${params.label}`}
       />
     </StyledFilter>
   )
 }
 
-const DateFilter = ({ column }: { column: any }): JSX.Element => {
+const DateFilter = (params: any): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<any>()
+  const history = useHistory()
+  const location = useLocation()
 
   const handleChange = (value: any): void => {
     const filterValue = value ? moment(value).format('YYYY-MM-DD') : ''
-    setFilterValue(column, filterValue)
+    setFilterValue(location, params.name, filterValue, history)
     setCurrentDate(value)
   }
 
@@ -131,18 +141,20 @@ const DateFilter = ({ column }: { column: any }): JSX.Element => {
         onChange={(value: any) => handleChange(value)}
         selected={currentDate}
         dateFormat="yyyy-MM-dd"
-        placeholderText={`Фильтр по ${column.Header}`}
+        placeholderText={`Фильтр по ${params.label}`}
       />
     </StyledFilter>
   )
 }
 
-const DateTimeFilter = ({ column }: { column: any }): JSX.Element => {
+const DateTimeFilter = (params: any): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<any>()
+  const history = useHistory()
+  const location = useLocation()
 
   const handleChange = (value: any): void => {
     const filterValue = value ? moment(value).format('YYYY-MM-DDThh:mm:ss') : ''
-    setFilterValue(column, filterValue)
+    setFilterValue(location, params.name, filterValue, history)
     setCurrentDate(value)
   }
 
@@ -154,7 +166,7 @@ const DateTimeFilter = ({ column }: { column: any }): JSX.Element => {
         showTimeSelect
         selected={currentDate}
         dateFormat="yyyy-MM-dd hh:mm:ss"
-        placeholderText={`Фильтр по ${column.Header}`}
+        placeholderText={`Фильтр по ${params.label}`}
       />
     </StyledFilter>
   )

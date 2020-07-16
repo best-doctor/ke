@@ -13,6 +13,8 @@ configure({ adapter: new Adapter() })
 class TestAdmin extends BaseAdmin {
   baseUrl = 'https://test.com/test'
 
+  list_filters = []
+
   list_fields = [
     {
       Header: 'Id',

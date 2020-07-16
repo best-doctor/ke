@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
@@ -14,6 +14,7 @@ import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
   data: any
+  listFilters?: any
   columns: ListFieldDescription[]
   pageCount: number | undefined
   backendPagination: Pagination | undefined
@@ -71,26 +72,22 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
-const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Element => {
+const FilterBlock = (params: any): JSX.Element => {
   const history = useHistory()
 
   const [show, setShow] = React.useState<boolean>(false)
   const handleToggle = (): void => setShow(!show)
 
   const mountFilters = (): ReactNode => {
-    return headerGroups.map((headerGroup: HeaderGroup, key: number) => (
-      // eslint-disable-next-line
-      <Flex flexDirection="row" flexWrap="wrap" key={key}>
-        {headerGroup.headers
-          .filter((column: any) => column.Filter !== undefined)
-          .map((column: any) => (
-            <Flex flexDirection="column" m={2} key={column.id}>
-              <Text fontWeight="bold">{column.render('Header')}</Text>
-              <Box>{column.render('Filter')}</Box>
-            </Flex>
-          ))}
-      </Flex>
-    ))
+    // eslint-disable-next-line
+    return <Flex flexWrap="wrap" key="custom_filters">
+      {params.listFilters.map((listFilter: any) => (
+        <Flex flexDirection="column" m={2} key={listFilter.name}>
+          <Text fontWeight="bold">{listFilter.label}</Text>
+          <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>
+        </Flex>
+      ))}
+    </Flex>
   }
 
   return (
@@ -111,15 +108,13 @@ const FilterBlock = ({ headerGroups }: { headerGroups: HeaderGroup[] }): JSX.Ele
 }
 
 const Table = ({
+  listFilters,
   columns,
   data,
   pageCount: controlledPageCount,
   setBackendPage,
   filterable = false,
 }: TableProps): JSX.Element => {
-  const history = useHistory()
-  const location = useLocation()
-
   const {
     getTableProps,
     headerGroups,
@@ -142,10 +137,6 @@ const Table = ({
       pageCount: controlledPageCount,
       autoResetPage: false,
       stateReducer: (newState: any, action: any) => {
-        if (action.type === 'setFilter') {
-          const filters = FilterManager.extractTableFilters(newState.filters)
-          FilterManager.setFilters(location, filters, history)
-        }
         if (action.type === 'gotoPage' && setBackendPage) {
           setBackendPage(newState.pageIndex + 1)
         }
@@ -168,7 +159,7 @@ const Table = ({
         borderWidth="1px"
         onClick={() => false}
       >
-        {filterable && <FilterBlock headerGroups={headerGroups} />}
+        {filterable && listFilters && <FilterBlock listFilters={listFilters} />}
 
         <StyledTable {...getTableProps()}>
           <TableHead>{mountHeader(headerGroups)}</TableHead>
