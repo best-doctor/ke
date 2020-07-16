@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { FormLabel, Select, Box } from '@chakra-ui/core'
-import { getData, getWidgetContent } from '../utils/dataAccess'
+import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
 
 import type { BaseProvider } from '../admin/providers'
+import type { GenericAccessor } from '../typing'
 
 type SelectObject = {
   value: string
@@ -15,10 +16,10 @@ type SelectProps = {
   detailObject: any
   helpText: string
   setObject: Function
-  displayValue: string | Function | undefined
+  displayValue: GenericAccessor
   dataSource: string | Function
-  dataTarget: string | Function | undefined
-  targetPayload: string | Function | undefined
+  dataTarget: GenericAccessor
+  targetPayload: GenericAccessor
   provider: BaseProvider
   notifier: Function
   style: any
@@ -47,16 +48,8 @@ const SelectWidget = ({
     provider.getList(sourceUrl).then(([responseOptions, ,]: [any, any, any]) => setResultOptions(responseOptions))
   }, [provider, sourceUrl])
 
-  const getPayload = (e: any): string | { [key: string]: string } | null => {
-    if (targetPayload) {
-      return getData(targetPayload, e)
-    }
-
-    return { [name]: e.target.value }
-  }
-
   const handleChange = (e: any): void => {
-    provider.put(targetUrl, getPayload(e)).then(
+    provider.put(targetUrl, getPayload(e, name, targetPayload)).then(
       (result: any) => {
         setObject(result)
         notifier('success')

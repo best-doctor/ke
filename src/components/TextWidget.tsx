@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Text, FormLabel, Box } from '@chakra-ui/core'
 import { getWidgetContent } from '../utils/dataAccess'
 
+import type { GenericAccessor } from '../typing'
+
 const StyledTextWidget = styled.div`
   border-width: 2px;
   border-radius: 3px;
@@ -17,7 +19,7 @@ type TextWidgetProps = {
   name: string
   detailObject: any
   helpText: string
-  displayValue: string | Function | undefined
+  displayValue: GenericAccessor
   style: any
 }
 

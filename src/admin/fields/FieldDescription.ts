@@ -1,4 +1,5 @@
 import type { FunctionComponent } from 'react'
+import type { GenericAccessor } from '../../typing'
 
 type ListFieldDescription = {
   Header: string
@@ -13,8 +14,6 @@ type LayoutData = {
   h: number
   static: boolean
 }
-
-type GenericAccessor = string | Function | undefined
 
 type DetailFieldDescription = {
   name: string

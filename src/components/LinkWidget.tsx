@@ -3,6 +3,8 @@ import { Link, FormLabel, Box } from '@chakra-ui/core'
 import styled from 'styled-components'
 import { getWidgetContent } from '../utils/dataAccess'
 
+import type { GenericAccessor } from '../typing'
+
 const StyledLinkWidget = styled.div`
   border-width: 2px;
   border-radius: 3px;
@@ -17,7 +19,7 @@ type LinkWidgetProps = {
   name: string
   detailObject: any
   href: string | Function
-  displayValue: string | Function | undefined
+  displayValue: GenericAccessor
   helpText: string
   style: any
 }
