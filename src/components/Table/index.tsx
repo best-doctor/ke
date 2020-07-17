@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
-import type { ListFieldDescription } from 'admin/fields/FieldDescription'
+import type { ListFieldDescription, ListFilterDescription } from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
@@ -14,7 +14,7 @@ import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
   data: any
-  listFilters?: any
+  listFilters?: ListFilterDescription[]
   columns: ListFieldDescription[]
   pageCount: number | undefined
   backendPagination: Pagination | undefined
@@ -72,7 +72,7 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
-const FilterBlock = (params: any): JSX.Element => {
+const FilterBlock = ({ listFilters }: { listFilters: ListFilterDescription[] }): JSX.Element => {
   const history = useHistory()
 
   const [show, setShow] = React.useState<boolean>(false)
@@ -82,7 +82,7 @@ const FilterBlock = (params: any): JSX.Element => {
     // eslint-disable-next-line
     return (
       <Flex flexWrap="wrap" key="custom_filters">
-        {params.listFilters.map((listFilter: any) => (
+        {listFilters.map((listFilter: ListFilterDescription) => (
           <Flex flexDirection="column" m={2} key={listFilter.name}>
             <Text fontWeight="bold">{listFilter.label}</Text>
             <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>

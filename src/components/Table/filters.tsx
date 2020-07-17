@@ -31,6 +31,7 @@ const setFilterValue = (location: any, filterName: any, filterValue: any, histor
 }
 
 const BaseFilter = (params: any): JSX.Element => {
+  const { name, label } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -38,7 +39,7 @@ const BaseFilter = (params: any): JSX.Element => {
     // eslint-disable-next-line
     const value = event.target.value
 
-    setFilterValue(location, params.name, value, history)
+    setFilterValue(location, name, value, history)
   }
 
   return (
@@ -47,7 +48,7 @@ const BaseFilter = (params: any): JSX.Element => {
         className="styled-filter base-styled-filter"
         debounceTimeout={1000}
         onChange={(e: any) => handleChange(e)}
-        placeholder={`Фильтр по ${params.label}`}
+        placeholder={`Фильтр по ${label}`}
       />
     </StyledFilter>
   )
@@ -55,7 +56,8 @@ const BaseFilter = (params: any): JSX.Element => {
 
 const MultiSelectFilter = (params: any): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
-  const storedOptions = StoreManager.getResource(params.filterResource)
+  const { name, label, filterResource } = params
+  const storedOptions = StoreManager.getResource(filterResource)
   const history = useHistory()
   const location = useLocation()
 
@@ -80,7 +82,7 @@ const MultiSelectFilter = (params: any): JSX.Element => {
       setOptions(storedOptions)
     }
 
-    setFilterValue(location, params.name, selectedValueId, history)
+    setFilterValue(location, name, selectedValueId, history)
   }
 
   return (
@@ -93,19 +95,20 @@ const MultiSelectFilter = (params: any): JSX.Element => {
         options={options}
         getOptionLabel={(option: any) => option.text}
         getOptionValue={(option: any) => option.id}
-        placeholder={`Фильтр по ${params.label}`}
+        placeholder={`Фильтр по ${label}`}
       />
     </StyledFilter>
   )
 }
 
 const SelectFilter = (params: any): JSX.Element => {
+  const { name, label } = params
   const history = useHistory()
   const location = useLocation()
 
   const handleChange = (value: any): void => {
     const filterValue = value ? value.value : ''
-    setFilterValue(location, params.name, filterValue, history)
+    setFilterValue(location, name, filterValue, history)
   }
 
   return (
@@ -117,20 +120,21 @@ const SelectFilter = (params: any): JSX.Element => {
         isClearable
         getOptionLabel={(option: any) => option.text}
         getOptionValue={(option: any) => option.value}
-        placeholder={`Фильтр по ${params.label}`}
+        placeholder={`Фильтр по ${label}`}
       />
     </StyledFilter>
   )
 }
 
 const DateFilter = (params: any): JSX.Element => {
-  const [currentDate, setCurrentDate] = React.useState<any>()
+  const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
+  const { name, label } = params
   const history = useHistory()
   const location = useLocation()
 
-  const handleChange = (value: any): void => {
+  const handleChange = (value: Date | null | undefined): void => {
     const filterValue = value ? moment(value).format('YYYY-MM-DD') : ''
-    setFilterValue(location, params.name, filterValue, history)
+    setFilterValue(location, name, filterValue, history)
     setCurrentDate(value)
   }
 
@@ -138,23 +142,24 @@ const DateFilter = (params: any): JSX.Element => {
     <StyledFilter>
       <DatePicker
         className="styled-filter base-styled-filter"
-        onChange={(value: any) => handleChange(value)}
+        onChange={(value: Date | null | undefined) => handleChange(value)}
         selected={currentDate}
         dateFormat="yyyy-MM-dd"
-        placeholderText={`Фильтр по ${params.label}`}
+        placeholderText={`Фильтр по ${label}`}
       />
     </StyledFilter>
   )
 }
 
 const DateTimeFilter = (params: any): JSX.Element => {
-  const [currentDate, setCurrentDate] = React.useState<any>()
+  const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
+  const { name, label } = params
   const history = useHistory()
   const location = useLocation()
 
-  const handleChange = (value: any): void => {
+  const handleChange = (value: Date | null | undefined): void => {
     const filterValue = value ? moment(value).format('YYYY-MM-DDThh:mm:ss') : ''
-    setFilterValue(location, params.name, filterValue, history)
+    setFilterValue(location, name, filterValue, history)
     setCurrentDate(value)
   }
 
@@ -162,11 +167,11 @@ const DateTimeFilter = (params: any): JSX.Element => {
     <StyledFilter>
       <DatePicker
         className="styled-filter base-styled-filter"
-        onChange={(value: any) => handleChange(value)}
+        onChange={(value: Date | null | undefined) => handleChange(value)}
         showTimeSelect
         selected={currentDate}
         dateFormat="yyyy-MM-dd hh:mm:ss"
-        placeholderText={`Фильтр по ${params.label}`}
+        placeholderText={`Фильтр по ${label}`}
       />
     </StyledFilter>
   )
