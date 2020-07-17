@@ -12,11 +12,11 @@ const detailObject = {
 test('Link widget properly rendered', () => {
   const component = shallow(
     <LinkWidget
-      name='test'
+      name="test"
       detailObject={detailObject}
-      href='http://test.com'
+      href="http://test.com"
       displayValue={jest.fn()}
-      helpText='test'
+      helpText="test"
       style={{}}
     />
   )

@@ -13,9 +13,9 @@ const detailObject = {
 test('Select widget properly rendered', () => {
   const component = shallow(
     <SelectWidget
-      name='test'
-      helpText='test'
-      displayValue='test'
+      name="test"
+      helpText="test"
+      displayValue="test"
       detailObject={detailObject}
       dataSource={jest.fn()}
       dataTarget={jest.fn()}
