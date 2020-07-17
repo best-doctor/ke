@@ -8,8 +8,8 @@ type ListFieldDescription = {
 }
 
 type ListFiltersDescription = {
-    name: string
-    label: string
+  name: string
+  label: string
 }
 
 type LayoutData = {

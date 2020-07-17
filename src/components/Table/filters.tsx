@@ -4,12 +4,12 @@ import Select from 'react-select'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import * as moment from 'moment'
-import {useHistory, useLocation} from "react-router-dom";
+import { useHistory, useLocation } from 'react-router-dom'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
 import { StoreManager } from '../../store'
-import { FilterManager } from "../../utils/filterManager";
+import { FilterManager } from '../../utils/filterManager'
 
 const StyledFilter = styled.div`
   .base-styled-filter {
@@ -25,9 +25,9 @@ const StyledFilter = styled.div`
 `
 
 const setFilterValue = (location: any, filterName: any, filterValue: any, history: any): void => {
-    const filters = FilterManager.getFilters(location.search)
-    filters.push({"filterName": filterName, "filterOperation": undefined, "value": filterValue})
-    FilterManager.setFilters(location, filters, history)
+  const filters = FilterManager.getFilters(location.search)
+  filters.push({ filterName, filterOperation: undefined, value: filterValue })
+  FilterManager.setFilters(location, filters, history)
 }
 
 const BaseFilter = (params: any): JSX.Element => {

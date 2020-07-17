@@ -80,14 +80,16 @@ const FilterBlock = (params: any): JSX.Element => {
 
   const mountFilters = (): ReactNode => {
     // eslint-disable-next-line
-    return <Flex flexWrap="wrap" key="custom_filters">
-      {params.listFilters.map((listFilter: any) => (
-        <Flex flexDirection="column" m={2} key={listFilter.name}>
-          <Text fontWeight="bold">{listFilter.label}</Text>
-          <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>
-        </Flex>
-      ))}
-    </Flex>
+    return (
+      <Flex flexWrap="wrap" key="custom_filters">
+        {params.listFilters.map((listFilter: any) => (
+          <Flex flexDirection="column" m={2} key={listFilter.name}>
+            <Text fontWeight="bold">{listFilter.label}</Text>
+            <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>
+          </Flex>
+        ))}
+      </Flex>
+    )
   }
 
   return (
