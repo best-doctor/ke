@@ -12,19 +12,17 @@ const Resource = ({
   name,
   admin,
   provider,
-  additionalDetailComponents,
 }: {
   name: string
   admin: BaseAdmin
   provider: BaseProvider
-  additionalDetailComponents: JSX.Element[]
 }): JSX.Element => (
   <Switch>
     <Route exact path={`/${name}/`}>
       <RenderList admin={admin} provider={provider} />
     </Route>
     <Route exact path={`/${name}/:id`}>
-      <RenderDetail name={name} admin={admin} additionalComponents={additionalDetailComponents} provider={provider} />
+      <RenderDetail name={name} admin={admin} provider={provider} />
     </Route>
   </Switch>
 )
