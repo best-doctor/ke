@@ -52,7 +52,7 @@ In admin class you can describe:
 * [Fields for detail view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/detail_view.md)
 * [Filters for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_filters.md)
 
-As a result, yout admin class will look like this:
+As a result, your admin class will look like this:
 
 ```tsx
 // admin.tsx
@@ -94,7 +94,7 @@ class PatientAdmin extends BaseAdmin {
       layout: { x: 2, y: 1, w: 2, h: 1, static: true },
     },
     {
-      name: 'user__email',
+      name: 'user.email',
       widget: TextWidget,
       helpText: 'User email',
       layout: {x: 0, y: 0, w: 1, h: 2, static: true},
@@ -130,8 +130,6 @@ which makes all magic under the hood and get your user component.
 
 * `admin` – instance of your admin class
 * `provider` – instance of your provider implementation
-* `additionalDetailComponents` – (optional) you can pass in ke your
-  custom components which it will render
 
 ```tsx
 import { ResourceComposer } from '@bestdoctor/ke';
@@ -146,7 +144,6 @@ const App = () => (
       name="patients"
       admin={new PatientAdmin()}
       provider={provider}
-      additionalDetailComponents={[]}
     />
   </ResourceComposer>
 )
