@@ -48,6 +48,7 @@ Here you can declaratively describe your component.
 
 In admin class you can describe:
 
+* `baseUrl: string` – resource for API interaction
 * [Fields for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_view.md)
 * [Fields for detail view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/detail_view.md)
 * [Filters for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_filters.md)
