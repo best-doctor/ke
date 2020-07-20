@@ -3,6 +3,8 @@ import type { DetailFieldDescription, ListFieldDescription, ListFilterDescriptio
 export abstract class BaseAdmin {
   abstract baseUrl: string
 
+  abstract verboseName?: string
+
   abstract list_filters?: ListFilterDescription[]
 
   abstract list_fields: ListFieldDescription[]

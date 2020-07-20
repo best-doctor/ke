@@ -19,6 +19,5 @@ test('Render list mount', () => {
     </MemoryRouter>
   )
 
-  expect(component.find('SideBar').length).toEqual(1)
   expect(component.find('Table').length).toEqual(1)
 })
