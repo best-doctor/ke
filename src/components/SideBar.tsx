@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/core'
 import { Menu } from 'react-feather'
 
-const SideBar = ({ resourceList }: { resourceList: JSX.Element[] }): JSX.Element => {
+const SideBar = ({ resourceList }: { resourceList: JSX.Element[] | JSX.Element }): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
@@ -21,7 +21,6 @@ const SideBar = ({ resourceList }: { resourceList: JSX.Element[] }): JSX.Element
     <Flex flexDirection="column" backgroundColor="#EDF2F7">
       <Button variantColor="teal" m={2} ref={btnRef} onClick={onOpen}>
         <Menu />
-        {console.log(resourceList)}
       </Button>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
@@ -30,8 +29,8 @@ const SideBar = ({ resourceList }: { resourceList: JSX.Element[] }): JSX.Element
           <DrawerHeader>Разделы</DrawerHeader>
           <DrawerBody>
             <Flex flexDirection="column">
-              {resourceList.map((resource: JSX.Element) => (
-                <Button variantColor="teal" m={2}>
+              {React.Children.map(resourceList, (resource: JSX.Element) => (
+                <Button variantColor="teal" m={2} key={resource.props.name}>
                   <Link href={`${window.location.origin}/${resource.props.name}`}>
                     {resource.props.admin.verboseName}
                   </Link>
