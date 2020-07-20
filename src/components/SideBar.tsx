@@ -18,8 +18,8 @@ const SideBar = ({ resourceList }: { resourceList: JSX.Element[] | JSX.Element }
   const btnRef = React.useRef()
 
   return (
-    <Flex flexDirection="column" backgroundColor="#EDF2F7">
-      <Button variantColor="teal" m={2} ref={btnRef} onClick={onOpen}>
+    <>
+      <Button variantColor="teal" m={2} width={20} ref={btnRef} onClick={onOpen}>
         <Menu />
       </Button>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -40,7 +40,7 @@ const SideBar = ({ resourceList }: { resourceList: JSX.Element[] | JSX.Element }
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </Flex>
+    </>
   )
 }
 

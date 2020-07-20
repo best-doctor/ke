@@ -20,6 +20,7 @@ export const RenderDetail: React.FC<{
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
+  document.title = `${admin.verboseName} # ${id}`
 
   const notifier = (eventType: string): void => {
     const defaultNotification = {

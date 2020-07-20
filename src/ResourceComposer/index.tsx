@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import { ThemeProvider, Flex } from '@chakra-ui/core'
+import { ThemeProvider } from '@chakra-ui/core'
 
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
@@ -31,10 +31,8 @@ const Resource = ({
 const ResourceComposer = ({ children }: { children: JSX.Element[] }): JSX.Element => {
   return (
     <ThemeProvider>
-      <Flex>
-        <SideBar resourceList={children} />
-        <Router>{children}</Router>
-      </Flex>
+      <SideBar resourceList={children} />
+      <Router>{children}</Router>
     </ThemeProvider>
   )
 }

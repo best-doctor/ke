@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { ArrowLeft } from 'react-feather'
 
 const StyledLink = styled.div`
-  transform: translate(30px, 10px);
+  transform: translate(150px, 10px);
 `
 
 const ToListViewLink = ({ name }: { name: string }): JSX.Element => (

@@ -11,6 +11,7 @@ import { Table } from '../components/Table'
 import { FilterManager } from '../utils/filterManager'
 
 export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> = ({ admin, provider }) => {
+  document.title = `${admin.verboseName}`
   const location = useLocation()
 
   const [objects, setObjects] = useState<Model[]>([])
