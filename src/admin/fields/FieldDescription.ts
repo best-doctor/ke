@@ -13,6 +13,12 @@ type ListFilterDescription = {
   Filter: FunctionComponent<any>
 }
 
+type ListFilterTemplateDescription = {
+  name: string
+  label: string
+  filters: Function
+}
+
 type LayoutData = {
   x: number
   y: number
@@ -33,4 +39,4 @@ type DetailFieldDescription = {
   layout: LayoutData
 }
 
-export { DetailFieldDescription, ListFieldDescription, ListFilterDescription }
+export { DetailFieldDescription, ListFieldDescription, ListFilterDescription, ListFilterTemplateDescription }

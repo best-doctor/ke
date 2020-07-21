@@ -15,6 +15,8 @@ class TestAdmin extends BaseAdmin {
 
   list_filters = []
 
+  list_filter_templates = []
+
   list_fields = [
     {
       Header: 'Id',

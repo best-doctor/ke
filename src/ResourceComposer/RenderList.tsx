@@ -11,7 +11,11 @@ import { Table } from '../components/Table'
 import { SideBar } from '../components/SideBar'
 import { FilterManager } from '../utils/filterManager'
 
-export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> = ({ admin, provider }) => {
+export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider; user: any }> = ({
+  admin,
+  provider,
+  user,
+}) => {
   const location = useLocation()
 
   const [objects, setObjects] = useState<Model[]>([])
@@ -43,11 +47,13 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider }> 
       {objects && (
         <Table
           data={objects}
+          listFilterTemplates={admin.list_filter_templates}
           listFilters={admin.list_filters}
           columns={admin.list_fields}
           pageCount={pageCount}
           backendPagination={pagination}
           setBackendPage={setPage}
+          user={user}
           filterable
         />
       )}

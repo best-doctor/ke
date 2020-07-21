@@ -79,6 +79,14 @@ class FilterManager {
       search: '',
     })
   }
+
+  static overrideFilters(filters: Filter[], history: any): void {
+    const query = new URLSearchParams()
+
+    FilterManager.setQueryFilters(query, filters)
+
+    history.replace({ ...history.location, search: query.toString() })
+  }
 }
 
 export { FilterManager }

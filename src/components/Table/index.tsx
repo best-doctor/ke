@@ -5,7 +5,11 @@ import { Link, useHistory } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
-import type { ListFieldDescription, ListFilterDescription } from 'admin/fields/FieldDescription'
+import type {
+  ListFieldDescription,
+  ListFilterDescription,
+  ListFilterTemplateDescription,
+} from 'admin/fields/FieldDescription'
 
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
@@ -14,11 +18,13 @@ import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
   data: any
+  listFilterTemplates?: ListFilterTemplateDescription[]
   listFilters?: ListFilterDescription[]
   columns: ListFieldDescription[]
   pageCount: number | undefined
   backendPagination: Pagination | undefined
   setBackendPage: Function | undefined
+  user: any
   filterable: boolean
 }
 
@@ -72,7 +78,15 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
-const FilterBlock = ({ listFilters }: { listFilters: ListFilterDescription[] }): JSX.Element => {
+const FilterBlock = ({
+  listFilters,
+  listFilterTemplates,
+  user,
+}: {
+  listFilters?: ListFilterDescription[]
+  listFilterTemplates?: ListFilterTemplateDescription[]
+  user: any
+}): JSX.Element => {
   const history = useHistory()
 
   const [show, setShow] = React.useState<boolean>(false)
@@ -82,12 +96,13 @@ const FilterBlock = ({ listFilters }: { listFilters: ListFilterDescription[] }):
     // eslint-disable-next-line
     return (
       <Flex flexWrap="wrap" key="custom_filters">
-        {listFilters.map((listFilter: ListFilterDescription) => (
-          <Flex flexDirection="column" m={2} key={listFilter.name}>
-            <Text fontWeight="bold">{listFilter.label}</Text>
-            <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>
-          </Flex>
-        ))}
+        {listFilters &&
+          listFilters.map((listFilter: ListFilterDescription) => (
+            <Flex flexDirection="column" m={2} key={listFilter.name}>
+              <Text fontWeight="bold">{listFilter.label}</Text>
+              <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>
+            </Flex>
+          ))}
       </Flex>
     )
   }
@@ -102,6 +117,22 @@ const FilterBlock = ({ listFilters }: { listFilters: ListFilterDescription[] }):
           Сбросить
         </Button>
       </Flex>
+      {listFilterTemplates && (
+        <Flex flexDirection="row">
+          {listFilterTemplates.map((listFilterTemplate: ListFilterTemplateDescription) => (
+            <Button
+              variantColor="teal"
+              variant="outline"
+              onClick={() => FilterManager.overrideFilters(listFilterTemplate.filters(user), history)}
+              maxWidth={150}
+              m={2}
+              key={listFilterTemplate.name}
+            >
+              {listFilterTemplate.label}
+            </Button>
+          ))}
+        </Flex>
+      )}
       <Collapse mt={19} isOpen={show}>
         {mountFilters()}
       </Collapse>
@@ -111,10 +142,12 @@ const FilterBlock = ({ listFilters }: { listFilters: ListFilterDescription[] }):
 
 const Table = ({
   listFilters,
+  listFilterTemplates,
   columns,
   data,
   pageCount: controlledPageCount,
   setBackendPage,
+  user,
   filterable = false,
 }: TableProps): JSX.Element => {
   const {
@@ -161,7 +194,9 @@ const Table = ({
         borderWidth="1px"
         onClick={() => false}
       >
-        {filterable && listFilters && <FilterBlock listFilters={listFilters} />}
+        {filterable && listFilters && (
+          <FilterBlock listFilters={listFilters} listFilterTemplates={listFilterTemplates} user={user} />
+        )}
 
         <StyledTable {...getTableProps()}>
           <TableHead>{mountHeader(headerGroups)}</TableHead>
