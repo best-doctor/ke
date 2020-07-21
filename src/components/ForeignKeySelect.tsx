@@ -36,6 +36,8 @@ const ForeignKeySelect = ({
       onChange={(value: any) => handleChange(value)}
       loadOptions={debouncedLoadOptions}
       isClearable
+      menuPortalTarget={document.body}
+      styles={{ menuPortal: (base: any) => ({ ...base, zIndex: 9999 }) }}
       getOptionLabel={(option: any) => getOptionLabel(option)}
       getOptionValue={(option: any) => getOptionValue(option)}
       placeholder={placeholder}

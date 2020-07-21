@@ -13,5 +13,6 @@ script:
   - yarn test --coverageDirectory=. --coverage
   - yarn typecheck
   - mdl README.md
+  - mdl docs/
 after_script:
   - ./cc-test-reporter after-build --coverage-input-type=lcov --exit-code $TRAVIS_TEST_RESULT

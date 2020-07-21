@@ -46,11 +46,26 @@ class PatientProvider extends BaseProvider {
 After that you should extend BaseAdmin class.
 Here you can declaratively describe your component.
 
+In admin class you can describe:
+
+* `baseUrl: string` – resource for API interaction
+* [Fields for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_view.md)
+* [Fields for detail view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/detail_view.md)
+* [Filters for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_filters.md)
+
+As a result, your admin class will look like this:
+
 ```tsx
 // admin.tsx
 
-import { BaseAdmin } from '@bestdoctor/ke';
-import { Link, Text } from 'custom-ui-ket';
+import {
+  BaseAdmin,
+  BaseFilter,
+  LinkWidget,
+  TextWidget,
+  SelectWidget,
+  ForeignKeySelectWidget,
+} from '@bestdoctor/ke';
 import { PatientProvider } from './providers';
 
 class PatientAdmin extends BaseAdmin {
@@ -74,49 +89,40 @@ class PatientAdmin extends BaseAdmin {
   detail_fields = [
     {
       name: 'full_name',
-      widget: Link,
-      widget_attrs: { color: 'teal.500' },
+      widget: LinkWidget,
+      helpText: 'Full name',
+      href: (object: any) => object.admin.url,
       layout: { x: 2, y: 1, w: 2, h: 1, static: true },
     },
     {
-      name: 'user__email',
-      widget: Text,
-      layout: {x: 0, y: 0, w: 1, h: 2, static: true}
+      name: 'user.email',
+      widget: TextWidget,
+      helpText: 'User email',
+      layout: {x: 0, y: 0, w: 1, h: 2, static: true},
     },
+    {
+      name: 'status',
+      widget: SelectWidget,
+      helpText: 'Status',
+      dataSource: `${process.env.API_URL}appeal_results/`,
+      layout: {x: 3, y: 3, w: 1, h: 2, static: true},
+    },
+    {
+      name: 'user',
+      widget: ForeignKeySelectWidget,
+      helpText: 'User select',
+      dataSource: `${process.env.API_URL}users/`,
+      targetPayload: (object: any) => ({ user: object.email }),
+      optionLabel: (object: any) => object.full_name,
+      optionValue: (object: any) => object.email,
+      layout: { x: 9, y: 13.5, w: 2, h: 1, static: true },
+    }
   ]
 }
 ```
 
-BaseAdmin class uses attributes to build custom component:
-
-* `baseUrl` - admin class resource
-* `list_filters` - settings for displaying a list filters
-* `list_fields` - settings for displaying a list view table with specific
-  field styles. It uses [react-table](https://github.com/tannerlinsley/react-table)
-  under the hood.
-* `detail_fields` - settings for displaying a detail page view with specific
-  field styles
-
-Attributes in list filters description:
-
-* `name` - Name to generate server side filtering request.
-  With `id` value it will generate `/api/patients/?id=100500`
-* `label` - Filter title
-* `Filter` – Filter widget. It uses react-table formatunder the hood
-
-Attributes in list fields description:
-
-It uses react-table settings format with some additions. For example:
-
-* `toDetailRoute` – (optional) tells the table to use this column as
-  detail route with a given url
-
-Attributes in detail fields description:
-
-* `name` - field title in json response from backend
-* `widget` - React Component for rendering data in user interface
-* `widget_attrs` – (optional) custom props for widget
-* `layout` - setting for the grid to display the widget in the user interface
+To get more info about fields description,
+check [here](https://github.com/best-doctor/ke/blob/master/docs/admin_fields)
 
 After that you can use `ResourceComposer` and `Resource` components,
 which makes all magic under the hood and get your user component.
@@ -125,10 +131,8 @@ which makes all magic under the hood and get your user component.
 
 * `admin` – instance of your admin class
 * `provider` – instance of your provider implementation
-* `additionalDetailComponents` – (optional) you can pass in ke your
-  custom components which it will render
 
-```ts
+```tsx
 import { ResourceComposer } from '@bestdoctor/ke';
 
 import { Provider } from 'provider';
@@ -141,7 +145,6 @@ const App = () => (
       name="patients"
       admin={new PatientAdmin()}
       provider={provider}
-      additionalDetailComponents={[]}
     />
   </ResourceComposer>
 )

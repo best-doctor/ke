@@ -7,18 +7,17 @@ import type { BaseProvider } from 'admin/providers'
 
 import { RenderList } from './RenderList'
 import { RenderDetail } from './RenderDetail'
+import { SideBar } from '../components/SideBar'
 
 const Resource = ({
   name,
   admin,
   provider,
-  additionalDetailComponents,
   user,
 }: {
   name: string
   admin: BaseAdmin
   provider: BaseProvider
-  additionalDetailComponents: JSX.Element[]
   user: any
 }): JSX.Element => (
   <Switch>
@@ -26,7 +25,7 @@ const Resource = ({
       <RenderList admin={admin} provider={provider} user={user} />
     </Route>
     <Route exact path={`/${name}/:id`}>
-      <RenderDetail name={name} admin={admin} additionalComponents={additionalDetailComponents} provider={provider} />
+      <RenderDetail name={name} admin={admin} provider={provider} />
     </Route>
   </Switch>
 )
@@ -34,6 +33,7 @@ const Resource = ({
 const ResourceComposer = ({ children }: { children: JSX.Element[] }): JSX.Element => {
   return (
     <ThemeProvider>
+      <SideBar resourceList={children} />
       <Router>{children}</Router>
     </ThemeProvider>
   )

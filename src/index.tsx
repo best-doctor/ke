@@ -4,6 +4,7 @@ import { ResourceComposer, Resource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'ResourceComposer/RenderDetail'
 import { StoreManager } from 'store'
+import { getData, getWidgetContent, getPayload } from 'utils/dataAccess'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { TextWidget, LinkWidget, SelectWidget, ForeignKeySelectWidget, InputWidget } from './components'
@@ -33,4 +34,7 @@ export {
   SelectWidget,
   ForeignKeySelectWidget,
   InputWidget,
+  getData,
+  getWidgetContent,
+  getPayload,
 }

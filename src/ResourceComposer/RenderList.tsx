@@ -8,7 +8,6 @@ import type { BaseProvider } from 'admin/providers'
 import type { Pagination, TableFilter } from '../admin/providers'
 
 import { Table } from '../components/Table'
-import { SideBar } from '../components/SideBar'
 import { FilterManager } from '../utils/filterManager'
 
 export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider; user: any }> = ({
@@ -16,6 +15,7 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider; us
   provider,
   user,
 }) => {
+  document.title = `${admin.verboseName}`
   const location = useLocation()
 
   const [objects, setObjects] = useState<Model[]>([])
@@ -43,7 +43,6 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider; us
 
   return (
     <Flex>
-      <SideBar />
       {objects && (
         <Table
           data={objects}
