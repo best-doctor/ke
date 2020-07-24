@@ -14,8 +14,14 @@ const getData = (handler: GenericAccessor, detailObject: any): any => {
   return null
 }
 
-const getWidgetContent = (name: string, detailObject: any, handler: GenericAccessor): any => {
-  return getData(handler, detailObject) || get(detailObject, name)
+const getWidgetContent = (name: string, detailObject: any, handler: GenericAccessor, expectedType = 'string'): any => {
+  const widgetContent = getData(handler, detailObject)
+
+  if (!widgetContent || typeof widgetContent !== expectedType) {
+    return get(detailObject, name)
+  }
+
+  return widgetContent
 }
 
 const getPayload = (

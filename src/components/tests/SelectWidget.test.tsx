@@ -8,14 +8,18 @@ import { testProvider } from '../../setupTests'
 const detailObject = {
   id: 100500,
   last_name: 'test',
+  status: {
+    value: 'success',
+    text: 'Success',
+  },
 }
 
 test('Select widget properly rendered', () => {
   const component = shallow(
     <SelectWidget
-      name="test"
+      name="status.text"
       helpText="test"
-      displayValue="test"
+      displayValue={undefined}
       detailObject={detailObject}
       dataSource={jest.fn()}
       dataTarget={jest.fn()}

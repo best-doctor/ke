@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { FormLabel, Select, Box } from '@chakra-ui/core'
-import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
+import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
 
 import type { BaseProvider } from '../admin/providers'
 import type { GenericAccessor } from '../typing'
@@ -40,7 +40,8 @@ const SelectWidget = ({
 }: SelectProps): JSX.Element => {
   const sourceUrl = getData(dataSource, detailObject)
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
-  const content = getWidgetContent(name, detailObject, displayValue)
+
+  const { value, text } = getWidgetContent(name, detailObject, displayValue, 'object')
 
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
 
@@ -62,11 +63,11 @@ const SelectWidget = ({
     <Box {...style}>
       <FormLabel mt={5}>{helpText}</FormLabel>
       <Select onChange={(e) => handleChange(e)}>
-        <option value={content.value} selected key={content.value}>
-          {content.text}
+        <option value={value} selected key={value}>
+          {text}
         </option>
         {resultOptions
-          .filter((element) => element.value !== content.value)
+          .filter((element) => element.value !== value)
           .map((resultOption) => (
             <option value={resultOption.value} key={resultOption.value}>
               {resultOption.text}
