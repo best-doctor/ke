@@ -13,6 +13,8 @@ configure({ adapter: new Adapter() })
 class TestAdmin extends BaseAdmin {
   baseUrl = 'https://test.com/test'
 
+  permissions = undefined
+
   verboseName = 'Test verbose name'
 
   list_filters = []
