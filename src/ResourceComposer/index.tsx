@@ -7,7 +7,8 @@ import type { BaseProvider } from 'admin/providers'
 
 import { RenderList } from './RenderList'
 import { RenderDetail } from './RenderDetail'
-import { SideBar } from '../components/SideBar'
+import { SideBar, SideBarElement } from '../components/SideBar'
+import { mountElement } from '../utils/permissions'
 
 const Resource = ({
   name,
@@ -25,16 +26,40 @@ const Resource = ({
       <RenderList admin={admin} provider={provider} user={user} />
     </Route>
     <Route exact path={`/${name}/:id`}>
-      <RenderDetail name={name} admin={admin} provider={provider} />
+      <RenderDetail name={name} admin={admin} provider={provider} user={user} />
     </Route>
   </Switch>
 )
 
-const ResourceComposer = ({ children }: { children: JSX.Element[] }): JSX.Element => {
+const ResourceComposer = ({
+  children,
+  withSideBar = true,
+  permissions = [],
+}: {
+  permissions: string[]
+  withSideBar: boolean
+  children: JSX.Element[]
+}): JSX.Element => {
+  const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
   return (
     <ThemeProvider>
-      <SideBar resourceList={children} />
-      <Router>{children}</Router>
+      {withSideBar && (
+        <SideBar header="Разделы">
+          {React.Children.map(children, (resource: any) => {
+            const adminPermissions = resource.props.admin.permissions
+            const element = <SideBarElement resource={resource} />
+
+            return mountElement(permissions, adminPermissions, element) || <></>
+          })}
+        </SideBar>
+      )}
+      <Router>
+        {React.Children.map(children, (resource: any) => {
+          const adminPermissions = resource.props.admin.permissions
+
+          return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
+        })}
+      </Router>
     </ThemeProvider>
   )
 }
