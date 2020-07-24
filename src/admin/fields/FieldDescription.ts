@@ -29,7 +29,7 @@ type LayoutData = {
 
 type DetailFieldDescription = {
   name: string
-  widget: FunctionComponent<any>
+  widget: FunctionComponent<any> | Function
   helpText?: string
   displayValue?: GenericAccessor
   dataSource?: GenericAccessor
