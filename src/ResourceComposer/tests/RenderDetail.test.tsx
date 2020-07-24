@@ -15,7 +15,7 @@ test('Render detail mount', () => {
   const component = mount(
     <MemoryRouter initialEntries={['/test/']}>
       <ThemeProvider>
-        <RenderDetail name="test" admin={testAdmin} provider={testProvider} />
+        <RenderDetail name="test" admin={testAdmin} provider={testProvider} user={{}} />
       </ThemeProvider>
     </MemoryRouter>
   )

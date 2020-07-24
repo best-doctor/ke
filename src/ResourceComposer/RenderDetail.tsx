@@ -16,10 +16,12 @@ export const RenderDetail: React.FC<{
   name: string
   admin: BaseAdmin
   provider: BaseProvider
-}> = ({ name, admin, provider }) => {
+  user: any
+}> = ({ name, admin, provider, user }) => {
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
+
   document.title = `${admin.verboseName} # ${id}`
 
   const notifier = (eventType: string): void => {
@@ -58,7 +60,7 @@ export const RenderDetail: React.FC<{
     <>
       <ToListViewLink name={name} />
       <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
-        {mountComponents(object, admin.detail_fields, provider, setObject, notifier)}
+        {object && mountComponents(object, admin.detail_fields, provider, setObject, notifier, user)}
       </ReactGridLayout>
     </>
   )
