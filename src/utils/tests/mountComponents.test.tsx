@@ -12,7 +12,14 @@ const mockSetObject = (): null => null
 const mockNotifier = (): null => null
 
 test('Get components to mount', () => {
-  const components = mountComponents(detailObject, testAdmin.detail_fields, testProvider, mockSetObject, mockNotifier)
+  const components = mountComponents(
+    detailObject,
+    testAdmin.detail_fields,
+    testProvider,
+    mockSetObject,
+    mockNotifier,
+    {}
+  )
 
   const component = components[0]
 
