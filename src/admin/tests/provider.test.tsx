@@ -102,5 +102,5 @@ test('Provider get object', () => {
 
   testProvider.getObject(resourceUrl, objectId)
 
-  expect(testProvider.httpClient.get).toHaveBeenCalledWith('https://test.com/test-url/100500') // eslint-disable-line
+  expect(testProvider.httpClient.get).toHaveBeenCalledWith('https://test.com/test-url/100500/') // eslint-disable-line
 })
