@@ -44,7 +44,7 @@ export abstract class BaseProvider {
   }
 
   getObject = async (resourceUrl: string, objectId: string): Promise<Model> => {
-    const response = await this.http.get(resourceUrl + objectId)
+    const response = await this.http.get(`${resourceUrl}${objectId}/`)
     return response.data.data
   }
 
