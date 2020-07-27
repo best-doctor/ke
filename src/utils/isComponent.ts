@@ -1,8 +1,6 @@
 // This shit is stolen from several libs like react-table
 // because I could not find a normal way in the official documentation!!!
 
-const FUNCTION_REGEX = /react(\d+)?./i
-
 const isClassComponent = (objectToCheck: any): boolean => {
   return (
     typeof objectToCheck === 'function' &&
@@ -17,7 +15,6 @@ const isFunctionalComponent = (objectToCheck: any): boolean => {
   return (
     typeof objectToCheck === 'function' &&
     String(objectToCheck).includes('return') &&
-    !!FUNCTION_REGEX.exec(String(objectToCheck)) &&
     String(objectToCheck).includes('.createElement')
   )
 }
