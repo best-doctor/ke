@@ -9,13 +9,12 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Link,
 } from '@chakra-ui/core'
 import { Menu } from 'react-feather'
 
 const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => (
-  <Button variantColor="teal" m={2} key={resource.props.name}>
-    <Link href={`${window.location.origin}/${resource.props.name}`}>{resource.props.admin.verboseName}</Link>
+  <Button variantColor="teal" m={2} key={resource.props.name} onClick={() => (window.location.href = `${window.location.origin}/${resource.props.name}`)}>
+    {resource.props.admin.verboseName}
   </Button>
 )
 
