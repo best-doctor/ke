@@ -14,10 +14,10 @@ import { Menu } from 'react-feather'
 import { createEvent } from 'effector'
 import { useHistory } from 'react-router-dom'
 
-const goToResourceEvent = createEvent();
+const goToResourceEvent = createEvent()
 
 const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => {
-  const { push } = useHistory();
+  const { push } = useHistory()
   const goToResource = (): void => {
     push(`${resource.props.name}`)
     goToResourceEvent()
@@ -33,7 +33,7 @@ const SideBar = ({ header, children }: { header: string; children: JSX.Element[]
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
-  goToResourceEvent.watch(onClose);
+  goToResourceEvent.watch(onClose)
 
   return (
     <>
