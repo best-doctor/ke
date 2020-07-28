@@ -11,16 +11,29 @@ import {
   useDisclosure,
 } from '@chakra-ui/core'
 import { Menu } from 'react-feather'
+import { createEvent } from 'effector'
+import { useHistory } from 'react-router-dom'
 
-const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => (
-  <Button variantColor="teal" m={2} key={resource.props.name} onClick={() => (window.location.href = `${window.location.origin}/${resource.props.name}`)}>
-    {resource.props.admin.verboseName}
-  </Button>
-)
+const goToResourceEvent = createEvent();
+
+const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => {
+  const { push } = useHistory();
+  const goToResource = (): void => {
+    push(`${resource.props.name}`)
+    goToResourceEvent()
+  }
+  return (
+    <Button variantColor="teal" m={2} key={resource.props.name} onClick={goToResource}>
+      {resource.props.admin.verboseName}
+    </Button>
+  )
+}
 
 const SideBar = ({ header, children }: { header: string; children: JSX.Element[] }): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+
+  goToResourceEvent.watch(onClose);
 
   return (
     <>

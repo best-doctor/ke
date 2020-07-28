@@ -42,25 +42,25 @@ const ResourceComposer = ({
 }): JSX.Element => {
   const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
   return (
-    <ThemeProvider>
-      {withSideBar && (
-        <SideBar header="Разделы">
-          {React.Children.map(children, (resource: any) => {
-            const adminPermissions = resource.props.admin.permissions
-            const element = <SideBarElement resource={resource} />
+    <Router>
+      <ThemeProvider>
+        {withSideBar && (
+          <SideBar header="Разделы">
+            {React.Children.map(children, (resource: any) => {
+              const adminPermissions = resource.props.admin.permissions
+              const element = <SideBarElement resource={resource} />
 
-            return mountElement(permissions, adminPermissions, element) || <></>
-          })}
-        </SideBar>
-      )}
-      <Router>
+              return mountElement(permissions, adminPermissions, element) || <></>
+            })}
+          </SideBar>
+        )}
         {React.Children.map(children, (resource: any) => {
           const adminPermissions = resource.props.admin.permissions
 
           return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
         })}
-      </Router>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Router>
   )
 }
 
