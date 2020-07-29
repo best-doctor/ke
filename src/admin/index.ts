@@ -10,6 +10,8 @@ export abstract class BaseAdmin {
 
   abstract verboseName?: string
 
+  detailsRoute: Function = (row: any) => row.id
+
   abstract permissions?: string[]
 
   abstract list_filters?: ListFilterDescription[]
