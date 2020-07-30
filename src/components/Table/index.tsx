@@ -54,8 +54,7 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
   ))
 }
 
-const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | undefined): ReactNode => {
-  const { push } = useHistory()
+const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | undefined, push: Function): ReactNode => {
   const goToResource = (route: string): (() => void) => {
     return () => push(route)
   }
@@ -66,11 +65,25 @@ const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | u
       // eslint-disable-next-line
       <TableRow flexDirection="row" {...row.getRowProps()} data-testid="table-row">
         {row.cells.map((cell: any) => {
-          const onclickhandler = cell.column.toDetailRoute
-            ? { onClick: goToResource(cell.column.toDetailRoute(cell.row.original)) }
-            : detailsRoute
-            ? { onClick: goToResource(`${detailsRoute(cell.row.original)}`) }
-            : {}
+          let onclickhandler: {
+            onClick?: Function,
+          }
+
+          if (cell.column.toDetailRoute) {
+            onclickhandler = {
+              onClick: goToResource(cell.column.toDetailRoute(cell.row.original))
+            }
+          } else if (detailsRoute) {
+            onclickhandler = {
+              onClick: goToResource(`./${detailsRoute(cell.row.original)}`),
+            }
+          } else {
+            onclickhandler = {
+              // Routing to id by default
+              onClick: goToResource(`./${cell.row.original.id}`)
+            }
+          }
+
           return (
             <TableCell
               key={cell.row.index}
@@ -193,6 +206,8 @@ const Table = ({
     usePagination
   )
 
+  const { push } = useHistory()
+
   return (
     <Flex flexDirection="row" width="100%" flex={1} bg="gray.50" p={4}>
       <Flex
@@ -211,7 +226,7 @@ const Table = ({
 
         <StyledTable {...getTableProps()}>
           <TableHead>{mountHeader(headerGroups)}</TableHead>
-          <Flex flexDirection="column">{mountRows(page, prepareRow, detailsRoute)}</Flex>
+          <Flex flexDirection="column">{mountRows(page, prepareRow, detailsRoute, push)}</Flex>
         </StyledTable>
 
         <Bottom
