@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { ThemeProvider } from '@chakra-ui/core'
 
 import type { BaseAdmin } from 'admin'
@@ -22,7 +22,8 @@ const Resource = ({
   user: any
 }): JSX.Element => (
   <Switch>
-    <Route exact path={`/${name}/`}>
+    <Redirect exact strict from={`/${name}`} to={`/${name}/`} />
+    <Route exact strict path={`/${name}/`}>
       <RenderList admin={admin} provider={provider} user={user} />
     </Route>
     <Route exact path={`/${name}/:id`}>
