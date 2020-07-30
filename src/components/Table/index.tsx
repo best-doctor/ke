@@ -54,7 +54,12 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
   ))
 }
 
-const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | undefined, push: Function): ReactNode => {
+const mountRows = (
+  rows: Row[],
+  prepareRow: Function,
+  detailsRoute: Function | undefined,
+  push: Function
+): ReactNode => {
   const goToResource = (route: string): (() => void) => {
     return () => push(route)
   }
@@ -66,12 +71,12 @@ const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | u
       <TableRow flexDirection="row" {...row.getRowProps()} data-testid="table-row">
         {row.cells.map((cell: any) => {
           let onclickhandler: {
-            onClick?: Function,
+            onClick?: Function
           }
 
           if (cell.column.toDetailRoute) {
             onclickhandler = {
-              onClick: goToResource(cell.column.toDetailRoute(cell.row.original))
+              onClick: goToResource(cell.column.toDetailRoute(cell.row.original)),
             }
           } else if (detailsRoute) {
             onclickhandler = {
@@ -80,7 +85,7 @@ const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | u
           } else {
             onclickhandler = {
               // Routing to id by default
-              onClick: goToResource(`./${cell.row.original.id}`)
+              onClick: goToResource(`./${cell.row.original.id}`),
             }
           }
 
