@@ -19,7 +19,7 @@ const goToResourceEvent = createEvent()
 const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => {
   const { push } = useHistory()
   const goToResource = (): void => {
-    push(`/${resource.props.name}`)
+    push(`/${resource.props.name}/`)
     goToResourceEvent()
   }
   return (
