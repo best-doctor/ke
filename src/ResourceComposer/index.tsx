@@ -10,7 +10,17 @@ import { RenderDetail } from './RenderDetail'
 import { SideBar, SideBarElement } from '../components/SideBar'
 import { mountElement } from '../utils/permissions'
 
-const Resource = ({
+const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => {
+  return (
+    <Switch>
+      <Route exact path={`/${name}/`}>
+        {children}
+      </Route>
+    </Switch>
+  )
+}
+
+const AdminResource = ({
   name,
   admin,
   provider,
@@ -31,6 +41,10 @@ const Resource = ({
   </Switch>
 )
 
+const isAdminResource = (resource: any): boolean => {
+  return resource.props.admin !== undefined
+}
+
 const ResourceComposer = ({
   children,
   withSideBar = true,
@@ -46,22 +60,28 @@ const ResourceComposer = ({
       {withSideBar && (
         <SideBar header="Разделы">
           {React.Children.map(children, (resource: any) => {
-            const adminPermissions = resource.props.admin.permissions
-            const element = <SideBarElement resource={resource} />
+            if (isAdminResource(resource)) {
+              const adminPermissions = resource.props.admin.permissions
+              const element = <SideBarElement resource={resource} />
 
-            return mountElement(permissions, adminPermissions, element) || <></>
+              return mountElement(permissions, adminPermissions, element) || <></>
+            }
+            return <></>
           })}
         </SideBar>
       )}
       <Router>
         {React.Children.map(children, (resource: any) => {
-          const adminPermissions = resource.props.admin.permissions
+          if (isAdminResource(resource)) {
+            const adminPermissions = resource.props.admin.permissions
 
-          return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
+            return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
+          }
+          return resource
         })}
       </Router>
     </ThemeProvider>
   )
 }
 
-export { ResourceComposer, Resource }
+export { ResourceComposer, Resource, AdminResource }
