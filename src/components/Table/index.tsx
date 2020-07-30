@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
@@ -18,6 +18,7 @@ import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
   data: any
+  detailsRoute?: Function
   listFilterTemplates?: ListFilterTemplateDescription[]
   listFilters?: ListFilterDescription[]
   columns: ListFieldDescription[]
@@ -53,7 +54,15 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
   ))
 }
 
-const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
+const mountRows = (
+  rows: Row[],
+  prepareRow: Function,
+  detailsRoute: Function | undefined,
+  push: Function
+): ReactNode => {
+  const goToResource = (route: string): (() => void) => {
+    return () => push(route)
+  }
   return rows.map((row: Row) => {
     prepareRow(row)
 
@@ -61,15 +70,34 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
       // eslint-disable-next-line
       <TableRow flexDirection="row" {...row.getRowProps()} data-testid="table-row">
         {row.cells.map((cell: any) => {
+          let onclickhandler: {
+            onClick?: Function
+          }
+
+          if (cell.column.toDetailRoute) {
+            onclickhandler = {
+              onClick: goToResource(cell.column.toDetailRoute(cell.row.original)),
+            }
+          } else if (detailsRoute) {
+            onclickhandler = {
+              onClick: goToResource(`./${detailsRoute(cell.row.original)}`),
+            }
+          } else {
+            onclickhandler = {
+              // Routing to id by default
+              onClick: goToResource(`./${cell.row.original.id}`),
+            }
+          }
+
           return (
-            <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
-              {cell.column.toDetailRoute ? (
-                <Link to={{ pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}` }}>
-                  {cell.render('Cell')}
-                </Link>
-              ) : (
-                cell.render('Cell')
-              )}
+            <TableCell
+              key={cell.row.index}
+              justifyContent="flex-start"
+              p={4}
+              {...cell.getCellProps()}
+              {...onclickhandler}
+            >
+              {cell.render('Cell')}
             </TableCell>
           )
         })}
@@ -149,6 +177,7 @@ const Table = ({
   setBackendPage,
   user,
   filterable = false,
+  detailsRoute = undefined,
 }: TableProps): JSX.Element => {
   const {
     getTableProps,
@@ -182,6 +211,8 @@ const Table = ({
     usePagination
   )
 
+  const { push } = useHistory()
+
   return (
     <Flex flexDirection="row" width="100%" flex={1} bg="gray.50" p={4}>
       <Flex
@@ -200,7 +231,7 @@ const Table = ({
 
         <StyledTable {...getTableProps()}>
           <TableHead>{mountHeader(headerGroups)}</TableHead>
-          <Flex flexDirection="column">{mountRows(page, prepareRow)}</Flex>
+          <Flex flexDirection="column">{mountRows(page, prepareRow, detailsRoute, push)}</Flex>
         </StyledTable>
 
         <Bottom

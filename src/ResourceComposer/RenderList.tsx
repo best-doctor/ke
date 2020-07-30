@@ -46,6 +46,7 @@ export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider; us
       {objects && (
         <Table
           data={objects}
+          detailsRoute={admin.detailsRoute}
           listFilterTemplates={admin.list_filter_templates}
           listFilters={admin.list_filters}
           columns={admin.list_fields}
