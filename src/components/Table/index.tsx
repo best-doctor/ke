@@ -69,7 +69,7 @@ const mountRows = (rows: Row[], prepareRow: Function, detailsRoute: Function | u
           const onclickhandler = cell.column.toDetailRoute
             ? { onClick: goToResource(cell.column.toDetailRoute(cell.row.original)) }
             : detailsRoute
-            ? { onClick: goToResource(`./${detailsRoute(cell.row.original)}`) }
+            ? { onClick: goToResource(`${detailsRoute(cell.row.original)}`) }
             : {}
           return (
             <TableCell
