@@ -2,9 +2,16 @@ import * as React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 
+import type { BaseAnalytic } from '../../integration/analytics'
+
+import { pushAnalytics } from '../../integration/analytics/utils'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+
 import { TableIconButton } from './styles'
 
 type BottonProps = {
+  analytics: BaseAnalytic | undefined
+  resourceName: string
   pageIndex: number
   canPreviousPage: boolean
   canNextPage: boolean
@@ -15,16 +22,19 @@ type BottonProps = {
   previousPage: Function
 }
 
-const Bottom = ({
-  pageIndex,
-  canPreviousPage,
-  canNextPage,
-  pageOptions,
-  pageCount,
-  gotoPage,
-  nextPage,
-  previousPage,
-}: BottonProps): JSX.Element => {
+const Bottom = (props: BottonProps): JSX.Element => {
+  const {
+    resourceName,
+    pageIndex,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+  } = props
+
   return (
     <Flex
       borderTopWidth="1px"
@@ -40,14 +50,36 @@ const Bottom = ({
       <Flex flexDirection="row">
         <TableIconButton
           mr={2}
-          onClick={() => gotoPage(0)}
+          onClick={() => {
+            pushAnalytics({
+              eventName: EventNameEnum.BUTTON_CLICK,
+              widgetName: 'table_pagination_goto_first_page',
+              widgetType: WidgetTypeEnum.PAGINATION,
+              value: undefined,
+              resource: resourceName,
+              viewType: 'list_view',
+              ...props,
+            })
+            gotoPage(0)
+          }}
           isDisabled={!canPreviousPage}
           icon={() => <ChevronsLeft size={20} />}
         />
         <TableIconButton
           mr={2}
           isDisabled={!canPreviousPage}
-          onClick={() => previousPage()}
+          onClick={() => {
+            previousPage()
+            pushAnalytics({
+              eventName: EventNameEnum.BUTTON_CLICK,
+              widgetName: 'table_pagination_goto_previous_page',
+              widgetType: WidgetTypeEnum.PAGINATION,
+              value: pageIndex - 1,
+              resource: resourceName,
+              viewType: 'list_view',
+              ...props,
+            })
+          }}
           icon={() => <ChevronLeft size={20} />}
         />
       </Flex>
@@ -63,12 +95,35 @@ const Bottom = ({
         <TableIconButton
           ml={2}
           isDisabled={!canNextPage}
-          onClick={() => nextPage()}
+          onClick={() => {
+            pushAnalytics({
+              eventName: EventNameEnum.BUTTON_CLICK,
+              widgetName: 'table_pagination_goto_next_page',
+              widgetType: WidgetTypeEnum.PAGINATION,
+              value: pageIndex + 1,
+              resource: resourceName,
+              viewType: 'list_view',
+              ...props,
+            })
+            nextPage()
+          }}
           icon={() => <ChevronRight size={20} />}
         />
         <TableIconButton
           ml={2}
-          onClick={() => gotoPage(pageCount ? pageCount - 1 : 1)}
+          onClick={() => {
+            const lastPage = pageCount ? pageCount - 1 : 1
+            pushAnalytics({
+              eventName: EventNameEnum.BUTTON_CLICK,
+              widgetName: 'table_pagination_goto_last_page',
+              widgetType: WidgetTypeEnum.PAGINATION,
+              value: lastPage,
+              resource: resourceName,
+              viewType: 'list_view',
+              ...props,
+            })
+            gotoPage(lastPage)
+          }}
           isDisabled={!canNextPage}
           icon={() => <ChevronsRight size={20} />}
         />

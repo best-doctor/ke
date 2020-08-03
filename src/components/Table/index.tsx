@@ -153,6 +153,8 @@ const Table = ({
         </StyledTable>
 
         <Bottom
+          analytics={analytics}
+          resourceName={resourceName}
           pageIndex={pageIndex}
           canPreviousPage={canPreviousPage}
           canNextPage={canNextPage}
