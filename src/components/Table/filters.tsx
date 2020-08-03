@@ -8,6 +8,9 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
+import { pushAnalytics } from '../../integration/analytics/utils'
+import { EventNameEnum } from '../../integration/analytics/firebase/enums'
+import { getCommonFilterAnalyticsPayload } from '../../integration/analytics/firebase/utils'
 import { StoreManager } from '../../store'
 import { FilterManager } from '../../utils/filterManager'
 
@@ -31,13 +34,19 @@ const setFilterValue = (location: any, filterName: any, filterValue: any, histor
 }
 
 const BaseFilter = (params: any): JSX.Element => {
-  const { name, label } = params
+  const { name, label, resourceName } = params
   const history = useHistory()
   const location = useLocation()
 
   const handleChange = (event: any): void => {
     // eslint-disable-next-line
     const value = event.target.value
+
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, value, name),
+      ...params,
+    })
 
     setFilterValue(location, name, value, history)
   }
@@ -56,7 +65,7 @@ const BaseFilter = (params: any): JSX.Element => {
 
 const MultiSelectFilter = (params: any): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
-  const { name, label, filterResource } = params
+  const { name, label, filterResource, resourceName } = params
   const storedOptions = StoreManager.getResource(filterResource)
   const history = useHistory()
   const location = useLocation()
@@ -82,6 +91,12 @@ const MultiSelectFilter = (params: any): JSX.Element => {
       setOptions(storedOptions)
     }
 
+    pushAnalytics({
+      eventName: EventNameEnum.MULTISELECT_OPTION_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, selectedValueId, name),
+      ...params,
+    })
+
     setFilterValue(location, name, selectedValueId, history)
   }
 
@@ -102,12 +117,19 @@ const MultiSelectFilter = (params: any): JSX.Element => {
 }
 
 const SelectFilter = (params: any): JSX.Element => {
-  const { name, label } = params
+  const { name, label, resourceName } = params
   const history = useHistory()
   const location = useLocation()
 
   const handleChange = (value: any): void => {
     const filterValue = value ? value.value : ''
+
+    pushAnalytics({
+      eventName: EventNameEnum.SELECT_OPTION_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, filterValue, name),
+      ...params,
+    })
+
     setFilterValue(location, name, filterValue, history)
   }
 
@@ -128,12 +150,19 @@ const SelectFilter = (params: any): JSX.Element => {
 
 const DateFilter = (params: any): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label } = params
+  const { name, label, resourceName } = params
   const history = useHistory()
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
     const filterValue = value ? moment(value).format('YYYY-MM-DD') : ''
+
+    pushAnalytics({
+      eventName: EventNameEnum.DATE_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, filterValue, name),
+      ...params,
+    })
+
     setFilterValue(location, name, filterValue, history)
     setCurrentDate(value)
   }
@@ -153,12 +182,19 @@ const DateFilter = (params: any): JSX.Element => {
 
 const DateTimeFilter = (params: any): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label } = params
+  const { name, label, resourceName } = params
   const history = useHistory()
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
     const filterValue = value ? moment(value).format('YYYY-MM-DDThh:mm:ss') : ''
+
+    pushAnalytics({
+      eventName: EventNameEnum.DATETIME_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, filterValue, name),
+      ...params,
+    })
+
     setFilterValue(location, name, filterValue, history)
     setCurrentDate(value)
   }
