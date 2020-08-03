@@ -1,6 +1,7 @@
 import { get } from 'lodash'
 
 import type { FirebaseEvent } from '../index'
+import { WidgetTypeEnum } from './enums'
 
 type WidgetAnalyticsProps = {
   object: any
@@ -34,8 +35,33 @@ const getNewValueByCommonFields = (onChangeValue: any): string => {
   return onChangeValue
 }
 
-const getNameFromDataPath = (name: string, resourceName: string): string => {
-  return `${resourceName}_${name.replace('.', '_')}`
+const getNameFromDataPath = (name: string | undefined, resourceName: string): string => {
+  if (name) {
+    return `${resourceName}_${name.replace('.', '_')}`
+  }
+  return ''
 }
 
-export { getFirebaseEvent, getNewValueByCommonFields, getNameFromDataPath, WidgetAnalyticsProps }
+const getAnalyticsFilterName = (resourceName: string, filterName: string): string => {
+  return `${resourceName}_${filterName}_filter`
+}
+
+const getCommonFilterAnalyticsPayload = (resourceName: string, filterValue: any, name: string): any => {
+  return {
+    widgetName: getAnalyticsFilterName(resourceName, name),
+    widgetType: WidgetTypeEnum.FILTER,
+    value: filterValue,
+    resource: resourceName,
+    resourceId: undefined,
+    viewType: 'list_view',
+  }
+}
+
+export {
+  getFirebaseEvent,
+  getNewValueByCommonFields,
+  getNameFromDataPath,
+  WidgetAnalyticsProps,
+  getAnalyticsFilterName,
+  getCommonFilterAnalyticsPayload,
+}

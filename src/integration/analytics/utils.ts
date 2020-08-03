@@ -7,12 +7,12 @@ type widgetAnalyticsParams = {
   widgetType: string
   widgetName?: string | undefined
   analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
+  widgetAnalytics?: Function | boolean | undefined
   viewType: string
-  detailObject: any
+  detailObject?: any
   resource: string
-  name: string
-  value: any
+  name?: string
+  value?: any
 }
 
 const pushAnalytics = (params: widgetAnalyticsParams): void => {
