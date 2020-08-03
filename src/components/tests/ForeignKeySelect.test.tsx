@@ -30,6 +30,7 @@ test('FK select widget properly rendered', () => {
   const component = shallow(
     <ForeignKeySelectWidget
       name="test"
+      resource="test-resource"
       detailObject={detailObject}
       provider={testProvider}
       helpText="test"
@@ -37,10 +38,13 @@ test('FK select widget properly rendered', () => {
       displayValue="test"
       dataSource="test"
       dataTarget="test"
+      analytics={undefined}
+      widgetAnalytics={jest.fn()}
       targetPayload={jest.fn()}
       optionLabel={jest.fn()}
       optionValue={jest.fn()}
       notifier={jest.fn()}
+      viewType="test_view"
       style={{}}
     />
   )

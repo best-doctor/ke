@@ -3,8 +3,11 @@ import AsyncSelect from 'react-select/async'
 import { Box, FormLabel } from '@chakra-ui/core'
 import * as debouncePromise from 'debounce-promise'
 
+import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
+import { pushAnalytics } from '../integration/analytics'
 import { getData, getWidgetContent } from '../utils/dataAccess'
 import type { BaseProvider } from '../admin/providers'
+import type { BaseAnalytic } from '../integration/analytics'
 
 const ForeignKeySelect = ({
   provider,
@@ -48,6 +51,7 @@ const ForeignKeySelect = ({
 type ForeignKeySelectWidgetProps = {
   name: string
   detailObject: any
+  resource: string
   provider: BaseProvider
   helpText: string
   displayValue: string | Function
@@ -58,28 +62,40 @@ type ForeignKeySelectWidgetProps = {
   optionValue: Function
   setObject: Function
   notifier: Function
+  analytics: BaseAnalytic | undefined
+  viewType: string
+  widgetAnalytics: Function | boolean | undefined
   style: any
 }
 
-const ForeignKeySelectWidget = ({
-  name,
-  detailObject,
-  provider,
-  helpText,
-  setObject,
-  displayValue,
-  dataSource,
-  dataTarget,
-  targetPayload,
-  optionLabel,
-  optionValue,
-  notifier,
-  style,
-}: ForeignKeySelectWidgetProps): JSX.Element => {
+const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
+  const {
+    name,
+    detailObject,
+    provider,
+    helpText,
+    setObject,
+    displayValue,
+    dataSource,
+    dataTarget,
+    targetPayload,
+    optionLabel,
+    optionValue,
+    notifier,
+    style,
+  } = props
+
   const placeholder = getWidgetContent(name, detailObject, displayValue)
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
   const handleChange = (value: any): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value,
+      ...props,
+    })
+
     provider.put(targetUrl, targetPayload(value)).then(
       (updatedObject: any) => {
         setObject(updatedObject)

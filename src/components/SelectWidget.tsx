@@ -2,7 +2,9 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { FormLabel, Select, Box } from '@chakra-ui/core'
 import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
+import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../integration/analytics'
 
+import type { BaseAnalytic } from '../integration/analytics'
 import type { BaseProvider } from '../admin/providers'
 import type { GenericAccessor } from '../typing'
 
@@ -13,6 +15,7 @@ type SelectObject = {
 
 type SelectProps = {
   name: string
+  resource: string
   detailObject: any
   helpText: string
   setObject: Function
@@ -21,23 +24,28 @@ type SelectProps = {
   dataTarget: GenericAccessor
   targetPayload: GenericAccessor
   provider: BaseProvider
+  analytics: BaseAnalytic | undefined
+  widgetAnalytics: Function | boolean | undefined
   notifier: Function
+  viewType: string
   style: any
 }
 
-const SelectWidget = ({
-  name,
-  helpText,
-  displayValue,
-  detailObject,
-  dataSource,
-  dataTarget,
-  targetPayload,
-  setObject,
-  provider,
-  style,
-  notifier,
-}: SelectProps): JSX.Element => {
+const SelectWidget = (props: SelectProps): JSX.Element => {
+  const {
+    name,
+    helpText,
+    displayValue,
+    detailObject,
+    dataSource,
+    dataTarget,
+    targetPayload,
+    setObject,
+    provider,
+    style,
+    notifier,
+  } = props
+
   const sourceUrl = getData(dataSource, detailObject)
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
@@ -50,6 +58,13 @@ const SelectWidget = ({
   }, [provider, sourceUrl])
 
   const handleChange = (e: any): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.SELECT_OPTION_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value: e,
+      ...props,
+    })
+
     provider.put(targetUrl, getPayload(e, name, targetPayload)).then(
       (result: any) => {
         setObject(result)

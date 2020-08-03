@@ -18,6 +18,9 @@ test('Select widget properly rendered', () => {
   const component = shallow(
     <SelectWidget
       name="status.text"
+      resource="test-resource"
+      analytics={undefined}
+      widgetAnalytics={jest.fn()}
       helpText="test"
       displayValue={undefined}
       detailObject={detailObject}
@@ -27,6 +30,7 @@ test('Select widget properly rendered', () => {
       setObject={jest.fn()}
       provider={testProvider}
       style={{}}
+      viewType="test_view"
       notifier={jest.fn()}
     />
   )

@@ -15,6 +15,9 @@ test('Input widget properly rendered', () => {
   const component = shallow(
     <InputWidget
       name="test"
+      resource="test-resource"
+      analytics={undefined}
+      widgetAnalytics={jest.fn()}
       helpText="test"
       detailObject={detailObject}
       setObject={jest.fn()}
@@ -23,6 +26,7 @@ test('Input widget properly rendered', () => {
       targetPayload="test"
       notifier={jest.fn()}
       provider={testProvider}
+      viewType="test_view"
       style={{}}
     />
   )

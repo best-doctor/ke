@@ -13,10 +13,14 @@ test('Link widget properly rendered', () => {
   const component = shallow(
     <LinkWidget
       name="test"
+      resource="test-resource"
+      analytics={undefined}
+      widgetAnalytics={jest.fn()}
       detailObject={detailObject}
       href="http://test.com"
       displayValue={jest.fn()}
       helpText="test"
+      viewType="test_view"
       style={{}}
     />
   )
