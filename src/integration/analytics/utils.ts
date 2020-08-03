@@ -40,7 +40,7 @@ const pushAnalytics = (params: widgetAnalyticsParams): void => {
     viewType,
     widgetName: widgetName || getNameFromDataPath(name, resourceName),
     resourceName,
-    resourceId: object && (object.uuid || object.uuid),
+    resourceId: object && (object.uuid || object.id),
     widgetType,
     url: window.location.href,
     newValue: getNewValueByCommonFields(onChangeValue),
