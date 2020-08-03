@@ -1,23 +1,21 @@
 import * as React from 'react'
-import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
+import { Flex, Text } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
+import type { BaseAnalytic } from 'integration/analytics'
 import type {
   ListFieldDescription,
   ListFilterDescription,
   ListFilterTemplateDescription,
 } from 'admin/fields/FieldDescription'
-import type { BaseAnalytic } from 'integration/analytics'
 
-import { pushAnalytics } from '../../integration/analytics/utils'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
+import { FilterBlock } from './TableFiltersBlock'
 import { Bottom } from './Bottom'
 import type { Pagination } from '../../admin/providers'
-import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
   resourceName: string
@@ -30,14 +28,6 @@ type TableProps = {
   setBackendPage: Function | undefined
   user: any
   filterable: boolean
-  analytics: BaseAnalytic | undefined
-}
-
-type FilterBlockProps = {
-  resourceName: string
-  listFilters?: ListFilterDescription[]
-  listFilterTemplates?: ListFilterTemplateDescription[]
-  user: any
   analytics: BaseAnalytic | undefined
 }
 
@@ -89,75 +79,6 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
       </TableRow>
     )
   })
-}
-
-const FilterBlock = (props: FilterBlockProps): JSX.Element => {
-  const history = useHistory()
-  const { resourceName, listFilters, listFilterTemplates, user, analytics } = props
-
-  const [show, setShow] = React.useState<boolean>(false)
-  const handleToggle = (): void => setShow(!show)
-
-  const mountFilters = (): ReactNode => {
-    // eslint-disable-next-line
-    return (
-      <Flex flexWrap="wrap" key="custom_filters">
-        {listFilters &&
-          listFilters.map((listFilter: ListFilterDescription) => (
-            <Flex flexDirection="column" m={2} key={listFilter.name}>
-              <Text fontWeight="bold">{listFilter.label}</Text>
-              <Box>{React.createElement(listFilter.Filter, { ...listFilter, analytics, resourceName })}</Box>
-            </Flex>
-          ))}
-      </Flex>
-    )
-  }
-
-  const resetFiltersOnClick = (): void => {
-    FilterManager.resetFilters(history)
-
-    pushAnalytics({
-      eventName: EventNameEnum.BUTTON_CLICK,
-      widgetName: 'reset_filters',
-      widgetType: WidgetTypeEnum.ACTION,
-      value: undefined,
-      resource: resourceName,
-      viewType: 'list_view',
-      ...props,
-    })
-  }
-
-  return (
-    <>
-      <Flex flexDirection="row">
-        <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
-          Фильтровать
-        </Button>
-        <Button variantColor="teal" onClick={() => resetFiltersOnClick()} maxWidth={130} m={2}>
-          Сбросить
-        </Button>
-      </Flex>
-      {listFilterTemplates && (
-        <Flex flexDirection="row">
-          {listFilterTemplates.map((listFilterTemplate: ListFilterTemplateDescription) => (
-            <Button
-              variantColor="teal"
-              variant="outline"
-              onClick={() => FilterManager.overrideFilters(listFilterTemplate.filters(user), history)}
-              maxWidth={150}
-              m={2}
-              key={listFilterTemplate.name}
-            >
-              {listFilterTemplate.label}
-            </Button>
-          ))}
-        </Flex>
-      )}
-      <Collapse mt={19} isOpen={show}>
-        {mountFilters()}
-      </Collapse>
-    </>
-  )
 }
 
 const Table = ({
