@@ -13,12 +13,15 @@ const mockNotifier = (): null => null
 
 test('Get components to mount', () => {
   const components = mountComponents(
+    'test-resource',
     detailObject,
     testAdmin.detail_fields,
     testProvider,
     mockSetObject,
     mockNotifier,
-    {}
+    {},
+    undefined,
+    'test_view'
   )
 
   const component = components[0]
