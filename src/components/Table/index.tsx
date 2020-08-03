@@ -10,13 +10,17 @@ import type {
   ListFilterDescription,
   ListFilterTemplateDescription,
 } from 'admin/fields/FieldDescription'
+import type { BaseAnalytic } from 'integration/analytics'
 
+import { pushAnalytics } from '../../integration/analytics/utils'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { Bottom } from './Bottom'
 import type { Pagination } from '../../admin/providers'
 import { FilterManager } from '../../utils/filterManager'
 
 type TableProps = {
+  resourceName: string
   data: any
   listFilterTemplates?: ListFilterTemplateDescription[]
   listFilters?: ListFilterDescription[]
@@ -26,6 +30,15 @@ type TableProps = {
   setBackendPage: Function | undefined
   user: any
   filterable: boolean
+  analytics: BaseAnalytic | undefined
+}
+
+type FilterBlockProps = {
+  resourceName: string
+  listFilters?: ListFilterDescription[]
+  listFilterTemplates?: ListFilterTemplateDescription[]
+  user: any
+  analytics: BaseAnalytic | undefined
 }
 
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba
@@ -78,16 +91,9 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
   })
 }
 
-const FilterBlock = ({
-  listFilters,
-  listFilterTemplates,
-  user,
-}: {
-  listFilters?: ListFilterDescription[]
-  listFilterTemplates?: ListFilterTemplateDescription[]
-  user: any
-}): JSX.Element => {
+const FilterBlock = (props: FilterBlockProps): JSX.Element => {
   const history = useHistory()
+  const { resourceName, listFilters, listFilterTemplates, user, analytics } = props
 
   const [show, setShow] = React.useState<boolean>(false)
   const handleToggle = (): void => setShow(!show)
@@ -100,11 +106,25 @@ const FilterBlock = ({
           listFilters.map((listFilter: ListFilterDescription) => (
             <Flex flexDirection="column" m={2} key={listFilter.name}>
               <Text fontWeight="bold">{listFilter.label}</Text>
-              <Box>{React.createElement(listFilter.Filter, listFilter)}</Box>
+              <Box>{React.createElement(listFilter.Filter, { ...listFilter, analytics, resourceName })}</Box>
             </Flex>
           ))}
       </Flex>
     )
+  }
+
+  const resetFiltersOnClick = (): void => {
+    FilterManager.resetFilters(history)
+
+    pushAnalytics({
+      eventName: EventNameEnum.BUTTON_CLICK,
+      widgetName: 'reset_filters',
+      widgetType: WidgetTypeEnum.ACTION,
+      value: undefined,
+      resource: resourceName,
+      viewType: 'list_view',
+      ...props,
+    })
   }
 
   return (
@@ -113,7 +133,7 @@ const FilterBlock = ({
         <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
           Фильтровать
         </Button>
-        <Button variantColor="teal" onClick={() => FilterManager.resetFilters(history)} maxWidth={130} m={2}>
+        <Button variantColor="teal" onClick={() => resetFiltersOnClick()} maxWidth={130} m={2}>
           Сбросить
         </Button>
       </Flex>
@@ -141,6 +161,7 @@ const FilterBlock = ({
 }
 
 const Table = ({
+  resourceName,
   listFilters,
   listFilterTemplates,
   columns,
@@ -148,6 +169,7 @@ const Table = ({
   pageCount: controlledPageCount,
   setBackendPage,
   user,
+  analytics,
   filterable = false,
 }: TableProps): JSX.Element => {
   const {
@@ -195,7 +217,13 @@ const Table = ({
         onClick={() => false}
       >
         {filterable && listFilters && (
-          <FilterBlock listFilters={listFilters} listFilterTemplates={listFilterTemplates} user={user} />
+          <FilterBlock
+            listFilters={listFilters}
+            listFilterTemplates={listFilterTemplates}
+            user={user}
+            analytics={analytics}
+            resourceName={resourceName}
+          />
         )}
 
         <StyledTable {...getTableProps()}>
