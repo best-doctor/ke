@@ -38,8 +38,6 @@ class FirebaseAnalytic extends BaseAnalytic {
       const { userId } = config
 
       firebase.initializeApp(config)
-      console.log('set user id')
-      console.log(userId)
       firebase.analytics().setUserId(userId || '')
     }
 
