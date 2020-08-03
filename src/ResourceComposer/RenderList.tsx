@@ -3,20 +3,21 @@ import { useEffect, useState } from 'react'
 import { Flex } from '@chakra-ui/core'
 import { useLocation } from 'react-router-dom'
 
+import type { BaseAnalytic } from 'integration/analytics/base'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { Pagination, TableFilter } from '../admin/providers'
-import type { BaseAnalytic } from '../integration/analytics'
 
 import { Table } from '../components/Table'
 import { FilterManager } from '../utils/filterManager'
 
 export const RenderList: React.FC<{
+  resourceName: string
   admin: BaseAdmin
   provider: BaseProvider
   user: any
   analytics: BaseAnalytic | undefined
-}> = ({ admin, provider, user }) => {
+}> = ({ resourceName, admin, provider, user, analytics }) => {
   document.title = `${admin.verboseName}`
   const location = useLocation()
 
@@ -47,6 +48,7 @@ export const RenderList: React.FC<{
     <Flex>
       {objects && (
         <Table
+          resourceName={resourceName}
           data={objects}
           listFilterTemplates={admin.list_filter_templates}
           listFilters={admin.list_filters}
@@ -56,6 +58,7 @@ export const RenderList: React.FC<{
           setBackendPage={setPage}
           user={user}
           filterable
+          analytics={analytics}
         />
       )}
     </Flex>

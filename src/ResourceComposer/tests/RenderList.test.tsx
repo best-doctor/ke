@@ -14,7 +14,7 @@ test('Render list mount', () => {
   const component = mount(
     <MemoryRouter initialEntries={['/test/']}>
       <ThemeProvider>
-        <RenderList admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
+        <RenderList resourceName='test' admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
       </ThemeProvider>
     </MemoryRouter>
   )

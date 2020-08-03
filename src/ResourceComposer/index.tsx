@@ -37,7 +37,7 @@ const AdminResource = ({
   <Switch>
     <Redirect exact strict from={`/${name}`} to={`/${name}/`} />
     <Route exact strict path={`/${name}/`}>
-      <RenderList admin={admin} provider={provider} user={user} analytics={analytics} />
+      <RenderList resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
     </Route>
     <Route exact path={`/${name}/:id`}>
       <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
