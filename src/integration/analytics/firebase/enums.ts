@@ -1,6 +1,9 @@
 enum EventNameEnum {
   LINK_CLICK = 'link_click',
+  DATE_CHANGE = 'date_change',
+  DATETIME_CHANGE = 'datetime_change',
   SELECT_OPTION_CHANGE = 'select_option_change',
+  MULTISELECT_OPTION_CHANGE = 'multiselect_option_change',
   NESTED_SELECT_OPTION_CHANGE = 'nested_select_option_change',
   BUTTON_CLICK = 'button_click',
   FOREIGN_KEY_SELECT_OPTION_CHANGE = 'foreign_key_select_option_change',
