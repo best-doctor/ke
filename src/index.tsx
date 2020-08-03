@@ -10,7 +10,7 @@ import {
   WidgetTypeEnum,
   FirebaseConfigType,
 } from 'integration/analytics'
-import { ResourceComposer, Resource } from 'ResourceComposer'
+import { ResourceComposer, Resource, AdminResource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'ResourceComposer/RenderDetail'
 import { StoreManager } from 'store'
@@ -29,6 +29,7 @@ export {
   Table,
   ResourceComposer,
   Resource,
+  AdminResource,
   RenderList,
   RenderDetail,
   SelectFilter,

@@ -127,7 +127,7 @@ check [here](https://github.com/best-doctor/ke/blob/master/docs/admin_fields)
 After that you can use `ResourceComposer` and `Resource` components,
 which makes all magic under the hood and get your user component.
 
-`Resource` component takes the following arguments:
+`AdminResource` component takes the following arguments:
 
 * `admin` – instance of your admin class
 * `provider` – instance of your provider implementation
@@ -141,7 +141,7 @@ const provider = new Provider()
 
 const App = () => (
   <ResourceComposer>
-    <Resource
+    <AdminResource
       name="patients"
       admin={new PatientAdmin()}
       provider={provider}
