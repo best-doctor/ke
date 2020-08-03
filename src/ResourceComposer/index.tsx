@@ -4,6 +4,7 @@ import { ThemeProvider } from '@chakra-ui/core'
 
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
+import type { BaseAnalytic } from 'integration/analytics/base'
 
 import { RenderList } from './RenderList'
 import { RenderDetail } from './RenderDetail'
@@ -15,21 +16,25 @@ const Resource = ({
   admin,
   provider,
   user,
+  analytics,
 }: {
   name: string
   admin: BaseAdmin
   provider: BaseProvider
   user: any
-}): JSX.Element => (
-  <Switch>
-    <Route exact path={`/${name}/`}>
-      <RenderList admin={admin} provider={provider} user={user} />
-    </Route>
-    <Route exact path={`/${name}/:id`}>
-      <RenderDetail name={name} admin={admin} provider={provider} user={user} />
-    </Route>
-  </Switch>
-)
+  analytics: BaseAnalytic | undefined
+}): JSX.Element => {
+  return (
+    <Switch>
+      <Route exact path={`/${name}/`}>
+        <RenderList admin={admin} provider={provider} user={user} analytics={analytics} />
+      </Route>
+      <Route exact path={`/${name}/:id`}>
+        <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+      </Route>
+    </Switch>
+  )
+}
 
 const ResourceComposer = ({
   children,

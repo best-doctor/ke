@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react'
-import type { GenericAccessor } from '../../typing'
+import type { GenericAccessor } from 'typing'
 
 type ListFieldDescription = {
   Header: string
@@ -35,6 +35,7 @@ type DetailFieldDescription = {
   dataSource?: GenericAccessor
   dataTarget?: GenericAccessor
   targetPayload?: GenericAccessor
+  widgetAnalytics?: GenericAccessor
   href?: GenericAccessor
   layout: LayoutData
 }

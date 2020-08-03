@@ -9,8 +9,8 @@ import { RenderDetail } from '../RenderDetail'
 test('ResourceComposer mounts router with children', () => {
   const wrapper = shallow(
     <ResourceComposer withSideBar={false} permissions={[]}>
-      <Resource name="test" admin={testAdmin} provider={testProvider} user={undefined} />
-      <Resource name="test2" admin={testAdmin} provider={testProvider} user={undefined} />
+      <Resource name="test" admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
+      <Resource name="test2" admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
     </ResourceComposer>
   )
 
@@ -19,7 +19,9 @@ test('ResourceComposer mounts router with children', () => {
 })
 
 test('Resource mounts properly', () => {
-  const wrapper = shallow(<Resource name="test" admin={testAdmin} provider={testProvider} user={undefined} />)
+  const wrapper = shallow(
+    <Resource name="test" admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
+  )
 
   expect(wrapper.find('Switch').length).toEqual(1)
   expect(wrapper.find('Route').length).toEqual(2)

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
+import type { BaseAnalytic } from 'integration/analytics/base'
 
 import { mountComponents } from '../utils/mountComponents'
 import { ToListViewLink } from '../components/ToListViewLink'
@@ -13,16 +14,18 @@ import { ToListViewLink } from '../components/ToListViewLink'
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
 export const RenderDetail: React.FC<{
-  name: string
+  resourceName: string
   admin: BaseAdmin
   provider: BaseProvider
   user: any
-}> = ({ name, admin, provider, user }) => {
+  analytics: BaseAnalytic | undefined
+}> = ({ resourceName, admin, provider, user, analytics }) => {
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
 
   document.title = `${admin.verboseName} # ${id}`
+  const viewType = 'detail_view'
 
   const notifier = (eventType: string): void => {
     const defaultNotification = {
@@ -58,9 +61,20 @@ export const RenderDetail: React.FC<{
 
   return (
     <>
-      <ToListViewLink name={name} />
+      <ToListViewLink name={resourceName} />
       <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
-        {object && mountComponents(object, admin.detail_fields, provider, setObject, notifier, user)}
+        {object &&
+          mountComponents(
+            resourceName,
+            object,
+            admin.detail_fields,
+            provider,
+            setObject,
+            notifier,
+            user,
+            analytics,
+            viewType
+          )}
       </ReactGridLayout>
     </>
   )

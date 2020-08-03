@@ -6,15 +6,17 @@ import { useLocation } from 'react-router-dom'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { Pagination, TableFilter } from '../admin/providers'
+import type { BaseAnalytic } from '../integration/analytics'
 
 import { Table } from '../components/Table'
 import { FilterManager } from '../utils/filterManager'
 
-export const RenderList: React.FC<{ admin: BaseAdmin; provider: BaseProvider; user: any }> = ({
-  admin,
-  provider,
-  user,
-}) => {
+export const RenderList: React.FC<{
+  admin: BaseAdmin
+  provider: BaseProvider
+  user: any
+  analytics: BaseAnalytic | undefined
+}> = ({ admin, provider, user }) => {
   document.title = `${admin.verboseName}`
   const location = useLocation()
 

@@ -1,5 +1,15 @@
 import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
+import {
+  FirebaseAnalytic,
+  FirebaseEventPayload,
+  FirebaseEvent,
+  BaseAnalytic,
+  pushAnalytics,
+  EventNameEnum,
+  WidgetTypeEnum,
+  FirebaseConfigType,
+} from 'integration/analytics'
 import { ResourceComposer, Resource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'ResourceComposer/RenderDetail'
@@ -40,4 +50,12 @@ export {
   getPayload,
   AvatarWidget,
   hasPermission,
+  FirebaseAnalytic,
+  FirebaseEventPayload,
+  FirebaseEvent,
+  BaseAnalytic,
+  pushAnalytics,
+  EventNameEnum,
+  WidgetTypeEnum,
+  FirebaseConfigType,
 }
