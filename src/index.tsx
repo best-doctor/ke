@@ -1,5 +1,11 @@
 import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
+import type {
+  ListFieldDescription,
+  DetailFieldDescription,
+  ListFilterDescription,
+  ListFilterTemplateDescription,
+} from 'admin/fields/FieldDescription'
 import {
   FirebaseAnalytic,
   FirebaseEventPayload,
@@ -59,4 +65,8 @@ export {
   EventNameEnum,
   WidgetTypeEnum,
   FirebaseConfigType,
+  ListFieldDescription,
+  DetailFieldDescription,
+  ListFilterDescription,
+  ListFilterTemplateDescription,
 }
