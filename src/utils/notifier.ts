@@ -23,20 +23,20 @@ class ChakraUINotifier extends BaseNotifier {
     isClosable: true,
   }
 
-  notifySuccess(message: string | undefined = 'Обновлено'): void {
+  _notify(message: string, status: string): void {
     this.notifierHanlder({
       title: message,
-      status: 'success',
+      status: status,
       ...this.defaultNotifierConfig,
     })
   }
 
+  notifySuccess(message: string | undefined = 'Обновлено'): void {
+    this._notify(message, 'success')
+  }
+
   notifyError(message: string | undefined = 'Ошибка'): void {
-    this.notifierHanlder({
-      title: message,
-      status: 'error',
-      ...this.defaultNotifierConfig,
-    })
+    this._notify(message, 'error')
   }
 }
 
