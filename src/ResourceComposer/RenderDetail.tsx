@@ -9,51 +9,30 @@ import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
 import { mountComponents } from '../utils/mountComponents'
+import { ChakraUINotifier } from '../utils/notifier'
 import { ToListViewLink } from '../components/ToListViewLink'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
-export const RenderDetail: React.FC<{
+type RenderDetailProps = {
   resourceName: string
   admin: BaseAdmin
   provider: BaseProvider
   user: any
   analytics: BaseAnalytic | undefined
-}> = ({ resourceName, admin, provider, user, analytics }) => {
+}
+
+const ViewType = 'detail_view'
+
+export const RenderDetail = (props: RenderDetailProps) => {
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
+  const notifier = new ChakraUINotifier(toast)
+
+  const { resourceName, admin, provider, user, analytics } = props
 
   document.title = `${admin.verboseName} # ${id}`
-  const viewType = 'detail_view'
-
-  const notifier = (eventType: string): void => {
-    const defaultNotification = {
-      notificationTitle: 'Обновлено',
-      notificationStatus: 'success',
-    }
-    const errorNotification = {
-      notificationTitle: 'Ошибка',
-      notificationStatus: 'error',
-    }
-
-    const statusMapping = new Map([
-      ['success', defaultNotification],
-      ['error', errorNotification],
-    ])
-    const { notificationTitle, notificationStatus }: { notificationTitle: string; notificationStatus: string } =
-      statusMapping.get(eventType) || defaultNotification
-
-    return toast({
-      title: notificationTitle,
-      position: 'top',
-      // eslint-disable-next-line
-      // @ts-ignore
-      status: notificationStatus,
-      duration: 9000,
-      isClosable: true,
-    })
-  }
 
   useEffect(() => {
     provider.getObject(admin.baseUrl, id).then((res) => setObject(res))
@@ -62,6 +41,7 @@ export const RenderDetail: React.FC<{
   return (
     <>
       <ToListViewLink name={resourceName} />
+
       <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
         {object &&
           mountComponents(
@@ -73,7 +53,7 @@ export const RenderDetail: React.FC<{
             notifier,
             user,
             analytics,
-            viewType
+            ViewType
           )}
       </ReactGridLayout>
     </>
