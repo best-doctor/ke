@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
 import type { BaseProvider } from '../admin/providers'
+import type { BaseNotifier } from '../utils/notifier'
 
 import { isValidComponent } from './isComponent'
 
@@ -12,7 +13,7 @@ const mountComponents = (
   adminFields: DetailFieldDescription[],
   provider: BaseProvider,
   setObject: Function,
-  notifier: Function,
+  notifier: BaseNotifier,
   user: any,
   analytics: BaseAnalytic | undefined,
   viewType: string
