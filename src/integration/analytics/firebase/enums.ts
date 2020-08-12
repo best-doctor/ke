@@ -7,6 +7,7 @@ enum EventNameEnum {
   NESTED_SELECT_OPTION_CHANGE = 'nested_select_option_change',
   BUTTON_CLICK = 'button_click',
   FOREIGN_KEY_SELECT_OPTION_CHANGE = 'foreign_key_select_option_change',
+  MULTI_SELECT_OPTION_CHANGE = 'multi_select_option_change',
   INPUT_CHANGE = 'input_change',
 }
 
