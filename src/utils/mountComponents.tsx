@@ -9,17 +9,17 @@ import { isValidComponent } from './isComponent'
 
 type mountComponentsKwargs = {
   resourceName: string
-  object: any
+  object: object
   elements: DetailFieldDescription[]
   provider: BaseProvider
   setObject: Function
   notifier: BaseNotifier
-  user: any
+  user: object
   analytics: BaseAnalytic | undefined
   ViewType: string
 }
 
-const getComponentFromCallable = (widget: JSX.Element | Function, user: any): any => {
+const getComponentFromCallable = (widget: JSX.Element | Function, user: object): any => {
   // Widget can be defined as callable. In this case, we inject some payload to arrow function.
   let ComponentToMount = null
 

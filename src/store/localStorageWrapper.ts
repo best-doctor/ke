@@ -3,13 +3,15 @@ class WrappedLocalStorage {
     localStorage.setItem(itemKey, JSON.stringify(payload))
   }
 
-  static getItem(itemKey: string): any {
+  static getItem(itemKey: string): object | null {
     const item = localStorage.getItem(itemKey)
 
     if (item) return JSON.parse(item)
+
+    return null
   }
 
-  static popItem(itemKey: string): any {
+  static popItem(itemKey: string): object | null {
     const item = WrappedLocalStorage.getItem(itemKey)
     localStorage.removeItem(itemKey)
 

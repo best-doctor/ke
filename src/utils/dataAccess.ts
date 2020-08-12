@@ -2,7 +2,7 @@ import { get } from 'lodash'
 
 import type { GenericAccessor } from '../typing'
 
-const getData = (handler: GenericAccessor, detailObject: any): any => {
+const getData = (handler: GenericAccessor, detailObject: object): any => {
   if (typeof handler === 'function') {
     return handler(detailObject)
   }
@@ -14,7 +14,7 @@ const getData = (handler: GenericAccessor, detailObject: any): any => {
   return null
 }
 
-const getWidgetContent = (name: string, detailObject: any, handler: GenericAccessor, expectedType = 'string'): any => {
+const getWidgetContent = (name: string, detailObject: object, handler: GenericAccessor, expectedType = 'string'): any => {
   const widgetContent = getData(handler, detailObject)
 
   if (!widgetContent || typeof widgetContent !== expectedType) {
@@ -25,7 +25,7 @@ const getWidgetContent = (name: string, detailObject: any, handler: GenericAcces
 }
 
 const getPayload = (
-  e: any,
+  e: React.ChangeEvent<HTMLInputElement>,
   name: string,
   targetPayload: GenericAccessor
 ): string | { [key: string]: string } | null => {

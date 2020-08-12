@@ -27,7 +27,7 @@ const isExoticComponent = (objectToCheck: any): boolean => {
   )
 }
 
-const isValidComponent = (objectToCheck: any): boolean => {
+const isValidComponent = (objectToCheck: object): boolean => {
   return isClassComponent(objectToCheck) || isFunctionalComponent(objectToCheck) || isExoticComponent(objectToCheck)
 }
 
