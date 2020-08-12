@@ -51,4 +51,5 @@ export {
   ListFilterDescription,
   ListFilterTemplateDescription,
   WizardFieldDescription,
+  WizardFieldElement,
 }
