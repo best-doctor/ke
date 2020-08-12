@@ -1,9 +1,9 @@
 /* eslint max-classes-per-file: 0 */
 
 abstract class BaseNotifier {
-  notifierHanlder: any
+  notifierHanlder: Function | object
 
-  constructor(notifierHandler: any) {
+  constructor(notifierHandler: Function) {
     this.notifierHanlder = notifierHandler
   }
 
@@ -26,7 +26,7 @@ class ChakraUINotifier extends BaseNotifier {
   }
 
   notify(message: string, status: string): void {
-    this.notifierHanlder({
+    (this.notifierHanlder as Function)({
       title: message,
       status,
       ...this.defaultNotifierConfig,
