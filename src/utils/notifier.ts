@@ -26,7 +26,7 @@ class ChakraUINotifier extends BaseNotifier {
   }
 
   notify(message: string, status: string): void {
-    (this.notifierHanlder as Function)({
+    ;(this.notifierHanlder as Function)({
       title: message,
       status,
       ...this.defaultNotifierConfig,
