@@ -3,6 +3,7 @@ import type {
   ListFieldDescription,
   ListFilterDescription,
   ListFilterTemplateDescription,
+  WizardFieldDescription,
 } from './fields/FieldDescription'
 
 export abstract class BaseAdmin {
@@ -19,4 +20,6 @@ export abstract class BaseAdmin {
   abstract list_fields: ListFieldDescription[]
 
   abstract detail_fields: DetailFieldDescription[]
+
+  abstract wizards?: WizardFieldDescription
 }
