@@ -8,11 +8,13 @@ import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
+import { mountWizards } from '../WizardMaster/utils'
 import { mountComponents } from '../utils/mountComponents'
 import { ChakraUINotifier } from '../utils/notifier'
 import { ToListViewLink } from '../components/ToListViewLink'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
+const ViewType = 'detail_view'
 
 type RenderDetailProps = {
   resourceName: string
@@ -22,15 +24,13 @@ type RenderDetailProps = {
   analytics: BaseAnalytic | undefined
 }
 
-const ViewType = 'detail_view'
-
-export const RenderDetail = (props: RenderDetailProps) => {
+const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const [object, setObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
   const notifier = new ChakraUINotifier(toast)
 
-  const { resourceName, admin, provider, user, analytics } = props
+  const { resourceName, admin, provider } = props
 
   document.title = `${admin.verboseName} # ${id}`
 
@@ -38,24 +38,25 @@ export const RenderDetail = (props: RenderDetailProps) => {
     provider.getObject(admin.baseUrl, id).then((res) => setObject(res))
   }, [id, provider, admin.baseUrl])
 
+  const containersToMount = {
+    detail_fields: mountComponents,
+    wizards: mountWizards,
+  }
+
   return (
     <>
       <ToListViewLink name={resourceName} />
 
       <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
         {object &&
-          mountComponents(
-            resourceName,
-            object,
-            admin.detail_fields,
-            provider,
-            setObject,
-            notifier,
-            user,
-            analytics,
-            ViewType
-          )}
+          Object.entries(containersToMount).map(([elementsKey, container]: [string, Function]) => {
+            const elements = admin[elementsKey as keyof typeof admin]
+
+            return container({ object, setObject, notifier, ViewType, elements, ...props })
+          })}
       </ReactGridLayout>
     </>
   )
 }
+
+export { RenderDetail }
