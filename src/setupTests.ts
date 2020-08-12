@@ -4,6 +4,7 @@ import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import axios from 'axios'
 
+import { ChakraUINotifier } from './utils/notifier'
 import { TextWidget } from './components/TextWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
@@ -51,5 +52,6 @@ class TestProvider extends BaseProvider {
 
 const testAdmin = new TestAdmin()
 const testProvider = new TestProvider()
+const testNotifier = new ChakraUINotifier(jest.fn())
 
-export { testAdmin, testProvider }
+export { testAdmin, testProvider, testNotifier }

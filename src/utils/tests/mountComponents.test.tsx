@@ -1,6 +1,5 @@
 import { mountComponents } from '../mountComponents'
-import { ChakraUINotifier } from '../notifier'
-import { testAdmin, testProvider } from '../../setupTests'
+import { testAdmin, testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {
   id: 100500,
@@ -18,7 +17,7 @@ test('Get components to mount', () => {
     elements: testAdmin.detail_fields,
     provider: testProvider,
     setObject: mockSetObject,
-    notifier: new ChakraUINotifier({}),
+    notifier: testNotifier,
     user: {},
     analytics: undefined,
     ViewType: 'test_view',
