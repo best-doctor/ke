@@ -32,7 +32,7 @@ const getNewValueByCommonFields = (onChangeValue: any): string => {
     if (newValue) return newValue
   }
 
-  return onChangeValue
+  return JSON.stringify(onChangeValue)
 }
 
 const getNameFromDataPath = (name: string | undefined, resourceName: string): string => {
