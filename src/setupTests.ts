@@ -36,6 +36,8 @@ class TestAdmin extends BaseAdmin {
       layout: { x: 1, y: 3, w: 1, h: 2, static: true },
     },
   ]
+
+  wizards = []
 }
 
 const mockedHTTP = axios.create({})
