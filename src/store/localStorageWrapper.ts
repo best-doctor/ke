@@ -13,8 +13,6 @@ class WrappedLocalStorage {
     const item = WrappedLocalStorage.getItem(itemKey)
     localStorage.removeItem(itemKey)
 
-    if (!item) return { [itemKey]: item }
-
     return item
   }
 }
