@@ -1,3 +1,5 @@
+/* eslint max-classes-per-file: 0 */
+
 abstract class BaseNotifier {
   notifierHanlder: any
 
@@ -23,20 +25,20 @@ class ChakraUINotifier extends BaseNotifier {
     isClosable: true,
   }
 
-  _notify(message: string, status: string): void {
+  notify(message: string, status: string): void {
     this.notifierHanlder({
       title: message,
-      status: status,
+      status,
       ...this.defaultNotifierConfig,
     })
   }
 
   notifySuccess(message: string | undefined = 'Обновлено'): void {
-    this._notify(message, 'success')
+    this.notify(message, 'success')
   }
 
   notifyError(message: string | undefined = 'Ошибка'): void {
-    this._notify(message, 'error')
+    this.notify(message, 'error')
   }
 }
 
