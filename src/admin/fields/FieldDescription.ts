@@ -1,5 +1,6 @@
 import type { FunctionComponent } from 'react'
 import type { GenericAccessor } from 'typing'
+import type { BaseWizard } from '../../WizardMaster/interfaces'
 
 type ListFieldDescription = {
   Header: string
@@ -27,6 +28,8 @@ type LayoutData = {
   static: boolean
 }
 
+type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard)
+
 type DetailFieldDescription = {
   name: string
   widget: FunctionComponent<any> | Function
@@ -40,4 +43,12 @@ type DetailFieldDescription = {
   layout: LayoutData
 }
 
-export { DetailFieldDescription, ListFieldDescription, ListFilterDescription, ListFilterTemplateDescription }
+type WizardFieldDescription = WizardFieldElement[]
+
+export {
+  DetailFieldDescription,
+  ListFieldDescription,
+  ListFilterDescription,
+  ListFilterTemplateDescription,
+  WizardFieldDescription,
+}
