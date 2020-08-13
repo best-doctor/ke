@@ -1,6 +1,6 @@
 import { getData, getWidgetContent, getPayload } from '../dataAccess'
 
-type DetailObject = { id: number, last_name: string }
+type DetailObject = { id: number; last_name: string }
 
 type MockEvent = { target: { value: string } }
 

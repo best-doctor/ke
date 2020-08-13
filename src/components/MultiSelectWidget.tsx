@@ -45,7 +45,9 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
 
   const loadOptions = (inputValue: string): Promise<object> => {
     return new Promise((resolve) => {
-      resolve(provider.getList(`${dataSource}?search=${inputValue}`).then(([data, ,]: [object, object, object]) => data))
+      resolve(
+        provider.getList(`${dataSource}?search=${inputValue}`).then(([data, ,]: [object, object, object]) => data)
+      )
     })
   }
 
