@@ -1,13 +1,16 @@
 import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
-import { Textarea, Box, FormLabel } from '@chakra-ui/core'
+import { Textarea } from '@chakra-ui/core'
+import { WidgetWrapper } from './WidgetWrapper'
 import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../integration/analytics'
+import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 import type { BaseProvider } from '../admin/providers'
 import type { GenericAccessor } from '../typing'
 import type { BaseAnalytic } from '../integration/analytics/base'
+import type { BaseNotifier } from '../utils/notifier'
 
 type InputWidgetProps = {
   name: string
@@ -20,10 +23,10 @@ type InputWidgetProps = {
   dataTarget: GenericAccessor
   targetPayload: GenericAccessor
   setObject: Function
-  notifier: Function
+  notifier: BaseNotifier
   provider: BaseProvider
   viewType: string
-  style: any
+  style: object
 }
 
 const InputWidget = (props: InputWidgetProps): JSX.Element => {
@@ -43,21 +46,15 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
   const content = getWidgetContent(name, detailObject, displayValue)
 
-  const handleChange = (e: any): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     pushAnalytics({ eventName: EventNameEnum.INPUT_CHANGE, widgetType: WidgetTypeEnum.INPUT, value: e, ...props })
 
-    provider.put(targetUrl, getPayload(e, name, targetPayload)).then(
-      (updatedObject: any) => {
-        setObject(updatedObject)
-        notifier('success')
-      },
-      () => notifier('error')
-    )
+    const inputPayload = getPayload(e.target.value, name, targetPayload)
+    makeUpdateWithNotification(provider, targetUrl, inputPayload, setObject, notifier)
   }
 
   return (
-    <Box {...style}>
-      <FormLabel mt={5}>{helpText}</FormLabel>
+    <WidgetWrapper style={style} helpText={helpText}>
       <DebounceInput
         value={content}
         resize="none"
@@ -68,7 +65,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
         element={Textarea as React.FC}
         onChange={(e) => handleChange(e)}
       />
-    </Box>
+    </WidgetWrapper>
   )
 }
 

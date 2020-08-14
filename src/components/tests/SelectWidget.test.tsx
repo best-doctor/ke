@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
-import { FormLabel, Box, Select } from '@chakra-ui/core'
+import { Select } from '@chakra-ui/core'
 
+import { WidgetWrapper } from '../WidgetWrapper'
 import { SelectWidget } from '../SelectWidget'
-import { testProvider } from '../../setupTests'
+import { testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {
   id: 100500,
@@ -31,11 +32,10 @@ test('Select widget properly rendered', () => {
       provider={testProvider}
       style={{}}
       viewType="test_view"
-      notifier={jest.fn()}
+      notifier={testNotifier}
     />
   )
 
-  expect(component.find(Box).length).toEqual(1)
   expect(component.find(Select).length).toEqual(1)
-  expect(component.find(FormLabel).length).toEqual(1)
+  expect(component.find(WidgetWrapper).length).toEqual(1)
 })

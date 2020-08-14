@@ -1,19 +1,19 @@
 import * as React from 'react'
 
-import { Avatar, Box, FormLabel } from '@chakra-ui/core'
+import { Avatar } from '@chakra-ui/core'
+import { WidgetWrapper } from './WidgetWrapper'
 
 type AvatarWidgetProps = {
   name: string
   helpText: string
-  style: any
+  style: object
 }
 
 const AvatarWidget = ({ helpText, style }: AvatarWidgetProps): JSX.Element => {
   return (
-    <Box {...style}>
-      <FormLabel mt={5}>{helpText}</FormLabel>
+    <WidgetWrapper style={style} helpText={helpText}>
       <Avatar name="BD" src="" />
-    </Box>
+    </WidgetWrapper>
   )
 }
 

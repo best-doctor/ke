@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { Link, FormLabel, Box } from '@chakra-ui/core'
+import { Link } from '@chakra-ui/core'
 import styled from 'styled-components'
-import { getWidgetContent } from '../utils/dataAccess'
 
+import { WidgetWrapper } from './WidgetWrapper'
+import { getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../integration/analytics'
 
 import type { GenericAccessor } from '../typing'
@@ -42,14 +43,13 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   }
 
   return (
-    <Box {...style}>
-      <FormLabel>{helpText || ''}</FormLabel>
+    <WidgetWrapper style={style} helpText={helpText || ''}>
       <StyledLinkWidget>
         <Link target="_blank" href={linkHref} onClick={() => handleClick()}>
           {content}
         </Link>
       </StyledLinkWidget>
-    </Box>
+    </WidgetWrapper>
   )
 }
 

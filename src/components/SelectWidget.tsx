@@ -1,11 +1,15 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { FormLabel, Select, Box } from '@chakra-ui/core'
+import { Select } from '@chakra-ui/core'
+
+import { WidgetWrapper } from './WidgetWrapper'
 import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../integration/analytics'
+import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 import type { BaseAnalytic } from '../integration/analytics'
 import type { BaseProvider } from '../admin/providers'
+import type { BaseNotifier } from '../utils/notifier'
 import type { GenericAccessor } from '../typing'
 
 type SelectObject = {
@@ -26,9 +30,9 @@ type SelectProps = {
   provider: BaseProvider
   analytics: BaseAnalytic | undefined
   widgetAnalytics: Function | boolean | undefined
-  notifier: Function
+  notifier: BaseNotifier
   viewType: string
-  style: any
+  style: object
 }
 
 const SelectWidget = (props: SelectProps): JSX.Element => {
@@ -54,10 +58,12 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
 
   useEffect(() => {
-    provider.getList(sourceUrl).then(([responseOptions, ,]: [any, any, any]) => setResultOptions(responseOptions))
+    provider.getList(sourceUrl).then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
   }, [provider, sourceUrl])
 
-  const handleChange = (e: any): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const widgetPayload = getPayload(e.target.value, name, targetPayload)
+
     pushAnalytics({
       eventName: EventNameEnum.SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
@@ -65,19 +71,12 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
       ...props,
     })
 
-    provider.put(targetUrl, getPayload(e, name, targetPayload)).then(
-      (result: any) => {
-        setObject(result)
-        notifier('success')
-      },
-      () => notifier('error')
-    )
+    makeUpdateWithNotification(provider, targetUrl, widgetPayload, setObject, notifier)
   }
 
   return (
-    <Box {...style}>
-      <FormLabel mt={5}>{helpText}</FormLabel>
-      <Select onChange={(e) => handleChange(e)}>
+    <WidgetWrapper style={style} helpText={helpText}>
+      <Select name={name} onChange={(e) => handleChange(e)}>
         <option value={value} selected key={value}>
           {text}
         </option>
@@ -89,7 +88,7 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
             </option>
           ))}
       </Select>
-    </Box>
+    </WidgetWrapper>
   )
 }
 

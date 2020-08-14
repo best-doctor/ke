@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 import { DebounceInput } from 'react-debounce-input'
-import { FormLabel } from '@chakra-ui/core'
 
+import { WidgetWrapper } from '../WidgetWrapper'
 import { InputWidget } from '../InputWidget'
-import { testProvider } from '../../setupTests'
+import { testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {
   id: 100500,
@@ -24,7 +24,7 @@ test('Input widget properly rendered', () => {
       displayValue="test"
       dataTarget="test"
       targetPayload="test"
-      notifier={jest.fn()}
+      notifier={testNotifier}
       provider={testProvider}
       viewType="test_view"
       style={{}}
@@ -32,5 +32,5 @@ test('Input widget properly rendered', () => {
   )
 
   expect(component.find(DebounceInput).length).toEqual(1)
-  expect(component.find(FormLabel).length).toEqual(1)
+  expect(component.find(WidgetWrapper).length).toEqual(1)
 })

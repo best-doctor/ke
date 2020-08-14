@@ -1,52 +1,14 @@
 import * as React from 'react'
-import AsyncSelect from 'react-select/async'
-import { Box, FormLabel } from '@chakra-ui/core'
-import * as debouncePromise from 'debounce-promise'
 
+import { AsyncSelectWidget } from './AsyncSelectWidget'
+import { WidgetWrapper } from './WidgetWrapper'
+import { makeUpdateWithNotification } from '../admin/providers/utils'
 import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../integration/analytics'
 import { getData, getWidgetContent } from '../utils/dataAccess'
 import type { BaseProvider } from '../admin/providers'
 import type { BaseAnalytic } from '../integration/analytics'
-
-const ForeignKeySelect = ({
-  provider,
-  dataResourceUrl,
-  handleChange,
-  placeholder,
-  getOptionLabel,
-  getOptionValue,
-}: {
-  provider: BaseProvider
-  dataResourceUrl: string
-  handleChange: Function
-  placeholder: string
-  getOptionLabel: Function
-  getOptionValue: Function
-}): JSX.Element => {
-  const debounceValue = 500
-
-  const loadOptions = (inputValue: string): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(provider.getList(`${dataResourceUrl}?search=${inputValue}`).then(([data, ,]: [any, any, any]) => data))
-    })
-  }
-
-  const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
-
-  return (
-    <AsyncSelect
-      onChange={(value: any) => handleChange(value)}
-      loadOptions={debouncedLoadOptions}
-      isClearable
-      menuPortalTarget={document.body}
-      styles={{ menuPortal: (base: any) => ({ ...base, zIndex: 9999 }) }}
-      getOptionLabel={(option: any) => getOptionLabel(option)}
-      getOptionValue={(option: any) => getOptionValue(option)}
-      placeholder={placeholder}
-    />
-  )
-}
+import type { BaseNotifier } from '../utils/notifier'
 
 type ForeignKeySelectWidgetProps = {
   name: string
@@ -61,11 +23,11 @@ type ForeignKeySelectWidgetProps = {
   optionLabel: Function
   optionValue: Function
   setObject: Function
-  notifier: Function
+  notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   viewType: string
   widgetAnalytics: Function | boolean | undefined
-  style: any
+  style: object
 }
 
 const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
@@ -85,39 +47,36 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     style,
   } = props
 
-  const placeholder = getWidgetContent(name, detailObject, displayValue)
+  const [value, setValue] = React.useState<object>(getWidgetContent(name, detailObject, displayValue, 'object'))
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
-  const handleChange = (value: any): void => {
+  const handleChange = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
+    setValue(changeValue)
+
     pushAnalytics({
       eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
-      value,
+      value: changeValue,
       ...props,
     })
 
-    provider.put(targetUrl, targetPayload(value)).then(
-      (updatedObject: any) => {
-        setObject(updatedObject)
-        notifier('success')
-      },
-      () => notifier('error')
-    )
+    const widgetPayload = targetPayload(changeValue)
+    makeUpdateWithNotification(provider, targetUrl, widgetPayload, setObject, notifier)
   }
 
   return (
-    <Box {...style}>
-      <FormLabel>{helpText}</FormLabel>
-      <ForeignKeySelect
+    <WidgetWrapper style={style} helpText={helpText}>
+      <AsyncSelectWidget
         provider={provider}
         dataResourceUrl={dataSource}
         handleChange={handleChange}
-        placeholder={placeholder}
+        value={value}
+        isClearable
         getOptionLabel={optionLabel}
         getOptionValue={optionValue}
       />
-    </Box>
+    </WidgetWrapper>
   )
 }
 
-export { ForeignKeySelect, ForeignKeySelectWidget }
+export { ForeignKeySelectWidget }

@@ -1,14 +1,14 @@
 import * as React from 'react'
 
-import { Box, FormLabel } from '@chakra-ui/core'
-import AsyncSelect from 'react-select/async'
-import * as debouncePromise from 'debounce-promise'
 import type { ValueType } from 'react-select/src/types'
 
 import type { BaseProvider } from 'index'
+import { AsyncSelectWidget } from './AsyncSelectWidget'
+import { WidgetWrapper } from './WidgetWrapper'
 import { pushAnalytics } from '../integration/analytics'
 import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
 import { WrappedLocalStorage } from '../store/localStorageWrapper'
+import { getWidgetContent } from '../utils/dataAccess'
 
 import type { BaseAnalytic } from '../integration/analytics'
 import type { BaseNotifier } from '../utils/notifier'
@@ -22,7 +22,7 @@ type MultiSelectWidgetProps = {
   helpText: string
   setObject: Function
   displayValue: GenericAccessor
-  dataSource: string | Function
+  dataSource: string
   dataTarget: GenericAccessor
   targetPayload: GenericAccessor
   provider: BaseProvider
@@ -32,40 +32,53 @@ type MultiSelectWidgetProps = {
   optionLabel: Function
   optionValue: Function
   viewType: string
-  style: any
+  style: object
 }
 
 type MultiSelectValue = {
   [key: string]: string
 }
 
+type RawWidgetPayload = (string | number | undefined)[]
+
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
-  const { name, targetPayload, provider, dataSource, optionLabel, optionValue, style, helpText } = props
-  const debounceValue = 500
+  const {
+    name,
+    targetPayload,
+    optionLabel,
+    optionValue,
+    style,
+    helpText,
+    detailObject,
+    displayValue,
+    provider,
+    dataSource,
+  } = props
 
-  const loadOptions = (inputValue: string): Promise<object> => {
-    return new Promise((resolve) => {
-      resolve(
-        provider.getList(`${dataSource}?search=${inputValue}`).then(([data, ,]: [object, object, object]) => data)
-      )
-    })
-  }
+  const [value, setValue] = React.useState<MultiSelectValue[]>(
+    getWidgetContent(name, detailObject, displayValue, 'object')
+  )
 
-  const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
+  const collectWidgetPayload = (changeValue: ValueType<MultiSelectValue[]>): [object, RawWidgetPayload] => {
+    let payloadIds: RawWidgetPayload = []
 
-  const handleChange = (value: ValueType<MultiSelectValue[]>): void => {
-    let payloadIds: (string | number | undefined)[] = []
-
-    if (value) {
-      payloadIds = (value as MultiSelectValue[]).map((element: MultiSelectValue) => element.uuid || element.id)
+    if (changeValue) {
+      payloadIds = (changeValue as MultiSelectValue[]).map((element: MultiSelectValue) => element.uuid || element.id)
     }
 
     const widgetPayload = (targetPayload as Function)(payloadIds)
+    return [widgetPayload, payloadIds]
+  }
+
+  const handleChange = (changeValue: ValueType<MultiSelectValue[]>): void => {
+    setValue(changeValue as MultiSelectValue[])
+
+    const [widgetPayload, rawPayload] = collectWidgetPayload(changeValue)
 
     pushAnalytics({
       eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
-      value: payloadIds,
+      value: rawPayload,
       ...props,
     })
 
@@ -73,19 +86,17 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   }
 
   return (
-    <Box {...style}>
-      <FormLabel>{helpText}</FormLabel>
-      <AsyncSelect
-        onChange={(value: ValueType<MultiSelectValue[]>) => handleChange(value)}
-        loadOptions={debouncedLoadOptions}
-        isClearable
+    <WidgetWrapper style={style} helpText={helpText}>
+      <AsyncSelectWidget
+        provider={provider}
+        dataResourceUrl={dataSource}
+        handleChange={handleChange}
+        value={value}
         isMulti
-        menuPortalTarget={document.body}
-        styles={{ menuPortal: (base: object) => ({ ...base, zIndex: 9999 }) }}
-        getOptionLabel={(option: object) => optionLabel(option)}
-        getOptionValue={(option: object) => optionValue(option)}
+        getOptionLabel={optionLabel}
+        getOptionValue={optionValue}
       />
-    </Box>
+    </WidgetWrapper>
   )
 }
 

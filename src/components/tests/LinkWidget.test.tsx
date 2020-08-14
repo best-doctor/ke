@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
-import { FormLabel, Link } from '@chakra-ui/core'
+import { Link } from '@chakra-ui/core'
 
+import { WidgetWrapper } from '../WidgetWrapper'
 import { LinkWidget } from '../LinkWidget'
 
 const detailObject = {
@@ -26,5 +27,5 @@ test('Link widget properly rendered', () => {
   )
 
   expect(component.find(Link).length).toEqual(1)
-  expect(component.find(FormLabel).length).toEqual(1)
+  expect(component.find(WidgetWrapper).length).toEqual(1)
 })
