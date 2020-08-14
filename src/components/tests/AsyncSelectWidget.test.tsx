@@ -9,7 +9,7 @@ test('Async select widget properly rendered', () => {
   const component = shallow(
     <AsyncSelectWidget
       provider={testProvider}
-      dataResourceUrl='test.com'
+      dataResourceUrl="test.com"
       handleChange={jest.fn()}
       value={{}}
       getOptionLabel={jest.fn()}
