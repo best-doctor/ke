@@ -13,9 +13,14 @@ class WrappedLocalStorage {
 
   static popItem(itemKey: string): object | null {
     const item = WrappedLocalStorage.getItem(itemKey)
-    localStorage.removeItem(itemKey)
 
-    return item
+    if (item) {
+      localStorage.removeItem(itemKey)
+
+      return item
+    }
+
+    return null
   }
 }
 

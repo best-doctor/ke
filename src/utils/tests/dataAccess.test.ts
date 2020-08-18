@@ -2,17 +2,9 @@ import { getData, getWidgetContent, getPayload } from '../dataAccess'
 
 type DetailObject = { id: number; last_name: string }
 
-type MockEvent = { target: { value: string } }
-
 const detailObject = {
   id: 100500,
   last_name: 'test',
-}
-
-const mockEvent = {
-  target: {
-    value: 'kek',
-  },
 }
 
 test.each([
@@ -36,10 +28,10 @@ test.each([
 })
 
 test.each([
-  ['some_field', (e: MockEvent) => ({ id: e.target.value }), { id: 'kek' }],
+  ['some_field', (value: string) => ({ id: value }), { id: 'kek' }],
   ['some_field', undefined, { some_field: 'kek' }],
 ])('getPayload', (name, targetPayload, expectedResult) => {
-  const result = getPayload(mockEvent as React.ChangeEvent<HTMLInputElement>, name, targetPayload)
+  const result = getPayload('kek', name, targetPayload)
 
   expect(result).toEqual(expectedResult)
 })

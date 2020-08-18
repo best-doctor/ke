@@ -15,6 +15,7 @@ type AsyncSelectWidgetProps = {
   getOptionValue: Function
   isClearable?: boolean
   isMulti?: boolean
+  closeMenuOnSelect?: boolean
   searchParamName?: string
 }
 
@@ -52,7 +53,6 @@ const AsyncSelectWidget = ({
       value={value}
       onChange={(changeValue: ValueType<object | object[]>) => handleChange(changeValue)}
       loadOptions={debouncedLoadOptions}
-      closeMenuOnSelect={false}
       isClearable={isClearable}
       isMulti={isMulti}
       menuPortalTarget={document.body}

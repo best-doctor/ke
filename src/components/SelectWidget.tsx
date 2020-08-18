@@ -49,12 +49,10 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
     style,
     notifier,
   } = props
-
   const sourceUrl = getData(dataSource, detailObject)
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
   const { value, text } = getWidgetContent(name, detailObject, displayValue, 'object')
-
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
 
   useEffect(() => {

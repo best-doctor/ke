@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { AsyncSelectWidget } from './AsyncSelectWidget'
+import { WrappedLocalStorage } from '../store/localStorageWrapper'
 import { WidgetWrapper } from './WidgetWrapper'
 import { makeUpdateWithNotification } from '../admin/providers/utils'
 import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
@@ -15,6 +16,7 @@ type ForeignKeySelectWidgetProps = {
   detailObject: any
   resource: string
   provider: BaseProvider
+  useLocalStorage?: boolean | undefined
   helpText: string
   displayValue: string | Function
   targetPayload: Function
@@ -35,6 +37,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     name,
     detailObject,
     provider,
+    useLocalStorage,
     helpText,
     setObject,
     displayValue,
@@ -48,6 +51,8 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   } = props
 
   const [value, setValue] = React.useState<object>(getWidgetContent(name, detailObject, displayValue, 'object'))
+  WrappedLocalStorage.setItem(name, value || null)
+
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
   const handleChange = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
@@ -61,7 +66,12 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     })
 
     const widgetPayload = targetPayload(changeValue)
-    makeUpdateWithNotification(provider, targetUrl, widgetPayload, setObject, notifier)
+
+    if (useLocalStorage) {
+      WrappedLocalStorage.setItem(name, changeValue)
+    } else {
+      makeUpdateWithNotification(provider, targetUrl, widgetPayload, setObject, notifier)
+    }
   }
 
   return (

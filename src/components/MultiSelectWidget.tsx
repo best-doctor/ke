@@ -41,10 +41,17 @@ type MultiSelectValue = {
 
 type RawWidgetPayload = (string | number | undefined)[]
 
+const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[] => {
+  if (widgetValue) {
+    return widgetValue.map((element: MultiSelectValue) => element.uuid || element.id)
+  }
+
+  return []
+}
+
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
     name,
-    targetPayload,
     optionLabel,
     optionValue,
     style,
@@ -58,31 +65,25 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const [value, setValue] = React.useState<MultiSelectValue[]>(
     getWidgetContent(name, detailObject, displayValue, 'object')
   )
-
-  const collectWidgetPayload = (changeValue: ValueType<MultiSelectValue[]>): [object, RawWidgetPayload] => {
-    let payloadIds: RawWidgetPayload = []
-
-    if (changeValue) {
-      payloadIds = (changeValue as MultiSelectValue[]).map((element: MultiSelectValue) => element.uuid || element.id)
-    }
-
-    const widgetPayload = (targetPayload as Function)(payloadIds)
-    return [widgetPayload, payloadIds]
-  }
+  WrappedLocalStorage.setItem(name, extractPayloadIds(value))
 
   const handleChange = (changeValue: ValueType<MultiSelectValue[]>): void => {
     setValue(changeValue as MultiSelectValue[])
 
-    const [widgetPayload, rawPayload] = collectWidgetPayload(changeValue)
+    let payloadIds: RawWidgetPayload = []
+
+    if (changeValue) {
+      payloadIds = extractPayloadIds(changeValue as MultiSelectValue[])
+    }
 
     pushAnalytics({
       eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
-      value: rawPayload,
+      value: payloadIds,
       ...props,
     })
 
-    WrappedLocalStorage.setItem(name, widgetPayload)
+    WrappedLocalStorage.setItem(name, payloadIds)
   }
 
   return (
@@ -91,6 +92,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
         provider={provider}
         dataResourceUrl={dataSource}
         handleChange={handleChange}
+        closeMenuOnSelect={false}
         value={value}
         isMulti
         getOptionLabel={optionLabel}

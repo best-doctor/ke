@@ -2,9 +2,9 @@ import { get } from 'lodash'
 
 import type { GenericAccessor } from '../typing'
 
-const getData = (handler: GenericAccessor, detailObject: object): any => {
+const getData = (handler: GenericAccessor, data: any): any => {
   if (typeof handler === 'function') {
-    return handler(detailObject)
+    return handler(data)
   }
 
   if (typeof handler === 'string') {
@@ -30,15 +30,15 @@ const getWidgetContent = (
 }
 
 const getPayload = (
-  e: React.ChangeEvent<HTMLInputElement>,
+  value: string,
   name: string,
   targetPayload: GenericAccessor
 ): string | { [key: string]: string } | null => {
   if (targetPayload) {
-    return getData(targetPayload, e)
+    return getData(targetPayload, value)
   }
 
-  return { [name]: e.target.value }
+  return { [name]: value }
 }
 
 export { getData, getWidgetContent, getPayload }
