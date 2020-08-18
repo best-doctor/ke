@@ -4,7 +4,7 @@ import { BaseWizardStep } from './interfaces'
 
 import { TextWidget } from '../components'
 
-const defaultLayout = { x: 1, y: 1, w: 1, h: 1, static: true}
+const defaultLayout = { x: 1, y: 1, w: 1, h: 1, static: true }
 
 class ErrorDisplay extends BaseWizardStep {
   widgets = [
@@ -22,9 +22,9 @@ class SuccessDisplay extends BaseWizardStep {
     {
       name: 'success_page',
       widget: TextWidget,
-      displayValue: (object: any) => (`Создан объект с номером ${object.uuid || object.id}`),
+      displayValue: (object: any) => `Создан объект с номером ${object.uuid || object.id}`,
       layout: defaultLayout,
-    }
+    },
   ]
 }
 

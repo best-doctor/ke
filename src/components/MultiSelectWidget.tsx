@@ -50,17 +50,7 @@ const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[
 }
 
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
-  const {
-    name,
-    optionLabel,
-    optionValue,
-    style,
-    helpText,
-    detailObject,
-    displayValue,
-    provider,
-    dataSource,
-  } = props
+  const { name, optionLabel, optionValue, style, helpText, detailObject, displayValue, provider, dataSource } = props
 
   const [value, setValue] = React.useState<MultiSelectValue[]>(
     getWidgetContent(name, detailObject, displayValue, 'object')
