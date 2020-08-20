@@ -3,10 +3,8 @@ import { DebounceInput } from 'react-debounce-input'
 import { Textarea } from '@chakra-ui/core'
 import { WidgetWrapper } from './WidgetWrapper'
 import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
-import { WrappedLocalStorage } from '../store/localStorageWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../integration/analytics'
-import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 import type { BaseProvider } from '../admin/providers'
 import type { GenericAccessor } from '../typing'
@@ -29,6 +27,8 @@ type InputWidgetProps = {
   provider: BaseProvider
   viewType: string
   style: object
+  setInitialValue: Function
+  submitChange: Function
 }
 
 const InputWidget = (props: InputWidgetProps): JSX.Element => {
@@ -36,29 +36,22 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
     name,
     helpText,
     detailObject,
-    useLocalStorage,
-    setObject,
     displayValue,
     dataTarget,
     targetPayload,
-    notifier,
-    provider,
     style,
+    submitChange,
+    setInitialValue,
   } = props
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
   const content = getWidgetContent(name, detailObject, displayValue)
-  WrappedLocalStorage.setItem(name, content || null)
+  setInitialValue({ [name]: content })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     pushAnalytics({ eventName: EventNameEnum.INPUT_CHANGE, widgetType: WidgetTypeEnum.INPUT, value: e, ...props })
 
     const inputPayload = getPayload(e.target.value, name, targetPayload)
-
-    if (useLocalStorage) {
-      WrappedLocalStorage.setItem(name, e.target.value)
-    } else {
-      makeUpdateWithNotification(provider, targetUrl, inputPayload, setObject, notifier)
-    }
+    submitChange({ url: targetUrl, payload: inputPayload })
   }
 
   return (

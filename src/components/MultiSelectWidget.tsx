@@ -7,7 +7,6 @@ import { AsyncSelectWidget } from './AsyncSelectWidget'
 import { WidgetWrapper } from './WidgetWrapper'
 import { pushAnalytics } from '../integration/analytics'
 import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
-import { WrappedLocalStorage } from '../store/localStorageWrapper'
 import { getWidgetContent } from '../utils/dataAccess'
 
 import type { BaseAnalytic } from '../integration/analytics'
@@ -18,7 +17,6 @@ type MultiSelectWidgetProps = {
   name: string
   resource: string
   detailObject: object
-  useLocalStorage: boolean
   helpText: string
   setObject: Function
   displayValue: GenericAccessor
@@ -33,6 +31,8 @@ type MultiSelectWidgetProps = {
   optionValue: Function
   viewType: string
   style: object
+  setInitialValue: Function
+  submitChange: Function
 }
 
 type MultiSelectValue = {
@@ -50,12 +50,24 @@ const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[
 }
 
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
-  const { name, optionLabel, optionValue, style, helpText, detailObject, displayValue, provider, dataSource } = props
+  const {
+    name,
+    optionLabel,
+    optionValue,
+    style,
+    helpText,
+    detailObject,
+    displayValue,
+    provider,
+    dataSource,
+    setInitialValue,
+    submitChange,
+  } = props
 
   const [value, setValue] = React.useState<MultiSelectValue[]>(
     getWidgetContent(name, detailObject, displayValue, 'object')
   )
-  WrappedLocalStorage.setItem(name, extractPayloadIds(value))
+  setInitialValue({ [name]: value })
 
   const handleChange = (changeValue: ValueType<MultiSelectValue[]>): void => {
     setValue(changeValue as MultiSelectValue[])
@@ -73,7 +85,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
       ...props,
     })
 
-    WrappedLocalStorage.setItem(name, payloadIds)
+    submitChange({ url: '', payload: payloadIds })
   }
 
   return (

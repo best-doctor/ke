@@ -5,7 +5,6 @@ import { Select } from '@chakra-ui/core'
 import { WidgetWrapper } from './WidgetWrapper'
 import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../integration/analytics'
-import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 import type { BaseAnalytic } from '../integration/analytics'
 import type { BaseProvider } from '../admin/providers'
@@ -33,6 +32,8 @@ type SelectProps = {
   notifier: BaseNotifier
   viewType: string
   style: object
+  setInitialValue: Function
+  submitChange: Function
 }
 
 const SelectWidget = (props: SelectProps): JSX.Element => {
@@ -44,16 +45,17 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
     dataSource,
     dataTarget,
     targetPayload,
-    setObject,
     provider,
     style,
-    notifier,
+    setInitialValue,
+    submitChange,
   } = props
   const sourceUrl = getData(dataSource, detailObject)
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
   const { value, text } = getWidgetContent(name, detailObject, displayValue, 'object')
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
+  setInitialValue({ [name]: value })
 
   useEffect(() => {
     provider.getList(sourceUrl).then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
@@ -69,7 +71,7 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
       ...props,
     })
 
-    makeUpdateWithNotification(provider, targetUrl, widgetPayload, setObject, notifier)
+    submitChange({ url: targetUrl, payload: widgetPayload })
   }
 
   return (
