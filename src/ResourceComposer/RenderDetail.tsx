@@ -9,7 +9,7 @@ import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
 import { mountWizards } from '../WizardMaster/utils'
-import { mountComponents } from '../utils/mountComponents'
+import { mountDetailFields } from '../utils/mountDetailFields'
 import { ChakraUINotifier } from '../utils/notifier'
 import { ToListViewLink } from '../components/ToListViewLink'
 
@@ -39,7 +39,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   }, [id, provider, admin.baseUrl])
 
   const containersToMount = {
-    detail_fields: mountComponents,
+    detail_fields: mountDetailFields,
     wizards: mountWizards,
   }
 
