@@ -51,6 +51,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
         {object &&
           Object.entries(containersToMount).map(([elementsKey, container]: [string, Function]) => {
             const elements = admin[elementsKey as keyof typeof admin]
+            if (!elements) return []
 
             return container({ object, setObject, notifier, ViewType, elements, ...props })
           })}
