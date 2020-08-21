@@ -21,6 +21,8 @@ test('Get components to mount', () => {
     user: {},
     analytics: undefined,
     ViewType: 'test_view',
+    setInitialValue: jest.fn(),
+    submitChange: jest.fn(),
   })
 
   const component = components[0]

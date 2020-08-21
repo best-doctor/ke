@@ -8,6 +8,8 @@ import type { BaseNotifier } from './notifier'
 import { isValidComponent } from './isComponent'
 
 type mountComponentsKwargs = {
+  setInitialValue: Function
+  submitChange: Function
   resourceName: string
   object: object
   elements: DetailFieldDescription[]
@@ -33,6 +35,8 @@ const getComponentFromCallable = (widget: JSX.Element | Function, user: object):
 }
 
 const mountComponents = ({
+  setInitialValue,
+  submitChange,
   resourceName,
   object,
   elements,
@@ -60,6 +64,8 @@ const mountComponents = ({
         analytics={analytics}
         widgetAnalytics={widgetAnalytics}
         viewType={ViewType}
+        setInitialValue={setInitialValue}
+        submitChange={submitChange}
         {...adminElement}
       />
     )
