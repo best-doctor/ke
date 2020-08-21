@@ -1,15 +1,10 @@
 import * as React from 'react'
 import { Wizard } from './components'
-import { WrappedLocalStorage } from '../store/localStorageWrapper'
 
-import type { BaseNotifier } from '../utils/notifier'
+import type { BaseNotifier } from '../common/notifier'
 import type { BaseProvider } from '../admin/providers/index'
 import type { BaseWizard } from './interfaces'
-import type {
-  WizardFieldDescription,
-  WizardFieldElement,
-  DetailFieldDescription,
-} from '../admin/fields/FieldDescription'
+import type { WizardFieldDescription, WizardFieldElement } from '../admin/fields/FieldDescription'
 import type { BaseAnalytic } from '../integration/analytics/base'
 
 type MountWizardsKwargs = {
@@ -21,25 +16,6 @@ type MountWizardsKwargs = {
   setObject: Function
   analytics: BaseAnalytic
   user: object
-}
-
-const collectPayloadFromContext = (widgets: DetailFieldDescription[]): { [key: string]: object } => {
-  const payload = {}
-
-  // eslint-disable-next-line
-  for (const widget of widgets) {
-    const { name: widgetKey } = widget
-    const widgetValue = WrappedLocalStorage.popItem(widgetKey)
-
-    if (widget.targetPayload && typeof widget.targetPayload === 'function' && widgetValue) {
-      // check that widget payload handler exists
-      Object.assign(payload, widget.targetPayload(widgetValue))
-    } else {
-      Object.assign(payload, { [widgetKey]: widgetValue })
-    }
-  }
-
-  return payload
 }
 
 const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: object): BaseWizard => {
@@ -75,4 +51,4 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
   })
 }
 
-export { mountWizards, collectPayloadFromContext }
+export { mountWizards }
