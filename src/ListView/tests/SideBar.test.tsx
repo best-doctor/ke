@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { Menu } from 'react-feather'
 import { Drawer, DrawerContent } from '@chakra-ui/core'
 
-import { SideBar } from '../SideBar'
+import { SideBar } from '../components/SideBar'
 
 test('Side bar component properly rendered', () => {
   const component = shallow(

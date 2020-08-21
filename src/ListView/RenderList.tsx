@@ -8,7 +8,7 @@ import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { Pagination, TableFilter } from '../admin/providers'
 
-import { Table } from '../components/Table'
+import { Table } from './components/Table'
 import { FilterManager } from '../common/filterManager'
 
 export const RenderList: React.FC<{

@@ -21,7 +21,7 @@ import {
   FirebaseConfigType,
 } from 'integration/analytics'
 import { ResourceComposer, Resource, AdminResource } from 'ResourceComposer'
-import { RenderList } from 'ResourceComposer/RenderList'
+import { RenderList } from 'ListView/RenderList'
 import { RenderDetail } from 'DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
@@ -40,8 +40,8 @@ import {
   AvatarWidget,
   MultiSelectWidget,
 } from './components'
-import { Table } from './components/Table'
-import { SelectFilter, MultiSelectFilter, BaseFilter, DateFilter, DateTimeFilter } from './components/Table/filters'
+import { Table } from './ListView/components/Table'
+import { SelectFilter, MultiSelectFilter, BaseFilter, DateFilter, DateTimeFilter } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './components/AsyncSelectWidget'
 
 export {

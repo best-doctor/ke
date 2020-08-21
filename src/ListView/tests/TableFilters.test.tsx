@@ -5,7 +5,7 @@ import { DebounceInput } from 'react-debounce-input'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 
-import { BaseFilter, SelectFilter, MultiSelectFilter, DateTimeFilter, DateFilter } from '../Table/filters'
+import { BaseFilter, SelectFilter, MultiSelectFilter, DateTimeFilter, DateFilter } from '../components/Table/filters'
 
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({

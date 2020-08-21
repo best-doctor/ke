@@ -6,9 +6,9 @@ import type { ReactNode } from 'react'
 import type { ListFilterDescription, ListFilterTemplateDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics'
 
-import { pushAnalytics } from '../../integration/analytics/utils'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
-import { FilterManager } from '../../common/filterManager'
+import { pushAnalytics } from '../../../integration/analytics/utils'
+import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
+import { FilterManager } from '../../../common/filterManager'
 
 type FilterBlockProps = {
   resourceName: string

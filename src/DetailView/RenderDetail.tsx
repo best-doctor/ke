@@ -11,7 +11,7 @@ import type { BaseAnalytic } from 'integration/analytics/base'
 import { mountWizards } from '../WizardMaster/utils'
 import { mountDetailFields } from './utils/mountDetailFields'
 import { ChakraUINotifier } from '../common/notifier'
-import { ToListViewLink } from '../components/ToListViewLink'
+import { ToListViewLink } from './components/ToListViewLink'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 const ViewType = 'detail_view'

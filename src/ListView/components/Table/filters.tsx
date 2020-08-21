@@ -8,11 +8,11 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { pushAnalytics } from '../../integration/analytics/utils'
-import { EventNameEnum } from '../../integration/analytics/firebase/enums'
-import { getCommonFilterAnalyticsPayload } from '../../integration/analytics/firebase/utils'
-import { StoreManager } from '../../common/store'
-import { FilterManager } from '../../common/filterManager'
+import { pushAnalytics } from '../../../integration/analytics/utils'
+import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
+import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
+import { StoreManager } from '../../../common/store'
+import { FilterManager } from '../../../common/filterManager'
 
 const StyledFilter = styled.div`
   .base-styled-filter {

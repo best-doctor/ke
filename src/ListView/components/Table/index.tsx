@@ -15,7 +15,7 @@ import type {
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { FilterBlock } from './TableFiltersBlock'
 import { Bottom } from './Bottom'
-import type { Pagination } from '../../admin/providers'
+import type { Pagination } from '../../../admin/providers'
 
 type TableProps = {
   resourceName: string

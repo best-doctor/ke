@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 
-import type { BaseAnalytic } from '../../integration/analytics'
+import type { BaseAnalytic } from '../../../integration/analytics'
 
-import { pushAnalytics } from '../../integration/analytics/utils'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { pushAnalytics } from '../../../integration/analytics/utils'
+import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 
 import { TableIconButton } from './styles'
 

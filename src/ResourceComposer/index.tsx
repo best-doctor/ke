@@ -6,9 +6,9 @@ import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
-import { RenderList } from './RenderList'
+import { RenderList } from '../ListView/RenderList'
 import { RenderDetail } from '../DetailView/RenderDetail'
-import { SideBar, SideBarElement } from '../components/SideBar'
+import { SideBar, SideBarElement } from '../ListView/components/SideBar'
 import { mountElement } from '../common/permissions'
 
 const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => {

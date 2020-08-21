@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import { testAdmin, testProvider } from '../../setupTests'
 import { ResourceComposer, Resource, AdminResource } from '../index'
-import { RenderList } from '../RenderList'
+import { RenderList } from '../../ListView/RenderList'
 import { RenderDetail } from '../../DetailView/RenderDetail'
 
 test('ResourceComposer mounts router with children', () => {
