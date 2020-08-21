@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { ForeignKeySelectWidget } from '../widgets/ForeignKeySelect'
-import { AsyncSelectWidget } from '../../components/AsyncSelectWidget'
+import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {

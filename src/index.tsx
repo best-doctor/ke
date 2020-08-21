@@ -39,10 +39,16 @@ import {
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
-} from './components'
+} from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
-import { SelectFilter, MultiSelectFilter, BaseFilter, DateFilter, DateTimeFilter } from './ListView/components/Table/filters'
-import { AsyncSelectWidget } from './components/AsyncSelectWidget'
+import {
+  SelectFilter,
+  MultiSelectFilter,
+  BaseFilter,
+  DateFilter,
+  DateTimeFilter,
+} from './ListView/components/Table/filters'
+import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 
 export {
   BaseAdmin,

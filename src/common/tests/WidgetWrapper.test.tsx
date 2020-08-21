@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { FormLabel, Box } from '@chakra-ui/core'
 
-import { WidgetWrapper } from '../WidgetWrapper'
+import { WidgetWrapper } from '../components/WidgetWrapper'
 
 test('Widget wrapper properly rendered', () => {
   const component = shallow(

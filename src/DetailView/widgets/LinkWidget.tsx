@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link } from '@chakra-ui/core'
 import styled from 'styled-components'
 
-import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { DebounceInput } from 'react-debounce-input'
 
-import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { InputWidget } from '../widgets/InputWidget'
 import { testProvider, testNotifier } from '../../setupTests'
 

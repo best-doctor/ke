@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Textarea } from '@chakra-ui/core'
-import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'

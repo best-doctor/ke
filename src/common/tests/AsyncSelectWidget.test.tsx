@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import AsyncSelect from 'react-select/async'
 
-import { AsyncSelectWidget } from '../AsyncSelectWidget'
+import { AsyncSelectWidget } from '../components/AsyncSelectWidget'
 import { testProvider } from '../../setupTests'
 
 test('Async select widget properly rendered', () => {

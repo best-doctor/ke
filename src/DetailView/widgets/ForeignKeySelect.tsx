@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { AsyncSelectWidget } from '../../components/AsyncSelectWidget'
-import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 import { getData, getWidgetContent } from '../utils/dataAccess'

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Select } from '@chakra-ui/core'
 
-import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
