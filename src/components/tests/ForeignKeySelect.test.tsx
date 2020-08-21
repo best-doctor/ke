@@ -31,6 +31,8 @@ test('FK select widget properly rendered', () => {
       notifier={testNotifier}
       viewType="test_view"
       style={{}}
+      setInitialValue={jest.fn()}
+      submitChange={jest.fn()}
     />
   )
 

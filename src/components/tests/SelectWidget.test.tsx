@@ -33,6 +33,8 @@ test('Select widget properly rendered', () => {
       style={{}}
       viewType="test_view"
       notifier={testNotifier}
+      setInitialValue={jest.fn()}
+      submitChange={jest.fn()}
     />
   )
 

@@ -28,6 +28,8 @@ test('Input widget properly rendered', () => {
       provider={testProvider}
       viewType="test_view"
       style={{}}
+      setInitialValue={jest.fn()}
+      submitChange={jest.fn()}
     />
   )
 
