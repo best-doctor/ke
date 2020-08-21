@@ -2,7 +2,7 @@
 
 import { BaseWizardStep } from './interfaces'
 
-import { TextWidget } from '../components'
+import { TextWidget } from '../DetailView/widgets/TextWidget'
 
 const defaultLayout = { x: 1, y: 1, w: 1, h: 1, static: true }
 
