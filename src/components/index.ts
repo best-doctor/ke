@@ -1,9 +1,9 @@
-import { TextWidget } from './TextWidget'
-import { LinkWidget } from './LinkWidget'
-import { SelectWidget } from './SelectWidget'
-import { ForeignKeySelectWidget } from './ForeignKeySelect'
-import { InputWidget } from './InputWidget'
-import { AvatarWidget } from './AvatarWidget'
-import { MultiSelectWidget } from './MultiSelectWidget'
+import { TextWidget } from '../DetailView/widgets/TextWidget'
+import { LinkWidget } from '../DetailView/widgets/LinkWidget'
+import { SelectWidget } from '../DetailView/widgets/SelectWidget'
+import { ForeignKeySelectWidget } from '../DetailView/widgets/ForeignKeySelect'
+import { InputWidget } from '../DetailView/widgets/InputWidget'
+import { AvatarWidget } from '../DetailView/widgets/AvatarWidget'
+import { MultiSelectWidget } from '../DetailView/widgets/MultiSelectWidget'
 
 export { TextWidget, LinkWidget, SelectWidget, ForeignKeySelectWidget, InputWidget, AvatarWidget, MultiSelectWidget }
