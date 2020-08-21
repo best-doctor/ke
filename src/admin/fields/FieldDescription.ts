@@ -32,6 +32,7 @@ type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard)
 
 type DetailFieldDescription = {
   name: string
+  required?: boolean
   widget: FunctionComponent<any> | Function
   helpText?: string
   displayValue?: GenericAccessor
