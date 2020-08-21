@@ -7,7 +7,7 @@ import { pushAnalytics } from '../../integration/analytics'
 import { getData, getWidgetContent } from '../utils/dataAccess'
 import type { BaseProvider } from '../../admin/providers'
 import type { BaseAnalytic } from '../../integration/analytics'
-import type { BaseNotifier } from '../../utils/notifier'
+import type { BaseNotifier } from '../../common/notifier'
 
 type ForeignKeySelectWidgetProps = {
   name: string

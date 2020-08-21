@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
-import type { BaseProvider } from '../admin/providers'
-import type { BaseNotifier } from './notifier'
+import type { BaseProvider } from '../../admin/providers'
+import type { BaseNotifier } from '../notifier'
 
 import { isValidComponent } from './isComponent'
 

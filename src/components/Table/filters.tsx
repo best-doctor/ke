@@ -12,7 +12,7 @@ import { pushAnalytics } from '../../integration/analytics/utils'
 import { EventNameEnum } from '../../integration/analytics/firebase/enums'
 import { getCommonFilterAnalyticsPayload } from '../../integration/analytics/firebase/utils'
 import { StoreManager } from '../../store'
-import { FilterManager } from '../../utils/filterManager'
+import { FilterManager } from '../../common/filterManager'
 
 const StyledFilter = styled.div`
   .base-styled-filter {

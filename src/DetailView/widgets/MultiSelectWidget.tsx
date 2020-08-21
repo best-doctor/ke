@@ -10,7 +10,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { getWidgetContent } from '../utils/dataAccess'
 
 import type { BaseAnalytic } from '../../integration/analytics'
-import type { BaseNotifier } from '../../utils/notifier'
+import type { BaseNotifier } from '../../common/notifier'
 import type { GenericAccessor } from '../../typing'
 
 type MultiSelectWidgetProps = {

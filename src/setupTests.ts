@@ -4,7 +4,7 @@ import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import axios from 'axios'
 
-import { ChakraUINotifier } from './utils/notifier'
+import { ChakraUINotifier } from './common/notifier'
 import { TextWidget } from './DetailView/widgets/TextWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'

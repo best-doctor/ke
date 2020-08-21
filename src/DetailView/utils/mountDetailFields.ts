@@ -1,6 +1,6 @@
 import { createStore, createEvent } from 'effector'
 
-import { mountComponents } from '../../utils/mountComponents'
+import { mountComponents } from '../../common/utils/mountComponents'
 import { makeUpdateWithNotification } from '../../admin/providers/utils'
 
 type WidgetPayload = { url: string; payload: object }

@@ -9,7 +9,7 @@ import { pushAnalytics } from '../../integration/analytics'
 import type { BaseProvider } from '../../admin/providers'
 import type { GenericAccessor } from '../../typing'
 import type { BaseAnalytic } from '../../integration/analytics/base'
-import type { BaseNotifier } from '../../utils/notifier'
+import type { BaseNotifier } from '../../common/notifier'
 
 type InputWidgetProps = {
   name: string

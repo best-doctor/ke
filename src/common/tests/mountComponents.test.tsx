@@ -1,4 +1,4 @@
-import { mountComponents } from '../mountComponents'
+import { mountComponents } from '../utils/mountComponents'
 import { testAdmin, testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {

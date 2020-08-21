@@ -8,7 +8,7 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 
 import type { BaseAnalytic } from '../../integration/analytics'
 import type { BaseProvider } from '../../admin/providers'
-import type { BaseNotifier } from '../../utils/notifier'
+import type { BaseNotifier } from '../../common/notifier'
 import type { GenericAccessor } from '../../typing'
 
 type SelectObject = {
