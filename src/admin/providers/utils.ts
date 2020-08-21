@@ -1,4 +1,4 @@
-import type { BaseNotifier } from 'utils/notifier'
+import type { BaseNotifier } from 'common/notifier'
 import type { BaseProvider } from './index'
 
 const makeUpdateWithNotification = (
@@ -8,9 +8,10 @@ const makeUpdateWithNotification = (
   setObject: Function,
   notifier: BaseNotifier
 ): Promise<any> => {
-  return provider.put(url, payload).then(
+  return provider.httpClient.patch(url, payload).then(
     (updatedObject: any) => {
-      setObject(updatedObject)
+      // TODO implement patch in base provider
+      setObject(updatedObject.data.data)
       notifier.notifySuccess()
     },
     () => notifier.notifyError()

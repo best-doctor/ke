@@ -1,7 +1,7 @@
 import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 
-import { FilterManager } from '../../utils/filterManager'
+import { FilterManager } from '../../common/filterManager'
 
 export type Filter = {
   filterName: string
