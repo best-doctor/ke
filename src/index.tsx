@@ -1,7 +1,7 @@
 import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
 import { makeUpdateWithNotification } from 'admin/providers/utils'
-import { WrappedLocalStorage } from 'store/localStorageWrapper'
+import { WrappedLocalStorage } from 'common/store/localStorageWrapper'
 import type {
   ListFieldDescription,
   DetailFieldDescription,
@@ -25,7 +25,7 @@ import { RenderList } from 'ResourceComposer/RenderList'
 import { RenderDetail } from 'DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
-import { StoreManager } from 'store'
+import { StoreManager } from 'common/store'
 import { getData, getWidgetContent, getPayload } from 'DetailView/utils/dataAccess'
 import { hasPermission } from 'common/permissions'
 import { BaseNotifier } from 'common/notifier'
