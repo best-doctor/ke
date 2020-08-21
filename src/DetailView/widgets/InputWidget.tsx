@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Textarea } from '@chakra-ui/core'
-import { WidgetWrapper } from './WidgetWrapper'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
 import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
-import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../integration/analytics'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { pushAnalytics } from '../../integration/analytics'
 
-import type { BaseProvider } from '../admin/providers'
-import type { GenericAccessor } from '../typing'
-import type { BaseAnalytic } from '../integration/analytics/base'
-import type { BaseNotifier } from '../utils/notifier'
+import type { BaseProvider } from '../../admin/providers'
+import type { GenericAccessor } from '../../typing'
+import type { BaseAnalytic } from '../../integration/analytics/base'
+import type { BaseNotifier } from '../../utils/notifier'
 
 type InputWidgetProps = {
   name: string

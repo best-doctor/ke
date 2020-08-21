@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
+import { DebounceInput } from 'react-debounce-input'
 
-import { WidgetWrapper } from '../WidgetWrapper'
-import { ForeignKeySelectWidget } from '../ForeignKeySelect'
-import { AsyncSelectWidget } from '../AsyncSelectWidget'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { InputWidget } from '../widgets/InputWidget'
 import { testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {
@@ -11,24 +11,21 @@ const detailObject = {
   last_name: 'test',
 }
 
-test('FK select widget properly rendered', () => {
+test('Input widget properly rendered', () => {
   const component = shallow(
-    <ForeignKeySelectWidget
+    <InputWidget
       name="test"
       resource="test-resource"
-      detailObject={detailObject}
-      provider={testProvider}
-      helpText="test"
-      setObject={jest.fn()}
-      displayValue="test"
-      dataSource="test"
-      dataTarget="test"
       analytics={undefined}
       widgetAnalytics={jest.fn()}
-      targetPayload={jest.fn()}
-      optionLabel={jest.fn()}
-      optionValue={jest.fn()}
+      helpText="test"
+      detailObject={detailObject}
+      setObject={jest.fn()}
+      displayValue="test"
+      dataTarget="test"
+      targetPayload="test"
       notifier={testNotifier}
+      provider={testProvider}
       viewType="test_view"
       style={{}}
       setInitialValue={jest.fn()}
@@ -36,6 +33,6 @@ test('FK select widget properly rendered', () => {
     />
   )
 
+  expect(component.find(DebounceInput).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
-  expect(component.find(AsyncSelectWidget).length).toEqual(1)
 })

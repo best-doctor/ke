@@ -9,7 +9,7 @@ import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
 import { mountWizards } from '../WizardMaster/utils'
-import { mountDetailFields } from '../utils/mountDetailFields'
+import { mountDetailFields } from './utils/mountDetailFields'
 import { ChakraUINotifier } from '../utils/notifier'
 import { ToListViewLink } from '../components/ToListViewLink'
 

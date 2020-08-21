@@ -2,8 +2,8 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { Select } from '@chakra-ui/core'
 
-import { WidgetWrapper } from '../WidgetWrapper'
-import { SelectWidget } from '../SelectWidget'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { SelectWidget } from '../widgets/SelectWidget'
 import { testProvider, testNotifier } from '../../setupTests'
 
 const detailObject = {

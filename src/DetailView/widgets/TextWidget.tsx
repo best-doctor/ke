@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Text, FormLabel, Box } from '@chakra-ui/core'
 import { getWidgetContent } from '../utils/dataAccess'
 
-import type { GenericAccessor } from '../typing'
+import type { GenericAccessor } from '../../typing'
 
 const StyledTextWidget = styled.div`
   border-width: 2px;

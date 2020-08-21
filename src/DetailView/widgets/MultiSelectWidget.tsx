@@ -3,15 +3,15 @@ import * as React from 'react'
 import type { ValueType } from 'react-select/src/types'
 
 import type { BaseProvider } from 'index'
-import { AsyncSelectWidget } from './AsyncSelectWidget'
-import { WidgetWrapper } from './WidgetWrapper'
-import { pushAnalytics } from '../integration/analytics'
-import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
+import { AsyncSelectWidget } from '../../components/AsyncSelectWidget'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { pushAnalytics } from '../../integration/analytics'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { getWidgetContent } from '../utils/dataAccess'
 
-import type { BaseAnalytic } from '../integration/analytics'
-import type { BaseNotifier } from '../utils/notifier'
-import type { GenericAccessor } from '../typing'
+import type { BaseAnalytic } from '../../integration/analytics'
+import type { BaseNotifier } from '../../utils/notifier'
+import type { GenericAccessor } from '../../typing'
 
 type MultiSelectWidgetProps = {
   name: string

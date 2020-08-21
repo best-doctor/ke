@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Avatar } from '@chakra-ui/core'
-import { WidgetWrapper } from './WidgetWrapper'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
 
 type AvatarWidgetProps = {
   name: string

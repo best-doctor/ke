@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-import { AsyncSelectWidget } from './AsyncSelectWidget'
-import { WidgetWrapper } from './WidgetWrapper'
-import { EventNameEnum, WidgetTypeEnum } from '../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../integration/analytics'
+import { AsyncSelectWidget } from '../../components/AsyncSelectWidget'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { pushAnalytics } from '../../integration/analytics'
 import { getData, getWidgetContent } from '../utils/dataAccess'
-import type { BaseProvider } from '../admin/providers'
-import type { BaseAnalytic } from '../integration/analytics'
-import type { BaseNotifier } from '../utils/notifier'
+import type { BaseProvider } from '../../admin/providers'
+import type { BaseAnalytic } from '../../integration/analytics'
+import type { BaseNotifier } from '../../utils/notifier'
 
 type ForeignKeySelectWidgetProps = {
   name: string

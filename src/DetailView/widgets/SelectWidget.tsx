@@ -2,14 +2,14 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Select } from '@chakra-ui/core'
 
-import { WidgetWrapper } from './WidgetWrapper'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
 import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
-import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../integration/analytics'
+import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
-import type { BaseAnalytic } from '../integration/analytics'
-import type { BaseProvider } from '../admin/providers'
-import type { BaseNotifier } from '../utils/notifier'
-import type { GenericAccessor } from '../typing'
+import type { BaseAnalytic } from '../../integration/analytics'
+import type { BaseProvider } from '../../admin/providers'
+import type { BaseNotifier } from '../../utils/notifier'
+import type { GenericAccessor } from '../../typing'
 
 type SelectObject = {
   value: string

@@ -2,12 +2,12 @@ import * as React from 'react'
 import { Link } from '@chakra-ui/core'
 import styled from 'styled-components'
 
-import { WidgetWrapper } from './WidgetWrapper'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
 import { getWidgetContent } from '../utils/dataAccess'
-import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../integration/analytics'
+import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
-import type { GenericAccessor } from '../typing'
-import type { BaseAnalytic } from '../integration/analytics'
+import type { GenericAccessor } from '../../typing'
+import type { BaseAnalytic } from '../../integration/analytics'
 
 const StyledLinkWidget = styled.div`
   border-width: 2px;

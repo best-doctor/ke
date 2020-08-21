@@ -2,8 +2,8 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from '@chakra-ui/core'
 
-import { WidgetWrapper } from '../WidgetWrapper'
-import { LinkWidget } from '../LinkWidget'
+import { WidgetWrapper } from '../../components/WidgetWrapper'
+import { LinkWidget } from '../widgets/LinkWidget'
 
 const detailObject = {
   id: 100500,
