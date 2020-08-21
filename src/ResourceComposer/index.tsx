@@ -7,7 +7,7 @@ import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
 import { RenderList } from './RenderList'
-import { RenderDetail } from './RenderDetail'
+import { RenderDetail } from '../DetailView/RenderDetail'
 import { SideBar, SideBarElement } from '../components/SideBar'
 import { mountElement } from '../utils/permissions'
 

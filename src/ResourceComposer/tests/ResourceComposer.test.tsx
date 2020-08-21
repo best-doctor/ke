@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import { testAdmin, testProvider } from '../../setupTests'
 import { ResourceComposer, Resource, AdminResource } from '../index'
 import { RenderList } from '../RenderList'
-import { RenderDetail } from '../RenderDetail'
+import { RenderDetail } from '../../DetailView/RenderDetail'
 
 test('ResourceComposer mounts router with children', () => {
   const wrapper = shallow(

@@ -8,6 +8,7 @@ import type {
   ListFilterDescription,
   ListFilterTemplateDescription,
 } from 'admin/fields/FieldDescription'
+import { BaseForm } from 'admin/adminForm'
 import type { WizardState } from 'WizardMaster/interfaces'
 import {
   FirebaseAnalytic,
@@ -21,10 +22,9 @@ import {
 } from 'integration/analytics'
 import { ResourceComposer, Resource, AdminResource } from 'ResourceComposer'
 import { RenderList } from 'ResourceComposer/RenderList'
-import { RenderDetail } from 'ResourceComposer/RenderDetail'
+import { RenderDetail } from 'DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
-import { collectPayloadFromContext } from 'WizardMaster/utils'
 import { StoreManager } from 'store'
 import { getData, getWidgetContent, getPayload } from 'utils/dataAccess'
 import { hasPermission } from 'utils/permissions'
@@ -91,7 +91,7 @@ export {
   WrappedLocalStorage,
   BaseNotifier,
   MultiSelectWidget,
-  collectPayloadFromContext,
   SuccessDisplay,
   ErrorDisplay,
+  BaseForm,
 }
