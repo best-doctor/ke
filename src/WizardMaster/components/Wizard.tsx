@@ -23,6 +23,7 @@ type WizardProps = {
 
 const Wizard = (props: WizardProps): JSX.Element => {
   const [show, setShow] = React.useState(false)
+
   const handleToggle = (): void => setShow(!show)
 
   const { wizard, provider, object, setObject, notifier, analytics, style, ViewType, user } = props

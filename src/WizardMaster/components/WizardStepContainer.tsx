@@ -73,7 +73,6 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     ViewType,
     submitChange,
   } = props
-
   return (
     <>
       {mountComponents({
@@ -138,7 +137,6 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     setCurrentState,
     submitChange,
   } = props
-
   const { widgets: elements } = wizardStep
   let { resourceName } = wizardStep
 

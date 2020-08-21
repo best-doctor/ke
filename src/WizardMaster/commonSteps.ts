@@ -22,7 +22,7 @@ class SuccessDisplay extends BaseWizardStep {
     {
       name: 'success_page',
       widget: TextWidget,
-      displayValue: (object: any) => `Создан объект с номером ${object.uuid || object.id}`,
+      displayValue: (object: any) => `Создан объект с номером ${object.code || object.uuid || object.id}`,
       layout: defaultLayout,
     },
   ]
