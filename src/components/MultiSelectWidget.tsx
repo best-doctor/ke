@@ -67,7 +67,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const [value, setValue] = React.useState<MultiSelectValue[]>(
     getWidgetContent(name, detailObject, displayValue, 'object')
   )
-  setInitialValue({ [name]: value })
+  setInitialValue({ [name]: extractPayloadIds(value) })
 
   const handleChange = (changeValue: ValueType<MultiSelectValue[]>): void => {
     setValue(changeValue as MultiSelectValue[])

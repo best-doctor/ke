@@ -50,7 +50,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   } = props
 
   const [value, setValue] = React.useState<object>(getWidgetContent(name, detailObject, displayValue, 'object'))
-  setInitialValue({ [name]: value })
+  setInitialValue(value ? targetPayload(value) : null)
 
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
