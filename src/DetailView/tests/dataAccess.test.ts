@@ -1,4 +1,4 @@
-import { getData, getWidgetContent, getPayload } from '../dataAccess'
+import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
 
 type DetailObject = { id: number; last_name: string }
 
