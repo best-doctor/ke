@@ -1,7 +1,6 @@
 import { BaseAdmin } from 'admin'
 import { BaseProvider } from 'admin/providers'
 import { makeUpdateWithNotification } from 'admin/providers/utils'
-import { WrappedLocalStorage } from 'common/store/localStorageWrapper'
 import type {
   ListFieldDescription,
   DetailFieldDescription,
@@ -94,7 +93,6 @@ export {
   WizardState,
   BaseWizard,
   makeUpdateWithNotification,
-  WrappedLocalStorage,
   BaseNotifier,
   MultiSelectWidget,
   SuccessDisplay,
