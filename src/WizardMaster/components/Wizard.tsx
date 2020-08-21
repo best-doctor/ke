@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { Button, useDisclosure } from '@chakra-ui/core'
+import { Button } from '@chakra-ui/core'
 
-import { WrappedLocalStorage } from '../../store/localStorageWrapper'
+import { submitChange } from '../controllers'
 import { WizardContainer } from './WizardContainer'
 
-import type { BaseNotifier } from '../../utils/notifier'
+import type { BaseNotifier } from '../../common/notifier'
 import type { BaseProvider } from '../../admin/providers/index'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
@@ -22,20 +22,22 @@ type WizardProps = {
 }
 
 const Wizard = (props: WizardProps): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [show, setShow] = React.useState(false)
+  const handleToggle = (): void => setShow(!show)
+
   const { wizard, provider, object, setObject, notifier, analytics, style, ViewType, user } = props
-  WrappedLocalStorage.setItem('__initial__', null) // TODO move it to constant
+
+  submitChange({ payload: { __initial__: null } })
 
   return (
-    <>
-      <Button onClick={onOpen} style={style} variantColor="teal" variant="outline">
+    <div style={style}>
+      <Button onClick={handleToggle} variantColor="teal" variant="outline">
         {`${wizard.title}`}
       </Button>
 
       <WizardContainer
-        isOpen={isOpen}
-        onClose={onClose}
         wizard={wizard}
+        show={show}
         provider={provider}
         object={object}
         setObject={setObject}
@@ -43,8 +45,9 @@ const Wizard = (props: WizardProps): JSX.Element => {
         analytics={analytics}
         ViewType={ViewType}
         user={user}
+        submitChange={submitChange}
       />
-    </>
+    </div>
   )
 }
 

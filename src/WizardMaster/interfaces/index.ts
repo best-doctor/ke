@@ -1,6 +1,8 @@
 /* eslint max-classes-per-file: 0 */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["next", "prev"] }] */
 
+import { containerStore, containerErrorsStore } from '../store'
+import { clearErros, pushError } from '../controllers'
 import type { DetailFieldDescription } from '../../admin/fields/FieldDescription'
 
 type WizardState = Promise<string>
@@ -8,6 +10,19 @@ type WizardState = Promise<string>
 type WizardPayload = { [key: string]: any }
 
 const defaultLayout = { x: 1, y: 17.5, w: 10, h: 2, static: true }
+
+const validateContext = (widgets: any): void => {
+  clearErros()
+
+  const wizardContext = containerStore.getState()
+
+  widgets.forEach((widget: any) => {
+    const widgetContent = wizardContext[widget.name]
+    if (widget.required === true && !widgetContent) {
+      pushError(`Поле ${widget.helpText} обязательно`)
+    }
+  })
+}
 
 abstract class BaseWizardStep {
   title: string
@@ -31,6 +46,20 @@ abstract class BaseWizardStep {
 
   prev(_: WizardPayload): WizardState {
     return Promise.resolve('back')
+  }
+
+  nextStep(props: WizardPayload): WizardState {
+    validateContext(this.widgets)
+
+    if (containerErrorsStore.getState().length > 0) {
+      return Promise.resolve('invalid_form')
+    }
+
+    return this.next(props)
+  }
+
+  prevStep(props: WizardPayload): WizardState {
+    return this.prev(props)
   }
 }
 
