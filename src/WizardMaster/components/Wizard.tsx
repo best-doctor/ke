@@ -21,19 +21,20 @@ type WizardProps = {
   style?: object
 }
 
+const clearInitialObjectState = (): { payload: object } => submitChange({ payload: { __initial__: null } })
+
 const Wizard = (props: WizardProps): JSX.Element => {
   const [show, setShow] = React.useState(false)
 
   const handleToggle = (): void => setShow(!show)
-
   const { wizard, provider, object, setObject, notifier, analytics, style, ViewType, user } = props
 
-  submitChange({ payload: { __initial__: null } })
+  clearInitialObjectState()
 
   return (
     <div style={style}>
-      <Button onClick={handleToggle} variantColor="teal" variant="outline">
-        {`${wizard.title}`}
+      <Button onClick={handleToggle} variantColor="teal" variant="outline" width="inherit">
+        {wizard.title}
       </Button>
 
       <WizardContainer
