@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { FormLabel, Box, Text } from '@chakra-ui/core'
 
-import { TextWidget } from '../widgets/TextWidget'
+import { TextWidget } from '../../widgets/TextWidget'
 
 const detailObject = {
   test: {

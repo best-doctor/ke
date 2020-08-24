@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { ForeignKeySelectWidget } from '../widgets/ForeignKeySelect'
-import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
-import { testProvider, testNotifier } from '../../setupTests'
+import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
+import { ForeignKeySelectWidget } from '../../widgets/ForeignKeySelect'
+import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
+import { testProvider, testNotifier } from '../../../setupTests'
 
 const detailObject = {
   id: 100500,
