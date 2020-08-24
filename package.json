@@ -88,7 +88,7 @@
         "test": "jest --env=jsdom",
         "format": "prettier --write 'src/**/*'",
         "typecheck": "yarn tsc --noEmit",
-        "makecheck": "yarn typecheck && yarn lint && yarn test && mdl README.md",
+        "makecheck": "yarn typecheck && yarn lint && yarn test && mdl README.md && mdl docs",
         "prepare": "yarn build",
         "preversion": "yarn lint",
         "version": "yarn format && git add -A src",
