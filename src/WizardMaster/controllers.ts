@@ -1,4 +1,4 @@
-import { pushError, clearErros, setInitialValue, submitChange, pushWizardStepToBackend } from './actions'
+import { pushError, clearErros, setInitialValue, submitChange, pushWizardStepToBackend } from './events'
 import { containerErrorsStore, containerStore } from './store'
 
 containerErrorsStore.on(pushError, (state, value) => [...state, value]).on(clearErros, () => [])
