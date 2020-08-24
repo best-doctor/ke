@@ -52,6 +52,8 @@ type WizardStepControlPanelProps = {
   object: object
 }
 
+type WizardStepContainerRef = HTMLElement | null
+
 const clearStorage = (elements: DetailFieldDescription[], storage: { [key: string]: object | null }): void => {
   const storeToClear = storage
 
@@ -73,6 +75,13 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     ViewType,
     submitChange,
   } = props
+
+  React.useEffect(() => {
+    return () => {
+      clearStorage(elements, containerStore.getState())
+    }
+  })
+
   return (
     <>
       {mountComponents({
@@ -149,9 +158,17 @@ const WizardValidationErrors = ({ errors }: { errors: string[] }): JSX.Element =
 
 const executeScroll = (whereTo = 0): void => window.scrollTo(0, whereTo)
 
-const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
-  const wizardStepRef = React.useRef<HTMLElement | null>(null)
+const scrollToWizardContainer = (
+  isContainerOpened: boolean,
+  wizardContainerRef: React.RefObject<WizardStepContainerRef>
+): void => {
+  if (isContainerOpened === true && wizardContainerRef.current !== null) {
+    executeScroll(wizardContainerRef.current.offsetHeight)
+  }
+}
 
+const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
+  const wizardStepRef = React.useRef<WizardStepContainerRef>(null)
   const {
     wizard,
     wizardStep,
@@ -167,21 +184,15 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     setCurrentState,
     submitChange,
   } = props
-
-  React.useEffect(() => {
-    if (show === true && wizardStepRef.current !== null) {
-      executeScroll(wizardStepRef.current.offsetHeight)
-    }
-  })
-
   const { widgets: elements } = wizardStep
+
+  React.useEffect(() => scrollToWizardContainer(show, wizardStepRef))
+
   let { resourceName } = wizardStep
 
   if (!resourceName) {
     resourceName = ''
   }
-
-  clearStorage(elements, containerStore.getState())
 
   return (
     <>
