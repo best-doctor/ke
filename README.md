@@ -153,6 +153,43 @@ const App = () => (
 `App` will have routes for the list and detail view with the
 settings and widgets you set.
 
+## Monitoring
+
+Out of the box we support error monitoring via [Sentry](https://sentry.io)
+To include it in your application, use the component [`EnableSentry`](https://github.com/best-doctor/ke/blob/master/src/integration/EnableSentry.tsx)
+at the root of your application.
+
+```tsx
+// App.tsx
+import { EnableSentry } from '@bestdoctor/ke'
+
+const App = (): JSX.Element => (
+  <>
+    <EnableSentry sentryDSN={sentryDSN} />
+    <h1>Hello, world</h1>
+  </>
+)
+```
+
+For application perfomance monitoring we support [ELK APM](https://www.elastic.co/apm)
+You can use it via [EnableELK](https://github.com/best-doctor/ke/blob/master/src/integration/EnableELK.tsx)
+component
+
+```tsx
+import { EnableELK } from '@bestdoctor/ke'
+
+const App = (): JSX.Element => (
+  <>
+    <EnableELK
+      serviceName={ELK_SERVICE_NAME}
+      serverUrl={ELK_SERVER_URL}
+      serviceVersion={ELK_SERVICE_VERSION}
+    />
+    <h1>Hello, world</h1>
+  </>
+)
+```
+
 ## Contributing
 
 We would love you to contribute to our project. It's simple:
