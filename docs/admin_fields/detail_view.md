@@ -14,7 +14,8 @@ and can contains the following properties:
   will get it via lodash [`get`](https://lodash.com/docs/4.17.15#get)
 
   This field is also used for the unique key of the element,
-  so if your widget does not imply data unpacking, just put a unique title in the name field
+  so if your widget does not imply data unpacking, just put a unique title in the
+  name field
 * `widget: Component` – component to render an element on your detail view.
 
   `ke` has set of [predefined widgets](https://github.com/best-doctor/ke/tree/master/src/components)
@@ -27,27 +28,32 @@ and can contains the following properties:
   So, you can unpack only those objects that your specific component needs via
   [js destructing syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 * `helpText?: string | undefined` – help text label for your widget
-* `displayValue?: string | (object: backendDetailObject) | undefined` – value to display.
+* `displayValue?: string | (obj: backendDetailObject) | undefined` – value to display.
 
   It can be a static value (string) or dynamically selected (arrow function).
   In the second case, the arrow function will accept as input an object received
   from the backend in your [DetailView](https://github.com/best-doctor/ke/blob/master/src/DetailView/RenderDetail.tsx#L38).
-* `dataSource?: string | (object: backendDetailObject) | undefined` – url to get data from backend.
+* `dataSource?: string | (obj: backendDetailObject) | undefined` – url to get data
+  from backend.
 
   In some cases, you will need to get data for
   rendering in a widget (for example, in an asynchronous selection).
   To specify the path from where to get this data, you can use this setting.
 
-  This can be a static value, or unpacking an object from the backend via an arrow function
-  in case you use [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS)
-* `dataTarget?: string | (object: backendDetailObject) | undefined` – url to push data to backend.
+  This can be a static value, or unpacking an object from the backend via
+  an arrow function in case you use [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS)
+* `dataTarget?: string | (obj: backendDetailObject) | undefined` – url to push data
+  to backend.
 
   By default, ke will try to take url from your detal object from the backend.
-  You can override this behavior by assigning a static url or using dynamic detail object unpacking
-  via arrow function
-* `targetPayload?: string | (value: widgetOnChangeValue) | undefined` – specifies backend payload format
+  You can override this behavior by assigning a static url or using dynamic detail
+  object unpacking via arrow function
+* `targetPayload?: string | (value: widgetOnChangeValue) | undefined` – specifies
+  backend payload format
 
-  By default, ke will generate a backend payload in the format `{ widgetName: onChangeValue }`
+  By default, ke will generate a backend payload in the
+  `{ widgetName: onChangeValue }` format.
+
   You can override this behavior using a customization and arrow function.
 
   Function accepts the value from widget onChange method as input.
@@ -57,15 +63,18 @@ and can contains the following properties:
 * `optionLabel: (object: backendDetailObject)` – specific for [ForeignKeySelectWidget](https://github.com/best-doctor/ke/blob/master/src/DetailView/widgets/ForeignKeySelect.tsx)
 
   Used to display the value in ForeignKeySelect.
-  We use [react-select](https://react-select.com/home) for this widget under the hood
+  We use [react-select](https://react-select.com/home) for this widget under
+  the hood
 
 * `optionValue: (object: backendDetailObject)` – specific for [ForeignKeySelectWidget](https://github.com/best-doctor/ke/blob/master/src/DetailView/widgets/ForeignKeySelect.tsx)
 
   Used to set select value in ForeignKeySelect.
-  We use [react-select](https://react-select.com/home) for this widget under the hood
-* `layout: { x: number, y: number, w: number, h: number, static: boolean }` – layout settings.
-  `ke` uses [react-grid-layout](https://github.com/STRML/react-grid-layout) for widgets compose.
-  So, we use the same settings format
+  We use [react-select](https://react-select.com/home) for this widget under
+  the hood
+* `layout: { x: number, y: number, w: number, h: number, static: boolean }` – layout
+  settings.
+  `ke` uses [react-grid-layout](https://github.com/STRML/react-grid-layout)
+  for widgets compose. So, we use the same settings format
 
 ## Example
 
