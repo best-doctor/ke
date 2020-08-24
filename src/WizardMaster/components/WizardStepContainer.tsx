@@ -4,7 +4,7 @@ import { Heading, Button, Box } from '@chakra-ui/core'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
-import { containerStore } from '../store'
+import { containerStore, containerErrorsStore } from '../store'
 import { setInitialValue } from '../controllers'
 import { mountComponents } from '../../common/utils/mountComponents'
 
@@ -52,11 +52,11 @@ type WizardStepControlPanelProps = {
   object: object
 }
 
-const clearStorage = (elements: DetailFieldDescription[]): void => {
-  const storage = containerStore.getState()
+const clearStorage = (elements: DetailFieldDescription[], storage: { [key: string]: object | null }): void => {
+  const storeToClear = storage
 
   elements.forEach((element: DetailFieldDescription) => {
-    storage[element.name] = null
+    storeToClear[element.name] = null
   })
 }
 
@@ -95,13 +95,21 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
 const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element => {
   const { wizardStep, wizard, submitChange, currentState, setCurrentState } = props
 
+  const getWizardStepControlPayload = (): object => ({
+    ...props,
+    context: containerStore.getState(),
+    updateContext: submitChange,
+  })
+
   return (
     <>
       <Button
         variant="ghost"
         mr={3}
         onClick={() => {
-          wizardStep.prevStep(props).then((action: string) => setCurrentState(wizard.transition(currentState, action)))
+          wizardStep
+            .prevStep(getWizardStepControlPayload())
+            .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
         }}
       >
         {wizardStep.backStepLabel}
@@ -111,7 +119,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
         m={5}
         onClick={() => {
           wizardStep
-            .nextStep({ ...props, context: containerStore.getState(), updateContext: submitChange })
+            .nextStep(getWizardStepControlPayload())
             .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
         }}
       >
@@ -121,7 +129,29 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
   )
 }
 
+const WizardValidationErrors = ({ errors }: { errors: string[] }): JSX.Element => {
+  const ErrorDisplay = (): JSX.Element => (
+    <Box m={5}>
+      <Heading size="sm">Пожалуйста, исправьте ошибки ниже:</Heading>
+      <ul>
+        {errors.map((error: string) => (
+          <li style={{ color: 'red' }}>{error}</li>
+        ))}
+      </ul>
+    </Box>
+  )
+
+  if (errors.length > 0) {
+    return <ErrorDisplay />
+  }
+  return <></>
+}
+
+const executeScroll = (whereTo = 0): void => window.scrollTo(0, whereTo)
+
 const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
+  const wizardStepRef = React.useRef<HTMLElement | null>(null)
+
   const {
     wizard,
     wizardStep,
@@ -137,6 +167,13 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     setCurrentState,
     submitChange,
   } = props
+
+  React.useEffect(() => {
+    if (show === true && wizardStepRef.current !== null) {
+      executeScroll(wizardStepRef.current.offsetHeight)
+    }
+  })
+
   const { widgets: elements } = wizardStep
   let { resourceName } = wizardStep
 
@@ -144,12 +181,21 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     resourceName = ''
   }
 
-  clearStorage(elements)
+  clearStorage(elements, containerStore.getState())
 
   return (
     <>
       {show && (
-        <Box mt={4} borderWidth="2px" borderRadius="md" maxH={500} p={5} borderColor="gray.300" overflow="scroll">
+        <Box
+          ref={wizardStepRef}
+          mt={4}
+          borderWidth="2px"
+          borderRadius="md"
+          height={500}
+          p={5}
+          borderColor="gray.300"
+          overflow="scroll"
+        >
           <Heading size="md">{wizard.title}</Heading>
           <WizardStepComponents
             elements={elements}
@@ -163,6 +209,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
             ViewType={ViewType}
             submitChange={submitChange}
           />
+          <WizardValidationErrors errors={containerErrorsStore.getState()} />
           <WizardStepControlPanel
             wizardStep={wizardStep}
             wizard={wizard}
