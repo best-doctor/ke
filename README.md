@@ -153,6 +153,53 @@ const App = () => (
 `App` will have routes for the list and detail view with the
 settings and widgets you set.
 
+## Permissions
+
+You can restrict access to different sections of your system,
+as well as to individual widgets.
+
+To restrict access to an entire section, define permissions list
+in your admin class:
+
+```tsx
+import { BaseAdmin } from '@bestdoctor/ke'
+
+class MyAdmin extends BaseAdmin {
+  baseUrl = 'https://test.com'
+
+  permissions = ['my_admin_access_permission']
+
+  list_fields = ...
+}
+```
+
+and pass current user permissions list to `ResourceComposer` element:
+
+```tsx
+<ResourceComposer permissions={currentUser.permissions}>
+  ...
+</ResourceComposer>
+```
+
+To render a specific widget based on user permissions, use `hasPermission`
+util in detail fields settings:
+
+```tsx
+import { hasPermission } from '@bestdoctor/ke'
+
+...
+{
+  name: 'status.text',
+  helpText: 'Status',
+  widget: (user: { permissions: string[] }) => (
+    hasPermission(user.permissions, 'admin_permission') ? SelectWidget : TextWidget
+  ),
+  displayValue: (object: any) => object.status,
+  targetPayload: (value: any) => ({ status: value }),
+  layout: { x: 9, y: 9, w: 2, h: 1, static: true },
+},
+```
+
 ## Monitoring
 
 Out of the box we support error monitoring via [Sentry](https://sentry.io)
