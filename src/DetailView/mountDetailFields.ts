@@ -6,8 +6,8 @@ import type { BaseProvider } from 'index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 
-import { mountComponents } from '../../common/utils/mountComponents'
-import { makeUpdateWithNotification } from '../../admin/providers/utils'
+import { mountComponents } from '../common/utils/mountComponents'
+import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 type WidgetPayload = { url: string; payload: object }
 
