@@ -1,15 +1,11 @@
-import { createStore, createEvent } from 'effector'
-
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
 import type { BaseProvider } from 'index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 
+import { initDetailViewControllers } from './controllers'
 import { mountComponents } from '../common/utils/mountComponents'
-import { makeUpdateWithNotification } from '../admin/providers/utils'
-
-type WidgetPayload = { url: string; payload: object }
 
 type MountDetailFieldsArgs = {
   resourceName: string
@@ -19,13 +15,9 @@ type MountDetailFieldsArgs = {
   setObject: Function
   notifier: BaseNotifier
   user: object
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   ViewType: string
 }
-
-const containerStore = createStore<object>({})
-const submitChange = createEvent<WidgetPayload>()
-const setInitialValue = createEvent<object>()
 
 const mountDetailFields = ({
   resourceName,
@@ -38,13 +30,7 @@ const mountDetailFields = ({
   analytics,
   ViewType,
 }: MountDetailFieldsArgs): JSX.Element[] => {
-  containerStore
-    .on(setInitialValue, (state: object, value: object) => ({ ...state, ...value }))
-    .on(submitChange, (_, widgetPayload: WidgetPayload) => {
-      const { url, payload } = widgetPayload
-
-      makeUpdateWithNotification(provider, url, payload, setObject, notifier)
-    })
+  const [setInitialValue, submitChange] = initDetailViewControllers(provider, setObject, notifier)
 
   return mountComponents({
     setInitialValue,
