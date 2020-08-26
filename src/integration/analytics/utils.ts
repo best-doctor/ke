@@ -25,7 +25,7 @@ const pushAnalytics = (params: widgetAnalyticsParams): void => {
     value: onChangeValue,
     detailObject: object,
     resource: resourceName,
-    name,
+    name: adminWidgetName,
     viewType,
   } = params
 
@@ -38,7 +38,7 @@ const pushAnalytics = (params: widgetAnalyticsParams): void => {
     object,
     eventName,
     viewType,
-    widgetName: widgetName || getNameFromDataPath(name, resourceName),
+    widgetName: widgetName || getNameFromDataPath(adminWidgetName, resourceName),
     resourceName,
     resourceId: object && (object.uuid || object.id),
     widgetType,
