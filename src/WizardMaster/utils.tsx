@@ -8,6 +8,7 @@ import type { WizardFieldDescription, WizardFieldElement } from '../admin/fields
 import type { BaseAnalytic } from '../integration/analytics/base'
 
 type MountWizardsKwargs = {
+  resourceName: string
   object: object
   notifier: BaseNotifier
   ViewType: string
@@ -27,7 +28,7 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
 }
 
 const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
-  const { object, notifier, ViewType, elements, provider, setObject, analytics, user } = kwargs
+  const { object, notifier, ViewType, elements, provider, setObject, analytics, user, resourceName } = kwargs
 
   return elements.map((wizardInstance: WizardFieldElement) => {
     const wizard = getWizardFromCallable(wizardInstance, object)
@@ -46,6 +47,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
         analytics={analytics}
         ViewType={ViewType}
         user={user}
+        resourceName={resourceName}
       />
     )
   })

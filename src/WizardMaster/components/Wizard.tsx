@@ -6,10 +6,13 @@ import { WizardContainer } from './WizardContainer'
 
 import type { BaseNotifier } from '../../common/notifier'
 import type { BaseProvider } from '../../admin/providers/index'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 
 type WizardProps = {
+  resourceName: string
   wizard: BaseWizard
   provider: BaseProvider
   object: object
@@ -25,9 +28,20 @@ const clearInitialObjectState = (): { payload: object } => submitChange({ payloa
 
 const Wizard = (props: WizardProps): JSX.Element => {
   const [show, setShow] = React.useState(false)
+  const { wizard, provider, object, setObject, notifier, analytics, style, ViewType, user, resourceName } = props
 
-  const handleToggle = (): void => setShow(!show)
-  const { wizard, provider, object, setObject, notifier, analytics, style, ViewType, user } = props
+  const handleToggle = (): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.BUTTON_CLICK,
+      widgetType: WidgetTypeEnum.ACTION,
+      widgetName: 'open_wizard',
+      viewType: 'wizard',
+      resource: resourceName,
+      value: undefined,
+      ...props,
+    })
+    setShow(!show)
+  }
 
   clearInitialObjectState()
 

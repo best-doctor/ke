@@ -7,6 +7,8 @@ import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { containerStore, containerErrorsStore } from '../store'
 import { setInitialValue } from '../controllers'
 import { mountComponents } from '../../common/utils/mountComponents'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { pushAnalytics } from '../../integration/analytics'
 
 import type { BaseNotifier } from '../../common/notifier'
 import type { BaseProvider } from '../../admin/providers/index'
@@ -50,6 +52,7 @@ type WizardStepControlPanelProps = {
   setCurrentState: Function
   provider: BaseProvider
   object: object
+  analytics: BaseAnalytic
 }
 
 type WizardStepContainerRef = HTMLElement | null
@@ -116,6 +119,15 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
         variant="ghost"
         mr={3}
         onClick={() => {
+          pushAnalytics({
+            eventName: EventNameEnum.BUTTON_CLICK,
+            widgetType: WidgetTypeEnum.ACTION,
+            widgetName: 'wizard_prev_step',
+            viewType: 'wizard',
+            resource: wizardStep.resourceName ? wizardStep.resourceName : '',
+            value: currentState,
+            ...props,
+          })
           wizardStep
             .prevStep(getWizardStepControlPayload())
             .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
@@ -127,6 +139,15 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
         variantColor="blue"
         m={5}
         onClick={() => {
+          pushAnalytics({
+            eventName: EventNameEnum.BUTTON_CLICK,
+            widgetType: WidgetTypeEnum.ACTION,
+            widgetName: 'wizard_next_step',
+            viewType: 'wizard',
+            resource: wizardStep.resourceName ? wizardStep.resourceName : '',
+            value: currentState,
+            ...props,
+          })
           wizardStep
             .nextStep(getWizardStepControlPayload())
             .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
@@ -229,6 +250,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
             setCurrentState={setCurrentState}
             object={object}
             submitChange={submitChange}
+            analytics={analytics}
           />
         </Box>
       )}
