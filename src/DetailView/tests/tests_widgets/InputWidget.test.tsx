@@ -44,9 +44,12 @@ test('Input widget properly rendered', () => {
 
 test('Submit user input', () => {
   const component = mount(getComponent())
-  const event = { target: { value: "sometext" } };
+  const event = { target: { value: 'sometext' } }
 
-  (component.find(DebounceInput).props() as { onChange: Function }).onChange(event)
+  ;(component.find(DebounceInput).props() as { onChange: Function }).onChange(event)
 
-  expect(submitChangeMock).toHaveBeenCalledWith({ url: 'https://some-test-target.com', payload: { testPayload: 'sometext'} })
+  expect(submitChangeMock).toHaveBeenCalledWith({
+    url: 'https://some-test-target.com',
+    payload: { testPayload: 'sometext' },
+  })
 })
