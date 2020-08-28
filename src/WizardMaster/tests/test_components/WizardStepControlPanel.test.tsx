@@ -12,8 +12,8 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  jest.clearAllMocks();
-});
+  jest.clearAllMocks()
+})
 
 jest.mock('../../../integration/analytics/utils')
 
@@ -26,15 +26,15 @@ const getComponent = (): JSX.Element => {
   return (
     <ThemeProvider>
       <WizardStepControlPanel
-      wizardStep={testWizardStep}
-      wizard={testWizard}
-      provider={testProvider}
-      object={{ id: 100500 }}
-      analytics={analytics}
-      submitChange={jest.fn()}
-      currentState={currentState}
-      setCurrentState={jest.fn()}
-    />
+        wizardStep={testWizardStep}
+        wizard={testWizard}
+        provider={testProvider}
+        object={{ id: 100500 }}
+        analytics={analytics}
+        submitChange={jest.fn()}
+        currentState={currentState}
+        setCurrentState={jest.fn()}
+      />
     </ThemeProvider>
   )
 }
@@ -46,10 +46,7 @@ test('Wizard step control panel buttons', () => {
   expect(buttons.length).toBe(2)
 })
 
-test.each([
-  [0],
-  [1],
-])('Wizard step control panel buttons analytics', (buttonIndex) => {
+test.each([[0], [1]])('Wizard step control panel buttons analytics', (buttonIndex) => {
   const component = mount(getComponent())
   const buttons = component.find('button')
 

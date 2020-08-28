@@ -18,20 +18,20 @@ const getComponent = (): JSX.Element => {
   return (
     <ThemeProvider>
       <WizardStepContainer
-      wizardStep={testWizardStep}
-      wizard={testWizard}
-      provider={testProvider}
-      object={{ id: 100500 }}
-      setObject={setObject}
-      notifier={testNotifier}
-      analytics={analytics}
-      ViewType={ViewType}
-      user={user}
-      show
-      submitChange={jest.fn()}
-      currentState={currentState}
-      setCurrentState={jest.fn()}
-    />
+        wizardStep={testWizardStep}
+        wizard={testWizard}
+        provider={testProvider}
+        object={{ id: 100500 }}
+        setObject={setObject}
+        notifier={testNotifier}
+        analytics={analytics}
+        ViewType={ViewType}
+        user={user}
+        show
+        submitChange={jest.fn()}
+        currentState={currentState}
+        setCurrentState={jest.fn()}
+      />
     </ThemeProvider>
   )
 }
