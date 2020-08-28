@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { shallow, mount } from 'enzyme'
-import { DebounceInput } from 'react-debounce-input'
+import { act } from 'react-dom/test-utils'
 
+import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
-import { InputWidget } from '../../widgets/InputWidget'
+import { MultiSelectWidget } from '../../widgets/MultiSelectWidget'
 import { testProvider, testNotifier } from '../../../setupTests'
 
 const submitChangeMock = jest.fn()
@@ -15,41 +16,41 @@ const detailObject = {
 }
 
 const getComponent = (): JSX.Element => (
-  <InputWidget
+  <MultiSelectWidget
     name="test"
     resource="test-resource"
     analytics={undefined}
+    dataSource="test-source"
     widgetAnalytics={jest.fn()}
     helpText="test"
     detailObject={detailObject}
     setObject={jest.fn()}
     displayValue="test"
-    dataTarget="https://some-test-target.com"
-    targetPayload={(value: string) => ({ testPayload: value })}
+    dataTarget="test"
+    targetPayload={(value: string[]) => ({ testPayload: value })}
     notifier={testNotifier}
     provider={testProvider}
     viewType="test_view"
     style={{}}
+    optionLabel={jest.fn()}
+    optionValue={jest.fn()}
     setInitialValue={jest.fn()}
     submitChange={submitChangeMock}
   />
 )
 
-test('Input widget properly rendered', () => {
+test('Multiselect widget properly rendered', () => {
   const component = shallow(getComponent())
 
-  expect(component.find(DebounceInput).length).toEqual(1)
+  expect(component.find(AsyncSelectWidget).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
 })
 
-test('Submit user input', () => {
+test('Submit user multiselect change', () => {
   const component = mount(getComponent())
-  const event = { target: { value: 'sometext' } }
+  const value = [{ id: 100500 }]
 
-  ;(component.find(DebounceInput).props() as { onChange: Function }).onChange(event)
+  act(() => (component.find('AsyncSelectWidget').props() as { handleChange: Function }).handleChange(value))
 
-  expect(submitChangeMock).toHaveBeenCalledWith({
-    url: 'https://some-test-target.com',
-    payload: { testPayload: 'sometext' },
-  })
+  expect(submitChangeMock).toHaveBeenCalledWith({ url: '', payload: [100500] })
 })

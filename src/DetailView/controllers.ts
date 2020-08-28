@@ -23,4 +23,4 @@ const initDetailViewControllers = (provider: BaseProvider, setObject: Function, 
   return [setInitialValue, submitChange]
 }
 
-export { initDetailViewControllers }
+export { initDetailViewControllers, initDataUpdateHandler }
