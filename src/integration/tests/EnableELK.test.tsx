@@ -15,9 +15,7 @@ test('Call elk apm initialization', () => {
   const serverUrl = 'https://service-url.com'
   const serviceVersion = '100500'
 
-  const component = mount(
-    <EnableELK serviceName={serviceName} serviceVersion={serviceVersion} serverUrl={serverUrl} />
-  )
+  const component = mount(<EnableELK serviceName={serviceName} serviceVersion={serviceVersion} serverUrl={serverUrl} />)
 
   expect(component.find('EnableELK').length).toBe(1)
   expect(mockedInit.mock.calls.length).toBe(1)

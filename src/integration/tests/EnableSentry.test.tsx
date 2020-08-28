@@ -15,12 +15,7 @@ test('Call sentry initialization', () => {
   const user = { email: 'test@test.com' }
   const sentryDSN = 'test-sentry-dsn'
 
-  const component = mount(
-    <EnableSentry
-      sentryDSN={sentryDSN}
-      user={user}
-    />
-  )
+  const component = mount(<EnableSentry sentryDSN={sentryDSN} user={user} />)
 
   expect(component.find('EnableSentry').length).toBe(1)
   expect(mockedInit.mock.calls.length).toBe(1)
