@@ -64,8 +64,15 @@ class TestWizardStep extends BaseWizardStep {
 const testWizardStep = new TestWizardStep('test_wizard_step')
 
 class TestWizard extends BaseWizard {
-  stateWidgetMapping = {}
-  machine = {}
+  stateWidgetMapping = {
+    begin: testWizardStep,
+  }
+
+  machine = {
+    begin: {
+      forward: 'test',
+    }
+  }
 }
 
 const testWizard = new TestWizard('Test Wizard')

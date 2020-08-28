@@ -3,6 +3,7 @@ import { Button } from '@chakra-ui/core'
 
 import { submitChange } from '../controllers'
 import { WizardContainer } from './WizardContainer'
+import { clearInitialObjectState } from '../utils'
 
 import type { BaseNotifier } from '../../common/notifier'
 import type { BaseProvider } from '../../admin/providers/index'
@@ -23,8 +24,6 @@ type WizardProps = {
   user: object
   style?: object
 }
-
-const clearInitialObjectState = (): { payload: object } => submitChange({ payload: { __initial__: null } })
 
 const Wizard = (props: WizardProps): JSX.Element => {
   const [show, setShow] = React.useState(false)
