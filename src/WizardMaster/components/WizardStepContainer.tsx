@@ -104,6 +104,23 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
   )
 }
 
+const sendPushAnalytics = (
+  resourceName: string,
+  widgetName: string,
+  currentState: string,
+  props: WizardStepControlPanelProps
+): void => {
+  pushAnalytics({
+    eventName: EventNameEnum.BUTTON_CLICK,
+    widgetType: WidgetTypeEnum.ACTION,
+    widgetName,
+    viewType: 'wizard',
+    resource: resourceName,
+    value: currentState,
+    ...props,
+  })
+}
+
 const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element => {
   const { wizardStep, wizard, submitChange, currentState, setCurrentState } = props
 
@@ -119,15 +136,12 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
         variant="ghost"
         mr={3}
         onClick={() => {
-          pushAnalytics({
-            eventName: EventNameEnum.BUTTON_CLICK,
-            widgetType: WidgetTypeEnum.ACTION,
-            widgetName: 'wizard_prev_step',
-            viewType: 'wizard',
-            resource: wizardStep.resourceName ? wizardStep.resourceName : '',
-            value: currentState,
-            ...props,
-          })
+          sendPushAnalytics(
+            wizardStep.resourceName ? wizardStep.resourceName : '',
+            'wizard_prev_step',
+            currentState,
+            props
+          )
           wizardStep
             .prevStep(getWizardStepControlPayload())
             .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
@@ -139,15 +153,12 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
         variantColor="blue"
         m={5}
         onClick={() => {
-          pushAnalytics({
-            eventName: EventNameEnum.BUTTON_CLICK,
-            widgetType: WidgetTypeEnum.ACTION,
-            widgetName: 'wizard_next_step',
-            viewType: 'wizard',
-            resource: wizardStep.resourceName ? wizardStep.resourceName : '',
-            value: currentState,
-            ...props,
-          })
+          sendPushAnalytics(
+            wizardStep.resourceName ? wizardStep.resourceName : '',
+            'wizard_next_step',
+            currentState,
+            props
+          )
           wizardStep
             .nextStep(getWizardStepControlPayload())
             .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
