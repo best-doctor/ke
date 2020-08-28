@@ -15,11 +15,14 @@ type MountWizardsKwargs = {
   elements: WizardFieldDescription
   provider: BaseProvider
   setObject: Function
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   user: object
 }
 
-const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: object): BaseWizard => {
+const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: object): BaseWizard | null => {
+  /*
+    We need this for unpacking wizard instance with conditions.
+  */
   if (typeof wizardInstance === 'function') {
     return wizardInstance(object)
   }
@@ -53,4 +56,4 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
   })
 }
 
-export { mountWizards }
+export { mountWizards, getWizardFromCallable }

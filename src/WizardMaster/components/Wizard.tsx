@@ -18,7 +18,7 @@ type WizardProps = {
   object: object
   setObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   ViewType: string
   user: object
   style?: object
