@@ -25,21 +25,24 @@ type WizardProps = {
 }
 
 const clearInitialObjectState = (): { payload: object } => submitChange({ payload: { __initial__: null } })
+const sendPushAnalytics = (resourceName: string, widgetName: string, props: WizardProps): void => {
+  pushAnalytics({
+    eventName: EventNameEnum.BUTTON_CLICK,
+    widgetType: WidgetTypeEnum.ACTION,
+    widgetName,
+    viewType: 'wizard',
+    resource: resourceName,
+    value: undefined,
+    ...props,
+  })
+}
 
 const Wizard = (props: WizardProps): JSX.Element => {
   const [show, setShow] = React.useState(false)
   const { wizard, provider, object, setObject, notifier, analytics, style, ViewType, user, resourceName } = props
 
   const handleToggle = (): void => {
-    pushAnalytics({
-      eventName: EventNameEnum.BUTTON_CLICK,
-      widgetType: WidgetTypeEnum.ACTION,
-      widgetName: 'open_wizard',
-      viewType: 'wizard',
-      resource: resourceName,
-      value: undefined,
-      ...props,
-    })
+    sendPushAnalytics(resourceName, 'open_wizard', props)
     setShow(!show)
   }
 
