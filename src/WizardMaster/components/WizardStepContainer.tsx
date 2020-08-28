@@ -22,7 +22,7 @@ type WizardViewContainerProps = {
   object: object
   setObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   currentState: string
   setCurrentState: Function
   ViewType: string
@@ -38,7 +38,7 @@ type WizardStepComponentsProps = {
   object: object
   setObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   user: object
   ViewType: string
   submitChange: Function
@@ -52,7 +52,7 @@ type WizardStepControlPanelProps = {
   setCurrentState: Function
   provider: BaseProvider
   object: object
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
 }
 
 type WizardStepContainerRef = HTMLElement | null

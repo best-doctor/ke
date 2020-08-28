@@ -8,7 +8,7 @@ import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 
-import { mountWizards } from '../WizardMaster/utils'
+import { mountWizards } from '../WizardMaster/mountWizards'
 import { mountDetailFields } from './mountDetailFields'
 import { ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'

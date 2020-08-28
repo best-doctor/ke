@@ -3,6 +3,7 @@ import { Button } from '@chakra-ui/core'
 
 import { submitChange } from '../controllers'
 import { WizardContainer } from './WizardContainer'
+import { clearInitialObjectState } from '../utils'
 
 import type { BaseNotifier } from '../../common/notifier'
 import type { BaseProvider } from '../../admin/providers/index'
@@ -18,13 +19,12 @@ type WizardProps = {
   object: object
   setObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   ViewType: string
   user: object
   style?: object
 }
 
-const clearInitialObjectState = (): { payload: object } => submitChange({ payload: { __initial__: null } })
 const sendPushAnalytics = (resourceName: string, widgetName: string, props: WizardProps): void => {
   pushAnalytics({
     eventName: EventNameEnum.BUTTON_CLICK,

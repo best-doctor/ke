@@ -28,7 +28,7 @@ type LayoutData = {
   static: boolean
 }
 
-type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard)
+type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard | null)
 
 type DetailFieldDescription = {
   name: string

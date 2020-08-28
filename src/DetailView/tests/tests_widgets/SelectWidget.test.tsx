@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { shallow } from 'enzyme'
-import { Select } from '@chakra-ui/core'
+import { mount } from 'enzyme'
+import { Select, ThemeProvider } from '@chakra-ui/core'
+import { act } from 'react-dom/test-utils'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { SelectWidget } from '../../widgets/SelectWidget'
@@ -15,8 +16,10 @@ const detailObject = {
   },
 }
 
-test('Select widget properly rendered', () => {
-  const component = shallow(
+const submitChangeMock = jest.fn()
+
+const getComponent = (): JSX.Element => (
+  <ThemeProvider>
     <SelectWidget
       name="status.text"
       resource="test-resource"
@@ -26,18 +29,32 @@ test('Select widget properly rendered', () => {
       displayValue={undefined}
       detailObject={detailObject}
       dataSource={jest.fn()}
-      dataTarget={jest.fn()}
-      targetPayload={jest.fn()}
+      dataTarget="https://test.com"
+      targetPayload={(value: string) => ({ testPayload: value })}
       setObject={jest.fn()}
       provider={testProvider}
       style={{}}
       viewType="test_view"
       notifier={testNotifier}
       setInitialValue={jest.fn()}
-      submitChange={jest.fn()}
+      submitChange={submitChangeMock}
     />
-  )
+  </ThemeProvider>
+)
+
+test('Select widget properly rendered', () => {
+  const component = mount(getComponent())
 
   expect(component.find(Select).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
+})
+
+test('User change select', () => {
+  const widget = getComponent()
+  const component = mount(widget)
+  const value = { target: { value: 'some_value' } }
+
+  act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))
+
+  expect(submitChangeMock).toHaveBeenCalledWith({ url: 'https://test.com', payload: { testPayload: 'some_value' } })
 })

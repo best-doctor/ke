@@ -4,12 +4,15 @@ import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import axios from 'axios'
 
+import { BaseWizard, BaseWizardStep } from './WizardMaster/interfaces'
 import { ChakraUINotifier } from './common/notifier'
 import { TextWidget } from './DetailView/widgets/TextWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
 
 configure({ adapter: new Adapter() })
+
+const testNotifier = new ChakraUINotifier(jest.fn())
 
 class TestAdmin extends BaseAdmin {
   baseUrl = 'https://test.com/test'
@@ -41,6 +44,8 @@ class TestAdmin extends BaseAdmin {
   wizards = []
 }
 
+const testAdmin = new TestAdmin()
+
 const mockedHTTP = axios.create({})
 mockedHTTP.defaults = { baseURL: 'https://test.com/' }
 
@@ -50,8 +55,26 @@ class TestProvider extends BaseProvider {
   }
 }
 
-const testAdmin = new TestAdmin()
 const testProvider = new TestProvider()
-const testNotifier = new ChakraUINotifier(jest.fn())
 
-export { testAdmin, testProvider, testNotifier }
+class TestWizardStep extends BaseWizardStep {
+  widgets = testAdmin.detail_fields
+}
+
+const testWizardStep = new TestWizardStep('test_wizard_step')
+
+class TestWizard extends BaseWizard {
+  stateWidgetMapping = {
+    begin: testWizardStep,
+  }
+
+  machine = {
+    begin: {
+      forward: 'test',
+    },
+  }
+}
+
+const testWizard = new TestWizard('Test Wizard')
+
+export { testAdmin, testProvider, testNotifier, testWizard, testWizardStep }

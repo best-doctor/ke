@@ -16,7 +16,7 @@ type WizardContainerProps = {
   object: object
   setObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic
+  analytics: BaseAnalytic | undefined
   ViewType: string
   user: object
   show: boolean
