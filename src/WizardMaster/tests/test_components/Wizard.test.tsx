@@ -51,9 +51,9 @@ test('Wizard main component push analytics', () => {
   const pushAnalyticsMock = mocked(pushAnalytics)
 
   const component = shallow(getComponent())
-  const wizardButton = component.find('Button');
+  const wizardButton = component.find('Button')
 
-  (wizardButton.props() as { onClick: Function }).onClick()
+  ;(wizardButton.props() as { onClick: Function }).onClick()
 
   expect(pushAnalyticsMock.mock.calls.length).toBe(1)
 })

@@ -71,7 +71,7 @@ class TestWizard extends BaseWizard {
   machine = {
     begin: {
       forward: 'test',
-    }
+    },
   }
 }
 
