@@ -11,10 +11,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/core'
 import { Menu } from 'react-feather'
-import { createEvent } from 'effector'
 import { useHistory } from 'react-router-dom'
 
-const goToResourceEvent = createEvent()
+import { goToResourceEvent } from '../events'
 
 const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => {
   const { push } = useHistory()
@@ -23,7 +22,7 @@ const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element =>
     goToResourceEvent()
   }
   return (
-    <Button variantColor="teal" m={2} key={resource.props.name} onClick={goToResource}>
+    <Button variantColor="teal" m={2} key={resource.props.name} onClick={goToResource} id="go-to-resource-button">
       {resource.props.admin.verboseName}
     </Button>
   )

@@ -48,12 +48,17 @@ export abstract class BaseProvider {
     return response.data.data
   }
 
-  post = async (resourceUrl: string, payload: any): Promise<Model> => {
+  post = async (resourceUrl: string, payload: object): Promise<Model> => {
     const response = await this.http.post(resourceUrl, payload)
     return response.data.data
   }
 
-  put = async (resourceUrl: string, payload: any): Promise<Model> => {
+  put = async (resourceUrl: string, payload: object): Promise<Model> => {
+    const response = await this.http.put(resourceUrl, payload)
+    return response.data.data
+  }
+
+  patch = async (resourceUrl: string, payload: object): Promise<Model> => {
     const response = await this.http.put(resourceUrl, payload)
     return response.data.data
   }

@@ -31,7 +31,7 @@ const AdminResource = ({
   name: string
   admin: BaseAdmin
   provider: BaseProvider
-  user: any
+  user: object
   analytics: BaseAnalytic | undefined
 }): JSX.Element => (
   <Switch>
@@ -45,7 +45,7 @@ const AdminResource = ({
   </Switch>
 )
 
-const isAdminResource = (resource: any): boolean => {
+const isAdminResource = (resource: JSX.Element): boolean => {
   return resource.props.admin !== undefined
 }
 
@@ -64,7 +64,7 @@ const ResourceComposer = ({
       <ThemeProvider>
         {withSideBar && (
           <SideBar header="Разделы">
-            {React.Children.map(children, (resource: any) => {
+            {React.Children.map(children, (resource: JSX.Element) => {
               if (isAdminResource(resource)) {
                 const adminPermissions = resource.props.admin.permissions
                 const element = <SideBarElement resource={resource} />
@@ -75,7 +75,7 @@ const ResourceComposer = ({
             })}
           </SideBar>
         )}
-        {React.Children.map(children, (resource: any) => {
+        {React.Children.map(children, (resource: JSX.Element) => {
           if (isAdminResource(resource)) {
             const adminPermissions = resource.props.admin.permissions
 

@@ -104,7 +104,7 @@ const FilterBlock = (props: FilterBlockProps): JSX.Element => {
         <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
           Фильтровать
         </Button>
-        <Button variantColor="teal" onClick={() => resetFiltersOnClick()} maxWidth={130} m={2}>
+        <Button id="reset-filters" variantColor="teal" onClick={() => resetFiltersOnClick()} maxWidth={130} m={2}>
           Сбросить
         </Button>
       </Flex>

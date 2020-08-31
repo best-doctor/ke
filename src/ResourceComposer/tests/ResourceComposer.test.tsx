@@ -6,14 +6,16 @@ import { ResourceComposer, Resource, AdminResource } from '../index'
 import { RenderList } from '../../ListView/RenderList'
 import { RenderDetail } from '../../DetailView/RenderDetail'
 
+const fakeUser = { id: 100500 }
+
 test('ResourceComposer mounts router with children', () => {
   const wrapper = shallow(
     <ResourceComposer withSideBar={false} permissions={[]}>
       <Resource name="test2">
         <></>
       </Resource>
-      <AdminResource name="test" admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
-      <AdminResource name="test2" admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
+      <AdminResource name="test" admin={testAdmin} provider={testProvider} user={fakeUser} analytics={undefined} />
+      <AdminResource name="test2" admin={testAdmin} provider={testProvider} user={fakeUser} analytics={undefined} />
     </ResourceComposer>
   )
 
@@ -24,7 +26,7 @@ test('ResourceComposer mounts router with children', () => {
 
 test('Resource mounts properly', () => {
   const wrapper = shallow(
-    <AdminResource name="test" admin={testAdmin} provider={testProvider} user={undefined} analytics={undefined} />
+    <AdminResource name="test" admin={testAdmin} provider={testProvider} user={fakeUser} analytics={undefined} />
   )
 
   expect(wrapper.find('Switch').length).toEqual(1)

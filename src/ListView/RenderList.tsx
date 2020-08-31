@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
 import { Flex } from '@chakra-ui/core'
 import { useLocation } from 'react-router-dom'
 
@@ -21,10 +20,10 @@ export const RenderList: React.FC<{
   document.title = `${admin.verboseName}`
   const location = useLocation()
 
-  const [objects, setObjects] = useState<Model[]>([])
-  const [pagination, setPagination] = useState<Pagination>()
-  const [pageCount, setPageCount] = useState(0)
-  const [page, setPage] = useState(1)
+  const [objects, setObjects] = React.useState<Model[]>([])
+  const [pagination, setPagination] = React.useState<Pagination>()
+  const [pageCount, setPageCount] = React.useState(0)
+  const [page, setPage] = React.useState(1)
 
   const processBackendResponse = ([backendData, , backendPagination]: [
     Model[],
@@ -39,7 +38,7 @@ export const RenderList: React.FC<{
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     const filters = FilterManager.getFilters(location.search)
     provider.getList(admin.baseUrl, filters, page).then(processBackendResponse)
   }, [admin.baseUrl, provider, page, location])

@@ -77,4 +77,14 @@ class TestWizard extends BaseWizard {
 
 const testWizard = new TestWizard('Test Wizard')
 
-export { testAdmin, testProvider, testNotifier, testWizard, testWizardStep }
+const dataMockResponse = [{ id: '100500', test: 'key' }]
+
+const mockPagination = {
+  page: 100500,
+  perPage: 100500,
+  count: 100500,
+  nextUrl: '',
+  prevUrl: '',
+}
+
+export { testAdmin, testProvider, testNotifier, testWizard, testWizardStep, dataMockResponse, mockPagination }
