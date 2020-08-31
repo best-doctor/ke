@@ -4,18 +4,8 @@ import { mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
 import { ThemeProvider } from '@chakra-ui/core'
 
-import { testAdmin, testProvider } from '../../setupTests'
+import { testAdmin, testProvider, dataMockResponse, mockPagination } from '../../setupTests'
 import { RenderList } from '../RenderList'
-
-const dataMockResponse = [{ id: '100500', test: 'key' }]
-
-const mockPagination = {
-  page: 100500,
-  perPage: 100500,
-  count: 100500,
-  nextUrl: '',
-  prevUrl: '',
-}
 
 const getComponent = (): JSX.Element => (
   <MemoryRouter initialEntries={['/test/']}>
