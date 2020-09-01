@@ -1,5 +1,5 @@
-import { submitChange } from './controllers'
-
+import { containerStore } from './store'
+import { clearErros, pushError, submitChange } from './controllers'
 import type { BaseWizard } from './interfaces'
 import type { WizardFieldElement, DetailFieldDescription } from '../admin/fields/FieldDescription'
 
@@ -24,4 +24,17 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
   return wizardInstance
 }
 
-export { getWizardFromCallable, clearInitialObjectState, clearStorage }
+const validateContext = (widgets: any): void => {
+  clearErros()
+
+  const wizardContext = containerStore.getState()
+
+  widgets.forEach((widget: any) => {
+    const widgetContent = wizardContext[widget.name]
+    if (widget.required === true && !widgetContent) {
+      pushError(`Поле ${widget.helpText} обязательно`)
+    }
+  })
+}
+
+export { getWizardFromCallable, clearInitialObjectState, clearStorage, validateContext }
