@@ -1,9 +1,17 @@
 import { submitChange } from './controllers'
 
 import type { BaseWizard } from './interfaces'
-import type { WizardFieldElement } from '../admin/fields/FieldDescription'
+import type { WizardFieldElement, DetailFieldDescription } from '../admin/fields/FieldDescription'
 
 const clearInitialObjectState = (): { payload: object } => submitChange({ payload: { __initial__: null } })
+
+const clearStorage = (elements: DetailFieldDescription[], storage: { [key: string]: object | null }): void => {
+  const storeToClear = storage
+
+  elements.forEach((element: DetailFieldDescription) => {
+    storeToClear[element.name] = null
+  })
+}
 
 const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: object): BaseWizard | null => {
   /*
@@ -16,4 +24,4 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
   return wizardInstance
 }
 
-export { getWizardFromCallable, clearInitialObjectState }
+export { getWizardFromCallable, clearInitialObjectState, clearStorage }
