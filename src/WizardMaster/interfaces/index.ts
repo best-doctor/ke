@@ -9,7 +9,7 @@ type WizardState = Promise<string>
 
 type WizardPayload = { [key: string]: any }
 
-const defaultLayout = { x: 1, y: 17.5, w: 10, h: 2, static: true }
+const defaultLayout = { x: 1, y: 1, w: 10, h: 2, static: true }
 
 abstract class BaseWizardStep {
   title: string

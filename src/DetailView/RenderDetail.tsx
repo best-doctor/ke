@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/core'
-import * as GridLayout from 'react-grid-layout'
 import { useParams } from 'react-router-dom'
 
 import type { BaseAdmin } from 'admin'
@@ -13,7 +12,6 @@ import { mountDetailFields } from './mountDetailFields'
 import { ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'
 
-const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 const ViewType = 'detail_view'
 
 type RenderDetailProps = {
@@ -41,21 +39,19 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const containersToMount = {
     detail_fields: mountDetailFields,
     wizards: mountWizards,
+    additional_detail_widgets: mountDetailFields,
   }
 
   return (
     <>
       <ToListViewLink name={resourceName} />
+      {object &&
+        Object.entries(containersToMount).map(([elementsKey, container]: [string, Function]) => {
+          const elements = admin[elementsKey as keyof typeof admin]
+          if (!elements) return []
 
-      <ReactGridLayout key="maingrid" className="layout" cols={12} rowHeight={30}>
-        {object &&
-          Object.entries(containersToMount).map(([elementsKey, container]: [string, Function]) => {
-            const elements = admin[elementsKey as keyof typeof admin]
-            if (!elements) return []
-
-            return container({ object, setObject, notifier, ViewType, elements, ...props })
-          })}
-      </ReactGridLayout>
+          return container({ object, setObject, notifier, ViewType, elements, elementsKey, ...props })
+        })}
     </>
   )
 }

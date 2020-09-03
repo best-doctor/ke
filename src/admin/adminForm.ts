@@ -14,6 +14,8 @@ type FormWidgetsField =
 abstract class BaseForm {
   abstract widgets: FormWidgetsField
 
+  abstract additional_detail_widgets: FormWidgetsField
+
   asView(): FormWidgetsField {
     return this.widgets
   }
