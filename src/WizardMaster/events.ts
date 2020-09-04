@@ -5,6 +5,5 @@ const clearErros = createEvent()
 
 const setInitialValue = createEvent<object>()
 const submitChange = createEvent<{ payload: object }>()
-const pushWizardStepToBackend = createEvent()
 
-export { setInitialValue, submitChange, pushWizardStepToBackend, clearErros, pushError }
+export { setInitialValue, submitChange, clearErros, pushError }
