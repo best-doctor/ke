@@ -15,7 +15,7 @@ type InputWidgetProps = {
   name: string
   helpText: string
   resource: string
-  detailObject: any
+  detailObject: { url: string }
   useLocalStorage?: boolean | undefined
   analytics: BaseAnalytic | undefined
   widgetAnalytics: Function | boolean | undefined
@@ -45,6 +45,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   } = props
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
   const content = getWidgetContent(name, detailObject, displayValue)
+
   setInitialValue({ [name]: content })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
