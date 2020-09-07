@@ -1,9 +1,10 @@
 import * as React from 'react'
+import { useStore } from 'effector-react'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
-import { containerStore } from '../../store'
 import { setInitialValue } from '../../controllers'
-import { clearStorage } from '../../utils'
+import { containerStore } from '../../store'
+
 import { mountComponents } from '../../../common/utils/mountComponents'
 import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
@@ -23,6 +24,8 @@ type WizardStepComponentsProps = {
 }
 
 const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => {
+  const state = useStore(containerStore)
+
   const {
     elements,
     resourceName,
@@ -36,11 +39,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     submitChange,
   } = props
 
-  React.useEffect(() => {
-    return () => {
-      clearStorage(elements, containerStore.getState())
-    }
-  })
+  React.useEffect(() => {}, [state])
 
   return (
     <>
@@ -56,6 +55,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
         user,
         analytics,
         ViewType,
+        containerStore,
       })}
     </>
   )

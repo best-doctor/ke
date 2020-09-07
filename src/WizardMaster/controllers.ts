@@ -1,15 +1,12 @@
-import { pushError, clearErros, setInitialValue, submitChange, pushWizardStepToBackend } from './events'
-import { containerErrorsStore, containerStore } from './store'
+import { pushError, clearErros, setInitialValue, submitChange } from './events'
+import { containerErrorsStore, containerStore, initialStore } from './store'
 
 containerErrorsStore.on(pushError, (state, value) => [...state, value]).on(clearErros, () => [])
 
-containerStore
-  .on(setInitialValue, (state, value) => {
-    return { ...state, ...value }
-  })
-  .on(submitChange, (state, { payload }) => {
-    return { ...state, ...payload }
-  })
-  .on(pushWizardStepToBackend, (state, url) => console.log(state, url))
+initialStore.on(setInitialValue, (state, value) => {
+  return { ...state, ...value }
+})
 
-export { pushError, clearErros, setInitialValue, submitChange, pushWizardStepToBackend }
+containerStore.on(submitChange, (state, { payload }) => ({ ...state, ...payload }))
+
+export { pushError, clearErros, setInitialValue, submitChange }

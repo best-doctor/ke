@@ -1,4 +1,4 @@
-import { containerStore } from './store'
+import { containerStore, initialStore } from './store'
 import { clearErros, pushError, submitChange } from './controllers'
 import type { BaseWizard } from './interfaces'
 import type { WizardFieldElement, DetailFieldDescription } from '../admin/fields/FieldDescription'
@@ -27,7 +27,7 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
 const validateContext = (widgets: any): void => {
   clearErros()
 
-  const wizardContext = containerStore.getState()
+  const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
 
   widgets.forEach((widget: any) => {
     const widgetContent = wizardContext[widget.name]

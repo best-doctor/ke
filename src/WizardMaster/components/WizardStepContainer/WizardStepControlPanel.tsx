@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button } from '@chakra-ui/core'
 
-import { containerStore } from '../../store'
+import { containerStore, initialStore } from '../../store'
 
 import type { BaseProvider } from '../../../admin/providers/index'
 import type { BaseWizardStep, BaseWizard } from '../../interfaces'
@@ -40,11 +40,15 @@ const sendPushAnalytics = (
 const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element => {
   const { wizardStep, wizard, submitChange, currentState, setCurrentState } = props
 
-  const getWizardStepControlPayload = (): object => ({
-    ...props,
-    context: containerStore.getState(),
-    updateContext: submitChange,
-  })
+  const getWizardStepControlPayload = (): object => {
+    const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
+
+    return {
+      ...props,
+      context: wizardContext,
+      updateContext: submitChange,
+    }
+  }
 
   return (
     <>

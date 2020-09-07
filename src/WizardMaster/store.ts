@@ -1,6 +1,9 @@
 import { createStore } from 'effector'
 
-const containerErrorsStore = createStore<string[]>([])
-const containerStore = createStore<{ [key: string]: object | null }>({})
+type StoreElement = { [key: string]: object | null }
 
-export { containerErrorsStore, containerStore }
+const containerErrorsStore = createStore<string[]>([])
+const initialStore = createStore<StoreElement>({})
+const containerStore = createStore<StoreElement>({})
+
+export { containerErrorsStore, containerStore, initialStore }

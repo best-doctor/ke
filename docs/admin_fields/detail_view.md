@@ -76,6 +76,10 @@ and can contains the following properties:
   `ke` uses [react-grid-layout](https://github.com/STRML/react-grid-layout)
   for widgets compose. So, we use the same settings format
 
+* `notBlockingValidators` – TODO
+
+* `blockingValidators` – TODO
+
 ## Example
 
 ```ts
