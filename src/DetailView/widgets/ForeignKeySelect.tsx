@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
@@ -11,7 +12,7 @@ import type { BaseNotifier } from '../../common/notifier'
 
 type ForeignKeySelectWidgetProps = {
   name: string
-  detailObject: any
+  detailObject: { [key: string]: object | string }
   resource: string
   provider: BaseProvider
   useLocalStorage?: boolean | undefined
@@ -30,6 +31,9 @@ type ForeignKeySelectWidgetProps = {
   style: object
   setInitialValue: Function
   submitChange: Function
+  notBlockingValidators?: Function[]
+  blockingValidators?: Function[]
+  containerStore: { getState: Function }
 }
 
 const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
@@ -47,9 +51,14 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     style,
     setInitialValue,
     submitChange,
+    notBlockingValidators = [],
+    blockingValidators = [],
+    containerStore,
   } = props
 
   const [value, setValue] = React.useState<object>(getWidgetContent(name, detailObject, displayValue, 'object'))
+  const dataResourceUrl = getData(dataSource, containerStore.getState())
+
   setInitialValue(value ? targetPayload(value) : null)
 
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
@@ -70,15 +79,22 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   return (
     <WidgetWrapper style={style} helpText={helpText}>
-      <AsyncSelectWidget
+      <ValidationWrapper
+        notBlockingValidators={notBlockingValidators}
+        blockingValidators={blockingValidators}
         provider={provider}
-        dataResourceUrl={dataSource}
-        handleChange={handleChange}
-        value={value}
-        isClearable
-        getOptionLabel={optionLabel}
-        getOptionValue={optionValue}
-      />
+        detailObject={detailObject}
+      >
+        <AsyncSelectWidget
+          provider={provider}
+          dataResourceUrl={dataResourceUrl}
+          handleChange={handleChange}
+          value={value}
+          isClearable
+          getOptionLabel={optionLabel}
+          getOptionValue={optionValue}
+        />
+      </ValidationWrapper>
     </WidgetWrapper>
   )
 }

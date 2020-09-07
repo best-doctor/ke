@@ -52,5 +52,5 @@ test('Submit user multiselect change', () => {
 
   act(() => (component.find('AsyncSelectWidget').props() as { handleChange: Function }).handleChange(value))
 
-  expect(submitChangeMock).toHaveBeenCalledWith({ url: '', payload: [100500] })
+  expect(submitChangeMock).toHaveBeenCalledWith({ url: '', payload: { test: [100500] } })
 })

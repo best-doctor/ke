@@ -19,6 +19,7 @@ type mountComponentsKwargs = {
   user: object
   analytics: BaseAnalytic | undefined
   ViewType: string
+  containerStore?: object | undefined
 }
 
 const getComponentFromCallable = (widget: JSX.Element | Function, user: object): any => {
@@ -46,6 +47,7 @@ const mountComponents = ({
   user,
   analytics,
   ViewType,
+  containerStore,
 }: mountComponentsKwargs): JSX.Element[] => {
   return elements.map((adminElement: DetailFieldDescription) => {
     const { widget, name, layout, widgetAnalytics } = adminElement
@@ -66,6 +68,7 @@ const mountComponents = ({
         viewType={ViewType}
         setInitialValue={setInitialValue}
         submitChange={submitChange}
+        containerStore={containerStore}
         {...adminElement}
       />
     )

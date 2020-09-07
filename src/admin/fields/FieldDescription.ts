@@ -29,6 +29,7 @@ type LayoutData = {
 }
 
 type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard | null)
+type WidgetValueValidator = Function
 
 type DetailFieldDescription = {
   name: string
@@ -40,6 +41,8 @@ type DetailFieldDescription = {
   dataTarget?: GenericAccessor
   targetPayload?: GenericAccessor
   widgetAnalytics?: GenericAccessor
+  notBlockingValidators?: WidgetValueValidator[] | undefined
+  blockingValidators?: WidgetValueValidator[] | undefined
   href?: GenericAccessor
   layout: LayoutData
 }

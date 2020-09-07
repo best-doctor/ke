@@ -85,7 +85,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
       ...props,
     })
 
-    submitChange({ url: '', payload: payloadIds })
+    submitChange({ url: '', payload: { [name]: payloadIds } })
   }
 
   return (

@@ -36,6 +36,21 @@ type SelectProps = {
   submitChange: Function
 }
 
+const getSelectContent = (
+  name: string,
+  detailObject: object,
+  displayValue: GenericAccessor,
+  expectedType: string
+): [string, string] => {
+  // TODO Remove this
+  try {
+    const { value, text } = getWidgetContent(name, detailObject, displayValue, expectedType)
+    return [value, text]
+  } catch (TypeError) {
+    return ['', '']
+  }
+}
+
 const SelectWidget = (props: SelectProps): JSX.Element => {
   const {
     name,
@@ -53,7 +68,8 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
   const sourceUrl = getData(dataSource, detailObject)
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
-  const { value, text } = getWidgetContent(name, detailObject, displayValue, 'object')
+  const [value, text] = getSelectContent(name, detailObject, displayValue, 'object')
+
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
   setInitialValue({ [name]: value })
 

@@ -6,6 +6,7 @@ import type { BaseProvider } from 'index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 
+import { containerStore } from './store'
 import { initDetailViewControllers } from './controllers'
 import { mountComponents } from '../common/utils/mountComponents'
 
@@ -52,6 +53,7 @@ const mountDetailFields = ({
         user,
         analytics,
         ViewType,
+        containerStore,
       })}
     </ReactGridLayout>
   )
