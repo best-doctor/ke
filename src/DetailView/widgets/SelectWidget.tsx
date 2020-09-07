@@ -36,7 +36,12 @@ type SelectProps = {
   submitChange: Function
 }
 
-const getSelectContent = (name: string, detailObject: object, displayValue: GenericAccessor, expectedType: string): [string, string] => {
+const getSelectContent = (
+  name: string,
+  detailObject: object,
+  displayValue: GenericAccessor,
+  expectedType: string
+): [string, string] => {
   // TODO Remove this
   try {
     const { value, text } = getWidgetContent(name, detailObject, displayValue, expectedType)
