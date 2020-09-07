@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as GridLayout from 'react-grid-layout'
 import { Heading, Box } from '@chakra-ui/core'
 
 import { WizardStepComponents } from './WizardStepComponents'
@@ -11,6 +12,8 @@ import { containerErrorsStore } from '../../store'
 import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
+
+const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
 type WizardStepContainerRef = HTMLElement | null
 
@@ -71,17 +74,12 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
   return (
     <>
       {show && (
-        <Box
-          ref={wizardStepRef}
-          mt={4}
-          borderWidth="2px"
-          borderRadius="md"
-          height={500}
-          p={5}
-          borderColor="gray.300"
-          overflow="scroll"
-        >
-          <Heading size="md">{wizard.title}</Heading>
+        <Box ref={wizardStepRef} mt={4} borderTopWidth="2px" borderBottomWidth="2px" p={5} borderColor="gray.300">
+          <ReactGridLayout key="wizardStepHeaderLayout" className="layout" cols={12} rowHeight={30}>
+            <Heading key="header" size="md" data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}>
+              {wizard.title}
+            </Heading>
+          </ReactGridLayout>
           <WizardStepComponents
             elements={elements}
             resourceName={resourceName}
@@ -94,17 +92,23 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
             ViewType={ViewType}
             submitChange={submitChange}
           />
-          <WizardValidationErrors errors={containerErrorsStore.getState()} />
-          <WizardStepControlPanel
-            wizardStep={wizardStep}
-            wizard={wizard}
-            provider={provider}
-            currentState={currentState}
-            setCurrentState={setCurrentState}
-            object={object}
-            submitChange={submitChange}
-            analytics={analytics}
-          />
+          <ReactGridLayout key="wizardStepFooterLayout" className="layout" cols={12} rowHeight={30}>
+            <Box key="errors" data-grid={{ x: 1, y: 1, w: 10, h: 1, static: true }}>
+              <WizardValidationErrors errors={containerErrorsStore.getState()} />
+            </Box>
+            <Box key="steps" data-grid={{ x: 1, y: 1, w: 10, h: 1, static: true }}>
+              <WizardStepControlPanel
+                wizardStep={wizardStep}
+                wizard={wizard}
+                provider={provider}
+                currentState={currentState}
+                setCurrentState={setCurrentState}
+                object={object}
+                submitChange={submitChange}
+                analytics={analytics}
+              />
+            </Box>
+          </ReactGridLayout>
         </Box>
       )}
     </>

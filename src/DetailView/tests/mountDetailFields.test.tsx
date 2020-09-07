@@ -22,6 +22,7 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
   const user = {}
   const analytics = undefined
   const ViewType = 'test'
+  const elementsKey = 'detail_fields'
 
   mountDetailFields({
     resourceName,
@@ -33,6 +34,7 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
     user,
     analytics,
     ViewType,
+    elementsKey,
   })
 
   expect(mockedMountComponents.mock.calls.length).toBe(1)

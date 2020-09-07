@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useStore } from 'effector-react'
+import * as GridLayout from 'react-grid-layout'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { setInitialValue } from '../../controllers'
@@ -9,6 +10,8 @@ import { mountComponents } from '../../../common/utils/mountComponents'
 import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
+
+const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
 type WizardStepComponentsProps = {
   elements: DetailFieldDescription[]
@@ -42,7 +45,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
   React.useEffect(() => {}, [state])
 
   return (
-    <>
+    <ReactGridLayout key="wizardStepComponentsLayout" className="layout" cols={12} rowHeight={30}>
       {mountComponents({
         setInitialValue,
         submitChange,
@@ -57,7 +60,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
         ViewType,
         containerStore,
       })}
-    </>
+    </ReactGridLayout>
   )
 }
 

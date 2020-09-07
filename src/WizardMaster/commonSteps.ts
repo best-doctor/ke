@@ -4,7 +4,7 @@ import { BaseWizardStep } from './interfaces'
 
 import { TextWidget } from '../DetailView/widgets/TextWidget'
 
-const defaultLayout = { x: 1, y: 1, w: 1, h: 1, static: true }
+const defaultLayout = { x: 1, y: 1, w: 10, h: 1, static: true }
 
 class ErrorDisplay extends BaseWizardStep {
   widgets = [
