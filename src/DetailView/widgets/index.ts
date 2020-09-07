@@ -5,5 +5,15 @@ import { ForeignKeySelectWidget } from './ForeignKeySelect'
 import { InputWidget } from './InputWidget'
 import { AvatarWidget } from './AvatarWidget'
 import { MultiSelectWidget } from './MultiSelectWidget'
+import { DateTimeRangeWidget } from './DateTimeRangeWidget'
 
-export { TextWidget, LinkWidget, SelectWidget, ForeignKeySelectWidget, InputWidget, AvatarWidget, MultiSelectWidget }
+export {
+  TextWidget,
+  LinkWidget,
+  SelectWidget,
+  ForeignKeySelectWidget,
+  InputWidget,
+  AvatarWidget,
+  MultiSelectWidget,
+  DateTimeRangeWidget,
+}

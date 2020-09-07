@@ -30,7 +30,7 @@ const getWidgetContent = (
 }
 
 const getPayload = (
-  value: string,
+  value: any,
   name: string,
   targetPayload: GenericAccessor
 ): string | { [key: string]: string } | null => {

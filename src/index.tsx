@@ -38,6 +38,7 @@ import {
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
+  DateTimeRangeWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -72,6 +73,7 @@ export {
   SelectWidget,
   ForeignKeySelectWidget,
   InputWidget,
+  DateTimeRangeWidget,
   getData,
   getWidgetContent,
   getPayload,
