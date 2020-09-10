@@ -118,8 +118,9 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper style={style} helpText={helpText}>
       <StyledTextEditor>
-        {/* @ts-ignore */}
         <RichTextEditor
+          // eslint-disable-next-line
+          // @ts-ignore
           toolbarConfig={toolbarConfig}
           editorClassName="text-editor-widget"
           value={value}
