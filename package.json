@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "0.13.0",
+    "version": "0.14.0",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -16,6 +16,7 @@
         "@types/firebase": "^3.2.1",
         "@types/react-datepicker": "^3.0.2",
         "@types/react-ga": "^2.3.0",
+        "@types/react-rte": "^0.16.1",
         "axios": "^0.19.2",
         "css-loader": "^3.6.0",
         "debounce-promise": "^3.1.2",
@@ -33,6 +34,7 @@
         "react-ga": "^3.1.2",
         "react-grid-layout": "0.16.6",
         "react-router-dom": "^5.1.2",
+        "react-rte": "^0.16.3",
         "react-select": "^3.1.0",
         "react-table": "^7.0.4",
         "style-loader": "^1.2.1",

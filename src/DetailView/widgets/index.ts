@@ -6,6 +6,7 @@ import { InputWidget } from './InputWidget'
 import { AvatarWidget } from './AvatarWidget'
 import { MultiSelectWidget } from './MultiSelectWidget'
 import { DateTimeRangeWidget } from './DateTimeRangeWidget'
+import { TextEditorWidget } from './TextEditorWidget'
 
 export {
   TextWidget,
@@ -16,4 +17,5 @@ export {
   AvatarWidget,
   MultiSelectWidget,
   DateTimeRangeWidget,
+  TextEditorWidget,
 }

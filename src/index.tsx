@@ -39,6 +39,7 @@ import {
   AvatarWidget,
   MultiSelectWidget,
   DateTimeRangeWidget,
+  TextEditorWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -100,4 +101,5 @@ export {
   SuccessDisplay,
   ErrorDisplay,
   BaseForm,
+  TextEditorWidget,
 }
