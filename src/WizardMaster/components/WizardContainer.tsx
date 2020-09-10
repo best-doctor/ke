@@ -27,6 +27,7 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
   const { wizard, provider, object, setObject, notifier, analytics, user, ViewType, show, submitChange } = props
 
   const [currentState, setCurrentState] = React.useState<string>('begin')
+  submitChange({ url: '', payload: { mainObject: object } })
 
   const getObject = (): object => {
     return containerStore.getState().__initial__ || object
