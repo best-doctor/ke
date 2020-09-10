@@ -50,6 +50,7 @@ import {
   DateTimeFilter,
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
+import { WidgetWrapper } from './common/components/WidgetWrapper'
 
 export {
   BaseAdmin,
@@ -102,4 +103,5 @@ export {
   ErrorDisplay,
   BaseForm,
   TextEditorWidget,
+  WidgetWrapper,
 }
