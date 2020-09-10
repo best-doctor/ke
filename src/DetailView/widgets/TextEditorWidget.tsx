@@ -51,6 +51,28 @@ const debounce = (func: Function, delay: number): any => {
   }
 }
 
+const valueToEditorFormat = (value: string, format = 'html'): any => {
+  return RichTextEditor.createValueFromString(value, format)
+}
+
+const valueFromEditorFormat = (value: { toString: Function }, format = 'html'): string => {
+  return value.toString(format)
+}
+
+const toolbarConfig = {
+  // Optionally specify the groups to display (displayed in the order listed).
+  display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'LINK_BUTTONS'],
+  INLINE_STYLE_BUTTONS: [
+    { label: 'Bold', style: 'BOLD', className: 'custom-css-class' },
+    { label: 'Italic', style: 'ITALIC' },
+    { label: 'Underline', style: 'UNDERLINE' },
+  ],
+  BLOCK_TYPE_BUTTONS: [
+    { label: 'UL', style: 'unordered-list-item' },
+    { label: 'OL', style: 'ordered-list-item' },
+  ],
+}
+
 const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
   const {
     name,
@@ -65,7 +87,7 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
   } = props
 
   const [value, setValue] = React.useState(
-    RichTextEditor.createValueFromString(getWidgetContent(name, detailObject, displayValue) || '', 'html')
+    valueToEditorFormat(getWidgetContent(name, detailObject, displayValue) || '')
   )
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
@@ -76,12 +98,12 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
     []
   )
 
-  setInitialValue({ [name]: value })
+  setInitialValue({ [name]: valueFromEditorFormat(value) })
 
   const handleChange = (editorValue: any): void => {
     setValue(editorValue)
 
-    const formatedValue = editorValue.toString('html')
+    const formatedValue = valueFromEditorFormat(editorValue)
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
@@ -96,7 +118,13 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper style={style} helpText={helpText}>
       <StyledTextEditor>
-        <RichTextEditor editorClassName="text-editor-widget" value={value} onChange={handleChange} />
+        {/* @ts-ignore */}
+        <RichTextEditor
+          toolbarConfig={toolbarConfig}
+          editorClassName="text-editor-widget"
+          value={value}
+          onChange={handleChange}
+        />
       </StyledTextEditor>
     </WidgetWrapper>
   )
