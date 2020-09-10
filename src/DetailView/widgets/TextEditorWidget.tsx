@@ -1,5 +1,5 @@
 import * as React from 'react'
-import RichTextEditor from "react-rte";
+import RichTextEditor from 'react-rte'
 import styled from 'styled-components'
 
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -42,14 +42,14 @@ const StyledTextEditor = styled.div`
 `
 
 const debounce = (func: Function, delay: number): any => {
-  let timeoutId: number;
-  return function(...args: any[]) {
+  let timeoutId: number
+  return function (...args: any[]) {
     clearInterval(timeoutId)
     // eslint-disable-next-line
     // @ts-ignore
     timeoutId = setTimeout(() => func.apply(this, args), delay)
-  };
-};
+  }
+}
 
 const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
   const {
@@ -64,12 +64,14 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
     setInitialValue,
   } = props
 
-  const [value, setValue] = React.useState(RichTextEditor.createValueFromString(getWidgetContent(name, detailObject, displayValue) || '', 'html'));
+  const [value, setValue] = React.useState(
+    RichTextEditor.createValueFromString(getWidgetContent(name, detailObject, displayValue) || '', 'html')
+  )
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
 
   const debounceCallback = React.useCallback(
     debounce((callbackValue: object) => {
-      submitChange({ url: targetUrl, payload: callbackValue });
+      submitChange({ url: targetUrl, payload: callbackValue })
     }, 1000),
     []
   )
@@ -79,8 +81,13 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
   const handleChange = (editorValue: any): void => {
     setValue(editorValue)
 
-    const formatedValue = editorValue.toString("html")
-    pushAnalytics({ eventName: EventNameEnum.INPUT_CHANGE, widgetType: WidgetTypeEnum.INPUT, value: formatedValue, ...props })
+    const formatedValue = editorValue.toString('html')
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value: formatedValue,
+      ...props,
+    })
 
     const inputPayload = getPayload(formatedValue, name, targetPayload)
     debounceCallback(inputPayload)
