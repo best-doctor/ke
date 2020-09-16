@@ -1,9 +1,8 @@
 import * as React from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import * as moment from 'moment'
-import styled from 'styled-components'
-import { Button } from '@chakra-ui/core/dist'
+import { Button } from '@chakra-ui/core'
+
+import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
@@ -33,73 +32,7 @@ type DateTimeRangeWidgetProps = {
   submitChange: Function
   oneDayInterval?: boolean | undefined
 }
-type BaseDateTimeRangeWidgetProps = {
-  startDate: Date | null
-  endDate: Date | null
-  handleChangeDate: Function
-  handleButtonClick: Function
-  helpText: string
-  style: object
-}
-const StyleDateTime = styled.div`
-  .styled-date-time {
-    border-width: 1px;
-    border-color: #cbd5e0;
-    border-radius: 0.25rem;
-    padding: 3px;
-    height: 40px;
-    width: 150px;
-  }
-`
 
-const StyleDateTimeItem = styled.div`
-  width: 150px;
-  height: 40px;
-  float: left;
-  margin-right: 5px;
-`
-
-const StyleItemSeparator = styled.div`
-  width: 15px;
-  height: 40px;
-  float: left;
-  text-align: center;
-  padding-top: 10px;
-  margin-right: 5px;
-`
-
-const StyleDateTimeButton = styled.div``
-const BaseDateTimeRangeWidget = (props: BaseDateTimeRangeWidgetProps): JSX.Element => {
-  const { startDate, endDate, handleChangeDate, handleButtonClick } = props
-  return (
-    <StyleDateTime>
-      <StyleDateTimeItem>
-        <DatePicker
-          className="styled-date-time"
-          selected={startDate}
-          onChange={(value: Date) => handleChangeDate(value, 'start')}
-          showTimeSelect
-          dateFormat="yyyy-MM-dd HH:mm"
-        />
-      </StyleDateTimeItem>
-      <StyleItemSeparator> - </StyleItemSeparator>
-      <StyleDateTimeItem>
-        <DatePicker
-          className="styled-date-time"
-          selected={endDate}
-          onChange={(value: Date) => handleChangeDate(value, 'end')}
-          showTimeSelect
-          dateFormat="yyyy-MM-dd HH:mm"
-        />
-      </StyleDateTimeItem>
-      <StyleDateTimeButton>
-        <Button variantColor="teal" variant="outline" onClick={(event) => handleButtonClick(event)}>
-          Весь день
-        </Button>
-      </StyleDateTimeButton>
-    </StyleDateTime>
-  )
-}
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const {
     name,
@@ -119,7 +52,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
   const content = getWidgetContent(name, detailObject, displayValue)
   if (content) {
-    ;[iStartDate, iEndDate] = content
+    [iStartDate, iEndDate] = content
   }
   const [startDate, setStartDate] = React.useState<Date | null>(iStartDate ? new Date(iStartDate) : null)
   const [endDate, setEndDate] = React.useState<Date | null>(iEndDate ? new Date(iEndDate) : null)
@@ -196,15 +129,17 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
     }
   }
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       <BaseDateTimeRangeWidget
         startDate={startDate}
         endDate={endDate}
         handleChangeDate={handleChangeDate}
-        handleButtonClick={handleButtonClick}
         helpText={helpText}
         style={style}
       />
+      <Button variantColor="teal" variant="outline" onClick={() => handleButtonClick()}>
+        Весь день
+      </Button>
     </WidgetWrapper>
   )
 }
