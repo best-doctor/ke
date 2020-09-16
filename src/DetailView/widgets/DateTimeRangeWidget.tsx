@@ -52,7 +52,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const targetUrl = getData(dataTarget, detailObject) || detailObject.url
   const content = getWidgetContent(name, detailObject, displayValue)
   if (content) {
-    [iStartDate, iEndDate] = content
+    ;[iStartDate, iEndDate] = content
   }
   const [startDate, setStartDate] = React.useState<Date | null>(iStartDate ? new Date(iStartDate) : null)
   const [endDate, setEndDate] = React.useState<Date | null>(iEndDate ? new Date(iEndDate) : null)
