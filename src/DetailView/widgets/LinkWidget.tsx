@@ -2,12 +2,12 @@ import * as React from 'react'
 import { Link } from '@chakra-ui/core'
 import styled from 'styled-components'
 
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
-import type { GenericAccessor } from '../../typing'
-import type { BaseAnalytic } from '../../integration/analytics'
+import type { GenericAccessor, WidgetProps } from '../../typing'
 
 const StyledLinkWidget = styled.div`
   border-width: 2px;
@@ -19,23 +19,15 @@ const StyledLinkWidget = styled.div`
   padding-bottom: 2px;
 `
 
-type LinkWidgetProps = {
-  name: string
-  resource: string
-  analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
-  detailObject: any
-  href: string | Function
-  displayValue: GenericAccessor
-  helpText: string
-  viewType: string
-  style: any
-}
+type LinkWidgetProps = WidgetProps & { href: GenericAccessor }
+
+const contentType = 'string'
 
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
-  const { name, detailObject, href, displayValue, helpText, style } = props
+  const { name, detailObject, href, helpText, style, containerStore } = props
 
-  const content = getWidgetContent(name, detailObject, displayValue)
+  const context = containerStore.getState()
+  const { content } = useWidgetInitialization({ ...props, contentType, context })
   const linkHref = getWidgetContent(name, detailObject, href)
 
   const handleClick = (): void => {

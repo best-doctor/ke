@@ -4,6 +4,7 @@ import { Link } from '@chakra-ui/core'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { LinkWidget } from '../../widgets/LinkWidget'
+import { mockedEffectorContainerStore, testProvider, testNotifier } from '../../../setupTests'
 
 const detailObject = {
   id: 100500,
@@ -23,6 +24,15 @@ test('Link widget properly rendered', () => {
       helpText="test"
       viewType="test_view"
       style={{}}
+      containerStore={mockedEffectorContainerStore}
+      provider={testProvider}
+      dataTarget={jest.fn()}
+      dataSource={jest.fn()}
+      targetPayload={jest.fn()}
+      setObject={jest.fn()}
+      notifier={testNotifier}
+      setInitialValue={jest.fn()}
+      submitChange={jest.fn()}
     />
   )
 

@@ -2,36 +2,13 @@ import * as React from 'react'
 import RichTextEditor from 'react-rte'
 import styled from 'styled-components'
 
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
+import { getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 
-import type { BaseProvider } from '../../admin/providers'
-import type { GenericAccessor } from '../../typing'
-import type { BaseAnalytic } from '../../integration/analytics/base'
-import type { BaseNotifier } from '../../common/notifier'
-
-type InputWidgetProps = {
-  name: string
-  helpText: string
-  resource: string
-  detailObject: { url: string }
-  useLocalStorage?: boolean | undefined
-  analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
-  displayValue: GenericAccessor
-  dataTarget: GenericAccessor
-  targetPayload: GenericAccessor
-  setObject: Function
-  notifier: BaseNotifier
-  provider: BaseProvider
-  viewType: string
-  style: object
-  setInitialValue: Function
-  submitChange: Function
-  containerStore: any
-}
+import type { WidgetProps } from '../../typing'
 
 const StyledTextEditor = styled.div`
   .text-editor-widget {
@@ -73,23 +50,21 @@ const toolbarConfig = {
   ],
 }
 
-const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    detailObject,
-    displayValue,
-    dataTarget,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-  } = props
+const contentType = 'string'
 
-  const [value, setValue] = React.useState(
-    valueToEditorFormat(getWidgetContent(name, detailObject, displayValue) || '')
-  )
-  const targetUrl = getData(dataTarget, detailObject) || detailObject.url
+const TextEditorWidget = (props: WidgetProps): JSX.Element => {
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+
+  const context = containerStore.getState()
+  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const editorContent = valueToEditorFormat(content as string)
+
+  const [value, setValue] = React.useState(editorContent)
+
+  React.useEffect(() => {
+    setValue(editorContent)
+    // eslint-disable-next-line
+  }, [content])
 
   const debounceCallback = React.useCallback(
     debounce((callbackValue: object) => {
@@ -98,7 +73,7 @@ const TextEditorWidget = (props: InputWidgetProps): JSX.Element => {
     []
   )
 
-  setInitialValue({ [name]: valueFromEditorFormat(value) })
+  setInitialValue({ [name]: content })
 
   const handleChange = (editorValue: any): void => {
     setValue(editorValue)

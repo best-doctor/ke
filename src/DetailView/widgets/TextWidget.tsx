@@ -1,9 +1,11 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Text, FormLabel, Box } from '@chakra-ui/core'
-import { getWidgetContent } from '../utils/dataAccess'
 
-import type { GenericAccessor } from '../../typing'
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
+// import { getWidgetContent } from '../utils/dataAccess'
+
+import type { WidgetProps } from '../../typing'
 
 const StyledTextWidget = styled.div`
   border-width: 2px;
@@ -15,16 +17,12 @@ const StyledTextWidget = styled.div`
   padding-bottom: 2px;
 `
 
-type TextWidgetProps = {
-  name: string
-  detailObject: any
-  helpText: string
-  displayValue: GenericAccessor
-  style: any
-}
+const contentType = 'string'
 
-const TextWidget = ({ name, detailObject, displayValue, helpText, style }: TextWidgetProps): JSX.Element => {
-  const content = getWidgetContent(name, detailObject, displayValue)
+const TextWidget = (props: WidgetProps): JSX.Element => {
+  const { containerStore, style, helpText } = props
+
+  const { content } = useWidgetInitialization({ ...props, contentType, context: containerStore.getState() })
 
   return (
     <Box {...style}>

@@ -4,7 +4,7 @@ import { DebounceInput } from 'react-debounce-input'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { InputWidget } from '../../widgets/InputWidget'
-import { testProvider, testNotifier } from '../../../setupTests'
+import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const submitChangeMock = jest.fn()
 
@@ -22,6 +22,7 @@ const getComponent = (): JSX.Element => (
     widgetAnalytics={jest.fn()}
     helpText="test"
     detailObject={detailObject}
+    dataSource={jest.fn()}
     setObject={jest.fn()}
     displayValue="test"
     dataTarget="https://some-test-target.com"
@@ -32,6 +33,7 @@ const getComponent = (): JSX.Element => (
     style={{}}
     setInitialValue={jest.fn()}
     submitChange={submitChangeMock}
+    containerStore={mockedEffectorContainerStore}
   />
 )
 

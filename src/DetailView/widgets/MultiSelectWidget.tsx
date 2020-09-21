@@ -2,44 +2,22 @@ import * as React from 'react'
 
 import type { ValueType } from 'react-select/src/types'
 
-import type { BaseProvider } from 'index'
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics } from '../../integration/analytics'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
-import { getWidgetContent } from '../utils/dataAccess'
-
-import type { BaseAnalytic } from '../../integration/analytics'
-import type { BaseNotifier } from '../../common/notifier'
-import type { GenericAccessor } from '../../typing'
-
-type MultiSelectWidgetProps = {
-  name: string
-  resource: string
-  detailObject: object
-  helpText: string
-  setObject: Function
-  displayValue: GenericAccessor
-  dataSource: string
-  dataTarget: GenericAccessor
-  targetPayload: GenericAccessor
-  provider: BaseProvider
-  analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
-  notifier: BaseNotifier
-  optionLabel: Function
-  optionValue: Function
-  viewType: string
-  style: object
-  setInitialValue: Function
-  submitChange: Function
-}
+import type { WidgetProps } from '../../typing'
 
 type MultiSelectValue = {
   [key: string]: string
 }
 
 type RawWidgetPayload = (string | number | undefined)[]
+
+type MultiSelectWidgetProps = WidgetProps & { optionLabel: Function, optionValue: Function }
+
+const contentType = 'object'
 
 const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[] => {
   if (widgetValue) {
@@ -56,17 +34,16 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     optionValue,
     style,
     helpText,
-    detailObject,
-    displayValue,
     provider,
-    dataSource,
     setInitialValue,
     submitChange,
+    containerStore,
   } = props
 
-  const [value, setValue] = React.useState<MultiSelectValue[]>(
-    getWidgetContent(name, detailObject, displayValue, 'object')
-  )
+  const context = containerStore.getState()
+  const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, contentType, context })
+
+  const [value, setValue] = React.useState<MultiSelectValue[]>(content as MultiSelectValue[])
   setInitialValue({ [name]: extractPayloadIds(value) })
 
   const handleChange = (changeValue: ValueType<MultiSelectValue[]>): void => {
@@ -85,14 +62,14 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
       ...props,
     })
 
-    submitChange({ url: '', payload: { [name]: payloadIds } })
+    submitChange({ url: targetUrl, payload: { [name]: payloadIds } })
   }
 
   return (
     <WidgetWrapper style={style} helpText={helpText}>
       <AsyncSelectWidget
         provider={provider}
-        dataResourceUrl={dataSource}
+        dataResourceUrl={dataResourceUrl}
         handleChange={handleChange}
         closeMenuOnSelect={false}
         value={value}

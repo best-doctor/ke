@@ -1,50 +1,22 @@
 import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Textarea } from '@chakra-ui/core'
+
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
+import { getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 
-import type { BaseProvider } from '../../admin/providers'
-import type { GenericAccessor } from '../../typing'
-import type { BaseAnalytic } from '../../integration/analytics/base'
-import type { BaseNotifier } from '../../common/notifier'
+import type { WidgetProps } from '../../typing'
 
-type InputWidgetProps = {
-  name: string
-  helpText: string
-  resource: string
-  detailObject: { url: string }
-  useLocalStorage?: boolean | undefined
-  analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
-  displayValue: GenericAccessor
-  dataTarget: GenericAccessor
-  targetPayload: GenericAccessor
-  setObject: Function
-  notifier: BaseNotifier
-  provider: BaseProvider
-  viewType: string
-  style: object
-  setInitialValue: Function
-  submitChange: Function
-}
+const contentType = 'string'
 
-const InputWidget = (props: InputWidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    detailObject,
-    displayValue,
-    dataTarget,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-  } = props
-  const targetUrl = getData(dataTarget, detailObject) || detailObject.url
-  const content = getWidgetContent(name, detailObject, displayValue)
+const InputWidget = (props: WidgetProps): JSX.Element => {
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+
+  const context = containerStore.getState()
+  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
 
   setInitialValue({ [name]: content })
 
@@ -58,7 +30,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper style={style} helpText={helpText}>
       <DebounceInput
-        value={content}
+        value={content as string}
         resize="none"
         height={263}
         borderWidth="2px"

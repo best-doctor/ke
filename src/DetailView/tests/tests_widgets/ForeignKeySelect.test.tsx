@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { ForeignKeySelectWidget } from '../../widgets/ForeignKeySelect'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
-import { testProvider, testNotifier } from '../../../setupTests'
+import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const detailObject = {
   id: '100500',
@@ -14,9 +14,6 @@ const detailObject = {
 }
 
 const submitChangeMock = jest.fn()
-const containerStoreMock = {
-  getState: () => {},
-}
 
 const getComponent = (): JSX.Element => (
   <ForeignKeySelectWidget
@@ -39,7 +36,7 @@ const getComponent = (): JSX.Element => (
     style={{}}
     setInitialValue={jest.fn()}
     submitChange={submitChangeMock}
-    containerStore={containerStoreMock}
+    containerStore={mockedEffectorContainerStore}
   />
 )
 

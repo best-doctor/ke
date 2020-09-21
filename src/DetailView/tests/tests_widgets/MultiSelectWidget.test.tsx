@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { MultiSelectWidget } from '../../widgets/MultiSelectWidget'
-import { testProvider, testNotifier } from '../../../setupTests'
+import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const submitChangeMock = jest.fn()
 
@@ -36,6 +36,7 @@ const getComponent = (): JSX.Element => (
     optionValue={jest.fn()}
     setInitialValue={jest.fn()}
     submitChange={submitChangeMock}
+    containerStore={mockedEffectorContainerStore}
   />
 )
 
@@ -52,5 +53,5 @@ test('Submit user multiselect change', () => {
 
   act(() => (component.find('AsyncSelectWidget').props() as { handleChange: Function }).handleChange(value))
 
-  expect(submitChangeMock).toHaveBeenCalledWith({ url: '', payload: { test: [100500] } })
+  expect(submitChangeMock).toHaveBeenCalledWith({ url: 'test', payload: { test: [100500] } })
 })

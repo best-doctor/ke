@@ -1,40 +1,20 @@
 import * as React from 'react'
 
+import type { WidgetProps } from 'typing'
+
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
-import { getData, getWidgetContent } from '../utils/dataAccess'
-import type { BaseProvider } from '../../admin/providers'
-import type { BaseAnalytic } from '../../integration/analytics'
-import type { BaseNotifier } from '../../common/notifier'
+import { getPayload } from '../utils/dataAccess'
 
-type ForeignKeySelectWidgetProps = {
-  name: string
-  detailObject: { [key: string]: object | string }
-  resource: string
-  provider: BaseProvider
-  useLocalStorage?: boolean | undefined
-  helpText: string
-  displayValue: string | Function
-  targetPayload: Function
-  dataSource: string
-  dataTarget: string | Function
-  optionLabel: Function
-  optionValue: Function
-  setObject: Function
-  notifier: BaseNotifier
-  analytics: BaseAnalytic | undefined
-  viewType: string
-  widgetAnalytics: Function | boolean | undefined
-  style: object
-  setInitialValue: Function
-  submitChange: Function
-  notBlockingValidators?: Function[]
-  blockingValidators?: Function[]
-  containerStore: { getState: Function }
-}
+type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function, optionValue: Function }
+
+const contentType = 'object'
+const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
+const widgetType = WidgetTypeEnum.INPUT
 
 const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   const {
@@ -42,9 +22,6 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     detailObject,
     provider,
     helpText,
-    displayValue,
-    dataSource,
-    dataTarget,
     targetPayload,
     optionLabel,
     optionValue,
@@ -56,24 +33,26 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     containerStore,
   } = props
 
-  const [value, setValue] = React.useState<object>(getWidgetContent(name, detailObject, displayValue, 'object'))
-  const dataResourceUrl = getData(dataSource, containerStore.getState())
+  const context = containerStore.getState()
 
-  setInitialValue(value ? targetPayload(value) : null)
+  const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, contentType, context })
 
-  const targetUrl = getData(dataTarget, detailObject) || detailObject.url
+  const [value, setValue] = React.useState<object>(content as object)
 
-  const handleChange = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
+  setInitialValue(value ? getPayload(value, name, targetPayload) : null)
+
+  const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(changeValue)
 
     pushAnalytics({
-      eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
-      widgetType: WidgetTypeEnum.INPUT,
+      eventName,
+      widgetType,
       value: changeValue,
       ...props,
     })
 
-    const widgetPayload = targetPayload(changeValue)
+    const widgetPayload = getPayload(changeValue, name, targetPayload)
+
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
 
@@ -88,7 +67,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
         <AsyncSelectWidget
           provider={provider}
           dataResourceUrl={dataResourceUrl}
-          handleChange={handleChange}
+          handleChange={handleChangeValue}
           value={value}
           isClearable
           getOptionLabel={optionLabel}
