@@ -15,7 +15,7 @@ type MultiSelectValue = {
 
 type RawWidgetPayload = (string | number | undefined)[]
 
-type MultiSelectWidgetProps = WidgetProps & { optionLabel: Function, optionValue: Function }
+type MultiSelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
 const contentType = 'object'
 

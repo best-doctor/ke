@@ -10,7 +10,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import { getPayload } from '../utils/dataAccess'
 
-type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function, optionValue: Function }
+type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
 const contentType = 'object'
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
