@@ -1,13 +1,14 @@
 import * as React from 'react'
 
 import type { BaseProvider } from '../../admin/providers'
+import type { DetailObject } from '../../typing'
 
 const makeCheck = (
   validators: Function[],
   changeValue: object | string,
   setMessage: Function,
   provider: BaseProvider,
-  detailObject: object
+  detailObject: DetailObject
 ): void => {
   validators.forEach((validator: Function) => {
     validator(changeValue, provider, detailObject).then((validationResult: string) =>
@@ -21,7 +22,7 @@ const useValidation = (
   blockingValidators: Function[],
   notBlockingValidators: Function[],
   provider: BaseProvider,
-  detailObject: object
+  detailObject: DetailObject
 ): { infoMessages: string[]; errorMessages: string[]; handleAction: Function } => {
   const [infoMessages, setInfoMessage] = React.useState<string[]>([])
   const [errorMessages, setErrorMessage] = React.useState<string[]>([])

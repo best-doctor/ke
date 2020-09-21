@@ -9,7 +9,7 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 import type { BaseAnalytic } from '../../integration/analytics'
 import type { BaseProvider } from '../../admin/providers'
 import type { BaseNotifier } from '../../common/notifier'
-import type { GenericAccessor } from '../../typing'
+import type { GenericAccessor, DetailObject } from '../../typing'
 
 type SelectObject = {
   value: string
@@ -19,7 +19,7 @@ type SelectObject = {
 type SelectProps = {
   name: string
   resource: string
-  detailObject: any
+  detailObject: DetailObject
   helpText: string
   setObject: Function
   displayValue: GenericAccessor
@@ -38,7 +38,7 @@ type SelectProps = {
 
 const getSelectContent = (
   name: string,
-  detailObject: object,
+  detailObject: DetailObject,
   displayValue: GenericAccessor,
   expectedType: string
 ): [string, string] => {

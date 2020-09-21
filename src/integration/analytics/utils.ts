@@ -1,4 +1,5 @@
 import { getFirebaseEvent, getNameFromDataPath, getNewValueByCommonFields } from './firebase/utils'
+import type { DetailObject } from '../../typing'
 
 import type { BaseAnalytic } from './index'
 
@@ -9,7 +10,7 @@ type widgetAnalyticsParams = {
   analytics: BaseAnalytic | undefined
   widgetAnalytics?: Function | boolean | undefined
   viewType: string
-  detailObject?: any
+  detailObject?: DetailObject
   resource: string
   name?: string
   value?: any

@@ -1,10 +1,13 @@
 import { get } from 'lodash'
+import type { DetailObject } from 'typing'
 
 import type { FirebaseEvent } from '../index'
 import { WidgetTypeEnum } from './enums'
 
+type AnalyticsValue = string | object
+
 type WidgetAnalyticsProps = {
-  object: any
+  object: DetailObject
   onChangeValue: any
   eventName: string
   widgetName: string
@@ -17,17 +20,26 @@ type WidgetAnalyticsProps = {
   newValue?: string
 }
 
+type CommonFilterAnalyticsPayload = {
+  widgetName: string
+  widgetType: string
+  value: AnalyticsValue
+  resource: string
+  resourceId: string | undefined
+  viewType: string
+}
+
 const getFirebaseEvent = (widgetAnalyticsProps: WidgetAnalyticsProps): FirebaseEvent => {
   const { eventName, widgetName, widgetType, newValue, resourceName, viewType, resourceId, url } = widgetAnalyticsProps
   return { eventName, eventPayload: { widgetName, widgetType, newValue, viewType, resourceName, resourceId, url } }
 }
 
-const getNewValueByCommonFields = (onChangeValue: any): string => {
+const getNewValueByCommonFields = (onChangeValue: AnalyticsValue): string => {
   const commonFieldsList = ['target.value', 'uuid', 'id', 'email']
 
   // eslint-disable-next-line
   for (const field of commonFieldsList) {
-    const newValue = get(onChangeValue, field)
+    const newValue = get(onChangeValue as object, field)
 
     if (newValue) return newValue
   }
@@ -46,7 +58,11 @@ const getAnalyticsFilterName = (resourceName: string, filterName: string): strin
   return `${resourceName}_${filterName}_filter`
 }
 
-const getCommonFilterAnalyticsPayload = (resourceName: string, filterValue: any, name: string): any => {
+const getCommonFilterAnalyticsPayload = (
+  resourceName: string,
+  filterValue: AnalyticsValue,
+  name: string
+): CommonFilterAnalyticsPayload => {
   return {
     widgetName: getAnalyticsFilterName(resourceName, name),
     widgetType: WidgetTypeEnum.FILTER,

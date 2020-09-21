@@ -49,11 +49,18 @@ type TableIconButtonProps = SpaceProps & {
   icon: any
   onClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined
   isDisabled: boolean
-  children: JSX.Element
+  children?: JSX.Element
   variantColor?: string
 }
 
-const TableIconButton: any = ({ icon, onClick, isDisabled, children, variantColor, ...rest }: TableIconButtonProps) => {
+const TableIconButton = ({
+  icon,
+  onClick,
+  isDisabled,
+  children,
+  variantColor,
+  ...rest
+}: TableIconButtonProps): JSX.Element => {
   return (
     <IconButton
       size="sm"

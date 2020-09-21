@@ -4,6 +4,7 @@ import { configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import axios from 'axios'
 
+import type { Store } from 'effector'
 import { BaseWizard, BaseWizardStep } from './WizardMaster/interfaces'
 import { ChakraUINotifier } from './common/notifier'
 import { TextWidget } from './DetailView/widgets/TextWidget'
@@ -87,4 +88,17 @@ const mockPagination = {
   prevUrl: '',
 }
 
-export { testAdmin, testProvider, testNotifier, testWizard, testWizardStep, dataMockResponse, mockPagination }
+const mockedEffectorContainerStore = {
+  getState: () => {},
+} as Store<object>
+
+export {
+  testAdmin,
+  testProvider,
+  testNotifier,
+  testWizard,
+  testWizardStep,
+  dataMockResponse,
+  mockPagination,
+  mockedEffectorContainerStore,
+}
