@@ -18,7 +18,7 @@ type RenderDetailProps = {
   resourceName: string
   admin: BaseAdmin
   provider: BaseProvider
-  user: any
+  user: object
   analytics: BaseAnalytic | undefined
 }
 
@@ -33,8 +33,9 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   document.title = `${admin.verboseName} # ${id}`
 
   useEffect(() => {
-    provider.getObject(admin.baseUrl, id).then((res) => setObject(res))
-  }, [id, provider, admin.baseUrl])
+    const resource = admin.getResource(id)
+    provider.getObject(resource).then((res) => setObject(res))
+  }, [id, provider, admin])
 
   const containersToMount = {
     detail_fields: mountDetailFields,

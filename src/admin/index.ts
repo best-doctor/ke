@@ -7,8 +7,6 @@ import type {
 } from './fields/FieldDescription'
 
 export abstract class BaseAdmin {
-  abstract baseUrl: string
-
   abstract verboseName?: string
 
   abstract permissions?: string[]
@@ -22,4 +20,6 @@ export abstract class BaseAdmin {
   abstract detail_fields: DetailFieldDescription[]
 
   abstract wizards?: WizardFieldDescription
+
+  abstract getResource(lookupField?: string | undefined): string
 }

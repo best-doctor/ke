@@ -35,7 +35,7 @@ const storeDetailEffect = createEffect({
     resourceId: string
     provider: BaseProvider
   }): Promise<any[]> {
-    const data = await provider.getObject(resourceUrl, resourceId)
+    const data = await provider.getObject(`${resourceUrl}${resourceId}/`)
 
     return [data, resourceUrl + resourceId]
   },

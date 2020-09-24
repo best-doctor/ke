@@ -32,7 +32,7 @@ export abstract class BaseProvider {
   }
 
   getList = async (
-    url: string,
+    url: string | URL,
     filters: Filter[] | null = null,
     page: number | null = null
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
@@ -43,8 +43,8 @@ export abstract class BaseProvider {
     return this.navigate(generatedUrl, resourceFilters)
   }
 
-  getObject = async (resourceUrl: string, objectId: string): Promise<Model> => {
-    const response = await this.http.get(`${resourceUrl}${objectId}/`)
+  getObject = async (resourceUrl: string): Promise<Model> => {
+    const response = await this.http.get(resourceUrl)
     return response.data.data
   }
 
@@ -71,8 +71,11 @@ export abstract class BaseProvider {
     return [data, tableFilters, pagination]
   }
 
-  parseUrl = (baseUrl: string): [string, Filter[]] => {
-    const url = new URL(baseUrl)
+  parseUrl = (baseUrl: string | URL): [string, Filter[]] => {
+    let url = baseUrl
+    if (typeof url === 'string') {
+      url = new URL(url)
+    }
 
     const searchParamsObject = FilterManager.convertSearchParamsToObject(url.searchParams)
     const filters = FilterManager.parseQueryFilters(searchParamsObject)
