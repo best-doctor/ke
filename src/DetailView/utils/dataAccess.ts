@@ -2,7 +2,7 @@ import { get } from 'lodash'
 
 import type { GenericAccessor, DetailObject } from '../../typing'
 
-const getData = (handler: GenericAccessor, data: object, context = {}): any => {
+const getData = (handler: GenericAccessor, data: DetailObject, context = {}): any => {
   if (typeof handler === 'function') {
     return handler(data, context)
   }
