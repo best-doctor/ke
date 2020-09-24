@@ -1,10 +1,10 @@
 import { get } from 'lodash'
 
-import type { GenericAccessor } from '../../typing'
+import type { GenericAccessor, DetailObject } from '../../typing'
 
-const getData = (handler: GenericAccessor, data: any): any => {
+const getData = (handler: GenericAccessor, data: object, context = {}): any => {
   if (typeof handler === 'function') {
-    return handler(data)
+    return handler(data, context)
   }
 
   if (typeof handler === 'string') {
@@ -16,11 +16,12 @@ const getData = (handler: GenericAccessor, data: any): any => {
 
 const getWidgetContent = (
   name: string,
-  detailObject: object,
+  detailObject: DetailObject,
   handler: GenericAccessor,
+  context = {},
   expectedType = 'string'
 ): any => {
-  const widgetContent = getData(handler, detailObject)
+  const widgetContent = getData(handler, detailObject, context)
 
   if (!widgetContent || typeof widgetContent !== expectedType) {
     return get(detailObject, name)
