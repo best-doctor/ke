@@ -1,4 +1,5 @@
 import { BaseAdmin } from 'admin'
+import type { WidgetProps } from 'typing'
 import { BaseProvider } from 'admin/providers'
 import { makeUpdateWithNotification } from 'admin/providers/utils'
 import type {
@@ -24,6 +25,7 @@ import { RenderList } from 'ListView/RenderList'
 import { RenderDetail } from 'DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
+import { useWidgetInitialization } from 'common/hooks/useWidgetInitialization'
 import { StoreManager } from 'common/store'
 import { getData, getWidgetContent, getPayload } from 'DetailView/utils/dataAccess'
 import { hasPermission } from 'common/permissions'
@@ -106,4 +108,6 @@ export {
   TextEditorWidget,
   WidgetWrapper,
   DateTimeRangeListWidget,
+  useWidgetInitialization,
+  WidgetProps,
 }
