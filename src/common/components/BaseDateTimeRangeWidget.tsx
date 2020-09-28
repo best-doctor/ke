@@ -8,9 +8,9 @@ type BaseDateTimeRangeWidgetProps = {
   startDate: Date | null
   endDate: Date | null
   handleChangeDate: Function
-  helpText: string
-  style: object
+  itemIndex?: number | undefined
 }
+
 const StyleDateTime = styled.div`
   .styled-date-time {
     border-width: 1px;
@@ -39,7 +39,7 @@ const StyleItemSeparator = styled.div`
 `
 
 const BaseDateTimeRangeWidget = (props: BaseDateTimeRangeWidgetProps): JSX.Element => {
-  const { startDate, endDate, handleChangeDate } = props
+  const { startDate, endDate, handleChangeDate, itemIndex = 0 } = props
 
   return (
     <StyleDateTime>
@@ -47,7 +47,7 @@ const BaseDateTimeRangeWidget = (props: BaseDateTimeRangeWidgetProps): JSX.Eleme
         <DatePicker
           className="styled-date-time"
           selected={startDate}
-          onChange={(value: Date) => handleChangeDate(value, 'start')}
+          onChange={(value: Date) => handleChangeDate(value, 'start', itemIndex)}
           showTimeSelect
           dateFormat="yyyy-MM-dd HH:mm"
         />
@@ -57,7 +57,7 @@ const BaseDateTimeRangeWidget = (props: BaseDateTimeRangeWidgetProps): JSX.Eleme
         <DatePicker
           className="styled-date-time"
           selected={endDate}
-          onChange={(value: Date) => handleChangeDate(value, 'end')}
+          onChange={(value: Date) => handleChangeDate(value, 'end', itemIndex)}
           showTimeSelect
           dateFormat="yyyy-MM-dd HH:mm"
         />

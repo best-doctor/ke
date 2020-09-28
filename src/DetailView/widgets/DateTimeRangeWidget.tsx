@@ -4,74 +4,43 @@ import { Button } from '@chakra-ui/core'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
+import { getPayload } from '../utils/dataAccess'
+import { getNewDateRange } from '../utils/dateUtils'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
-import type { BaseProvider } from '../../admin/providers'
-import type { GenericAccessor } from '../../typing'
-import type { BaseAnalytic } from '../../integration/analytics/base'
-import type { BaseNotifier } from '../../common/notifier'
+import type { OptionalDate, WidgetProps } from '../../typing'
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 
-type DateTimeRangeWidgetProps = {
-  name: string
-  helpText: string
-  resource: string
-  detailObject: any
-  useLocalStorage?: boolean | undefined
-  analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
-  displayValue: GenericAccessor
-  dataTarget: GenericAccessor
-  targetPayload: GenericAccessor
-  setObject: Function
-  notifier: BaseNotifier
-  provider: BaseProvider
-  viewType: string
-  style: object
-  setInitialValue: Function
-  submitChange: Function
-  oneDayInterval?: boolean | undefined
+type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undefined }
+
+const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string, string] | null => {
+  if (dateFrom && dateTo) {
+    return [moment(dateFrom).format('YYYY-MM-DDTHH:mm:ss'), moment(dateTo).format('YYYY-MM-DDTHH:mm:ss')]
+  }
+  return null
 }
 
+const contentType = 'string'
+
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    detailObject,
-    displayValue,
-    dataTarget,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-    oneDayInterval,
-  } = props
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props
+
+  const context = containerStore.getState()
   let iStartDate = null
   let iEndDate = null
 
-  const targetUrl = getData(dataTarget, detailObject) || detailObject.url
-  const content = getWidgetContent(name, detailObject, displayValue)
+  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
   if (content) {
-    ;[iStartDate, iEndDate] = content
+    ;[iStartDate, iEndDate] = content as [string, string]
   }
-  const [startDate, setStartDate] = React.useState<Date | null>(iStartDate ? new Date(iStartDate) : null)
-  const [endDate, setEndDate] = React.useState<Date | null>(iEndDate ? new Date(iEndDate) : null)
+  const [startDate, setStartDate] = React.useState<OptionalDate>(iStartDate ? new Date(iStartDate) : null)
+  const [endDate, setEndDate] = React.useState<OptionalDate>(iEndDate ? new Date(iEndDate) : null)
+
   setInitialValue({ [name]: content })
 
-  const datesAreOnSameDay = (first: Date, second: Date): boolean =>
-    first.getFullYear() === second.getFullYear() &&
-    first.getMonth() === second.getMonth() &&
-    first.getDate() === second.getDate()
-
-  const getInputPayload = (dateFrom: Date | null, dateTo: Date | null): [string, string] | null => {
-    if (dateFrom && dateTo) {
-      return [moment(dateFrom).format('YYYY-MM-DDTHH:mm:ss'), moment(dateTo).format('YYYY-MM-DDTHH:mm:ss')]
-    }
-    return null
-  }
-
-  const handleChangeDate = (date: Date | null, dateKind: string, save = true): void => {
+  const handleChangeDate = (date: OptionalDate, dateKind: string, save = true): void => {
     const changeValue = date ? moment(date).format('YYYY-MM-DDTHH:mm:ss') : ''
+
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
@@ -79,26 +48,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
       ...props,
     })
 
-    let newStartDate = null
-    let newEndDate = null
-
-    if (dateKind === 'start') {
-      newStartDate = date
-      newEndDate = endDate || date
-    } else {
-      newStartDate = startDate || date
-      newEndDate = date
-    }
-
-    if (newStartDate && newEndDate) {
-      if ((oneDayInterval && !datesAreOnSameDay(newStartDate, newEndDate)) || newEndDate < newStartDate) {
-        if (dateKind === 'start') {
-          newEndDate = newStartDate
-        } else {
-          newStartDate = newEndDate
-        }
-      }
-    }
+    const [newStartDate, newEndDate] = getNewDateRange(dateKind, date, startDate, endDate, oneDayInterval)
 
     setStartDate(newStartDate)
     setEndDate(newEndDate)
@@ -130,13 +80,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   }
   return (
     <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
-      <BaseDateTimeRangeWidget
-        startDate={startDate}
-        endDate={endDate}
-        handleChangeDate={handleChangeDate}
-        helpText={helpText}
-        style={style}
-      />
+      <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />
       <Button variantColor="teal" variant="outline" onClick={() => handleButtonClick()}>
         Весь день
       </Button>
