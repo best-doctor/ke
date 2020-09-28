@@ -40,6 +40,7 @@ import {
   MultiSelectWidget,
   DateTimeRangeWidget,
   TextEditorWidget,
+  DateTimeRangeListWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -104,4 +105,5 @@ export {
   BaseForm,
   TextEditorWidget,
   WidgetWrapper,
+  DateTimeRangeListWidget,
 }
