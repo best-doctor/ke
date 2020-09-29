@@ -8,6 +8,7 @@ import { MultiSelectWidget } from './MultiSelectWidget'
 import { DateTimeRangeWidget } from './DateTimeRangeWidget'
 import { TextEditorWidget } from './TextEditorWidget'
 import { DateTimeRangeListWidget } from './DateTimeRangeListWidget'
+import { DateTimeWidget } from './DateTimeWidget'
 
 export {
   TextWidget,
@@ -20,4 +21,5 @@ export {
   DateTimeRangeWidget,
   TextEditorWidget,
   DateTimeRangeListWidget,
+  DateTimeWidget,
 }

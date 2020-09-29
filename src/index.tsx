@@ -44,6 +44,7 @@ import {
   DateTimeRangeWidget,
   TextEditorWidget,
   DateTimeRangeListWidget,
+  DateTimeWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -112,4 +113,5 @@ export {
   useWidgetInitialization,
   WidgetProps,
   handleUserAction,
+  DateTimeWidget,
 }

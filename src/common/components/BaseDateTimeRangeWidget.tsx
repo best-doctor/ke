@@ -66,4 +66,4 @@ const BaseDateTimeRangeWidget = (props: BaseDateTimeRangeWidgetProps): JSX.Eleme
   )
 }
 
-export { BaseDateTimeRangeWidget }
+export { BaseDateTimeRangeWidget, StyleDateTime }
