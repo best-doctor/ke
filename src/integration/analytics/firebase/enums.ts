@@ -1,5 +1,6 @@
 enum EventNameEnum {
   LINK_CLICK = 'link_click',
+  RADIO_BUTTON_CHOICE = 'radio_button_choice',
   DATE_CHANGE = 'date_change',
   DATETIME_CHANGE = 'datetime_change',
   SELECT_OPTION_CHANGE = 'select_option_change',
