@@ -69,7 +69,7 @@ const TextEditorWidget = (props: WidgetProps): JSX.Element => {
   const debounceCallback = React.useCallback(
     debounce((callbackValue: object) => {
       submitChange({ url: targetUrl, payload: callbackValue })
-    }, 1000),
+    }, 3000),
     []
   )
 
