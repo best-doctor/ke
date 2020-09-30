@@ -3,7 +3,7 @@ import { getData, getWidgetContent } from '../../DetailView/utils/dataAccess'
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
 type InitializationParameters = {
-  contentType: string | undefined
+  contentType?: string | undefined
   context: object
 }
 

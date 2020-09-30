@@ -80,7 +80,7 @@ class TestWizard extends BaseWizard {
 
 const testWizard = new TestWizard('Test Wizard')
 
-const dataMockResponse = [{ id: '100500', test: 'key' }]
+const dataMockResponse = [{ id: '100500', test: 'key', uuid: '81-test-uuid-100500', title: 'test' }]
 
 const mockPagination = {
   page: 100500,
