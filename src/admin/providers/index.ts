@@ -59,7 +59,7 @@ export abstract class BaseProvider {
   }
 
   patch = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response = await this.http.put(resourceUrl, payload)
+    const response = await this.http.patch(resourceUrl, payload)
     return response.data.data
   }
 
