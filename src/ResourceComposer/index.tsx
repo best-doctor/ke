@@ -54,8 +54,8 @@ const ResourceComposer = ({
   withSideBar = true,
   permissions = [],
 }: {
-  permissions: string[]
-  withSideBar: boolean
+  permissions?: string[]
+  withSideBar?: boolean
   children: JSX.Element[]
 }): JSX.Element => {
   const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
