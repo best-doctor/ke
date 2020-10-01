@@ -56,6 +56,7 @@ import {
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
+import { ValidationWrapper } from './common/components/ValidationWrapper'
 
 export {
   BaseAdmin,
@@ -114,4 +115,5 @@ export {
   WidgetProps,
   handleUserAction,
   DateTimeWidget,
+  ValidationWrapper,
 }
