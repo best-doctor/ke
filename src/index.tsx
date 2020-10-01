@@ -45,6 +45,7 @@ import {
   TextEditorWidget,
   DateTimeRangeListWidget,
   DateTimeWidget,
+  RadioButtonWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -116,4 +117,5 @@ export {
   handleUserAction,
   DateTimeWidget,
   ValidationWrapper,
+  RadioButtonWidget,
 }

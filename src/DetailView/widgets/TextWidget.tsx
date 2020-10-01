@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Text, FormLabel, Box } from '@chakra-ui/core'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
-// import { getWidgetContent } from '../utils/dataAccess'
 
 import type { WidgetProps } from '../../typing'
 
@@ -15,6 +14,7 @@ const StyledTextWidget = styled.div`
   padding-right: 2px;
   padding-top: 2px;
   padding-bottom: 2px;
+  white-space: pre-line;
 `
 
 const contentType = 'string'

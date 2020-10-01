@@ -3,7 +3,7 @@ import { getPayload } from '../../DetailView/utils/dataAccess'
 import { pushAnalytics } from '../../integration/analytics'
 
 type ActionHandlerArguments = WidgetProps & {
-  targetUrl: string | undefined
+  targetUrl?: string | undefined
   widgetValue: string | object | undefined
   widgetType: string
   eventName: string
