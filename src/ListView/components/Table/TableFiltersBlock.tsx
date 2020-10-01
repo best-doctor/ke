@@ -63,7 +63,7 @@ const mountFilterTemplates = (props: FilterBlockProps, history: any): JSX.Elemen
             variantColor="teal"
             variant="outline"
             onClick={() => filterTemplatesOnClick(listFilterTemplate, props, history)}
-            maxWidth={150}
+            maxWidth={250}
             m={2}
             key={listFilterTemplate.name}
           >
