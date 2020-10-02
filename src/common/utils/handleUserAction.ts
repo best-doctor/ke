@@ -4,7 +4,7 @@ import { pushAnalytics } from '../../integration/analytics'
 
 type ActionHandlerArguments = WidgetProps & {
   targetUrl?: string | undefined
-  widgetValue: string | object | undefined
+  widgetValue?: string | object | undefined
   widgetType: string
   eventName: string
 }
