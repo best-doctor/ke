@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as moment from 'moment'
 import { Button } from '@chakra-ui/core'
+import styled from 'styled-components'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -10,7 +11,6 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { GenericAccessor, OptionalDate, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
-import styled from 'styled-components'
 
 type DateRange = [OptionalDate, OptionalDate]
 
