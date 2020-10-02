@@ -34,6 +34,7 @@ import { BaseNotifier } from 'common/notifier'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import {
+  AsyncTextWidget,
   TextWidget,
   LinkWidget,
   SelectWidget,
@@ -118,4 +119,5 @@ export {
   DateTimeWidget,
   ValidationWrapper,
   RadioButtonWidget,
+  AsyncTextWidget,
 }
