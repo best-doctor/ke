@@ -16,8 +16,10 @@ type RadioButtonElement = {
   title: string
 }
 
-const RadioButtonWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, provider, style, helpText } = props
+type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
+
+const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
+  const { containerStore, provider, style, helpText, optionLabel, optionValue } = props
   const context = containerStore.getState()
 
   const { dataResourceUrl, content } = useWidgetInitialization({ ...props, context })
@@ -42,7 +44,7 @@ const RadioButtonWidget = (props: WidgetProps): JSX.Element => {
     <WidgetWrapper style={style} helpText={helpText}>
       <RadioGroup onChange={handleChange}>
         {elements.map((element: RadioButtonElement) => (
-          <Radio value={element.uuid}>{element.title}</Radio>
+          <Radio value={optionValue(element)}>{optionLabel(element)}</Radio>
         ))}
       </RadioGroup>
     </WidgetWrapper>

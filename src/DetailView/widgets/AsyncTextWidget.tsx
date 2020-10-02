@@ -13,7 +13,7 @@ const contentType = 'string'
 const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   const { containerStore, style, helpText, name, provider, displayValue } = props
 
-  const [content, setContent] = useState<any>([])
+  const [content, setContent] = useState<string>('')
 
   const context = containerStore.getState()
 
