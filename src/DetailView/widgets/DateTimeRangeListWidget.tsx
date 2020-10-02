@@ -85,7 +85,7 @@ const AllDayDateTimeRangeAction = (props: DateTimeRangeActionProps): JSX.Element
 const contentType = 'string'
 
 const getInitialValue = (inputCount: number): DateRange[] => {
-  const initialRange = [new Date(), new Date()]
+  const initialRange = [null, null]
   const initialValue = []
 
   for (let elementIndex = 0; elementIndex < inputCount; elementIndex++) {
@@ -105,7 +105,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     setInitialValue,
     oneDayInterval,
     containerStore,
-    inputCount = 5,
+    inputCount = 1,
   } = props
 
   const context = containerStore.getState()
@@ -138,6 +138,21 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
 
+  const handleRemove = (itemIndex: number): void => {
+    const newDateRanges = dateRanges.slice()
+    newDateRanges.splice(itemIndex, 1)
+    if (newDateRanges.length < 1) {
+      newDateRanges.push([null, null])
+    }
+    setDateRanges(newDateRanges)
+  }
+
+  const handleAdd = (itemIndex: number): void => {
+    const newDateRanges = dateRanges.slice()
+    newDateRanges.splice(itemIndex + 1, 0, [null, null])
+    setDateRanges(newDateRanges)
+  }
+
   return (
     <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       {dateRanges.map((dateRange: DateRange, itemIndex: number) => {
@@ -162,6 +177,12 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
               submitChange={submitChange}
               name={name}
             />
+            <Button variantColor="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
+              -
+            </Button>
+            <Button variantColor="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
+              +
+            </Button>
             <br />
             <br />
           </>

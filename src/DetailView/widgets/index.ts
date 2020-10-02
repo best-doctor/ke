@@ -1,3 +1,4 @@
+import { AsyncTextWidget } from './AsyncTextWidget'
 import { TextWidget } from './TextWidget'
 import { LinkWidget } from './LinkWidget'
 import { SelectWidget } from './SelectWidget'
@@ -12,6 +13,7 @@ import { DateTimeWidget } from './DateTimeWidget'
 import { RadioButtonWidget } from './RadioButtonWidget'
 
 export {
+  AsyncTextWidget,
   TextWidget,
   LinkWidget,
   SelectWidget,

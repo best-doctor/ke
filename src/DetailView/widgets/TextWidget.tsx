@@ -38,4 +38,4 @@ const TextWidget = (props: WidgetProps): JSX.Element => {
   )
 }
 
-export { TextWidget }
+export { TextWidget, StyledTextWidget }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
-import { Textarea } from '@chakra-ui/core'
+import { Textarea, Input } from '@chakra-ui/core'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -10,10 +10,21 @@ import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
 
+type InputWidgetProps = WidgetProps & { isTextarea?: boolean }
+
 const contentType = 'string'
 
-const InputWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+const InputWidget = (props: InputWidgetProps): JSX.Element => {
+  const {
+    name,
+    helpText,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    isTextarea = true,
+  } = props
 
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
@@ -32,11 +43,11 @@ const InputWidget = (props: WidgetProps): JSX.Element => {
       <DebounceInput
         value={content as string}
         resize="none"
-        height={263}
+        height={isTextarea ? 263 : 33}
         borderWidth="2px"
         borderColor="gray.300"
         debounceTimeout={1000}
-        element={Textarea as React.FC}
+        element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
         onChange={(e) => handleChange(e)}
       />
     </WidgetWrapper>
