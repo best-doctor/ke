@@ -10,6 +10,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { GenericAccessor, OptionalDate, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
+import styled from 'styled-components'
 
 type DateRange = [OptionalDate, OptionalDate]
 
@@ -26,6 +27,11 @@ type DateTimeRangeActionProps = {
 }
 
 type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undefined; inputCount?: number }
+
+const StyledButton = styled.div`
+  float: left;
+  margin-right: 5px;
+`
 
 const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] => {
   return dateRanges.map((dateRange_: DateRange) => {
@@ -166,23 +172,29 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
               handleChangeDate={handleChangeDate}
               itemIndex={itemIndex}
             />
-            <AllDayDateTimeRangeAction
-              startDate={startDate}
-              endDate={endDate}
-              itemIndex={itemIndex}
-              setDateRanges={setDateRanges}
-              dateRanges={dateRanges}
-              targetPayload={targetPayload}
-              targetUrl={targetUrl}
-              submitChange={submitChange}
-              name={name}
-            />
-            <Button variantColor="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
-              -
-            </Button>
-            <Button variantColor="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
-              +
-            </Button>
+            <StyledButton>
+              <AllDayDateTimeRangeAction
+                startDate={startDate}
+                endDate={endDate}
+                itemIndex={itemIndex}
+                setDateRanges={setDateRanges}
+                dateRanges={dateRanges}
+                targetPayload={targetPayload}
+                targetUrl={targetUrl}
+                submitChange={submitChange}
+                name={name}
+              />
+            </StyledButton>
+            <StyledButton>
+              <Button variantColor="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
+                -
+              </Button>
+            </StyledButton>
+            <StyledButton>
+              <Button variantColor="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
+                +
+              </Button>
+            </StyledButton>
             <br />
             <br />
           </>
