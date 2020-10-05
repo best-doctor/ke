@@ -344,17 +344,42 @@ Among other arguments described above, it takes `widgetAnalytics` parameter.
 pushAnalytics({
   eventName: EventNameEnum.BUTTON_CLICK,
   widgetType: WidgetTypeEnum.ACTION,
-  value: createdAppeal.url,
+  value: 'some value',
   widgetAnalytics: true,
   widgetName,
-  viewType: 'top_bar_action',
-  resource,
+  viewType: 'some_action',
+  resource: 'some_resource',
   ...props,
 })
 ```
 
 `props` here is the [properties](https://github.com/best-doctor/ke/blob/master/src/typing.tsx#L12),
 that `ke` injects in your custom widget when renders them from admin settings.
+
+```tsx
+import type { WidgetProps } from '@bestdoctor/ke'
+
+const CustomWidget = (props: WidgetProps): JSX.Element => {
+  const handleUserAction = (): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.BUTTON_CLICK,
+      widgetType: WidgetTypeEnum.ACTION,
+      value: 'some value',
+      widgetAnalytics: true,
+      widgetName,
+      viewType: 'some_action',
+      resource: 'some_resource',
+      ...props,
+    })
+
+    ...
+  }
+
+  return (
+    <Button onClick={handleUserAction}>TEST</Button>
+  )
+}
+```
 
 ## Contributing
 
