@@ -283,25 +283,16 @@ that will handle events submit (in case you use SDK).
 
 `ke` has default analytics payload format:
 
-```
-eventName: string – name of event. By default defined [here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
-
-widgetName: string – name of widget that triggered event
-
-widgetType: string – type of widget that triggered event. By default defined
-[here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
-
-value: string | object – value to send with event
-
-viewType: string – current view type (list or detail)
-
-resourceName: string – name of the backend resource on which the event occurred
-
-resourceId: string – id of the backend resource on which the event occurred
-(in case of detail view)
-
-url: string – current location in SPA routing
-```
+* eventName: string – name of event. By default defined [here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
+* widgetName: string – name of widget that triggered event
+* widgetType: string – type of widget that triggered event. By default defined
+  [here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
+* value: string | object – value to send with event
+* viewType: string – current view type (list or detail)
+* resourceName: string – name of the backend resource on which the event occurred
+* resourceId: string – id of the backend resource on which the event occurred
+  (in case of detail view)
+* url: string – current location in SPA routing
 
 You can override it with `widgetAnalytics` setting
 in your [admin class settings](https://github.com/best-doctor/ke#usage-example)
