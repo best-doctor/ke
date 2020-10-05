@@ -76,7 +76,7 @@ and can contains the following properties:
   `ke` uses [react-grid-layout](https://github.com/STRML/react-grid-layout)
   for widgets compose. So, we use the same settings format
 
-* `widgetAnalytics` – analytics event format control ([more details]())
+* `widgetAnalytics` – analytics event format control ([more details](https://github.com/best-doctor/ke#analytics))
 
 * `notBlockingValidators` – list of validation functions with non-blocking checks.
   Used in wizards (coming soon)

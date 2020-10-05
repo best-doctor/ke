@@ -285,14 +285,21 @@ that will handle events submit (in case you use SDK).
 
 ```
 eventName: string – name of event. By default defined [here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
+
 widgetName: string – name of widget that triggered event
+
 widgetType: string – type of widget that triggered event. By default defined
 [here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
+
 value: string | object – value to send with event
+
 viewType: string – current view type (list or detail)
+
 resourceName: string – name of the backend resource on which the event occurred
+
 resourceId: string – id of the backend resource on which the event occurred
 (in case of detail view)
+
 url: string – current location in SPA routing
 ```
 
@@ -326,6 +333,28 @@ setting as `false`:
   ...
 }
 ```
+
+If you want to use analytics in your custom component-based widget,
+you can use `pushAnalytics` [handler](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/utils.ts#L19)
+
+It encapsulates the logic for unpacking and sending the event to the analytics.
+Among other arguments described above, it takes `widgetAnalytics` parameter.
+
+```ts
+pushAnalytics({
+  eventName: EventNameEnum.BUTTON_CLICK,
+  widgetType: WidgetTypeEnum.ACTION,
+  value: createdAppeal.url,
+  widgetAnalytics: true,
+  widgetName,
+  viewType: 'top_bar_action',
+  resource,
+  ...props,
+})
+```
+
+`props` here is the [properties](https://github.com/best-doctor/ke/blob/master/src/typing.tsx#L12),
+that `ke` injects in your custom widget when renders them from admin settings.
 
 ## Contributing
 
