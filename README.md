@@ -48,10 +48,13 @@ Here you can declaratively describe your component.
 
 In admin class you can describe:
 
-* `baseUrl: string` – resource for API interaction
+* baseUrl: string – resource for API interaction
+* `getResource(lookupField?: string | undefined): string` - method to get resource
+  url string for backend requests.
 * [Fields for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_view.md)
 * [Fields for detail view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/detail_view.md)
 * [Filters for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_filters.md)
+* [Template filters for list view](https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_template_filters.md)
 
 As a result, your admin class will look like this:
 
@@ -69,8 +72,6 @@ import {
 import { PatientProvider } from './providers';
 
 class PatientAdmin extends BaseAdmin {
-  baseUrl = `${process.env.API_URL}patients/`
-
   list_filters = {
     name: 'id',
     label: 'ID',
@@ -118,19 +119,26 @@ class PatientAdmin extends BaseAdmin {
       layout: { x: 9, y: 13.5, w: 2, h: 1, static: true },
     }
   ]
+
+  getResource(lookupField?: string | undefined): string {
+    const baseUrl = `${process.env.API_URL}patients/`
+    return getAdminResource(baseUrl, lookupField)
+  }
 }
 ```
 
 To get more info about fields description,
 check [here](https://github.com/best-doctor/ke/blob/master/docs/admin_fields)
 
-After that you can use `ResourceComposer` and `Resource` components,
+After that you can use `ResourceComposer`, `AdminResource` and `Resource` components,
 which makes all magic under the hood and get your user component.
 
 `AdminResource` component takes the following arguments:
 
 * `admin` – instance of your admin class
 * `provider` – instance of your provider implementation
+* `user` – user object from your backend. Used for permissions and analytics system
+* `analytcs` – analytics object instance. See below for more details.
 
 ```tsx
 import { ResourceComposer } from '@bestdoctor/ke';
@@ -145,6 +153,8 @@ const App = () => (
       name="patients"
       admin={new PatientAdmin()}
       provider={provider}
+      user={{ name: 'name', permissions: ['admin_user'] }}
+      analytics={analyticsInstnace}
     />
   </ResourceComposer>
 )
@@ -152,6 +162,24 @@ const App = () => (
 
 `App` will have routes for the list and detail view with the
 settings and widgets you set.
+
+`Resource` component can be used in case you want to mount custom widget to
+`ke` routing and use it features under the hood. For example, login page:
+
+```tsx
+<Resource name="login">
+  <Login />
+</Resource>
+```
+
+If you want ke to generate a side bar with all sections of your spa, use
+`withSideBar` setting:
+
+```tsx
+<ResourceComposer withSideBar>
+  ...
+</ResourceComposer>
+```
 
 ## Permissions
 
