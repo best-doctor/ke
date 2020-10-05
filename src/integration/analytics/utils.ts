@@ -56,7 +56,9 @@ const pushAnalytics = (params: widgetAnalyticsParams): void => {
     event = getFirebaseEvent(widgetDefaultAnalyticsPayload)
   }
 
-  analytics && analytics.pushEvent(event)
+  if (analytics && typeof analytics.pushEvent === 'function') {
+    analytics.pushEvent(event)
+  }
 }
 
 export { pushAnalytics }
