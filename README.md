@@ -237,6 +237,96 @@ const App = (): JSX.Element => (
 )
 ```
 
+## Analytics
+
+`ke` has default integration with google analytics through firebase.
+You can use it or connect the service you need. To use build-in analytics
+create instance:
+
+```ts
+import { FirebaseAnalytics } from '@bestdoctor/ke'
+
+const firebaseConfig = {
+    apiKey: 'secret',
+    authDomain: 'auth.domain',
+    databaseURL: 'database.url',
+    projectId: 'projectID',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: '',
+    measurementId: '',
+    userId: '',
+  }
+
+const analytics = new FirebaseAnalytics(firebaseConfig)
+```
+
+and pass it to your `AdminResource`:
+
+```tsx
+<AdminResource
+  name="test"
+  admin={new TestAdmin()}
+  provider={provider}
+  user={currentUser}
+  analytics={analytics}
+/>
+```
+
+If you want to use another analytics service,
+you must define on your side a client that
+will implement the base [interface](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/base.ts),
+by analogy with [firebase](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/firebase.ts)
+
+Analytics hanlder here is object,
+that will handle events submit (in case you use SDK).
+
+`ke` has default analytics payload format:
+
+```
+eventName: string – name of event. By default defined [here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
+widgetName: string – name of widget that triggered event
+widgetType: string – type of widget that triggered event. By default defined
+[here](https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts)
+value: string | object – value to send with event
+viewType: string – current view type (list or detail)
+resourceName: string – name of the backend resource on which the event occurred
+resourceId: string – id of the backend resource on which the event occurred
+(in case of detail view)
+url: string – current location in SPA routing
+```
+
+You can override it with `widgetAnalytics` setting
+in your [admin class settings](https://github.com/best-doctor/ke#usage-example)
+(place where you describe your widgets layout).
+
+This setting can be declared as an arrow function that takes all of the above parameters.
+The return value of this function will be used as
+the body of the request when sent to the analytics:
+
+```ts
+{
+  name: 'test_widget',
+  widget: SelectWidget,
+  widgetAnalytics: ({ eventName, viewType, value, widgetName }) => (
+    { customEventKey: { eventName, ... }}
+  ),
+  ...
+}
+```
+
+To disable analytics for a specific widget, you can declare a `widgetAnalytics`
+setting as `false`:
+
+```ts
+{
+  name: 'test_widget',
+  widget: SelectWidget,
+  widgetAnalytics: false,
+  ...
+}
+```
+
 ## Contributing
 
 We would love you to contribute to our project. It's simple:
