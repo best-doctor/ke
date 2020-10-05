@@ -16,6 +16,8 @@ configure({ adapter: new Adapter() })
 const testNotifier = new ChakraUINotifier(jest.fn())
 
 class TestAdmin extends BaseAdmin {
+  baseUrl = 'test'
+
   permissions = undefined
 
   verboseName = 'Test verbose name'
@@ -41,10 +43,6 @@ class TestAdmin extends BaseAdmin {
   ]
 
   wizards = []
-
-  getResource(lookupField?: string | undefined): string {
-    return `test/${lookupField}`
-  }
 }
 
 const testAdmin = new TestAdmin()
