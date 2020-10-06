@@ -26,20 +26,28 @@ it to the provider class.
 ```ts
 // client.ts
 
+import axios from 'axios'
+
 const httpClient = axios.create({
   baseURL: process.env.API_URL,
 })
 
+export { httpClient }
+
+
 // provider.ts
 
-import { BaseProvider } from '@bestdoctor/ke';
-import { httpClient } from 'client';
+import { BaseProvider } from '@bestdoctor/ke'
+import { httpClient } from 'client'
 
-class PatientProvider extends BaseProvider {
+class Provider extends BaseProvider {
   constructor() {
     super(httpClient)
   }
 }
+
+export { Provider }
+
 
 ```
 
