@@ -10,6 +10,10 @@ import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
 
+type TextEditorProps = WidgetProps & {
+  debounceValue?: number | undefined
+}
+
 const StyledTextEditor = styled.div`
   .text-editor-widget {
     height: 200px;
@@ -52,8 +56,9 @@ const toolbarConfig = {
 
 const contentType = 'string'
 
-const TextEditorWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore, debounceValue } = props
+  const defaultDebounceValue = 3000
 
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
@@ -69,7 +74,7 @@ const TextEditorWidget = (props: WidgetProps): JSX.Element => {
   const debounceCallback = React.useCallback(
     debounce((callbackValue: object) => {
       submitChange({ url: targetUrl, payload: callbackValue })
-    }, 3000),
+    }, debounceValue || defaultDebounceValue),
     []
   )
 
