@@ -17,8 +17,6 @@ type RawWidgetPayload = (string | number | undefined)[]
 
 type MultiSelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
-const contentType = 'object'
-
 const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[] => {
   if (widgetValue) {
     return widgetValue.map((element: MultiSelectValue) => element.uuid || element.id)
@@ -41,7 +39,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
 
   const [value, setValue] = React.useState<MultiSelectValue[]>(content as MultiSelectValue[])
   setInitialValue({ [name]: extractPayloadIds(value) })

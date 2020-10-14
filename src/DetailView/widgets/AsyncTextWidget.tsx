@@ -8,8 +8,6 @@ import type { WidgetProps } from '../../typing'
 import { getWidgetContent } from '../utils/dataAccess'
 import { StyledTextWidget } from './TextWidget'
 
-const contentType = 'string'
-
 const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   const { containerStore, style, helpText, name, provider, displayValue } = props
 
@@ -17,13 +15,13 @@ const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
 
   const context = containerStore.getState()
 
-  const { dataResourceUrl } = useWidgetInitialization({ ...props, contentType, context })
+  const { dataResourceUrl } = useWidgetInitialization({ ...props, context })
 
   useEffect(() => {
     provider
       .getObject(dataResourceUrl)
       .then((responseData: any) =>
-        setContent(getWidgetContent(name, responseData, displayValue, context, contentType) || '')
+        setContent(getWidgetContent(name, responseData, displayValue, context) || '')
       )
   }, [provider, dataResourceUrl, context, displayValue, name])
 

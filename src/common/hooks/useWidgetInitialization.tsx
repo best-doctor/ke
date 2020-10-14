@@ -3,8 +3,7 @@ import { getData, getWidgetContent } from '../../DetailView/utils/dataAccess'
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
 type InitializationParameters = {
-  contentType?: string | undefined
-  context: object
+  context: object  // store for wizards and common detail view widgets
 }
 
 type InitializationArguments = WidgetProps & InitializationParameters
@@ -23,10 +22,10 @@ const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObj
 }
 
 const useWidgetInitialization = (initializationArguments: InitializationArguments): InitializedWidgetAttributes => {
-  const { dataTarget, detailObject, contentType, name, displayValue, context, dataSource } = initializationArguments
+  const { dataTarget, detailObject, name, displayValue, context, dataSource } = initializationArguments
 
   const targetUrl = getWidgetTargetUrl(dataTarget, detailObject)
-  const content = getWidgetContent(name, detailObject, displayValue, context, contentType) || ''
+  const content = getWidgetContent(name, detailObject, displayValue, context) || ''
   const dataResourceUrl = getData(dataSource, context)
 
   return {

@@ -18,13 +18,11 @@ type RadioButtonElement = {
 
 type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
-const contentType = 'object'
-
 const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   const { containerStore, provider, style, helpText, optionLabel, optionValue } = props
   const context = containerStore.getState()
 
-  const { dataResourceUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const { dataResourceUrl, content } = useWidgetInitialization({ ...props, context })
   const [elements, setElements] = React.useState<RadioButtonElement[]>(content as RadioButtonElement[])
 
   React.useEffect(() => {

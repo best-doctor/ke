@@ -10,7 +10,6 @@ import { handleUserAction } from '../../common/utils/handleUserAction'
 
 import type { OptionalDate, WidgetProps } from '../../typing'
 
-const contentType = 'string'
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
@@ -18,7 +17,7 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
   const { name, helpText, style, setInitialValue, containerStore } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
   const [date, setDate] = React.useState<OptionalDate>(content ? new Date(content as string) : null)
   setInitialValue({ [name]: content })
 

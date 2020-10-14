@@ -88,8 +88,6 @@ const AllDayDateTimeRangeAction = (props: DateTimeRangeActionProps): JSX.Element
   )
 }
 
-const contentType = 'string'
-
 const getInitialValue = (inputCount: number): DateRange[] => {
   const initialRange = [null, null]
   const initialValue = []
@@ -115,7 +113,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
 
   const value = content || getInitialValue(inputCount)
 

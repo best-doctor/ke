@@ -54,14 +54,12 @@ const toolbarConfig = {
   ],
 }
 
-const contentType = 'string'
-
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore, debounceValue } = props
   const defaultDebounceValue = 3000
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
   const editorContent = valueToEditorFormat(content as string)
 
   const [value, setValue] = React.useState(editorContent)

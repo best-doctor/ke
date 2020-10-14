@@ -17,12 +17,10 @@ const StyledTextWidget = styled.div`
   white-space: pre-line;
 `
 
-const contentType = 'string'
-
 const TextWidget = (props: WidgetProps): JSX.Element => {
   const { containerStore, style, helpText } = props
 
-  const { content } = useWidgetInitialization({ ...props, contentType, context: containerStore.getState() })
+  const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
   return (
     <Box {...style}>

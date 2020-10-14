@@ -19,11 +19,10 @@ const getWidgetContent = (
   detailObject: DetailObject,
   handler: GenericAccessor,
   context = {},
-  expectedType = 'string'
 ): any => {
   const widgetContent = getData(handler, detailObject, context)
 
-  if (!widgetContent || typeof widgetContent !== expectedType) {
+  if (!widgetContent) {
     return get(detailObject, name)
   }
 

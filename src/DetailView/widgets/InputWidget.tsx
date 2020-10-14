@@ -12,8 +12,6 @@ import type { WidgetProps } from '../../typing'
 
 type InputWidgetProps = WidgetProps & { isTextarea?: boolean }
 
-const contentType = 'string'
-
 const InputWidget = (props: InputWidgetProps): JSX.Element => {
   const {
     name,
@@ -27,7 +25,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
