@@ -8,12 +8,12 @@ const WidgetWrapper = ({
   children,
 }: {
   style: object
-  helpText: string
+  helpText?: string
   children: JSX.Element[] | JSX.Element
 }): JSX.Element => {
   return (
     <Box {...style}>
-      <FormLabel mt={5}>{helpText}</FormLabel>
+      <FormLabel mt={5}>{helpText || ''}</FormLabel>
       {children}
     </Box>
   )

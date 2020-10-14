@@ -19,13 +19,10 @@ const getComponent = (): JSX.Element => (
   <MultiSelectWidget
     name="test"
     resource="test-resource"
-    analytics={undefined}
     dataSource="test-source"
-    widgetAnalytics={jest.fn()}
     helpText="test"
     detailObject={detailObject}
     setObject={jest.fn()}
-    displayValue="test"
     dataTarget="test"
     targetPayload={(value: string[]) => ({ testPayload: value })}
     notifier={testNotifier}
