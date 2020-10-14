@@ -14,16 +14,10 @@ const getData = (handler: GenericAccessor, data: DetailObject, context = {}): an
   return null
 }
 
-const getWidgetContent = (
-  name: string,
-  detailObject: DetailObject,
-  handler: GenericAccessor,
-  context = {},
-  expectedType = 'string'
-): any => {
+const getWidgetContent = (name: string, detailObject: DetailObject, handler: GenericAccessor, context = {}): any => {
   const widgetContent = getData(handler, detailObject, context)
 
-  if (!widgetContent || typeof widgetContent !== expectedType) {
+  if (!widgetContent) {
     return get(detailObject, name)
   }
 

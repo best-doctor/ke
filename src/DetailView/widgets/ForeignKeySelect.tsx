@@ -12,7 +12,6 @@ import { getPayload } from '../utils/dataAccess'
 
 type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
-const contentType = 'object'
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
@@ -35,7 +34,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   const context = containerStore.getState()
 
-  const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
 
   const [value, setValue] = React.useState<object>(content as object)
 

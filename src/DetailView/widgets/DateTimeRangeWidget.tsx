@@ -20,8 +20,6 @@ const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string,
   return null
 }
 
-const contentType = 'string'
-
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props
 
@@ -29,7 +27,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   let iStartDate = null
   let iEndDate = null
 
-  const { targetUrl, content } = useWidgetInitialization({ ...props, contentType, context })
+  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
   if (content) {
     ;[iStartDate, iEndDate] = content as [string, string]
   }

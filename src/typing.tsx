@@ -14,16 +14,16 @@ type WidgetProps = {
   detailObject: DetailObject
   resource: string
   provider: BaseProvider
-  helpText: string
-  displayValue: GenericAccessor
+  helpText?: string
+  displayValue?: GenericAccessor
   targetPayload: Function
   dataSource: GenericAccessor
   dataTarget: GenericAccessor
   setObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic | undefined
   viewType: string
-  widgetAnalytics: Function | boolean | undefined
+  widgetAnalytics?: Function | boolean | undefined
   style: object
   setInitialValue: Function
   submitChange: Function

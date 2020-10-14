@@ -21,13 +21,11 @@ const StyledLinkWidget = styled.div`
 
 type LinkWidgetProps = WidgetProps & { href: GenericAccessor }
 
-const contentType = 'string'
-
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   const { name, detailObject, href, helpText, style, containerStore } = props
 
   const context = containerStore.getState()
-  const { content } = useWidgetInitialization({ ...props, contentType, context })
+  const { content } = useWidgetInitialization({ ...props, context })
   const linkHref = getWidgetContent(name, detailObject, href)
 
   const handleClick = (): void => {

@@ -7,7 +7,7 @@ type widgetAnalyticsParams = {
   eventName: string
   widgetType: string
   widgetName?: string | undefined
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic | undefined
   widgetAnalytics?: Function | boolean | undefined
   viewType: string
   detailObject?: DetailObject
