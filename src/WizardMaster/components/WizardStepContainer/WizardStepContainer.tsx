@@ -33,17 +33,6 @@ type WizardViewContainerProps = {
   submitChange: Function
 }
 
-const executeScroll = (whereTo = 0): void => window.scrollTo(0, whereTo)
-
-const scrollToWizardContainer = (
-  isContainerOpened: boolean,
-  wizardContainerRef: React.RefObject<WizardStepContainerRef>
-): void => {
-  if (isContainerOpened === true && wizardContainerRef.current !== null) {
-    executeScroll(wizardContainerRef.current.offsetHeight)
-  }
-}
-
 const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
   const wizardStepRef = React.useRef<WizardStepContainerRef>(null)
   const {
@@ -62,8 +51,6 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     submitChange,
   } = props
   const { widgets: elements } = wizardStep
-
-  React.useEffect(() => scrollToWizardContainer(show, wizardStepRef))
 
   let { resourceName } = wizardStep
 

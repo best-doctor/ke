@@ -37,8 +37,5 @@ const getComponent = (): JSX.Element => {
 }
 
 test('Wizard step container', () => {
-  window.scrollTo = jest.fn()
   mount(getComponent())
-
-  expect((window.scrollTo as jest.Mock).mock.calls.length).toBe(1)
 })
