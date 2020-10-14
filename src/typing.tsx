@@ -3,7 +3,7 @@ import type { BaseProvider } from 'admin/providers/index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 
-type GenericAccessor = string | Function | undefined
+type GenericAccessor = string | Function | JSX.Element | undefined
 
 type OptionalDate = Date | null
 
