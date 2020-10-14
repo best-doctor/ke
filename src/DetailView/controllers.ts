@@ -23,7 +23,11 @@ const initDataUpdateHandler = (provider: BaseProvider, setMainDetailObject: Func
   })
 }
 
-const initDetailViewControllers = (provider: BaseProvider, setMainDetailObject: Function, notifier: BaseNotifier): Function[] => {
+const initDetailViewControllers = (
+  provider: BaseProvider,
+  setMainDetailObject: Function,
+  notifier: BaseNotifier
+): Function[] => {
   /*
     setInitialValue function used to store widget initial data.
 
