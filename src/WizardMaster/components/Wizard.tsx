@@ -57,10 +57,9 @@ const Wizard = (props: WizardProps): JSX.Element => {
         <Button
           key="wizardToggleButton"
           onClick={handleToggle}
-          variantColor="teal"
-          variant="outline"
+          variantColor="green"
           width="inherit"
-          data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}
+          data-grid={{ x: 1, y: 0, w: 10, h: 2, static: true }}
         >
           {wizard.title}
         </Button>
