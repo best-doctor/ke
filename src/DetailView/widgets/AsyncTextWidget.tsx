@@ -20,9 +20,7 @@ const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   useEffect(() => {
     provider
       .getObject(dataResourceUrl)
-      .then((responseData: any) =>
-        setContent(getWidgetContent(name, responseData, displayValue, context) || '')
-      )
+      .then((responseData: any) => setContent(getWidgetContent(name, responseData, displayValue, context) || ''))
   }, [provider, dataResourceUrl, context, displayValue, name])
 
   return (

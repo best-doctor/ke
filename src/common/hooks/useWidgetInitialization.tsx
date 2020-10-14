@@ -3,7 +3,7 @@ import { getData, getWidgetContent } from '../../DetailView/utils/dataAccess'
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
 type InitializationParameters = {
-  context: object  // store for wizards and common detail view widgets
+  context: object // store for wizards and common detail view widgets
 }
 
 type InitializationArguments = WidgetProps & InitializationParameters
