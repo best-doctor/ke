@@ -5,6 +5,7 @@ import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseProvider } from 'index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
+import type { DetailObject, FieldsTypeInAdminClass } from 'typing'
 
 import { containerStore } from './store'
 import { initDetailViewControllers } from './controllers'
@@ -14,30 +15,37 @@ const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
 type MountDetailFieldsArgs = {
   resourceName: string
-  object: object
+  mainDetailObject: DetailObject
   elements: DetailFieldDescription[]
   provider: BaseProvider
-  setObject: Function
+  setMainDetailObject: Function
   notifier: BaseNotifier
   user: object
   analytics: BaseAnalytic | undefined
   ViewType: string
-  elementsKey: string
+  elementsKey: FieldsTypeInAdminClass
 }
 
 const mountDetailFields = ({
   resourceName,
-  object,
+  mainDetailObject,
   elements,
   provider,
-  setObject,
+  setMainDetailObject,
   notifier,
   user,
   analytics,
   ViewType,
   elementsKey,
 }: MountDetailFieldsArgs): JSX.Element => {
-  const [setInitialValue, submitChange] = initDetailViewControllers(provider, setObject, notifier)
+  /*
+    Function mounts widgets for Detail View.
+
+    Widgets of Detail View type do not use store,
+    but immediately send data entered (or selected) by the user
+    to the backend (if the widget assumes interaction with the backend)
+  */
+  const [setInitialValue, submitChange] = initDetailViewControllers(provider, setMainDetailObject, notifier)
 
   return (
     <ReactGridLayout key={elementsKey} className="layout" cols={12} rowHeight={30}>
@@ -45,10 +53,10 @@ const mountDetailFields = ({
         setInitialValue,
         submitChange,
         resourceName,
-        object,
+        mainDetailObject,
         elements,
         provider,
-        setObject,
+        setMainDetailObject,
         notifier,
         user,
         analytics,

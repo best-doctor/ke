@@ -32,4 +32,6 @@ type WidgetProps = {
   containerStore: Store<object>
 }
 
-export { GenericAccessor, OptionalDate, DetailObject, WidgetProps }
+type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'
+
+export { GenericAccessor, OptionalDate, DetailObject, WidgetProps, FieldsTypeInAdminClass }

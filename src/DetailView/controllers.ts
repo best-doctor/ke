@@ -8,6 +8,14 @@ import { makeUpdateWithNotification } from '../admin/providers/utils'
 import type { WidgetPayload } from './events'
 
 const initDataUpdateHandler = (provider: BaseProvider, setObject: Function, notifier: BaseNotifier): void => {
+  /*
+    submitChange function used to handle user action on the widget.
+
+    There are two types of submitChange function – for Detail View and for Wizard View.
+
+    In case of DetailView, submitChange takes payload of widget and and url for sending data to the backend.
+    And the function sends a payload to the backend at the specified url
+  */
   containerStore.on(submitChange, (_, widgetPayload: WidgetPayload) => {
     const { url, payload } = widgetPayload
 
@@ -16,6 +24,14 @@ const initDataUpdateHandler = (provider: BaseProvider, setObject: Function, noti
 }
 
 const initDetailViewControllers = (provider: BaseProvider, setObject: Function, notifier: BaseNotifier): Function[] => {
+  /*
+    setInitialValue function used to store widget initial data.
+
+    There are two types of setInitialValue function – for Detail View and for Wizard View.
+
+    In case of DetailView, setInitialValue does nothing and
+    is only needed to comply with the interface (for compatibility with the Wizard View)
+  */
   containerStore.on(setInitialValue, (state: object, value: object) => ({ ...state, ...value }))
 
   initDataUpdateHandler(provider, setObject, notifier)

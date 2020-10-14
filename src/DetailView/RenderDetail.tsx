@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
+import type { FieldsTypeInAdminClass } from 'typing'
 
 import { mountWizards } from '../WizardMaster/mountWizards'
 import { mountDetailFields } from './mountDetailFields'
@@ -14,16 +15,41 @@ import { ToListViewLink } from './components/ToListViewLink'
 
 const ViewType = 'detail_view'
 
+type BackendResourceName = string
+
 type RenderDetailProps = {
-  resourceName: string
+  resourceName: BackendResourceName
   admin: BaseAdmin
   provider: BaseProvider
   user: object
   analytics: BaseAnalytic | undefined
 }
 
+const getContainersToMount = (): { [key in FieldsTypeInAdminClass]: Function } => {
+  /*
+    Takes a handler that will embed objects for a specific type of fields.
+
+    Types of fields can be viewed in BaseAdmin class
+  */
+  return {
+    detail_fields: mountDetailFields,
+    wizards: mountWizards,
+    additional_detail_widgets: mountDetailFields,
+  }
+}
+
 const RenderDetail = (props: RenderDetailProps): JSX.Element => {
-  const [object, setObject] = useState<Model>()
+  /*
+    Entry point for displaying components in https://myspa.com/some-url/100500 route format.
+
+    Here we fetch data from the backend using the url that we specified in a
+    admin class.
+
+    After that we mounts the widgets of a particular view type. At the moment there are two:
+    - Detail View (see mountDetailFields for detail)
+    - Wizard View (see mountWizards for detail)
+  */
+  const [mainDetailObject, setMainDetailObject] = useState<Model>()
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
   const notifier = new ChakraUINotifier(toast)
@@ -33,25 +59,27 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   document.title = `${admin.verboseName} # ${id}`
 
   useEffect(() => {
-    const resource = admin.getResource(id)
-    provider.getObject(resource).then((res) => setObject(res))
+    const backendResourceUrl = admin.getResource(id)
+    provider.getObject(backendResourceUrl).then((res) => setMainDetailObject(res))
   }, [id, provider, admin])
-
-  const containersToMount = {
-    detail_fields: mountDetailFields,
-    wizards: mountWizards,
-    additional_detail_widgets: mountDetailFields,
-  }
 
   return (
     <>
       <ToListViewLink name={resourceName} />
-      {object &&
-        Object.entries(containersToMount).map(([elementsKey, container]: [string, Function]) => {
+      {mainDetailObject &&
+        Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
           const elements = admin[elementsKey as keyof typeof admin]
           if (!elements) return []
 
-          return container({ object, setObject, notifier, ViewType, elements, elementsKey, ...props })
+          return container({
+            mainDetailObject,
+            setMainDetailObject,
+            notifier,
+            ViewType,
+            elements,
+            elementsKey,
+            ...props,
+          })
         })}
     </>
   )
