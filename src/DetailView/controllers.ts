@@ -7,7 +7,7 @@ import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 import type { WidgetPayload } from './events'
 
-const initDataUpdateHandler = (provider: BaseProvider, setObject: Function, notifier: BaseNotifier): void => {
+const initDataUpdateHandler = (provider: BaseProvider, setMainDetailObject: Function, notifier: BaseNotifier): void => {
   /*
     submitChange function used to handle user action on the widget.
 
@@ -19,11 +19,11 @@ const initDataUpdateHandler = (provider: BaseProvider, setObject: Function, noti
   containerStore.on(submitChange, (_, widgetPayload: WidgetPayload) => {
     const { url, payload } = widgetPayload
 
-    makeUpdateWithNotification(provider, url, payload, setObject, notifier)
+    makeUpdateWithNotification(provider, url, payload, setMainDetailObject, notifier)
   })
 }
 
-const initDetailViewControllers = (provider: BaseProvider, setObject: Function, notifier: BaseNotifier): Function[] => {
+const initDetailViewControllers = (provider: BaseProvider, setMainDetailObject: Function, notifier: BaseNotifier): Function[] => {
   /*
     setInitialValue function used to store widget initial data.
 
@@ -34,7 +34,7 @@ const initDetailViewControllers = (provider: BaseProvider, setObject: Function, 
   */
   containerStore.on(setInitialValue, (state: object, value: object) => ({ ...state, ...value }))
 
-  initDataUpdateHandler(provider, setObject, notifier)
+  initDataUpdateHandler(provider, setMainDetailObject, notifier)
 
   return [setInitialValue, submitChange]
 }
