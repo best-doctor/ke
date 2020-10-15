@@ -16,6 +16,18 @@ const clearStorage = (elements: DetailFieldDescription[], storage: { [key: strin
 const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: object): BaseWizard | null => {
   /*
     We need this for unpacking wizard instance with conditions.
+
+    There are times when we show the button to launch the wizard only under some condition.
+    This is how it can be implemented in admin class:
+
+    wizards = [
+      (object: DetailObject) => {
+        if (someCondition(object)) {
+          return new MyWizard('My wizard name')
+        }
+        return null
+      },
+    ]
   */
   if (typeof wizardInstance === 'function') {
     return wizardInstance(object)

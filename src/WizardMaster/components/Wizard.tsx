@@ -12,6 +12,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
+import type { DetailObject } from '../../typing'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
@@ -19,8 +20,8 @@ type WizardProps = {
   resourceName: string
   wizard: BaseWizard
   provider: BaseProvider
-  object: object
-  setObject: Function
+  mainDetailObject: DetailObject
+  setMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   ViewType: string
@@ -42,7 +43,17 @@ const sendPushAnalytics = (resourceName: string, widgetName: string, props: Wiza
 
 const Wizard = (props: WizardProps): JSX.Element => {
   const [show, setShow] = React.useState(false)
-  const { wizard, provider, object, setObject, notifier, analytics, ViewType, user, resourceName } = props
+  const {
+    wizard,
+    provider,
+    mainDetailObject,
+    setMainDetailObject,
+    notifier,
+    analytics,
+    ViewType,
+    user,
+    resourceName,
+  } = props
 
   const handleToggle = (): void => {
     sendPushAnalytics(resourceName, 'open_wizard', props)
@@ -69,8 +80,8 @@ const Wizard = (props: WizardProps): JSX.Element => {
         wizard={wizard}
         show={show}
         provider={provider}
-        object={object}
-        setObject={setObject}
+        mainDetailObject={mainDetailObject}
+        setMainDetailObject={setMainDetailObject}
         notifier={notifier}
         analytics={analytics}
         ViewType={ViewType}

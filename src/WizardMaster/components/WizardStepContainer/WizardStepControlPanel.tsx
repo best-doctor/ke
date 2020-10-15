@@ -8,6 +8,7 @@ import type { BaseWizardStep, BaseWizard } from '../../interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../../integration/analytics'
+import type { WizardObject } from '../../../typing'
 
 type WizardStepControlPanelProps = {
   wizardStep: BaseWizardStep
@@ -16,7 +17,7 @@ type WizardStepControlPanelProps = {
   currentState: string
   setCurrentState: Function
   provider: BaseProvider
-  object: object
+  mainWizardObject: WizardObject
   analytics: BaseAnalytic | undefined
 }
 

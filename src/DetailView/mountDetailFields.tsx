@@ -43,7 +43,7 @@ const mountDetailFields = ({
 
     Widgets of Detail View type do not use store,
     but immediately send data entered (or selected) by the user
-    to the backend (if the widget assumes interaction with the backend)
+    to the backend (if the widget assumes interaction with the backend) via submitChange handler.
   */
   const [setInitialValue, submitChange] = initDetailViewControllers(provider, setMainDetailObject, notifier)
 

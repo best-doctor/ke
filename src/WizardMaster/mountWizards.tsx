@@ -7,24 +7,42 @@ import type { WizardFieldDescription, WizardFieldElement } from '../admin/fields
 import type { BaseNotifier } from '../common/notifier'
 import type { BaseProvider } from '../admin/providers/index'
 import type { BaseAnalytic } from '../integration/analytics'
+import type { DetailObject } from '../typing'
 
 type MountWizardsKwargs = {
   resourceName: string
-  object: object
+  mainDetailObject: DetailObject
   notifier: BaseNotifier
   ViewType: string
   elements: WizardFieldDescription
   provider: BaseProvider
-  setObject: Function
+  setMainDetailObject: Function
   analytics: BaseAnalytic | undefined
   user: object
 }
 
 const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
-  const { object, notifier, ViewType, elements, provider, setObject, analytics, user, resourceName } = kwargs
+  /*
+    Function mounts widgets for Wizard View.
+
+    Widgets of Wizard View type use store.
+    They do not send user data to the backend immediately, but put it in store.
+  */
+
+  const {
+    mainDetailObject,
+    notifier,
+    ViewType,
+    elements,
+    provider,
+    setMainDetailObject,
+    analytics,
+    user,
+    resourceName,
+  } = kwargs
 
   return elements.map((wizardInstance: WizardFieldElement) => {
-    const wizard = getWizardFromCallable(wizardInstance, object)
+    const wizard = getWizardFromCallable(wizardInstance, mainDetailObject)
 
     if (!wizard) return <></>
 
@@ -34,8 +52,8 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
         data-grid={wizard.layout}
         wizard={wizard}
         provider={provider}
-        object={object}
-        setObject={setObject}
+        mainDetailObject={mainDetailObject}
+        setMainDetailObject={setMainDetailObject}
         notifier={notifier}
         analytics={analytics}
         ViewType={ViewType}

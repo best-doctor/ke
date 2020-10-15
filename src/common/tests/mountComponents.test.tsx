@@ -13,10 +13,10 @@ const mockSetObject = (): null => null
 test('Get components to mount', () => {
   const components = mountComponents({
     resourceName: 'test-resource',
-    object: detailObject,
+    mainDetailObject: detailObject,
     elements: testAdmin.detail_fields,
     provider: testProvider,
-    setObject: mockSetObject,
+    setMainDetailObject: mockSetObject,
     notifier: testNotifier,
     user: {},
     analytics: undefined,

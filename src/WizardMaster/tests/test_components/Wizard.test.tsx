@@ -13,7 +13,7 @@ jest.mock('../../../integration/analytics/utils')
 const getComponent = (): JSX.Element => {
   const resourceName = 'test'
   const ViewType = 'test_view'
-  const setObject = jest.fn()
+  const setMainDetailObject = jest.fn()
   const analytics = undefined
   const user = {}
 
@@ -22,8 +22,8 @@ const getComponent = (): JSX.Element => {
       resourceName={resourceName}
       wizard={testWizard}
       provider={testProvider}
-      object={{ id: 100500 }}
-      setObject={setObject}
+      mainDetailObject={{ id: 100500 }}
+      setMainDetailObject={setMainDetailObject}
       notifier={testNotifier}
       analytics={analytics}
       ViewType={ViewType}

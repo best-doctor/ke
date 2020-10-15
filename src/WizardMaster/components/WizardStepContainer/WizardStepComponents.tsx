@@ -10,6 +10,7 @@ import { mountComponents } from '../../../common/utils/mountComponents'
 import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
+import type { WizardObject } from '../../../typing'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
@@ -17,8 +18,8 @@ type WizardStepComponentsProps = {
   elements: DetailFieldDescription[]
   resourceName: string
   provider: BaseProvider
-  object: object
-  setObject: Function
+  mainWizardObject: WizardObject
+  setMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   user: object
@@ -33,8 +34,8 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     elements,
     resourceName,
     provider,
-    object,
-    setObject,
+    mainWizardObject,
+    setMainDetailObject,
     notifier,
     analytics,
     user,
@@ -50,10 +51,10 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
         setInitialValue,
         submitChange,
         resourceName,
-        object,
+        mainDetailObject: mainWizardObject,
         elements,
         provider,
-        setObject,
+        setMainDetailObject,
         notifier,
         user,
         analytics,

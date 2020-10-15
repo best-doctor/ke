@@ -12,6 +12,7 @@ import { containerErrorsStore } from '../../store'
 import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
+import type { WizardObject } from '../../../typing'
 
 const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
@@ -21,8 +22,8 @@ type WizardViewContainerProps = {
   wizard: BaseWizard
   wizardStep: BaseWizardStep
   provider: BaseProvider
-  object: object
-  setObject: Function
+  mainWizardObject: WizardObject
+  setMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   currentState: string
@@ -39,8 +40,8 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     wizard,
     wizardStep,
     provider,
-    object,
-    setObject,
+    mainWizardObject,
+    setMainDetailObject,
     notifier,
     analytics,
     user,
@@ -71,8 +72,8 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
             elements={elements}
             resourceName={resourceName}
             provider={provider}
-            object={object}
-            setObject={setObject}
+            mainWizardObject={mainWizardObject}
+            setMainDetailObject={setMainDetailObject}
             notifier={notifier}
             analytics={analytics}
             user={user}
@@ -90,7 +91,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 provider={provider}
                 currentState={currentState}
                 setCurrentState={setCurrentState}
-                object={object}
+                mainWizardObject={mainWizardObject}
                 submitChange={submitChange}
                 analytics={analytics}
               />

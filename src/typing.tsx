@@ -9,6 +9,8 @@ type OptionalDate = Date | null
 
 type DetailObject = any
 
+type WizardObject = any
+
 type WidgetProps = {
   name: string
   detailObject: DetailObject
@@ -34,4 +36,4 @@ type WidgetProps = {
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'
 
-export { GenericAccessor, OptionalDate, DetailObject, WidgetProps, FieldsTypeInAdminClass }
+export { GenericAccessor, OptionalDate, DetailObject, WidgetProps, FieldsTypeInAdminClass, WizardObject }

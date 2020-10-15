@@ -7,7 +7,7 @@ import { testWizard, testProvider, testNotifier } from '../../../setupTests'
 
 const getComponent = (): JSX.Element => {
   const ViewType = 'test_view'
-  const setObject = jest.fn()
+  const setMainDetailObject = jest.fn()
   const analytics = undefined
   const user = {}
 
@@ -16,8 +16,8 @@ const getComponent = (): JSX.Element => {
       <WizardContainer
         wizard={testWizard}
         provider={testProvider}
-        object={{ id: 100500 }}
-        setObject={setObject}
+        mainDetailObject={{ id: 100500 }}
+        setMainDetailObject={setMainDetailObject}
         notifier={testNotifier}
         analytics={analytics}
         ViewType={ViewType}

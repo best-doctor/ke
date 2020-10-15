@@ -11,7 +11,7 @@ jest.mock('../../../integration/analytics/utils')
 const getComponent = (): JSX.Element => {
   const currentState = 'begin'
   const ViewType = 'test_view'
-  const setObject = jest.fn()
+  const setMainDetailObject = jest.fn()
   const analytics = undefined
   const user = {}
 
@@ -21,8 +21,8 @@ const getComponent = (): JSX.Element => {
         wizardStep={testWizardStep}
         wizard={testWizard}
         provider={testProvider}
-        object={{ id: 100500 }}
-        setObject={setObject}
+        mainWizardObject={{ id: 100500 }}
+        setMainDetailObject={setMainDetailObject}
         notifier={testNotifier}
         analytics={analytics}
         ViewType={ViewType}

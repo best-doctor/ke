@@ -13,9 +13,9 @@ const mockedMountComponents = mocked(mountComponents)
 const initDetailViewControllersMock = mocked(initDetailViewControllers).mockImplementation(() => [jest.fn(), jest.fn()])
 
 test('Call mount componentns for unpack detail view widgets with correct args', () => {
-  const setObject = jest.fn()
+  const setMainDetailObject = jest.fn()
   const resourceName = 'test'
-  const object = {}
+  const mainDetailObject = {}
   const elements = testAdmin.detail_fields
   const provider = testProvider
   const notifier = testNotifier
@@ -26,10 +26,10 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
 
   mountDetailFields({
     resourceName,
-    object,
+    mainDetailObject,
     elements,
     provider,
-    setObject,
+    setMainDetailObject,
     notifier,
     user,
     analytics,
@@ -39,5 +39,5 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
 
   expect(mockedMountComponents.mock.calls.length).toBe(1)
   expect(initDetailViewControllersMock.mock.calls.length).toBe(1)
-  expect(initDetailViewControllersMock).toHaveBeenCalledWith(testProvider, setObject, testNotifier)
+  expect(initDetailViewControllersMock).toHaveBeenCalledWith(testProvider, setMainDetailObject, testNotifier)
 })

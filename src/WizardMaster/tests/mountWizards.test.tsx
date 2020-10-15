@@ -7,7 +7,7 @@ test('Mount wizard main component', () => {
   const ViewType = 'test_view'
   const elements = [testWizard]
   const provider = testProvider
-  const setObject = jest.fn()
+  const setMainDetailObject = jest.fn()
   const analytics = undefined
   const user = {}
 
@@ -17,10 +17,10 @@ test('Mount wizard main component', () => {
     ViewType,
     elements,
     provider,
-    setObject,
+    setMainDetailObject,
     analytics,
     user,
-    object: { id: 100500 },
+    mainDetailObject: { id: 100500 },
   })
   const result = wizards[0]
 

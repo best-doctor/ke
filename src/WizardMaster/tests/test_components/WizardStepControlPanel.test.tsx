@@ -29,7 +29,7 @@ const getComponent = (): JSX.Element => {
         wizardStep={testWizardStep}
         wizard={testWizard}
         provider={testProvider}
-        object={{ id: 100500 }}
+        mainWizardObject={{ id: 100500 }}
         analytics={analytics}
         submitChange={jest.fn()}
         currentState={currentState}
