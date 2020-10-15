@@ -31,7 +31,13 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   setInitialValue({ [name]: content })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    pushAnalytics({ eventName: EventNameEnum.INPUT_CHANGE, widgetType: WidgetTypeEnum.INPUT, value: e, objectForAnalytics: props.mainDetailObject, ...props })
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value: e,
+      objectForAnalytics: props.mainDetailObject,
+      ...props,
+    })
 
     const inputPayload = getPayload(e.target.value, name, targetPayload)
     submitChange({ url: targetUrl, payload: inputPayload })

@@ -29,7 +29,13 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   const linkHref = getWidgetContent(name, mainDetailObject, href)
 
   const handleClick = (): void => {
-    pushAnalytics({ eventName: EventNameEnum.LINK_CLICK, widgetType: WidgetTypeEnum.ACTION, value: linkHref, objectForAnalytics: props.mainDetailObject, ...props })
+    pushAnalytics({
+      eventName: EventNameEnum.LINK_CLICK,
+      widgetType: WidgetTypeEnum.ACTION,
+      value: linkHref,
+      objectForAnalytics: props.mainDetailObject,
+      ...props,
+    })
   }
 
   return (
