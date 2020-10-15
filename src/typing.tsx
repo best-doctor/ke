@@ -13,7 +13,7 @@ type WizardObject = any
 
 type WidgetProps = {
   name: string
-  detailObject: DetailObject
+  mainDetailObject: DetailObject
   resource: string
   provider: BaseProvider
   helpText?: string
@@ -21,7 +21,7 @@ type WidgetProps = {
   targetPayload: Function
   dataSource: GenericAccessor
   dataTarget: GenericAccessor
-  setObject: Function
+  setMainDetailObject: Function
   notifier: BaseNotifier
   analytics?: BaseAnalytic | undefined
   viewType: string

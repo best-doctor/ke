@@ -22,10 +22,10 @@ const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObj
 }
 
 const useWidgetInitialization = (initializationArguments: InitializationArguments): InitializedWidgetAttributes => {
-  const { dataTarget, detailObject, name, displayValue, context, dataSource } = initializationArguments
+  const { dataTarget, mainDetailObject, name, displayValue, context, dataSource } = initializationArguments
 
-  const targetUrl = getWidgetTargetUrl(dataTarget, detailObject)
-  const content = getWidgetContent(name, detailObject, displayValue, context) || ''
+  const targetUrl = getWidgetTargetUrl(dataTarget, mainDetailObject)
+  const content = getWidgetContent(name, mainDetailObject, displayValue, context) || ''
   const dataResourceUrl = getData(dataSource, context)
 
   return {

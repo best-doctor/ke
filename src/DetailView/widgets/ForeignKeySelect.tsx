@@ -18,7 +18,7 @@ const widgetType = WidgetTypeEnum.INPUT
 const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   const {
     name,
-    detailObject,
+    mainDetailObject,
     provider,
     helpText,
     targetPayload,
@@ -47,6 +47,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
       eventName,
       widgetType,
       value: changeValue,
+      objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 
@@ -61,7 +62,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
         notBlockingValidators={notBlockingValidators}
         blockingValidators={blockingValidators}
         provider={provider}
-        detailObject={detailObject}
+        detailObject={mainDetailObject}
       >
         <AsyncSelectWidget
           provider={provider}

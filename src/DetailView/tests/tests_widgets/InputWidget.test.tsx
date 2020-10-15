@@ -21,9 +21,9 @@ const getComponent = (): JSX.Element => (
     analytics={undefined}
     widgetAnalytics={jest.fn()}
     helpText="test"
-    detailObject={detailObject}
+    mainDetailObject={detailObject}
     dataSource={jest.fn()}
-    setObject={jest.fn()}
+    setMainDetailObject={jest.fn()}
     displayValue="test"
     dataTarget="https://some-test-target.com"
     targetPayload={(value: string) => ({ testPayload: value })}

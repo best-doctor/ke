@@ -43,6 +43,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
       eventName: EventNameEnum.DATE_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: changeValue,
+      objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 

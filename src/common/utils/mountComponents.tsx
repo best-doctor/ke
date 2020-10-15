@@ -67,10 +67,10 @@ const mountComponents = ({
       <ComponentToMount
         key={name}
         resource={resourceName}
-        detailObject={mainDetailObject}
+        mainDetailObject={mainDetailObject}
         data-grid={layout}
         provider={provider}
-        setObject={setMainDetailObject}
+        setMainDetailObject={setMainDetailObject}
         notifier={notifier}
         analytics={analytics}
         widgetAnalytics={widgetAnalytics}

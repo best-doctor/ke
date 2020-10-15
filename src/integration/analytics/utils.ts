@@ -10,7 +10,7 @@ type widgetAnalyticsParams = {
   analytics?: BaseAnalytic | undefined
   widgetAnalytics?: Function | boolean | undefined
   viewType: string
-  detailObject?: DetailObject
+  objectForAnalytics?: DetailObject
   resource: string
   name?: string
   value?: any
@@ -24,7 +24,7 @@ const pushAnalytics = (params: widgetAnalyticsParams): void => {
     analytics,
     widgetAnalytics,
     value: onChangeValue,
-    detailObject: object,
+    objectForAnalytics,
     resource: resourceName,
     name: adminWidgetName,
     viewType,
@@ -36,12 +36,12 @@ const pushAnalytics = (params: widgetAnalyticsParams): void => {
 
   const widgetDefaultAnalyticsPayload = {
     onChangeValue,
-    object,
+    objectForAnalytics,
     eventName,
     viewType,
     widgetName: widgetName || getNameFromDataPath(adminWidgetName, resourceName),
     resourceName,
-    resourceId: object && (object.uuid || object.id),
+    resourceId: objectForAnalytics && (objectForAnalytics.uuid || objectForAnalytics.id),
     widgetType,
     url: window.location.href,
     newValue: getNewValueByCommonFields(onChangeValue),

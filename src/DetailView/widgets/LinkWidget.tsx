@@ -22,14 +22,14 @@ const StyledLinkWidget = styled.div`
 type LinkWidgetProps = WidgetProps & { href: GenericAccessor; target?: string }
 
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
-  const { name, detailObject, href, helpText, style, containerStore, target = '_blank' } = props
+  const { name, mainDetailObject, href, helpText, style, containerStore, target = '_blank' } = props
 
   const context = containerStore.getState()
   const { content } = useWidgetInitialization({ ...props, context })
-  const linkHref = getWidgetContent(name, detailObject, href)
+  const linkHref = getWidgetContent(name, mainDetailObject, href)
 
   const handleClick = (): void => {
-    pushAnalytics({ eventName: EventNameEnum.LINK_CLICK, widgetType: WidgetTypeEnum.ACTION, value: linkHref, ...props })
+    pushAnalytics({ eventName: EventNameEnum.LINK_CLICK, widgetType: WidgetTypeEnum.ACTION, value: linkHref, objectForAnalytics: props.mainDetailObject, ...props })
   }
 
   return (

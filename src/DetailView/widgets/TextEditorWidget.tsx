@@ -86,6 +86,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: formatedValue,
+      objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 

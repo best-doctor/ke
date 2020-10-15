@@ -7,7 +7,7 @@ import { WidgetTypeEnum } from './enums'
 type AnalyticsValue = string | object
 
 type WidgetAnalyticsProps = {
-  object: DetailObject
+  objectForAnalytics: DetailObject
   onChangeValue: any
   eventName: string
   widgetName: string

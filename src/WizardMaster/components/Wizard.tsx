@@ -37,6 +37,7 @@ const sendPushAnalytics = (resourceName: string, widgetName: string, props: Wiza
     viewType: 'wizard',
     resource: resourceName,
     value: undefined,
+    objectForAnalytics: props.mainDetailObject,
     ...props,
   })
 }
@@ -56,6 +57,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
   } = props
 
   const handleToggle = (): void => {
+    // заюзать handleUserAction здесь
     sendPushAnalytics(resourceName, 'open_wizard', props)
     setShow(!show)
   }

@@ -31,6 +31,7 @@ const sendPushAnalytics = (
     eventName: EventNameEnum.BUTTON_CLICK,
     widgetType: WidgetTypeEnum.ACTION,
     widgetName,
+    objectForAnalytics: props.mainWizardObject,
     viewType: 'wizard',
     resource: resourceName,
     value: currentState,

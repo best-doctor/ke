@@ -21,8 +21,8 @@ const getComponent = (): JSX.Element => (
     resource="test-resource"
     dataSource="test-source"
     helpText="test"
-    detailObject={detailObject}
-    setObject={jest.fn()}
+    mainDetailObject={detailObject}
+    setMainDetailObject={jest.fn()}
     dataTarget="test"
     targetPayload={(value: string[]) => ({ testPayload: value })}
     notifier={testNotifier}

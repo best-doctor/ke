@@ -6,34 +6,11 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
-import type { BaseAnalytic } from '../../integration/analytics'
-import type { BaseProvider } from '../../admin/providers'
-import type { BaseNotifier } from '../../common/notifier'
-import type { GenericAccessor, DetailObject } from '../../typing'
+import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
 type SelectObject = {
   value: string
   text: string
-}
-
-type SelectProps = {
-  name: string
-  resource: string
-  detailObject: DetailObject
-  helpText: string
-  setObject: Function
-  displayValue: GenericAccessor
-  dataSource: string | Function
-  dataTarget: GenericAccessor
-  targetPayload: GenericAccessor
-  provider: BaseProvider
-  analytics: BaseAnalytic | undefined
-  widgetAnalytics: Function | boolean | undefined
-  notifier: BaseNotifier
-  viewType: string
-  style: object
-  setInitialValue: Function
-  submitChange: Function
 }
 
 const getSelectContent = (
@@ -51,12 +28,12 @@ const getSelectContent = (
   }
 }
 
-const SelectWidget = (props: SelectProps): JSX.Element => {
+const SelectWidget = (props: WidgetProps): JSX.Element => {
   const {
     name,
     helpText,
     displayValue,
-    detailObject,
+    mainDetailObject,
     dataSource,
     dataTarget,
     targetPayload,
@@ -65,10 +42,10 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
     setInitialValue,
     submitChange,
   } = props
-  const sourceUrl = getData(dataSource, detailObject)
-  const targetUrl = getData(dataTarget, detailObject) || detailObject.url
+  const sourceUrl = getData(dataSource, mainDetailObject)
+  const targetUrl = getData(dataTarget, mainDetailObject) || mainDetailObject.url
 
-  const [value, text] = getSelectContent(name, detailObject, displayValue, 'object')
+  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
 
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
   setInitialValue({ [name]: value })
@@ -84,6 +61,7 @@ const SelectWidget = (props: SelectProps): JSX.Element => {
       eventName: EventNameEnum.SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: e,
+      objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 

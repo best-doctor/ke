@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { SelectWidget } from '../../widgets/SelectWidget'
-import { testProvider, testNotifier } from '../../../setupTests'
+import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const detailObject = {
   id: 100500,
@@ -27,17 +27,18 @@ const getComponent = (): JSX.Element => (
       widgetAnalytics={jest.fn()}
       helpText="test"
       displayValue={undefined}
-      detailObject={detailObject}
+      mainDetailObject={detailObject}
       dataSource={jest.fn()}
       dataTarget="https://test.com"
       targetPayload={(value: string) => ({ testPayload: value })}
-      setObject={jest.fn()}
+      setMainDetailObject={jest.fn()}
       provider={testProvider}
       style={{}}
       viewType="test_view"
       notifier={testNotifier}
       setInitialValue={jest.fn()}
       submitChange={submitChangeMock}
+      containerStore={mockedEffectorContainerStore}
     />
   </ThemeProvider>
 )

@@ -19,10 +19,10 @@ const getComponent = (): JSX.Element => (
   <ForeignKeySelectWidget
     name="data"
     resource="test-resource"
-    detailObject={detailObject}
+    mainDetailObject={detailObject}
     provider={testProvider}
     helpText="test"
-    setObject={jest.fn()}
+    setMainDetailObject={jest.fn()}
     displayValue="test"
     dataSource="test"
     dataTarget="test"

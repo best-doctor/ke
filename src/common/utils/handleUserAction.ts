@@ -28,7 +28,7 @@ const handleUserAction = (actionHandlerArguments: ActionHandlerArguments): void 
     widgetType,
     analytics,
     widgetAnalytics,
-    detailObject,
+    mainDetailObject,
     resource,
     viewType,
   } = actionHandlerArguments
@@ -41,7 +41,7 @@ const handleUserAction = (actionHandlerArguments: ActionHandlerArguments): void 
     analytics,
     widgetAnalytics,
     value: widgetValue,
-    detailObject,
+    objectForAnalytics: mainDetailObject,
     resource,
     name,
     viewType,

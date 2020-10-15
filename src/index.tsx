@@ -9,7 +9,7 @@ import type {
   ListFilterTemplateDescription,
 } from 'admin/fields/FieldDescription'
 import { BaseForm } from 'admin/adminForm'
-import type { WizardState } from 'WizardMaster/interfaces'
+import type { WizardState, WizardPayload } from 'WizardMaster/interfaces'
 import {
   FirebaseAnalytic,
   FirebaseEventPayload,
@@ -120,4 +120,5 @@ export {
   ValidationWrapper,
   RadioButtonWidget,
   AsyncTextWidget,
+  WizardPayload,
 }
