@@ -4,7 +4,6 @@ import { Button } from '@chakra-ui/core'
 
 import { submitChange } from '../controllers'
 import { WizardContainer } from './WizardContainer'
-import { clearInitialObjectState } from '../utils'
 
 import type { BaseNotifier } from '../../common/notifier'
 import type { BaseProvider } from '../../admin/providers/index'
@@ -61,8 +60,6 @@ const Wizard = (props: WizardProps): JSX.Element => {
     sendPushAnalytics(resourceName, 'open_wizard', props)
     setShow(!show)
   }
-
-  clearInitialObjectState()
 
   return (
     <>

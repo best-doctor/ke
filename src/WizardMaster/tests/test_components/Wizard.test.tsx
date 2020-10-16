@@ -4,7 +4,6 @@ import { mocked } from 'ts-jest/utils'
 
 import { Wizard } from '../../components'
 import { pushAnalytics } from '../../../integration/analytics/utils'
-import { clearInitialObjectState } from '../../utils'
 import { testWizard, testProvider, testNotifier } from '../../../setupTests'
 
 jest.mock('../../utils')
@@ -37,14 +36,6 @@ test('Wizard main component elements', () => {
   const component = shallow(getComponent())
 
   expect(component.find('WizardContainer').length).toBe(1)
-})
-
-test('Wizard storage clear after mounting', () => {
-  const clearStorageMock = mocked(clearInitialObjectState)
-
-  shallow(getComponent())
-
-  expect(clearStorageMock.mock.calls.length).toBe(2)
 })
 
 test('Wizard main component push analytics', () => {

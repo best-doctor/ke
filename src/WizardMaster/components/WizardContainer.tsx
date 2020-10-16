@@ -53,7 +53,8 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
       Similary with detail view, wizard has an object,
       wizard has an object on which the client's actions are performed in the wizard's script.
     */
-    return containerStore.getState().__initial__ || mainDetailObject
+    const context = containerStore.getState()
+    return context.__initial__ || mainDetailObject
   }
 
   return (
