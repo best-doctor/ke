@@ -22,16 +22,6 @@ const StyledTextEditor = styled.div`
   }
 `
 
-const debounce = (func: Function, delay: number): any => {
-  let timeoutId: number
-  return function (...args: any[]) {
-    clearInterval(timeoutId)
-    // eslint-disable-next-line
-    // @ts-ignore
-    timeoutId = setTimeout(() => func.apply(this, args), delay)
-  }
-}
-
 const valueToEditorFormat = (value: string, format = 'html'): any => {
   return RichTextEditor.createValueFromString(value, format)
 }
@@ -55,8 +45,7 @@ const toolbarConfig = {
 }
 
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore, debounceValue } = props
-  const defaultDebounceValue = 3000
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
 
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, context })
@@ -69,19 +58,14 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
     // eslint-disable-next-line
   }, [content])
 
-  const debounceCallback = React.useCallback(
-    debounce((callbackValue: object) => {
-      submitChange({ url: targetUrl, payload: callbackValue })
-    }, debounceValue || defaultDebounceValue),
-    []
-  )
-
   setInitialValue({ [name]: content })
 
   const handleChange = (editorValue: any): void => {
     setValue(editorValue)
+  }
 
-    const formatedValue = valueFromEditorFormat(editorValue)
+  const handleBlur = (): void => {
+    const formatedValue = valueFromEditorFormat(value)
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
@@ -91,7 +75,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
     })
 
     const inputPayload = getPayload(formatedValue, name, targetPayload)
-    debounceCallback(inputPayload)
+    submitChange({ url: targetUrl, payload: inputPayload })
   }
 
   return (
@@ -104,6 +88,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
           editorClassName="text-editor-widget"
           value={value}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
       </StyledTextEditor>
     </WidgetWrapper>
