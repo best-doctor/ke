@@ -28,6 +28,8 @@ const useValidation = (
   const [errorMessages, setErrorMessage] = React.useState<string[]>([])
 
   const handleAction = (changeValue: object | string): void | null => {
+    setErrorMessage([])
+    setInfoMessage([])
     makeCheck(blockingValidators, changeValue, setErrorMessage, provider, detailObject)
     makeCheck(notBlockingValidators, changeValue, setInfoMessage, provider, detailObject)
 
