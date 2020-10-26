@@ -1,6 +1,6 @@
 import * as React from 'react'
-import * as GridLayout from 'react-grid-layout'
-import { Button } from '@chakra-ui/core'
+import { Button, Box } from '@chakra-ui/core'
+import { Row, Col } from 'react-flexbox-grid'
 
 import { submitChange } from '../controllers'
 import { WizardContainer } from './WizardContainer'
@@ -12,8 +12,6 @@ import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
-
-const ReactGridLayout = GridLayout.WidthProvider(GridLayout)
 
 type WizardProps = {
   resourceName: string
@@ -63,17 +61,21 @@ const Wizard = (props: WizardProps): JSX.Element => {
 
   return (
     <>
-      <ReactGridLayout key="wizardStepHeaderLayout" className="layout" cols={12} rowHeight={30}>
-        <Button
-          key="wizardToggleButton"
-          onClick={handleToggle}
-          variantColor="green"
-          width="inherit"
-          data-grid={{ x: 1, y: 0, w: 10, h: 2, static: true }}
-        >
-          {wizard.title}
-        </Button>
-      </ReactGridLayout>
+      <Row>
+        <Col xs={12}>
+          <Box padding="16px">
+            <Button
+              key="wizardToggleButton"
+              onClick={handleToggle}
+              variantColor="green"
+              width="inherit"
+              style={{ width: '100%', height: '60px' }}
+            >
+              {wizard.title}
+            </Button>
+          </Box>
+        </Col>
+      </Row>
 
       <WizardContainer
         wizard={wizard}
