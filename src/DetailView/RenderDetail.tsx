@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { useToast } from '@chakra-ui/core'
+import { useToast, Box } from '@chakra-ui/core'
 import { useParams } from 'react-router-dom'
+import { Row, Col } from 'react-flexbox-grid'
 
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
@@ -65,22 +66,32 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
 
   return (
     <>
-      <ToListViewLink name={resourceName} />
-      {mainDetailObject &&
-        Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
-          const elements = admin[elementsKey as keyof typeof admin]
-          if (!elements) return []
+      <Row>
+        <Col xs={12}>
+          <Box padding="8px">
+            <ToListViewLink name={resourceName} />
+          </Box>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          {mainDetailObject &&
+            Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
+              const elements = admin[elementsKey as keyof typeof admin]
+              if (!elements) return []
 
-          return container({
-            mainDetailObject,
-            setMainDetailObject,
-            notifier,
-            ViewType,
-            elements,
-            elementsKey,
-            ...props,
-          })
-        })}
+              return container({
+                mainDetailObject,
+                setMainDetailObject,
+                notifier,
+                ViewType,
+                elements,
+                elementsKey,
+                ...props,
+              })
+            })}
+        </Col>
+      </Row>
     </>
   )
 }
