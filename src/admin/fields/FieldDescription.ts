@@ -23,9 +23,6 @@ type ListFilterTemplateDescription = {
 type LayoutData = {
   x: number
   y: number
-  w: number
-  h: number
-  static: boolean
 }
 
 type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard | null)

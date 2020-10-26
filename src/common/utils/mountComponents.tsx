@@ -78,7 +78,7 @@ const mountComponents = ({
   let lastRow = null
 
   for (const element of elements) {
-    const currentRow = get(element, 'colProps.row')
+    const currentRow = get(element, 'layout.y')
     if (currentRow !== lastRow) {
       if (columns.length > 0) {
         rows.push(columns)

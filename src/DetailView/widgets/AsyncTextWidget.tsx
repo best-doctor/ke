@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { Text, FormLabel, Box } from '@chakra-ui/core'
+import { Text } from '@chakra-ui/core'
 import { useEffect, useState } from 'react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 
 import type { WidgetProps } from '../../typing'
 import { getWidgetContent } from '../utils/dataAccess'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { StyledTextWidget } from './TextWidget'
 
 const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
@@ -24,16 +25,11 @@ const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   }, [provider, dataResourceUrl, context, displayValue, name])
 
   return (
-    <Box {...style}>
-      {content && (
-        <>
-          <FormLabel>{helpText || ''}</FormLabel>
-          <StyledTextWidget>
-            <Text>{content}</Text>
-          </StyledTextWidget>
-        </>
-      )}
-    </Box>
+    <WidgetWrapper style={style} helpText={helpText}>
+      <StyledTextWidget>
+        <Text>{content || '\u00a0'}</Text>
+      </StyledTextWidget>
+    </WidgetWrapper>
   )
 }
 
