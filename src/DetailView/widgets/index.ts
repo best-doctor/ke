@@ -11,6 +11,7 @@ import { TextEditorWidget } from './TextEditorWidget'
 import { DateTimeRangeListWidget } from './DateTimeRangeListWidget'
 import { DateTimeWidget } from './DateTimeWidget'
 import { RadioButtonWidget } from './RadioButtonWidget'
+import { ContainerWidget } from './ContainerWidget'
 
 export {
   AsyncTextWidget,
@@ -26,4 +27,5 @@ export {
   DateTimeRangeListWidget,
   DateTimeWidget,
   RadioButtonWidget,
+  ContainerWidget,
 }

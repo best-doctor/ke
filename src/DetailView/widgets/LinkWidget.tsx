@@ -13,10 +13,7 @@ const StyledLinkWidget = styled.div`
   border-width: 2px;
   border-radius: 3px;
   border-color: #cbd5e0;
-  padding-left: 5px;
-  padding-right: 2px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding: 5.4px;
 `
 
 type LinkWidgetProps = WidgetProps & { href: GenericAccessor; target?: string }

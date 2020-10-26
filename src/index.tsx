@@ -47,6 +47,7 @@ import {
   DateTimeRangeListWidget,
   DateTimeWidget,
   RadioButtonWidget,
+  ContainerWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -121,4 +122,5 @@ export {
   RadioButtonWidget,
   AsyncTextWidget,
   WizardPayload,
+  ContainerWidget,
 }

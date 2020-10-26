@@ -1,4 +1,7 @@
 import * as React from 'react'
+import { get } from 'lodash'
+// @ts-ignore
+import { Row, getColumnProps } from 'react-flexbox-grid'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
@@ -58,28 +61,69 @@ const mountComponents = ({
     Type described in `typing.ts::WidgetProps`
   */
 
-  return elements.map((adminElement: DetailFieldDescription) => {
-    const { widget, name, layout, widgetAnalytics } = adminElement
+  elements.sort((firstElement, secondElement) => {
+    const firstY = get(firstElement, 'layout.y')
+    const secondY = get(secondElement, 'layout.y')
+    const firstX = get(firstElement, 'layout.x')
+    const secondX = get(secondElement, 'layout.x')
 
-    const ComponentToMount = getComponentFromCallable(widget, user)
+    if (firstY === secondY) {
+      return firstX > secondX ? 1 : -1
+    }
+    return firstY > secondY ? 1 : -1
+  })
 
+  const rows = []
+  let columns = []
+  let lastRow = null
+
+  for (const element of elements) {
+    const currentRow = get(element, 'colProps.row')
+    if (currentRow !== lastRow) {
+      if (columns.length > 0) {
+        rows.push(columns)
+        columns = []
+      }
+    }
+    columns.push(element)
+    lastRow = currentRow
+  }
+  if (columns) {
+    rows.push(columns)
+  }
+
+  return rows.map((rowColumns) => {
     return (
-      <ComponentToMount
-        key={name}
-        resource={resourceName}
-        mainDetailObject={mainDetailObject}
-        data-grid={layout}
-        provider={provider}
-        setMainDetailObject={setMainDetailObject}
-        notifier={notifier}
-        analytics={analytics}
-        widgetAnalytics={widgetAnalytics}
-        viewType={ViewType}
-        setInitialValue={setInitialValue}
-        submitChange={submitChange}
-        containerStore={containerStore}
-        {...adminElement}
-      />
+      <Row>
+        {rowColumns.map((adminElement: DetailFieldDescription) => {
+          const { widget, name, layout, widgetAnalytics } = adminElement
+
+          const ComponentToMount = getComponentFromCallable(widget, user)
+          const colProps = getColumnProps(layout)
+
+          return (
+            <div className={colProps.className}>
+              <ComponentToMount
+                key={name}
+                resource={resourceName}
+                resourceName={resourceName}
+                mainDetailObject={mainDetailObject}
+                // data-grid={layout}
+                provider={provider}
+                setMainDetailObject={setMainDetailObject}
+                notifier={notifier}
+                analytics={analytics}
+                widgetAnalytics={widgetAnalytics}
+                viewType={ViewType}
+                setInitialValue={setInitialValue}
+                submitChange={submitChange}
+                containerStore={containerStore}
+                {...adminElement}
+              />
+            </div>
+          )
+        })}
+      </Row>
     )
   })
 }
