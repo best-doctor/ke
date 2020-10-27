@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
-import { FormLabel, Box, Text } from '@chakra-ui/core'
+import { Text } from '@chakra-ui/core'
 
-import { TextWidget } from '../../widgets/TextWidget'
+import { TextWidget, StyledTextWidget } from '../../widgets/TextWidget'
+import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const detailObject = {
@@ -35,7 +36,7 @@ test('Text widget properly rendered', () => {
     />
   )
 
-  expect(component.find(Box).length).toEqual(1)
+  expect(component.find(WidgetWrapper).length).toEqual(1)
+  expect(component.find(StyledTextWidget).length).toEqual(1)
   expect(component.find(Text).length).toEqual(1)
-  expect(component.find(FormLabel).length).toEqual(1)
 })

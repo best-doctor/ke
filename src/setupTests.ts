@@ -38,7 +38,7 @@ class TestAdmin extends BaseAdmin {
       name: 'patient.last_name',
       helpText: 'Test help text',
       widget: TextWidget,
-      layout: { x: 1, y: 3, w: 1, h: 2, static: true },
+      layout: { x: 1, y: 3, xs: 12 },
     },
   ]
 

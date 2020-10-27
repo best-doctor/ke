@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { get } from 'lodash'
+// eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps } from 'react-flexbox-grid'
 
@@ -77,7 +78,8 @@ const mountComponents = ({
   let columns = []
   let lastRow = null
 
-  for (const element of elements) {
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i]
     const currentRow = get(element, 'layout.y')
     if (currentRow !== lastRow) {
       if (columns.length > 0) {

@@ -25,9 +25,9 @@ test('Get components to mount', () => {
     submitChange: jest.fn(),
   })
 
-  const component = components[0]
+  const component = components[0].props.children[0].props.children
 
   expect(component?.type?.name).toEqual('TextWidget')
-  expect(component?.props.layout).toEqual({ x: 1, y: 3, w: 1, h: 2, static: true })
+  expect(component?.props.layout).toEqual({ x: 1, y: 3, xs: 12 })
   expect(component?.props.helpText).toEqual('Test help text')
 })
