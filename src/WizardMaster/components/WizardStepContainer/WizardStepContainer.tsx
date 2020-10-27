@@ -84,10 +84,10 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
               />
               <Row>
                 <Col xs={12}>
-                  <Box key="errors" data-grid={{ x: 1, y: 1, w: 10, h: 1, static: true }}>
+                  <Box key="errors">
                     <WizardValidationErrors errors={containerErrorsStore.getState()} />
                   </Box>
-                  <Box key="steps" data-grid={{ x: 1, y: 1, w: 10, h: 1, static: true }}>
+                  <Box key="steps">
                     <WizardStepControlPanel
                       wizardStep={wizardStep}
                       wizard={wizard}
