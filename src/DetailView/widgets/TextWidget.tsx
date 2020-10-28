@@ -8,7 +8,7 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import type { WidgetProps } from '../../typing'
 
 const StyledTextWidget = styled.div`
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 3px;
   border-color: #cbd5e0;
   padding: 5.4px;

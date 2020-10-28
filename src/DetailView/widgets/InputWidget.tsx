@@ -49,7 +49,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
         value={content as string}
         resize="none"
         height={isTextarea ? 263 : 33}
-        borderWidth="2px"
+        borderWidth="1px"
         borderColor="gray.300"
         debounceTimeout={1000}
         element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
