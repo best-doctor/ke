@@ -33,6 +33,17 @@ const StyledButton = styled.div`
   margin-right: 5px;
 `
 
+const StyledDateTimeRangeListContainer = styled.div`
+  overflow: hidden;
+  & > div.date-time-list-item + div.date-time-list-item {
+    margin-top: 8px;
+  }
+`
+
+const StyledDateTimeRangeListItem = styled.div`
+  overflow: hidden;
+`
+
 const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] => {
   return dateRanges.map((dateRange_: DateRange) => {
     const [dateFrom, dateTo] = dateRange_
@@ -160,45 +171,45 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
 
   return (
     <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
-      {dateRanges.map((dateRange: DateRange, itemIndex: number) => {
-        const [startDate, endDate] = dateRange
+      <StyledDateTimeRangeListContainer className="date-time-list-container">
+        {dateRanges.map((dateRange: DateRange, itemIndex: number) => {
+          const [startDate, endDate] = dateRange
 
-        return (
-          <>
-            <BaseDateTimeRangeWidget
-              startDate={startDate}
-              endDate={endDate}
-              handleChangeDate={handleChangeDate}
-              itemIndex={itemIndex}
-            />
-            <StyledButton>
-              <AllDayDateTimeRangeAction
+          return (
+            <StyledDateTimeRangeListItem className="date-time-list-item">
+              <BaseDateTimeRangeWidget
                 startDate={startDate}
                 endDate={endDate}
+                handleChangeDate={handleChangeDate}
                 itemIndex={itemIndex}
-                setDateRanges={setDateRanges}
-                dateRanges={dateRanges}
-                targetPayload={targetPayload}
-                targetUrl={targetUrl}
-                submitChange={submitChange}
-                name={name}
               />
-            </StyledButton>
-            <StyledButton>
-              <Button variantColor="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
-                -
-              </Button>
-            </StyledButton>
-            <StyledButton>
-              <Button variantColor="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
-                +
-              </Button>
-            </StyledButton>
-            <br />
-            <br />
-          </>
-        )
-      })}
+              <StyledButton>
+                <AllDayDateTimeRangeAction
+                  startDate={startDate}
+                  endDate={endDate}
+                  itemIndex={itemIndex}
+                  setDateRanges={setDateRanges}
+                  dateRanges={dateRanges}
+                  targetPayload={targetPayload}
+                  targetUrl={targetUrl}
+                  submitChange={submitChange}
+                  name={name}
+                />
+              </StyledButton>
+              <StyledButton>
+                <Button variantColor="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
+                  -
+                </Button>
+              </StyledButton>
+              <StyledButton>
+                <Button variantColor="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
+                  +
+                </Button>
+              </StyledButton>
+            </StyledDateTimeRangeListItem>
+          )
+        })}
+      </StyledDateTimeRangeListContainer>
     </WidgetWrapper>
   )
 }
