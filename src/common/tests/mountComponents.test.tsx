@@ -28,6 +28,6 @@ test('Get components to mount', () => {
   const component = components[0].props.children[0].props.children
 
   expect(component?.type?.name).toEqual('TextWidget')
-  expect(component?.props.layout).toEqual({ x: 1, y: 3, xs: 12 })
+  expect(component?.props.layout).toEqual({ x: 1, y: 3, w: 12, md: 12, mdOffset: 0, xs: 12, xsOffset: 0 })
   expect(component?.props.helpText).toEqual('Test help text')
 })

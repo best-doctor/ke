@@ -77,17 +77,29 @@ const mountComponents = ({
   const rows = []
   let columns = []
   let lastRow = null
+  let lastColEnd = 1
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i]
-    const currentRow = get(element, 'layout.y')
+    const currentRow = get(element, 'layout.y', 1)
+    const currentCol = get(element, 'layout.x', 1)
+    const currentWidth = get(element, 'layout.w', 12)
+
     if (currentRow !== lastRow) {
       if (columns.length > 0) {
         rows.push(columns)
         columns = []
+        lastColEnd = 1
       }
     }
+
+    element.layout.md = get(element, 'layout.md', currentWidth)
+    element.layout.xs = get(element, 'layout.xs', 12)
+    element.layout.xsOffset = get(element, 'layout.xsOffset', 0)
+    element.layout.mdOffset = get(element, 'layout.mdOffset', currentCol - lastColEnd)
+
     columns.push(element)
+    lastColEnd = currentCol + currentWidth
     lastRow = currentRow
   }
   if (columns) {

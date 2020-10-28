@@ -67,14 +67,14 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   return (
     <>
       <Row>
-        <Col xs={10} xsOffset={1}>
+        <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
           <Box padding="8px">
             <ToListViewLink name={resourceName} />
           </Box>
         </Col>
       </Row>
       <Row>
-        <Col xs={10} xsOffset={1}>
+        <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
           {mainDetailObject &&
             Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
               const elements = admin[elementsKey as keyof typeof admin]

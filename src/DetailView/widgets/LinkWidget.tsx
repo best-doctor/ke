@@ -38,9 +38,13 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper style={style} helpText={helpText || ''}>
       <StyledLinkWidget>
-        <Link target={target} href={linkHref} onClick={() => handleClick()} color="teal.500">
-          {content}
-        </Link>
+        {linkHref ? (
+          <Link target={target} href={linkHref} onClick={() => handleClick()} color="teal.500">
+            {content || 'Ссылка'}
+          </Link>
+        ) : (
+          '\u00a0'
+        )}
       </StyledLinkWidget>
     </WidgetWrapper>
   )

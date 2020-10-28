@@ -23,6 +23,17 @@ type ListFilterTemplateDescription = {
 type LayoutData = {
   x: number
   y: number
+  w: number
+  xs?: number
+  sm?: number
+  md?: number
+  lg?: number
+  xl?: number
+  xsOffset?: number
+  smOffset?: number
+  mdOffset?: number
+  lgOffset?: number
+  xlOffset?: number
 }
 
 type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard | null)
