@@ -63,7 +63,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
     <>
       <Row>
         <Col xs={12}>
-          <Box padding="16px 0">
+          <Box marginBottom="16px">
             <Button
               key="wizardToggleButton"
               onClick={handleToggle}

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box } from '@chakra-ui/core'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
 import type { BaseProvider } from 'index'
@@ -44,7 +45,7 @@ const mountDetailFields = ({
   const [setInitialValue, submitChange] = initDetailViewControllers(provider, setMainDetailObject, notifier)
 
   return (
-    <>
+    <Box marginBottom="16px">
       {mountComponents({
         setInitialValue,
         submitChange,
@@ -59,7 +60,7 @@ const mountDetailFields = ({
         ViewType,
         containerStore,
       })}
-    </>
+    </Box>
   )
 }
 
