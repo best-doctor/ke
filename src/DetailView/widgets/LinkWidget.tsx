@@ -23,7 +23,7 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
 
   const context = containerStore.getState()
   const { content } = useWidgetInitialization({ ...props, context })
-  const linkHref = getWidgetContent(name, mainDetailObject, href)
+  const linkHref = getWidgetContent(name, mainDetailObject, href, context)
 
   const handleClick = (): void => {
     pushAnalytics({
