@@ -10,7 +10,7 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 import type { GenericAccessor, WidgetProps } from '../../typing'
 
 const StyledLinkWidget = styled.div`
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 3px;
   border-color: #cbd5e0;
   padding: 5.4px;

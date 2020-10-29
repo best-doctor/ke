@@ -62,7 +62,14 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
       {show && (
         <Row>
           <Col xs={12}>
-            <Box ref={wizardStepRef} mt={4} borderTopWidth="2px" borderBottomWidth="2px" p={5} borderColor="gray.300">
+            <Box
+              ref={wizardStepRef}
+              marginBottom="16px"
+              borderTopWidth="1px"
+              borderBottomWidth="1px"
+              padding="8px"
+              borderColor="gray.300"
+            >
               <Row>
                 <Col xs={12}>
                   <Heading key="header" size="md" data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}>

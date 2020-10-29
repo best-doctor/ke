@@ -36,17 +36,25 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
   return wizardInstance
 }
 
+const validateRequiredWidgets = (widgets: any, wizardContext: any): void => {
+  widgets.forEach((widget: any) => {
+    if (widget?.widgets) {
+      validateRequiredWidgets(widget.widgets, wizardContext)
+    } else {
+      const widgetContent = wizardContext[widget.name]
+      if (widget.required === true && !widgetContent) {
+        pushError(`Поле ${widget.helpText} обязательно`)
+      }
+    }
+  })
+}
+
 const validateContext = (widgets: any): void => {
   clearErros()
 
   const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
 
-  widgets.forEach((widget: any) => {
-    const widgetContent = wizardContext[widget.name]
-    if (widget.required === true && !widgetContent) {
-      pushError(`Поле ${widget.helpText} обязательно`)
-    }
-  })
+  validateRequiredWidgets(widgets, wizardContext)
 }
 
 export { getWizardFromCallable, clearInitialObjectState, clearStorage, validateContext }
