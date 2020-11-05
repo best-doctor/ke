@@ -32,6 +32,8 @@ type WidgetProps = {
   notBlockingValidators?: Function[]
   blockingValidators?: Function[]
   containerStore: Store<object>
+  useClipboard?: boolean
+  copyValue?: GenericAccessor
 }
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'

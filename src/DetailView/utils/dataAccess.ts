@@ -36,4 +36,13 @@ const getPayload = (
   return { [name]: value }
 }
 
-export { getData, getWidgetContent, getPayload }
+const getCopyHandler = (value: any, copyValue?: GenericAccessor, fallbackCopyValue?: GenericAccessor): Function => {
+  const realCopyValue = copyValue || fallbackCopyValue
+  if (typeof realCopyValue === 'function') return () => realCopyValue(value)
+
+  if (typeof realCopyValue === 'string') return () => realCopyValue
+
+  return () => value.toString()
+}
+
+export { getData, getWidgetContent, getPayload, getCopyHandler }
