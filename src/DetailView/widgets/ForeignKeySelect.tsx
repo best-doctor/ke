@@ -8,7 +8,7 @@ import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
-import { getPayload } from '../utils/dataAccess'
+import { getCopyHandler, getPayload } from '../utils/dataAccess'
 
 type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
@@ -30,6 +30,8 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     notBlockingValidators = [],
     blockingValidators = [],
     containerStore,
+    useClipboard,
+    copyValue,
   } = props
 
   const context = containerStore.getState()
@@ -56,8 +58,10 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
 
+  const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value))
+
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper style={style} helpText={helpText} useClipboard={useClipboard} copyValue={handleCopyValue}>
       <ValidationWrapper
         notBlockingValidators={notBlockingValidators}
         blockingValidators={blockingValidators}

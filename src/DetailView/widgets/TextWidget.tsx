@@ -6,6 +6,7 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 
 import type { WidgetProps } from '../../typing'
+import { getCopyHandler } from '../utils/dataAccess'
 
 const StyledTextWidget = styled.div`
   border-width: 1px;
@@ -16,12 +17,17 @@ const StyledTextWidget = styled.div`
 `
 
 const TextWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, style, helpText } = props
+  const { containerStore, style, helpText, useClipboard, copyValue } = props
 
   const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper
+      style={style}
+      helpText={helpText}
+      useClipboard={useClipboard}
+      copyValue={getCopyHandler(content, copyValue)}
+    >
       <StyledTextWidget>
         <Text>{content || '\u00a0'}</Text>
       </StyledTextWidget>
