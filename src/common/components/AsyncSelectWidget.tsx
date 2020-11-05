@@ -10,13 +10,14 @@ type AsyncSelectWidgetProps = {
   provider: BaseProvider
   dataResourceUrl: string
   handleChange: Function
-  value: object
+  value: object | null
   getOptionLabel: Function
   getOptionValue: Function
   isClearable?: boolean
   isMulti?: boolean
   closeMenuOnSelect?: boolean
   searchParamName?: string
+  placeholder?: string
 }
 
 const AsyncSelectWidget = ({
@@ -29,6 +30,7 @@ const AsyncSelectWidget = ({
   isClearable = false,
   isMulti = false,
   searchParamName = 'search',
+  placeholder = 'Введите значение',
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -57,8 +59,9 @@ const AsyncSelectWidget = ({
       isMulti={isMulti}
       menuPortalTarget={document.body}
       styles={{ menuPortal: (base: object) => ({ ...base, zIndex: 9999 }) }}
-      getOptionLabel={(option: object) => getOptionLabel(option)}
-      getOptionValue={(option: object) => getOptionValue(option)}
+      getOptionLabel={(option: object | null) => (option ? getOptionLabel(option) : option)}
+      getOptionValue={(option: object | null) => (option ? getOptionValue(option) : option)}
+      placeholder={placeholder}
     />
   )
 }

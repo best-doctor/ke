@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { DebounceInput } from 'react-debounce-input'
+import { Box } from '@chakra-ui/core'
 import Select from 'react-select'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
@@ -10,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
+import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
 import { StoreManager } from '../../../common/store'
 import { FilterManager } from '../../../common/filterManager'
@@ -148,6 +150,44 @@ const SelectFilter = (params: any): JSX.Element => {
   )
 }
 
+const ForeignKeySelectFilter = (params: any): JSX.Element => {
+  const { name, label, resourceName, provider, filterResource, optionLabel, optionValue } = params
+  const history = useHistory()
+  const location = useLocation()
+  const isClearable = true
+  const [value, setValue] = React.useState<object | null>(null)
+
+  const handleChange = (changeValue: any): void => {
+    setValue(changeValue)
+    const filterValue = changeValue ? optionValue(changeValue) : ''
+
+    pushAnalytics({
+      eventName: EventNameEnum.SELECT_OPTION_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, filterValue, name),
+      ...params,
+    })
+
+    setFilterValue(location, name, filterValue, history)
+  }
+
+  return (
+    <StyledFilter>
+      <Box className="styled-filter">
+        <AsyncSelectWidget
+          provider={provider}
+          dataResourceUrl={filterResource}
+          handleChange={handleChange}
+          value={value}
+          isClearable={isClearable}
+          getOptionLabel={optionLabel}
+          getOptionValue={optionValue}
+          placeholder={`Фильтр по ${label}`}
+        />
+      </Box>
+    </StyledFilter>
+  )
+}
+
 const DateFilter = (params: any): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
   const { name, label, resourceName } = params
@@ -213,4 +253,4 @@ const DateTimeFilter = (params: any): JSX.Element => {
   )
 }
 
-export { BaseFilter, MultiSelectFilter, SelectFilter, DateFilter, DateTimeFilter }
+export { BaseFilter, MultiSelectFilter, SelectFilter, DateFilter, DateTimeFilter, ForeignKeySelectFilter }

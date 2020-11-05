@@ -9,6 +9,7 @@ import type { BaseAnalytic } from 'integration/analytics'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 import { FilterManager } from '../../../common/filterManager'
+import type { BaseProvider } from '../../../admin/providers'
 
 type FilterBlockProps = {
   resourceName: string
@@ -16,6 +17,7 @@ type FilterBlockProps = {
   listFilterTemplates?: ListFilterTemplateDescription[]
   user: any
   analytics: BaseAnalytic | undefined
+  provider?: BaseProvider
 }
 
 const filterTemplatesOnClick = (
@@ -38,7 +40,7 @@ const filterTemplatesOnClick = (
 }
 
 const mountFilters = (props: FilterBlockProps): ReactNode => {
-  const { listFilters, analytics, resourceName } = props
+  const { listFilters, analytics, resourceName, provider } = props
   // eslint-disable-next-line
   return (
     <Flex flexWrap="wrap" key="custom_filters">
@@ -46,7 +48,7 @@ const mountFilters = (props: FilterBlockProps): ReactNode => {
         listFilters.map((listFilter: ListFilterDescription) => (
           <Flex flexDirection="column" m={2} key={listFilter.name}>
             <Text fontWeight="bold">{listFilter.label}</Text>
-            <Box>{React.createElement(listFilter.Filter, { ...listFilter, analytics, resourceName })}</Box>
+            <Box>{React.createElement(listFilter.Filter, { ...listFilter, analytics, resourceName, provider })}</Box>
           </Flex>
         ))}
     </Flex>

@@ -10,7 +10,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import { getPayload } from '../utils/dataAccess'
 
-type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
+type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function; isClearable?: boolean }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
@@ -24,6 +24,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     targetPayload,
     optionLabel,
     optionValue,
+    isClearable = false,
     style,
     setInitialValue,
     submitChange,
@@ -36,7 +37,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
 
-  const [value, setValue] = React.useState<object>(content as object)
+  const [value, setValue] = React.useState<object | null>(content as object | null)
 
   setInitialValue(value ? getPayload(value, name, targetPayload) : null)
 
@@ -69,7 +70,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           dataResourceUrl={dataResourceUrl}
           handleChange={handleChangeValue}
           value={value}
-          isClearable
+          isClearable={isClearable}
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
         />

@@ -56,6 +56,7 @@ import {
   BaseFilter,
   DateFilter,
   DateTimeFilter,
+  ForeignKeySelectFilter,
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
@@ -70,6 +71,7 @@ export {
   AdminResource,
   RenderList,
   RenderDetail,
+  ForeignKeySelectFilter,
   SelectFilter,
   MultiSelectFilter,
   DateFilter,

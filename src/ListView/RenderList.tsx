@@ -59,6 +59,7 @@ export const RenderList: React.FC<{
           user={user}
           filterable
           analytics={analytics}
+          provider={provider}
         />
       )}
     </Flex>
