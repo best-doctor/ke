@@ -70,7 +70,6 @@
         "jest": "^26.0.1",
         "lint-staged": "^10.2.2",
         "prettier": "^2.0.4",
-        "react": "file:../batyacrm/node_modules/react",
         "react-dom": "^16.13.1",
         "react-test-renderer": "^16.13.1",
         "ts-jest": "^26.0.0",
@@ -82,7 +81,6 @@
         "webpack-cli": "^3.3.11"
     },
     "peerDependencies": {
-        "react": "file:../batyacrm/node_modules/react",
         "react-dom": "^16.13.1"
     },
     "scripts": {
