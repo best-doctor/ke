@@ -10,7 +10,12 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import { getCopyHandler, getPayload } from '../utils/dataAccess'
 
-type ForeignKeySelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function; isClearable?: boolean }
+type ForeignKeySelectWidgetProps = WidgetProps & {
+  optionLabel: Function
+  optionValue: Function
+  isClearable?: boolean
+  searchParamName?: string
+}
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
@@ -33,6 +38,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     containerStore,
     useClipboard,
     copyValue,
+    searchParamName,
   } = props
 
   const context = containerStore.getState()
@@ -77,6 +83,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           isClearable={isClearable}
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
+          searchParamName={searchParamName}
         />
       </ValidationWrapper>
     </WidgetWrapper>
