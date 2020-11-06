@@ -1,3 +1,5 @@
+const esModules = ['react-icons'].join('|');
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -6,4 +8,8 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy"
   },
+  transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
+  transform: {
+    'js': 'jest-esm-transformer'
+  }
 }
