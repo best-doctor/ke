@@ -14,6 +14,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   optionLabel: Function
   optionValue: Function
   isClearable?: boolean
+  defaultOptions?: boolean
   searchParamName?: string
 }
 
@@ -30,6 +31,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     optionLabel,
     optionValue,
     isClearable = false,
+    defaultOptions = false,
     style,
     setInitialValue,
     submitChange,
@@ -81,6 +83,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           handleChange={handleChangeValue}
           value={value}
           isClearable={isClearable}
+          defaultOptions={defaultOptions}
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
           searchParamName={searchParamName}

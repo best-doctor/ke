@@ -151,7 +151,16 @@ const SelectFilter = (params: any): JSX.Element => {
 }
 
 const ForeignKeySelectFilter = (params: any): JSX.Element => {
-  const { name, label, resourceName, provider, filterResource, optionLabel, optionValue } = params
+  const {
+    name,
+    label,
+    resourceName,
+    provider,
+    filterResource,
+    optionLabel,
+    optionValue,
+    defaultOptions = false,
+  } = params
   const history = useHistory()
   const location = useLocation()
   const isClearable = true
@@ -179,6 +188,7 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
           handleChange={handleChange}
           value={value}
           isClearable={isClearable}
+          defaultOptions={defaultOptions}
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
           placeholder={`Фильтр по ${label}`}
