@@ -31,16 +31,54 @@ export abstract class BaseProvider {
     return this.http
   }
 
-  getList = async (
+
+  getPage = async (
     url: string | URL,
     filters: Filter[] | null = null,
-    page: number | null = null
+    page: number | null = null,
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const [resourceUrl, resourceFilters] = this.parseUrl(url)
 
     const generatedUrl = this.getUrl(resourceUrl, resourceFilters, filters, page)
 
     return this.navigate(generatedUrl, resourceFilters)
+  }
+
+  getList = async (
+    url: string | URL,
+    filters: Filter[] | null = null,
+    perPage: number | null = null,
+    startPage: number | null = null,
+    endPage: number | null = null,
+  ): Promise<Model[]> => {
+    const combinedFilters: Filter[] = [...(filters || [])]
+    if (perPage) {
+      combinedFilters.push({
+        filterName: 'per_page',
+        value: perPage.toString(),
+        filterOperation: undefined,
+      })
+    }
+    let page: number = startPage || 1
+    let data: Model[] = []
+
+    while (page) {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const [pageData, , pagination] = await this.getPage(url, combinedFilters, page)
+        data = data.concat(pageData)
+        page += 1
+        if (
+          pagination.nextUrl == null
+          || (endPage && page > endPage)
+        )
+          page = 0
+      }
+      catch (err) {
+        return data
+      }
+    }
+    return data
   }
 
   getObject = async (resourceUrl: string): Promise<Model> => {

@@ -90,7 +90,7 @@ test.each([
 ])('Provider get list', (url, filters, page, expectedUrl, expectedResourceFilters) => {
   testProvider.navigate = jest.fn()
 
-  testProvider.getList(url, filters, page)
+  testProvider.getPage(url, filters, page)
 
   expect(testProvider.navigate).toHaveBeenCalledWith(expectedUrl, expectedResourceFilters)
 })

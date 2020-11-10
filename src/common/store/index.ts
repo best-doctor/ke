@@ -19,7 +19,7 @@ const storeDetailResource = createEvent<DetailEvent>()
 
 const storeListEffect = createEffect({
   async handler({ resourceUrl, provider }: { resourceUrl: string; provider: BaseProvider }): Promise<any[]> {
-    const [data, ,] = await provider.getList(resourceUrl)
+    const [data, ,] = await provider.getPage(resourceUrl)
 
     return [data, resourceUrl]
   },

@@ -46,7 +46,7 @@ const AsyncSelectWidget = ({
     const url = getUrl(changeValue)
 
     return new Promise((resolve) => {
-      resolve(provider.getList(url).then(([data, ,]: [object, object, object]) => data))
+      resolve(provider.getPage(url).then(([data, ,]: [object, object, object]) => data))
     })
   }
 

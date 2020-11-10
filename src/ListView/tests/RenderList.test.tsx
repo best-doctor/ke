@@ -22,7 +22,7 @@ const getComponent = (): JSX.Element => (
 )
 
 test('Render list mount', () => {
-  jest.spyOn(testProvider, 'getList').mockImplementation(() => {
+  jest.spyOn(testProvider, 'getPage').mockImplementation(() => {
     return Promise.resolve([dataMockResponse, [], mockPagination])
   })
 

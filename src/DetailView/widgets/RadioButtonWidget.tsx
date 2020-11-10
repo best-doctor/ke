@@ -28,7 +28,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   React.useEffect(() => {
     if (dataResourceUrl) {
       provider
-        .getList(dataResourceUrl)
+        .getPage(dataResourceUrl)
         .then(([data, ,]: [Model[], object, object]) => setElements(data as RadioButtonElement[]))
     }
   }, [dataResourceUrl, provider])

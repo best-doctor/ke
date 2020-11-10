@@ -51,7 +51,7 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
   setInitialValue({ [name]: value })
 
   useEffect(() => {
-    provider.getList(sourceUrl).then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
+    provider.getPage(sourceUrl).then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
   }, [provider, sourceUrl])
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {

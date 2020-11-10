@@ -41,7 +41,7 @@ export const RenderList: React.FC<{
   React.useEffect(() => {
     const resource = admin.getResource()
     const filters = FilterManager.getFilters(location.search)
-    provider.getList(resource, filters, page).then(processBackendResponse)
+    provider.getPage(resource, filters, page).then(processBackendResponse)
   }, [admin, provider, page, location])
 
   return (
