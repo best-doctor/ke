@@ -31,11 +31,10 @@ export abstract class BaseProvider {
     return this.http
   }
 
-
   getPage = async (
     url: string | URL,
     filters: Filter[] | null = null,
-    page: number | null = null,
+    page: number | null = null
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const [resourceUrl, resourceFilters] = this.parseUrl(url)
 
@@ -49,7 +48,7 @@ export abstract class BaseProvider {
     filters: Filter[] | null = null,
     perPage: number | null = null,
     startPage: number | null = null,
-    endPage: number | null = null,
+    endPage: number | null = null
   ): Promise<Model[]> => {
     const combinedFilters: Filter[] = [...(filters || [])]
     if (perPage) {
@@ -68,13 +67,8 @@ export abstract class BaseProvider {
         const [pageData, , pagination] = await this.getPage(url, combinedFilters, page)
         data = data.concat(pageData)
         page += 1
-        if (
-          pagination.nextUrl == null
-          || (endPage && page > endPage)
-        )
-          page = 0
-      }
-      catch (err) {
+        if (pagination.nextUrl == null || (endPage && page > endPage)) page = 0
+      } catch (err) {
         return data
       }
     }

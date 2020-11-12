@@ -48,6 +48,7 @@ import {
   DateTimeWidget,
   RadioButtonWidget,
   ContainerWidget,
+  CheckboxWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -125,4 +126,5 @@ export {
   AsyncTextWidget,
   WizardPayload,
   ContainerWidget,
+  CheckboxWidget,
 }

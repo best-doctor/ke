@@ -12,6 +12,7 @@ import { DateTimeRangeListWidget } from './DateTimeRangeListWidget'
 import { DateTimeWidget } from './DateTimeWidget'
 import { RadioButtonWidget } from './RadioButtonWidget'
 import { ContainerWidget } from './ContainerWidget'
+import { CheckboxWidget } from './CheckboxWidget'
 
 export {
   AsyncTextWidget,
@@ -28,4 +29,5 @@ export {
   DateTimeWidget,
   RadioButtonWidget,
   ContainerWidget,
+  CheckboxWidget,
 }

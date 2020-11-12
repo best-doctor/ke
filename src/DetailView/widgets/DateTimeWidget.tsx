@@ -18,12 +18,19 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
 
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, context })
-  const [date, setDate] = React.useState<OptionalDate>(content ? new Date(content as string) : null)
+
+  const contentDate = content ? new Date(content as string) : null
+  const [date, setDate] = React.useState<OptionalDate>(contentDate)
+
+  if (moment(contentDate).format('YYYY-MM-DDTHH:mm:ss') !== moment(date).format('YYYY-MM-DDTHH:mm:ss')) {
+    setDate(contentDate)
+  }
+
   setInitialValue({ [name]: content })
 
   const handleChange = (value: OptionalDate): void => {
-    const widgetValue = value ? moment(value).format('YYYY-MM-DDTHH:mm:ss') : ''
     setDate(value)
+    const widgetValue = value ? moment(value).format('YYYY-MM-DDTHH:mm:ss') : ''
 
     handleUserAction({ ...props, widgetValue, targetUrl, eventName, widgetType })
   }
