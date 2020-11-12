@@ -4,6 +4,8 @@
 import { containerErrorsStore } from '../store'
 import { validateContext } from '../utils'
 import type { DetailFieldDescription } from '../../admin/fields/FieldDescription'
+import type { WizardStepButtonDescription } from '../buttons'
+import { getDefaultButtons } from '../buttons'
 
 type WizardState = Promise<string>
 
@@ -20,6 +22,10 @@ abstract class BaseWizardStep {
 
   backStepLabel?: string = 'Назад'
 
+  requireValidation?: boolean = true
+
+  buttons: WizardStepButtonDescription[] = getDefaultButtons(this)
+
   abstract widgets: DetailFieldDescription[]
 
   constructor(title: string, resourceName?: string | undefined) {
@@ -35,7 +41,7 @@ abstract class BaseWizardStep {
     return Promise.resolve('back')
   }
 
-  nextStep(props: WizardPayload): WizardState {
+  validatedNext(props: WizardPayload): WizardState {
     validateContext(this.widgets)
 
     if (containerErrorsStore.getState().length > 0) {
@@ -43,10 +49,6 @@ abstract class BaseWizardStep {
     }
 
     return this.next(props)
-  }
-
-  prevStep(props: WizardPayload): WizardState {
-    return this.prev(props)
   }
 }
 

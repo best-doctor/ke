@@ -4,7 +4,7 @@ import { Button } from '@chakra-ui/core'
 import { containerStore, initialStore } from '../../store'
 
 import type { BaseProvider } from '../../../admin/providers/index'
-import type { BaseWizardStep, BaseWizard } from '../../interfaces'
+import type { BaseWizard, BaseWizardStep } from '../../interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../../integration/analytics'
@@ -52,42 +52,30 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
     }
   }
 
+  const { buttons } = wizardStep
+
   return (
     <>
-      <Button
-        variant="ghost"
-        mr={5}
-        onClick={() => {
-          sendPushAnalytics(
-            wizardStep.resourceName ? wizardStep.resourceName : '',
-            'wizard_prev_step',
-            currentState,
-            props
-          )
-          wizardStep
-            .prevStep(getWizardStepControlPayload())
-            .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
-        }}
-      >
-        {wizardStep.backStepLabel}
-      </Button>
-      <Button
-        variantColor="blue"
-        m={5}
-        onClick={() => {
-          sendPushAnalytics(
-            wizardStep.resourceName ? wizardStep.resourceName : '',
-            'wizard_next_step',
-            currentState,
-            props
-          )
-          wizardStep
-            .nextStep(getWizardStepControlPayload())
-            .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
-        }}
-      >
-        {wizardStep.forwardStepLabel}
-      </Button>
+      {buttons.map((button) => {
+        return (
+          <Button
+            {...button.style}
+            onClick={() => {
+              sendPushAnalytics(
+                wizardStep.resourceName ? wizardStep.resourceName : '',
+                button.analyticsTarget,
+                currentState,
+                props
+              )
+              button.handler
+                .call(wizardStep, getWizardStepControlPayload())
+                .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
+            }}
+          >
+            {button.label}
+          </Button>
+        )
+      })}
     </>
   )
 }

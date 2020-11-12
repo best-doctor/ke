@@ -33,6 +33,7 @@ import { hasPermission } from 'common/permissions'
 import { BaseNotifier } from 'common/notifier'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
+import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/buttons'
 import {
   AsyncTextWidget,
   TextWidget,
@@ -127,4 +128,7 @@ export {
   WizardPayload,
   ContainerWidget,
   CheckboxWidget,
+  getDefaultButtons,
+  getPrevButton,
+  getNextButton,
 }
