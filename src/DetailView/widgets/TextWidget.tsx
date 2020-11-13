@@ -17,7 +17,7 @@ const StyledTextWidget = styled.div`
 `
 
 const TextWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, style, helpText, useClipboard, copyValue } = props
+  const { containerStore, style, helpText, useClipboard, copyValue, notifier } = props
 
   const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
@@ -27,6 +27,7 @@ const TextWidget = (props: WidgetProps): JSX.Element => {
       helpText={helpText}
       useClipboard={useClipboard}
       copyValue={getCopyHandler(content, copyValue)}
+      notifier={notifier}
     >
       <StyledTextWidget>
         <Text>{content || '\u00a0'}</Text>

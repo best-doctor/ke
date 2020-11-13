@@ -41,6 +41,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     useClipboard,
     copyValue,
     searchParamName,
+    notifier,
   } = props
 
   const context = containerStore.getState()
@@ -70,7 +71,13 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value))
 
   return (
-    <WidgetWrapper style={style} helpText={helpText} useClipboard={useClipboard} copyValue={handleCopyValue}>
+    <WidgetWrapper
+      style={style}
+      helpText={helpText}
+      useClipboard={useClipboard}
+      copyValue={handleCopyValue}
+      notifier={notifier}
+    >
       <ValidationWrapper
         notBlockingValidators={notBlockingValidators}
         blockingValidators={blockingValidators}

@@ -7,9 +7,9 @@ abstract class BaseNotifier {
     this.notifierHanlder = notifierHandler
   }
 
-  abstract notifySuccess(): void
+  abstract notifySuccess(message?: string | undefined): void
 
-  abstract notifyError(): void
+  abstract notifyError(message?: string | undefined): void
 }
 
 type ChakraUINotifierConfig = {

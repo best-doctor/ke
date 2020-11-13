@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { shallow, mount } from 'enzyme'
 import { mocked } from 'ts-jest/utils'
-import { Menu } from 'react-feather'
+import { FiMenu } from 'react-icons/fi'
 import { Drawer, DrawerContent, ThemeProvider } from '@chakra-ui/core'
 
 import { SideBar, SideBarElement } from '../components/SideBar'
@@ -40,7 +40,7 @@ test('Side bar component properly rendered', () => {
     </SideBar>
   )
 
-  expect(component.find(Menu).length).toEqual(1)
+  expect(component.find(FiMenu).length).toEqual(1)
   expect(component.find(Drawer).length).toEqual(1)
   expect(component.find(DrawerContent).length).toEqual(1)
   expect(component.find('h1').length).toEqual(2)

@@ -1,7 +1,8 @@
 import * as React from 'react'
 
 import { Box, FormLabel } from '@chakra-ui/core'
-import { FaCopy } from 'react-icons/all'
+import { FiCopy } from 'react-icons/fi'
+import type { BaseNotifier } from '../notifier'
 
 const WidgetWrapper = ({
   style,
@@ -9,15 +10,20 @@ const WidgetWrapper = ({
   children,
   copyValue,
   useClipboard,
+  notifier,
 }: {
   style: object
   helpText?: string
   children: JSX.Element[] | JSX.Element
   copyValue?: Function
   useClipboard?: boolean
+  notifier?: BaseNotifier
 }): JSX.Element => {
   const handleClipboard = (): void => {
-    if (copyValue) navigator.clipboard.writeText(copyValue())
+    if (copyValue) {
+      navigator.clipboard.writeText(copyValue())
+      if (notifier) notifier.notifySuccess('Скопировано в буфер обмена')
+    }
   }
 
   return (
@@ -25,7 +31,7 @@ const WidgetWrapper = ({
       <FormLabel mt={5}>
         {helpText || ''}
         {useClipboard && (
-          <Box as={FaCopy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
+          <Box as={FiCopy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
         )}
       </FormLabel>
       {children}

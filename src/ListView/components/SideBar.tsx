@@ -10,7 +10,7 @@ import {
   DrawerCloseButton,
   useDisclosure,
 } from '@chakra-ui/core'
-import { Menu } from 'react-feather'
+import { FiMenu } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 
 import { goToResourceEvent } from '../events'
@@ -37,7 +37,7 @@ const SideBar = ({ header, children }: { header: string; children: JSX.Element[]
   return (
     <>
       <Button variantColor="teal" m={2} width={20} ref={btnRef} onClick={onOpen}>
-        <Menu />
+        <FiMenu />
       </Button>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
