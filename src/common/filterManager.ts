@@ -24,11 +24,11 @@ class FilterManager {
   }
 
   static parseQueryFilters(queryFiltersObject: QueryFilter): Filter[] {
-    const queryFiltersObjectKeys = Object.keys(queryFiltersObject)
-
-    return queryFiltersObjectKeys.map((name: string) => {
-      const [filterName, filterOperation] = name.split('__')
-      const value = queryFiltersObject[name]
+    return Object.entries(queryFiltersObject).map(([name, value]) => {
+      const parts = name.split('__')
+      let filterOperation
+      if (parts.length > 1) filterOperation = parts.pop()
+      const filterName = parts.join('__')
 
       return { filterName, filterOperation, value }
     })

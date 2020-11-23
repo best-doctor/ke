@@ -19,5 +19,5 @@ test('Render detail mount', () => {
     </MemoryRouter>
   )
 
-  expect(component.find('ArrowLeft').length).toEqual(1)
+  expect(component.find('FiArrowLeft').length).toEqual(1)
 })
