@@ -150,6 +150,50 @@ const SelectFilter = (params: any): JSX.Element => {
   )
 }
 
+const BooleanFilter = (params: any): JSX.Element => {
+  const {
+    name,
+    label,
+    resourceName,
+    true_value = 'true',
+    true_text = 'Да',
+    false_text = 'Нет',
+    false_value = 'false',
+  } = params
+  const history = useHistory()
+  const location = useLocation()
+  const options = [
+    { value: true_value, text: true_text },
+    { value: false_value, text: false_text },
+  ]
+
+  const handleChange = (value: any): void => {
+    const filterValue = value ? value.value : ''
+
+    pushAnalytics({
+      eventName: EventNameEnum.SELECT_OPTION_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, filterValue, name),
+      ...params,
+    })
+
+    setFilterValue(location, name, filterValue, history)
+  }
+
+  return (
+    <StyledFilter>
+      <Select
+        className="styled-filter"
+        onChange={(value: any) => handleChange(value)}
+        options={options}
+        isClearable
+        getOptionLabel={(option: any) => option.text}
+        getOptionValue={(option: any) => option.value}
+        placeholder={`Фильтр по ${label}`}
+      />
+    </StyledFilter>
+  )
+}
+
 const ForeignKeySelectFilter = (params: any): JSX.Element => {
   const {
     name,
@@ -263,4 +307,12 @@ const DateTimeFilter = (params: any): JSX.Element => {
   )
 }
 
-export { BaseFilter, MultiSelectFilter, SelectFilter, DateFilter, DateTimeFilter, ForeignKeySelectFilter }
+export {
+  BaseFilter,
+  BooleanFilter,
+  MultiSelectFilter,
+  SelectFilter,
+  DateFilter,
+  DateTimeFilter,
+  ForeignKeySelectFilter,
+}
