@@ -155,16 +155,16 @@ const BooleanFilter = (params: any): JSX.Element => {
     name,
     label,
     resourceName,
-    true_value = 'true',
-    true_text = 'Да',
-    false_text = 'Нет',
-    false_value = 'false',
+    trueValue = 'true',
+    trueText = 'Да',
+    falseValue = 'false',
+    falseText = 'Нет',
   } = params
   const history = useHistory()
   const location = useLocation()
   const options = [
-    { value: true_value, text: true_text },
-    { value: false_value, text: false_text },
+    { value: trueValue, text: trueText },
+    { value: falseValue, text: falseText },
   ]
 
   const handleChange = (value: any): void => {
