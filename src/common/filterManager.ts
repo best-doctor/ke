@@ -34,9 +34,18 @@ class FilterManager {
     })
   }
 
-  static removeDuplicates(filtersList: Filter[], uniquePropertyName: keyof Filter = 'filterName'): Filter[] {
-    return filtersList.filter((obj: Filter, pos: number, arr: Filter[]) => {
-      return arr.map((mapObj: Filter) => mapObj[uniquePropertyName]).indexOf(obj[uniquePropertyName]) === pos
+  static removeDuplicates(
+    filtersList: Filter[],
+    uniquePropertyNames: (keyof Filter)[] = ['filterName', 'filterOperation']
+  ): Filter[] {
+    const uniqueKeys = new Set()
+    return filtersList.filter((mapObj: Filter) => {
+      const key = uniquePropertyNames.map((k) => mapObj[k] || '').join('|')
+      if (uniqueKeys.has(key)) {
+        return false
+      }
+      uniqueKeys.add(key)
+      return true
     })
   }
 

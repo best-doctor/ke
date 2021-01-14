@@ -21,8 +21,14 @@ test.each([
     [
       { filterName: 'status', filterOperation: undefined, value: 'new' },
       { filterName: 'status', filterOperation: undefined, value: 'closed' },
+      { filterName: 'substatus', filterOperation: undefined, value: 'closed' },
+      { filterName: 'status', filterOperation: 'in', value: 'closed' },
     ],
-    [{ filterName: 'status', filterOperation: undefined, value: 'new' }],
+    [
+      { filterName: 'status', filterOperation: undefined, value: 'new' },
+      { filterName: 'substatus', filterOperation: undefined, value: 'closed' },
+      { filterName: 'status', filterOperation: 'in', value: 'closed' },
+    ],
   ],
 ])('Remove duplicates from object by unique key', (filters, expectedResult) => {
   const result = FilterManager.removeDuplicates(filters)
