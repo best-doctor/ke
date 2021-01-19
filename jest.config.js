@@ -1,4 +1,4 @@
-const esModules = ['react-icons'].join('|');
+const esModules = ['react-icons', 'lodash-es'].join('|');
 
 module.exports = {
   preset: 'ts-jest',
@@ -11,5 +11,10 @@ module.exports = {
   transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
   transform: {
     'js': 'jest-esm-transformer'
-  }
+  },
+  globals: {
+    'ts-jest': {
+      tsconfig: './tsconfig.spec.json'
+    }
+  },
 }
