@@ -81,15 +81,16 @@
         "typescript": "^3.9.2",
         "webpack": "^4.43.0",
         "webpack-bundle-analyzer": "^4.3.0",
-        "webpack-cli": "^3.3.11"
+        "webpack-cli": "^3.3.11",
+        "webpack-merge": "^5.7.3"
     },
     "peerDependencies": {
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
     },
     "scripts": {
-        "build": "webpack",
-        "start": "webpack --watch",
+        "build": "webpack --config ./webpack.prod.js",
+        "start": "webpack --config ./webpack.dev.js --watch",
         "lint": "eslint --ext .ts,.tsx src",
         "test": "jest --env=jsdom",
         "format": "prettier --write 'src/**/*'",

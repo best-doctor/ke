@@ -3,10 +3,9 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
-module.exports = ['source-map'].map((devtool) => ({
+module.exports = {
   entry: './src/index',
-  mode: 'development',
-  devtool,
+  devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
@@ -41,4 +40,4 @@ module.exports = ['source-map'].map((devtool) => ({
     react: 'react',
     'react-dom': 'react-dom',
   },
-}))
+}
