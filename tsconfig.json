@@ -7,8 +7,8 @@
     "lib": [
       "DOM",
     ],
-    "module": "commonjs",
-    "target": "es5",
+    "module": "ES6",
+    "target": "ES2018",
     "outDir": "dist",
     "allowJs": false,
     "allowSyntheticDefaultImports": false,
@@ -21,6 +21,7 @@
     "importsNotUsedAsValues": "error",
     "jsx": "react",
     "strict": true,
+    "moduleResolution": "Node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
