@@ -1,6 +1,7 @@
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 module.exports = ['source-map'].map((devtool) => ({
   entry: './src/index',
@@ -32,7 +33,10 @@ module.exports = ['source-map'].map((devtool) => ({
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin({ watch: true })],
+  plugins: [
+    new CleanWebpackPlugin({ watch: true }),
+    new MomentLocalesPlugin({ localesToKeep: ['es-us', 'ru'] }),
+  ],
   externals: {
     react: 'react',
     'react-dom': 'react-dom',
