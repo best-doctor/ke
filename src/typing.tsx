@@ -2,7 +2,7 @@ import type { Store } from 'effector'
 import type { BaseProvider } from 'admin/providers/index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
-import type { GoogleConfig } from './integration/google';
+import type { GoogleConfig } from './integration/google'
 
 type GenericAccessor = string | Function | JSX.Element | undefined
 
