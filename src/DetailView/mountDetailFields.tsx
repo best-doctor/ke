@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box } from '@chakra-ui/core'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
-import type { BaseProvider } from 'index'
+import type { BaseProvider, GoogleConfig } from 'index'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import type { DetailObject, FieldsTypeInAdminClass } from 'typing'
@@ -20,6 +20,7 @@ type MountDetailFieldsArgs = {
   notifier: BaseNotifier
   user: object
   analytics: BaseAnalytic | undefined
+  googleConfig?: GoogleConfig | undefined
   ViewType: string
   elementsKey: FieldsTypeInAdminClass
 }
@@ -33,6 +34,7 @@ const mountDetailFields = ({
   notifier,
   user,
   analytics,
+  googleConfig,
   ViewType,
 }: MountDetailFieldsArgs): JSX.Element => {
   /*
@@ -57,6 +59,7 @@ const mountDetailFields = ({
         notifier,
         user,
         analytics,
+        googleConfig,
         ViewType,
         containerStore,
       })}

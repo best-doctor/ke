@@ -34,6 +34,7 @@ import { BaseNotifier } from 'common/notifier'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/buttons'
+import type { GoogleConfig } from './integration/google'
 import {
   AsyncTextWidget,
   TextWidget,
@@ -50,6 +51,8 @@ import {
   RadioButtonWidget,
   ContainerWidget,
   CheckboxWidget,
+  MapWidget,
+  MarkerInfo
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -96,6 +99,7 @@ export {
   getPayload,
   AvatarWidget,
   hasPermission,
+  GoogleConfig,
   FirebaseAnalytic,
   FirebaseEventPayload,
   FirebaseEvent,
@@ -130,6 +134,8 @@ export {
   WizardPayload,
   ContainerWidget,
   CheckboxWidget,
+  MapWidget,
+  MarkerInfo,
   getDefaultButtons,
   getPrevButton,
   getNextButton,

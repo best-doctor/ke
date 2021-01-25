@@ -13,6 +13,7 @@ import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
+import type { GoogleConfig } from '../../../integration/google';
 
 type WizardStepContainerRef = HTMLElement | null
 
@@ -24,6 +25,7 @@ type WizardViewContainerProps = {
   setMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
+  googleConfig: GoogleConfig | undefined
   currentState: string
   setCurrentState: Function
   ViewType: string
@@ -42,6 +44,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     setMainDetailObject,
     notifier,
     analytics,
+    googleConfig,
     user,
     ViewType,
     show,
@@ -85,6 +88,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 setMainDetailObject={setMainDetailObject}
                 notifier={notifier}
                 analytics={analytics}
+                googleConfig={googleConfig}
                 user={user}
                 ViewType={ViewType}
                 submitChange={submitChange}

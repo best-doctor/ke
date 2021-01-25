@@ -1,0 +1,1 @@
+export { GoogleConfig } from './types'

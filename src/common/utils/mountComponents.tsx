@@ -11,6 +11,7 @@ import type { BaseNotifier } from '../notifier'
 import type { DetailObject, GenericAccessor } from '../../typing'
 
 import { isValidComponent } from './isComponent'
+import type { GoogleConfig } from '../../integration/google'
 
 type mountComponentsKwargs = {
   setInitialValue: Function
@@ -23,6 +24,7 @@ type mountComponentsKwargs = {
   notifier: BaseNotifier
   user: object
   analytics: BaseAnalytic | undefined
+  googleConfig: GoogleConfig | undefined
   ViewType: string
   containerStore?: object | undefined
 }
@@ -51,6 +53,7 @@ const mountComponents = ({
   notifier,
   user,
   analytics,
+  googleConfig,
   ViewType,
   containerStore,
 }: mountComponentsKwargs): JSX.Element[] => {
@@ -127,6 +130,7 @@ const mountComponents = ({
                 setMainDetailObject={setMainDetailObject}
                 notifier={notifier}
                 analytics={analytics}
+                googleConfig={googleConfig}
                 widgetAnalytics={widgetAnalytics}
                 viewType={ViewType}
                 setInitialValue={setInitialValue}
