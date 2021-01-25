@@ -12,6 +12,7 @@ import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
+import type { GoogleConfig } from '../../integration/google';
 
 type WizardProps = {
   resourceName: string
@@ -21,6 +22,7 @@ type WizardProps = {
   setMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
+  googleConfig: GoogleConfig | undefined
   ViewType: string
   user: object
   style?: object
@@ -48,6 +50,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
     setMainDetailObject,
     notifier,
     analytics,
+    googleConfig,
     ViewType,
     user,
     resourceName,
@@ -85,6 +88,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
         setMainDetailObject={setMainDetailObject}
         notifier={notifier}
         analytics={analytics}
+        googleConfig={googleConfig}
         ViewType={ViewType}
         user={user}
         submitChange={submitChange}

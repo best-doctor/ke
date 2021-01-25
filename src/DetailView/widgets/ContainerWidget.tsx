@@ -12,6 +12,7 @@ const ContainerWidget = (props: any): JSX.Element => {
     notifier,
     user,
     analytics,
+    googleConfig,
     ViewType,
     containerStore,
     widgets,
@@ -29,6 +30,7 @@ const ContainerWidget = (props: any): JSX.Element => {
         notifier,
         user,
         analytics,
+        googleConfig,
         ViewType,
         containerStore,
       })}

@@ -10,6 +10,7 @@
         "@elastic/apm-rum": "^5.3.0",
         "@emotion/core": "^10.0.28",
         "@emotion/styled": "^10.0.27",
+        "@react-google-maps/api": "^2.1.0",
         "@sentry/react": "^5.19.0",
         "@types/enzyme": "^3.10.5",
         "@types/enzyme-adapter-react-16": "^1.0.6",

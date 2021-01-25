@@ -9,6 +9,7 @@ test('Mount wizard main component', () => {
   const provider = testProvider
   const setMainDetailObject = jest.fn()
   const analytics = undefined
+  const googleConfig = undefined
   const user = {}
 
   const wizards = mountWizards({
@@ -19,6 +20,7 @@ test('Mount wizard main component', () => {
     provider,
     setMainDetailObject,
     analytics,
+    googleConfig,
     user,
     mainDetailObject: { id: 100500 },
   })
