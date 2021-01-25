@@ -8,8 +8,7 @@ import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
 import type { FieldsTypeInAdminClass } from 'typing'
-import type { GoogleConfig } from 'integration/google';
-
+import type { GoogleConfig } from 'integration/google'
 
 import { mountWizards } from '../WizardMaster/mountWizards'
 import { mountDetailFields } from './mountDetailFields'
@@ -25,8 +24,8 @@ type RenderDetailProps = {
   admin: BaseAdmin
   provider: BaseProvider
   user: object
-  analytics: BaseAnalytic | undefined,
-  googleConfig?: GoogleConfig,
+  analytics: BaseAnalytic | undefined
+  googleConfig?: GoogleConfig
 }
 
 const getContainersToMount = (): { [key in FieldsTypeInAdminClass]: Function } => {

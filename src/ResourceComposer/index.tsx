@@ -5,7 +5,7 @@ import { ThemeProvider } from '@chakra-ui/core'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
 import type { BaseAnalytic } from 'integration/analytics/base'
-import type { GoogleConfig } from '../integration/google';
+import type { GoogleConfig } from '../integration/google'
 
 import { RenderList } from '../ListView/RenderList'
 import { RenderDetail } from '../DetailView/RenderDetail'
@@ -28,7 +28,7 @@ const AdminResource = ({
   provider,
   user,
   analytics,
-  googleConfig
+  googleConfig,
 }: {
   name: string
   admin: BaseAdmin
@@ -43,7 +43,14 @@ const AdminResource = ({
       <RenderList resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
     </Route>
     <Route exact path={`/${name}/:id`}>
-      <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} googleConfig={googleConfig} />
+      <RenderDetail
+        resourceName={name}
+        admin={admin}
+        provider={provider}
+        user={user}
+        analytics={analytics}
+        googleConfig={googleConfig}
+      />
     </Route>
   </Switch>
 )

@@ -52,7 +52,7 @@ import {
   ContainerWidget,
   CheckboxWidget,
   MapWidget,
-  MarkerInfo
+  MarkerInfo,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {

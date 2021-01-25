@@ -32,5 +32,5 @@ export {
   ContainerWidget,
   CheckboxWidget,
   MapWidget,
-  MarkerInfo
+  MarkerInfo,
 }

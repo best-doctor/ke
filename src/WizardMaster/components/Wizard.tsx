@@ -12,7 +12,7 @@ import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
-import type { GoogleConfig } from '../../integration/google';
+import type { GoogleConfig } from '../../integration/google'
 
 type WizardProps = {
   resourceName: string

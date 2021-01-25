@@ -8,7 +8,7 @@ import type { BaseNotifier } from '../common/notifier'
 import type { BaseProvider } from '../admin/providers/index'
 import type { BaseAnalytic } from '../integration/analytics'
 import type { DetailObject } from '../typing'
-import type { GoogleConfig } from '../integration/google';
+import type { GoogleConfig } from '../integration/google'
 
 type MountWizardsKwargs = {
   resourceName: string
