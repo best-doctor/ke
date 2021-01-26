@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { get } from 'lodash-es'
 // eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps } from 'react-flexbox-grid'
@@ -12,6 +11,7 @@ import type { DetailObject, GenericAccessor } from '../../typing'
 
 import { isValidComponent } from './isComponent'
 import type { GoogleConfig } from '../../integration/google'
+import { get } from './get'
 
 type mountComponentsKwargs = {
   setInitialValue: Function
@@ -66,10 +66,10 @@ const mountComponents = ({
   */
 
   elements.sort((firstElement, secondElement) => {
-    const firstY = get(firstElement, 'layout.y')
-    const secondY = get(secondElement, 'layout.y')
-    const firstX = get(firstElement, 'layout.x')
-    const secondX = get(secondElement, 'layout.x')
+    const firstY = get(firstElement, 'layout.y') as number
+    const secondY = get(secondElement, 'layout.y') as number
+    const firstX = get(firstElement, 'layout.x') as number
+    const secondX = get(secondElement, 'layout.x') as number
 
     if (firstY === secondY) {
       return firstX > secondX ? 1 : -1
@@ -84,9 +84,9 @@ const mountComponents = ({
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i]
-    const currentRow = get(element, 'layout.y', 1)
-    const currentCol = get(element, 'layout.x', 1)
-    const currentWidth = get(element, 'layout.w', 12)
+    const currentRow = get(element, 'layout.y', 1) as number
+    const currentCol = get(element, 'layout.x', 1) as number
+    const currentWidth = get(element, 'layout.w', 12) as number
 
     if (currentRow !== lastRow) {
       if (columns.length > 0) {
@@ -96,10 +96,10 @@ const mountComponents = ({
       }
     }
 
-    element.layout.md = get(element, 'layout.md', currentWidth)
-    element.layout.xs = get(element, 'layout.xs', 12)
-    element.layout.xsOffset = get(element, 'layout.xsOffset', 0)
-    element.layout.mdOffset = get(element, 'layout.mdOffset', currentCol - lastColEnd)
+    element.layout.md = get(element, 'layout.md', currentWidth) as number
+    element.layout.xs = get(element, 'layout.xs', 12) as number
+    element.layout.xsOffset = get(element, 'layout.xsOffset', 0) as number
+    element.layout.mdOffset = get(element, 'layout.mdOffset', currentCol - lastColEnd) as number
 
     columns.push(element)
     lastColEnd = currentCol + currentWidth
