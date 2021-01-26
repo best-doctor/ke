@@ -1,8 +1,8 @@
-import { get } from 'lodash-es'
 import type { DetailObject } from 'typing'
 
 import type { FirebaseEvent } from '../index'
 import { WidgetTypeEnum } from './enums'
+import { get } from '../../../common/utils/get'
 
 type AnalyticsValue = string | object
 
@@ -41,7 +41,7 @@ const getNewValueByCommonFields = (onChangeValue: AnalyticsValue): string => {
   for (const field of commonFieldsList) {
     const newValue = get(onChangeValue as object, field)
 
-    if (newValue) return newValue
+    if (newValue) return newValue as string
   }
 
   return JSON.stringify(onChangeValue)
