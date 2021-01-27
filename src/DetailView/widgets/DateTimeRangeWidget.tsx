@@ -1,6 +1,6 @@
 import * as React from 'react'
-import * as moment from 'moment'
 import { Button } from '@chakra-ui/core'
+import { format } from 'date-fns'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -15,7 +15,7 @@ type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undef
 
 const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string, string] | null => {
   if (dateFrom && dateTo) {
-    return [moment(dateFrom).format('YYYY-MM-DDTHH:mm:ss'), moment(dateTo).format('YYYY-MM-DDTHH:mm:ss')]
+    return [format(dateFrom, 'YYYY-MM-DDTHH:mm:ss'), format(dateTo, 'YYYY-MM-DDTHH:mm:ss')]
   }
   return null
 }
@@ -37,7 +37,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   setInitialValue({ [name]: content })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, save = true): void => {
-    const changeValue = date ? moment(date).format('YYYY-MM-DDTHH:mm:ss') : ''
+    const changeValue = date ? format(date, 'YYYY-MM-DDTHH:mm:ss') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,

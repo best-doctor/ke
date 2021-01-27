@@ -4,8 +4,8 @@ import { Box } from '@chakra-ui/core'
 import Select from 'react-select'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
-import * as moment from 'moment'
 import { useHistory, useLocation } from 'react-router-dom'
+import { format } from 'date-fns'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -249,7 +249,7 @@ const DateFilter = (params: any): JSX.Element => {
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? moment(value).format('YYYY-MM-DD') : ''
+    const filterValue = value ? format(value, 'YYYY-MM-DD') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -281,7 +281,7 @@ const DateTimeFilter = (params: any): JSX.Element => {
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? moment(value).format('YYYY-MM-DDThh:mm:ss') : ''
+    const filterValue = value ? format(value, 'YYYY-MM-DDThh:mm:ss') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATETIME_CHANGE,

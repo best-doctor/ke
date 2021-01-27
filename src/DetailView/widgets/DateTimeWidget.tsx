@@ -1,6 +1,6 @@
 import * as React from 'react'
-import * as moment from 'moment'
 import DatePicker from 'react-datepicker'
+import { format } from 'date-fns'
 
 import { StyleDateTime } from '../../common/components/BaseDateTimeRangeWidget'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -22,7 +22,7 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
   const contentDate = content ? new Date(content as string) : null
   const [date, setDate] = React.useState<OptionalDate>(contentDate)
 
-  if (moment(contentDate).format('YYYY-MM-DDTHH:mm:ss') !== moment(date).format('YYYY-MM-DDTHH:mm:ss')) {
+  if (format(contentDate || new Date(), 'YYYY-MM-DDTHH:mm:ss') !== format(date || new Date(), 'YYYY-MM-DDTHH:mm:ss')) {
     setDate(contentDate)
   }
 
@@ -30,7 +30,7 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
 
   const handleChange = (value: OptionalDate): void => {
     setDate(value)
-    const widgetValue = value ? moment(value).format('YYYY-MM-DDTHH:mm:ss') : ''
+    const widgetValue = value ? format(value, 'YYYY-MM-DDTHH:mm:ss') : ''
 
     handleUserAction({ ...props, widgetValue, targetUrl, eventName, widgetType })
   }
