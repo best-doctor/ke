@@ -7,7 +7,7 @@ import { WizardValidationErrors } from './WizardValidationErrors'
 import { WizardStepControlPanel } from './WizardStepControlPanel'
 
 import type { BaseWizardStep, BaseWizard } from '../../interfaces'
-import { containerErrorsStore } from '../../store'
+import { containerErrorsStore, containerStore, initialStore } from '../../store'
 
 import type { BaseNotifier } from '../../../common/notifier'
 import type { BaseProvider } from '../../../admin/providers/index'
@@ -58,6 +58,11 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
 
   if (!resourceName) {
     resourceName = ''
+  }
+
+  if (show) {
+    const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
+    wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
   }
 
   return (

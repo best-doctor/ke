@@ -1,5 +1,5 @@
 /* eslint max-classes-per-file: 0 */
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["next", "prev"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["beforeShow", "next", "prev"] }] */
 
 import { containerErrorsStore } from '../store'
 import { validateContext } from '../utils'
@@ -32,6 +32,8 @@ abstract class BaseWizardStep {
     this.title = title
     this.resourceName = resourceName
   }
+
+  beforeShow(_: WizardPayload): void {}
 
   next(_: WizardPayload): WizardState {
     return Promise.resolve('forward')
