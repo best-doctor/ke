@@ -34,6 +34,7 @@ import { BaseNotifier } from 'common/notifier'
 import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/buttons'
+import type { WidgetPayload } from 'DetailView/events'
 import type { GoogleConfig } from './integration/google'
 import {
   AsyncTextWidget,
@@ -67,7 +68,6 @@ import {
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
-import type { WidgetPayload } from 'DetailView/events'
 
 export {
   BaseAdmin,
