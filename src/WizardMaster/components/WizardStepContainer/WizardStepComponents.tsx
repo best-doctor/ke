@@ -18,6 +18,7 @@ type WizardStepComponentsProps = {
   provider: BaseProvider
   mainWizardObject: WizardObject
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   googleConfig: GoogleConfig | undefined
@@ -35,6 +36,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     provider,
     mainWizardObject,
     setMainDetailObject,
+    refreshMainDetailObject,
     notifier,
     analytics,
     googleConfig,
@@ -55,6 +57,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
         elements,
         provider,
         setMainDetailObject,
+        refreshMainDetailObject,
         notifier,
         user,
         analytics,

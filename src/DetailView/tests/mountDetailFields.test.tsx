@@ -14,6 +14,7 @@ const initDetailViewControllersMock = mocked(initDetailViewControllers).mockImpl
 
 test('Call mount componentns for unpack detail view widgets with correct args', () => {
   const setMainDetailObject = jest.fn()
+  const refreshMainDetailObject = jest.fn()
   const resourceName = 'test'
   const mainDetailObject = {}
   const elements = testAdmin.detail_fields
@@ -27,6 +28,7 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
   mountDetailFields({
     resourceName,
     mainDetailObject,
+    refreshMainDetailObject,
     elements,
     provider,
     setMainDetailObject,

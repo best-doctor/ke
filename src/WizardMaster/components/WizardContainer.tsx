@@ -17,6 +17,7 @@ type WizardContainerProps = {
   provider: BaseProvider
   mainDetailObject: DetailObject
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   googleConfig: GoogleConfig | undefined
@@ -39,6 +40,7 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
     provider,
     mainDetailObject,
     setMainDetailObject,
+    refreshMainDetailObject,
     notifier,
     analytics,
     googleConfig,
@@ -69,6 +71,7 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
       currentState={currentState}
       setCurrentState={setCurrentState}
       setMainDetailObject={setMainDetailObject}
+      refreshMainDetailObject={refreshMainDetailObject}
       notifier={notifier}
       analytics={analytics}
       googleConfig={googleConfig}

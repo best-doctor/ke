@@ -20,6 +20,7 @@ type WizardProps = {
   provider: BaseProvider
   mainDetailObject: DetailObject
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   googleConfig: GoogleConfig | undefined
@@ -48,6 +49,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
     provider,
     mainDetailObject,
     setMainDetailObject,
+    refreshMainDetailObject,
     notifier,
     analytics,
     googleConfig,
@@ -86,6 +88,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
         provider={provider}
         mainDetailObject={mainDetailObject}
         setMainDetailObject={setMainDetailObject}
+        refreshMainDetailObject={refreshMainDetailObject}
         notifier={notifier}
         analytics={analytics}
         googleConfig={googleConfig}

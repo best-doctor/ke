@@ -17,6 +17,7 @@ test('Get components to mount', () => {
     elements: testAdmin.detail_fields,
     provider: testProvider,
     setMainDetailObject: mockSetObject,
+    refreshMainDetailObject: jest.fn(),
     notifier: testNotifier,
     user: {},
     analytics: undefined,

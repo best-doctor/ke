@@ -19,6 +19,7 @@ type WizardStepControlPanelProps = {
   provider: BaseProvider
   mainWizardObject: WizardObject
   analytics: BaseAnalytic | undefined
+  refreshMainDetailObject: Function
 }
 
 const sendPushAnalytics = (

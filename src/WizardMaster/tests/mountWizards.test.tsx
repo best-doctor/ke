@@ -8,6 +8,7 @@ test('Mount wizard main component', () => {
   const elements = [testWizard]
   const provider = testProvider
   const setMainDetailObject = jest.fn()
+  const refreshMainDetailObject = jest.fn()
   const analytics = undefined
   const googleConfig = undefined
   const user = {}
@@ -19,6 +20,7 @@ test('Mount wizard main component', () => {
     elements,
     provider,
     setMainDetailObject,
+    refreshMainDetailObject,
     analytics,
     googleConfig,
     user,

@@ -21,6 +21,7 @@ type mountComponentsKwargs = {
   elements: DetailFieldDescription[]
   provider: BaseProvider
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   notifier: BaseNotifier
   user: object
   analytics: BaseAnalytic | undefined
@@ -50,6 +51,7 @@ const mountComponents = ({
   elements,
   provider,
   setMainDetailObject,
+  refreshMainDetailObject,
   notifier,
   user,
   analytics,
@@ -128,6 +130,7 @@ const mountComponents = ({
                 // data-grid={layout}
                 provider={provider}
                 setMainDetailObject={setMainDetailObject}
+                refreshMainDetailObject={refreshMainDetailObject}
                 notifier={notifier}
                 analytics={analytics}
                 googleConfig={googleConfig}
