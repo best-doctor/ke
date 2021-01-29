@@ -17,6 +17,7 @@ type MountDetailFieldsArgs = {
   elements: DetailFieldDescription[]
   provider: BaseProvider
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   notifier: BaseNotifier
   user: object
   analytics: BaseAnalytic | undefined
@@ -28,6 +29,7 @@ type MountDetailFieldsArgs = {
 const mountDetailFields = ({
   resourceName,
   mainDetailObject,
+  refreshMainDetailObject,
   elements,
   provider,
   setMainDetailObject,
@@ -53,6 +55,7 @@ const mountDetailFields = ({
         submitChange,
         resourceName,
         mainDetailObject,
+        refreshMainDetailObject,
         elements,
         provider,
         setMainDetailObject,

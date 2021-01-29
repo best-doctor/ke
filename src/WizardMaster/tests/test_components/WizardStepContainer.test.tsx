@@ -12,6 +12,7 @@ const getComponent = (): JSX.Element => {
   const currentState = 'begin'
   const ViewType = 'test_view'
   const setMainDetailObject = jest.fn()
+  const refreshMainDetailObject = jest.fn()
   const analytics = undefined
   const googleConfig = undefined
   const user = {}
@@ -24,6 +25,7 @@ const getComponent = (): JSX.Element => {
         provider={testProvider}
         mainWizardObject={{ id: 100500 }}
         setMainDetailObject={setMainDetailObject}
+        refreshMainDetailObject={refreshMainDetailObject}
         notifier={testNotifier}
         analytics={analytics}
         googleConfig={googleConfig}

@@ -53,6 +53,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
     - Wizard View (see mountWizards for detail)
   */
   const [mainDetailObject, setMainDetailObject] = useState<Model>()
+  const [needRefreshDetailObject, setNeedRefreshDetailObject] = useState<boolean>(true)
   const { id } = useParams<{ id: string }>()
   const toast = useToast()
   const notifier = new ChakraUINotifier(toast)
@@ -61,10 +62,17 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
 
   document.title = `${admin.verboseName} # ${id}`
 
+  const refreshMainDetailObject = (): void => {
+    setNeedRefreshDetailObject(true)
+  }
+
   useEffect(() => {
     const backendResourceUrl = admin.getResource(id)
-    provider.getObject(backendResourceUrl).then((res) => setMainDetailObject(res))
-  }, [id, provider, admin])
+    provider.getObject(backendResourceUrl).then((res) => {
+      setMainDetailObject(res)
+      setNeedRefreshDetailObject(false)
+    })
+  }, [id, provider, admin, needRefreshDetailObject])
 
   return (
     <>
@@ -89,6 +97,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
                 ViewType,
                 elements,
                 elementsKey,
+                refreshMainDetailObject,
                 ...props,
               })
             })}

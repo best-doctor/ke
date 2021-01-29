@@ -18,6 +18,7 @@ type MountWizardsKwargs = {
   elements: WizardFieldDescription
   provider: BaseProvider
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   analytics: BaseAnalytic | undefined
   googleConfig: GoogleConfig | undefined
   user: object
@@ -38,6 +39,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
     elements,
     provider,
     setMainDetailObject,
+    refreshMainDetailObject,
     analytics,
     googleConfig,
     user,
@@ -57,6 +59,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
         provider={provider}
         mainDetailObject={mainDetailObject}
         setMainDetailObject={setMainDetailObject}
+        refreshMainDetailObject={refreshMainDetailObject}
         notifier={notifier}
         analytics={analytics}
         googleConfig={googleConfig}

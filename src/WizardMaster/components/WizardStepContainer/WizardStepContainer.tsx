@@ -23,6 +23,7 @@ type WizardViewContainerProps = {
   provider: BaseProvider
   mainWizardObject: WizardObject
   setMainDetailObject: Function
+  refreshMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
   googleConfig: GoogleConfig | undefined
@@ -42,6 +43,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     provider,
     mainWizardObject,
     setMainDetailObject,
+    refreshMainDetailObject,
     notifier,
     analytics,
     googleConfig,
@@ -91,6 +93,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 provider={provider}
                 mainWizardObject={mainWizardObject}
                 setMainDetailObject={setMainDetailObject}
+                refreshMainDetailObject={refreshMainDetailObject}
                 notifier={notifier}
                 analytics={analytics}
                 googleConfig={googleConfig}
@@ -113,6 +116,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                       mainWizardObject={mainWizardObject}
                       submitChange={submitChange}
                       analytics={analytics}
+                      refreshMainDetailObject={refreshMainDetailObject}
                     />
                   </Box>
                 </Col>

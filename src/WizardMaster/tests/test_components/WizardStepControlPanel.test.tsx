@@ -34,6 +34,7 @@ const getComponent = (): JSX.Element => {
         submitChange={jest.fn()}
         currentState={currentState}
         setCurrentState={jest.fn()}
+        refreshMainDetailObject={jest.fn()}
       />
     </ThemeProvider>
   )
