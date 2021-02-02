@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import type { BaseAnalytic } from 'integration/analytics/base'
 import type { BaseAdmin } from 'admin'
 import type { BaseProvider } from 'admin/providers'
-import type { Pagination, TableFilter } from '../admin/providers'
+import type { Pagination, TableFilter } from '../admin/providers/interfaces'
 
 import { Table } from './components/Table'
 import { FilterManager } from '../common/filterManager'

@@ -15,7 +15,7 @@ import type {
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { FilterBlock } from './TableFiltersBlock'
 import { Bottom } from './Bottom'
-import type { Pagination, BaseProvider } from '../../../admin/providers'
+import type { Pagination, Provider } from '../../../admin/providers/interfaces'
 
 type TableProps = {
   resourceName: string
@@ -29,7 +29,7 @@ type TableProps = {
   user: any
   filterable: boolean
   analytics: BaseAnalytic | undefined
-  provider?: BaseProvider
+  provider?: Provider
 }
 
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba
