@@ -1,5 +1,5 @@
 /*
-Extracted from lodash
+Extracted from lodash, but simplified
  */
 export function get(obj: DataRecord, path: string | string[], defaultValue?: unknown): unknown {
   const result = obj == null ? undefined : baseGet(obj, path)
