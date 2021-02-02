@@ -95,8 +95,8 @@ export class BaseProvider implements Provider {
   navigate = async (
     url: string,
     resourceFilters: Filter[],
-    cacheTime = 0,
-    forceCache = false
+    cacheTime?: number,
+    forceCache?: boolean
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const response = await this.get(url, cacheTime, forceCache)
     const { data, meta } = response.data
