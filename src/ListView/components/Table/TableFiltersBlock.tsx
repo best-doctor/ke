@@ -9,7 +9,7 @@ import type { BaseAnalytic } from 'integration/analytics'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 import { FilterManager } from '../../../common/filterManager'
-import type { BaseProvider } from '../../../admin/providers'
+import type { Provider } from '../../../admin/providers/interfaces'
 
 type FilterBlockProps = {
   resourceName: string
@@ -17,7 +17,7 @@ type FilterBlockProps = {
   listFilterTemplates?: ListFilterTemplateDescription[]
   user: any
   analytics: BaseAnalytic | undefined
-  provider?: BaseProvider
+  provider?: Provider
 }
 
 const filterTemplatesOnClick = (

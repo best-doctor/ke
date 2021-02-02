@@ -1,5 +1,5 @@
 import type { Store } from 'effector'
-import type { BaseProvider } from 'admin/providers/index'
+import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import type { GoogleConfig } from './integration/google'
@@ -16,7 +16,7 @@ type WidgetProps = {
   name: string
   mainDetailObject: DetailObject
   resource: string
-  provider: BaseProvider
+  provider: Provider
   helpText?: string
   displayValue?: GenericAccessor
   targetPayload: Function

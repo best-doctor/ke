@@ -3,14 +3,14 @@ import * as React from 'react'
 import { MessagesBlock } from './MessagesBlock'
 import { useValidation } from '../hooks/useValidation'
 
-import type { BaseProvider } from '../../admin/providers'
+import type { Provider } from '../../admin/providers/interfaces'
 import type { DetailObject } from '../../typing'
 
 type ValidationWrapperProps = {
   children: JSX.Element
   blockingValidators: Function[]
   notBlockingValidators: Function[]
-  provider: BaseProvider
+  provider: Provider
   detailObject: DetailObject
 }
 
