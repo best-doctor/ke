@@ -1,6 +1,6 @@
 import type { Location } from 'history'
 
-import type { Filter, TableFilter } from 'admin/providers'
+import type { Filter, TableFilter } from 'admin/providers/interfaces'
 
 type QueryFilter = {
   [key: string]: string

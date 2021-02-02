@@ -2,28 +2,11 @@ import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 
 import { FilterManager } from '../../common/filterManager'
+import type { Filter, ResponseCache, Pagination, Provider, TableFilter } from './interfaces'
 
-export type Filter = {
-  filterName: string
-  value: string
-  filterOperation: string | undefined
-}
-
-export type TableFilter = {
-  id: string
-  value: Filter
-}
-
-export type Pagination = {
-  page: number
-  perPage: number
-  count: number | undefined
-  nextUrl: string | undefined
-  prevUrl: string | undefined
-}
-
-export abstract class BaseProvider {
-  constructor(private readonly http: AxiosInstance = axios.create({})) {
+export class BaseProvider implements Provider {
+  constructor(private readonly http: AxiosInstance = axios.create({}), readonly cache?: ResponseCache) {
+    this.cache = cache
     this.http = http
   }
 
@@ -34,13 +17,15 @@ export abstract class BaseProvider {
   getPage = async (
     url: string | URL,
     filters: Filter[] | null = null,
-    page: number | null = null
+    page: number | null = null,
+    cacheTime?: number,
+    forceCache?: boolean
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const [resourceUrl, resourceFilters] = this.parseUrl(url)
 
     const generatedUrl = this.getUrl(resourceUrl, resourceFilters, filters, page)
 
-    return this.navigate(generatedUrl, resourceFilters)
+    return this.navigate(generatedUrl, resourceFilters, cacheTime, forceCache)
   }
 
   getList = async (
@@ -48,7 +33,9 @@ export abstract class BaseProvider {
     filters: Filter[] | null = null,
     perPage: number | null = null,
     startPage: number | null = null,
-    endPage: number | null = null
+    endPage: number | null = null,
+    cacheTime?: number,
+    forceCache?: boolean
   ): Promise<Model[]> => {
     const combinedFilters: Filter[] = [...(filters || [])]
     if (perPage) {
@@ -64,7 +51,7 @@ export abstract class BaseProvider {
     while (page) {
       try {
         // eslint-disable-next-line no-await-in-loop
-        const [pageData, , pagination] = await this.getPage(url, combinedFilters, page)
+        const [pageData, , pagination] = await this.getPage(url, combinedFilters, page, cacheTime, forceCache)
         data = data.concat(pageData)
         page += 1
         if (pagination.nextUrl == null || (endPage && page > endPage)) page = 0
@@ -75,8 +62,8 @@ export abstract class BaseProvider {
     return data
   }
 
-  getObject = async (resourceUrl: string): Promise<Model> => {
-    const response = await this.http.get(resourceUrl)
+  getObject = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<Model> => {
+    const response = await this.get(resourceUrl, cacheTime, forceCache)
     return response.data.data
   }
 
@@ -95,8 +82,23 @@ export abstract class BaseProvider {
     return response.data.data
   }
 
-  navigate = async (url: string, resourceFilters: Filter[]): Promise<[Model[], Array<TableFilter>, Pagination]> => {
-    const response = await this.http.get(url)
+  get = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<any> => {
+    if (!forceCache) {
+      const cached = this.cache?.get(resourceUrl, cacheTime) || undefined
+      if (cached !== undefined) return Promise.resolve(cached)
+    }
+    const response = this.http.get(resourceUrl)
+    if (forceCache) response.then((data) => this.cache?.set(resourceUrl, data))
+    return response
+  }
+
+  navigate = async (
+    url: string,
+    resourceFilters: Filter[],
+    cacheTime = 0,
+    forceCache = false
+  ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
+    const response = await this.get(url, cacheTime, forceCache)
     const { data, meta } = response.data
     const [tableFilters, pagination] = this.getFiltersAndPagination(meta, resourceFilters)
 

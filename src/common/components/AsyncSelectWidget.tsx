@@ -4,10 +4,10 @@ import AsyncSelect from 'react-select/async'
 import * as debouncePromise from 'debounce-promise'
 
 import type { ValueType } from 'react-select/src/types'
-import type { BaseProvider } from '../../admin/providers'
+import type { Provider } from '../../admin/providers/interfaces'
 
 type AsyncSelectWidgetProps = {
-  provider: BaseProvider
+  provider: Provider
   dataResourceUrl: string
   handleChange: Function
   value: object | null
