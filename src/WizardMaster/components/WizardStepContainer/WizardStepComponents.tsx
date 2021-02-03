@@ -7,7 +7,7 @@ import { containerStore } from '../../store'
 
 import { mountComponents } from '../../../common/utils/mountComponents'
 import type { BaseNotifier } from '../../../common/notifier'
-import type { BaseProvider } from '../../../admin/providers/index'
+import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
 import type { GoogleConfig } from '../../../integration/google'
@@ -15,7 +15,7 @@ import type { GoogleConfig } from '../../../integration/google'
 type WizardStepComponentsProps = {
   elements: DetailFieldDescription[]
   resourceName: string
-  provider: BaseProvider
+  provider: Provider
   mainWizardObject: WizardObject
   setMainDetailObject: Function
   refreshMainDetailObject: Function

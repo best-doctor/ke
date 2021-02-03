@@ -2,7 +2,8 @@ import * as React from 'react'
 import { Box } from '@chakra-ui/core'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
-import type { BaseProvider, GoogleConfig } from 'index'
+import type { GoogleConfig } from 'index'
+import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import type { DetailObject, FieldsTypeInAdminClass } from 'typing'
@@ -15,7 +16,7 @@ type MountDetailFieldsArgs = {
   resourceName: string
   mainDetailObject: DetailObject
   elements: DetailFieldDescription[]
-  provider: BaseProvider
+  provider: Provider
   setMainDetailObject: Function
   refreshMainDetailObject: Function
   notifier: BaseNotifier

@@ -6,7 +6,7 @@ import { submitChange } from '../controllers'
 import { WizardContainer } from './WizardContainer'
 
 import type { BaseNotifier } from '../../common/notifier'
-import type { BaseProvider } from '../../admin/providers/index'
+import type { Provider } from '../../admin/providers/interfaces'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
@@ -17,7 +17,7 @@ import type { GoogleConfig } from '../../integration/google'
 type WizardProps = {
   resourceName: string
   wizard: BaseWizard
-  provider: BaseProvider
+  provider: Provider
   mainDetailObject: DetailObject
   setMainDetailObject: Function
   refreshMainDetailObject: Function

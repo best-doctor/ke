@@ -99,7 +99,10 @@ test('Provider get object', () => {
   testProvider.httpClient.get = jest.fn() // eslint-disable-line
   const resourceUrl = 'https://test.com/test-url/100500/'
 
-  testProvider.getObject(resourceUrl)
+  testProvider.getObject(resourceUrl).then(
+    () => {},
+    () => {}
+  )
 
   expect(testProvider.httpClient.get).toHaveBeenCalledWith('https://test.com/test-url/100500/') // eslint-disable-line
 })

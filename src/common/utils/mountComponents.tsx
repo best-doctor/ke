@@ -6,7 +6,7 @@ import { Row, getColumnProps } from 'react-flexbox-grid'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
-import type { BaseProvider } from '../../admin/providers'
+import type { Provider } from '../../admin/providers/interfaces'
 import type { BaseNotifier } from '../notifier'
 import type { DetailObject, GenericAccessor } from '../../typing'
 
@@ -19,7 +19,7 @@ type mountComponentsKwargs = {
   resourceName: string
   mainDetailObject: DetailObject
   elements: DetailFieldDescription[]
-  provider: BaseProvider
+  provider: Provider
   setMainDetailObject: Function
   refreshMainDetailObject: Function
   notifier: BaseNotifier

@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/core'
 
 import { containerStore, initialStore } from '../../store'
 
-import type { BaseProvider } from '../../../admin/providers/index'
+import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseWizard, BaseWizardStep } from '../../interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
@@ -16,7 +16,7 @@ type WizardStepControlPanelProps = {
   submitChange: Function
   currentState: string
   setCurrentState: Function
-  provider: BaseProvider
+  provider: Provider
   mainWizardObject: WizardObject
   analytics: BaseAnalytic | undefined
   refreshMainDetailObject: Function

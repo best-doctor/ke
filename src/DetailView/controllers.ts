@@ -1,5 +1,5 @@
 import type { BaseNotifier } from 'common/notifier'
-import type { BaseProvider } from 'index'
+import type { Provider } from 'admin/providers/interfaces'
 
 import { containerStore } from './store'
 import { setInitialValue, submitChange } from './events'
@@ -7,7 +7,7 @@ import { makeUpdateWithNotification } from '../admin/providers/utils'
 
 import type { WidgetPayload } from './events'
 
-const initDataUpdateHandler = (provider: BaseProvider, setMainDetailObject: Function, notifier: BaseNotifier): void => {
+const initDataUpdateHandler = (provider: Provider, setMainDetailObject: Function, notifier: BaseNotifier): void => {
   /*
     submitChange function used to handle user action on the widget.
 
@@ -24,7 +24,7 @@ const initDataUpdateHandler = (provider: BaseProvider, setMainDetailObject: Func
 }
 
 const initDetailViewControllers = (
-  provider: BaseProvider,
+  provider: Provider,
   setMainDetailObject: Function,
   notifier: BaseNotifier
 ): Function[] => {

@@ -6,7 +6,7 @@ import { containerStore } from '../store'
 import { WizardStepContainer } from './WizardStepContainer'
 
 import type { BaseNotifier } from '../../common/notifier'
-import type { BaseProvider } from '../../admin/providers/index'
+import type { Provider } from '../../admin/providers/interfaces'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
@@ -14,7 +14,7 @@ import type { GoogleConfig } from '../../integration/google'
 
 type WizardContainerProps = {
   wizard: BaseWizard
-  provider: BaseProvider
+  provider: Provider
   mainDetailObject: DetailObject
   setMainDetailObject: Function
   refreshMainDetailObject: Function

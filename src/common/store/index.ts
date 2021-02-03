@@ -1,16 +1,16 @@
 import { createEffect, createEvent, createStore } from 'effector'
 
-import type { BaseProvider } from 'admin/providers'
+import type { Provider } from 'admin/providers/interfaces'
 
 type ListEvent = {
   resourceUrl: string
-  provider: BaseProvider
+  provider: Provider
 }
 
 type DetailEvent = {
   resourceUrl: string
   resourceId: string
-  provider: BaseProvider
+  provider: Provider
 }
 
 const storeListResource = createEvent<ListEvent>()
@@ -18,7 +18,7 @@ const storeListResource = createEvent<ListEvent>()
 const storeDetailResource = createEvent<DetailEvent>()
 
 const storeListEffect = createEffect({
-  async handler({ resourceUrl, provider }: { resourceUrl: string; provider: BaseProvider }): Promise<any[]> {
+  async handler({ resourceUrl, provider }: { resourceUrl: string; provider: Provider }): Promise<any[]> {
     const [data, ,] = await provider.getPage(resourceUrl)
 
     return [data, resourceUrl]
@@ -33,7 +33,7 @@ const storeDetailEffect = createEffect({
   }: {
     resourceUrl: string
     resourceId: string
-    provider: BaseProvider
+    provider: Provider
   }): Promise<any[]> {
     const data = await provider.getObject(`${resourceUrl}${resourceId}/`)
 
@@ -54,11 +54,11 @@ const effectorStore = createStore<object>({})
   })
 
 class StoreManager {
-  static storeList(resourceUrl: string, provider: BaseProvider): void {
+  static storeList(resourceUrl: string, provider: Provider): void {
     storeListResource({ resourceUrl, provider })
   }
 
-  static storeDetail(resourceUrl: string, resourceId: string, provider: BaseProvider): void {
+  static storeDetail(resourceUrl: string, resourceId: string, provider: Provider): void {
     storeDetailResource({ resourceUrl, resourceId, provider })
   }
 
