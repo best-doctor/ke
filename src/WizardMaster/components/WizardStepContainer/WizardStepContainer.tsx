@@ -10,7 +10,7 @@ import type { BaseWizardStep, BaseWizard } from '../../interfaces'
 import { containerErrorsStore, containerStore, initialStore } from '../../store'
 
 import type { BaseNotifier } from '../../../common/notifier'
-import type { BaseProvider } from '../../../admin/providers/index'
+import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
 import type { GoogleConfig } from '../../../integration/google'
@@ -20,7 +20,7 @@ type WizardStepContainerRef = HTMLElement | null
 type WizardViewContainerProps = {
   wizard: BaseWizard
   wizardStep: BaseWizardStep
-  provider: BaseProvider
+  provider: Provider
   mainWizardObject: WizardObject
   setMainDetailObject: Function
   refreshMainDetailObject: Function

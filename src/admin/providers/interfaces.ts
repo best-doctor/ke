@@ -49,6 +49,14 @@ interface Provider {
   ): Promise<Model[]>
 
   getObject(resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<Model>
+
+  get(resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<any>
+
+  post(resourceUrl: string, payload: object): Promise<Model>
+
+  put(resourceUrl: string, payload: object): Promise<Model>
+
+  patch(resourceUrl: string, payload: object): Promise<Model>
 }
 
 export { Filter, Pagination, Provider, ResponseCache, TableFilter }

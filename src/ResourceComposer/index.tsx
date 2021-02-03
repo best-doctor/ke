@@ -3,7 +3,7 @@ import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-d
 import { ThemeProvider } from '@chakra-ui/core'
 
 import type { BaseAdmin } from 'admin'
-import type { BaseProvider } from 'admin/providers'
+import type { Provider } from 'admin/providers/interfaces'
 import type { BaseAnalytic } from 'integration/analytics/base'
 import type { GoogleConfig } from '../integration/google'
 
@@ -32,7 +32,7 @@ const AdminResource = ({
 }: {
   name: string
   admin: BaseAdmin
-  provider: BaseProvider
+  provider: Provider
   user: object
   analytics: BaseAnalytic | undefined
   googleConfig?: GoogleConfig

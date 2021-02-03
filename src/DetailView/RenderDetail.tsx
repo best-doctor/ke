@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
 
 import type { BaseAdmin } from 'admin'
-import type { BaseProvider } from 'admin/providers'
+import type { Provider } from 'admin/providers/interfaces'
 import type { BaseAnalytic } from 'integration/analytics/base'
 import type { FieldsTypeInAdminClass } from 'typing'
 import type { GoogleConfig } from 'integration/google'
@@ -22,7 +22,7 @@ type BackendResourceName = string
 type RenderDetailProps = {
   resourceName: BackendResourceName
   admin: BaseAdmin
-  provider: BaseProvider
+  provider: Provider
   user: object
   analytics: BaseAnalytic | undefined
   googleConfig?: GoogleConfig
