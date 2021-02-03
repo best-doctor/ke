@@ -92,7 +92,7 @@ test.each([
 
   testProvider.getPage(url, filters, page)
 
-  expect(testProvider.navigate).toHaveBeenCalledWith(expectedUrl, expectedResourceFilters)
+  expect(testProvider.navigate).toHaveBeenCalledWith(expectedUrl, expectedResourceFilters, undefined, undefined)
 })
 
 test('Provider get object', () => {

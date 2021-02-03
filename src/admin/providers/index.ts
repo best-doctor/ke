@@ -88,7 +88,7 @@ export class BaseProvider implements Provider {
       if (cached !== undefined) return Promise.resolve(cached)
     }
     const response = this.http.get(resourceUrl)
-    if (forceCache) response.then((data) => this.cache?.set(resourceUrl, data))
+    if (forceCache || cacheTime) response.then((response) => this.cache?.set(resourceUrl, response))
     return response
   }
 
