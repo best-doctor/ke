@@ -5,7 +5,7 @@ import { getWizardFromCallable } from './utils'
 
 import type { WizardFieldDescription, WizardFieldElement } from '../admin/fields/FieldDescription'
 import type { BaseNotifier } from '../common/notifier'
-import type { BaseProvider } from '../admin/providers/index'
+import type { Provider } from '../admin/providers/interfaces'
 import type { BaseAnalytic } from '../integration/analytics'
 import type { DetailObject } from '../typing'
 import type { GoogleConfig } from '../integration/google'
@@ -16,7 +16,7 @@ type MountWizardsKwargs = {
   notifier: BaseNotifier
   ViewType: string
   elements: WizardFieldDescription
-  provider: BaseProvider
+  provider: Provider
   setMainDetailObject: Function
   refreshMainDetailObject: Function
   analytics: BaseAnalytic | undefined

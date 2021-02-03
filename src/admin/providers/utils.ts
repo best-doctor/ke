@@ -1,8 +1,8 @@
 import type { BaseNotifier } from 'common/notifier'
-import type { BaseProvider } from './index'
+import type { Provider } from 'admin/providers/interfaces'
 
 const makeUpdateWithNotification = (
-  provider: BaseProvider,
+  provider: Provider,
   url: string,
   payload: object,
   setObject: Function,

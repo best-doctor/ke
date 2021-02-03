@@ -83,12 +83,14 @@ export class BaseProvider implements Provider {
   }
 
   get = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<any> => {
-    if (!forceCache) {
+    let effectiveForceCache = forceCache
+    if (!effectiveForceCache) {
       const cached = this.cache?.get(resourceUrl, cacheTime) || undefined
       if (cached !== undefined) return Promise.resolve(cached)
+      effectiveForceCache = true
     }
     const response = this.http.get(resourceUrl)
-    if (forceCache || cacheTime) response.then((response) => this.cache?.set(resourceUrl, response))
+    if (effectiveForceCache) response.then((data) => this.cache?.set(resourceUrl, data))
     return response
   }
 
