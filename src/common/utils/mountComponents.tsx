@@ -30,14 +30,14 @@ type mountComponentsKwargs = {
   containerStore?: object | undefined
 }
 
-const getComponentFromCallable = (widget: GenericAccessor, user: object): any => {
+const getComponentFromCallable = (widget: GenericAccessor, user: object, detailObject: DetailObject): any => {
   // Widget can be defined as callable. In this case, we inject some payload to arrow function.
   let ComponentToMount = null
 
   if (isValidComponent(widget as JSX.Element)) {
     ComponentToMount = widget
   } else {
-    ComponentToMount = (widget as Function)(user)
+    ComponentToMount = (widget as Function)(user, detailObject)
   }
 
   return ComponentToMount
@@ -117,7 +117,7 @@ const mountComponents = ({
         {rowColumns.map((adminElement: DetailFieldDescription) => {
           const { widget, name, layout, widgetAnalytics } = adminElement
 
-          const ComponentToMount = getComponentFromCallable(widget, user)
+          const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject)
           const colProps = getColumnProps(layout)
 
           return (
