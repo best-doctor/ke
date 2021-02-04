@@ -8,7 +8,7 @@ import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
-import { getCopyHandler, getPayload } from '../utils/dataAccess'
+import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 
 type ForeignKeySelectWidgetProps = WidgetProps & {
   optionLabel: Function
@@ -42,11 +42,13 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     copyValue,
     searchParamName,
     notifier,
+    cacheTime,
   } = props
 
   const context = containerStore.getState()
 
   const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
+  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object | null>(content as object | null)
 
@@ -86,6 +88,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
       >
         <AsyncSelectWidget
           provider={provider}
+          cacheTime={effectiveCacheTime}
           dataResourceUrl={dataResourceUrl}
           handleChange={handleChangeValue}
           value={value}

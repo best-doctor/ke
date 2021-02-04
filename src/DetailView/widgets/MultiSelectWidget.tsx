@@ -8,6 +8,7 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics } from '../../integration/analytics'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import type { WidgetProps } from '../../typing'
+import { getAccessor } from '../utils/dataAccess'
 
 type MultiSelectValue = {
   [key: string]: string
@@ -28,6 +29,7 @@ const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
     name,
+    mainDetailObject,
     optionLabel,
     optionValue,
     style,
@@ -36,10 +38,12 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     setInitialValue,
     submitChange,
     containerStore,
+    cacheTime,
   } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
+  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, setValue] = React.useState<MultiSelectValue[]>(content as MultiSelectValue[])
   setInitialValue({ [name]: extractPayloadIds(value) })
@@ -68,6 +72,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     <WidgetWrapper style={style} helpText={helpText}>
       <AsyncSelectWidget
         provider={provider}
+        cacheTime={effectiveCacheTime}
         dataResourceUrl={dataResourceUrl}
         handleChange={handleChange}
         closeMenuOnSelect={false}

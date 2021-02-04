@@ -7,6 +7,7 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 
 import type { WidgetProps } from '../../typing'
 import { handleUserAction } from '../../common/utils/handleUserAction'
+import { getAccessor } from '../utils/dataAccess'
 
 const eventName = EventNameEnum.RADIO_BUTTON_CHOICE
 const widgetType = WidgetTypeEnum.ACTION
@@ -19,8 +20,9 @@ type RadioButtonElement = {
 type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
 const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
-  const { containerStore, provider, style, helpText, optionLabel, optionValue } = props
+  const { mainDetailObject, containerStore, provider, style, helpText, optionLabel, optionValue, cacheTime } = props
   const context = containerStore.getState()
+  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const { dataResourceUrl, content } = useWidgetInitialization({ ...props, context })
   const [elements, setElements] = React.useState<RadioButtonElement[]>(content as RadioButtonElement[])
@@ -28,10 +30,10 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   React.useEffect(() => {
     if (dataResourceUrl) {
       provider
-        .getPage(dataResourceUrl)
+        .getPage(dataResourceUrl, undefined, undefined, effectiveCacheTime)
         .then(([data, ,]: [Model[], object, object]) => setElements(data as RadioButtonElement[]))
     }
-  }, [dataResourceUrl, provider])
+  }, [dataResourceUrl, provider, effectiveCacheTime])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const widgetValueId = e.target.value
