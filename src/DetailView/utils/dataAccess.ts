@@ -1,6 +1,6 @@
 import { get } from 'lodash-es'
 
-import type {GenericAccessor, DetailObject, Accessor} from '../../typing'
+import type { GenericAccessor, DetailObject, Accessor } from '../../typing'
 
 const getData = (handler: GenericAccessor, data: DetailObject, context = {}): any => {
   if (typeof handler === 'function') {

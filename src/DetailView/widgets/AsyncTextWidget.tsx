@@ -5,24 +5,25 @@ import { useEffect, useState } from 'react'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 
 import type { WidgetProps } from '../../typing'
-import { getWidgetContent } from '../utils/dataAccess'
+import { getAccessor, getWidgetContent } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { StyledTextWidget } from './TextWidget'
 
 const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, style, helpText, name, provider, displayValue } = props
+  const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } = props
 
   const [content, setContent] = useState<string>('')
 
   const context = containerStore.getState()
 
   const { dataResourceUrl } = useWidgetInitialization({ ...props, context })
+  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   useEffect(() => {
     provider
-      .getObject(dataResourceUrl)
+      .getObject(dataResourceUrl, effectiveCacheTime)
       .then((responseData: any) => setContent(getWidgetContent(name, responseData, displayValue, context) || ''))
-  }, [provider, dataResourceUrl, context, displayValue, name])
+  }, [provider, dataResourceUrl, context, displayValue, name, effectiveCacheTime])
 
   return (
     <WidgetWrapper style={style} helpText={helpText}>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Select } from '@chakra-ui/core'
 
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getData, getPayload, getWidgetContent } from '../utils/dataAccess'
+import { getAccessor, getData, getPayload, getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
@@ -33,6 +33,7 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
     name,
     helpText,
     displayValue,
+    containerStore,
     mainDetailObject,
     dataSource,
     dataTarget,
@@ -41,9 +42,12 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
     style,
     setInitialValue,
     submitChange,
+    cacheTime,
   } = props
   const sourceUrl = getData(dataSource, mainDetailObject)
   const targetUrl = getData(dataTarget, mainDetailObject) || mainDetailObject.url
+  const context = containerStore.getState()
+  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
 
@@ -51,8 +55,10 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
   setInitialValue({ [name]: value })
 
   useEffect(() => {
-    provider.getPage(sourceUrl).then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
-  }, [provider, sourceUrl])
+    provider
+      .getPage(sourceUrl, undefined, undefined, effectiveCacheTime)
+      .then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
+  }, [provider, sourceUrl, effectiveCacheTime])
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const widgetPayload = getPayload(e.target.value, name, targetPayload)
