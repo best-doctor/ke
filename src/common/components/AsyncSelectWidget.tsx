@@ -19,6 +19,7 @@ type AsyncSelectWidgetProps = {
   closeMenuOnSelect?: boolean
   searchParamName?: string
   placeholder?: string
+  cacheTime?: number
 }
 
 const AsyncSelectWidget = ({
