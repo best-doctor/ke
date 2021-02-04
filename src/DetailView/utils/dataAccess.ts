@@ -1,5 +1,5 @@
-import type { GenericAccessor, DetailObject } from '../../typing'
 import { get } from '../../common/utils/get'
+import type {GenericAccessor, DetailObject, Accessor} from '../../typing'
 
 const getData = (handler: GenericAccessor, data: DetailObject, context = {}): any => {
   if (typeof handler === 'function') {
@@ -11,6 +11,14 @@ const getData = (handler: GenericAccessor, data: DetailObject, context = {}): an
   }
 
   return null
+}
+
+const getAccessor = (handler: Accessor<any>, data: DetailObject, context = {}): any => {
+  if (typeof handler === 'function') {
+    return handler(data, context)
+  }
+
+  return handler
 }
 
 const getWidgetContent = (name: string, detailObject: DetailObject, handler: GenericAccessor, context = {}): any => {
@@ -44,4 +52,4 @@ const getCopyHandler = (value: any, copyValue?: GenericAccessor, fallbackCopyVal
   return () => value.toString()
 }
 
-export { getData, getWidgetContent, getPayload, getCopyHandler }
+export { getData, getAccessor, getWidgetContent, getPayload, getCopyHandler }

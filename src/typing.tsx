@@ -4,6 +4,8 @@ import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import type { GoogleConfig } from './integration/google'
 
+type Accessor<T> = T | Function | undefined
+
 type GenericAccessor = string | Function | JSX.Element | undefined
 
 type OptionalDate = Date | null
@@ -36,8 +38,9 @@ type WidgetProps = {
   containerStore: Store<object>
   useClipboard?: boolean
   copyValue?: GenericAccessor
+  cacheTime?: Accessor<number>
 }
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'
 
-export { GenericAccessor, OptionalDate, DetailObject, WidgetProps, FieldsTypeInAdminClass, WizardObject }
+export { GenericAccessor, Accessor, OptionalDate, DetailObject, WidgetProps, FieldsTypeInAdminClass, WizardObject }
