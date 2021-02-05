@@ -30,7 +30,7 @@ import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
 import { useWidgetInitialization } from 'common/hooks/useWidgetInitialization'
 import { StoreManager } from 'common/store'
 import { handleUserAction } from 'common/utils/handleUserAction'
-import { getData, getAccessor, getWidgetContent, getPayload } from 'DetailView/utils/dataAccess'
+import { getData, getAccessor, getAccessorWithDefault, getWidgetContent, getPayload } from 'DetailView/utils/dataAccess'
 import { hasPermission } from 'common/permissions'
 import { BaseNotifier } from 'common/notifier'
 import { EnableELK } from 'integration/EnableELK'
@@ -99,6 +99,7 @@ export {
   DateTimeRangeWidget,
   getData,
   getAccessor,
+  getAccessorWithDefault,
   getWidgetContent,
   getPayload,
   AvatarWidget,

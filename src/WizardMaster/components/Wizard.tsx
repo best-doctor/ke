@@ -11,8 +11,9 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
-import type { DetailObject } from '../../typing'
+import type { Accessor, DetailObject } from '../../typing'
 import type { GoogleConfig } from '../../integration/google'
+import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
 
 type WizardProps = {
   resourceName: string
@@ -27,6 +28,8 @@ type WizardProps = {
   ViewType: string
   user: object
   style?: object
+  allowToggle?: Accessor<boolean>
+  isExpanded?: Accessor<boolean>
 }
 
 const sendPushAnalytics = (resourceName: string, widgetName: string, props: WizardProps): void => {
@@ -43,7 +46,6 @@ const sendPushAnalytics = (resourceName: string, widgetName: string, props: Wiza
 }
 
 const Wizard = (props: WizardProps): JSX.Element => {
-  const [show, setShow] = React.useState(false)
   const {
     wizard,
     provider,
@@ -56,35 +58,49 @@ const Wizard = (props: WizardProps): JSX.Element => {
     ViewType,
     user,
     resourceName,
+    allowToggle: allowToggleHandler = true,
+    isExpanded: isExpandedHandler,
   } = props
+
+  const effectiveAllowToggle = getAccessorWithDefault(allowToggleHandler, mainDetailObject, undefined, true)
+  const effectiveIsExpanded = getAccessorWithDefault(
+    isExpandedHandler,
+    mainDetailObject,
+    undefined,
+    !effectiveAllowToggle
+  )
+
+  const [isExpanded, toggleExpanded] = React.useState(effectiveIsExpanded)
 
   const handleToggle = (): void => {
     // заюзать handleUserAction здесь
     sendPushAnalytics(resourceName, 'open_wizard', props)
-    setShow(!show)
+    toggleExpanded(!isExpanded)
   }
 
   return (
     <>
-      <Row>
-        <Col xs={12}>
-          <Box marginBottom="16px">
-            <Button
-              key="wizardToggleButton"
-              onClick={handleToggle}
-              variantColor="green"
-              width="inherit"
-              style={{ width: '100%', height: '60px' }}
-            >
-              {wizard.title}
-            </Button>
-          </Box>
-        </Col>
-      </Row>
+      {effectiveAllowToggle && (
+        <Row>
+          <Col xs={12}>
+            <Box marginBottom="16px">
+              <Button
+                key="wizardToggleButton"
+                onClick={handleToggle}
+                variantColor="green"
+                width="inherit"
+                style={{ width: '100%', height: '60px' }}
+              >
+                {wizard.title}
+              </Button>
+            </Box>
+          </Col>
+        </Row>
+      )}
 
       <WizardContainer
         wizard={wizard}
-        show={show}
+        show={isExpanded}
         provider={provider}
         mainDetailObject={mainDetailObject}
         setMainDetailObject={setMainDetailObject}

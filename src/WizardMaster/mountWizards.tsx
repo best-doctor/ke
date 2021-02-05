@@ -66,6 +66,8 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
         ViewType={ViewType}
         user={user}
         resourceName={resourceName}
+        allowToggle={wizard.allowToggle}
+        isExpanded={wizard.isExpanded}
       />
     )
   })
