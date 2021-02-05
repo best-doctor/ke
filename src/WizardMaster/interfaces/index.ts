@@ -6,6 +6,7 @@ import { validateContext } from '../utils'
 import type { DetailFieldDescription } from '../../admin/fields/FieldDescription'
 import type { WizardStepButtonDescription } from '../buttons'
 import { getDefaultButtons } from '../buttons'
+import type { Accessor } from '../../typing'
 
 type WizardState = Promise<string>
 
@@ -59,12 +60,18 @@ abstract class BaseWizard {
 
   layout?: object = defaultLayout
 
+  allowToggle?: Accessor<boolean>
+
+  isExpanded?: Accessor<boolean>
+
   abstract stateWidgetMapping: { [key: string]: BaseWizardStep }
 
   abstract machine: { [key: string]: object | string }
 
-  constructor(title: string) {
+  constructor(title: string, allowToggle?: Accessor<boolean>, isExpanded?: Accessor<boolean>) {
     this.title = title
+    this.allowToggle = allowToggle
+    this.isExpanded = isExpanded
   }
 
   transition(currentState: string, action: string): string {

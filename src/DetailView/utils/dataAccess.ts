@@ -21,6 +21,17 @@ const getAccessor = (handler: Accessor<any>, data: DetailObject, context = {}): 
   return handler
 }
 
+const getAccessorWithDefault = (
+  handler: Accessor<any>,
+  data: DetailObject,
+  context = {},
+  defaultValue: any = undefined
+): any => {
+  const value = getAccessor(handler, data, context)
+  if (value === undefined) return defaultValue
+  return value
+}
+
 const getWidgetContent = (name: string, detailObject: DetailObject, handler: GenericAccessor, context = {}): any => {
   const widgetContent = getData(handler, detailObject, context)
 
@@ -52,4 +63,4 @@ const getCopyHandler = (value: any, copyValue?: GenericAccessor, fallbackCopyVal
   return () => value.toString()
 }
 
-export { getData, getAccessor, getWidgetContent, getPayload, getCopyHandler }
+export { getData, getAccessor, getAccessorWithDefault, getWidgetContent, getPayload, getCopyHandler }
