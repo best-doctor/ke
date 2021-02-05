@@ -10,6 +10,7 @@ import { ChakraUINotifier } from './common/notifier'
 import { TextWidget } from './DetailView/widgets/TextWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
+import type { ResponseCache } from './admin/providers/interfaces'
 
 configure({ adapter: new Adapter() })
 
@@ -51,8 +52,8 @@ const mockedHTTP = axios.create({})
 mockedHTTP.defaults = { baseURL: 'https://test.com/' }
 
 class TestProvider extends BaseProvider {
-  constructor() {
-    super(mockedHTTP)
+  constructor(cache?: ResponseCache) {
+    super(mockedHTTP, cache)
   }
 }
 

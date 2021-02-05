@@ -6,16 +6,15 @@ type CachedValue = {
 }
 
 class LocalCache implements ResponseCache {
-  cacheTime = 0
+  constructor(readonly cacheTime: number = 0) {}
 
   keySpace: Record<string, CachedValue> = {}
 
-  get(cacheKey: string, cacheTime?: number): any {
-    const effectiveCacheTime = cacheTime || this.cacheTime
-    if (effectiveCacheTime > 0) {
+  get(cacheKey: string, cacheTime: number = this.cacheTime): any {
+    if (cacheTime > 0) {
       const cached = this.keySpace[cacheKey] || undefined
       if (cached !== undefined) {
-        if (cached.cachedTime + effectiveCacheTime * 1000 > Date.now()) {
+        if (cached.cachedTime + cacheTime * 1000 > Date.now()) {
           return cached.value
         }
       }
