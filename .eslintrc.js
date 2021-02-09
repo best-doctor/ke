@@ -1,5 +1,8 @@
 module.exports = {
-  plugins: ['@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint',
+    'eslint-plugin-tsdoc'
+  ],
   extends: [
     'airbnb-typescript',
     'airbnb/hooks',
@@ -40,5 +43,6 @@ module.exports = {
     // TypeScript handles it better
     'consistent-return': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
+    'tsdoc/syntax': 'warn',
   },
 }
