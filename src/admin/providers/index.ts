@@ -4,7 +4,31 @@ import axios from 'axios'
 import { FilterManager } from '../../common/filterManager'
 import type { Filter, ResponseCache, Pagination, Provider, TableFilter } from './interfaces'
 
+/**
+ * Base for Django REST API interactions
+ *
+ * @example Usage
+ * # Contents of `provider.ts`
+ * ```ts
+ * import { BaseProvider } from '@bestdoctor/ke'
+ * import { httpClient } from 'client'
+ *
+ * export class Provider extends BaseProvider {
+ *   constructor() {
+ *     super(axios.create({
+ *       baseURL: 'https://localhost/',
+ *     }))
+ *   }
+ * }
+ * ```
+ *
+ * @public
+ */
 export class BaseProvider implements Provider {
+  /**
+   * @param http - axios-instance used for all http requests
+   * @param cache - optional cache-object for temporary store all got results by their URLs
+   */
   constructor(private readonly http: AxiosInstance = axios.create({}), readonly cache?: ResponseCache) {
     this.cache = cache
     this.http = http
@@ -14,6 +38,17 @@ export class BaseProvider implements Provider {
     return this.http
   }
 
+  /**
+   * Load one 'page' of resource from backend
+   *
+   * Try to load a standard slice of all resource models. Useful for paginated lists.
+   *
+   * @param url - resource url
+   * @param filters - filters accepted by resource API
+   * @param page - requested page number
+   * @param cacheTime - time in seconds for caching result
+   * @param forceCache - don't use cache if true
+   */
   getPage = async (
     url: string | URL,
     filters: Filter[] | null = null,
@@ -28,6 +63,19 @@ export class BaseProvider implements Provider {
     return this.navigate(generatedUrl, resourceFilters, cacheTime, forceCache)
   }
 
+  /**
+   * Load several adjacent `pages` of resource from backend.
+   *
+   * Try to load several adjacent slices of all resource models. Make request per page.
+   *
+   * @param url - resource url
+   * @param filters - filters accepted by resource API
+   * @param perPage - count models per page
+   * @param startPage - start page number
+   * @param endPage - end page number
+   * @param cacheTime - time in seconds for caching result
+   * @param forceCache - don't use cache if true
+   */
   getList = async (
     url: string | URL,
     filters: Filter[] | null = null,
@@ -62,6 +110,13 @@ export class BaseProvider implements Provider {
     return data
   }
 
+  /**
+   * Load single resource model
+   *
+   * @param resourceUrl - resource URL
+   * @param cacheTime - time in seconds for caching result
+   * @param forceCache - don't use cache if true
+   */
   getObject = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<Model> => {
     const response = await this.get(resourceUrl, cacheTime, forceCache)
     return response.data.data
