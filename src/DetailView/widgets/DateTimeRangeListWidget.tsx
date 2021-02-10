@@ -49,7 +49,7 @@ const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] =
     const [dateFrom, dateTo] = dateRange_
 
     if (dateFrom && dateTo) {
-      return [format(dateFrom, 'YYYY-MM-DDTHH:mm:ss'), format(dateTo, 'YYYY-MM-DDTHH:mm:ss')]
+      return [format(dateFrom, 'yyyy-MM-ddTHH:mm:ss'), format(dateTo, 'yyyy-MM-ddTHH:mm:ss')]
     }
 
     return null
@@ -133,7 +133,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   setInitialValue({ [name]: value })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, itemIndex: number): void => {
-    const changeValue = date ? format(date, 'YYYY-MM-DDTHH:mm:ss') : ''
+    const changeValue = date ? format(date, 'yyyy-MM-ddTHH:mm:ss') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -168,7 +168,6 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     newDateRanges.splice(itemIndex + 1, 0, [null, null])
     setDateRanges(newDateRanges)
   }
-
   return (
     <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       <StyledDateTimeRangeListContainer className="date-time-list-container">
@@ -213,4 +212,4 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     </WidgetWrapper>
   )
 }
-export { DateTimeRangeListWidget }
+export { DateTimeRangeListWidget, StyledDateTimeRangeListContainer }
