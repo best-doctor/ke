@@ -9,6 +9,12 @@ import { getAccessor, getWidgetContent } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { StyledTextWidget } from './TextWidget'
 
+/**
+ * Async load 'data' from props.dataSource and then get content via props.displayValue if exists
+ * else get 'data'[props.name]. Render result as text block with props.style and props.helpText
+ *
+ * @param props - standard widget props
+ */
 const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } = props
 
