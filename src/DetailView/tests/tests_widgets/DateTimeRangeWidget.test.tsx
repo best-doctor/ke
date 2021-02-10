@@ -4,9 +4,7 @@ import { shallow } from 'enzyme'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateTimeRangeWidget } from '../../widgets/DateTimeRangeWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
-import {
-  BaseDateTimeRangeWidget
-} from "../../../common/components/BaseDateTimeRangeWidget";
+import { BaseDateTimeRangeWidget } from '../../../common/components/BaseDateTimeRangeWidget'
 
 const submitChangeMock = jest.fn()
 

@@ -2,12 +2,8 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
-import {
-  DateTimeRangeListWidget,
-  StyledDateTimeRangeListContainer
-} from '../../widgets/DateTimeRangeListWidget'
+import { DateTimeRangeListWidget, StyledDateTimeRangeListContainer } from '../../widgets/DateTimeRangeListWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
-
 
 const submitChangeMock = jest.fn()
 
@@ -15,7 +11,7 @@ const detailObject = {
   id: 100500,
   last_name: 'test',
   url: 'https://test.com',
-  test: [["2021-01-01","2021-01-02"]]
+  test: [['2021-01-01', '2021-01-02']],
 }
 
 const getComponent = (): JSX.Element => (

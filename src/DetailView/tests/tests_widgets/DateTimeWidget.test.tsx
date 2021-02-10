@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateTimeWidget } from '../../widgets/DateTimeWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
-import {StyleDateTime} from "../../../common/components/BaseDateTimeRangeWidget";
+import { StyleDateTime } from '../../../common/components/BaseDateTimeRangeWidget'
 
 const submitChangeMock = jest.fn()
 
