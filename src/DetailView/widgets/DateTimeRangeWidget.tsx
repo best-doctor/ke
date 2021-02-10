@@ -15,7 +15,7 @@ type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undef
 
 const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string, string] | null => {
   if (dateFrom && dateTo) {
-    return [format(dateFrom, 'YYYY-MM-DDTHH:mm:ss'), format(dateTo, 'YYYY-MM-DDTHH:mm:ss')]
+    return [format(dateFrom, 'yyyy-MM-ddTHH:mm:ss'), format(dateTo, 'yyyy-MM-ddTHH:mm:ss')]
   }
   return null
 }
@@ -37,7 +37,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   setInitialValue({ [name]: content })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, save = true): void => {
-    const changeValue = date ? format(date, 'YYYY-MM-DDTHH:mm:ss') : ''
+    const changeValue = date ? format(date, 'yyyy-MM-ddTHH:mm:ss') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
