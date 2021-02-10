@@ -10,6 +10,16 @@ import type { Pagination, TableFilter } from '../admin/providers/interfaces'
 import { Table } from './components/Table'
 import { FilterManager } from '../common/filterManager'
 
+/**
+ * Async load models and render them as paginated table.
+ * Change page title.
+ *
+ * @param resourceName - using for analytics
+ * @param admin - meta-information fo rendered models
+ * @param provider - used for requests to backend
+ * @param user - used for filter query
+ * @param analytics - for send analytics event
+ */
 export const RenderList: React.FC<{
   resourceName: string
   admin: BaseAdmin
