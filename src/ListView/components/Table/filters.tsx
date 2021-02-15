@@ -249,7 +249,7 @@ const DateFilter = (params: any): JSX.Element => {
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? format(value, 'YYYY-MM-DD') : ''
+    const filterValue = value ? format(value, 'yyyy-MM-dd') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -281,7 +281,7 @@ const DateTimeFilter = (params: any): JSX.Element => {
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? format(value, 'YYYY-MM-DDThh:mm:ss') : ''
+    const filterValue = value ? format(value, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATETIME_CHANGE,
