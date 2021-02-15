@@ -21,7 +21,9 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
 
   const contentDate = content ? new Date(content as string) : null
   const [date, setDate] = React.useState<OptionalDate>(contentDate)
-  if (format(contentDate || new Date(), 'yyyy-MM-ddTHH:mm:ss') !== format(date || new Date(), 'yyyy-MM-ddTHH:mm:ss')) {
+  if (
+    format(contentDate || new Date(), "yyyy-MM-dd'T'HH:mm:ss") !== format(date || new Date(), "yyyy-MM-dd'T'HH:mm:ss")
+  ) {
     setDate(contentDate)
   }
 
@@ -29,7 +31,7 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
 
   const handleChange = (value: OptionalDate): void => {
     setDate(value)
-    const widgetValue = value ? format(value, 'yyyy-MM-ddTHH:mm:ss') : ''
+    const widgetValue = value ? format(value, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     handleUserAction({ ...props, widgetValue, targetUrl, eventName, widgetType })
   }
