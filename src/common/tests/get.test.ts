@@ -47,7 +47,7 @@ const existsTupleArbitrary = fc.tuple(pathArrayArbitrary, valueArbitrary).chain(
 })
 
 const notExistsTupleArbitrary = fc
-  .tuple(pathArrayArbitrary, valueArbitrary, fc.hexaString())
+  .tuple(pathArrayArbitrary, valueArbitrary, fc.hexaString({ minLength: 10 }))
   .chain(([path, val, miss]) => {
     const wrongPath = [...path]
     wrongPath[Math.floor(Math.random() * wrongPath.length)] = miss
