@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
+import { act } from 'react-dom/test-utils'
 
 import DatePicker from 'react-datepicker'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
@@ -44,4 +45,17 @@ test('DateTimeWidget properly rendered', () => {
   expect(component.find(DatePicker).length).toEqual(1)
   expect(component.find(StyleDateTime).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
+})
+
+test('DateTimeWidget properly handle event', () => {
+  const component = mount(getComponent())
+
+  act(() => {
+    component.find(DatePicker).first().props().onChange(new Date('2021-01-02T00:00:00'), undefined)
+  })
+
+  expect(submitChangeMock).toHaveBeenCalledWith({
+    url: 'https://some-test-target.com',
+    payload: { testPayload: '2021-01-02T00:00:00' },
+  })
 })

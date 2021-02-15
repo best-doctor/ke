@@ -49,7 +49,7 @@ const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] =
     const [dateFrom, dateTo] = dateRange_
 
     if (dateFrom && dateTo) {
-      return [format(dateFrom, 'yyyy-MM-ddTHH:mm:ss'), format(dateTo, 'yyyy-MM-ddTHH:mm:ss')]
+      return [format(dateFrom, "yyyy-MM-dd'T'HH:mm:ss"), format(dateTo, "yyyy-MM-dd'T'HH:mm:ss")]
     }
 
     return null
@@ -133,7 +133,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   setInitialValue({ [name]: value })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, itemIndex: number): void => {
-    const changeValue = date ? format(date, 'yyyy-MM-ddTHH:mm:ss') : ''
+    const changeValue = date ? format(date, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
