@@ -9,6 +9,13 @@ type AvatarWidgetProps = {
   style: object
 }
 
+/**
+ * Render initials "BD" styled like avatar image
+ *
+ * @param helpText - description
+ * @param style
+ * @constructor
+ */
 const AvatarWidget = ({ helpText, style }: AvatarWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper style={style} helpText={helpText}>

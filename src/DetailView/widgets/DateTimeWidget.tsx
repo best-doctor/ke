@@ -13,6 +13,13 @@ import type { OptionalDate, WidgetProps } from '../../typing'
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
+/**
+ * Render date-time picker
+ * Waits for data type: ISO Date-string
+ *
+ * @param props
+ * @constructor
+ */
 const DateTimeWidget = (props: WidgetProps): JSX.Element => {
   const { name, helpText, style, setInitialValue, containerStore } = props
 

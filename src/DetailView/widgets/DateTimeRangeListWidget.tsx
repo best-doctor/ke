@@ -110,6 +110,16 @@ const getInitialValue = (inputCount: number): DateRange[] => {
   return initialValue as DateRange[]
 }
 
+/**
+ * Render list of datetime range widgets. Suppose to use for schedule modify.
+ *
+ * Waits for data type: [string, string][] , where string - ISO Date
+ *
+ * props.oneDayInterval: boolean - restrict date range to one day length
+ *
+ * @param props
+ * @constructor
+ */
 const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const {
     name,

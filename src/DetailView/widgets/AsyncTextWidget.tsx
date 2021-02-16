@@ -10,8 +10,9 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { StyledTextWidget } from './TextWidget'
 
 /**
- * Async load 'data' from props.dataSource and then get content via props.displayValue if exists
- * else get 'data'[props.name]. Render result as text block with props.style and props.helpText
+ * Render data  as text block with props.style and props.helpText
+ * Async load "data" from props.dataSource and then get content via props.displayValue if exists
+ * else get "data"[props.name].
  *
  * @param props - standard widget props
  */
