@@ -21,7 +21,7 @@ module.exports = {
     'import/no-default-export': 'error',
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/fixtures.ts'] }
+      { devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/fixtures.ts', '**/setupTests.ts'] }
     ],
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
     '@typescript-eslint/explicit-function-return-type': [
