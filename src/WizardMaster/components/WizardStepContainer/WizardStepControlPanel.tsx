@@ -53,7 +53,8 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
     }
   }
 
-  const { buttons } = wizardStep
+  const { getButtons } = wizardStep
+  const buttons = getButtons.call(wizardStep, getWizardStepControlPayload())
 
   return (
     <>
