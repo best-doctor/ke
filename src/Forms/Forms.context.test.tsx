@@ -22,9 +22,9 @@ describe('useNodeState - return state tuple from current context for got key', (
   test.each([
     ['dict', dictContextWithValidKeyArbitrary],
     ['array', arrContextWithValidKeyArbitrary],
-  ])('Return correct data for %s context', (_type, arbitrary) => {
+  ])('Return correct data for %s context', (_, arbitrary) => {
     fc.assert(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // arbitrary produce correct context-key pairs
       // @ts-ignore
       fc.property(arbitrary, ([context, key]) => {
         const wrapper = makeContextWrapper(context, jest.fn())

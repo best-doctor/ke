@@ -29,7 +29,7 @@ module.exports = {
       { allowExpressions: true, allowTypedFunctionExpressions: true },
     ],
     '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true }],
-    // Just because of hoising
+    // Just because of hoisting
     'no-use-before-define': ['error', { functions: false, classes: true, variables: true }],
     '@typescript-eslint/no-use-before-define': [
       'error',
@@ -45,4 +45,10 @@ module.exports = {
     'consistent-return': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
   },
+  overrides: [{
+    files: ['**/*.test.ts', '**/*.test.tsx'],
+    rules: {
+      '@typescript-eslint/ban-ts-ignore': 'off'
+    }
+  }]
 }

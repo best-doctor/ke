@@ -34,8 +34,7 @@ describe.each([
     fc.assert(
       fc.property(valueArbitrary, onChangeArbitrary, (value, onChange) => {
         const ref = createRef<InstanceType<typeof Element>>()
-        // Don't know how to define relation between Adapter and Element
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // Don't know how to define relation between Adapter and Element, but this is correct
         // @ts-ignore
         const component = mount(<Adapter ref={ref} value={value} onChange={onChange} />)
 

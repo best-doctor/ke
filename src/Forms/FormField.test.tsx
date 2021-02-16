@@ -43,7 +43,6 @@ test('Pass context[name] to "as"-component as "value"', () => {
       const [firstCall] = TestControlSpy.mock.calls
       const [firstArg] = firstCall
       // contextWithValidKeyArbitrary - produce correct context-key pairs
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       expect(firstArg.value).toBe(context[name])
     })
