@@ -1,4 +1,4 @@
-import { getData, getWidgetContent, getPayload } from '../utils/dataAccess'
+import { getData, getWidgetContent, getPayload, ensurePromise } from '../utils/dataAccess'
 
 type DetailObject = { id: number; last_name: string }
 
@@ -34,4 +34,14 @@ test.each([
   const result = getPayload('kek', name, targetPayload)
 
   expect(result).toEqual(expectedResult)
+})
+
+test.each([
+  ['value', 'value'],
+  [new Promise(() => 'value'), 'value'],
+  [new Promise(() => detailObject), detailObject],
+])('ensurePromise', (value, expectedResult) => {
+  const result = ensurePromise(value)
+
+  expect(result).resolves.toBe(expectedResult)
 })

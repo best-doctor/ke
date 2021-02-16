@@ -1,16 +1,29 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Select } from '@chakra-ui/core'
+import type { Store } from 'effector'
 
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getAccessor, getData, getPayload, getWidgetContent } from '../utils/dataAccess'
+import { getAccessor, getData, getPayload, getWidgetContent, applyCallback } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
-import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
+import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
 
 type SelectObject = {
   value: string
   text: string
+}
+
+type SelectWidgetProps = {
+  name: string
+  mainDetailObject: DetailObject
+  helpText?: string
+  displayValue?: GenericAccessor
+  data: Accessor<ValueOrPromise<SelectObject[]>>
+  style: object
+  setInitialValue: Function
+  handleChange: Function
+  containerStore: Store<object>
 }
 
 const getSelectContent = (
@@ -31,7 +44,6 @@ const getSelectContent = (
 const SelectWidget = (props: WidgetProps): JSX.Element => {
   const {
     name,
-    helpText,
     displayValue,
     containerStore,
     mainDetailObject,
@@ -39,26 +51,24 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
     dataTarget,
     targetPayload,
     provider,
-    style,
     setInitialValue,
     submitChange,
     cacheTime,
   } = props
-  const sourceUrl = getData(dataSource, mainDetailObject)
   const targetUrl = getData(dataTarget, mainDetailObject) || mainDetailObject.url
   const context = containerStore.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
-  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
+  const [value] = getSelectContent(name, mainDetailObject, displayValue, 'object')
 
-  const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
   setInitialValue({ [name]: value })
 
-  useEffect(() => {
-    provider
+  const options = (): Promise<SelectObject[]> => {
+    const sourceUrl = getData(dataSource, mainDetailObject, context)
+    return provider
       .getPage(sourceUrl, undefined, undefined, effectiveCacheTime)
-      .then(([responseOptions, ,]: [any, object, object]) => setResultOptions(responseOptions))
-  }, [provider, sourceUrl, effectiveCacheTime])
+      .then(([responseOptions, ,]: [any, object, object]) => responseOptions as SelectObject[])
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const widgetPayload = getPayload(e.target.value, name, targetPayload)
@@ -73,6 +83,34 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
 
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
+
+  return <BaseSelectWidget data={options} handleChange={handleChange} {...props} />
+}
+
+const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
+  const {
+    name,
+    helpText,
+    displayValue,
+    containerStore,
+    mainDetailObject,
+    data,
+    style,
+    setInitialValue,
+    handleChange,
+  } = props
+
+  const context = containerStore.getState()
+
+  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
+
+  const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
+  setInitialValue({ [name]: value })
+
+  useEffect(() => {
+    const responseOptions = getAccessor(data, mainDetailObject, context)
+    return applyCallback(responseOptions, setResultOptions)
+  }, [data, mainDetailObject, context])
 
   return (
     <WidgetWrapper style={style} helpText={helpText}>
@@ -92,4 +130,4 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
   )
 }
 
-export { SelectWidget }
+export { SelectWidget, BaseSelectWidget }
