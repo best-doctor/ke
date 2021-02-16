@@ -8,4 +8,4 @@ updates:
     schedule:
       interval: "daily"
     allow:
-      -dependency-type: "production"
+      - dependency-type: "production"
