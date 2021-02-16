@@ -1,6 +1,6 @@
 import * as fc from 'fast-check'
 
-const dictContextArbitrary = fc.dictionary(fc.string({ minLength: 1, maxLength: 10 }), fc.anything())
+export const dictContextArbitrary = fc.dictionary(fc.string({ minLength: 1, maxLength: 10 }), fc.anything())
 
 export const dictContextWithValidKeyArbitrary = dictContextArbitrary
   .filter((dict) => !![...Object.keys(dict)].length)
@@ -10,7 +10,7 @@ export const dictContextWithInvalidKeyArbitrary = fc
   .tuple(dictContextArbitrary, fc.string({ minLength: 1, maxLength: 10 }))
   .filter(([dict, key]) => !(key in dict))
 
-const arrContextArbitrary = fc.array(fc.anything(), { minLength: 0, maxLength: 50 })
+export const arrContextArbitrary = fc.array(fc.anything(), { minLength: 0, maxLength: 50 })
 
 export const arrContextWithValidKeyArbitrary = arrContextArbitrary
   .filter((arr) => !!arr.length)
