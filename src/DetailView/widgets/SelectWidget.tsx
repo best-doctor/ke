@@ -101,7 +101,6 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const responseOptions = getAccessor(data, mainDetailObject, context)
 
   const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
 
@@ -109,8 +108,9 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   setInitialValue({ [name]: value })
 
   useEffect(() => {
+    const responseOptions = getAccessor(data, mainDetailObject, context)
     return applyCallback(responseOptions, setResultOptions)
-  }, [responseOptions])
+  }, [data, mainDetailObject, context])
 
   return (
     <WidgetWrapper style={style} helpText={helpText}>
