@@ -7335,9 +7335,9 @@ react-clientside-effect@^1.2.2:
     "@babel/runtime" "^7.0.0"
 
 react-datepicker@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-3.1.3.tgz"
-  integrity sha512-4KbdWWAxa/AZJIDhQZwiBpZE9hCYZ4/gTVstdo9WEpFCsfh69xHklB/FZrR95mgkIU7ecU36V2eCuGgIO+ci0A==
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-3.5.0.tgz#fbac7d6d4b29001420d4411132c3d5f5d591d15c"
+  integrity sha512-iTRz15aG9lEF7tJVjPcGWvfALb2/RjqHVTvQO7J0DEvGSGZnTJpHlkTrBGBjJ9+i5zM4zcRGoStpjhaezS9p1g==
   dependencies:
     classnames "^2.2.6"
     date-fns "^2.0.1"
