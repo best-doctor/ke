@@ -1,5 +1,6 @@
 import * as React from 'react'
 import type { FunctionComponentElement, PropsWithChildren } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import type { FormsContextData } from './types'
 import { FormsContextProvider } from './Forms.context'
@@ -9,8 +10,22 @@ export function Form<T extends FormsContextData>({
   onChange,
   children,
 }: FormProps<T>): FunctionComponentElement<FormProps<T>> {
+  const [formData, setFormData] = useState(value)
+
+  useEffect(() => {
+    setFormData(value)
+  }, [value])
+
+  const handleChange = useCallback(
+    (val: T) => {
+      setFormData(val)
+      onChange(val)
+    },
+    [onChange, setFormData]
+  )
+
   return (
-    <FormsContextProvider value={[value, onChange as (val: FormsContextData) => void]}>
+    <FormsContextProvider value={[formData, handleChange as (val: FormsContextData) => void]}>
       <form>{children}</form>
     </FormsContextProvider>
   )

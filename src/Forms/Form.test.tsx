@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { ReactNode } from 'react'
 import * as fc from 'fast-check'
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react-hooks'
 
 import { arrContextArbitrary, dictContextArbitrary } from './fixtures'
 import { Form } from './Form'
@@ -78,7 +78,7 @@ test('Provide props onChange into FormsContext for children', () => {
       )
 
       const waitedUpdates = result.current.map(([key, setter]) => {
-        setter(newVal)
+        act(() => setter(newVal))
         return {
           ...value,
           [key]: newVal,
