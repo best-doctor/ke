@@ -69,9 +69,11 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
                 currentState,
                 props
               )
-              button.handler
-                .call(wizardStep, getWizardStepControlPayload())
-                .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
+              button.handler.call(wizardStep, getWizardStepControlPayload()).then((action: string | undefined) => {
+                if (action) {
+                  setCurrentState(wizard.transition(currentState, action))
+                }
+              })
             }}
           >
             {button.label}
