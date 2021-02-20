@@ -37,7 +37,7 @@ const DateTimeWidget = (props: WidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
+    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       <StyleDateTime>
         <DatePicker
           className="styled-date-time"

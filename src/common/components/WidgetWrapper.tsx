@@ -11,6 +11,7 @@ const WidgetWrapper = ({
   copyValue,
   useClipboard,
   notifier,
+  name = '',
 }: {
   style: object
   helpText?: string
@@ -18,6 +19,7 @@ const WidgetWrapper = ({
   copyValue?: Function
   useClipboard?: boolean
   notifier?: BaseNotifier
+  name?: string
 }): JSX.Element => {
   const handleClipboard = (): void => {
     if (copyValue) {
@@ -27,7 +29,7 @@ const WidgetWrapper = ({
   }
 
   return (
-    <Box {...style}>
+    <Box {...style} data-name={name}>
       <FormLabel mt={5}>
         {helpText || ''}
         {useClipboard && (

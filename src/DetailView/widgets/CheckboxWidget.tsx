@@ -36,7 +36,7 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText="&nbsp;">
+    <WidgetWrapper name={name} style={style} helpText="&nbsp;">
       <Box>
         <Checkbox isChecked={value} onChange={(e) => handleChange(e)}>
           {helpText}

@@ -113,7 +113,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   }, [data, mainDetailObject, context])
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <Select name={name} onChange={(e) => handleChange(e)}>
         <option value={value} selected key={value}>
           {text}

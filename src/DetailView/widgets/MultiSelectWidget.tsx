@@ -69,7 +69,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <AsyncSelectWidget
         provider={provider}
         cacheTime={effectiveCacheTime}

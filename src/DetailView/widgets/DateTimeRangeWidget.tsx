@@ -78,7 +78,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
     }
   }
   return (
-    <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
+    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />
       <Button variantColor="teal" variant="outline" onClick={() => handleButtonClick()}>
         Весь день

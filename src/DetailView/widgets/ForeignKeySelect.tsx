@@ -74,6 +74,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   return (
     <WidgetWrapper
+      name={name}
       style={style}
       helpText={helpText}
       useClipboard={useClipboard}

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box } from '@chakra-ui/core'
 import { mountComponents } from '../../common/utils/mountComponents'
 
 const ContainerWidget = (props: any): JSX.Element => {
@@ -17,9 +18,10 @@ const ContainerWidget = (props: any): JSX.Element => {
     ViewType,
     containerStore,
     widgets,
+    name,
   } = props
   return (
-    <>
+    <Box data-name={name}>
       {mountComponents({
         setInitialValue,
         submitChange,
@@ -36,7 +38,7 @@ const ContainerWidget = (props: any): JSX.Element => {
         ViewType,
         containerStore,
       })}
-    </>
+    </Box>
   )
 }
 
