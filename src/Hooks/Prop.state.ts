@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function useControlState<T>(initial: T): [T, (val: T) => void] {
+export function usePropState<T>(initial: T): [T, (val: T) => void] {
   const [state, updater] = useState(initial)
 
   useEffect(() => {

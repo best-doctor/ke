@@ -1,14 +1,15 @@
 import * as React from 'react'
 import { PropsWithChildren, useCallback } from 'react'
 
-import { useControlState, FormsContextProvider, FormsContextData } from '@forms'
+import { FormsContextProvider, FormsContextData } from '@forms'
+import { usePropState } from '@hooks'
 
 export function GroupControl<T extends Record<string, unknown>>({
   value,
   onChange,
   children,
 }: GroupControlProps<T>): JSX.Element {
-  const [currentValue, setCurrentValue] = useControlState(value)
+  const [currentValue, setCurrentValue] = usePropState(value)
 
   const handleChange = useCallback(
     (val: T) => {

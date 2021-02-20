@@ -2,13 +2,13 @@ import * as React from 'react'
 import { useEffect } from 'react'
 
 import { Map, MapProps, Marker, InfoWindow } from '@widgets/Map'
-import { useControlState } from '@forms'
+import { usePropState } from '@hooks'
 
 import type { Option, OptionKey } from './types'
 
 export function MapSelect<T>({ value, onChange, options, ...others }: MapSelectProps<T>): JSX.Element {
   const [currentKeyByValue] = getOptionByValue(options, value) || []
-  const [selectedKey, setSelectedKey] = useControlState(currentKeyByValue)
+  const [selectedKey, setSelectedKey] = usePropState(currentKeyByValue)
   const [, selectedLabel, selectedValue] = (selectedKey && getOptionByKey(options, selectedKey)) || []
 
   useEffect(() => {
