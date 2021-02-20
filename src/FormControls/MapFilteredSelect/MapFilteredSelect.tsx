@@ -4,7 +4,6 @@ import { Filters } from '@widgets/Filters'
 
 import { MapSelect, MapSelectProps } from '../MapSelect'
 
-
 export function MapFilteredSelect<T>({ value, onChange, options, filters }: MapFilteredSelectProps<T>): JSX.Element {
   return (
     <>
