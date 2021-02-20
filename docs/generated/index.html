@@ -1,0 +1,722 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@bestdoctor/ke</title>
+	<meta name="description" content="Documentation for @bestdoctor/ke">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@bestdoctor/ke</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@bestdoctor/ke</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#ke" id="ke" style="color: inherit; text-decoration: none;">
+					<h1>ke</h1>
+				</a>
+				<p><a href="https://travis-ci.org/best-doctor/ke"><img src="https://travis-ci.org/best-doctor/ke.svg?branch=master" alt="Build Status"></a>
+					<a href="https://codeclimate.com/github/best-doctor/ke/maintainability"><img src="https://api.codeclimate.com/v1/badges/ab2c95e8362410f4f079/maintainability" alt="Maintainability"></a>
+				<a href="https://codeclimate.com/github/best-doctor/ke/test_coverage"><img src="https://api.codeclimate.com/v1/badges/ab2c95e8362410f4f079/test_coverage" alt="Test Coverage"></a></p>
+				<p>React admin framework done by and for backenders</p>
+				<p>ALPHA VERSION – NOT FOR PRODUCTION USE</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p><code>$ yarn add @bestdoctor/ke</code></p>
+				<a href="#usage-example" id="usage-example" style="color: inherit; text-decoration: none;">
+					<h2>Usage example</h2>
+				</a>
+				<p>This is an example of the future API</p>
+				<p>To use <code>ke</code> you should implement several base classes.</p>
+				<p>First of all you should extend <code>BaseProvider</code> class.
+					It implements the basic methods for HTTP interaction using an axios instance.
+					Thus, you should have an axios instance with the required headers and pass
+				it to the provider class.</p>
+				<pre><code class="language-ts"><span style="color: #008000">// client.ts</span>
+
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;axios&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">httpClient</span><span style="color: #000000"> = </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">baseURL:</span><span style="color: #000000"> </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">.</span><span style="color: #0070C1">API_URL</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> { </span><span style="color: #001080">httpClient</span><span style="color: #000000"> }</span>
+
+
+<span style="color: #008000">// provider.ts</span>
+
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">BaseProvider</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">httpClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;client&#039;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">Provider</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">BaseProvider</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">constructor</span><span style="color: #000000">() {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">super</span><span style="color: #000000">(</span><span style="color: #001080">httpClient</span><span style="color: #000000">)</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> { </span><span style="color: #001080">Provider</span><span style="color: #000000"> }</span>
+
+
+</code></pre>
+				<p>After that you should extend BaseAdmin class.
+				Here you can declaratively describe your component.</p>
+				<p>In admin class you can describe:</p>
+				<ul>
+					<li>baseUrl: string – resource for API interaction</li>
+					<li><code>getResource(lookupField?: string | undefined): string</code> - method to get resource
+					url string for backend requests.</li>
+					<li><a href="https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_view.md">Fields for list view</a></li>
+					<li><a href="https://github.com/best-doctor/ke/blob/master/docs/admin_fields/detail_view.md">Fields for detail view</a></li>
+					<li><a href="https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_filters.md">Filters for list view</a></li>
+					<li><a href="https://github.com/best-doctor/ke/blob/master/docs/admin_fields/list_template_filters.md">Template filters for list view</a></li>
+				</ul>
+				<p>As a result, your admin class will look like this:</p>
+				<pre><code class="language-tsx"><span style="color: #008000">// admin.tsx</span>
+
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">BaseAdmin</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">BaseFilter</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">LinkWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">TextWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">SelectWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">ForeignKeySelectWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">PatientProvider</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./providers&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">PatientAdmin</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">BaseAdmin</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">list_filters</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;id&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">label:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ID&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">Filter:</span><span style="color: #000000"> </span><span style="color: #001080">BaseFilter</span><span style="color: #000000">,</span>
+<span style="color: #000000">  }</span>
+
+<span style="color: #000000">  </span><span style="color: #001080">list_fields</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;id&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">Header:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ID&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">toDetailRoute:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/patients&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #795E26">accessor</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">row</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">row</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  ]</span>
+
+<span style="color: #000000">  </span><span style="color: #001080">detail_fields</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;full_name&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widget:</span><span style="color: #000000"> </span><span style="color: #001080">LinkWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">helpText:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Full name&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #795E26">href</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">object</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">object</span><span style="color: #000000">.</span><span style="color: #001080">admin</span><span style="color: #000000">.</span><span style="color: #001080">url</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">layout:</span><span style="color: #000000"> { </span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">w:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">static:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;user.email&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widget:</span><span style="color: #000000"> </span><span style="color: #001080">TextWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">helpText:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;User email&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">layout:</span><span style="color: #000000"> {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">w:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">static:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">},</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;status&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widget:</span><span style="color: #000000"> </span><span style="color: #001080">SelectWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">helpText:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Status&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">dataSource:</span><span style="color: #000000"> </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">process</span><span style="color: #000000FF">.</span><span style="color: #001080">env</span><span style="color: #000000FF">.</span><span style="color: #0070C1">API_URL</span><span style="color: #0000FF">}</span><span style="color: #A31515">appeal_results/`</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">layout:</span><span style="color: #000000"> {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">w:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">static:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">},</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;user&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widget:</span><span style="color: #000000"> </span><span style="color: #001080">ForeignKeySelectWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">helpText:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;User select&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">dataSource:</span><span style="color: #000000"> </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">process</span><span style="color: #000000FF">.</span><span style="color: #001080">env</span><span style="color: #000000FF">.</span><span style="color: #0070C1">API_URL</span><span style="color: #0000FF">}</span><span style="color: #A31515">users/`</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #795E26">targetPayload</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">object</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({ </span><span style="color: #001080">user:</span><span style="color: #000000"> </span><span style="color: #001080">object</span><span style="color: #000000">.</span><span style="color: #001080">email</span><span style="color: #000000"> }),</span>
+<span style="color: #000000">      </span><span style="color: #795E26">optionLabel</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">object</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">object</span><span style="color: #000000">.</span><span style="color: #001080">full_name</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #795E26">optionValue</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">object</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">object</span><span style="color: #000000">.</span><span style="color: #001080">email</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">layout:</span><span style="color: #000000"> { </span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">9</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">13.5</span><span style="color: #000000">, </span><span style="color: #001080">w:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">static:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> },</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  ]</span>
+
+<span style="color: #000000">  </span><span style="color: #795E26">getResource</span><span style="color: #000000">(</span><span style="color: #001080">lookupField</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000"> | </span><span style="color: #267F99">undefined</span><span style="color: #000000">): </span><span style="color: #267F99">string</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">baseUrl</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">process</span><span style="color: #000000FF">.</span><span style="color: #001080">env</span><span style="color: #000000FF">.</span><span style="color: #0070C1">API_URL</span><span style="color: #0000FF">}</span><span style="color: #A31515">patients/`</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #795E26">getAdminResource</span><span style="color: #000000">(</span><span style="color: #001080">baseUrl</span><span style="color: #000000">, </span><span style="color: #001080">lookupField</span><span style="color: #000000">)</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>To get more info about fields description,
+				check <a href="https://github.com/best-doctor/ke/blob/master/docs/admin_fields">here</a></p>
+				<p>After that you can use <code>ResourceComposer</code>, <code>AdminResource</code> and <code>Resource</code> components,
+				which makes all magic under the hood and get your user component.</p>
+				<p><code>AdminResource</code> component takes the following arguments:</p>
+				<ul>
+					<li><code>admin</code> – instance of your admin class</li>
+					<li><code>provider</code> – instance of your provider implementation</li>
+					<li><code>user</code> – user object from your backend. Used for permissions and analytics system</li>
+					<li><code>analytcs</code> – analytics object instance. See below for more details.</li>
+				</ul>
+				<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ResourceComposer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Provider</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;provider&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">provider</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Provider</span><span style="color: #000000">()</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">App</span><span style="color: #000000"> = () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">AdminResource</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">name</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;patients&quot;</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">admin</span><span style="color: #000000">=</span><span style="color: #0000FF">{new</span><span style="color: #000000FF"> </span><span style="color: #795E26">PatientAdmin</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">provider</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">provider</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">user</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #000000FF">{ </span><span style="color: #001080">name:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;name&#039;</span><span style="color: #000000FF">, </span><span style="color: #001080">permissions:</span><span style="color: #000000FF"> [</span><span style="color: #A31515">&#039;admin_user&#039;</span><span style="color: #000000FF">] }</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">analytics</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">analyticsInstnace</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">    </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">)</span>
+</code></pre>
+				<p><code>App</code> will have routes for the list and detail view with the
+				settings and widgets you set.</p>
+				<p><code>Resource</code> component can be used in case you want to mount custom widget to
+				<code>ke</code> routing and use it features under the hood. For example, login page:</p>
+				<pre><code class="language-tsx"><span style="color: #800000">&lt;</span><span style="color: #267F99">Resource</span><span style="color: #000000"> </span><span style="color: #FF0000">name</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;login&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Login</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #800000">&lt;/</span><span style="color: #267F99">Resource</span><span style="color: #800000">&gt;</span>
+</code></pre>
+				<p>If you want ke to generate a side bar with all sections of your spa, use
+				<code>withSideBar</code> setting:</p>
+				<pre><code class="language-tsx"><span style="color: #800000">&lt;</span><span style="color: #267F99">ResourceComposer</span><span style="color: #000000"> </span><span style="color: #FF0000">withSideBar</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  ...</span>
+<span style="color: #800000">&lt;/</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+</code></pre>
+				<a href="#permissions" id="permissions" style="color: inherit; text-decoration: none;">
+					<h2>Permissions</h2>
+				</a>
+				<p>You can restrict access to different sections of your system,
+				as well as to individual widgets.</p>
+				<p>To restrict access to an entire section, define permissions list
+				in your admin class:</p>
+				<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">BaseAdmin</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyAdmin</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">BaseAdmin</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">baseUrl</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;https://test.com&#039;</span>
+
+<span style="color: #000000">  </span><span style="color: #001080">permissions</span><span style="color: #000000"> = [</span><span style="color: #A31515">&#039;my_admin_access_permission&#039;</span><span style="color: #000000">]</span>
+
+<span style="color: #000000">  </span><span style="color: #001080">list_fields</span><span style="color: #000000"> = ...</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>and pass current user permissions list to <code>ResourceComposer</code> element:</p>
+				<pre><code class="language-tsx"><span style="color: #800000">&lt;</span><span style="color: #267F99">ResourceComposer</span><span style="color: #000000"> </span><span style="color: #FF0000">permissions</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">currentUser</span><span style="color: #000000FF">.</span><span style="color: #001080">permissions</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  ...</span>
+<span style="color: #800000">&lt;/</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+</code></pre>
+				<p>To render a specific widget based on user permissions, use <code>hasPermission</code>
+				util in detail fields settings:</p>
+				<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">hasPermission</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+
+<span style="color: #000000">...</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  name: </span><span style="color: #A31515">&#039;status.text&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  helpText: </span><span style="color: #A31515">&#039;Status&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  widget: (</span><span style="color: #001080">user</span><span style="color: #000000">: { </span><span style="color: #001080">permissions</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">[] }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
+<span style="color: #000000">    </span><span style="color: #795E26">hasPermission</span><span style="color: #000000">(</span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">permissions</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;admin_permission&#039;</span><span style="color: #000000">) ? </span><span style="color: #001080">SelectWidget</span><span style="color: #000000"> : </span><span style="color: #001080">TextWidget</span>
+<span style="color: #000000">  ),</span>
+<span style="color: #000000">  displayValue: (</span><span style="color: #001080">object</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">object</span><span style="color: #000000">.</span><span style="color: #001080">status</span><span style="color: #000000">,</span>
+<span style="color: #000000">  targetPayload: (</span><span style="color: #001080">value</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({ </span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #001080">value</span><span style="color: #000000"> }),</span>
+<span style="color: #000000">  layout: { x: </span><span style="color: #098658">9</span><span style="color: #000000">, y: </span><span style="color: #098658">9</span><span style="color: #000000">, w: </span><span style="color: #098658">2</span><span style="color: #000000">, h: </span><span style="color: #098658">1</span><span style="color: #000000">, static: </span><span style="color: #0000FF">true</span><span style="color: #000000"> },</span>
+<span style="color: #000000">},</span>
+</code></pre>
+				<a href="#monitoring" id="monitoring" style="color: inherit; text-decoration: none;">
+					<h2>Monitoring</h2>
+				</a>
+				<p>Out of the box we support error monitoring via <a href="https://sentry.io">Sentry</a>
+					To include it in your application, use the component <a href="https://github.com/best-doctor/ke/blob/master/src/integration/EnableSentry.tsx"><code>EnableSentry</code></a>
+				at the root of your application.</p>
+				<pre><code class="language-tsx"><span style="color: #008000">// App.tsx</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">EnableSentry</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">App</span><span style="color: #000000"> = (): </span><span style="color: #267F99">JSX</span><span style="color: #000000">.</span><span style="color: #267F99">Element</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">EnableSentry</span><span style="color: #000000"> </span><span style="color: #FF0000">sentryDSN</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">sentryDSN</span><span style="color: #0000FF">}</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;h1&gt;</span><span style="color: #000000">Hello, world</span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/&gt;</span>
+<span style="color: #000000">)</span>
+</code></pre>
+				<p>For application perfomance monitoring we support <a href="https://www.elastic.co/apm">ELK APM</a>
+					You can use it via <a href="https://github.com/best-doctor/ke/blob/master/src/integration/EnableELK.tsx">EnableELK</a>
+				component</p>
+				<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">EnableELK</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">App</span><span style="color: #000000"> = (): </span><span style="color: #267F99">JSX</span><span style="color: #000000">.</span><span style="color: #267F99">Element</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">EnableELK</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">serviceName</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #0070C1">ELK_SERVICE_NAME</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">serverUrl</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #0070C1">ELK_SERVER_URL</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">      </span><span style="color: #FF0000">serviceVersion</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #0070C1">ELK_SERVICE_VERSION</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">    </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;h1&gt;</span><span style="color: #000000">Hello, world</span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/&gt;</span>
+<span style="color: #000000">)</span>
+</code></pre>
+				<a href="#analytics" id="analytics" style="color: inherit; text-decoration: none;">
+					<h2>Analytics</h2>
+				</a>
+				<p><code>ke</code> has default integration with google analytics through firebase.
+					You can use it or connect the service you need. To use build-in analytics
+				create instance:</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">FirebaseAnalytics</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">firebaseConfig</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">apiKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;secret&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">authDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;auth.domain&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">databaseURL:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;database.url&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">projectId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;projectID&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">storageBucket:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">messagingSenderId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">appId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">measurementId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">userId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  }</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">analytics</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FirebaseAnalytics</span><span style="color: #000000">(</span><span style="color: #001080">firebaseConfig</span><span style="color: #000000">)</span>
+</code></pre>
+				<p>and pass it to your <code>AdminResource</code>:</p>
+				<pre><code class="language-tsx"><span style="color: #800000">&lt;</span><span style="color: #267F99">AdminResource</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">name</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;test&quot;</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">admin</span><span style="color: #000000">=</span><span style="color: #0000FF">{new</span><span style="color: #000000FF"> </span><span style="color: #795E26">TestAdmin</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">provider</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">provider</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">user</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">currentUser</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">analytics</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">analytics</span><span style="color: #0000FF">}</span>
+<span style="color: #800000">/&gt;</span>
+</code></pre>
+				<p>If you want to use another analytics service,
+					you must define on your side a client that
+					will implement the base <a href="https://github.com/best-doctor/ke/blob/master/src/integration/analytics/base.ts">interface</a>,
+				by analogy with <a href="https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/firebase.ts">firebase</a></p>
+				<p>Analytics hanlder here is object,
+				that will handle events submit (in case you use SDK).</p>
+				<p><code>ke</code> has default analytics payload format:</p>
+				<ul>
+					<li>eventName: string – name of event. By default defined <a href="https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts">here</a></li>
+					<li>widgetName: string – name of widget that triggered event</li>
+					<li>widgetType: string – type of widget that triggered event. By default defined
+					<a href="https://github.com/best-doctor/ke/blob/master/src/integration/analytics/firebase/enums.ts">here</a></li>
+					<li>value: string | object – value to send with event</li>
+					<li>viewType: string – current view type (list or detail)</li>
+					<li>resourceName: string – name of the backend resource on which the event occurred</li>
+					<li>resourceId: string – id of the backend resource on which the event occurred
+					(in case of detail view)</li>
+					<li>url: string – current location in SPA routing</li>
+				</ul>
+				<p>You can override it with <code>widgetAnalytics</code> setting
+					in your <a href="https://github.com/best-doctor/ke#usage-example">admin class settings</a>
+				(place where you describe your widgets layout).</p>
+				<p>This setting can be declared as an arrow function that takes all of the above parameters.
+					The return value of this function will be used as
+				the body of the request when sent to the analytics:</p>
+				<pre><code class="language-ts"><span style="color: #000000">{</span>
+<span style="color: #000000">  name: </span><span style="color: #A31515">&#039;test_widget&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  widget: </span><span style="color: #001080">SelectWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">  widgetAnalytics: ({ </span><span style="color: #001080">eventName</span><span style="color: #000000">, </span><span style="color: #001080">viewType</span><span style="color: #000000">, </span><span style="color: #001080">value</span><span style="color: #000000">, </span><span style="color: #001080">widgetName</span><span style="color: #000000"> }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
+<span style="color: #000000">    { </span><span style="color: #001080">customEventKey</span><span style="color: #000000">: { </span><span style="color: #001080">eventName</span><span style="color: #000000">, ... }}</span>
+<span style="color: #000000">  ),</span>
+<span style="color: #000000">  ...</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>To disable analytics for a specific widget, you can declare a <code>widgetAnalytics</code>
+				setting as <code>false</code>:</p>
+				<pre><code class="language-ts"><span style="color: #000000">{</span>
+<span style="color: #000000">  name: </span><span style="color: #A31515">&#039;test_widget&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  widget: </span><span style="color: #001080">SelectWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">  widgetAnalytics: </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">  ...</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>If you want to use analytics in your custom component-based widget,
+				you can use <code>pushAnalytics</code> <a href="https://github.com/best-doctor/ke/blob/master/src/integration/analytics/utils.ts#L19">handler</a></p>
+				<p>It encapsulates the logic for unpacking and sending the event to the analytics.
+				Among other arguments described above, it takes <code>widgetAnalytics</code> parameter.</p>
+				<pre><code class="language-ts"><span style="color: #795E26">pushAnalytics</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">eventName:</span><span style="color: #000000"> </span><span style="color: #001080">EventNameEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">BUTTON_CLICK</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">widgetType:</span><span style="color: #000000"> </span><span style="color: #001080">WidgetTypeEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">ACTION</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;some value&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">widgetAnalytics:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">widgetName</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">viewType:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;some_action&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">resource:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;some_resource&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  ...</span><span style="color: #001080">props</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<p><code>props</code> here is the <a href="https://github.com/best-doctor/ke/blob/master/src/typing.tsx#L12">properties</a>,
+				that <code>ke</code> injects in your custom widget when renders them from admin settings.</p>
+				<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #AF00DB">type</span><span style="color: #000000"> { </span><span style="color: #001080">WidgetProps</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">CustomWidget</span><span style="color: #000000"> = (</span><span style="color: #001080">props</span><span style="color: #000000">: </span><span style="color: #267F99">WidgetProps</span><span style="color: #000000">): </span><span style="color: #267F99">JSX</span><span style="color: #000000">.</span><span style="color: #267F99">Element</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">handleUserAction</span><span style="color: #000000"> = (): </span><span style="color: #267F99">void</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">pushAnalytics</span><span style="color: #000000">({</span>
+<span style="color: #000000">      </span><span style="color: #001080">eventName:</span><span style="color: #000000"> </span><span style="color: #001080">EventNameEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">BUTTON_CLICK</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widgetType:</span><span style="color: #000000"> </span><span style="color: #001080">WidgetTypeEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">ACTION</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;some value&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widgetAnalytics:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widgetName</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">viewType:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;some_action&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">resource:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;some_resource&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      ...</span><span style="color: #001080">props</span><span style="color: #000000">,</span>
+<span style="color: #000000">    })</span>
+
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">  }</span>
+
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Button</span><span style="color: #000000"> </span><span style="color: #FF0000">onClick</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">handleUserAction</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">TEST</span><span style="color: #800000">&lt;/</span><span style="color: #267F99">Button</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  )</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>We would love you to contribute to our project. It&#39;s simple:</p>
+				<ul>
+					<li>Create an issue with bug you found or proposal you have.
+					Wait for approve from maintainer.</li>
+					<li>Create a pull request. Make sure all checks are green.</li>
+					<li>Fix review comments if any.</li>
+					<li>Be awesome.</li>
+				</ul>
+				<a href="#installation-for-local-development" id="installation-for-local-development" style="color: inherit; text-decoration: none;">
+					<h3>Installation for local development</h3>
+				</a>
+				<p>After cloning this repo if you&#39;d like to use it in another project using React
+				(placed at e.g. <code>/path/to/your/awesome/project/</code>) you should follow these steps:</p>
+				<ul>
+					<li>install all deps: <code>yarn install</code></li>
+					<li>create link to <code>@bestdoctor/ke</code>: <code>yarn link</code></li>
+					<li>link existing React in order to prevent hooks
+						<a href="https://ru.reactjs.org/warnings/invalid-hook-call-warning.html">problem</a>:
+					<code>npm link /path/to/your/awesome/project/node_modules/react</code></li>
+					<li>link <code>@bestdoctor/ke</code> to your project:
+					<code>yarn link &quot;@bestdoctor/ke&quot;</code> (must be run in your project&#39;s folder)</li>
+				</ul>
+				<p>Here are useful tips:</p>
+				<ul>
+					<li>You can run all checks and tests with <code>yarn makecheck</code>.
+					Please do it before TravisCI does.</li>
+					<li>We respect <a href="https://www.djangoproject.com/conduct/">Django CoC</a>.
+					Make soft, not bullshit.</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/eventnameenum.html" class="tsd-kind-icon">Event<wbr>Name<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/widgettypeenum.html" class="tsd-kind-icon">Widget<wbr>Type<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/baseadmin.html" class="tsd-kind-icon">Base<wbr>Admin</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/baseanalytic.html" class="tsd-kind-icon">Base<wbr>Analytic</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/baseform.html" class="tsd-kind-icon">Base<wbr>Form</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/basenotifier.html" class="tsd-kind-icon">Base<wbr>Notifier</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/baseprovider.html" class="tsd-kind-icon">Base<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/basewizard.html" class="tsd-kind-icon">Base<wbr>Wizard</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/basewizardstep.html" class="tsd-kind-icon">Base<wbr>Wizard<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/errordisplay.html" class="tsd-kind-icon">Error<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/firebaseanalytic.html" class="tsd-kind-icon">Firebase<wbr>Analytic</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/localcache.html" class="tsd-kind-icon">Local<wbr>Cache</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/storemanager.html" class="tsd-kind-icon">Store<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/successdisplay.html" class="tsd-kind-icon">Success<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/googleconfig.html" class="tsd-kind-icon">Google<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/markerinfo.html" class="tsd-kind-icon">Marker<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/provider.html" class="tsd-kind-icon">Provider</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/responsecache.html" class="tsd-kind-icon">Response<wbr>Cache</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#detailfielddescription" class="tsd-kind-icon">Detail<wbr>Field<wbr>Description</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#firebaseconfigtype" class="tsd-kind-icon">Firebase<wbr>Config<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#firebaseevent" class="tsd-kind-icon">Firebase<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#firebaseeventpayload" class="tsd-kind-icon">Firebase<wbr>Event<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#listfielddescription" class="tsd-kind-icon">List<wbr>Field<wbr>Description</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#listfilterdescription" class="tsd-kind-icon">List<wbr>Filter<wbr>Description</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#listfiltertemplatedescription" class="tsd-kind-icon">List<wbr>Filter<wbr>Template<wbr>Description</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#widgetpayload" class="tsd-kind-icon">Widget<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#widgetprops" class="tsd-kind-icon">Widget<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#wizardpayload" class="tsd-kind-icon">Wizard<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#wizardstate" class="tsd-kind-icon">Wizard<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#renderlist" class="tsd-kind-icon">Render<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#adminresource" class="tsd-kind-icon">Admin<wbr>Resource</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#asyncselectwidget" class="tsd-kind-icon">Async<wbr>Select<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#asynctextwidget" class="tsd-kind-icon">Async<wbr>Text<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#avatarwidget" class="tsd-kind-icon">Avatar<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#basefilter" class="tsd-kind-icon">Base<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#booleanfilter" class="tsd-kind-icon">Boolean<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#checkboxwidget" class="tsd-kind-icon">Checkbox<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#containerwidget" class="tsd-kind-icon">Container<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#datefilter" class="tsd-kind-icon">Date<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#datetimefilter" class="tsd-kind-icon">Date<wbr>Time<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#datetimerangelistwidget" class="tsd-kind-icon">Date<wbr>Time<wbr>Range<wbr>List<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#datetimerangewidget" class="tsd-kind-icon">Date<wbr>Time<wbr>Range<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#datetimewidget" class="tsd-kind-icon">Date<wbr>Time<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#enableelk" class="tsd-kind-icon">EnableELK</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#enablesentry" class="tsd-kind-icon">Enable<wbr>Sentry</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#foreignkeyselectfilter" class="tsd-kind-icon">Foreign<wbr>Key<wbr>Select<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#foreignkeyselectwidget" class="tsd-kind-icon">Foreign<wbr>Key<wbr>Select<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#inputwidget" class="tsd-kind-icon">Input<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#linkwidget" class="tsd-kind-icon">Link<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#mapwidget" class="tsd-kind-icon">Map<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#multiselectfilter" class="tsd-kind-icon">Multi<wbr>Select<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#multiselectwidget" class="tsd-kind-icon">Multi<wbr>Select<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#radiobuttonwidget" class="tsd-kind-icon">Radio<wbr>Button<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#renderdetail" class="tsd-kind-icon">Render<wbr>Detail</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#resource" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#resourcecomposer" class="tsd-kind-icon">Resource<wbr>Composer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#selectfilter" class="tsd-kind-icon">Select<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#selectwidget" class="tsd-kind-icon">Select<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#table" class="tsd-kind-icon">Table</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#texteditorwidget" class="tsd-kind-icon">Text<wbr>Editor<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#textwidget" class="tsd-kind-icon">Text<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#validationwrapper" class="tsd-kind-icon">Validation<wbr>Wrapper</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#widgetwrapper" class="tsd-kind-icon">Widget<wbr>Wrapper</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getaccessor" class="tsd-kind-icon">get<wbr>Accessor</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getaccessorwithdefault" class="tsd-kind-icon">get<wbr>Accessor<wbr>With<wbr>Default</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getdata" class="tsd-kind-icon">get<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getdefaultbuttons" class="tsd-kind-icon">get<wbr>Default<wbr>Buttons</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getnextbutton" class="tsd-kind-icon">get<wbr>Next<wbr>Button</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getpayload" class="tsd-kind-icon">get<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getprevbutton" class="tsd-kind-icon">get<wbr>Prev<wbr>Button</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getwidgetcontent" class="tsd-kind-icon">get<wbr>Widget<wbr>Content</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#handleuseraction" class="tsd-kind-icon">handle<wbr>User<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#haspermission" class="tsd-kind-icon">has<wbr>Permission</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#makeupdatewithnotification" class="tsd-kind-icon">make<wbr>Update<wbr>With<wbr>Notification</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#pushanalytics" class="tsd-kind-icon">push<wbr>Analytics</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#usewidgetinitialization" class="tsd-kind-icon">use<wbr>Widget<wbr>Initialization</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
