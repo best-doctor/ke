@@ -28,6 +28,10 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "paths": {
+      "@widgets/*": ["./Widgets/*"],
+      "@forms": ["./Forms"]
+    },
     "removeComments": true,
     "sourceMap": true,
     "skipLibCheck": true

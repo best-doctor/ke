@@ -1,0 +1,11 @@
+import { InfoWindow as GoogleInfoWindow } from '@react-google-maps/api'
+import type { FunctionComponent, PropsWithChildren } from 'react'
+
+import type { Coords } from './types'
+
+export const InfoWindow = (GoogleInfoWindow as unknown) as FunctionComponent<InfoWindowProps>
+
+type InfoWindowProps = PropsWithChildren<{
+  onCloseClick?: () => void
+  position: Coords
+}>
