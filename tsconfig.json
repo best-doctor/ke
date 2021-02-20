@@ -30,8 +30,7 @@
     "noUnusedParameters": true,
     "paths": {
       "@widgets/*": ["./Widgets/*"],
-      "@forms": ["./Forms"],
-      "@hooks": ["./Hooks"]
+      "@cdk/*": ["./cdk/*"],
     },
     "removeComments": true,
     "sourceMap": true,

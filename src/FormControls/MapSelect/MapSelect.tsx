@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect } from 'react'
 
 import { Map, MapProps, Marker, InfoWindow } from '@widgets/Map'
-import { usePropState } from '@hooks'
+import { usePropState } from '@cdk/Hooks'
 
 import type { Option, OptionKey } from './types'
 
