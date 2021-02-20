@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { InfoWindow, GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 

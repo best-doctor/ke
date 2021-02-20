@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Box } from '@chakra-ui/core'
 import Select from 'react-select'

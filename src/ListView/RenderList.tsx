@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Flex } from '@chakra-ui/core'
 import { useLocation } from 'react-router-dom'
 

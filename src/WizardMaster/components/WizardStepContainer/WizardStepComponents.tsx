@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useStore } from 'effector-react'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'

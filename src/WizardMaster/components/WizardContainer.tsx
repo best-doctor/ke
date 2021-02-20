@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["__initial__"] }] */
 
-import * as React from 'react'
+import React from 'react'
 
 import { containerStore } from '../store'
 import { WizardStepContainer } from './WizardStepContainer'

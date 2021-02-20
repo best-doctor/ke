@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import RichTextEditor from 'react-rte'
 import styled from 'styled-components'
 

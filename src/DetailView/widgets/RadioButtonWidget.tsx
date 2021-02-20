@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Radio, RadioGroup } from '@chakra-ui/core'
 
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { mount } from 'enzyme'
 import { ThemeProvider } from '@chakra-ui/core'
 import { mocked } from 'ts-jest/utils'

@@ -1,4 +1,4 @@
-import * as fc from 'fast-check'
+import fc from 'fast-check'
 import type { Arbitrary, Memo } from 'fast-check'
 
 import { get } from '../utils/get'

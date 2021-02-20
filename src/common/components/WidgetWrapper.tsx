@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { Box, FormLabel } from '@chakra-ui/core'
 import { FiCopy } from 'react-icons/fi'

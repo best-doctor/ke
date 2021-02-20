@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { permissionsProvided, hasPermission, hasPermissions, mountElement } from '../permissions'
 
 const permissionsList = ['test_permission1', 'test_permission2']

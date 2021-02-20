@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 // eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps } from 'react-flexbox-grid'

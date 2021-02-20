@@ -1,6 +1,5 @@
-import * as React from 'react'
 import { Text } from '@chakra-ui/core'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 

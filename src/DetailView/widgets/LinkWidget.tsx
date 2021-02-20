@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Link } from '@chakra-ui/core'
 import styled from 'styled-components'
 

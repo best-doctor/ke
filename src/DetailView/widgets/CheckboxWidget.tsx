@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Checkbox, Box } from '@chakra-ui/core'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { mocked } from 'ts-jest/utils'
 import { mount } from 'enzyme'
 

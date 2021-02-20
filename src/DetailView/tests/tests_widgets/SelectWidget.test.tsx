@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { mount } from 'enzyme'
 import { Select, ThemeProvider } from '@chakra-ui/core'
 import { act } from 'react-dom/test-utils'

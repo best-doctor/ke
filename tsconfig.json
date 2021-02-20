@@ -12,7 +12,7 @@
     "target": "ES5",
     "outDir": "dist",
     "allowJs": false,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "declaration": true,
@@ -29,6 +29,7 @@
     "noUnusedParameters": true,
     "removeComments": true,
     "sourceMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true
   }
 }

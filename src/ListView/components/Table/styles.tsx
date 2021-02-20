@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Flex, IconButton } from '@chakra-ui/core'
 import { color, justifyContent, space, SpaceProps } from 'styled-system'

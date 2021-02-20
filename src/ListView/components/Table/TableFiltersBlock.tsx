@@ -1,8 +1,7 @@
-import * as React from 'react'
+import React, { ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
 
-import type { ReactNode } from 'react'
 import type { ListFilterDescription, ListFilterTemplateDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics'
 

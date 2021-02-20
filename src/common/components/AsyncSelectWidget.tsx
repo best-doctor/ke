@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 
 import AsyncSelect from 'react-select/async'
-import * as debouncePromise from 'debounce-promise'
+import debouncePromise from 'debounce-promise'
 
 import type { ValueType } from 'react-select/src/types'
 import type { Provider } from '../../admin/providers/interfaces'

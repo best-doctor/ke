@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { ThemeProvider } from '@chakra-ui/core'
 

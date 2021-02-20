@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { MessagesBlock } from './MessagesBlock'
 import { useValidation } from '../hooks/useValidation'
