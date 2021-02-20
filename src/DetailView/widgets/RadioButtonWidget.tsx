@@ -20,7 +20,17 @@ type RadioButtonElement = {
 type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
 
 const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
-  const { mainDetailObject, containerStore, provider, style, helpText, optionLabel, optionValue, cacheTime } = props
+  const {
+    name,
+    mainDetailObject,
+    containerStore,
+    provider,
+    style,
+    helpText,
+    optionLabel,
+    optionValue,
+    cacheTime,
+  } = props
   const context = containerStore.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
@@ -43,7 +53,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <RadioGroup onChange={handleChange}>
         {elements.map((element: RadioButtonElement) => (
           <Radio value={optionValue(element)}>{optionLabel(element)}</Radio>

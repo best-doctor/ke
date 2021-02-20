@@ -1,7 +1,7 @@
 import * as React from 'react'
-import * as moment from 'moment'
 import { Button } from '@chakra-ui/core'
 import styled from 'styled-components'
+import { format } from 'date-fns'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -49,7 +49,7 @@ const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] =
     const [dateFrom, dateTo] = dateRange_
 
     if (dateFrom && dateTo) {
-      return [moment(dateFrom).format('YYYY-MM-DDTHH:mm:ss'), moment(dateTo).format('YYYY-MM-DDTHH:mm:ss')]
+      return [format(dateFrom, "yyyy-MM-dd'T'HH:mm:ss"), format(dateTo, "yyyy-MM-dd'T'HH:mm:ss")]
     }
 
     return null
@@ -143,7 +143,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   setInitialValue({ [name]: value })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, itemIndex: number): void => {
-    const changeValue = date ? moment(date).format('YYYY-MM-DDTHH:mm:ss') : ''
+    const changeValue = date ? format(date, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -178,9 +178,8 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     newDateRanges.splice(itemIndex + 1, 0, [null, null])
     setDateRanges(newDateRanges)
   }
-
   return (
-    <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
+    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       <StyledDateTimeRangeListContainer className="date-time-list-container">
         {dateRanges.map((dateRange: DateRange, itemIndex: number) => {
           const [startDate, endDate] = dateRange
@@ -223,4 +222,4 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     </WidgetWrapper>
   )
 }
-export { DateTimeRangeListWidget }
+export { DateTimeRangeListWidget, StyledDateTimeRangeListContainer }

@@ -17,12 +17,13 @@ const StyledTextWidget = styled.div`
 `
 
 const TextWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, style, helpText, useClipboard, copyValue, notifier } = props
+  const { containerStore, style, helpText, useClipboard, copyValue, notifier, name } = props
 
   const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
   return (
     <WidgetWrapper
+      name={name}
       style={style}
       helpText={helpText}
       useClipboard={useClipboard}

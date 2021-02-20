@@ -16,9 +16,9 @@ type AvatarWidgetProps = {
  * @param style
  * @constructor
  */
-const AvatarWidget = ({ helpText, style }: AvatarWidgetProps): JSX.Element => {
+const AvatarWidget = ({ helpText, style, name }: AvatarWidgetProps): JSX.Element => {
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <Avatar name="BD" src="" />
     </WidgetWrapper>
   )

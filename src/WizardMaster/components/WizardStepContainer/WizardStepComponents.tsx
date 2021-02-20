@@ -25,6 +25,7 @@ type WizardStepComponentsProps = {
   user: object
   ViewType: string
   submitChange: Function
+  setCurrentState: Function
 }
 
 const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => {
@@ -43,6 +44,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     user,
     ViewType,
     submitChange,
+    setCurrentState,
   } = props
 
   React.useEffect(() => {}, [state])
@@ -64,6 +66,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
         googleConfig,
         ViewType,
         containerStore,
+        setCurrentState,
       })}
     </>
   )

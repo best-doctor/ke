@@ -33,7 +33,7 @@ const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   }, [provider, dataResourceUrl, context, displayValue, name, effectiveCacheTime])
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <StyledTextWidget>
         <Text>{content || '\u00a0'}</Text>
       </StyledTextWidget>

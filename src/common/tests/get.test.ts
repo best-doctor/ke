@@ -50,7 +50,8 @@ const notExistsTupleArbitrary = fc
   .tuple(pathArrayArbitrary, valueArbitrary, fc.hexaString())
   .chain(([path, val, miss]) => {
     const wrongPath = [...path]
-    wrongPath[Math.floor(Math.random() * wrongPath.length)] = miss
+    const missPosition = Math.floor(Math.random() * wrongPath.length)
+    wrongPath[missPosition] = wrongPath[missPosition] === miss ? `_${miss}` : miss
     return fc.tuple(objWithPathArbitrary(path, val), fc.constant(wrongPath))
   })
 

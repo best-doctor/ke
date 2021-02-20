@@ -14,6 +14,8 @@ type DetailObject = any
 
 type WizardObject = any
 
+type ValueOrPromise<T> = T | Promise<T>
+
 type WidgetProps = {
   name: string
   mainDetailObject: DetailObject
@@ -43,4 +45,13 @@ type WidgetProps = {
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'
 
-export { GenericAccessor, Accessor, OptionalDate, DetailObject, WidgetProps, FieldsTypeInAdminClass, WizardObject }
+export {
+  GenericAccessor,
+  Accessor,
+  OptionalDate,
+  DetailObject,
+  WidgetProps,
+  FieldsTypeInAdminClass,
+  WizardObject,
+  ValueOrPromise,
+}
