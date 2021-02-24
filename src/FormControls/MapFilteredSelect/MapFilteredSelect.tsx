@@ -5,7 +5,14 @@ import { Filters, FiltersProps } from '@widgets/Filters'
 
 import { MapSelect, MapSelectProps } from '../MapSelect'
 
-export function MapFilteredSelect<T, K extends string>({ value, onChange, options, filters, filtersValue, onFiltersValueChange }: MapFilteredSelectProps<T, K>): JSX.Element {
+export function MapFilteredSelect<T, K extends string>({
+  value,
+  onChange,
+  options,
+  filters,
+  filtersValue,
+  onFiltersValueChange,
+}: MapFilteredSelectProps<T, K>): JSX.Element {
   return (
     <Box>
       <MapSelect value={value} onChange={onChange} options={options} />
@@ -14,10 +21,8 @@ export function MapFilteredSelect<T, K extends string>({ value, onChange, option
   )
 }
 
-type MapFilteredSelectProps<T, K extends string> =
-  Pick<MapSelectProps<T>, 'value' | 'onChange' | 'options'>
-  & Pick<FiltersProps<K>, 'filters'>
-  & {
-  filtersValue: FiltersProps<K>['value']
-  onFiltersValueChange: FiltersProps<K>['onChange']
-}
+type MapFilteredSelectProps<T, K extends string> = Pick<MapSelectProps<T>, 'value' | 'onChange' | 'options'> &
+  Pick<FiltersProps<K>, 'filters'> & {
+    filtersValue: FiltersProps<K>['value']
+    onFiltersValueChange: FiltersProps<K>['onChange']
+  }
