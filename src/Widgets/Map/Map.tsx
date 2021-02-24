@@ -20,4 +20,5 @@ export type MapProps = PropsWithChildren<{
   zoom?: number
   onCenterChanged?: () => void
   onZoomChanged?: () => void
+  onBoundsChanged?: () => void
 }>

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { PropsWithChildren, useCallback } from 'react'
 
-import { FormsContextProvider, FormsContextData } from '@forms'
-import { usePropState } from '@hooks'
+import { FormsContextProvider, FormsContextData } from '@cdk/Forms'
+import { usePropState } from '@cdk/Hooks'
 
 export function GroupControl<T extends Record<string, unknown>>({
   value,
