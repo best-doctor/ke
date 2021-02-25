@@ -5,7 +5,15 @@ import { DebounceInput } from 'react-debounce-input'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 
-import { BaseFilter, SelectFilter, MultiSelectFilter, DateTimeFilter, DateFilter } from '../components/Table/filters'
+import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
+import {
+  BaseFilter,
+  SelectFilter,
+  MultiSelectFilter,
+  DateTimeFilter,
+  DateFilter,
+  ForeignKeySelectFilter,
+} from '../components/Table/filters'
 
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
@@ -44,4 +52,10 @@ test('DateTime table filter rendering', () => {
   const component = mount(<DateTimeFilter />)
 
   expect(component.find(DatePicker).length).toEqual(1)
+})
+
+test('ForeignKeySelectFilter filter rendering', () => {
+  const component = mount(<ForeignKeySelectFilter />)
+
+  expect(component.find(AsyncSelectWidget).length).toEqual(1)
 })

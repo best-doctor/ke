@@ -204,6 +204,7 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
     optionLabel,
     optionValue,
     defaultOptions = false,
+    isMulti = false,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -212,7 +213,14 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
 
   const handleChange = (changeValue: any): void => {
     setValue(changeValue)
-    const filterValue = changeValue ? optionValue(changeValue) : ''
+    let filterValue
+    if (!changeValue) {
+      filterValue = ''
+    } else if (isMulti) {
+      filterValue = changeValue.map((option: any) => optionValue(option)).join(',')
+    } else {
+      filterValue = optionValue(changeValue)
+    }
 
     pushAnalytics({
       eventName: EventNameEnum.SELECT_OPTION_CHANGE,
@@ -236,6 +244,7 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
           placeholder={`Фильтр по ${label}`}
+          isMulti={isMulti}
         />
       </Box>
     </StyledFilter>
