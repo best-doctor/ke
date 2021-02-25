@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Heading, Box } from '@chakra-ui/core'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -100,6 +100,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 user={user}
                 ViewType={ViewType}
                 submitChange={submitChange}
+                setCurrentState={setCurrentState}
               />
               <Row>
                 <Col xs={12}>

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Button, Box } from '@chakra-ui/core'
 import { Row, Col } from 'react-flexbox-grid'
 

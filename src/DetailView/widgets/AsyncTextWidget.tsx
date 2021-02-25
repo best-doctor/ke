@@ -1,6 +1,5 @@
-import * as React from 'react'
 import { Text } from '@chakra-ui/core'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 
@@ -9,6 +8,13 @@ import { getAccessor, getWidgetContent } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { StyledTextWidget } from './TextWidget'
 
+/**
+ * Render data  as text block with props.style and props.helpText
+ * Async load "data" from props.dataSource and then get content via props.displayValue if exists
+ * else get "data"[props.name].
+ *
+ * @param props - standard widget props
+ */
 const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } = props
 
@@ -26,7 +32,7 @@ const AsyncTextWidget = (props: WidgetProps): JSX.Element => {
   }, [provider, dataResourceUrl, context, displayValue, name, effectiveCacheTime])
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <StyledTextWidget>
         <Text>{content || '\u00a0'}</Text>
       </StyledTextWidget>

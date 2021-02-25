@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 
 import AsyncSelect from 'react-select/async'
-import * as debouncePromise from 'debounce-promise'
+import debouncePromise from 'debounce-promise'
 
 import type { ValueType } from 'react-select/src/types'
 import type { Provider } from '../../admin/providers/interfaces'
@@ -22,6 +22,21 @@ type AsyncSelectWidgetProps = {
   cacheTime?: number
 }
 
+/**
+ * Create select component with async loading options filtered by input text
+ *
+ * @param provider - used for requests to backend
+ * @param dataResourceUrl - options resource URL
+ * @param handleChange - callback for select value changes
+ * @param value - initial value
+ * @param getOptionLabel - function will get every option model and should return label
+ * @param getOptionValue - function will get every option model and should return value
+ * @param isClearable - add clickable icon for select clear
+ * @param isMulti - enable multiselect
+ * @param defaultOptions - if array, when used as initial models for options list, if true when fire load options on render, else waiting for input
+ * @param searchParamName - url parameter name which will be used with input value on options requests to backend
+ * @param placeholder - text for empty select
+ */
 const AsyncSelectWidget = ({
   provider,
   dataResourceUrl,

@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { mount } from 'enzyme'
 import { Select, ThemeProvider } from '@chakra-ui/core'
 import { act } from 'react-dom/test-utils'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
-import { SelectWidget } from '../../widgets/SelectWidget'
+import { SelectWidget, BaseSelectWidget } from '../../widgets/SelectWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const detailObject = {
@@ -16,9 +16,16 @@ const detailObject = {
   },
 }
 
-const submitChangeMock = jest.fn()
+const options = [
+  { value: 'value1', text: 'text1' },
+  { value: 'value2', text: 'text2' },
+  { value: 'value3', text: 'text3' },
+]
 
-const getComponent = (): JSX.Element => (
+const submitChangeMock = jest.fn()
+const handleChangeMock = jest.fn()
+
+const getSelectWidgetComponent = (): JSX.Element => (
   <ThemeProvider>
     <SelectWidget
       name="status.text"
@@ -43,19 +50,53 @@ const getComponent = (): JSX.Element => (
   </ThemeProvider>
 )
 
+const getBaseSelectWidgetComponent = (): JSX.Element => (
+  <ThemeProvider>
+    <BaseSelectWidget
+      name="status.text"
+      helpText="test"
+      displayValue={undefined}
+      mainDetailObject={detailObject}
+      style={{}}
+      setInitialValue={jest.fn()}
+      handleChange={handleChangeMock}
+      containerStore={mockedEffectorContainerStore}
+      data={options}
+    />
+  </ThemeProvider>
+)
+
 test('Select widget properly rendered', () => {
-  const component = mount(getComponent())
+  const component = mount(getSelectWidgetComponent())
 
   expect(component.find(Select).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
 })
 
-test('User change select', () => {
-  const widget = getComponent()
+test('Select widget user change select', () => {
+  const widget = getSelectWidgetComponent()
   const component = mount(widget)
   const value = { target: { value: 'some_value' } }
 
   act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))
 
   expect(submitChangeMock).toHaveBeenCalledWith({ url: 'https://test.com', payload: { testPayload: 'some_value' } })
+})
+
+test('Base select widget properly rendered', () => {
+  jest.spyOn(React, 'useEffect').mockImplementation((f) => f())
+  const component = mount(getBaseSelectWidgetComponent())
+
+  expect(component.find(Select).length).toEqual(1)
+  expect(component.find(WidgetWrapper).length).toEqual(1)
+})
+
+test('Base select widget user change select', () => {
+  const widget = getBaseSelectWidgetComponent()
+  const component = mount(widget)
+  const value = { target: { value: 'some_value' } }
+
+  act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))
+
+  expect(handleChangeMock.mock.calls.length).toBe(1)
 })

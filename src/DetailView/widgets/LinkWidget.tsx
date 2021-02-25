@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Link } from '@chakra-ui/core'
 import styled from 'styled-components'
 
@@ -36,7 +36,7 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText || ''}>
+    <WidgetWrapper name={name} style={style} helpText={helpText || ''}>
       <StyledLinkWidget>
         {linkHref ? (
           <Link target={target} href={linkHref} onClick={() => handleClick()} color="teal.500">

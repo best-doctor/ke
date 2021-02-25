@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import type { ValueType } from 'react-select/src/types'
 
@@ -69,7 +69,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <AsyncSelectWidget
         provider={provider}
         cacheTime={effectiveCacheTime}

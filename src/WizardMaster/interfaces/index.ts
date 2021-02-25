@@ -34,6 +34,10 @@ abstract class BaseWizardStep {
     this.resourceName = resourceName
   }
 
+  getButtons(_: WizardPayload): WizardStepButtonDescription[] {
+    return this.buttons
+  }
+
   beforeShow(_: WizardPayload): void {}
 
   next(_: WizardPayload): WizardState {

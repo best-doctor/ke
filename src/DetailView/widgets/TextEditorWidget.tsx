@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import RichTextEditor from 'react-rte'
 import styled from 'styled-components'
 
@@ -79,7 +79,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <StyledTextEditor>
         <RichTextEditor
           // eslint-disable-next-line

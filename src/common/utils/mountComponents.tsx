@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 // eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps } from 'react-flexbox-grid'
@@ -28,6 +28,7 @@ type mountComponentsKwargs = {
   googleConfig: GoogleConfig | undefined
   ViewType: string
   containerStore?: object | undefined
+  setCurrentState?: Function
 }
 
 const getComponentFromCallable = (widget: GenericAccessor, user: object, detailObject: DetailObject): any => {
@@ -58,6 +59,7 @@ const mountComponents = ({
   googleConfig,
   ViewType,
   containerStore,
+  setCurrentState,
 }: mountComponentsKwargs): JSX.Element[] => {
   /*
     Mounts widgets, which are described in DetailFieldDescription format.
@@ -139,6 +141,7 @@ const mountComponents = ({
                 setInitialValue={setInitialValue}
                 submitChange={submitChange}
                 containerStore={containerStore}
+                setCurrentState={setCurrentState}
                 {...adminElement}
               />
             </div>

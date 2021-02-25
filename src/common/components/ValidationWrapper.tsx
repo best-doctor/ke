@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { MessagesBlock } from './MessagesBlock'
 import { useValidation } from '../hooks/useValidation'
@@ -14,6 +14,16 @@ type ValidationWrapperProps = {
   detailObject: DetailObject
 }
 
+/**
+ * Wrapper component to adding validation checks.
+ * Can be used only for children with handleChange prop.
+ *
+ * @param children - standard react children
+ * @param blockingValidators - fail in this validators will be shown as error
+ * @param notBlockingValidators - fail in this validators will be shown as info
+ * @param provider - provider for backend request, will be passed as second param to validators
+ * @param detailObject - addition object, will be passed as third param to validators
+ */
 const ValidationWrapper = ({
   children,
   blockingValidators,

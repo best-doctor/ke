@@ -1,5 +1,5 @@
 import { get } from '../../common/utils/get'
-import type { GenericAccessor, DetailObject, Accessor } from '../../typing'
+import type { GenericAccessor, DetailObject, Accessor, ValueOrPromise } from '../../typing'
 
 const getData = (handler: GenericAccessor, data: DetailObject, context = {}): any => {
   if (typeof handler === 'function') {
@@ -63,4 +63,21 @@ const getCopyHandler = (value: any, copyValue?: GenericAccessor, fallbackCopyVal
   return () => value.toString()
 }
 
-export { getData, getAccessor, getAccessorWithDefault, getWidgetContent, getPayload, getCopyHandler }
+const ensurePromise = <T>(valueOrPromise: ValueOrPromise<T>): Promise<T> => {
+  return Promise.resolve(valueOrPromise)
+}
+
+const applyCallback = <T>(valueOrPromise: ValueOrPromise<T>, callback: Function): any => {
+  ensurePromise(valueOrPromise).then((value: any) => callback(value))
+}
+
+export {
+  getData,
+  getAccessor,
+  getAccessorWithDefault,
+  getWidgetContent,
+  getPayload,
+  getCopyHandler,
+  ensurePromise,
+  applyCallback,
+}

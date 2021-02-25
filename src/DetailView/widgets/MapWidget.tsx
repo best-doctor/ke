@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { InfoWindow, GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
@@ -20,6 +20,7 @@ interface MarkerInfo {
 }
 
 interface MapWidgetProps {
+  name: string
   style: any
   helpText: string
   notifier: any
@@ -47,7 +48,7 @@ const moscowCoords: Coordinates = {
 }
 
 const MapWidget = (props: MapWidgetProps): JSX.Element => {
-  const { style, helpText, notifier, googleConfig, dataSource, mainDetailObject } = props
+  const { name, style, helpText, notifier, googleConfig, dataSource, mainDetailObject } = props
   const markers: readonly MarkerInfo[] = getData(dataSource, mainDetailObject) || []
   const center = markers.length ? markers[0].coords : moscowCoords
 
@@ -58,7 +59,7 @@ const MapWidget = (props: MapWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText} notifier={notifier}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier}>
       <StyledMapWidget>
         <LoadScript googleMapsApiKey={googleConfig?.apiKey || ''}>
           <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} center={center}>

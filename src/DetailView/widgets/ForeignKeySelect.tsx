@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import type { WidgetProps } from 'typing'
 
@@ -21,6 +21,19 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
+/**
+ * Render select-input with async loaded options from backend
+ * onChange - can return full loaded model fro option, not just key
+ *
+ * Based on AsyncSelectWidget, so have common props.
+ *
+ * props.optionLabel - got loaded model and return label for option
+ * props.optionValue - got loaded model and return label for value
+ * props.targetPayload - got selected model and return widget payload
+ *
+ * @param props
+ * @constructor
+ */
 const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   const {
     name,
@@ -74,6 +87,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   return (
     <WidgetWrapper
+      name={name}
       style={style}
       helpText={helpText}
       useClipboard={useClipboard}

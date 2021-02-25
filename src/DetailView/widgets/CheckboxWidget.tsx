@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Checkbox, Box } from '@chakra-ui/core'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -9,6 +9,13 @@ import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
 
+/**
+ * Render input-checkbox for using in forms
+ * Load "value" from props.dataSource and then get content via props.displayValue if exists
+ * else get 'data'[props.name].
+ * @param props
+ * @constructor
+ */
 const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
 
@@ -36,7 +43,7 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText="&nbsp;">
+    <WidgetWrapper name={name} style={style} helpText="&nbsp;">
       <Box>
         <Checkbox isChecked={value} onChange={(e) => handleChange(e)}>
           {helpText}

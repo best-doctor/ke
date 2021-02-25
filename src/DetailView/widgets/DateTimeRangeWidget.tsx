@@ -1,6 +1,6 @@
-import * as React from 'react'
-import * as moment from 'moment'
+import React from 'react'
 import { Button } from '@chakra-ui/core'
+import { format } from 'date-fns'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -15,11 +15,20 @@ type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undef
 
 const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string, string] | null => {
   if (dateFrom && dateTo) {
-    return [moment(dateFrom).format('YYYY-MM-DDTHH:mm:ss'), moment(dateTo).format('YYYY-MM-DDTHH:mm:ss')]
+    return [format(dateFrom, "yyyy-MM-dd'T'HH:mm:ss"), format(dateTo, "yyyy-MM-dd'T'HH:mm:ss")]
   }
   return null
 }
 
+/**
+ * Render date-range picker
+ * Waits for data type: [string, string], where string - ISO Date
+ *
+ * props.oneDayInterval: boolean - restrict date range to one day length
+ *
+ * @param props
+ * @constructor
+ */
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props
 
@@ -37,7 +46,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   setInitialValue({ [name]: content })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, save = true): void => {
-    const changeValue = date ? moment(date).format('YYYY-MM-DDTHH:mm:ss') : ''
+    const changeValue = date ? format(date, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -78,7 +87,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
     }
   }
   return (
-    <WidgetWrapper style={{ ...style, zIndex: 1000 }} helpText={helpText}>
+    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText}>
       <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />
       <Button variantColor="teal" variant="outline" onClick={() => handleButtonClick()}>
         Весь день

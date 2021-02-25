@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Box } from '@chakra-ui/core'
 import Select from 'react-select'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
-import * as moment from 'moment'
 import { useHistory, useLocation } from 'react-router-dom'
+import { format } from 'date-fns'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -204,6 +204,7 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
     optionLabel,
     optionValue,
     defaultOptions = false,
+    isMulti = false,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -212,7 +213,14 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
 
   const handleChange = (changeValue: any): void => {
     setValue(changeValue)
-    const filterValue = changeValue ? optionValue(changeValue) : ''
+    let filterValue
+    if (!changeValue) {
+      filterValue = ''
+    } else if (isMulti) {
+      filterValue = changeValue.map((option: any) => optionValue(option)).join(',')
+    } else {
+      filterValue = optionValue(changeValue)
+    }
 
     pushAnalytics({
       eventName: EventNameEnum.SELECT_OPTION_CHANGE,
@@ -236,6 +244,7 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
           placeholder={`Фильтр по ${label}`}
+          isMulti={isMulti}
         />
       </Box>
     </StyledFilter>
@@ -249,7 +258,7 @@ const DateFilter = (params: any): JSX.Element => {
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? moment(value).format('YYYY-MM-DD') : ''
+    const filterValue = value ? format(value, 'yyyy-MM-dd') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -281,7 +290,7 @@ const DateTimeFilter = (params: any): JSX.Element => {
   const location = useLocation()
 
   const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? moment(value).format('YYYY-MM-DDThh:mm:ss') : ''
+    const filterValue = value ? format(value, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATETIME_CHANGE,

@@ -1,9 +1,19 @@
-import * as React from 'react'
+import React from 'react'
 
 import { Box, FormLabel } from '@chakra-ui/core'
 import { FiCopy } from 'react-icons/fi'
 import type { BaseNotifier } from '../notifier'
 
+/**
+ * Standard styled container for other widgets
+ *
+ * @param style - container css styles
+ * @param helpText - inner widget(s) description
+ * @param children - standard react children
+ * @param copyValue - returns of this callback will be copy to clipboard (when use)
+ * @param useClipboard - show "copy-to-clipboard" handler
+ * @param notifier - object for send notification text on "copy-to-clipboard" event
+ */
 const WidgetWrapper = ({
   style,
   helpText,
@@ -11,6 +21,7 @@ const WidgetWrapper = ({
   copyValue,
   useClipboard,
   notifier,
+  name = '',
 }: {
   style: object
   helpText?: string
@@ -18,6 +29,7 @@ const WidgetWrapper = ({
   copyValue?: Function
   useClipboard?: boolean
   notifier?: BaseNotifier
+  name?: string
 }): JSX.Element => {
   const handleClipboard = (): void => {
     if (copyValue) {
@@ -27,7 +39,7 @@ const WidgetWrapper = ({
   }
 
   return (
-    <Box {...style}>
+    <Box {...style} data-name={name}>
       <FormLabel mt={5}>
         {helpText || ''}
         {useClipboard && (

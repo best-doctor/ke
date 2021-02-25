@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Textarea, Input } from '@chakra-ui/core'
 
@@ -44,7 +44,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <DebounceInput
         value={content as string}
         resize="none"

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { Avatar } from '@chakra-ui/core'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -9,9 +9,16 @@ type AvatarWidgetProps = {
   style: object
 }
 
-const AvatarWidget = ({ helpText, style }: AvatarWidgetProps): JSX.Element => {
+/**
+ * Render initials "BD" styled like avatar image
+ *
+ * @param helpText - description
+ * @param style
+ * @constructor
+ */
+const AvatarWidget = ({ helpText, style, name }: AvatarWidgetProps): JSX.Element => {
   return (
-    <WidgetWrapper style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
       <Avatar name="BD" src="" />
     </WidgetWrapper>
   )

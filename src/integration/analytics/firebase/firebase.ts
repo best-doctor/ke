@@ -1,6 +1,6 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["initialize"] }] */
 
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/analytics'
 
 import { BaseAnalytic } from '../base'

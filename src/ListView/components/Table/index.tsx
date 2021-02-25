@@ -1,9 +1,8 @@
-import * as React from 'react'
+import React, { ReactNode } from 'react'
 import { Flex, Text } from '@chakra-ui/core'
 import { usePagination, useTable, useFilters } from 'react-table'
 import { Link } from 'react-router-dom'
 
-import type { ReactNode } from 'react'
 import type { Row, HeaderGroup } from 'react-table'
 import type { BaseAnalytic } from 'integration/analytics'
 import type {

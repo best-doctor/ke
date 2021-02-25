@@ -1,4 +1,4 @@
-import * as fc from 'fast-check'
+import fc from 'fast-check'
 import type { Arbitrary, Memo } from 'fast-check'
 
 import { get } from '../utils/get'
@@ -50,7 +50,8 @@ const notExistsTupleArbitrary = fc
   .tuple(pathArrayArbitrary, valueArbitrary, fc.hexaString({ minLength: 10 }))
   .chain(([path, val, miss]) => {
     const wrongPath = [...path]
-    wrongPath[Math.floor(Math.random() * wrongPath.length)] = miss
+    const missPosition = Math.floor(Math.random() * wrongPath.length)
+    wrongPath[missPosition] = wrongPath[missPosition] === miss ? `_${miss}` : miss
     return fc.tuple(objWithPathArbitrary(path, val), fc.constant(wrongPath))
   })
 

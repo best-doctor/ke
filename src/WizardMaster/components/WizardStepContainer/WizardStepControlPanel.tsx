@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Button } from '@chakra-ui/core'
 
 import { containerStore, initialStore } from '../../store'
@@ -53,7 +53,8 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
     }
   }
 
-  const { buttons } = wizardStep
+  const { getButtons } = wizardStep
+  const buttons = getButtons.call(wizardStep, getWizardStepControlPayload())
 
   return (
     <>
@@ -68,9 +69,11 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
                 currentState,
                 props
               )
-              button.handler
-                .call(wizardStep, getWizardStepControlPayload())
-                .then((action: string) => setCurrentState(wizard.transition(currentState, action)))
+              button.handler.call(wizardStep, getWizardStepControlPayload()).then((action: string | undefined) => {
+                if (action) {
+                  setCurrentState(wizard.transition(currentState, action))
+                }
+              })
             }}
           >
             {button.label}

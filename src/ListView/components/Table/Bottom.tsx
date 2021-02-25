@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 
