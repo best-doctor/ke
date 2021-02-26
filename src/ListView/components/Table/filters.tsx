@@ -24,7 +24,7 @@ const StyledFilter = styled.div`
     padding: 3px;
   }
   .styled-filter {
-    height: auto;
+    min-height: 40px;
     width: 300px;
   }
 `
