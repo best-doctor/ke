@@ -3,7 +3,7 @@ import type { FunctionComponent, PropsWithChildren } from 'react'
 
 import type { Coords } from './types'
 
-export const InfoWindow = (GoogleInfoWindow as unknown) as FunctionComponent<InfoWindowProps>
+export const MapInfoWindow = (GoogleInfoWindow as unknown) as FunctionComponent<InfoWindowProps>
 
 type InfoWindowProps = PropsWithChildren<{
   onCloseClick?: () => void

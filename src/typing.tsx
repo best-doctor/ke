@@ -2,7 +2,6 @@ import type { Store } from 'effector'
 import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
-import type { GoogleConfig } from './integration/google'
 
 type Accessor<T> = T | Function | undefined
 
@@ -29,7 +28,6 @@ type WidgetProps = {
   setMainDetailObject: Function
   notifier: BaseNotifier
   analytics?: BaseAnalytic | undefined
-  googleConfig?: GoogleConfig
   viewType: string
   widgetAnalytics?: Function | boolean | undefined
   style: object

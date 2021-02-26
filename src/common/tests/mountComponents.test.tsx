@@ -21,7 +21,6 @@ test('Get components to mount', () => {
     notifier: testNotifier,
     user: {},
     analytics: undefined,
-    googleConfig: undefined,
     ViewType: 'test_view',
     setInitialValue: jest.fn(),
     submitChange: jest.fn(),

@@ -10,7 +10,6 @@ import type { Provider } from '../../admin/providers/interfaces'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
-import type { GoogleConfig } from '../../integration/google'
 
 type WizardContainerProps = {
   wizard: BaseWizard
@@ -20,7 +19,6 @@ type WizardContainerProps = {
   refreshMainDetailObject: Function
   notifier: BaseNotifier
   analytics: BaseAnalytic | undefined
-  googleConfig: GoogleConfig | undefined
   ViewType: string
   user: object
   show: boolean
@@ -43,7 +41,6 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
     refreshMainDetailObject,
     notifier,
     analytics,
-    googleConfig,
     user,
     ViewType,
     show,
@@ -74,7 +71,6 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
       refreshMainDetailObject={refreshMainDetailObject}
       notifier={notifier}
       analytics={analytics}
-      googleConfig={googleConfig}
       user={user}
       ViewType={ViewType}
       show={show}

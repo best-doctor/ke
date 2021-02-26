@@ -10,7 +10,6 @@ import type { BaseNotifier } from '../notifier'
 import type { DetailObject, GenericAccessor } from '../../typing'
 
 import { isValidComponent } from './isComponent'
-import type { GoogleConfig } from '../../integration/google'
 import { get } from './get'
 
 type mountComponentsKwargs = {
@@ -25,7 +24,6 @@ type mountComponentsKwargs = {
   notifier: BaseNotifier
   user: object
   analytics: BaseAnalytic | undefined
-  googleConfig: GoogleConfig | undefined
   ViewType: string
   containerStore?: object | undefined
   setCurrentState?: Function
@@ -56,7 +54,6 @@ const mountComponents = ({
   notifier,
   user,
   analytics,
-  googleConfig,
   ViewType,
   containerStore,
   setCurrentState,
@@ -135,7 +132,6 @@ const mountComponents = ({
                 refreshMainDetailObject={refreshMainDetailObject}
                 notifier={notifier}
                 analytics={analytics}
-                googleConfig={googleConfig}
                 widgetAnalytics={widgetAnalytics}
                 viewType={ViewType}
                 setInitialValue={setInitialValue}

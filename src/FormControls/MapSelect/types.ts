@@ -10,4 +10,4 @@ interface OptionLabel {
   infoView: ReactElement
 }
 
-type LatLng = [number, number]
+export type LatLng = { lat: number; lng: number }

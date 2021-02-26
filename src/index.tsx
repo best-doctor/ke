@@ -37,7 +37,7 @@ import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/buttons'
 import type { WidgetPayload } from 'DetailView/events'
-import type { GoogleConfig } from './integration/google'
+
 import {
   AsyncTextWidget,
   TextWidget,
@@ -55,8 +55,6 @@ import {
   RadioButtonWidget,
   ContainerWidget,
   CheckboxWidget,
-  MapWidget,
-  MarkerInfo,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -71,6 +69,9 @@ import {
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
+
+export * from './Widgets/Map'
+export * from './FormControls'
 
 export {
   BaseAdmin,
@@ -106,7 +107,6 @@ export {
   getPayload,
   AvatarWidget,
   hasPermission,
-  GoogleConfig,
   FirebaseAnalytic,
   FirebaseEventPayload,
   FirebaseEvent,
@@ -141,8 +141,6 @@ export {
   WizardPayload,
   ContainerWidget,
   CheckboxWidget,
-  MapWidget,
-  MarkerInfo,
   getDefaultButtons,
   getPrevButton,
   getNextButton,

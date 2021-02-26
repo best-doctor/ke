@@ -1,4 +1,4 @@
 export { Map, MapProps } from './Map'
 export { MapContextProvider } from './Map.context'
-export { Marker } from './Marker'
-export { InfoWindow } from './InfoWindow'
+export { MapMarker } from './Marker'
+export { MapInfoWindow } from './InfoWindow'

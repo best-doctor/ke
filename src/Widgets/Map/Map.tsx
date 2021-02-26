@@ -1,6 +1,5 @@
-import * as React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api'
-import type { PropsWithChildren } from 'react'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
@@ -10,7 +9,9 @@ export function Map({ children, ...other }: MapProps): JSX.Element {
 
   return (
     <LoadScript googleMapsApiKey={mapConfig?.apiKey || ''}>
-      <GoogleMap {...other}>{children}</GoogleMap>
+      <GoogleMap {...other} mapContainerStyle={{ height: '100%', width: '100%' }}>
+        {children}
+      </GoogleMap>
     </LoadScript>
   )
 }

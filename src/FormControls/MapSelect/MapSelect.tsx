@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 
-import { Map, MapProps, Marker, InfoWindow } from '@widgets/Map'
+import { Map, MapProps, MapMarker, MapInfoWindow } from '@widgets/Map'
 import { usePropState } from '@cdk/Hooks'
 
 import type { Option, OptionKey } from './types'
@@ -12,15 +12,17 @@ export function MapSelect<T>({ value, onChange, options, ...others }: MapSelectP
   const [, selectedLabel, selectedValue] = (selectedKey && getOptionByKey(options, selectedKey)) || []
 
   useEffect(() => {
-    onChange(selectedValue)
+    if (onChange) {
+      onChange(selectedValue)
+    }
   }, [onChange, selectedValue])
 
   return (
     <Map {...others}>
       {options.map(([key, label]) => (
-        <Marker key={key} position={label.coords} title={label.description} onClick={() => setSelectedKey(key)} />
+        <MapMarker key={key} position={label.coords} title={label.description} onClick={() => setSelectedKey(key)} />
       ))}
-      {selectedLabel && <InfoWindow position={selectedLabel.coords}>{selectedLabel.infoView}</InfoWindow>}
+      {selectedLabel && <MapInfoWindow position={selectedLabel.coords}>{selectedLabel.infoView}</MapInfoWindow>}
     </Map>
   )
 }
@@ -35,7 +37,7 @@ function getOptionByValue<T>(options: readonly Option<T>[], searchValue: T): Opt
 
 export type MapSelectProps<T> = MapProps & {
   value?: T
-  onChange: (val: T | undefined) => void
+  onChange?: (val: T | undefined) => void
   options: readonly Option<T>[]
   children?: never
 }

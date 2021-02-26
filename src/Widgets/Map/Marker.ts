@@ -3,7 +3,7 @@ import type { FunctionComponent } from 'react'
 
 import type { Coords } from './types'
 
-export const Marker = (GoogleMarker as unknown) as FunctionComponent<MarkerProps>
+export const MapMarker = (GoogleMarker as unknown) as FunctionComponent<MarkerProps>
 
 interface MarkerProps {
   position: Coords

@@ -10,7 +10,6 @@ const getComponent = (): JSX.Element => {
   const setMainDetailObject = jest.fn()
   const refreshMainDetailObject = jest.fn()
   const analytics = undefined
-  const googleConfig = undefined
   const user = {}
 
   return (
@@ -23,7 +22,6 @@ const getComponent = (): JSX.Element => {
         refreshMainDetailObject={refreshMainDetailObject}
         notifier={testNotifier}
         analytics={analytics}
-        googleConfig={googleConfig}
         ViewType={ViewType}
         user={user}
         show

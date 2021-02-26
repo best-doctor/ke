@@ -8,7 +8,6 @@ import type { BaseNotifier } from '../common/notifier'
 import type { Provider } from '../admin/providers/interfaces'
 import type { BaseAnalytic } from '../integration/analytics'
 import type { DetailObject } from '../typing'
-import type { GoogleConfig } from '../integration/google'
 
 type MountWizardsKwargs = {
   resourceName: string
@@ -20,7 +19,6 @@ type MountWizardsKwargs = {
   setMainDetailObject: Function
   refreshMainDetailObject: Function
   analytics: BaseAnalytic | undefined
-  googleConfig: GoogleConfig | undefined
   user: object
 }
 
@@ -41,7 +39,6 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
     setMainDetailObject,
     refreshMainDetailObject,
     analytics,
-    googleConfig,
     user,
     resourceName,
   } = kwargs
@@ -62,7 +59,6 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
         refreshMainDetailObject={refreshMainDetailObject}
         notifier={notifier}
         analytics={analytics}
-        googleConfig={googleConfig}
         ViewType={ViewType}
         user={user}
         resourceName={resourceName}

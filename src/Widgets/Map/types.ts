@@ -4,4 +4,4 @@ export interface MapContext {
 
 export type Coords = LatLng
 
-type LatLng = [number, number]
+type LatLng = { lat: number; lng: number }

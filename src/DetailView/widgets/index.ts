@@ -13,7 +13,6 @@ import { DateTimeWidget } from './DateTimeWidget'
 import { RadioButtonWidget } from './RadioButtonWidget'
 import { ContainerWidget } from './ContainerWidget'
 import { CheckboxWidget } from './CheckboxWidget'
-import { MapWidget, MarkerInfo } from './MapWidget'
 
 export {
   AsyncTextWidget,
@@ -32,6 +31,4 @@ export {
   RadioButtonWidget,
   ContainerWidget,
   CheckboxWidget,
-  MapWidget,
-  MarkerInfo,
 }
