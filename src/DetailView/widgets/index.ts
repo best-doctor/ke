@@ -10,6 +10,7 @@ import { DateTimeRangeWidget } from './DateTimeRangeWidget'
 import { TextEditorWidget } from './TextEditorWidget'
 import { DateTimeRangeListWidget } from './DateTimeRangeListWidget'
 import { DateTimeWidget } from './DateTimeWidget'
+import { DateWidget } from './DateWidget'
 import { RadioButtonWidget } from './RadioButtonWidget'
 import { ContainerWidget } from './ContainerWidget'
 import { CheckboxWidget } from './CheckboxWidget'
@@ -29,6 +30,7 @@ export {
   TextEditorWidget,
   DateTimeRangeListWidget,
   DateTimeWidget,
+  DateWidget,
   RadioButtonWidget,
   ContainerWidget,
   CheckboxWidget,
