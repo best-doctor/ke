@@ -9,7 +9,7 @@ export function Map({ children, ...other }: MapProps): JSX.Element {
 
   return (
     <LoadScript googleMapsApiKey={mapConfig?.apiKey || ''}>
-      <GoogleMap {...other} mapContainerStyle={{ height: '100%', width: '100%' }}>
+      <GoogleMap {...other} mapContainerStyle={{ height: '100%', width: '100%' }} clickableIcons={false}>
         {children}
       </GoogleMap>
     </LoadScript>

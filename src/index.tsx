@@ -73,6 +73,7 @@ import { ValidationWrapper } from './common/components/ValidationWrapper'
 
 export * from './Widgets/Map'
 export * from './FormControls'
+export * from './cdk/Compatibility'
 
 export {
   BaseAdmin,

@@ -15,6 +15,8 @@ const StyledMapFilterWidget = styled.div`
   white-space: pre-line;
 `
 
+const moscowCoords = { lat: 55.75, lng: 37.61 }
+
 export function MapFilteredSelectLegacy<T, K extends string>({
   value,
   onChange,
@@ -35,7 +37,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
               value={value}
               onChange={onChange}
               options={options}
-              center={{ lat: 55.75, lng: 37.61 }}
+              center={options.length ? options[0][1].coords : moscowCoords}
               zoom={12}
             />
           </Box>
