@@ -40,6 +40,49 @@ const getSelectContent = (
   }
 }
 
+const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
+  const {
+    name,
+    helpText,
+    displayValue,
+    containerStore,
+    mainDetailObject,
+    data,
+    style,
+    setInitialValue,
+    handleChange,
+  } = props
+
+  const context = containerStore.getState()
+
+  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
+
+  const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
+  setInitialValue({ [name]: value })
+
+  useEffect(() => {
+    const responseOptions = getAccessor(data, mainDetailObject, context)
+    return applyCallback(responseOptions, setResultOptions)
+  }, [data, mainDetailObject, context])
+
+  return (
+    <WidgetWrapper name={name} style={style} helpText={helpText}>
+      <Select name={name} onChange={(e) => handleChange(e)}>
+        <option value={value} selected key={value}>
+          {text}
+        </option>
+        {resultOptions
+          .filter((element) => element.value !== value)
+          .map((resultOption) => (
+            <option value={resultOption.value} key={resultOption.value}>
+              {resultOption.text}
+            </option>
+          ))}
+      </Select>
+    </WidgetWrapper>
+  )
+}
+
 const SelectWidget = (props: WidgetProps): JSX.Element => {
   const {
     name,
@@ -84,49 +127,6 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
   }
 
   return <BaseSelectWidget data={options} handleChange={handleChange} {...props} />
-}
-
-const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    displayValue,
-    containerStore,
-    mainDetailObject,
-    data,
-    style,
-    setInitialValue,
-    handleChange,
-  } = props
-
-  const context = containerStore.getState()
-
-  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
-
-  const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
-  setInitialValue({ [name]: value })
-
-  useEffect(() => {
-    const responseOptions = getAccessor(data, mainDetailObject, context)
-    return applyCallback(responseOptions, setResultOptions)
-  }, [data, mainDetailObject, context])
-
-  return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
-      <Select name={name} onChange={(e) => handleChange(e)}>
-        <option value={value} selected key={value}>
-          {text}
-        </option>
-        {resultOptions
-          .filter((element) => element.value !== value)
-          .map((resultOption) => (
-            <option value={resultOption.value} key={resultOption.value}>
-              {resultOption.text}
-            </option>
-          ))}
-      </Select>
-    </WidgetWrapper>
-  )
 }
 
 export { SelectWidget, BaseSelectWidget }

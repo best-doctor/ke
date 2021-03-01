@@ -12,7 +12,7 @@ import type { DetailObject, GenericAccessor } from '../../typing'
 import { isValidComponent } from './isComponent'
 import { get } from './get'
 
-type mountComponentsKwargs = {
+type MountComponentsKwargs = {
   setInitialValue: Function
   submitChange: Function
   resourceName: string
@@ -57,7 +57,7 @@ const mountComponents = ({
   ViewType,
   containerStore,
   setCurrentState,
-}: mountComponentsKwargs): JSX.Element[] => {
+}: MountComponentsKwargs): JSX.Element[] => {
   /*
     Mounts widgets, which are described in DetailFieldDescription format.
 

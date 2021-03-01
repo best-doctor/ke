@@ -32,8 +32,8 @@ module.exports = {
       { allowExpressions: true, allowTypedFunctionExpressions: true },
     ],
     '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true }],
-    // Just because of hoisting
-    'no-use-before-define': ['error', { functions: false, classes: true, variables: true }],
+    // note you must disable the base rule as it can report incorrect errors
+    'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': [
       'error',
       { functions: false, classes: true, variables: true, typedefs: true },
@@ -48,11 +48,23 @@ module.exports = {
     'consistent-return': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     'tsdoc/syntax': 'warn',
+    'react/no-unused-prop-types': 'off',
+    'react/require-default-props': 'off',
+    '@typescript-eslint/comma-dangle': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/unbound-method': 'off',
   },
   overrides: [{
     files: ['**/*.test.ts', '**/*.test.tsx'],
     rules: {
-      '@typescript-eslint/ban-ts-ignore': 'off'
+      '@typescript-eslint/ban-ts-ignore': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off'
     }
   }]
 }

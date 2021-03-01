@@ -117,7 +117,8 @@ const Table = ({
       autoResetPage: false,
       stateReducer: (newState: any, action: any) => {
         if (action.type === 'gotoPage' && setBackendPage) {
-          setBackendPage(newState.pageIndex + 1)
+          const newPageIndex = newState.pageIndex as number
+          setBackendPage(newPageIndex + 1)
         }
         return newState
       },

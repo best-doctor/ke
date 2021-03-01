@@ -3,7 +3,7 @@ import type { DetailObject } from '../../typing'
 
 import type { BaseAnalytic } from './index'
 
-type widgetAnalyticsParams = {
+type WidgetAnalyticsParams = {
   eventName: string
   widgetType: string
   widgetName?: string | undefined
@@ -16,7 +16,7 @@ type widgetAnalyticsParams = {
   value?: any
 }
 
-const pushAnalytics = (params: widgetAnalyticsParams): void => {
+const pushAnalytics = (params: WidgetAnalyticsParams): void => {
   const {
     eventName,
     widgetName,
