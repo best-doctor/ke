@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { useEffect } from 'react'
+import React from 'react'
+import { Button } from '@chakra-ui/core'
 
 import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'
 import { usePropState } from '../../cdk/Hooks'
@@ -11,18 +11,19 @@ export function MapSelect<T>({ value, onChange, options, ...others }: MapSelectP
   const [selectedKey, setSelectedKey] = usePropState(currentKeyByValue)
   const [, selectedLabel, selectedValue] = (selectedKey && getOptionByKey(options, selectedKey)) || []
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(selectedValue)
-    }
-  }, [onChange, selectedValue])
-
   return (
     <Map {...others}>
       {options.map(([key, label]) => (
         <MapMarker key={key} position={label.coords} title={label.description} onClick={() => setSelectedKey(key)} />
       ))}
-      {selectedLabel && <MapInfoWindow position={selectedLabel.coords}>{selectedLabel.infoView}</MapInfoWindow>}
+      {selectedLabel && (
+        <MapInfoWindow position={selectedLabel.coords} onCloseClick={() => setSelectedKey(undefined)}>
+          <>
+            {selectedLabel.infoView}
+            {onChange && <Button onClick={() => onChange(selectedValue)}>Выбрать</Button>}
+          </>
+        </MapInfoWindow>
+      )}
     </Map>
   )
 }
