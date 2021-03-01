@@ -28,10 +28,6 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "paths": {
-      "@widgets/*": ["./Widgets/*"],
-      "@cdk/*": ["./cdk/*"],
-    },
     "removeComments": true,
     "sourceMap": true,
     "skipLibCheck": true,

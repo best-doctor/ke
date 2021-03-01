@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 
-import { Map, MapProps, MapMarker, MapInfoWindow } from '@widgets/Map'
-import { usePropState } from '@cdk/Hooks'
+import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'
+import { usePropState } from '../../cdk/Hooks'
 
 import type { Option, OptionKey } from './types'
 

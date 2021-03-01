@@ -1,1 +1,1 @@
-export { MapFilteredSelect } from './MapFilteredSelect'
+export { MapFilteredSelectLegacy } from './MapFilteredSelectLegacy'
