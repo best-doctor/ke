@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import type { WidgetProps } from 'typing'
 
@@ -64,8 +64,11 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object | null>(content as object | null)
-
   setInitialValue(value ? getPayload(value, name, targetPayload) : null)
+
+  useEffect(() => {
+    setValue(content as object | null)
+  }, [content])
 
   const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(changeValue)
