@@ -11,7 +11,7 @@ export function Filters<K extends string>({ filters, value, onChange }: FiltersP
     <GroupControl value={value} onChange={onChange}>
       {filters.map(({ control, name, ...other }) => {
         return (
-          <Box marginBottom="5px">
+          <Box key={name} marginBottom="5px">
             <FormField name={name} as={control} {...other} />
           </Box>
         )
