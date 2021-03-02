@@ -1,18 +1,22 @@
 import React, { PropsWithChildren } from 'react'
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { Spinner } from '@chakra-ui/core'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 
 export function Map({ children, ...other }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: mapConfig?.apiKey || '',
+  })
 
-  return (
-    <LoadScript googleMapsApiKey={mapConfig?.apiKey || ''}>
-      <GoogleMap {...other} mapContainerStyle={{ height: '100%', width: '100%' }} clickableIcons={false}>
-        {children}
-      </GoogleMap>
-    </LoadScript>
+  return isLoaded ? (
+    <GoogleMap {...other} mapContainerStyle={{ height: '100%', width: '100%' }} clickableIcons={false}>
+      {children}
+    </GoogleMap>
+  ) : (
+    <Spinner />
   )
 }
 
