@@ -27,6 +27,7 @@ import { RenderList } from 'ListView/RenderList'
 import { RenderDetail } from 'DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
+import { pushError } from 'WizardMaster/events'
 import { useWidgetInitialization } from 'common/hooks/useWidgetInitialization'
 import { StoreManager } from 'common/store'
 import { handleUserAction } from 'common/utils/handleUserAction'
@@ -153,4 +154,5 @@ export {
   ResponseCache,
   PagedPagination,
   CursorPagination,
+  pushError,
 }
