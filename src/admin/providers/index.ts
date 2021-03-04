@@ -104,10 +104,10 @@ export class BaseProvider implements Provider {
         data = data.concat(pageData)
         hasNext = pagination.hasNext({ endPage: parameters?.endPage })
         const { prevUrl, nextUrl } = pagination
-        if ('page' in pagination || 'after' in pagination) {
+        if ('page' in pagination || ('after' in pagination && (pagination as CursorPagination).after !== undefined)) {
           localUrl = nextUrl as string
           page = undefined
-        } else if ('before' in pagination) {
+        } else if ('before' in pagination && (pagination as CursorPagination).before !== undefined) {
           localUrl = prevUrl as string
         }
       } catch (err) {
