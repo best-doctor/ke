@@ -4,8 +4,9 @@ import { useLocation } from 'react-router-dom'
 
 import type { BaseAnalytic } from 'integration/analytics/base'
 import type { BaseAdmin } from 'admin'
+import type { Pagination } from 'admin/providers/pagination/interfaces'
 import type { Provider } from 'admin/providers/interfaces'
-import type { Pagination, TableFilter } from '../admin/providers/interfaces'
+import type { TableFilter } from '../admin/providers/interfaces'
 
 import { Table } from './components/Table'
 import { FilterManager } from '../common/filterManager'
@@ -51,7 +52,7 @@ export const RenderList: React.FC<{
   React.useEffect(() => {
     const resource = admin.getResource()
     const filters = FilterManager.getFilters(location.search)
-    provider.getPage(resource, filters, page).then(processBackendResponse)
+    provider.getPage(resource, filters, { page }).then(processBackendResponse)
   }, [admin, provider, page, location])
 
   return (

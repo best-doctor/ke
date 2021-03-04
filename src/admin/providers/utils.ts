@@ -1,5 +1,6 @@
 import type { BaseNotifier } from 'common/notifier'
 import type { Provider } from 'admin/providers/interfaces'
+import type { PaginationParameters } from './pagination'
 
 const makeUpdateWithNotification = (
   provider: Provider,
@@ -17,4 +18,17 @@ const makeUpdateWithNotification = (
   )
 }
 
-export { makeUpdateWithNotification }
+const setPaginationParameters = (url: URL, paginationParameters: PaginationParameters): void => {
+  Object.entries(paginationParameters).forEach(([parameter, value]): void => {
+    if (value === undefined) {
+      return
+    }
+    if (value === null) {
+      url.searchParams.set(parameter, '')
+    } else {
+      url.searchParams.set(parameter, value.toString())
+    }
+  })
+}
+
+export { makeUpdateWithNotification, setPaginationParameters }

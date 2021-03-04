@@ -37,7 +37,7 @@ import { EnableELK } from 'integration/EnableELK'
 import { EnableSentry } from 'integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/buttons'
 import type { WidgetPayload } from 'DetailView/events'
-
+import type { CursorPagination, PagedPagination } from 'admin/providers/pagination'
 import {
   AsyncTextWidget,
   TextWidget,
@@ -151,4 +151,6 @@ export {
   Provider,
   LocalCache,
   ResponseCache,
+  PagedPagination,
+  CursorPagination,
 }

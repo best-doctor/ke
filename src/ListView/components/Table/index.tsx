@@ -11,10 +11,11 @@ import type {
   ListFilterTemplateDescription,
 } from 'admin/fields/FieldDescription'
 
+import type { Pagination } from 'admin/providers/pagination'
 import { StyledTable, TableCell, TableHead, TableRow } from './styles'
 import { FilterBlock } from './TableFiltersBlock'
 import { Bottom } from './Bottom'
-import type { Pagination, Provider } from '../../../admin/providers/interfaces'
+import type { Provider } from '../../../admin/providers/interfaces'
 
 type TableProps = {
   resourceName: string

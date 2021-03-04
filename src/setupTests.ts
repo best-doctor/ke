@@ -82,11 +82,11 @@ const testWizard = new TestWizard('Test Wizard')
 const dataMockResponse = [{ id: '100500', test: 'key', uuid: '81-test-uuid-100500', title: 'test' }]
 
 const mockPagination = {
-  page: 100500,
   perPage: 100500,
   count: 100500,
   nextUrl: '',
   prevUrl: '',
+  hasNext: (): boolean => false,
 }
 
 const mockedEffectorContainerStore = {

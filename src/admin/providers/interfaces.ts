@@ -1,4 +1,5 @@
 import type { AxiosInstance } from 'axios'
+import type { Pagination, PaginationParameters } from './pagination'
 
 interface Filter {
   filterName: string
@@ -11,19 +12,19 @@ interface TableFilter {
   value: Filter
 }
 
-interface Pagination {
-  page: number
-  perPage: number
-  count?: number
-  nextUrl?: string
-  prevUrl?: string
-}
-
 interface ResponseCache {
   cacheTime: number
 
   get(cacheKey: string, cacheTime?: number): any
   set(cacheKey: string, value: any): void
+}
+
+type GetListParameters = {
+  perPage?: number
+  startPage?: number
+  endPage?: number
+  before?: string | null
+  after?: string | null
 }
 
 interface Provider {
@@ -33,7 +34,7 @@ interface Provider {
   getPage(
     url: string | URL,
     filters?: Filter[] | null,
-    page?: number | null,
+    paginationParameters?: PaginationParameters | null | null,
     cacheTime?: number,
     forceCache?: boolean
   ): Promise<[Model[], Array<TableFilter>, Pagination]>
@@ -41,9 +42,7 @@ interface Provider {
   getList(
     url: string | URL,
     filters?: Filter[] | null,
-    perPage?: number | null,
-    startPage?: number | null,
-    endPage?: number | null,
+    parameters?: GetListParameters | null,
     cacheTime?: number,
     forceCache?: boolean
   ): Promise<Model[]>
@@ -59,4 +58,4 @@ interface Provider {
   patch(resourceUrl: string, payload: object): Promise<Model>
 }
 
-export { Filter, Pagination, Provider, ResponseCache, TableFilter }
+export { Filter, GetListParameters, Provider, ResponseCache, TableFilter }

@@ -2,7 +2,9 @@ import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 
 import { FilterManager } from '../../common/filterManager'
-import type { Filter, ResponseCache, Pagination, Provider, TableFilter } from './interfaces'
+import type { Filter, ResponseCache, Provider, TableFilter, GetListParameters } from './interfaces'
+import { CursorPagination, Pagination, PagedPagination, PaginationParameters } from './pagination'
+import { setPaginationParameters } from './utils'
 
 /**
  * Base for Django REST API interactions
@@ -45,20 +47,20 @@ export class BaseProvider implements Provider {
    *
    * @param url - resource url
    * @param filters - filters accepted by resource API
-   * @param page - requested page number
+   * @param paginationParameters - requested pagination parameters
    * @param cacheTime - time in seconds for caching result
    * @param forceCache - don't use cache if true
    */
   getPage = async (
     url: string | URL,
     filters: Filter[] | null = null,
-    page: number | null = null,
+    paginationParameters: PaginationParameters | null = null,
     cacheTime?: number,
     forceCache?: boolean
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const [resourceUrl, resourceFilters] = this.parseUrl(url)
 
-    const generatedUrl = this.getUrl(resourceUrl, resourceFilters, filters, page)
+    const generatedUrl = this.getUrl(resourceUrl, resourceFilters, filters, paginationParameters)
 
     return this.navigate(generatedUrl, resourceFilters, cacheTime, forceCache)
   }
@@ -70,22 +72,19 @@ export class BaseProvider implements Provider {
    *
    * @param url - resource url
    * @param filters - filters accepted by resource API
-   * @param perPage - count models per page
-   * @param startPage - start page number
-   * @param endPage - end page number
+   * @param parameters - list parameters
    * @param cacheTime - time in seconds for caching result
    * @param forceCache - don't use cache if true
    */
   getList = async (
     url: string | URL,
     filters: Filter[] | null = null,
-    perPage: number | null = null,
-    startPage: number | null = null,
-    endPage: number | null = null,
+    parameters: GetListParameters | null = null,
     cacheTime?: number,
     forceCache?: boolean
   ): Promise<Model[]> => {
     const combinedFilters: Filter[] = [...(filters || [])]
+    const perPage = parameters?.perPage
     if (perPage) {
       combinedFilters.push({
         filterName: 'per_page',
@@ -93,16 +92,24 @@ export class BaseProvider implements Provider {
         filterOperation: undefined,
       })
     }
-    let page: number = startPage || 1
+    let localUrl = url
+    let hasNext = true
+    let page: number | undefined = parameters?.startPage
     let data: Model[] = []
 
-    while (page) {
+    while (hasNext) {
       try {
         // eslint-disable-next-line no-await-in-loop
-        const [pageData, , pagination] = await this.getPage(url, combinedFilters, page, cacheTime, forceCache)
+        const [pageData, , pagination] = await this.getPage(localUrl, combinedFilters, { page }, cacheTime, forceCache)
         data = data.concat(pageData)
-        page += 1
-        if (pagination.nextUrl == null || (endPage && page > endPage)) page = 0
+        hasNext = pagination.hasNext({ endPage: parameters?.endPage })
+        const { prevUrl, nextUrl } = pagination
+        if ('page' in pagination || 'after' in pagination) {
+          localUrl = nextUrl as string
+          page = undefined
+        } else if ('before' in pagination) {
+          localUrl = prevUrl as string
+        }
       } catch (err) {
         return data
       }
@@ -157,7 +164,8 @@ export class BaseProvider implements Provider {
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
     const response = await this.get(url, cacheTime, forceCache)
     const { data, meta } = response.data
-    const [tableFilters, pagination] = this.getFiltersAndPagination(meta, resourceFilters)
+    const tableFilters = this.getFilters(meta, resourceFilters)
+    const pagination = this.getPagination(meta)
 
     return [data, tableFilters, pagination]
   }
@@ -178,7 +186,7 @@ export class BaseProvider implements Provider {
     resourceUrl: string,
     resourceFilters: Filter[] | null = null,
     filters: Filter[] | null = null,
-    page: number | null = null
+    paginationParameters: PaginationParameters | null = null
   ): string => {
     const url = new URL(resourceUrl)
 
@@ -190,25 +198,66 @@ export class BaseProvider implements Provider {
       FilterManager.setQueryFilters(url.searchParams, resourceFilters)
     }
 
-    if (page) {
-      url.searchParams.set('page', page.toString())
+    if (paginationParameters) {
+      setPaginationParameters(url, paginationParameters)
     }
 
     return url.href
   }
 
-  getFiltersAndPagination = (meta: any, resourceFilters: Filter[]): [Array<TableFilter>, Pagination] => {
-    const defaultPagination = { page: 1, perPage: 100, count: undefined, nextUrl: undefined, prevUrl: undefined }
-
-    if (meta === undefined) {
-      return [[], defaultPagination]
+  /**
+   * Get pagination from meta.
+   *
+   * Looks for proper keys in meta to determine type of pagination (paged or cursor).
+   * Falls back to default paged pagination.
+   *
+   * @param meta - response meta
+   */
+  getPagination = (meta: any): Pagination => {
+    const defaultPagination = {
+      page: 1,
+      perPage: 100,
+      count: undefined,
+      nextUrl: undefined,
+      prevUrl: undefined,
+      hasNext: () => false,
     }
 
-    const { page, per_page: perPage, total: count, url, next_url: nextUrl, prev_url: prevUrl } = meta
+    if (meta === undefined) {
+      return defaultPagination
+    }
+    if ('page' in meta) {
+      return new PagedPagination(meta)
+    }
+    if ('has_next' in meta) {
+      return new CursorPagination(meta)
+    }
+
+    return defaultPagination
+  }
+
+  /**
+   * Get filters from meta.
+   *
+   * Ignores get-parameters for pagination.
+   *
+   * @param meta  - response meta
+   * @param resourceFilters - resourse filters to ignore
+   */
+  getFilters = (meta: any, resourceFilters: Filter[]): Array<TableFilter> => {
+    if (meta === undefined) {
+      return []
+    }
+    const { url } = meta
     const [, backendFilters] = this.parseUrl(url)
 
-    const pagination: Pagination = { page, perPage, nextUrl, prevUrl, count }
-    const excludeNames = ['page', 'per_page', ...resourceFilters.map(({ filterName }: Filter) => filterName)]
+    const excludeNames = [
+      'page',
+      'before',
+      'after',
+      'per_page',
+      ...resourceFilters.map(({ filterName }: Filter) => filterName),
+    ]
     const tableFilters: Array<TableFilter> = []
 
     backendFilters.forEach((filter: Filter) => {
@@ -216,6 +265,6 @@ export class BaseProvider implements Provider {
         tableFilters.push({ id: filter.filterName, value: filter })
       }
     })
-    return [tableFilters, pagination]
+    return tableFilters
   }
 }
