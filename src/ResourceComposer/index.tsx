@@ -10,6 +10,7 @@ import { RenderList } from '../ListView/RenderList'
 import { RenderDetail } from '../DetailView/RenderDetail'
 import { SideBar, SideBarElement } from '../ListView/components/SideBar'
 import { mountElement } from '../common/permissions'
+import { SideBarElementCompatible } from '../LegacySupport'
 
 const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => {
   return (
@@ -70,6 +71,9 @@ const ResourceComposer = ({
                 const element = <SideBarElement resource={resource} />
 
                 return mountElement(permissions, adminPermissions, element) || <></>
+              }
+              if ('path' in resource.props && 'navTitle' in resource.props) {
+                return <SideBarElementCompatible {...resource.props} />
               }
               return <></>
             })}

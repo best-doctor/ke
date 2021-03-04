@@ -72,8 +72,11 @@ import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 
 export * from './Widgets/Map'
+export * from './Widgets/ItemsList'
 export * from './FormControls'
 export * from './cdk/Compatibility'
+export * from './cdk/Layouts'
+export * from './LegacySupport'
 
 export {
   BaseAdmin,
