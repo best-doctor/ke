@@ -77,7 +77,6 @@ export * from './Widgets/ItemsList'
 export * from './FormControls'
 export * from './cdk/Compatibility'
 export * from './cdk/Layouts'
-export * from './cdk/Tables'
 export * from './LegacySupport'
 
 export {
