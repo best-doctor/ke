@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { createRef } from 'react'
+import React, { createRef } from 'react'
 import fc from 'fast-check'
 import { mount } from 'enzyme'
 
