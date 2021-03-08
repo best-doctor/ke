@@ -3,7 +3,7 @@ import { createRef } from 'react'
 import fc from 'fast-check'
 import { mount } from 'enzyme'
 
-import { Input, Select, Textarea } from './Adapters'
+import { Input, Select, Textarea } from './Standard'
 
 const valueArbitrary = fc.string()
 

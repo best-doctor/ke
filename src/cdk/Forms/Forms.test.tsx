@@ -4,9 +4,12 @@ import { useState } from 'react'
 
 import { Form } from './Form'
 import { FormField } from './FormField'
-import { Input } from './Adapters'
 import { FormGroup } from './FormGroup'
 import { FormArray } from './FormArray'
+
+const Control = ({ value, onChange }: { value: string; onChange: (v: string) => void }): JSX.Element => {
+  return <input value={value} onChange={(e) => onChange(e.target.value)} />
+}
 
 describe('Forms sample tests', () => {
   const sampleData = {
@@ -24,15 +27,15 @@ describe('Forms sample tests', () => {
   test('Full form must render without error', () => {
     const form = mount(
       <Form value={sampleData} onChange={jest.fn()}>
-        <FormField name="name" as={Input} />
-        <FormField name="surname" as={Input} />
+        <FormField name="name" as={Control} />
+        <FormField name="surname" as={Control} />
         <FormGroup name="meta">
-          <FormField as={Input} name="title" />
-          <FormField as={Input} name="subtitle" />
+          <FormField as={Control} name="title" />
+          <FormField as={Control} name="subtitle" />
         </FormGroup>
         <FormArray name="rates">
-          <FormField as={Input} name={0} />
-          <FormField as={Input} name={1} />
+          <FormField as={Control} name={0} />
+          <FormField as={Control} name={1} />
         </FormArray>
       </Form>
     )
@@ -46,7 +49,7 @@ describe('Forms sample tests', () => {
     const handleChange = jest.fn()
     const form = mount(
       <Form value={sampleData} onChange={handleChange}>
-        <FormField name="name" as={Input} />
+        <FormField name="name" as={Control} />
       </Form>
     )
 
@@ -62,7 +65,7 @@ describe('Forms sample tests', () => {
     const form = mount(
       <Form value={sampleData} onChange={handleChange}>
         <FormGroup name="meta">
-          <FormField as={Input} name="title" />
+          <FormField as={Control} name="title" />
         </FormGroup>
       </Form>
     )
@@ -79,7 +82,7 @@ describe('Forms sample tests', () => {
     const form = mount(
       <Form value={sampleData} onChange={handleChange}>
         <FormArray name="rates">
-          <FormField as={Input} name={1} />
+          <FormField as={Control} name={1} />
         </FormArray>
       </Form>
     )
@@ -97,8 +100,8 @@ describe('Forms sample tests', () => {
     const handleChange = jest.fn()
     const form = mount(
       <Form value={sampleData} onChange={handleChange}>
-        <FormField name="name" as={Input} />
-        <FormField name="surname" as={Input} />
+        <FormField name="name" as={Control} />
+        <FormField name="surname" as={Control} />
       </Form>
     )
 
@@ -118,8 +121,8 @@ describe('Forms sample tests', () => {
       return (
         <>
           <Form value={data} onChange={handleChange}>
-            <FormField name="name" as={Input} />
-            <FormField name="surname" as={Input} />
+            <FormField name="name" as={Control} />
+            <FormField name="surname" as={Control} />
           </Form>
           <button type="button" onClick={() => setData(changedData)}>
             Change form data
@@ -144,7 +147,7 @@ describe('Forms sample tests', () => {
     expect(() =>
       mount(
         <Form value={sampleData} onChange={jest.fn()}>
-          <FormField as={Input} name="unexpected" />
+          <FormField as={Control} name="unexpected" />
         </Form>
       )
     ).toThrow(RangeError)

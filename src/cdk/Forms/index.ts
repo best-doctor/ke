@@ -1,4 +1,3 @@
-export { Input, Textarea, Select } from './Adapters'
 export { Form } from './Form'
 export { FormArray } from './FormArray'
 export { FormGroup } from './FormGroup'
