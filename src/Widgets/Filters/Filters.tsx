@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Box } from '@chakra-ui/core'
 
-import { GroupControl } from '../../cdk/Controls'
-import { FormField } from '../../cdk/Forms'
+import { GroupControl } from '@cdk/Controls'
+import { FormField } from '@cdk/Forms'
 
 import type { FiltersValue, Filter } from './types'
 

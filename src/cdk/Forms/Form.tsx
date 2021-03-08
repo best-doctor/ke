@@ -1,8 +1,7 @@
 import * as React from 'react'
 import type { FunctionComponentElement, PropsWithChildren } from 'react'
 import { useCallback } from 'react'
-
-import { usePropState } from '../Hooks'
+import { usePropState } from '@cdk/Hooks'
 
 import type { FormsContextData } from './types'
 import { FormsContextProvider } from './Forms.context'

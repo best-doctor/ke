@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import type { LayoutProps, SectionProps } from '../../cdk/Layouts'
-import { Table, Column, Th, Td } from '../../cdk/Tables'
+import type { LayoutProps, SectionProps } from '@cdk/Layouts'
+import { Table, Column, Th, Td } from '@cdk/Tables'
 
 export function ItemsList({ layout: L }: ItemsListProps): JSX.Element {
   const data: Item[] = [

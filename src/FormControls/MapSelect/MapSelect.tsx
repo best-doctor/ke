@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button } from '@chakra-ui/core'
+import { usePropState } from '@cdk/Hooks'
 
 import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'
-import { usePropState } from '../../cdk/Hooks'
 
 import type { Option, OptionKey } from './types'
 
