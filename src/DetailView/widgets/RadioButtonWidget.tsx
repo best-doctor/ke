@@ -17,7 +17,7 @@ type RadioButtonElement = {
   title: string
 }
 
-type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
+type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function; getSelectedValue: Function }
 
 const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   const {
@@ -30,12 +30,14 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     optionLabel,
     optionValue,
     cacheTime,
+    getSelectedValue,
   } = props
   const context = containerStore.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const { dataResourceUrl, content } = useWidgetInitialization({ ...props, context })
   const [elements, setElements] = React.useState<RadioButtonElement[]>(content as RadioButtonElement[])
+  const [selectedValue, setSelectedValue] = React.useState<string>('')
 
   React.useEffect(() => {
     if (dataResourceUrl) {
@@ -44,6 +46,10 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
         .then(([data, ,]: [Model[], object, object]) => setElements(data as RadioButtonElement[]))
     }
   }, [dataResourceUrl, provider, effectiveCacheTime])
+
+  React.useEffect(() => {
+    setSelectedValue(getSelectedValue(context))
+  }, [context, getSelectedValue])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const widgetValueId = e.target.value
@@ -54,7 +60,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText}>
-      <RadioGroup onChange={handleChange}>
+      <RadioGroup onChange={handleChange} value={selectedValue}>
         {elements.map((element: RadioButtonElement) => (
           <Radio value={optionValue(element)}>{optionLabel(element)}</Radio>
         ))}
