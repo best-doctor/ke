@@ -13,7 +13,10 @@ const testTags = ['div', 'p', 'span'].map((tag) => fc.constant(tag))
 const elementArbitrary = fc
   .tuple(fc.string({ minLength: 3, maxLength: 10 }), fc.oneof(...testTags))
   .map(([key, tag]) => React.createElement(tag, { key }))
-const valueArbitrary = fc.dictionary(fc.string({ minLength: 1, maxLength: 10 }), fc.string({ minLength: 1, maxLength: 10 }))
+const valueArbitrary = fc.dictionary(
+  fc.string({ minLength: 1, maxLength: 10 }),
+  fc.string({ minLength: 1, maxLength: 10 })
+)
 
 test('Children has rendered', () => {
   fc.assert(

@@ -1,2 +1,3 @@
 export * from './GroupControl'
-export * from './Standard'
+export { Input, Textarea } from './Standard'
+export * from './DebounceInput'
