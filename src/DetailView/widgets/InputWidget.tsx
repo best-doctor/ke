@@ -10,7 +10,7 @@ import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
 
-type InputWidgetProps = WidgetProps & { isTextarea?: boolean }
+type InputWidgetProps = WidgetProps & { isTextarea?: boolean; height?: number }
 
 const InputWidget = (props: InputWidgetProps): JSX.Element => {
   const {
@@ -22,8 +22,8 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
     setInitialValue,
     containerStore,
     isTextarea = true,
+    height,
   } = props
-
   const context = containerStore.getState()
 
   const { targetUrl, content } = useWidgetInitialization({ ...props, context })
@@ -48,7 +48,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
       <DebounceInput
         value={content as string}
         resize="none"
-        height={isTextarea ? 263 : 33}
+        height={height || (isTextarea ? 263 : 33)}
         borderWidth="1px"
         borderColor="gray.300"
         debounceTimeout={1000}
