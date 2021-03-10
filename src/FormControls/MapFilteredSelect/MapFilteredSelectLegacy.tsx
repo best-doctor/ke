@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Flex, Box } from '@chakra-ui/core'
+import { VerticalList } from '@cdk/Layouts'
 
 import { Filters, FiltersProps } from '../../Widgets/Filters'
 
@@ -42,7 +43,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
             />
           </Box>
           <Box width="300px" marginLeft="5px">
-            <Filters filters={filters} value={filtersValue} onChange={onFiltersValueChange} />
+            <Filters filters={filters} value={filtersValue} onChange={onFiltersValueChange} layout={VerticalList} />
           </Box>
         </Flex>
       </StyledMapFilterWidget>

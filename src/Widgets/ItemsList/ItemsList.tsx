@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
-import type { LayoutProps, SectionProps } from '@cdk/Layouts'
+import { LayoutProps, SectionProps, HorizontalList } from '@cdk/Layouts'
 import { Table, Column, Th, Td } from '@cdk/Tables'
+import { DebounceInput } from '@cdk/Controls'
+
+import { Filters } from '../Filters'
 
 export function ItemsList({ layout: L }: ItemsListProps): JSX.Element {
   const data: Item[] = [
@@ -16,7 +19,26 @@ export function ItemsList({ layout: L }: ItemsListProps): JSX.Element {
 
   return (
     <L>
-      <L.Filters>Filters</L.Filters>
+      <L.Filters>
+        <Filters
+          filters={[
+            {
+              name: 'search-1',
+              control: DebounceInput as any, // Temporary
+            },
+            {
+              name: 'search-2',
+              control: DebounceInput as any, // Temporary
+            },
+          ]}
+          value={{
+            'search-1': '',
+            'search-2': '',
+          }}
+          onChange={() => {}}
+          layout={HorizontalList}
+        />
+      </L.Filters>
       <L.Actions>Actions</L.Actions>
       <L.Content>
         <Table data={data} getKey={(item) => item.a}>
