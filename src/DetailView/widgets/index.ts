@@ -1,5 +1,6 @@
 import { AsyncTextWidget } from './AsyncTextWidget'
 import { TextWidget } from './TextWidget'
+import { TextValidationWidget } from './TextValidationWidget'
 import { LinkWidget } from './LinkWidget'
 import { SelectWidget, BaseSelectWidget } from './SelectWidget'
 import { ForeignKeySelectWidget } from './ForeignKeySelect'
@@ -18,6 +19,7 @@ import { CheckboxWidget } from './CheckboxWidget'
 export {
   AsyncTextWidget,
   TextWidget,
+  TextValidationWidget,
   LinkWidget,
   SelectWidget,
   BaseSelectWidget,

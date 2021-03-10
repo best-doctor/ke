@@ -42,6 +42,7 @@ import type { CursorPagination, PagedPagination } from 'admin/providers/paginati
 import {
   AsyncTextWidget,
   TextWidget,
+  TextValidationWidget,
   LinkWidget,
   SelectWidget,
   BaseSelectWidget,
@@ -100,6 +101,7 @@ export {
   EnableSentry,
   EnableELK,
   TextWidget,
+  TextValidationWidget,
   LinkWidget,
   SelectWidget,
   BaseSelectWidget,

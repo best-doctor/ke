@@ -1,0 +1,53 @@
+import React from 'react'
+
+import { MessagesBlock } from './MessagesBlock'
+import { useValueValidation } from '../hooks/useValidation'
+
+import type { Provider } from '../../admin/providers/interfaces'
+import type { DetailObject } from '../../typing'
+
+type ValueValidationWrapperProps = {
+  children: JSX.Element
+  blockingValidators: Function[]
+  notBlockingValidators: Function[]
+  provider: Provider
+  detailObject: DetailObject
+  value: string | object
+}
+
+/**
+ * Wrapper component to add validation checks against fixed value.
+ *
+ * @param children - standard react children
+ * @param blockingValidators - fail in this validators will be shown as error
+ * @param notBlockingValidators - fail in this validators will be shown as info
+ * @param provider - provider for backend request, will be passed as second param to validators
+ * @param detailObject - addition object, will be passed as third param to validators
+ * @param value - value to validate, will be passed as first param to validators
+ */
+const ValueValidationWrapper = ({
+  children,
+  blockingValidators,
+  notBlockingValidators,
+  provider,
+  detailObject,
+  value,
+}: ValueValidationWrapperProps): JSX.Element => {
+  const { infoMessages, errorMessages } = useValueValidation(
+    blockingValidators,
+    notBlockingValidators,
+    provider,
+    detailObject,
+    value
+  )
+
+  return (
+    <>
+      <children.type {...children.props} />
+      <MessagesBlock messages={infoMessages} messageType="warning" />
+      <MessagesBlock messages={errorMessages} messageType="error" />
+    </>
+  )
+}
+
+export { ValueValidationWrapper }
