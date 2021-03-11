@@ -1,18 +1,17 @@
-import React, { FC } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-export function AdminResourceCompatible({ path, component: Component }: AdminResourceCompatibleProps): JSX.Element {
+export function AdminResourceCompatible({ path, children }: AdminResourceCompatibleProps): JSX.Element {
   return (
     <Switch>
       <Route exact strict path={path}>
-        <Component />
+        {children}
       </Route>
     </Switch>
   )
 }
 
-interface AdminResourceCompatibleProps {
+type AdminResourceCompatibleProps = PropsWithChildren<{
   path: string
   navTitle: string
-  component: FC
-}
+}>

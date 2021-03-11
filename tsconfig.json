@@ -22,6 +22,9 @@
     "importHelpers": true,
     "importsNotUsedAsValues": "error",
     "jsx": "react",
+    "paths": {
+      "@cdk/*": ["./cdk/*"],
+    },
     "strict": true,
     "moduleResolution": "Node",
     "noFallthroughCasesInSwitch": true,

@@ -6,7 +6,8 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   collectCoverageFrom: ['./src/**/*.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "^@cdk(.*)$": "<rootDir>/src/cdk$1"
   },
   transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
   transform: {

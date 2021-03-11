@@ -1,49 +1,32 @@
-import React, { FC } from 'react'
-import type { LayoutProps, SectionProps } from '../../cdk/Layouts'
-import { Table, Column, Th, Td } from '../../cdk/Tables'
+import React, { FC, PropsWithChildren } from 'react'
+import { LayoutProps, SectionProps, HorizontalList } from '@cdk/Layouts'
 
-export function ItemsList({ layout: L }: ItemsListProps): JSX.Element {
-  const data: Item[] = [
-    {
-      a: 1,
-      b: 'Moscow',
-    },
-    {
-      a: 7,
-      b: 'SPb',
-    },
-  ]
+import { Filters, Filter, FiltersValue } from '../Filters'
 
+export function ItemsList<F extends string>({
+  layout: L,
+  filters,
+  filtersValue,
+  children,
+}: ItemsListProps<F>): JSX.Element {
   return (
     <L>
-      <L.Filters>Filters</L.Filters>
+      <L.Filters>
+        <Filters filters={filters} value={filtersValue} onChange={() => {}} layout={HorizontalList} />
+      </L.Filters>
       <L.Actions>Actions</L.Actions>
-      <L.Content>
-        <Table data={data} getKey={(item) => item.a}>
-          <Column>
-            <Th>A</Th>
-            <Td>{(item: Item) => item.a}</Td>
-          </Column>
-          <Column>
-            <Th>B</Th>
-            <Td>{(item: Item) => item.b}</Td>
-          </Column>
-        </Table>
-      </L.Content>
+      <L.Content>{children}</L.Content>
       <L.BatchActions>Batch actions</L.BatchActions>
       <L.Pagination>Pagination</L.Pagination>
     </L>
   )
 }
 
-interface Item {
-  a: number
-  b: string
-}
-
-interface ItemsListProps {
+type ItemsListProps<F extends string> = PropsWithChildren<{
+  filters: Filter<F>[]
+  filtersValue: FiltersValue<F>
   layout: ItemsListLayout
-}
+}>
 
 type ItemsListLayout = FC<LayoutProps> & {
   Filters: FC<SectionProps>
