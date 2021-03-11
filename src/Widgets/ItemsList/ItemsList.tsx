@@ -3,16 +3,16 @@ import { LayoutProps, SectionProps, HorizontalList } from '@cdk/Layouts'
 
 import { Filters, Filter, FiltersValue } from '../Filters'
 
-export function ItemsList<F extends string>({ layout: L, filters, filtersValue, children }: ItemsListProps<F>): JSX.Element {
+export function ItemsList<F extends string>({
+  layout: L,
+  filters,
+  filtersValue,
+  children,
+}: ItemsListProps<F>): JSX.Element {
   return (
     <L>
       <L.Filters>
-        <Filters
-          filters={filters}
-          value={filtersValue}
-          onChange={() => {}}
-          layout={HorizontalList}
-        />
+        <Filters filters={filters} value={filtersValue} onChange={() => {}} layout={HorizontalList} />
       </L.Filters>
       <L.Actions>Actions</L.Actions>
       <L.Content>{children}</L.Content>
