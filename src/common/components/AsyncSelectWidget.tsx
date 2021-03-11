@@ -3,7 +3,7 @@ import React from 'react'
 import AsyncSelect from 'react-select/async'
 import debouncePromise from 'debounce-promise'
 
-import type { ValueType } from 'react-select/src/types'
+import type { ValueType } from 'react-select'
 import type { Provider } from '../../admin/providers/interfaces'
 
 type AsyncSelectWidgetProps = {
@@ -71,7 +71,7 @@ const AsyncSelectWidget = ({
   return (
     <AsyncSelect
       value={value}
-      onChange={(changeValue: ValueType<object | object[]>) => handleChange(changeValue)}
+      onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
       loadOptions={debouncedLoadOptions}
       defaultOptions={defaultOptions}
       isClearable={isClearable}

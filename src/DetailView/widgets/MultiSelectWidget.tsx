@@ -1,12 +1,11 @@
 import React from 'react'
 
-import type { ValueType } from 'react-select/src/types'
+import type { ValueType } from 'react-select'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { pushAnalytics } from '../../integration/analytics'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import type { WidgetProps } from '../../typing'
 import { getAccessor } from '../utils/dataAccess'
 
@@ -48,7 +47,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const [value, setValue] = React.useState<MultiSelectValue[]>(content as MultiSelectValue[])
   setInitialValue({ [name]: extractPayloadIds(value) })
 
-  const handleChange = (changeValue: ValueType<MultiSelectValue[]>): void => {
+  const handleChange = (changeValue: ValueType<MultiSelectValue, true>): void => {
     setValue(changeValue as MultiSelectValue[])
 
     let payloadIds: RawWidgetPayload = []
