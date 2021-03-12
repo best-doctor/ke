@@ -7,12 +7,13 @@ export function ItemsList<F extends string>({
   layout: L,
   filters,
   filtersValue,
+  filtersOnChange,
   children,
 }: ItemsListProps<F>): JSX.Element {
   return (
     <L>
       <L.Filters>
-        <Filters filters={filters} value={filtersValue} onChange={() => {}} layout={HorizontalList} />
+        <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={HorizontalList} />
       </L.Filters>
       <L.Actions>Actions</L.Actions>
       <L.Content>{children}</L.Content>
@@ -25,6 +26,7 @@ export function ItemsList<F extends string>({
 type ItemsListProps<F extends string> = PropsWithChildren<{
   filters: Filter<F>[]
   filtersValue: FiltersValue<F>
+  filtersOnChange: (f: FiltersValue<F>) => void
   layout: ItemsListLayout
 }>
 
