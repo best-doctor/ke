@@ -268,3 +268,5 @@ export class BaseProvider implements Provider {
     return tableFilters
   }
 }
+
+export { Provider }
