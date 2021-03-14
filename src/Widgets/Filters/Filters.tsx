@@ -27,7 +27,7 @@ export function Filters<K extends string>({ filters, value, onChange, layout: La
     <GroupControl value={controlsValue} onChange={handleChange}>
       <Layout
         items={filters.map(({ control, name, ...other }) => {
-          return [name, <FormField name={name} as={control} {...other} />]
+          return [name, <FormField name={name} as={control} {...other} />, {}]
         })}
       />
     </GroupControl>
@@ -72,5 +72,5 @@ export interface FiltersProps<K extends string> {
   filters: Filter<K>[]
   value: FiltersValue<K>
   onChange: (val: FiltersValue<K>) => void
-  layout: ComponentType<{ items: [string, ReactNode][] }>
+  layout: ComponentType<{ items: readonly [string, ReactNode, {}][] }>
 }

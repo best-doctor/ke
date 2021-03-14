@@ -1,16 +1,6 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React from 'react'
 import { Box } from '@chakra-ui/core'
 
-export function VerticalList({ items }: VerticalListProps): ReactElement {
-  return (
-    <>
-      {items.map(([key, element]) => (
-        <Box key={key}>{element}</Box>
-      ))}
-    </>
-  )
-}
+import { makeList } from './Base'
 
-interface VerticalListProps {
-  items: [string, ReactNode][]
-}
+export const VerticalList = makeList(({ children }) => <>{children}</>, Box)

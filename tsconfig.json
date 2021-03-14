@@ -20,7 +20,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "importsNotUsedAsValues": "error",
+    "importsNotUsedAsValues": "remove",
     "jsx": "react",
     "paths": {
       "@cdk/*": ["./cdk/*"],
