@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box } from '@chakra-ui/core'
 import { Wizard } from './components'
 
 import { getWizardFromCallable } from './utils'
@@ -15,6 +16,7 @@ type MountWizardsKwargs = {
   notifier: BaseNotifier
   ViewType: string
   elements: WizardFieldDescription
+  elementsKey: string
   provider: Provider
   setMainDetailObject: Function
   refreshMainDetailObject: Function
@@ -22,7 +24,7 @@ type MountWizardsKwargs = {
   user: object
 }
 
-const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
+const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
   /*
     Function mounts widgets for Wizard View.
 
@@ -35,6 +37,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
     notifier,
     ViewType,
     elements,
+    elementsKey,
     provider,
     setMainDetailObject,
     refreshMainDetailObject,
@@ -43,30 +46,35 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element[] => {
     resourceName,
   } = kwargs
 
-  return elements.map((wizardInstance: WizardFieldElement) => {
-    const wizard = getWizardFromCallable(wizardInstance, mainDetailObject)
-
-    if (!wizard) return <></>
-
-    return (
-      <Wizard
-        key="wizard-element"
-        data-grid={wizard.layout}
-        wizard={wizard}
-        provider={provider}
-        mainDetailObject={mainDetailObject}
-        setMainDetailObject={setMainDetailObject}
-        refreshMainDetailObject={refreshMainDetailObject}
-        notifier={notifier}
-        analytics={analytics}
-        ViewType={ViewType}
-        user={user}
-        resourceName={resourceName}
-        allowToggle={wizard.allowToggle}
-        isExpanded={wizard.isExpanded}
-      />
-    )
-  })
+  return (
+    <Box key={elementsKey}>
+      {elements.map((wizardInstance: WizardFieldElement, index) => {
+        const wizard = getWizardFromCallable(wizardInstance, mainDetailObject)
+        const key = `wizard-element_${index}`
+        if (!wizard) {
+          return <div key={key} />
+        }
+        return (
+          <Wizard
+            key={wizard.title}
+            data-grid={wizard.layout}
+            wizard={wizard}
+            provider={provider}
+            mainDetailObject={mainDetailObject}
+            setMainDetailObject={setMainDetailObject}
+            refreshMainDetailObject={refreshMainDetailObject}
+            notifier={notifier}
+            analytics={analytics}
+            ViewType={ViewType}
+            user={user}
+            resourceName={resourceName}
+            allowToggle={wizard.allowToggle}
+            isExpanded={wizard.isExpanded}
+          />
+        )
+      })}
+    </Box>
+  )
 }
 
 export { mountWizards }

@@ -110,23 +110,24 @@ const mountComponents = ({
     rows.push(columns)
   }
 
-  return rows.map((rowColumns) => {
+  return rows.map((rowColumns, rowIndex) => {
+    const rowKey = rowIndex
     return (
-      <Row>
-        {rowColumns.map((adminElement: DetailFieldDescription) => {
+      <Row key={rowKey}>
+        {rowColumns.map((adminElement: DetailFieldDescription, columnIndex) => {
           const { widget, name, layout, widgetAnalytics } = adminElement
 
           const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject)
           const colProps = getColumnProps(layout)
+          const columnKey = `${rowIndex}_${columnIndex}_${name}`
 
           return (
-            <div className={colProps.className}>
+            <div className={colProps.className} key={columnKey}>
               <ComponentToMount
                 key={name}
                 resource={resourceName}
                 resourceName={resourceName}
                 mainDetailObject={mainDetailObject}
-                // data-grid={layout}
                 provider={provider}
                 setMainDetailObject={setMainDetailObject}
                 refreshMainDetailObject={refreshMainDetailObject}

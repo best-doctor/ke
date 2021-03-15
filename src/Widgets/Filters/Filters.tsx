@@ -10,7 +10,7 @@ export function Filters<K extends string>({ filters, value, onChange, layout: La
     <GroupControl value={value} onChange={onChange}>
       <Layout
         items={filters.map(({ control, name, ...other }) => {
-          return [name, <FormField name={name} as={control} {...other} />]
+          return [name, <FormField name={name} as={control} key={name} {...other} />]
         })}
       />
     </GroupControl>
