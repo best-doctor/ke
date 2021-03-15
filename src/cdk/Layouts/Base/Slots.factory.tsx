@@ -1,4 +1,4 @@
-import { ComponentProps, ComponentType, FC, PropsWithChildren, ReactElement, Children } from 'react'
+import React, { ComponentProps, ComponentType, FC, PropsWithChildren, ReactElement, Children } from 'react'
 
 export function makeSlots<S extends Slots>(
   slots: S,
@@ -8,12 +8,21 @@ export function makeSlots<S extends Slots>(
   const slotKeys = [...Object.keys(slots)]
 
   const Layout = ({ slots: slotElements, children }: SlotsProps<S>): ReactElement<SlotsProps<S>> => {
-    const elements = { ...slotElements }
+    const elements = Object.fromEntries(
+      Object.entries(slotElements || {}).map(([key, slotContent]) => {
+        if (!(key in slots)) {
+          throw new TypeError(`Unrecognized slots key "${key}" for layout. Waits for one of: ${slotKeys.join(', ')}.`)
+        }
+
+        const Slot = slots[key]
+        return [key, <Slot>{slotContent}</Slot>]
+      })
+    )
     if (children) {
       Children.forEach(children, (child) => {
         if (!child || typeof child !== 'object' || !('type' in child) || typeof child.type === 'string') {
           throw TypeError(
-            `Unacceptable child type '${JSON.stringify(child)}' for layout. Waits for one of: ${slotKeys}.`
+            `Unacceptable child type '${JSON.stringify(child)}' for layout. Waits for one of: ${slotKeys.join(', ')}.`
           )
         }
 
@@ -21,7 +30,9 @@ export function makeSlots<S extends Slots>(
 
         if (!key) {
           throw new TypeError(
-            `Unrecognized child component "${JSON.stringify(child.type)}" for layout. Waits for one of: ${slotKeys}.`
+            `Unrecognized child component "${JSON.stringify(child.type)}" for layout. Waits for one of: ${slotKeys.join(
+              ', '
+            )}.`
           )
         }
 

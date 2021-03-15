@@ -1,39 +1,28 @@
-import React, { FC, PropsWithChildren } from 'react'
-import { LayoutProps, SectionProps, HorizontalList } from '@cdk/Layouts'
+import React from 'react'
+import { HorizontalList, makeWithLayout } from '@cdk/Layouts'
 
 import { Filters, Filter, FiltersValue } from '../Filters'
 
-export function ItemsList<F extends string>({
-  layout: L,
-  filters,
-  filtersValue,
-  filtersOnChange,
-  children,
-}: ItemsListProps<F>): JSX.Element {
-  return (
-    <L>
-      <L.Filters>
-        <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={HorizontalList} />
-      </L.Filters>
-      <L.Actions>Actions</L.Actions>
-      <L.Content>{children}</L.Content>
-      <L.BatchActions>Batch actions</L.BatchActions>
-      <L.Pagination>Pagination</L.Pagination>
-    </L>
-  )
-}
+export const ItemsList = makeWithLayout(
+  <F extends string>({ filters, filtersValue, filtersOnChange }: ItemsListProps<F>) => {
+    return {
+      Filters: (
+        <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={HorizontalList}>
+          {(items) => ({
+            items: items.map(([key, node]) => [key, node, {}] as const),
+          })}
+        </Filters>
+      ),
+      Actions: 'Actions',
+      Content: 'Content',
+      BatchActions: 'Batch actions',
+      Pagination: 'Pagination',
+    }
+  }
+)
 
-type ItemsListProps<F extends string> = PropsWithChildren<{
+type ItemsListProps<F extends string> = {
   filters: Filter<F>[]
   filtersValue: FiltersValue<F>
   filtersOnChange: (f: FiltersValue<F>) => void
-  layout: ItemsListLayout
-}>
-
-type ItemsListLayout = FC<LayoutProps> & {
-  Filters: FC<SectionProps>
-  Actions: FC<SectionProps>
-  Content: FC<SectionProps>
-  BatchActions: FC<SectionProps>
-  Pagination: FC<SectionProps>
 }

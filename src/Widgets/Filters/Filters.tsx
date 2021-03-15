@@ -1,11 +1,18 @@
-import React, { ComponentType, ReactNode, useCallback, useEffect, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
 import { FormField } from '@cdk/Forms'
+import { PropsWithLayout } from '@cdk/Layouts'
 
 import type { FiltersValue, Filter } from './types'
 
-export function Filters<K extends string>({ filters, value, onChange, layout: Layout }: FiltersProps<K>): JSX.Element {
+export function Filters<K extends string, LP>({
+  filters,
+  value,
+  onChange,
+  layout: Layout,
+  children: makeLayoutProps,
+}: FiltersProps<K, LP>): ReactElement<FiltersProps<K, LP>> {
   const [, setPending] = useState(true)
   const [controlsValue, setControlsValue] = useState<typeof value>(cleanObject(value))
 
@@ -23,13 +30,17 @@ export function Filters<K extends string>({ filters, value, onChange, layout: La
     [onChange, filters]
   )
 
+  const layoutProps = useMemo(() => {
+    const filterItems = filters.map(({ control, name, ...other }) => {
+      return [name, <FormField name={name} as={control} {...other} />] as [key: K, field: ReactElement]
+    })
+
+    return makeLayoutProps(filterItems)
+  }, [filters, makeLayoutProps])
+
   return (
     <GroupControl value={controlsValue} onChange={handleChange}>
-      <Layout
-        items={filters.map(({ control, name, ...other }) => {
-          return [name, <FormField name={name} as={control} {...other} />, {}]
-        })}
-      />
+      <Layout {...layoutProps} />
     </GroupControl>
   )
 }
@@ -68,9 +79,12 @@ function cleanObject<T>(val: T): { [K in keyof T]: undefined } {
   return Object.fromEntries(Object.entries(val).map(([key]) => [key, undefined])) as { [K in keyof T]: undefined }
 }
 
-export interface FiltersProps<K extends string> {
-  filters: Filter<K>[]
-  value: FiltersValue<K>
-  onChange: (val: FiltersValue<K>) => void
-  layout: ComponentType<{ items: readonly [string, ReactNode, {}][] }>
-}
+export type FiltersProps<K extends string, LP> = PropsWithLayout<
+  {
+    filters: Filter<K>[]
+    value: FiltersValue<K>
+    onChange: (val: FiltersValue<K>) => void
+  },
+  readonly [key: K, field: ReactElement][],
+  LP
+>

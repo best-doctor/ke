@@ -21,7 +21,7 @@ export interface ListProps<ItemProps> {
   items: readonly Item<ItemProps>[]
 }
 
-type Item<ItemProps> = [key: string, node: ReactNode, itemProps: ItemProps]
+type Item<ItemProps> = readonly [key: string, node: ReactNode, itemProps: ItemProps]
 
 type ListContainerComponent = ComponentType<PropsWithChildren<{}>>
 
