@@ -1,8 +1,5 @@
 module.exports = {
-  plugins: [
-    '@typescript-eslint',
-    'eslint-plugin-tsdoc'
-  ],
+  plugins: ['@typescript-eslint', 'eslint-plugin-tsdoc'],
   extends: [
     'airbnb-typescript',
     'airbnb/hooks',
@@ -10,8 +7,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'prettier',
-    'prettier/react',
-    'prettier/@typescript-eslint',
   ],
   parserOptions: {
     project: './tsconfig.json',
@@ -24,9 +19,9 @@ module.exports = {
     'import/no-default-export': 'error',
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/fixtures.ts', '**/setupTests.ts'] }
+      { devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/fixtures.ts', '**/setupTests.ts'] },
     ],
-    // Makes no sense to allow type inferrence for expression parameters, but require typing the response
+    // Makes no sense to allow type inference for expression parameters, but require typing the response
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       { allowExpressions: true, allowTypedFunctionExpressions: true },
@@ -60,11 +55,13 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/unbound-method': 'off',
   },
-  overrides: [{
-    files: ['**/*.test.ts', '**/*.test.tsx'],
-    rules: {
-      '@typescript-eslint/ban-ts-ignore': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off'
-    }
-  }]
+  overrides: [
+    {
+      files: ['**/*.test.ts', '**/*.test.tsx'],
+      rules: {
+        '@typescript-eslint/ban-ts-ignore': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+      },
+    },
+  ],
 }
