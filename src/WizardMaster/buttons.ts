@@ -6,21 +6,21 @@ type WizardStepButtonDescription = {
   style: Style
   handler: Function
   label: string | undefined
-  analyticsTarget: string
+  name: string
 }
 
 const getPrevButton = (
   wizardStep: BaseWizardStep,
   style?: Style,
   label?: string,
-  analyticsTarget?: string
+  name?: string
 ): WizardStepButtonDescription => {
   const { prev } = wizardStep
   return {
     style: style || { variant: 'ghost', mr: 5 },
     handler: prev,
     label: label || wizardStep.backStepLabel,
-    analyticsTarget: analyticsTarget || 'wizard_prev_step',
+    name: name || 'prev',
   }
 }
 
@@ -28,7 +28,7 @@ const getNextButton = (
   wizardStep: BaseWizardStep,
   style?: Style,
   label?: string,
-  analyticsTarget?: string
+  name?: string
 ): WizardStepButtonDescription => {
   const { next, validatedNext, requireValidation } = wizardStep
 
@@ -36,7 +36,7 @@ const getNextButton = (
     style: style || { variantColor: 'blue', m: 5 },
     handler: requireValidation ? validatedNext : next,
     label: label || wizardStep.forwardStepLabel,
-    analyticsTarget: analyticsTarget || 'wizard_next_step',
+    name: name || 'next',
   }
 }
 

@@ -6,17 +6,19 @@ test('Mount wizard main component', () => {
   const resourceName = 'test'
   const ViewType = 'test_view'
   const elements = [testWizard]
+  const elementsKey = 'wizards'
   const provider = testProvider
   const setMainDetailObject = jest.fn()
   const refreshMainDetailObject = jest.fn()
   const analytics = undefined
   const user = {}
 
-  const wizards = mountWizards({
+  const element = mountWizards({
     resourceName,
     notifier: testNotifier,
     ViewType,
     elements,
+    elementsKey,
     provider,
     setMainDetailObject,
     refreshMainDetailObject,
@@ -24,8 +26,8 @@ test('Mount wizard main component', () => {
     user,
     mainDetailObject: { id: 100500 },
   })
-  const result = wizards[0]
+  const result = element.props.children[0]
 
-  expect(result.key).toEqual('wizard-element')
+  expect(result.key).toEqual('Test Wizard')
   expect(result.props.ViewType).toEqual('test_view')
 })

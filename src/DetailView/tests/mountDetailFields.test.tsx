@@ -25,7 +25,7 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
   const ViewType = 'test'
   const elementsKey = 'detail_fields'
 
-  mountDetailFields({
+  const element = mountDetailFields({
     resourceName,
     mainDetailObject,
     refreshMainDetailObject,
@@ -39,6 +39,7 @@ test('Call mount componentns for unpack detail view widgets with correct args', 
     elementsKey,
   })
 
+  expect(element.key).toEqual(elementsKey)
   expect(mockedMountComponents.mock.calls.length).toBe(1)
   expect(initDetailViewControllersMock.mock.calls.length).toBe(1)
   expect(initDetailViewControllersMock).toHaveBeenCalledWith(testProvider, setMainDetailObject, testNotifier)

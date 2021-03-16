@@ -7,9 +7,13 @@ const WizardValidationErrors = ({ errors }: { errors: string[] }): JSX.Element =
     <Box m={5}>
       <Heading size="sm">Пожалуйста, исправьте ошибки ниже:</Heading>
       <ul>
-        {errors.map((error: string) => (
-          <li style={{ color: 'red' }}>{error}</li>
-        ))}
+        {errors.map((error: string) => {
+          return (
+            <li style={{ color: 'red' }} key={error}>
+              {error}
+            </li>
+          )
+        })}
       </ul>
     </Box>
   )

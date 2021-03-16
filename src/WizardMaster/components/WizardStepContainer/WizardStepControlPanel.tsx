@@ -61,11 +61,12 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
       {buttons.map((button) => {
         return (
           <Button
+            key={button.name}
             {...button.style}
             onClick={() => {
               sendPushAnalytics(
                 wizardStep.resourceName ? wizardStep.resourceName : '',
-                button.analyticsTarget,
+                `wizard_${button.name}_step`,
                 currentState,
                 props
               )
