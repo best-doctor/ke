@@ -6,9 +6,11 @@ import type { Provider } from '../admin/providers'
 export function makeEntitiesSource<T>(provider: Pick<Provider, 'getPage'>, url: string): Source<T[]> {
   const fetch = createEffect(
     async (filters?: Filters): Promise<T[]> => {
+      const filterPairs = filters ? Object.entries(filters) : []
+      const cleanPairs = filterPairs.filter((pair) => Boolean(pair[1])) as [string, string][]
       const page = await provider.getPage(
         url,
-        filters ? Object.entries(filters).map(([filterName, value]) => ({ filterName, value })) : []
+        cleanPairs.map(([filterName, value]: [string, string]) => ({ filterName, value }))
       )
 
       return (page[0] as unknown) as T[]
@@ -31,10 +33,10 @@ export interface Source<T> {
   fetch: Effect<Readonly<Filters> | void, T>
 }
 
-interface SourceData<T> {
+export interface SourceData<T> {
   data: T
   pending: boolean
 }
 
-type FilterValue = string
+type FilterValue = string | undefined
 type Filters = Record<string, FilterValue>

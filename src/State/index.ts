@@ -1,1 +1,1 @@
-export { makeEntitiesSource, Source } from './EntitiesSource.factory'
+export { makeEntitiesSource, Source, SourceData } from './EntitiesSource.factory'
