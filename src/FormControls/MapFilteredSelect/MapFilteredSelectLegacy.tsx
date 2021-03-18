@@ -1,20 +1,10 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import { Flex, Box } from '@chakra-ui/core'
-import { VerticalList } from '@cdk/Layouts'
 
-import { Filters, FiltersProps } from '../../Widgets/Filters'
+import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 
 import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-
-const StyledMapFilterWidget = styled.div`
-  border-width: 1px;
-  border-radius: 3px;
-  border-color: #cbd5e0;
-  padding: 5.4px;
-  white-space: pre-line;
-`
+import { BlockM1xA1L } from '../../Layouts/BlockM1xA1L'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
@@ -31,9 +21,9 @@ export function MapFilteredSelectLegacy<T, K extends string>({
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText}>
-      <StyledMapFilterWidget>
-        <Flex height="400px">
-          <Box flex={1}>
+      <Filters filters={filters} value={filtersValue} onChange={onFiltersValueChange} layout={BlockM1xA1L}>
+        {(filterItems) => ({
+          M: (
             <MapSelect
               value={value}
               onChange={onChange}
@@ -41,21 +31,19 @@ export function MapFilteredSelectLegacy<T, K extends string>({
               center={options.length ? options[0][1].coords : moscowCoords}
               zoom={12}
             />
-          </Box>
-          <Box width="300px" marginLeft="5px">
-            <Filters filters={filters} value={filtersValue} onChange={onFiltersValueChange} layout={VerticalList} />
-          </Box>
-        </Flex>
-      </StyledMapFilterWidget>
+          ),
+          S: filterItems,
+        })}
+      </Filters>
     </WidgetWrapper>
   )
 }
 
-type MapFilteredSelectLegacyProps<T, K extends string> = Pick<MapSelectProps<T>, 'value' | 'onChange' | 'options'> &
-  Pick<FiltersProps<K>, 'filters'> & {
-    filtersValue: FiltersProps<K>['value']
-    onFiltersValueChange: FiltersProps<K>['onChange']
-    name: string
-    style: any
-    helpText: string
-  }
+type MapFilteredSelectLegacyProps<T, K extends string> = Pick<MapSelectProps<T>, 'value' | 'onChange' | 'options'> & {
+  filters: readonly Filter<K>[]
+  filtersValue: FiltersValue<K>
+  onFiltersValueChange: (v: FiltersValue<K>) => void
+  name: string
+  style: any
+  helpText: string
+}

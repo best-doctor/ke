@@ -1,25 +1,20 @@
 import React from 'react'
-import { HorizontalList, makeWithLayout } from '@cdk/Layouts'
+import { makeWithLayout } from '@cdk/Layouts'
 
 import { Filters, Filter, FiltersValue } from '../Filters'
+import { ListHorizontal } from '../../Layouts'
 
-export const ItemsList = makeWithLayout(
-  <F extends string>({ filters, filtersValue, filtersOnChange }: ItemsListProps<F>) => {
-    return {
-      Filters: (
-        <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={HorizontalList}>
-          {(items) => ({
-            items: items.map(([key, node]) => [key, node, {}] as const),
-          })}
-        </Filters>
-      ),
-      Actions: 'Actions',
-      Content: 'Content',
-      BatchActions: 'Batch actions',
-      Pagination: 'Pagination',
-    }
-  }
-)
+export const ItemsList = makeWithLayout(({ filters, filtersValue, filtersOnChange }: ItemsListProps<string>) => ({
+  Filters: (
+    <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={ListHorizontal}>
+      {(items) => items}
+    </Filters>
+  ),
+  Actions: 'Actions',
+  Content: 'Content',
+  BatchActions: 'Batch actions',
+  Pagination: 'Pagination',
+}))
 
 type ItemsListProps<F extends string> = {
   filters: Filter<F>[]

@@ -1,4 +1,7 @@
-import type { PropsWithChildren } from 'react'
+import { FC } from 'react'
 
-export type SectionProps<P = {}> = PropsWithChildren<P>
-export type LayoutProps<P = {}> = PropsWithChildren<P>
+export interface LayoutProps<C> {
+  children: C
+}
+
+export type LayoutComponent<C> = FC<LayoutProps<C>>

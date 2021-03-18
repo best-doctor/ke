@@ -90,10 +90,10 @@
     },
     "peerDependencies": {
         "date-fns": "^2.16.1",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1",
         "effector": "^21.8.5",
-        "effector-react": "^21.2.1"
+        "effector-react": "^21.2.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
     },
     "scripts": {
         "build": "webpack --config ./webpack.prod.js",
@@ -115,9 +115,9 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-          "prettier --write"
+            "prettier --write"
         ]
-  },
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/best-doctor/ke.git"
