@@ -1,6 +1,5 @@
-const permissionsProvided = (permissions: string[] | undefined | null): boolean => {
-  return permissions !== undefined && permissions !== null && permissions.length > 0
-}
+const permissionsProvided = (permissions: string[] | undefined | null): boolean =>
+  permissions !== undefined && permissions !== null && permissions.length > 0
 
 const hasPermission = (permissions: string[], requiredPerm: string): boolean => {
   if (permissionsProvided(permissions) === false) {

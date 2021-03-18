@@ -22,13 +22,9 @@ const StyledTextEditor = styled.div`
   }
 `
 
-const valueToEditorFormat = (value: string, format = 'html'): any => {
-  return RichTextEditor.createValueFromString(value, format)
-}
+const valueToEditorFormat = (value: string, format = 'html'): any => RichTextEditor.createValueFromString(value, format)
 
-const valueFromEditorFormat = (value: { toString: Function }, format = 'html'): string => {
-  return value.toString(format)
-}
+const valueFromEditorFormat = (value: { toString: Function }, format = 'html'): string => value.toString(format)
 
 const toolbarConfig = {
   // Optionally specify the groups to display (displayed in the order listed).

@@ -16,12 +16,10 @@ type AvatarWidgetProps = {
  * @param style
  * @constructor
  */
-const AvatarWidget = ({ helpText, style, name }: AvatarWidgetProps): JSX.Element => {
-  return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
-      <Avatar name="BD" src="" />
-    </WidgetWrapper>
-  )
-}
+const AvatarWidget = ({ helpText, style, name }: AvatarWidgetProps): JSX.Element => (
+  <WidgetWrapper name={name} style={style} helpText={helpText}>
+    <Avatar name="BD" src="" />
+  </WidgetWrapper>
+)
 
 export { AvatarWidget }

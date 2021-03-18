@@ -24,12 +24,11 @@ test('Redefine from context for inner component with array from outer by name pr
       const wrapper = makeArrayWrapper(name, outerContextWithInner, jest.fn())
 
       const { result } = renderHook(
-        () => {
-          return innerContext.map((_, key) => {
+        () =>
+          innerContext.map((_, key) => {
             const [field] = useNodeState(key)
             return field
-          })
-        },
+          }),
         { wrapper }
       )
 
@@ -38,9 +37,7 @@ test('Redefine from context for inner component with array from outer by name pr
   )
 })
 
-const notArrArbitrary = fc.anything().filter((val) => {
-  return !Array.isArray(val)
-})
+const notArrArbitrary = fc.anything().filter((val) => !Array.isArray(val))
 
 test('Throw exception if outerContext[name] not a array', () => {
   fc.assert(
@@ -69,12 +66,11 @@ test('Pass change from inner context to outer', () => {
         const wrapper = makeArrayWrapper(name, outerContextWithInner, outerContextSetter)
 
         const { result } = renderHook(
-          () => {
-            return innerContext.map((_, key) => {
+          () =>
+            innerContext.map((_, key) => {
               const [, setter] = useNodeState(key)
               return setter
-            })
-          },
+            }),
           { wrapper }
         )
 

@@ -44,8 +44,8 @@ const StyledDateTimeRangeListItem = styled.div`
   overflow: hidden;
 `
 
-const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] => {
-  return dateRanges.map((dateRange_: DateRange) => {
+const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] =>
+  dateRanges.map((dateRange_: DateRange) => {
     const [dateFrom, dateTo] = dateRange_
 
     if (dateFrom && dateTo) {
@@ -54,7 +54,6 @@ const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] =
 
     return null
   })
-}
 
 const AllDayDateTimeRangeAction = (props: DateTimeRangeActionProps): JSX.Element => {
   const {

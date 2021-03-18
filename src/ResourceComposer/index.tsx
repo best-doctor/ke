@@ -12,15 +12,13 @@ import { SideBar, SideBarElement } from '../ListView/components/SideBar'
 import { mountElement } from '../common/permissions'
 import { SideBarElementCompatible } from '../LegacySupport'
 
-const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => {
-  return (
-    <Switch>
-      <Route exact path={`/${name}/`}>
-        {children}
-      </Route>
-    </Switch>
-  )
-}
+const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => (
+  <Switch>
+    <Route exact path={`/${name}/`}>
+      {children}
+    </Route>
+  </Switch>
+)
 
 const AdminResource = ({
   name,
@@ -46,9 +44,7 @@ const AdminResource = ({
   </Switch>
 )
 
-const isAdminResource = (resource: JSX.Element): boolean => {
-  return resource.props.admin !== undefined
-}
+const isAdminResource = (resource: JSX.Element): boolean => resource.props.admin !== undefined
 
 const ResourceComposer = ({
   children,

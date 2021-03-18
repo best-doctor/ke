@@ -7,9 +7,9 @@ import { FormField } from './FormField'
 import { FormGroup } from './FormGroup'
 import { FormArray } from './FormArray'
 
-const Control = ({ value, onChange }: { value: string; onChange: (v: string) => void }): JSX.Element => {
-  return <input value={value} onChange={(e) => onChange(e.target.value)} />
-}
+const Control = ({ value, onChange }: { value: string; onChange: (v: string) => void }): JSX.Element => (
+  <input value={value} onChange={(e) => onChange(e.target.value)} />
+)
 
 describe('Forms sample tests', () => {
   const sampleData = {

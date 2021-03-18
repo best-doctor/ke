@@ -18,12 +18,11 @@ test('Provide props dict-value into FormsContext for children', () => {
       )
 
       const { result } = renderHook(
-        () => {
-          return [...Object.keys(value)].map((key) => {
+        () =>
+          [...Object.keys(value)].map((key) => {
             const [field] = useNodeState(key)
             return [key, field]
-          })
-        },
+          }),
         { wrapper }
       )
 
@@ -43,12 +42,11 @@ test('Provide props array-value into FormsContext for children', () => {
       )
 
       const { result } = renderHook(
-        () => {
-          return value.map((_, key) => {
+        () =>
+          value.map((_, key) => {
             const [field] = useNodeState(key)
             return field
-          })
-        },
+          }),
         { wrapper }
       )
 
@@ -68,12 +66,11 @@ test('Provide props onChange into FormsContext for children', () => {
       )
 
       const { result } = renderHook(
-        () => {
-          return [...Object.keys(value)].map((key) => {
+        () =>
+          [...Object.keys(value)].map((key) => {
             const [, setter] = useNodeState(key)
             return [key, setter] as const
-          })
-        },
+          }),
         { wrapper }
       )
 

@@ -63,9 +63,7 @@ const getCopyHandler = (value: any, copyValue?: GenericAccessor, fallbackCopyVal
   return () => value.toString()
 }
 
-const ensurePromise = <T>(valueOrPromise: ValueOrPromise<T>): Promise<T> => {
-  return Promise.resolve(valueOrPromise)
-}
+const ensurePromise = <T>(valueOrPromise: ValueOrPromise<T>): Promise<T> => Promise.resolve(valueOrPromise)
 
 const applyCallback = <T>(valueOrPromise: ValueOrPromise<T>, callback: Function): any => {
   ensurePromise(valueOrPromise).then((value: any) => callback(value))

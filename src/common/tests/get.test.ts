@@ -42,9 +42,9 @@ function objWithPathArbitrary(path: readonly string[], val: unknown): ReturnType
   return level(path.length)
 }
 
-const existsTupleArbitrary = fc.tuple(pathArrayArbitrary, valueArbitrary).chain(([path, val]) => {
-  return fc.tuple(objWithPathArbitrary(path, val), fc.constant(path), fc.constant(val))
-})
+const existsTupleArbitrary = fc
+  .tuple(pathArrayArbitrary, valueArbitrary)
+  .chain(([path, val]) => fc.tuple(objWithPathArbitrary(path, val), fc.constant(path), fc.constant(val)))
 
 const notExistsTupleArbitrary = fc
   .tuple(pathArrayArbitrary, valueArbitrary, fc.hexaString({ minLength: 10 }))

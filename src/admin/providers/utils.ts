@@ -8,15 +8,14 @@ const makeUpdateWithNotification = (
   payload: object,
   setObject: Function,
   notifier: BaseNotifier
-): Promise<any> => {
-  return provider.patch(url, payload).then(
+): Promise<any> =>
+  provider.patch(url, payload).then(
     (updatedObject: object) => {
       setObject(updatedObject)
       notifier.notifySuccess()
     },
     () => notifier.notifyError()
   )
-}
 
 const setPaginationParameters = (url: URL, paginationParameters: PaginationParameters): void => {
   Object.entries(paginationParameters).forEach(([parameter, value]): void => {

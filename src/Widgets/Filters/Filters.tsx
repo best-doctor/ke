@@ -16,9 +16,10 @@ export function Filters<K extends string, LayoutChildren>({
   children: makeLayoutChildren = (items) => (items as unknown) as LayoutChildren,
 }: FiltersProps<K, LayoutChildren>): ReactElement<FiltersProps<K, LayoutChildren>> {
   const layoutChildren = useMemo(() => {
-    const filterItems = filters.map(({ control, name, ...other }) => {
-      return [name, <FormField name={name} as={control} {...other} />] as [key: K, field: ReactElement]
-    })
+    const filterItems = filters.map(
+      ({ control, name, ...other }) =>
+        [name, <FormField name={name} as={control} {...other} />] as [key: K, field: ReactElement]
+    )
 
     return makeLayoutChildren(filterItems)
   }, [filters, makeLayoutChildren])

@@ -7,9 +7,7 @@ import { testAdmin, testProvider } from '../../../setupTests'
 import { RenderDetail } from '../../RenderDetail'
 
 test('Render detail mount', () => {
-  jest.spyOn(React, 'useEffect').mockImplementation(() => {
-    return { data: { patient: { last_name: 'Test' } } }
-  })
+  jest.spyOn(React, 'useEffect').mockImplementation(() => ({ data: { patient: { last_name: 'Test' } } }))
 
   const component = mount(
     <MemoryRouter initialEntries={['/test/']}>

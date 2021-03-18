@@ -54,24 +54,21 @@ const getNameFromDataPath = (name: string | undefined, resourceName: string): st
   return ''
 }
 
-const getAnalyticsFilterName = (resourceName: string, filterName: string): string => {
-  return `${resourceName}_${filterName}_filter`
-}
+const getAnalyticsFilterName = (resourceName: string, filterName: string): string =>
+  `${resourceName}_${filterName}_filter`
 
 const getCommonFilterAnalyticsPayload = (
   resourceName: string,
   filterValue: AnalyticsValue,
   name: string
-): CommonFilterAnalyticsPayload => {
-  return {
-    widgetName: getAnalyticsFilterName(resourceName, name),
-    widgetType: WidgetTypeEnum.FILTER,
-    value: filterValue,
-    resource: resourceName,
-    resourceId: undefined,
-    viewType: 'list_view',
-  }
-}
+): CommonFilterAnalyticsPayload => ({
+  widgetName: getAnalyticsFilterName(resourceName, name),
+  widgetType: WidgetTypeEnum.FILTER,
+  value: filterValue,
+  resource: resourceName,
+  resourceId: undefined,
+  viewType: 'list_view',
+})
 
 export {
   getFirebaseEvent,

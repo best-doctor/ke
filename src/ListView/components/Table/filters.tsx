@@ -274,7 +274,7 @@ const DateFilter = (params: any): JSX.Element => {
     <StyledFilter>
       <DatePicker
         className="styled-filter base-styled-filter"
-        onChange={(value) => handleChange(value as Date | null)}
+        onChange={(value) => handleChange(value)}
         selected={currentDate}
         dateFormat="yyyy-MM-dd"
         placeholderText={`Фильтр по ${label}`}
@@ -306,7 +306,7 @@ const DateTimeFilter = (params: any): JSX.Element => {
     <StyledFilter>
       <DatePicker
         className="styled-filter base-styled-filter"
-        onChange={(value) => handleChange(value as Date | null)}
+        onChange={(value) => handleChange(value)}
         showTimeSelect
         selected={currentDate}
         dateFormat="yyyy-MM-dd hh:mm:ss"

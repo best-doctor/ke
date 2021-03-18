@@ -40,8 +40,9 @@ const getNextButton = (
   }
 }
 
-const getDefaultButtons = (wizardStep: BaseWizardStep): WizardStepButtonDescription[] => {
-  return [getPrevButton(wizardStep), getNextButton(wizardStep)]
-}
+const getDefaultButtons = (wizardStep: BaseWizardStep): WizardStepButtonDescription[] => [
+  getPrevButton(wizardStep),
+  getNextButton(wizardStep),
+]
 
 export { WizardStepButtonDescription, getPrevButton, getNextButton, getDefaultButtons }

@@ -58,29 +58,27 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
 
   return (
     <>
-      {buttons.map((button) => {
-        return (
-          <Button
-            key={button.name}
-            {...button.style}
-            onClick={() => {
-              sendPushAnalytics(
-                wizardStep.resourceName ? wizardStep.resourceName : '',
-                `wizard_${button.name}_step`,
-                currentState,
-                props
-              )
-              button.handler.call(wizardStep, getWizardStepControlPayload()).then((action: string | undefined) => {
-                if (action) {
-                  setCurrentState(wizard.transition(currentState, action))
-                }
-              })
-            }}
-          >
-            {button.label}
-          </Button>
-        )
-      })}
+      {buttons.map((button) => (
+        <Button
+          key={button.name}
+          {...button.style}
+          onClick={() => {
+            sendPushAnalytics(
+              wizardStep.resourceName ? wizardStep.resourceName : '',
+              `wizard_${button.name}_step`,
+              currentState,
+              props
+            )
+            button.handler.call(wizardStep, getWizardStepControlPayload()).then((action: string | undefined) => {
+              if (action) {
+                setCurrentState(wizard.transition(currentState, action))
+              }
+            })
+          }}
+        >
+          {button.label}
+        </Button>
+      ))}
     </>
   )
 }

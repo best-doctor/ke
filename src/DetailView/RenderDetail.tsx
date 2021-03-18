@@ -25,18 +25,17 @@ type RenderDetailProps = {
   analytics: BaseAnalytic | undefined
 }
 
-const getContainersToMount = (): { [key in FieldsTypeInAdminClass]: Function } => {
+const getContainersToMount = (): { [key in FieldsTypeInAdminClass]: Function } =>
   /*
     Takes a handler that will embed objects for a specific type of fields.
 
     Types of fields can be viewed in BaseAdmin class
   */
-  return {
+  ({
     detail_fields: mountDetailFields,
     wizards: mountWizards,
     additional_detail_widgets: mountDetailFields,
-  }
-}
+  })
 
 const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   /*

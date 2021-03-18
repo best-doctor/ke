@@ -60,21 +60,19 @@ const TableIconButton = ({
   children,
   variantColor,
   ...rest
-}: TableIconButtonProps): JSX.Element => {
-  return (
-    <IconButton
-      size="sm"
-      {...rest}
-      icon={icon}
-      borderWidth={1}
-      onClick={onClick}
-      variantColor={variantColor}
-      isDisabled={isDisabled}
-      aria-label="Table Icon button"
-    >
-      {children}
-    </IconButton>
-  )
-}
+}: TableIconButtonProps): JSX.Element => (
+  <IconButton
+    size="sm"
+    {...rest}
+    icon={icon}
+    borderWidth={1}
+    onClick={onClick}
+    variantColor={variantColor}
+    isDisabled={isDisabled}
+    aria-label="Table Icon button"
+  >
+    {children}
+  </IconButton>
+)
 
 export { StyledTable, TableCell, TableHead, TableRow, TableIconButton }

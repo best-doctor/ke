@@ -14,12 +14,11 @@ type InitializedWidgetAttributes = {
   dataResourceUrl: string
 }
 
-const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObject): string => {
+const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObject): string =>
   /*
     Get the URL to which the data entered by the user will be submitted
   */
-  return getData(dataTarget, detailObject) || detailObject.url
-}
+  getData(dataTarget, detailObject) || detailObject.url
 
 const useWidgetInitialization = (initializationArguments: InitializationArguments): InitializedWidgetAttributes => {
   const { dataTarget, mainDetailObject, name, displayValue, context, dataSource } = initializationArguments

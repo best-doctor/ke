@@ -5,9 +5,9 @@ import { FormField } from '@cdk/Forms'
 
 import { GroupControl } from './GroupControl'
 
-const Control = ({ value, onChange }: { value: string; onChange: (v: string) => void }): JSX.Element => {
-  return <input value={value} onChange={(e) => onChange(e.target.value)} />
-}
+const Control = ({ value, onChange }: { value: string; onChange: (v: string) => void }): JSX.Element => (
+  <input value={value} onChange={(e) => onChange(e.target.value)} />
+)
 
 const testTags = ['div', 'p', 'span'].map((tag) => fc.constant(tag))
 const elementArbitrary = fc

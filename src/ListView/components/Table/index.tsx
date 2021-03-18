@@ -43,8 +43,8 @@ declare module 'react-table' {
   export interface ColumnInstance<D extends object = {}> extends UseSortByColumnProps<D> {}
 }
 
-const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
-  return headerGroups.map((headerGroup: HeaderGroup) => (
+const mountHeader = (headerGroups: HeaderGroup[]): ReactNode =>
+  headerGroups.map((headerGroup: HeaderGroup) => (
     <Flex flex={1} flexDirection="row" {...headerGroup.getHeaderGroupProps()}>
       {headerGroup.headers.map((column: any) => (
         <TableCell p={4} key={column.id} bg="gray.100" {...column.getHeaderProps()} justifyContent="space-between">
@@ -55,32 +55,28 @@ const mountHeader = (headerGroups: HeaderGroup[]): ReactNode => {
       ))}
     </Flex>
   ))
-}
 
-const mountRows = (rows: Row[], prepareRow: Function): ReactNode => {
-  return rows.map((row: Row) => {
+const mountRows = (rows: Row[], prepareRow: Function): ReactNode =>
+  rows.map((row: Row) => {
     prepareRow(row)
 
     return (
       // eslint-disable-next-line
       <TableRow flexDirection="row" {...row.getRowProps()} data-testid="table-row">
-        {row.cells.map((cell: any) => {
-          return (
-            <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
-              {cell.column.toDetailRoute ? (
-                <Link to={{ pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}` }}>
-                  {cell.render('Cell')}
-                </Link>
-              ) : (
-                cell.render('Cell')
-              )}
-            </TableCell>
-          )
-        })}
+        {row.cells.map((cell: any) => (
+          <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
+            {cell.column.toDetailRoute ? (
+              <Link to={{ pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}` }}>
+                {cell.render('Cell')}
+              </Link>
+            ) : (
+              cell.render('Cell')
+            )}
+          </TableCell>
+        ))}
       </TableRow>
     )
   })
-}
 
 const Table = ({
   resourceName,

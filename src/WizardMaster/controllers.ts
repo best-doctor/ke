@@ -3,9 +3,7 @@ import { containerErrorsStore, containerStore, initialStore } from './store'
 
 containerErrorsStore.on(pushError, (state, value) => [...state, value]).on(clearErros, () => [])
 
-initialStore.on(setInitialValue, (state, value) => {
-  return { ...state, ...value }
-})
+initialStore.on(setInitialValue, (state, value) => ({ ...state, ...value }))
 
 containerStore.on(submitChange, (state, { payload }) => ({ ...state, ...payload }))
 

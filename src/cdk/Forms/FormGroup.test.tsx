@@ -24,12 +24,11 @@ test('Redefine from context for inner component with dictionary from outer by na
       const wrapper = makeGroupWrapper(name, outerContextWithInner, jest.fn())
 
       const { result } = renderHook(
-        () => {
-          return [...Object.keys(innerContext)].map((key) => {
+        () =>
+          [...Object.keys(innerContext)].map((key) => {
             const [field] = useNodeState(key)
             return [key, field]
-          })
-        },
+          }),
         { wrapper }
       )
 
@@ -38,9 +37,9 @@ test('Redefine from context for inner component with dictionary from outer by na
   )
 })
 
-const notDictionaryArbitrary = fc.anything().filter((val) => {
-  return typeof val !== 'object' || val === null || Array.isArray(val)
-})
+const notDictionaryArbitrary = fc
+  .anything()
+  .filter((val) => typeof val !== 'object' || val === null || Array.isArray(val))
 
 test('Throw exception if outerContext[name] not a dictionary', () => {
   fc.assert(
@@ -69,12 +68,11 @@ test('Pass change from inner context to outer', () => {
         const wrapper = makeGroupWrapper(name, outerContextWithInner, outerContextSetter)
 
         const { result } = renderHook(
-          () => {
-            return [...Object.keys(innerContext)].map((key) => {
+          () =>
+            [...Object.keys(innerContext)].map((key) => {
               const [, setter] = useNodeState(key)
               return [key, setter] as const
-            })
-          },
+            }),
           { wrapper }
         )
 
