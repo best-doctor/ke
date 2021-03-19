@@ -15,6 +15,7 @@ import { DateWidget } from './DateWidget'
 import { RadioButtonWidget } from './RadioButtonWidget'
 import { ContainerWidget } from './ContainerWidget'
 import { CheckboxWidget } from './CheckboxWidget'
+import { CodeWidget } from './CodeWidget'
 
 export {
   AsyncTextWidget,
@@ -35,4 +36,5 @@ export {
   RadioButtonWidget,
   ContainerWidget,
   CheckboxWidget,
+  CodeWidget,
 }

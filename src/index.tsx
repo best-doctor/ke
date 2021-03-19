@@ -58,6 +58,7 @@ import {
   RadioButtonWidget,
   ContainerWidget,
   CheckboxWidget,
+  CodeWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -152,6 +153,7 @@ export {
   WizardPayload,
   ContainerWidget,
   CheckboxWidget,
+  CodeWidget,
   getDefaultButtons,
   getPrevButton,
   getNextButton,
