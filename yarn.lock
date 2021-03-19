@@ -3585,6 +3585,11 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
+date-fns@2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
+  integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
+
 date-fns@^2.0.1:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.14.0.tgz"
@@ -3928,6 +3933,16 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+effector-react@21.2.1:
+  version "21.2.1"
+  resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-21.2.1.tgz#b6d1c8a5c61ffee841b41f4b697ec069094798c8"
+  integrity sha512-NvQBKnA6VQ14aZcHjag5muqvqnfr4H8g3Ry8/nuiEWqR/c9LkKK9mUoU1lyQU7m/eKlvuXSqeDQ1I4iBsobMqA==
+
+effector@21.8.5:
+  version "21.8.5"
+  resolved "https://registry.yarnpkg.com/effector/-/effector-21.8.5.tgz#6e20124e05d9dc913282508c0cf1d2d3846ceada"
+  integrity sha512-H6orDC4IOnfh2VJUZ4a5BcF1vlZhL1omWhK81QESXstVc7ePtHjoPcAOVYRe+jYa27+mX6GXKikGfY5durUqSQ==
 
 elliptic@^6.0.0, elliptic@^6.5.2, elliptic@^6.5.3:
   version "6.5.4"
@@ -7863,6 +7878,16 @@ react-debounce-input@^3.2.2:
     lodash.debounce "^4"
     prop-types "^15.7.2"
 
+react-dom@16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
+  integrity sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
+
 react-draggable@3.x:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-3.3.2.tgz"
@@ -8064,6 +8089,15 @@ react-transition-group@^4.3.0:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
+  integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 read-pkg-up@^2.0.0:
