@@ -22,9 +22,14 @@ const MessagesBlock = ({
     <ul>
       {messages
         .filter((message: string | null) => message !== null)
-        .map((message: string) => (
-          <li style={{ color: messageColor }}>{message}</li>
-        ))}
+        .map((message: string, index) => {
+          const key = index
+          return (
+            <li style={{ color: messageColor }} key={key}>
+              {message}
+            </li>
+          )
+        })}
     </ul>
   )
 }

@@ -4,6 +4,7 @@ import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 
 import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
+
 import { BlockM1xA1L } from '../../Layouts/BlockM1xA1L'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }

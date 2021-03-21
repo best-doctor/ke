@@ -20,7 +20,7 @@ export const BlockM1xA1L = makeSlots(
   },
   (slotElements) => (
     <StyledMapFilterWidget>
-      <Flex height="400px">
+      <Flex height="448px">
         <Box flex={1}>{slotElements.M}</Box>
         <Box width="300px" marginLeft="5px">
           {slotElements.S}
