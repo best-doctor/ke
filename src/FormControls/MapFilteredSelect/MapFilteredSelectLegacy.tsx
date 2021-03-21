@@ -10,7 +10,7 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 
 const StyledMapFilterWidget = styled.div`
   border-width: 1px;
-  border-radius: 3px;
+  border-radius: 0.25rem;
   border-color: #cbd5e0;
   padding: 5.4px;
   white-space: pre-line;
@@ -32,7 +32,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText}>
       <StyledMapFilterWidget>
-        <Flex height="400px">
+        <Flex height="448px">
           <Box flex={1}>
             <MapSelect
               value={value}

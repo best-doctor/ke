@@ -5,3 +5,7 @@ export interface MapContext {
 export type Coords = LatLng
 
 type LatLng = { lat: number; lng: number }
+
+export type MarkerOptions = {
+  icon?: string
+}

@@ -1,20 +1,72 @@
-import React, { PropsWithChildren } from 'react'
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import React, { DetailedHTMLProps, PropsWithChildren } from 'react'
+import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/core'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
+import { MapMarker } from './Marker'
 
-export function Map({ children, ...other }: MapProps): JSX.Element {
+const searchBoxInputStyle: DetailedHTMLProps<any, any> = {
+  boxSizing: 'border-box',
+  border: `1px solid #cbd5e0`,
+  width: `100%`,
+  height: `40px`,
+  padding: `0 12px`,
+  marginBottom: '5.4px',
+  outline: `none`,
+  textOverflow: `ellipses`,
+}
+
+const mapContainerStyle: DetailedHTMLProps<any, any> = {
+  height: 'calc(100% - 45.4px)',
+  width: '100%',
+}
+
+export function Map({ children, center, ...other }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapConfig?.apiKey || '',
+    libraries: ['places'],
   })
+  const [searchBox, setSearchBox] = React.useState<any>()
+  const [searchBoxMarker, setSearchBoxMarker] = React.useState<Marker | null>(null)
+
+  const currentCenter = React.useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
+
+  const onLoad = (ref: any): void => {
+    setSearchBox(ref)
+  }
+
+  const onPlacesChanged = (): void => {
+    const places = searchBox.getPlaces()
+
+    let marker: Marker | null = null
+    if (places.length > 0) {
+      marker = {
+        position: places[0].geometry.location,
+        title: places[0]?.name,
+      }
+    }
+    setSearchBoxMarker(marker)
+  }
 
   return isLoaded ? (
-    <GoogleMap {...other} mapContainerStyle={{ height: '100%', width: '100%' }} clickableIcons={false}>
-      {children}
-    </GoogleMap>
+    <>
+      <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+        <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
+      </StandaloneSearchBox>
+      <GoogleMap {...other} center={currentCenter} mapContainerStyle={mapContainerStyle} clickableIcons={false}>
+        {children}
+        {searchBoxMarker && (
+          <MapMarker
+            key="searchBoxResult"
+            title={searchBoxMarker.title}
+            position={searchBoxMarker.position}
+            options={{ icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
+          />
+        )}
+      </GoogleMap>
+    </>
   ) : (
     <Spinner />
   )
@@ -27,3 +79,8 @@ export type MapProps = PropsWithChildren<{
   onZoomChanged?: () => void
   onBoundsChanged?: () => void
 }>
+
+type Marker = {
+  position: Coords
+  title?: string
+}

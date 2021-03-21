@@ -62,7 +62,9 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     <WidgetWrapper name={name} style={style} helpText={helpText}>
       <RadioGroup onChange={handleChange} value={selectedValue}>
         {elements.map((element: RadioButtonElement) => (
-          <Radio value={optionValue(element)}>{optionLabel(element)}</Radio>
+          <Radio value={optionValue(element)} key={element.uuid}>
+            {optionLabel(element)}
+          </Radio>
         ))}
       </RadioGroup>
     </WidgetWrapper>
