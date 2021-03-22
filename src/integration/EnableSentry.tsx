@@ -10,7 +10,7 @@ const EnableSentry = ({ sentryDSN, user }: EnableSentryProps): JSX.Element => {
   useEffect(() => {
     if (sentryDSN) {
       Sentry.init({ dsn: sentryDSN })
-      Sentry.configureScope((scope: any) => scope.setUser({ email: user && user.email }))
+      Sentry.configureScope((scope: Sentry.Scope) => scope.setUser({ email: user && user.email }))
     }
   }, [user, sentryDSN])
 

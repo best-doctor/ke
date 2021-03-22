@@ -43,7 +43,7 @@ function stringToPath(str: string): string[] {
   if (str.charCodeAt(0) === 46 /* . */) {
     result.push('')
   }
-  str.replace(rePropName, (match, number, quote, subString): string => {
+  str.replace(rePropName, (match, number, quote, subString: string): string => {
     result.push(quote ? subString.replace(reEscapeChar, '$1') : number || match)
     return ''
   })

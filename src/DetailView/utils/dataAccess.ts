@@ -54,13 +54,17 @@ const getPayload = (
   return { [name]: value }
 }
 
-const getCopyHandler = (value: any, copyValue?: GenericAccessor, fallbackCopyValue?: GenericAccessor): Function => {
+const getCopyHandler = (
+  value: { toString: Function } | null,
+  copyValue?: GenericAccessor,
+  fallbackCopyValue?: GenericAccessor
+): Function => {
   const realCopyValue = copyValue || fallbackCopyValue
   if (typeof realCopyValue === 'function') return () => realCopyValue(value)
 
   if (typeof realCopyValue === 'string') return () => realCopyValue
 
-  return () => value.toString()
+  return () => (value ? value.toString() : value)
 }
 
 const ensurePromise = <T>(valueOrPromise: ValueOrPromise<T>): Promise<T> => Promise.resolve(valueOrPromise)

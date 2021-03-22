@@ -9,9 +9,14 @@ type GenericAccessor = string | Function | JSX.Element | undefined
 
 type OptionalDate = Date | null
 
-type DetailObject = any
+type DetailObject = {
+  id?: string | number
+  uuid?: string
+  url?: string
+  [key: string]: any
+}
 
-type WizardObject = any
+type WizardObject = DetailObject
 
 type ValueOrPromise<T> = T | Promise<T>
 
@@ -33,8 +38,8 @@ type WidgetProps = {
   style: object
   setInitialValue: Function
   submitChange: Function
-  notBlockingValidators?: Function[]
-  blockingValidators?: Function[]
+  notBlockingValidators?: ValidatorFunction[]
+  blockingValidators?: ValidatorFunction[]
   containerStore: Store<object>
   useClipboard?: boolean
   copyValue?: GenericAccessor
@@ -42,6 +47,12 @@ type WidgetProps = {
 }
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'
+
+type ValidatorFunction = (
+  changeValue: object | string,
+  provider: Provider,
+  detailObject: DetailObject
+) => Promise<string>
 
 export {
   GenericAccessor,
@@ -52,4 +63,5 @@ export {
   FieldsTypeInAdminClass,
   WizardObject,
   ValueOrPromise,
+  ValidatorFunction,
 }

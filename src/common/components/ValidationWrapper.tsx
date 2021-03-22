@@ -4,12 +4,12 @@ import { MessagesBlock } from './MessagesBlock'
 import { useValidation } from '../hooks/useValidation'
 
 import type { Provider } from '../../admin/providers/interfaces'
-import type { DetailObject } from '../../typing'
+import type { DetailObject, ValidatorFunction } from '../../typing'
 
 type ValidationWrapperProps = {
   children: JSX.Element
-  blockingValidators: Function[]
-  notBlockingValidators: Function[]
+  blockingValidators: ValidatorFunction[]
+  notBlockingValidators: ValidatorFunction[]
   provider: Provider
   detailObject: DetailObject
 }
@@ -31,7 +31,9 @@ const ValidationWrapper = ({
   provider,
   detailObject,
 }: ValidationWrapperProps): JSX.Element => {
-  const originalHandler = children.props.handleChange || children.props.onChange || children.props.onClick
+  const { props } = children as { props: { handleChange?: Function; onChange?: Function; onClick: Function } }
+  const { handleChange, onChange, onClick } = props
+  const originalHandler = handleChange || onChange || onClick
 
   const { infoMessages, errorMessages, handleAction } = useValidation(
     originalHandler,

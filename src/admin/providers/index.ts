@@ -6,6 +6,13 @@ import type { Filter, ResponseCache, Provider, TableFilter, GetListParameters } 
 import { CursorPagination, Pagination, PagedPagination, PaginationParameters } from './pagination'
 import { setPaginationParameters } from './utils'
 
+type BaseResponse = {
+  data: {
+    data: any
+    meta: any
+  }
+}
+
 /**
  * Base for Django REST API interactions
  *
@@ -125,22 +132,22 @@ export class BaseProvider implements Provider {
    * @param forceCache - don't use cache if true
    */
   getObject = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<Model> => {
-    const response = await this.get(resourceUrl, cacheTime, forceCache)
+    const response: BaseResponse = await this.get(resourceUrl, cacheTime, forceCache)
     return response.data.data
   }
 
   post = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response = await this.http.post(resourceUrl, payload)
+    const response: BaseResponse = await this.http.post(resourceUrl, payload)
     return response.data.data
   }
 
   put = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response = await this.http.put(resourceUrl, payload)
+    const response: BaseResponse = await this.http.put(resourceUrl, payload)
     return response.data.data
   }
 
   patch = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response = await this.http.patch(resourceUrl, payload)
+    const response: BaseResponse = await this.http.patch(resourceUrl, payload)
     return response.data.data
   }
 
@@ -162,7 +169,7 @@ export class BaseProvider implements Provider {
     cacheTime?: number,
     forceCache?: boolean
   ): Promise<[Model[], Array<TableFilter>, Pagination]> => {
-    const response = await this.get(url, cacheTime, forceCache)
+    const response: BaseResponse = await this.get(url, cacheTime, forceCache)
     const { data, meta } = response.data
     const tableFilters = this.getFilters(meta, resourceFilters)
     const pagination = this.getPagination(meta)

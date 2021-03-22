@@ -1,4 +1,4 @@
-import type { Location } from 'history'
+import type { Location, History } from 'history'
 
 import type { Filter, TableFilter } from 'admin/providers/interfaces'
 
@@ -75,7 +75,7 @@ class FilterManager {
     })
   }
 
-  static setFilters(location: Location, filters: Filter[], history: any): void {
+  static setFilters(location: Location, filters: Filter[], history: History): void {
     const query = new URLSearchParams(location.search)
 
     FilterManager.setQueryFilters(query, filters)
@@ -83,13 +83,13 @@ class FilterManager {
     history.replace({ ...history.location, search: query.toString() })
   }
 
-  static resetFilters(history: any): void {
+  static resetFilters(history: History): void {
     history.push({
       search: '',
     })
   }
 
-  static overrideFilters(filters: Filter[], history: any): void {
+  static overrideFilters(filters: Filter[], history: History): void {
     const query = new URLSearchParams()
 
     FilterManager.setQueryFilters(query, filters)

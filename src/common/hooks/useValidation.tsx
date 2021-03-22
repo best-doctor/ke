@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from 'react'
-
 import type { Provider } from '../../admin/providers/interfaces'
-import type { DetailObject } from '../../typing'
+import type { DetailObject, ValidatorFunction } from '../../typing'
 
 const makeCheck = (
-  validators: Function[],
+  validators: ValidatorFunction[],
   changeValue: object | string,
   setMessage: Function,
   provider: Provider,
   detailObject: DetailObject
 ): void => {
-  validators.forEach((validator: Function) => {
+  validators.forEach((validator: ValidatorFunction) => {
     validator(changeValue, provider, detailObject).then((validationResult: string) =>
       setMessage((oldState: string[]) => [...oldState, validationResult])
     )
@@ -19,8 +18,8 @@ const makeCheck = (
 
 const useValidation = (
   callback: Function,
-  blockingValidators: Function[],
-  notBlockingValidators: Function[],
+  blockingValidators: ValidatorFunction[],
+  notBlockingValidators: ValidatorFunction[],
   provider: Provider,
   detailObject: DetailObject
 ): { infoMessages: string[]; errorMessages: string[]; handleAction: Function } => {
@@ -44,8 +43,8 @@ const useValidation = (
 }
 
 const useValueValidation = (
-  blockingValidators: Function[],
-  notBlockingValidators: Function[],
+  blockingValidators: ValidatorFunction[],
+  notBlockingValidators: ValidatorFunction[],
   provider: Provider,
   detailObject: DetailObject,
   value: string | object

@@ -7,7 +7,7 @@ import { get } from '../../../common/utils/get'
 type AnalyticsValue = string | object
 
 type WidgetAnalyticsProps = {
-  objectForAnalytics: DetailObject
+  objectForAnalytics: DetailObject | undefined
   onChangeValue: any
   eventName: string
   widgetName: string

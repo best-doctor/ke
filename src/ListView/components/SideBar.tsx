@@ -15,15 +15,28 @@ import { useHistory } from 'react-router-dom'
 
 import { goToResourceEvent } from '../events'
 
-const SideBarElement = ({ resource }: { resource: JSX.Element }): JSX.Element => {
+type SideBarProps = {
+  name: string
+  admin: {
+    verboseName: string
+  }
+}
+
+type SideBarElementType = {
+  props: SideBarProps
+}
+
+const SideBarElement = ({ resource }: { resource: SideBarElementType }): JSX.Element => {
   const { push } = useHistory()
+  const { props } = resource
+  const { name, admin } = props
   const goToResource = (): void => {
-    push(`/${resource.props.name}/`)
+    push(`/${name}/`)
     goToResourceEvent()
   }
   return (
-    <Button variantColor="teal" m={2} key={resource.props.name} onClick={goToResource} id="go-to-resource-button">
-      {resource.props.admin.verboseName}
+    <Button variantColor="teal" m={2} key={name} onClick={goToResource} id="go-to-resource-button">
+      {admin.verboseName}
     </Button>
   )
 }

@@ -12,6 +12,14 @@ import { SideBar, SideBarElement } from '../ListView/components/SideBar'
 import { mountElement } from '../common/permissions'
 import { SideBarElementCompatible } from '../LegacySupport'
 
+type ResourceProps = {
+  props: {
+    admin?: {
+      permissions: string[]
+    }
+  }
+}
+
 const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => (
   <Switch>
     <Route exact path={`/${name}/`}>
@@ -44,7 +52,7 @@ const AdminResource = ({
   </Switch>
 )
 
-const isAdminResource = (resource: JSX.Element): boolean => resource.props.admin !== undefined
+const isAdminResource = (resource: ResourceProps): boolean => resource.props.admin !== undefined
 
 const ResourceComposer = ({
   children,
@@ -63,7 +71,8 @@ const ResourceComposer = ({
           <SideBar header="Разделы">
             {React.Children.map(children, (resource: JSX.Element) => {
               if (isAdminResource(resource)) {
-                const adminPermissions = resource.props.admin.permissions
+                const { props } = resource as ResourceProps
+                const adminPermissions = props?.admin?.permissions || []
                 const element = <SideBarElement resource={resource} />
 
                 return mountElement(permissions, adminPermissions, element) || <></>
@@ -77,7 +86,8 @@ const ResourceComposer = ({
         )}
         {React.Children.map(children, (resource: JSX.Element) => {
           if (isAdminResource(resource)) {
-            const adminPermissions = resource.props.admin.permissions
+            const { props } = resource as ResourceProps
+            const adminPermissions = props?.admin?.permissions || []
 
             return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
           }

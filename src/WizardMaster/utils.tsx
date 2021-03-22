@@ -3,6 +3,13 @@ import { clearErros, pushError, submitChange } from './controllers'
 import type { BaseWizard } from './interfaces'
 import type { WizardFieldElement, DetailFieldDescription } from '../admin/fields/FieldDescription'
 
+type WidgetType = {
+  widgets?: WidgetType[]
+  required: boolean
+  helpText: string
+  name: string
+}
+
 const clearInitialObjectState = (): { payload: object } => submitChange({ payload: { __initial__: null } })
 
 const clearStorage = (elements: DetailFieldDescription[], storage: { [key: string]: object | null }): void => {
@@ -36,8 +43,8 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
   return wizardInstance
 }
 
-const validateRequiredWidgets = (widgets: any, wizardContext: any): void => {
-  widgets.forEach((widget: any) => {
+const validateRequiredWidgets = (widgets: WidgetType[], wizardContext: { [key: string]: any }): void => {
+  widgets.forEach((widget: WidgetType) => {
     if (widget?.widgets) {
       validateRequiredWidgets(widget.widgets, wizardContext)
     } else {

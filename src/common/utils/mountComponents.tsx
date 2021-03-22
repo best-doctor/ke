@@ -1,7 +1,7 @@
 import React from 'react'
 // eslint-disable-next-line
 // @ts-ignore
-import { Row, getColumnProps } from 'react-flexbox-grid'
+import { Row, getColumnProps, ColProps } from 'react-flexbox-grid'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
@@ -118,7 +118,7 @@ const mountComponents = ({
           const { widget, name, layout, widgetAnalytics } = adminElement
 
           const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject)
-          const colProps = getColumnProps(layout)
+          const colProps: ColProps = getColumnProps(layout)
           const columnKey = `${rowIndex}_${columnIndex}_${name}`
 
           return (

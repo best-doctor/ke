@@ -1,5 +1,7 @@
 abstract class BaseAnalytic {
-  analyticHandler: any
+  analyticHandler: {
+    logEvent: Function
+  }
 
   constructor(config: any) {
     this.analyticHandler = this.initialize(config)

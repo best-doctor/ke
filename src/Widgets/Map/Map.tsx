@@ -28,7 +28,7 @@ export function Map({ children, center, ...other }: MapProps): JSX.Element {
     googleMapsApiKey: mapConfig?.apiKey || '',
     libraries: ['places'],
   })
-  const [searchBox, setSearchBox] = React.useState<any>()
+  const [searchBox, setSearchBox] = React.useState<google.maps.places.SearchBox>()
   const [searchBoxMarker, setSearchBoxMarker] = React.useState<Marker | null>(null)
 
   const currentCenter = React.useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
@@ -38,16 +38,26 @@ export function Map({ children, center, ...other }: MapProps): JSX.Element {
   }
 
   const onPlacesChanged = (): void => {
-    const places = searchBox.getPlaces()
+    if (searchBox !== undefined) {
+      const places = searchBox.getPlaces()
 
-    let marker: Marker | null = null
-    if (places.length > 0) {
-      marker = {
-        position: places[0].geometry.location,
-        title: places[0]?.name,
+      let marker: Marker | null = null
+      if (places.length > 0) {
+        const place = places[0]
+        const { geometry } = place
+        if (geometry != null) {
+          const location = {
+            lat: geometry.location.lat(),
+            lng: geometry.location.lng(),
+          }
+          marker = {
+            position: location,
+            title: place?.name,
+          }
+        }
       }
+      setSearchBoxMarker(marker)
     }
-    setSearchBoxMarker(marker)
   }
 
   return isLoaded ? (

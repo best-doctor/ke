@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Flex, Text } from '@chakra-ui/core'
-import { usePagination, useTable, useFilters } from 'react-table'
+import { usePagination, useTable, useFilters, ActionType, TableState } from 'react-table'
 import { Link } from 'react-router-dom'
 
 import type { Row, HeaderGroup } from 'react-table'
@@ -32,6 +32,26 @@ type TableProps = {
   provider?: Provider
 }
 
+type ColumnType = {
+  id: string
+  getHeaderProps: () => any
+  toDetailRoute?: string
+  accessor?: (value: any) => any
+  render: (name: string) => ReactNode
+}
+
+type RowType = {
+  index: any
+  original: any
+}
+
+type CellProps = {
+  getCellProps: () => any
+  row: RowType
+  column: ColumnType
+  render: (name: string) => ReactNode
+}
+
 // Use declaration merging to extend types https://github.com/tannerlinsley/react-table/commit/7ab63858391ebb2ff621fa71411157df19d916ba
 declare module 'react-table' {
   export interface TableOptions<D extends object> extends UsePaginationOptions<D>, UseFiltersOptions<D> {}
@@ -46,7 +66,7 @@ declare module 'react-table' {
 const mountHeader = (headerGroups: HeaderGroup[]): ReactNode =>
   headerGroups.map((headerGroup: HeaderGroup) => (
     <Flex flex={1} flexDirection="row" {...headerGroup.getHeaderGroupProps()}>
-      {headerGroup.headers.map((column: any) => (
+      {headerGroup.headers.map((column: ColumnType) => (
         <TableCell p={4} key={column.id} bg="gray.100" {...column.getHeaderProps()} justifyContent="space-between">
           <Flex flexDirection="column">
             <Text fontWeight="bold">{column.render('Header')}</Text>
@@ -63,9 +83,9 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode =>
     return (
       // eslint-disable-next-line
       <TableRow flexDirection="row" {...row.getRowProps()} data-testid="table-row">
-        {row.cells.map((cell: any) => (
+        {row.cells.map((cell: CellProps) => (
           <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
-            {cell.column.toDetailRoute ? (
+            {cell.column.toDetailRoute && cell.column.accessor ? (
               <Link to={{ pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}` }}>
                 {cell.render('Cell')}
               </Link>
@@ -112,9 +132,9 @@ const Table = ({
       initialState: { pageIndex: 0 },
       pageCount: controlledPageCount,
       autoResetPage: false,
-      stateReducer: (newState: any, action: any) => {
+      stateReducer: (newState: TableState, action: ActionType) => {
         if (action.type === 'gotoPage' && setBackendPage) {
-          const newPageIndex = newState.pageIndex as number
+          const newPageIndex = newState.pageIndex
           setBackendPage(newPageIndex + 1)
         }
         return newState

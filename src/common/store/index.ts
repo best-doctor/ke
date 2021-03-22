@@ -13,6 +13,10 @@ type DetailEvent = {
   provider: Provider
 }
 
+type State = {
+  [key: string]: any
+}
+
 const storeListResource = createEvent<ListEvent>()
 
 const storeDetailResource = createEvent<DetailEvent>()
@@ -42,10 +46,10 @@ const storeDetailEffect = createEffect({
 })
 
 const effectorStore = createStore<object>({})
-  .on(storeListResource, (state: any, { resourceUrl, provider }: ListEvent): void => {
+  .on(storeListResource, (state: State, { resourceUrl, provider }: ListEvent): void => {
     !state[resourceUrl] && storeListEffect({ resourceUrl, provider })
   })
-  .on(storeDetailResource, (state: any, { resourceUrl, resourceId, provider }: DetailEvent): void => {
+  .on(storeDetailResource, (state: State, { resourceUrl, resourceId, provider }: DetailEvent): void => {
     !state[resourceUrl + resourceId] && storeDetailEffect({ resourceUrl, resourceId, provider })
   })
   .on(storeListEffect.done, (state: any, { result }): object => {
@@ -63,7 +67,7 @@ class StoreManager {
   }
 
   static getResource(resourceKey: string): any {
-    const state: any = effectorStore.getState()
+    const state: State = effectorStore.getState()
 
     return state[resourceKey]
   }

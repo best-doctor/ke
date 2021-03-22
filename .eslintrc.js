@@ -52,7 +52,6 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/unbound-method': 'off',
   },
   overrides: [
@@ -61,6 +60,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/ban-ts-ignore': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
       },
     },
   ],

@@ -9,10 +9,10 @@ export function Table<T>({ children, data, getKey }: TableProps<T>): JSX.Element
     .filter((child) => (child as ReactElement).type === Column)
     .map((columnElement, index) => ({
       key: index,
-      headCell: Children.toArray((columnElement as ReactElement).props.children).find(
+      headCell: Children.toArray((columnElement as ReactElement<PropsWithChildren<T>>).props.children).find(
         (child) => (child as ReactElement).type === Th
       ) as ReactElement,
-      dataCell: Children.toArray((columnElement as ReactElement).props.children).find(
+      dataCell: Children.toArray((columnElement as ReactElement<PropsWithChildren<T>>).props.children).find(
         (child) => (child as ReactElement).type === Td
       ) as ReactElement,
     }))

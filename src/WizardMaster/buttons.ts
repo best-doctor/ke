@@ -1,10 +1,10 @@
-import type { BaseWizardStep } from './interfaces'
+import type { BaseWizardStep, WizardPayload } from './interfaces'
 
 type Style = Record<string, any>
 
 type WizardStepButtonDescription = {
   style: Style
-  handler: Function
+  handler: (payload: WizardPayload) => Promise<string>
   label: string | undefined
   name: string
 }

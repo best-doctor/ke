@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import { useHistory, useLocation } from 'react-router-dom'
 import { format } from 'date-fns'
+import type { Location, History } from 'history'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -15,6 +16,21 @@ import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
 import { StoreManager } from '../../../common/store'
 import { FilterManager } from '../../../common/filterManager'
+
+type Option = {
+  text: string
+}
+
+type ValueType = {
+  value: string
+}
+
+type IdType = {
+  id: string
+}
+
+type OptionIdType = Option & IdType
+type OptionValueType = Option & ValueType
 
 const StyledFilter = styled.div`
   .base-styled-filter {
@@ -29,7 +45,7 @@ const StyledFilter = styled.div`
   }
 `
 
-const setFilterValue = (location: any, filterName: any, filterValue: any, history: any): void => {
+const setFilterValue = (location: Location, filterName: any, filterValue: any, history: History): void => {
   const filters = FilterManager.getFilters(location.search)
   filters.push({ filterName, filterOperation: undefined, value: filterValue })
   FilterManager.setFilters(location, filters, history)
@@ -68,7 +84,7 @@ const BaseFilter = (params: any): JSX.Element => {
 const MultiSelectFilter = (params: any): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
   const { name, label, filterResource, resourceName } = params
-  const storedOptions = StoreManager.getResource(filterResource)
+  const storedOptions = StoreManager.getResource(filterResource) as []
   const history = useHistory()
   const location = useLocation()
 
@@ -77,12 +93,14 @@ const MultiSelectFilter = (params: any): JSX.Element => {
   }, [storedOptions])
 
   const getFilteredOptions = (selectedValueId: string): string[] => {
-    const filteredOptions = storedOptions.filter((element: any) => element.parent === parseInt(selectedValueId, 10))
+    const filteredOptions = storedOptions.filter(
+      (element: { parent: number }) => element.parent === parseInt(selectedValueId, 10)
+    )
 
     return filteredOptions
   }
 
-  const handleChange = (value: any): void => {
+  const handleChange = (value: [IdType]): void => {
     let selectedValueId = ''
 
     if (value && value.length > 0) {
@@ -110,8 +128,8 @@ const MultiSelectFilter = (params: any): JSX.Element => {
         isMulti
         isClearable
         options={options}
-        getOptionLabel={(option: any) => option.text}
-        getOptionValue={(option: any) => option.id}
+        getOptionLabel={(option: OptionIdType) => option.text}
+        getOptionValue={(option: OptionIdType) => option.id}
         placeholder={`Фильтр по ${label}`}
       />
     </StyledFilter>
@@ -119,11 +137,11 @@ const MultiSelectFilter = (params: any): JSX.Element => {
 }
 
 const SelectFilter = (params: any): JSX.Element => {
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, filterResource } = params
   const history = useHistory()
   const location = useLocation()
 
-  const handleChange = (value: any): void => {
+  const handleChange = (value: ValueType): void => {
     const filterValue = value ? value.value : ''
 
     pushAnalytics({
@@ -140,10 +158,10 @@ const SelectFilter = (params: any): JSX.Element => {
       <Select
         className="styled-filter"
         onChange={(value: any) => handleChange(value)}
-        options={StoreManager.getResource(params.filterResource)}
+        options={StoreManager.getResource(filterResource)}
         isClearable
-        getOptionLabel={(option: any) => option.text}
-        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: OptionValueType) => option.text}
+        getOptionValue={(option: OptionValueType) => option.value}
         placeholder={`Фильтр по ${label}`}
       />
     </StyledFilter>
@@ -167,7 +185,7 @@ const BooleanFilter = (params: any): JSX.Element => {
     { value: falseValue, text: falseText },
   ]
 
-  const handleChange = (value: any): void => {
+  const handleChange = (value: ValueType): void => {
     const filterValue = value ? value.value : ''
 
     pushAnalytics({
@@ -186,8 +204,8 @@ const BooleanFilter = (params: any): JSX.Element => {
         onChange={(value: any) => handleChange(value)}
         options={options}
         isClearable
-        getOptionLabel={(option: any) => option.text}
-        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: OptionValueType) => option.text}
+        getOptionValue={(option: OptionValueType) => option.value}
         placeholder={`Фильтр по ${label}`}
       />
     </StyledFilter>
@@ -211,13 +229,13 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
   const isClearable = true
   const [value, setValue] = React.useState<object | null>(null)
 
-  const handleChange = (changeValue: any): void => {
+  const handleChange = (changeValue: []): void => {
     setValue(changeValue)
     let filterValue
     if (!changeValue) {
       filterValue = ''
     } else if (isMulti) {
-      filterValue = changeValue.map((option: any) => optionValue(option)).join(',')
+      filterValue = changeValue.map((option: OptionValueType) => optionValue(option)).join(',')
     } else {
       filterValue = optionValue(changeValue)
     }

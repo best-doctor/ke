@@ -4,12 +4,12 @@ import { MessagesBlock } from './MessagesBlock'
 import { useValueValidation } from '../hooks/useValidation'
 
 import type { Provider } from '../../admin/providers/interfaces'
-import type { DetailObject } from '../../typing'
+import type { DetailObject, ValidatorFunction } from '../../typing'
 
 type ValueValidationWrapperProps = {
   children: JSX.Element
-  blockingValidators: Function[]
-  notBlockingValidators: Function[]
+  blockingValidators: ValidatorFunction[]
+  notBlockingValidators: ValidatorFunction[]
   provider: Provider
   detailObject: DetailObject
   value: string | object
