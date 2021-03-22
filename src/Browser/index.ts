@@ -1,0 +1,1 @@
+export { localStorageProvider } from './LocalStorage'

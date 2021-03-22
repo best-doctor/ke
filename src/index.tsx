@@ -82,6 +82,7 @@ export * from './Layouts'
 export { Column, Th, Td, Table as UpdatedTable } from './cdk/Tables'
 export * from './LegacySupport'
 export * from './State'
+export * from './Browser'
 
 export {
   BaseAdmin,
