@@ -93,7 +93,8 @@
         "elliptic": "^6.5.3",
         "node-fetch": "^2.6.1",
         "node-notifier": "^8.0.1",
-        "serialize-javascript": "^3.1.0"
+        "serialize-javascript": "^3.1.0",
+        "ssri": "^8.0.1"
     },
     "peerDependencies": {
         "date-fns": "^2.16.1",
