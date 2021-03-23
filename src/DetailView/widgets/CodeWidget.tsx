@@ -11,6 +11,7 @@ const StyledCodeWidget = styled.pre`
   border-color: #cbd5e0;
   padding: 5.4px;
   white-space: pre-wrap;
+  word-wrap: break-word;
   a {
     color: blue;
   }
