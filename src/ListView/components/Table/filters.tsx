@@ -327,7 +327,7 @@ const DateTimeFilter = (params: any): JSX.Element => {
         onChange={(value) => handleChange(value)}
         showTimeSelect
         selected={currentDate}
-        dateFormat="yyyy-MM-dd hh:mm:ss"
+        dateFormat="yyyy-MM-dd HH:mm:ss"
         placeholderText={`Фильтр по ${label}`}
       />
     </StyledFilter>
