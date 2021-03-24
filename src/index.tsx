@@ -73,6 +73,7 @@ import {
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
+import { MessagesBlock } from './common/components/MessagesBlock'
 
 export * from './Widgets/Map'
 export * from './Widgets/ItemsList'
@@ -81,6 +82,7 @@ export * from './cdk/Compatibility'
 export * from './cdk/Providers'
 export * from './Layouts'
 export { Column, Th, Td, Table as UpdatedTable } from './cdk/Tables'
+export * from './cdk/Forms'
 export * from './LegacySupport'
 export * from './State'
 export * from './Browser'
@@ -166,4 +168,5 @@ export {
   PagedPagination,
   CursorPagination,
   pushError,
+  MessagesBlock,
 }
