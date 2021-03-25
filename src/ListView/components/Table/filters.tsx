@@ -31,6 +31,7 @@ type IdType = {
 
 type OptionIdType = Option & IdType
 type OptionValueType = Option & ValueType
+type DatePickerValue = Date | [Date, Date] | null | undefined
 
 const StyledFilter = styled.div`
   .base-styled-filter {
@@ -50,6 +51,9 @@ const setFilterValue = (location: Location, filterName: any, filterValue: any, h
   filters.push({ filterName, filterOperation: undefined, value: filterValue })
   FilterManager.setFilters(location, filters, history)
 }
+
+const getDateFromDatePicker = (value: DatePickerValue): Date | null | undefined =>
+  Array.isArray(value) ? value[0] : value
 
 const BaseFilter = (params: any): JSX.Element => {
   const { name, label, resourceName } = params
@@ -275,8 +279,9 @@ const DateFilter = (params: any): JSX.Element => {
   const history = useHistory()
   const location = useLocation()
 
-  const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? format(value, 'yyyy-MM-dd') : ''
+  const handleChange = (value: DatePickerValue): void => {
+    const singleValue = getDateFromDatePicker(value)
+    const filterValue = singleValue ? format(singleValue, 'yyyy-MM-dd') : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATE_CHANGE,
@@ -285,7 +290,7 @@ const DateFilter = (params: any): JSX.Element => {
     })
 
     setFilterValue(location, name, filterValue, history)
-    setCurrentDate(value)
+    setCurrentDate(singleValue)
   }
 
   return (
@@ -307,8 +312,9 @@ const DateTimeFilter = (params: any): JSX.Element => {
   const history = useHistory()
   const location = useLocation()
 
-  const handleChange = (value: Date | null | undefined): void => {
-    const filterValue = value ? format(value, "yyyy-MM-dd'T'HH:mm:ss") : ''
+  const handleChange = (value: DatePickerValue): void => {
+    const singleValue = getDateFromDatePicker(value)
+    const filterValue = singleValue ? format(singleValue, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     pushAnalytics({
       eventName: EventNameEnum.DATETIME_CHANGE,
@@ -317,7 +323,7 @@ const DateTimeFilter = (params: any): JSX.Element => {
     })
 
     setFilterValue(location, name, filterValue, history)
-    setCurrentDate(value)
+    setCurrentDate(singleValue)
   }
 
   return (

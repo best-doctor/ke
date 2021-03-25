@@ -13,14 +13,20 @@ import type { OptionalDate, WidgetProps } from '../../typing'
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
+type DateWidgetProps = {
+  minDate?: Date
+  maxDate?: Date
+  filterDate?: (dateValue: Date) => boolean
+}
+
 /**
  * Render date picker
  *
  * @param props
  * @constructor
  */
-const DateWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, style, setInitialValue, containerStore } = props
+const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
+  const { name, helpText, style, setInitialValue, containerStore, minDate, maxDate, filterDate } = props
 
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, context })
@@ -48,6 +54,10 @@ const DateWidget = (props: WidgetProps): JSX.Element => {
           selected={date}
           onChange={(value: Date) => handleChange(value)}
           dateFormat="yyyy-MM-dd"
+          minDate={minDate}
+          maxDate={maxDate}
+          filterDate={filterDate}
+          showDisabledMonthNavigation
         />
       </StyleDateTime>
     </WidgetWrapper>
