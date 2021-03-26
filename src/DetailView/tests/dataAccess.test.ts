@@ -1,4 +1,4 @@
-import { getData, getWidgetContent, getPayload, ensurePromise } from '../utils/dataAccess'
+import { getData, getWidgetContent, getPayload, ensurePromise, getAccessor } from '../utils/dataAccess'
 
 type DetailObject = { id: number; last_name: string }
 
@@ -44,4 +44,18 @@ test.each([
   const result = ensurePromise(value)
 
   expect(result).resolves.toBe(expectedResult)
+})
+
+test.each([
+  ['value', undefined, undefined, 'value'],
+  [null, undefined, undefined, null],
+  [undefined, undefined, undefined, undefined],
+  [() => 'value', undefined, undefined, 'value'],
+  [(data: DetailObject) => data.id, detailObject, undefined, 100500],
+  [(data: DetailObject, context: DetailObject) => data.id + context.id, detailObject, detailObject, 201000],
+  [(_: DetailObject, context: DetailObject) => context.id, detailObject, detailObject, 100500],
+])('getAccessor', (value, data, context, expectedResult) => {
+  const result = getAccessor(value, data, context)
+
+  expect(result).toBe(expectedResult)
 })

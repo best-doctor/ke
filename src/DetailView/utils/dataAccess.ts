@@ -13,7 +13,7 @@ const getData = (handler: GenericAccessor, data: DetailObject, context = {}): an
   return null
 }
 
-const getAccessor = (handler: Accessor<any>, data: DetailObject, context = {}): any => {
+const getAccessor = (handler: Accessor<any>, data?: DetailObject, context = {}): any => {
   if (typeof handler === 'function') {
     return handler(data, context)
   }

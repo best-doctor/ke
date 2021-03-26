@@ -1,9 +1,10 @@
 import type { AxiosInstance } from 'axios'
+import { Accessor } from '../../typing'
 import type { Pagination, PaginationParameters } from './pagination'
 
 interface Filter {
   filterName: string
-  value: string
+  value: Accessor<string>
   filterOperation?: string
 }
 

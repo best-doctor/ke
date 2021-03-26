@@ -1,6 +1,7 @@
 import type { Location, History } from 'history'
 
 import type { Filter, TableFilter } from 'admin/providers/interfaces'
+import { getAccessor } from '../DetailView/utils/dataAccess'
 
 type QueryFilter = {
   [key: string]: string
@@ -68,9 +69,9 @@ class FilterManager {
   static setQueryFilters(query: URLSearchParams, filters: Filter[]): void {
     filters.forEach((filter: Filter) => {
       if (filter.filterOperation) {
-        query.set(`${filter.filterName}__${filter.filterOperation}`, filter.value)
+        query.set(`${filter.filterName}__${filter.filterOperation}`, getAccessor(filter.value))
       } else {
-        query.set(filter.filterName, filter.value)
+        query.set(filter.filterName, getAccessor(filter.value))
       }
     })
   }
