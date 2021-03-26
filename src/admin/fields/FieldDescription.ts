@@ -18,6 +18,10 @@ type ListFilterTemplateDescription = {
   name: string
   label: string
   filters: Function
+  style?: {
+    variant?: 'outline' | 'ghost' | 'unstyled' | 'link' | 'solid'
+    variantColor?: string
+  }
 }
 
 type LayoutData = {

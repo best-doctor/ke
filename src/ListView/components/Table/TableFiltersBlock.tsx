@@ -59,18 +59,23 @@ const mountFilterTemplates = (props: FilterBlockProps, history: any): JSX.Elemen
   return (
     <Flex flexDirection="row">
       {listFilterTemplates &&
-        listFilterTemplates.map((listFilterTemplate: ListFilterTemplateDescription) => (
-          <Button
-            variantColor="teal"
-            variant="outline"
-            onClick={() => filterTemplatesOnClick(listFilterTemplate, props, history)}
-            maxWidth={250}
-            m={2}
-            key={listFilterTemplate.name}
-          >
-            {listFilterTemplate.label}
-          </Button>
-        ))}
+        listFilterTemplates.map((listFilterTemplate: ListFilterTemplateDescription) => {
+          const style = listFilterTemplate.style || {
+            variantColor: 'teal',
+            variant: 'outline',
+          }
+          return (
+            <Button
+              onClick={() => filterTemplatesOnClick(listFilterTemplate, props, history)}
+              maxWidth={250}
+              m={2}
+              key={listFilterTemplate.name}
+              {...style}
+            >
+              {listFilterTemplate.label}
+            </Button>
+          )
+        })}
     </Flex>
   )
 }

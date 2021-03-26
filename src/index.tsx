@@ -1,6 +1,6 @@
 import { BaseAdmin } from 'admin'
 import type { WidgetProps } from 'typing'
-import type { Provider, ResponseCache } from 'admin/providers/interfaces'
+import { Filter, Provider, ResponseCache } from 'admin/providers/interfaces'
 import { LocalCache } from 'admin/providers/caches'
 import { BaseProvider } from 'admin/providers'
 import { makeUpdateWithNotification } from 'admin/providers/utils'
@@ -169,4 +169,5 @@ export {
   CursorPagination,
   pushError,
   MessagesBlock,
+  Filter,
 }
