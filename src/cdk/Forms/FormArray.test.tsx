@@ -84,7 +84,7 @@ test('Pass change from inner context to outer', () => {
           }
         })
 
-        const outerSetterCallsFirstArgs = outerContextSetter.mock.calls.map((args) => args[0])
+        const outerSetterCallsFirstArgs = outerContextSetter.mock.calls.map((args): unknown => args[0])
         expect(outerSetterCallsFirstArgs).toEqual(waitedUpdates)
       }
     )

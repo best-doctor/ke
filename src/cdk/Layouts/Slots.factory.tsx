@@ -2,7 +2,7 @@ import React, { ComponentProps, ComponentType, FC, ReactElement, Children, React
 
 export function makeSlots<S extends SlotsMap>(
   slotsMap: S,
-  mapping: (elements: SlotsData<S>) => ReactElement
+  mapping: (elements: SlotsData<S>) => ReactElement<SlotsProps<S>>
 ): FC<SlotsProps<S>> & S {
   const Layout = ({ slots: slotsData, children }: SlotsProps<S>): ReactElement<SlotsProps<S>> => {
     let elements: SlotElements<S> = {}

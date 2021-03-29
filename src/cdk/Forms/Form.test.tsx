@@ -82,7 +82,7 @@ test('Provide props onChange into FormsContext for children', () => {
         }
       })
 
-      const contextSetterCallsFirstArgs = contextSetter.mock.calls.map((args) => args[0])
+      const contextSetterCallsFirstArgs = contextSetter.mock.calls.map((args): unknown => args[0])
       expect(contextSetterCallsFirstArgs).toEqual(waitedUpdates)
     })
   )

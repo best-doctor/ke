@@ -76,7 +76,7 @@ test('Value destructs to child controls by names', () => {
         const controlPairs = groupControl
           .find(FormField)
           .map((formField) => [formField.prop('name'), formField.find(Control).first()] as const)
-        const controlValuePairs = controlPairs.map(([name, control]) => [name, control.prop('value')])
+        const controlValuePairs = controlPairs.map(([name, control]): unknown[] => [name, control.prop('value')])
 
         expect(Object.fromEntries(controlValuePairs)).toEqual(value)
       }

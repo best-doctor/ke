@@ -19,7 +19,7 @@ function makeMountField(
     <FormsContextProvider value={context}>
       <FormField name={name} as={asComponent} {...addProps} />
     </FormsContextProvider>
-  )
+  ) as ReactWrapper
 }
 
 test('Create "as"-component', () => {
