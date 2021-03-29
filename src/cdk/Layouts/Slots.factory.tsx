@@ -1,21 +1,19 @@
-import React, { ComponentProps, ComponentType, FC, ReactElement, Children, ReactNode, isValidElement } from 'react'
+import React, { ReactElement, Children, ReactNode, isValidElement } from 'react'
+
+import { LayoutChildren, LayoutComponent, LayoutElement, LayoutProps } from './types'
 
 export function makeSlots<S extends SlotsMap>(
   slotsMap: S,
-  mapping: (elements: SlotsData<S>) => ReactElement<SlotsProps<S>>
-): FC<SlotsProps<S>> & S {
-  const Layout = ({ slots: slotsData, children }: SlotsProps<S>): ReactElement<SlotsProps<S>> => {
-    let elements: SlotElements<S> = {}
+  mapping: (elements: SlotsElement<S>) => ReactElement
+): LayoutComponent<SlotsData<S>> & S {
+  const Layout = ({ children }: LayoutProps<SlotsData<S>>): LayoutElement<SlotsData<S>> => {
+    let elements: SlotsElement<S> = {}
 
-    if (slotsData) {
-      elements = elementsFromSlotsData(slotsData, slotsMap)
-    } else if (children) {
-      elements = isSlotsData(children)
-        ? elementsFromSlotsData(children, slotsMap)
-        : elementsFromChildren(children, slotsMap)
-    }
+    elements = isSlotsData(children)
+      ? elementsFromSlotsData(children, slotsMap)
+      : elementsFromChildren(children, slotsMap)
 
-    return mapping(elements)
+    return mapping(elements) as LayoutElement<SlotsData<S>>
   }
 
   return Object.assign(Layout, slotsMap)
@@ -25,7 +23,7 @@ function isSlotsData<S extends SlotsMap>(val: SlotsData<S> | ReactNode): val is 
   return typeof val === 'object' && !isValidElement(val)
 }
 
-function elementsFromSlotsData<S extends SlotsMap>(data: SlotsData<S>, map: S): SlotElements<S> {
+function elementsFromSlotsData<S extends SlotsMap>(data: SlotsData<S>, map: S): SlotsElement<S> {
   const slotKeys = [...Object.keys(map)]
 
   return Object.fromEntries(
@@ -37,10 +35,10 @@ function elementsFromSlotsData<S extends SlotsMap>(data: SlotsData<S>, map: S): 
       const Slot = map[key]
       return [key, <Slot>{slotContent}</Slot>]
     })
-  ) as SlotElements<S>
+  ) as SlotsElement<S>
 }
 
-function elementsFromChildren<S extends SlotsMap>(children: ReactNode, map: S): SlotElements<S> {
+function elementsFromChildren<S extends SlotsMap>(children: ReactNode, map: S): SlotsElement<S> {
   const componentToKey = new Map(Object.entries(map).map(([key, slot]) => [slot, key]))
   const slotKeys = [...Object.keys(map)]
 
@@ -51,7 +49,7 @@ function elementsFromChildren<S extends SlotsMap>(children: ReactNode, map: S): 
       )
     }
 
-    const key = componentToKey.get(child.type)
+    const key = componentToKey.get(child.type as LayoutComponent<unknown>)
 
     if (!key) {
       throw new TypeError(
@@ -61,32 +59,19 @@ function elementsFromChildren<S extends SlotsMap>(children: ReactNode, map: S): 
       )
     }
 
-    return [key, child] as [keyof S, ReactElement<ComponentProps<S[keyof S]>, S[keyof S]>]
+    return [key, child] as [keyof S, LayoutElement<unknown>]
   })
 
-  return Object.fromEntries(pairs || []) as SlotElements<S>
+  return Object.fromEntries(pairs || []) as SlotsElement<S>
 }
 
-type SlotsMap = Record<string, SlotComponent>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SlotsMap = Record<string, LayoutComponent<any>>
 
 type SlotsData<S extends SlotsMap> = {
-  [K in keyof S]?: ComponentProps<S[K]>['children']
+  [K in keyof S]?: LayoutChildren<S[K]>
 }
 
-type SlotElements<S extends SlotsMap> = {
-  [K in keyof S]?: ReactElement<ComponentProps<S[K]>, S[K]>
+type SlotsElement<S extends SlotsMap> = {
+  [K in keyof S]?: LayoutElement<LayoutProps<S[K]>>
 }
-
-export type SlotsProps<S extends SlotsMap> = SlotsViaProps<S> | SlotsViaChildren<S>
-
-interface SlotsViaProps<S extends SlotsMap> {
-  slots: SlotsData<S>
-  children?: never
-}
-
-interface SlotsViaChildren<S extends SlotsMap> {
-  slots?: never
-  children: SlotsData<S> | ReactNode
-}
-
-type SlotComponent = ComponentType<{ children: unknown }>

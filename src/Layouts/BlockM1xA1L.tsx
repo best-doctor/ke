@@ -1,6 +1,6 @@
 import { makeSlots } from '@cdk/Layouts'
 import { Box, Flex } from '@chakra-ui/core'
-import React, { PropsWithChildren } from 'react'
+import React, { Key, PropsWithChildren, ReactNode } from 'react'
 import styled from 'styled-components'
 
 import { ListVertical } from './ListVertical'
@@ -16,7 +16,7 @@ const StyledMapFilterWidget = styled.div`
 export const BlockM1xA1L = makeSlots(
   {
     M: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    S: ({ children }: PropsWithChildren<{}>) => <ListVertical>{children}</ListVertical>,
+    S: ({ children }: { children: (readonly [Key, ReactNode])[] }) => <ListVertical>{children}</ListVertical>,
   },
   (slotElements) => (
     <StyledMapFilterWidget>

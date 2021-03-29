@@ -1,42 +1,31 @@
-import { FC } from 'react'
+import { ReactElement } from 'react'
 
-import { LayoutComponent } from './types'
+import { Component, LayoutComponent } from './types'
 
-export function makeWithLayout<FeatureProps, FeatureReturn, LayoutChildren>(
-  featureFunc: FeatureFunc<FeatureProps, FeatureReturn>
-): FC<PropsWithLayout<FeatureProps, FeatureReturn, LayoutChildren>>
-export function makeWithLayout<FeatureProps, FeatureReturn, LayoutChildren>(
-  featureFunc: FeatureFunc<FeatureProps, FeatureReturn>,
-  defaultLayout: LayoutComponent<LayoutChildren>,
-  defaultMapping: (v: FeatureReturn) => LayoutChildren
-): FC<PropsWithDefaultLayout<FeatureProps, FeatureReturn, LayoutChildren>>
-export function makeWithLayout<FeatureProps, FeatureReturn, LayoutChildren>(
-  featureFunc: FeatureFunc<FeatureProps, FeatureReturn>,
-  defaultLayout?: LayoutComponent<LayoutChildren>,
-  defaultMapping?: (v: FeatureReturn) => LayoutChildren
-):
-  | FC<PropsWithLayout<FeatureProps, FeatureReturn, LayoutChildren>>
-  | FC<PropsWithDefaultLayout<FeatureProps, FeatureReturn, LayoutChildren>> {
-  return ({ layout = defaultLayout, children: makeLayoutChildren = defaultMapping, ...other }) => {
-    const featureData = featureFunc(other as FeatureProps)
-    /* eslint-disable @typescript-eslint/no-non-null-assertion */
+export function makeWithLayout<P, R>(featureFunc: FeatureFunc<P, R>): Component<PropsWithLayout<P, R>>
+export function makeWithLayout<P, R>(
+  featureFunc: FeatureFunc<P, R>,
+  defaultLayout: LayoutComponent<R>
+): Component<PropsWithDefaultLayout<P, R>>
+export function makeWithLayout<P, R>(
+  featureFunc: FeatureFunc<P, R>,
+  defaultLayout?: LayoutComponent<R>
+): Component<PropsWithDefaultLayout<P, R>> | Component<PropsWithLayout<P, R>> {
+  return ({ layout = defaultLayout, ...other }) => {
+    const featureData = featureFunc(other as P)
     // Here two way of using function - with default layout and optional props or without layout and with required props
-    // so layout and makeLayoutChildren would be exists
-    const layoutChildren = makeLayoutChildren!(featureData)
-    return layout!({ children: layoutChildren })
-    /* eslint-enable @typescript-eslint/no-non-null-assertion */
+    // so layout would be exists
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return (layout!({ children: featureData }) as unknown) as ReactElement<PropsWithDefaultLayout<P, R>>
   }
 }
 
-export type PropsWithLayout<FeatureProps, FeatureReturn, LayoutChildren> = FeatureProps &
-  ExtLayoutProps<FeatureReturn, LayoutChildren>
+export type PropsWithLayout<P, R> = P & AddLayoutProps<R>
 
-export type PropsWithDefaultLayout<FeatureProps, FeatureReturn, LayoutChildren> = FeatureProps &
-  Partial<ExtLayoutProps<FeatureReturn, LayoutChildren>>
+export type PropsWithDefaultLayout<P, R> = P & Partial<AddLayoutProps<R>>
 
-export interface ExtLayoutProps<FeatureReturn, LayoutChildren> {
-  layout: LayoutComponent<LayoutChildren>
-  children: (v: FeatureReturn) => LayoutChildren
+export interface AddLayoutProps<C> {
+  layout: LayoutComponent<C>
 }
 
 type FeatureFunc<P, R> = (props: P) => R

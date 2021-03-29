@@ -1,28 +1,27 @@
-import React, { FC, ReactElement, useMemo } from 'react'
+import React, { Key, ReactElement, ReactNode, useMemo } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
 import { FormField } from '@cdk/Forms'
-import { LayoutProps, PropsWithDefaultLayout } from '@cdk/Layouts'
+import { PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import { ListVertical } from '../../Layouts'
 
 import type { FiltersValue, Filter } from './types'
 
-export function Filters<K extends string, LayoutChildren>({
+export function Filters<K extends string>({
   filters,
   value,
   onChange,
-  layout: Layout = ListVertical as FC<LayoutProps<LayoutChildren>>,
-  children: makeLayoutChildren = (items) => (items as unknown) as LayoutChildren,
-}: FiltersProps<K, LayoutChildren>): ReactElement<FiltersProps<K, LayoutChildren>> {
-  const layoutChildren = useMemo(() => {
-    const filterItems = filters.map(
-      ({ control, name, ...other }) =>
-        [name, <FormField name={name} as={control} {...other} />] as [key: K, field: ReactElement]
-    )
-
-    return makeLayoutChildren(filterItems)
-  }, [filters, makeLayoutChildren])
+  layout: Layout = ListVertical,
+}: FiltersProps<K>): ReactElement<FiltersProps<K>> {
+  const layoutChildren = useMemo(
+    () =>
+      filters.map(
+        ({ control, name, ...other }) =>
+          [name, <FormField name={name} as={control} {...other} />] as [key: K, field: ReactElement]
+      ),
+    [filters]
+  )
 
   return (
     <GroupControl value={value} onChange={onChange}>
@@ -37,8 +36,4 @@ interface BaseFiltersProps<K extends string> {
   onChange: (v: FiltersValue<K>) => void
 }
 
-export type FiltersProps<K extends string, LayoutChildren> = PropsWithDefaultLayout<
-  BaseFiltersProps<K>,
-  [K, ReactElement][],
-  LayoutChildren
->
+export type FiltersProps<K extends string> = PropsWithDefaultLayout<BaseFiltersProps<K>, (readonly [Key, ReactNode])[]>

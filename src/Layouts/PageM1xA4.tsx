@@ -1,16 +1,14 @@
-import React, { ReactElement } from 'react'
+import React, { ReactNode } from 'react'
 import { Box } from '@chakra-ui/core'
 import { makeSlots } from '@cdk/Layouts'
 
-import type { SectionProps } from './types'
-
 export const PageM1xA4 = makeSlots(
   {
-    T1: makeSection(),
-    T2: makeSection(),
-    M: makeSection(),
-    B1: makeSection(),
-    B2: makeSection(),
+    T1: ({ children }: { children: ReactNode }) => <>{children}</>,
+    T2: ({ children }: { children: ReactNode }) => <>{children}</>,
+    M: ({ children }: { children: ReactNode }) => <>{children}</>,
+    B1: ({ children }: { children: ReactNode }) => <>{children}</>,
+    B2: ({ children }: { children: ReactNode }) => <>{children}</>,
   },
   (slotElements) => (
     <Box>
@@ -22,7 +20,3 @@ export const PageM1xA4 = makeSlots(
     </Box>
   )
 )
-
-function makeSection(): (props: SectionProps) => ReactElement<SectionProps> {
-  return ({ children }) => <>{children}</>
-}

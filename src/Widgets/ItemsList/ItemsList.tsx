@@ -5,11 +5,7 @@ import { Filters, Filter, FiltersValue } from '../Filters'
 import { ListHorizontal } from '../../Layouts'
 
 export const ItemsList = makeWithLayout(({ filters, filtersValue, filtersOnChange }: ItemsListProps<string>) => ({
-  Filters: (
-    <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={ListHorizontal}>
-      {(items) => items}
-    </Filters>
-  ),
+  Filters: <Filters filters={filters} value={filtersValue} onChange={filtersOnChange} layout={ListHorizontal} />,
   Actions: 'Actions',
   Content: 'Content',
   BatchActions: 'Batch actions',
