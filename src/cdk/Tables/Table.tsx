@@ -5,16 +5,22 @@ import { Th } from './Th'
 import { Td } from './Td'
 
 export function Table<T>({ children, data, getKey }: TableProps<T>): JSX.Element {
+  const getColumnHeadCell = (columnElement: ReactElement): ReactElement =>
+    (Children.toArray((columnElement as ReactElement<PropsWithChildren<T>>).props.children).find(
+      (child) => (child as ReactElement).type === Th
+    ) || <Th />) as ReactElement
+
+  const getColumnDataCell = (columnElement: ReactElement): ReactElement =>
+    (Children.toArray((columnElement as ReactElement<PropsWithChildren<T>>).props.children).find(
+      (child) => (child as ReactElement).type === Td
+    ) || <Td>{() => ''}</Td>) as ReactElement
+
   const columns = Children.toArray(children)
     .filter((child) => (child as ReactElement).type === Column)
     .map((columnElement, index) => ({
       key: index,
-      headCell: Children.toArray((columnElement as ReactElement<PropsWithChildren<T>>).props.children).find(
-        (child) => (child as ReactElement).type === Th
-      ) as ReactElement,
-      dataCell: Children.toArray((columnElement as ReactElement<PropsWithChildren<T>>).props.children).find(
-        (child) => (child as ReactElement).type === Td
-      ) as ReactElement,
+      headCell: getColumnHeadCell(columnElement as ReactElement),
+      dataCell: getColumnDataCell(columnElement as ReactElement),
     }))
 
   return (
