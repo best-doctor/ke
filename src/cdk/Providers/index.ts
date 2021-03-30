@@ -1,3 +1,3 @@
-export { KeyValueProvider, NamespaceWrapper } from './KeyValue'
-export { CRUDProvider, GetSetBased } from './CRUD'
+export * from './KeyValue'
+export * from './CRUD'
 export { ReadWriteProvider } from './types'

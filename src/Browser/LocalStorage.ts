@@ -1,20 +1,18 @@
-import { KeyValueProvider } from '@cdk/Providers'
+import { SyncKeyValueProvider } from '@cdk/Providers'
 
-class LocalStorage implements KeyValueProvider<string, string> {
+class LocalStorage implements SyncKeyValueProvider<string, string> {
   constructor(private readonly base: Storage) {}
 
-  get(key: string): Promise<string | null> {
-    return Promise.resolve(this.base.getItem(key))
+  get(key: string): string | null {
+    return this.base.getItem(key)
   }
 
-  set(key: string, value: string): Promise<void> {
+  set(key: string, value: string): void {
     this.base.setItem(key, value)
-    return Promise.resolve()
   }
 
-  remove(key: string): Promise<void> {
+  remove(key: string): void {
     this.base.removeItem(key)
-    return Promise.resolve()
   }
 }
 

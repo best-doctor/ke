@@ -1,2 +1,2 @@
-export { KeyValueProvider } from './types'
-export { NamespaceWrapper } from './Namespace.wrapper'
+export { AsyncKeyValueProvider, SyncKeyValueProvider } from './types'
+export { makeNamespace } from './Namespace.factory'
