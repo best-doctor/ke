@@ -28,6 +28,8 @@ export abstract class BaseAdmin {
 
   abstract wizards?: WizardFieldDescription
 
+  abstract favicon?: string
+
   getResource(lookupField?: string | undefined): string {
     if (lookupField) return `${this.baseUrl}/${lookupField}/`
 

@@ -66,12 +66,15 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   }
   document.title = title
 
+  let favicon = admin.favicon || ''
+
   if (admin.getPageFavicon) {
     const favIconSource = admin.getPageFavicon(mainDetailObject)
     if (favIconSource) {
-      setFavicon(favIconSource)
+      favicon = favIconSource
     }
   }
+  setFavicon(favicon)
 
   const refreshMainDetailObject = (): void => {
     setNeedRefreshDetailObject(true)

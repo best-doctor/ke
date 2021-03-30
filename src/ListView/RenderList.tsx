@@ -10,6 +10,7 @@ import type { TableFilter } from '../admin/providers/interfaces'
 
 import { Table } from './components/Table'
 import { FilterManager } from '../common/filterManager'
+import { setFavicon } from '../Browser/Favicon'
 
 /**
  * Async load models and render them as paginated table.
@@ -29,6 +30,7 @@ export const RenderList: React.FC<{
   analytics: BaseAnalytic | undefined
 }> = ({ resourceName, admin, provider, user, analytics }) => {
   document.title = `${admin.verboseName}`
+  setFavicon(admin.favicon || '')
   const location = useLocation()
 
   const [objects, setObjects] = React.useState<Model[]>([])

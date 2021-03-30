@@ -44,6 +44,8 @@ class TestAdmin extends BaseAdmin {
   ]
 
   wizards = []
+
+  favicon = '/static/icon.png'
 }
 
 const testAdmin = new TestAdmin()
