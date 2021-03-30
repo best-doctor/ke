@@ -12,6 +12,7 @@ import { mountWizards } from '../WizardMaster/mountWizards'
 import { mountDetailFields } from './mountDetailFields'
 import { ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'
+import { setFavicon } from '../Browser/Favicon'
 
 const ViewType = 'detail_view'
 
@@ -56,7 +57,21 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
 
   const { resourceName, admin, provider } = props
 
-  document.title = `${admin.verboseName} # ${id}`
+  let title = `${admin.verboseName} # ${id}`
+  if (admin.getPageTitle) {
+    const pageTitle = admin.getPageTitle(mainDetailObject)
+    if (pageTitle) {
+      title = pageTitle
+    }
+  }
+  document.title = title
+
+  if (admin.getPageFavicon) {
+    const favIconSource = admin.getPageFavicon(mainDetailObject)
+    if (favIconSource) {
+      setFavicon(favIconSource)
+    }
+  }
 
   const refreshMainDetailObject = (): void => {
     setNeedRefreshDetailObject(true)

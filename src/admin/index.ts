@@ -6,6 +6,11 @@ import type {
   WizardFieldDescription,
 } from './fields/FieldDescription'
 
+export interface BaseAdmin {
+  getPageTitle?(val: Record<string, unknown> | undefined): string
+  getPageFavicon?(val: Record<string, unknown> | undefined): string
+}
+
 export abstract class BaseAdmin {
   abstract baseUrl: string
 
