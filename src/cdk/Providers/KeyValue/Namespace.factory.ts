@@ -9,12 +9,11 @@ export function makeNamespace<T>(
   namespace: string
 ): SyncKeyValueProvider<string, T>
 export function makeNamespace<T>(base: StringKeyValueProvider<T>, namespace: string): StringKeyValueProvider<T> {
-  const namespaced = { ...base }
-  namespaced.get = withPrefix(namespaced, namespaced.get, namespace)
-  namespaced.set = withPrefix(namespaced, namespaced.set, namespace)
-  namespaced.remove = withPrefix(namespaced, namespaced.remove, namespace)
-
-  return namespaced
+  return {
+    get: withPrefix(base, base.get, namespace),
+    set: withPrefix(base, base.get, namespace),
+    remove: withPrefix(base, base.remove, namespace),
+  } as StringKeyValueProvider<T>
 }
 
 function withPrefix<F extends (key: string, ...args: never[]) => unknown>(
