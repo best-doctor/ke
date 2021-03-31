@@ -13,6 +13,7 @@ type AsyncSelectWidgetProps = {
   value: object | null
   getOptionLabel: Function
   getOptionValue: Function
+  styles?: object
   isClearable?: boolean
   isMulti?: boolean
   defaultOptions?: boolean
@@ -31,6 +32,7 @@ type AsyncSelectWidgetProps = {
  * @param value - initial value
  * @param getOptionLabel - function will get every option model and should return label
  * @param getOptionValue - function will get every option model and should return value
+ * @param styles - react-select styles
  * @param isClearable - add clickable icon for select clear
  * @param isMulti - enable multiselect
  * @param defaultOptions - if array, when used as initial models for options list, if true when fire load options on render, else waiting for input
@@ -44,6 +46,7 @@ const AsyncSelectWidget = ({
   value,
   getOptionLabel,
   getOptionValue,
+  styles,
   isClearable = false,
   isMulti = false,
   defaultOptions = false,
@@ -51,6 +54,13 @@ const AsyncSelectWidget = ({
   placeholder = 'Введите значение',
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
+
+  const widgetStyles = {
+    ...{
+      menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
+    },
+    ...(styles !== undefined ? styles : {}),
+  }
 
   const getUrl = (changeValue: string): string => {
     const url = new URL(dataResourceUrl)
@@ -77,7 +87,7 @@ const AsyncSelectWidget = ({
       isClearable={isClearable}
       isMulti={isMulti}
       menuPortalTarget={document.body}
-      styles={{ menuPortal: (base: object) => ({ ...base, zIndex: 9999 }) }}
+      styles={widgetStyles}
       getOptionLabel={(option: object | null) => (option ? getOptionLabel(option) : option)}
       getOptionValue={(option: object | null) => (option ? getOptionValue(option) : option)}
       placeholder={placeholder}

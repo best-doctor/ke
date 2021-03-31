@@ -16,6 +16,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   isClearable?: boolean
   defaultOptions?: boolean
   searchParamName?: string
+  styles?: object
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -30,6 +31,7 @@ const widgetType = WidgetTypeEnum.INPUT
  * props.optionLabel - got loaded model and return label for option
  * props.optionValue - got loaded model and return label for value
  * props.targetPayload - got selected model and return widget payload
+ * props.styles - react-select styles
  *
  * @param props
  * @constructor
@@ -46,6 +48,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     isClearable = false,
     defaultOptions = false,
     style,
+    styles,
     setInitialValue,
     submitChange,
     notBlockingValidators = [],
@@ -114,6 +117,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           getOptionLabel={optionLabel}
           getOptionValue={optionValue}
           searchParamName={searchParamName}
+          styles={styles}
         />
       </ValidationWrapper>
     </WidgetWrapper>
