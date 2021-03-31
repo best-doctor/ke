@@ -11,7 +11,7 @@ export function makeNamespace<T>(
 export function makeNamespace<T>(base: StringKeyValueProvider<T>, namespace: string): StringKeyValueProvider<T> {
   return {
     get: withPrefix(base, base.get, namespace),
-    set: withPrefix(base, base.get, namespace),
+    set: withPrefix(base, base.set, namespace),
     remove: withPrefix(base, base.remove, namespace),
   } as StringKeyValueProvider<T>
 }
