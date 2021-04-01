@@ -10,7 +10,8 @@ export function useStoreState<T, Api extends API<T>>(initial: T, api: Api): [Sto
 }
 
 type API<T> = {
-  [name: string]: (prev: T, e: unknown) => T
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [name: string]: (prev: T, e: any) => T
 }
 
 type StoreApi<T, Api extends API<T>> = {
