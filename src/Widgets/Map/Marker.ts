@@ -10,4 +10,6 @@ interface MarkerProps {
   title?: string
   onClick?: () => void
   options?: MarkerOptions
+  draggable?: boolean
+  onDragEnd?: (coordinates: { latLng: { lat: () => number; lng: () => number } }) => void
 }
