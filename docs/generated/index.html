@@ -124,7 +124,7 @@
 <span style="color: #000000">  </span><span style="color: #001080">BaseAdmin</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">BaseFilter</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">LinkWidget</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">TextWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">ReadOnlyWidget</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">SelectWidget</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">ForeignKeySelectWidget</span><span style="color: #000000">,</span>
 <span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span><span style="color: #000000">;</span>
@@ -156,7 +156,7 @@
 <span style="color: #000000">    },</span>
 <span style="color: #000000">    {</span>
 <span style="color: #000000">      </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;user.email&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #001080">widget:</span><span style="color: #000000"> </span><span style="color: #001080">TextWidget</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">widget:</span><span style="color: #000000"> </span><span style="color: #001080">ReadOnlyWidget</span><span style="color: #000000">,</span>
 <span style="color: #000000">      </span><span style="color: #001080">helpText:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;User email&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">      </span><span style="color: #001080">layout:</span><span style="color: #000000"> {</span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">w:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">static:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">},</span>
 <span style="color: #000000">    },</span>
@@ -259,7 +259,7 @@
 <span style="color: #000000">  name: </span><span style="color: #A31515">&#039;status.text&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  helpText: </span><span style="color: #A31515">&#039;Status&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  widget: (</span><span style="color: #001080">user</span><span style="color: #000000">: { </span><span style="color: #001080">permissions</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">[] }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
-<span style="color: #000000">    </span><span style="color: #795E26">hasPermission</span><span style="color: #000000">(</span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">permissions</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;admin_permission&#039;</span><span style="color: #000000">) ? </span><span style="color: #001080">SelectWidget</span><span style="color: #000000"> : </span><span style="color: #001080">TextWidget</span>
+<span style="color: #000000">    </span><span style="color: #795E26">hasPermission</span><span style="color: #000000">(</span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">permissions</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;admin_permission&#039;</span><span style="color: #000000">) ? </span><span style="color: #001080">SelectWidget</span><span style="color: #000000"> : </span><span style="color: #001080">ReadOnlyWidget</span>
 <span style="color: #000000">  ),</span>
 <span style="color: #000000">  displayValue: (</span><span style="color: #001080">object</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">object</span><span style="color: #000000">.</span><span style="color: #001080">status</span><span style="color: #000000">,</span>
 <span style="color: #000000">  targetPayload: (</span><span style="color: #001080">value</span><span style="color: #000000">: </span><span style="color: #267F99">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({ </span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #001080">value</span><span style="color: #000000"> }),</span>
@@ -492,6 +492,9 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/firebaseanalytic.html" class="tsd-kind-icon">Firebase<wbr>Analytic</a>
 					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/getsetbased.html" class="tsd-kind-icon">Get<wbr>Set<wbr>Based</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/localcache.html" class="tsd-kind-icon">Local<wbr>Cache</a>
 					</li>
@@ -504,14 +507,44 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/successdisplay.html" class="tsd-kind-icon">Success<wbr>Display</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/asynckeyvalueprovider.html" class="tsd-kind-icon">Async<wbr>Key<wbr>Value<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/asyncreadwriteprovider.html" class="tsd-kind-icon">Async<wbr>Read<wbr>Write<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/crudprovider.html" class="tsd-kind-icon">CRUDProvider</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/entitieslistprops.html" class="tsd-kind-icon">Entities<wbr>List<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/entitiessource.html" class="tsd-kind-icon">Entities<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/filter.html" class="tsd-kind-icon">Filter</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/layoutprops.html" class="tsd-kind-icon">Layout<wbr>Props</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/provider.html" class="tsd-kind-icon">Provider</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/responsecache.html" class="tsd-kind-icon">Response<wbr>Cache</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/synckeyvalueprovider.html" class="tsd-kind-icon">Sync<wbr>Key<wbr>Value<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/syncreadwriteprovider.html" class="tsd-kind-icon">Sync<wbr>Read<wbr>Write<wbr>Provider</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#detailfielddescription" class="tsd-kind-icon">Detail<wbr>Field<wbr>Description</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#entitiesstore" class="tsd-kind-icon">Entities<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#firebaseconfigtype" class="tsd-kind-icon">Firebase<wbr>Config<wbr>Type</a>
@@ -521,6 +554,15 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#firebaseeventpayload" class="tsd-kind-icon">Firebase<wbr>Event<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#formscontextdata" class="tsd-kind-icon">Forms<wbr>Context<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#layoutcomponent" class="tsd-kind-icon">Layout<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#layoutelement" class="tsd-kind-icon">Layout<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#listfielddescription" class="tsd-kind-icon">List<wbr>Field<wbr>Description</a>
@@ -540,6 +582,12 @@
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="modules.html#mapselectprops" class="tsd-kind-icon">Map<wbr>Select<wbr>Props</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#propswithdefaultlayout" class="tsd-kind-icon">Props<wbr>With<wbr>Default<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#propswithlayout" class="tsd-kind-icon">Props<wbr>With<wbr>Layout</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#widgetpayload" class="tsd-kind-icon">Widget<wbr>Payload</a>
 					</li>
@@ -553,6 +601,9 @@
 						<a href="modules.html#wizardstate" class="tsd-kind-icon">Wizard<wbr>State</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="modules.html#formscontextprovider" class="tsd-kind-icon">Forms<wbr>Context<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="modules.html#mapcontextprovider" class="tsd-kind-icon">Map<wbr>Context<wbr>Provider</a>
 					</li>
 					<li class=" tsd-kind-variable">
@@ -562,16 +613,31 @@
 						<a href="modules.html#mapmarker" class="tsd-kind-icon">Map<wbr>Marker</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="modules.html#pagem1xa4" class="tsd-kind-icon">Page<wbr>M1x<wbr>A4</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="modules.html#renderlist" class="tsd-kind-icon">Render<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#localstorageprovider" class="tsd-kind-icon">local<wbr>Storage<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#locationsearch" class="tsd-kind-icon">location<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#pusherror" class="tsd-kind-icon">push<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#adminresource" class="tsd-kind-icon">Admin<wbr>Resource</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#asyncselectwidget" class="tsd-kind-icon">Async<wbr>Select<wbr>Widget</a>
+						<a href="modules.html#adminresourcecompatible" class="tsd-kind-icon">Admin<wbr>Resource<wbr>Compatible</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#asynctextwidget" class="tsd-kind-icon">Async<wbr>Text<wbr>Widget</a>
+						<a href="modules.html#asyncreadonlywidget" class="tsd-kind-icon">Async<wbr>Read<wbr>Only<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#asyncselectwidget" class="tsd-kind-icon">Async<wbr>Select<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#avatarwidget" class="tsd-kind-icon">Avatar<wbr>Widget</a>
@@ -587,6 +653,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#checkboxwidget" class="tsd-kind-icon">Checkbox<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#codewidget" class="tsd-kind-icon">Code<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#containerwidget" class="tsd-kind-icon">Container<wbr>Widget</a>
@@ -621,11 +690,29 @@
 					<li class=" tsd-kind-function">
 						<a href="modules.html#foreignkeyselectwidget" class="tsd-kind-icon">Foreign<wbr>Key<wbr>Select<wbr>Widget</a>
 					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#form" class="tsd-kind-icon">Form</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#formarray" class="tsd-kind-icon">Form<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#formfield" class="tsd-kind-icon">Form<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#formgroup" class="tsd-kind-icon">Form<wbr>Group</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#inputwidget" class="tsd-kind-icon">Input<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#linkwidget" class="tsd-kind-icon">Link<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#listhorizontal" class="tsd-kind-icon">List<wbr>Horizontal</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#listvertical" class="tsd-kind-icon">List<wbr>Vertical</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#map" class="tsd-kind-icon">Map</a>
@@ -640,13 +727,25 @@
 						<a href="modules.html#mapselectlegacy" class="tsd-kind-icon">Map<wbr>Select<wbr>Legacy</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#maskfilter" class="tsd-kind-icon">Mask<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#messagesblock" class="tsd-kind-icon">Messages<wbr>Block</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#multiselectfilter" class="tsd-kind-icon">Multi<wbr>Select<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#multiselectwidget" class="tsd-kind-icon">Multi<wbr>Select<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#pagination" class="tsd-kind-icon">Pagination</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#radiobuttonwidget" class="tsd-kind-icon">Radio<wbr>Button<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#readonlywidget" class="tsd-kind-icon">Read<wbr>Only<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#renderdetail" class="tsd-kind-icon">Render<wbr>Detail</a>
@@ -664,19 +763,31 @@
 						<a href="modules.html#selectwidget" class="tsd-kind-icon">Select<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#sidebarelementcompatible" class="tsd-kind-icon">Side<wbr>Bar<wbr>Element<wbr>Compatible</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#styledtable" class="tsd-kind-icon">Styled<wbr>Table</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#table" class="tsd-kind-icon">Table</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#texteditorwidget" class="tsd-kind-icon">Text<wbr>Editor<wbr>Widget</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#textwidget" class="tsd-kind-icon">Text<wbr>Widget</a>
+						<a href="modules.html#textvalidationwidget" class="tsd-kind-icon">Text<wbr>Validation<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#updatedfilters" class="tsd-kind-icon">Updated<wbr>Filters</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#validationwrapper" class="tsd-kind-icon">Validation<wbr>Wrapper</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#widgetwrapper" class="tsd-kind-icon">Widget<wbr>Wrapper</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#entitieslist" class="tsd-kind-icon">entities<wbr>List</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#getaccessor" class="tsd-kind-icon">get<wbr>Accessor</a>
@@ -709,13 +820,61 @@
 						<a href="modules.html#haspermission" class="tsd-kind-icon">has<wbr>Permission</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="modules.html#makecomponentproxy" class="tsd-kind-icon">make<wbr>Component<wbr>Proxy</a>
+						<a href="modules.html#makeasync" class="tsd-kind-icon">make<wbr>Async</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makeasyncconverter" class="tsd-kind-icon">make<wbr>Async<wbr>Converter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makeentitiessource" class="tsd-kind-icon">make<wbr>Entities<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makelist" class="tsd-kind-icon">make<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makenamespace" class="tsd-kind-icon">make<wbr>Namespace</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makepartial" class="tsd-kind-icon">make<wbr>Partial</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makepropskeyproxy" class="tsd-kind-icon">make<wbr>Props<wbr>Key<wbr>Proxy</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makepropsvalueproxy" class="tsd-kind-icon">make<wbr>Props<wbr>Value<wbr>Proxy</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makeproxied" class="tsd-kind-icon">make<wbr>Proxied</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makeslots" class="tsd-kind-icon">make<wbr>Slots</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makesyncconverter" class="tsd-kind-icon">make<wbr>Sync<wbr>Converter</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#makeupdatewithnotification" class="tsd-kind-icon">make<wbr>Update<wbr>With<wbr>Notification</a>
 					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#makewithlayout" class="tsd-kind-icon">make<wbr>With<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#partial" class="tsd-kind-icon">partial</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#pushanalytics" class="tsd-kind-icon">push<wbr>Analytics</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#usefactorypropstate" class="tsd-kind-icon">use<wbr>Factory<wbr>Prop<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#usepartialstate" class="tsd-kind-icon">use<wbr>Partial<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#usepropstate" class="tsd-kind-icon">use<wbr>Prop<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#usestorestate" class="tsd-kind-icon">use<wbr>Store<wbr>State</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#usewidgetinitialization" class="tsd-kind-icon">use<wbr>Widget<wbr>Initialization</a>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>WidgetTypeEnum | @bestdoctor/ke</title>
+	<title>EntitiesSource | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,82 +55,65 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="widgettypeenum.html">WidgetTypeEnum</a>
+					<a href="entitiessource.html">EntitiesSource</a>
 				</li>
 			</ul>
-			<h1>Enumeration WidgetTypeEnum</h1>
+			<h1>Interface EntitiesSource&lt;Entity&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>Entity</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">EntitiesSource</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="widgettypeenum.html#action" class="tsd-kind-icon">ACTION</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="widgettypeenum.html#filter" class="tsd-kind-icon">FILTER</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="widgettypeenum.html#input" class="tsd-kind-icon">INPUT</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="widgettypeenum.html#pagination" class="tsd-kind-icon">PAGINATION</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="widgettypeenum.html#sorting" class="tsd-kind-icon">SORTING</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiessource.html#fetch" class="tsd-kind-icon">fetch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiessource.html#store" class="tsd-kind-icon">store</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="action" class="tsd-anchor"></a>
-					<h3>ACTION</h3>
-					<div class="tsd-signature tsd-kind-icon">ACTION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;action&quot;</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fetch" class="tsd-anchor"></a>
+					<h3>fetch</h3>
+					<div class="tsd-signature tsd-kind-icon">fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">[</span>models<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span>totalCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/integration/analytics/firebase/enums.ts#L16">src/integration/analytics/firebase/enums.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/State/EntitiesSource.factory.ts#L37">src/State/EntitiesSource.factory.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="filter" class="tsd-anchor"></a>
-					<h3>FILTER</h3>
-					<div class="tsd-signature tsd-kind-icon">FILTER<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;filter&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="store" class="tsd-anchor"></a>
+					<h3>store</h3>
+					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <a href="../modules.html#entitiesstore" class="tsd-signature-type" data-tsd-kind="Type alias">EntitiesStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/integration/analytics/firebase/enums.ts#L18">src/integration/analytics/firebase/enums.ts:18</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="input" class="tsd-anchor"></a>
-					<h3>INPUT</h3>
-					<div class="tsd-signature tsd-kind-icon">INPUT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;input&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/integration/analytics/firebase/enums.ts#L17">src/integration/analytics/firebase/enums.ts:17</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="pagination" class="tsd-anchor"></a>
-					<h3>PAGINATION</h3>
-					<div class="tsd-signature tsd-kind-icon">PAGINATION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;pagination&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/integration/analytics/firebase/enums.ts#L20">src/integration/analytics/firebase/enums.ts:20</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="sorting" class="tsd-anchor"></a>
-					<h3>SORTING</h3>
-					<div class="tsd-signature tsd-kind-icon">SORTING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;sorting&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/integration/analytics/firebase/enums.ts#L19">src/integration/analytics/firebase/enums.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/f4c4316/src/State/EntitiesSource.factory.ts#L36">src/State/EntitiesSource.factory.ts:36</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -148,23 +131,14 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum">
-						<a href="widgettypeenum.html" class="tsd-kind-icon">Widget<wbr>Type<wbr>Enum</a>
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="entitiessource.html" class="tsd-kind-icon">Entities<wbr>Source</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="widgettypeenum.html#action" class="tsd-kind-icon">ACTION</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="entitiessource.html#fetch" class="tsd-kind-icon">fetch</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="widgettypeenum.html#filter" class="tsd-kind-icon">FILTER</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="widgettypeenum.html#input" class="tsd-kind-icon">INPUT</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="widgettypeenum.html#pagination" class="tsd-kind-icon">PAGINATION</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="widgettypeenum.html#sorting" class="tsd-kind-icon">SORTING</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="entitiessource.html#store" class="tsd-kind-icon">store</a>
 							</li>
 						</ul>
 					</li>
