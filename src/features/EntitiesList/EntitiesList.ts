@@ -22,7 +22,7 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
   }, [filtersValueWithPage])
 
   const { store, fetch } = source
-  const { data } = useStore(store)
+  const { data, totalCount } = useStore(store)
 
   useEffect(() => {
     const subs = filtersValueWithPage$.watch((changedFilters) => fetch(changedFilters))
@@ -39,6 +39,7 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
     pagination: createElement(paginationComponent, {
       value: pageNumber,
       onChange: onPageChange,
+      totalCount: Math.ceil((totalCount || 1) / 30),
     }),
   }
 }
@@ -56,6 +57,7 @@ interface EntitiesSource<Entity, Filters> {
 type EntitiesStore<Entity> = Store<{
   data: Entity[]
   pending: boolean
+  totalCount: number | null
 }>
 
 type FiltersComponent<Filters> = ComponentType<{
@@ -70,4 +72,5 @@ type ListComponent<Entity> = ComponentType<{
 type PaginationComponent = ComponentType<{
   value: number
   onChange: (page: number) => void
+  totalCount: number
 }>
