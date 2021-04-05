@@ -40,8 +40,6 @@ import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/bu
 import type { WidgetPayload } from 'DetailView/events'
 import type { CursorPagination, PagedPagination } from 'admin/providers/pagination'
 import {
-  AsyncTextWidget,
-  TextWidget,
   TextValidationWidget,
   LinkWidget,
   SelectWidget,
@@ -59,6 +57,8 @@ import {
   ContainerWidget,
   CheckboxWidget,
   CodeWidget,
+  ReadOnlyWidget,
+  AsyncReadOnlyWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -111,7 +111,6 @@ export {
   AsyncSelectWidget,
   EnableSentry,
   EnableELK,
-  TextWidget,
   TextValidationWidget,
   LinkWidget,
   SelectWidget,
@@ -157,11 +156,12 @@ export {
   DateWidget,
   ValidationWrapper,
   RadioButtonWidget,
-  AsyncTextWidget,
   WizardPayload,
   ContainerWidget,
   CheckboxWidget,
   CodeWidget,
+  ReadOnlyWidget,
+  AsyncReadOnlyWidget,
   getDefaultButtons,
   getPrevButton,
   getNextButton,

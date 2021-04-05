@@ -99,12 +99,12 @@ and can contains the following properties:
 },
 {
   name: 'some_help_text',
-  widget: TextWidget,
+  widget: ReadOnlyWidget,
   displayValue: 'Some help text',
 },
 {
   name: 'some_another_info',
-  widget: TextWidget,
+  widget: ReadOnlyWidget,
   displayValue: (object: backendDetailObject) => objectFormBackend.some_info,
 },
 

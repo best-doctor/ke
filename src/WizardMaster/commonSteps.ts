@@ -2,7 +2,7 @@
 
 import { BaseWizardStep } from './interfaces'
 
-import { TextWidget } from '../DetailView/widgets/TextWidget'
+import { ReadOnlyWidget } from '../DetailView/widgets/ReadOnlyWidget'
 
 type CreatedObject = {
   id?: number
@@ -15,7 +15,7 @@ class ErrorDisplay extends BaseWizardStep {
   widgets = [
     {
       name: 'error_page',
-      widget: TextWidget,
+      widget: ReadOnlyWidget,
       displayValue: (_: any): string => 'Произошла  ошибка обработки визарда',
       layout: defaultLayout,
     },
@@ -26,7 +26,7 @@ class SuccessDisplay extends BaseWizardStep {
   widgets = [
     {
       name: 'success_page',
-      widget: TextWidget,
+      widget: ReadOnlyWidget,
       displayValue: (object: CreatedObject): string =>
         `Создан объект с номером ${object.code || object.uuid || object.id}`,
       layout: defaultLayout,

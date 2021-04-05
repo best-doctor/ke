@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Text } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 
-import { TextWidget, StyledTextWidget } from '../../widgets/TextWidget'
+import { ReadOnlyWidget } from '../../widgets/ReadOnlyWidget'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
@@ -12,9 +12,9 @@ const detailObject = {
   },
 }
 
-test('Text widget properly rendered', () => {
+test('Read only widget properly rendered', () => {
   const component = shallow(
-    <TextWidget
+    <ReadOnlyWidget
       name="test.name"
       helpText="test"
       style={{}}
@@ -37,6 +37,5 @@ test('Text widget properly rendered', () => {
   )
 
   expect(component.find(WidgetWrapper).length).toEqual(1)
-  expect(component.find(StyledTextWidget).length).toEqual(1)
-  expect(component.find(Text).length).toEqual(1)
+  expect(component.find(Box).length).toEqual(1)
 })

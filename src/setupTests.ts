@@ -7,7 +7,7 @@ import axios from 'axios'
 import type { Store } from 'effector'
 import { BaseWizard, BaseWizardStep } from './WizardMaster/interfaces'
 import { ChakraUINotifier } from './common/notifier'
-import { TextWidget } from './DetailView/widgets/TextWidget'
+import { ReadOnlyWidget } from './DetailView/widgets/ReadOnlyWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
 import type { ResponseCache } from './admin/providers/interfaces'
@@ -38,7 +38,7 @@ class TestAdmin extends BaseAdmin {
     {
       name: 'patient.last_name',
       helpText: 'Test help text',
-      widget: TextWidget,
+      widget: ReadOnlyWidget,
       layout: { x: 1, y: 3, w: 12 },
     },
   ]

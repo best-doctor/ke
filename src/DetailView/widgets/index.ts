@@ -1,5 +1,3 @@
-import { AsyncTextWidget } from './AsyncTextWidget'
-import { TextWidget } from './TextWidget'
 import { TextValidationWidget } from './TextValidationWidget'
 import { LinkWidget } from './LinkWidget'
 import { SelectWidget, BaseSelectWidget } from './SelectWidget'
@@ -16,10 +14,10 @@ import { RadioButtonWidget } from './RadioButtonWidget'
 import { ContainerWidget } from './ContainerWidget'
 import { CheckboxWidget } from './CheckboxWidget'
 import { CodeWidget } from './CodeWidget'
+import { ReadOnlyWidget } from './ReadOnlyWidget'
+import { AsyncReadOnlyWidget } from './AsyncReadOnlyWidget'
 
 export {
-  AsyncTextWidget,
-  TextWidget,
   TextValidationWidget,
   LinkWidget,
   SelectWidget,
@@ -37,4 +35,6 @@ export {
   ContainerWidget,
   CheckboxWidget,
   CodeWidget,
+  ReadOnlyWidget,
+  AsyncReadOnlyWidget,
 }

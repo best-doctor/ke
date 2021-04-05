@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -7,7 +7,6 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import type { Accessor, WidgetProps } from '../../typing'
 import { getAccessor, getCopyHandler } from '../utils/dataAccess'
 import { ValueValidationWrapper } from '../../common/components/ValueValidationWrapper'
-import { StyledTextWidget } from './TextWidget'
 
 const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<any> }): JSX.Element => {
   const {
@@ -45,9 +44,9 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
         detailObject={mainDetailObject}
         value={value}
       >
-        <StyledTextWidget>
-          <Text>{content || '\u00a0'}</Text>
-        </StyledTextWidget>
+        <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
+          {content || '\u00a0'}
+        </Box>
       </ValueValidationWrapper>
     </WidgetWrapper>
   )

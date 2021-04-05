@@ -73,7 +73,7 @@ import {
   BaseAdmin,
   BaseFilter,
   LinkWidget,
-  TextWidget,
+  ReadOnlyWidget,
   SelectWidget,
   ForeignKeySelectWidget,
 } from '@bestdoctor/ke';
@@ -105,7 +105,7 @@ class PatientAdmin extends BaseAdmin {
     },
     {
       name: 'user.email',
-      widget: TextWidget,
+      widget: ReadOnlyWidget,
       helpText: 'User email',
       layout: {x: 0, y: 0, w: 1, h: 2, static: true},
     },
@@ -228,7 +228,7 @@ import { hasPermission } from '@bestdoctor/ke'
   name: 'status.text',
   helpText: 'Status',
   widget: (user: { permissions: string[] }) => (
-    hasPermission(user.permissions, 'admin_permission') ? SelectWidget : TextWidget
+    hasPermission(user.permissions, 'admin_permission') ? SelectWidget : ReadOnlyWidget
   ),
   displayValue: (object: any) => object.status,
   targetPayload: (value: any) => ({ status: value }),
