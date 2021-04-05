@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { DebounceInput } from 'react-debounce-input'
+import InputMask, { Props as InputMaskProps } from 'react-input-mask'
 import { Box } from '@chakra-ui/core'
 import Select from 'react-select'
 import styled from 'styled-components'
@@ -16,6 +17,8 @@ import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
 import { StoreManager } from '../../../common/store'
 import { FilterManager } from '../../../common/filterManager'
+import { Accessor } from '../../../typing'
+import { Provider } from '../../../admin/providers'
 
 type Option = {
   text: string
@@ -33,6 +36,28 @@ type OptionIdType = Option & IdType
 type OptionValueType = Option & ValueType
 type DatePickerValue = Date | [Date, Date] | null | undefined
 
+type FilterProps = {
+  name: string
+  label: string
+  resourceName: string
+}
+type ResourceFilterProps = FilterProps & {
+  filterResource: string
+}
+type BooleanFilterProps = FilterProps & {
+  trueValue?: string
+  trueText?: string
+  falseValue?: string
+  falseText?: string
+}
+type ForeignKeySelectFilterProps = ResourceFilterProps & {
+  provider: Provider
+  optionLabel: (value: OptionValueType | OptionValueType[]) => string
+  optionValue: (value: OptionValueType | OptionValueType[]) => string
+  defaultOptions?: boolean
+  isMulti?: boolean
+}
+
 const StyledFilter = styled.div`
   .base-styled-filter {
     border-width: 1px;
@@ -46,7 +71,12 @@ const StyledFilter = styled.div`
   }
 `
 
-const setFilterValue = (location: Location, filterName: any, filterValue: any, history: History): void => {
+const setFilterValue = (
+  location: Location,
+  filterName: string,
+  filterValue: Accessor<string>,
+  history: History
+): void => {
   const filters = FilterManager.getFilters(location.search)
   filters.push({ filterName, filterOperation: undefined, value: filterValue })
   FilterManager.setFilters(location, filters, history)
@@ -55,14 +85,13 @@ const setFilterValue = (location: Location, filterName: any, filterValue: any, h
 const getDateFromDatePicker = (value: DatePickerValue): Date | null | undefined =>
   Array.isArray(value) ? value[0] : value
 
-const BaseFilter = (params: any): JSX.Element => {
+const BaseFilter = (params: FilterProps): JSX.Element => {
   const { name, label, resourceName } = params
   const history = useHistory()
   const location = useLocation()
 
-  const handleChange = (event: any): void => {
-    // eslint-disable-next-line
-    const value = event.target.value
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = event.target
 
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
@@ -78,14 +107,48 @@ const BaseFilter = (params: any): JSX.Element => {
       <DebounceInput
         className="styled-filter base-styled-filter"
         debounceTimeout={1000}
-        onChange={(e: any) => handleChange(e)}
-        placeholder={`Фильтр по ${label}`}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        placeholder={`Фильтр по ${label}` as const}
       />
     </StyledFilter>
   )
 }
 
-const MultiSelectFilter = (params: any): JSX.Element => {
+const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
+  const { name, label, resourceName, ...maskProps } = params
+  const history = useHistory()
+  const location = useLocation()
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = event.target
+
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, value, name),
+      ...params,
+    })
+
+    setFilterValue(location, name, value, history)
+  }
+
+  const MaskElement = (props: React.InputHTMLAttributes<HTMLInputElement>): JSX.Element => (
+    <InputMask {...maskProps} {...props} />
+  )
+
+  return (
+    <StyledFilter>
+      <DebounceInput
+        className="styled-filter base-styled-filter"
+        debounceTimeout={1000}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        placeholder={`Фильтр по ${label}` as const}
+        element={MaskElement}
+      />
+    </StyledFilter>
+  )
+}
+
+const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
   const { name, label, filterResource, resourceName } = params
   const storedOptions = StoreManager.getResource(filterResource) as []
@@ -140,7 +203,7 @@ const MultiSelectFilter = (params: any): JSX.Element => {
   )
 }
 
-const SelectFilter = (params: any): JSX.Element => {
+const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const { name, label, resourceName, filterResource } = params
   const history = useHistory()
   const location = useLocation()
@@ -172,7 +235,7 @@ const SelectFilter = (params: any): JSX.Element => {
   )
 }
 
-const BooleanFilter = (params: any): JSX.Element => {
+const BooleanFilter = (params: BooleanFilterProps): JSX.Element => {
   const {
     name,
     label,
@@ -216,7 +279,7 @@ const BooleanFilter = (params: any): JSX.Element => {
   )
 }
 
-const ForeignKeySelectFilter = (params: any): JSX.Element => {
+const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Element => {
   const {
     name,
     label,
@@ -273,7 +336,7 @@ const ForeignKeySelectFilter = (params: any): JSX.Element => {
   )
 }
 
-const DateFilter = (params: any): JSX.Element => {
+const DateFilter = (params: FilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
   const { name, label, resourceName } = params
   const history = useHistory()
@@ -306,7 +369,7 @@ const DateFilter = (params: any): JSX.Element => {
   )
 }
 
-const DateTimeFilter = (params: any): JSX.Element => {
+const DateTimeFilter = (params: FilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
   const { name, label, resourceName } = params
   const history = useHistory()
@@ -348,4 +411,5 @@ export {
   DateFilter,
   DateTimeFilter,
   ForeignKeySelectFilter,
+  MaskFilter,
 }
