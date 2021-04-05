@@ -69,6 +69,7 @@ import {
   DateTimeFilter,
   ForeignKeySelectFilter,
   BooleanFilter,
+  MaskFilter,
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
@@ -107,6 +108,7 @@ export {
   DateTimeFilter,
   BaseFilter,
   BooleanFilter,
+  MaskFilter,
   StoreManager,
   AsyncSelectWidget,
   EnableSentry,

@@ -13,7 +13,15 @@ import {
   DateTimeFilter,
   DateFilter,
   ForeignKeySelectFilter,
+  MaskFilter,
 } from '../components/Table/filters'
+import { testProvider } from '../../setupTests'
+
+const filterProps = {
+  name: 'name',
+  label: 'label',
+  resourceName: 'resourceName',
+}
 
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
@@ -25,37 +33,51 @@ jest.mock('react-router-dom', () => ({
 }))
 
 test('Base table filter rendering', () => {
-  const component = mount(<BaseFilter />)
+  const component = mount(<BaseFilter {...filterProps} />)
+
+  expect(component.find(DebounceInput).length).toEqual(1)
+})
+
+test('Mask table filter rendering', () => {
+  const component = mount(<MaskFilter {...filterProps} mask="99-99-99" />)
 
   expect(component.find(DebounceInput).length).toEqual(1)
 })
 
 test('Select table filter rendering', () => {
-  const component = mount(<SelectFilter />)
+  const component = mount(<SelectFilter {...filterProps} filterResource="filterResource" />)
 
   expect(component.find(Select).length).toEqual(1)
 })
 
 test('Multi select table filter rendering', () => {
-  const component = mount(<MultiSelectFilter />)
+  const component = mount(<MultiSelectFilter {...filterProps} filterResource="filterResource" />)
 
   expect(component.find(Select).length).toEqual(1)
 })
 
 test('Date table filter rendering', () => {
-  const component = mount(<DateFilter />)
+  const component = mount(<DateFilter {...filterProps} />)
 
   expect(component.find(DatePicker).length).toEqual(1)
 })
 
 test('DateTime table filter rendering', () => {
-  const component = mount(<DateTimeFilter />)
+  const component = mount(<DateTimeFilter {...filterProps} />)
 
   expect(component.find(DatePicker).length).toEqual(1)
 })
 
 test('ForeignKeySelectFilter filter rendering', () => {
-  const component = mount(<ForeignKeySelectFilter />)
+  const component = mount(
+    <ForeignKeySelectFilter
+      {...filterProps}
+      filterResource="filterResource"
+      provider={testProvider}
+      optionLabel={() => ''}
+      optionValue={() => ''}
+    />
+  )
 
   expect(component.find(AsyncSelectWidget).length).toEqual(1)
 })
