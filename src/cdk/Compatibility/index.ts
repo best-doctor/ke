@@ -1,1 +1,3 @@
-export { makeComponentProxy } from './ComponentProxy.factory'
+export { makePropsKeyProxy } from './PropsKeyProxy'
+export { makePropsValueProxy } from './PropsValueProxy'
+export { makePartial } from './Partial'

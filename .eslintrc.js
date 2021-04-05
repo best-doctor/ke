@@ -64,11 +64,18 @@ module.exports = {
       },
     },
     {
-      files: ['src/cdk/**/*.ts*'],
+      files: ['src/cdk/**/*.ts*', 'src/features/**/*.ts*'],
       rules: {
         '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/no-unsafe-assignment': 'error',
         '@typescript-eslint/no-unsafe-call': 'error',
+      },
+    },
+    {
+      // Special kinds of function which must used only as part of React components
+      files: ['src/features/**/*.ts*'],
+      rules: {
+        'react-hooks/rules-of-hooks': 'off',
       },
     },
   ],

@@ -1,7 +1,11 @@
-import React, { PropsWithChildren } from 'react'
+import React, { CSSProperties, PropsWithChildren, ReactElement } from 'react'
 
-export function Column(_: ColumnProps): JSX.Element {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function Column(_: ColumnProps): ReactElement<ColumnProps> {
   return <></>
 }
 
-type ColumnProps = PropsWithChildren<{}>
+export type ColumnProps = PropsWithChildren<{
+  name?: string | number
+  styles?: CSSProperties
+}>

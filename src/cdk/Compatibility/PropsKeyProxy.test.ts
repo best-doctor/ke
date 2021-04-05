@@ -1,4 +1,4 @@
-import { makePropsKeyProxy } from './PropsKeyProxy.factory'
+import { makePropsKeyProxy } from './PropsKeyProxy'
 
 test('Keys correctly mapped', () => {
   const inner = jest.fn()

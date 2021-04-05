@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import { FC } from 'react'
 
 export function makePropsValueProxy<SP, SK extends keyof SP, TV>(
   source: FC<SP>,

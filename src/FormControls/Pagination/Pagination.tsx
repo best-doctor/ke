@@ -35,7 +35,7 @@ export const Pagination = makeWithLayout(({ value, onChange, totalCount }: Pagin
     [totalCount]
   )
 
-  const [$pagination, paginationEvents] = useStoreState(value, paginationApi)
+  const [$pagination, { toFirst, prev, toLast, next }] = useStoreState(value, paginationApi)
 
   useEffect(() => {
     const subs = $pagination.watch(onChange)
@@ -47,23 +47,23 @@ export const Pagination = makeWithLayout(({ value, onChange, totalCount }: Pagin
 
   return {
     ToFirst: (
-      <Button onClick={() => paginationEvents.toFirst()}>
+      <Button onClick={() => toFirst()}>
         <FiChevronsLeft />
       </Button>
     ),
     ToPrev: (
-      <Button onClick={() => paginationEvents.prev()}>
+      <Button onClick={() => prev()}>
         <FiChevronLeft />
       </Button>
     ),
     Pages: `${current} / ${totalCount}`,
     ToNext: (
-      <Button onClick={() => paginationEvents.next()}>
+      <Button onClick={() => next()}>
         <FiChevronRight />
       </Button>
     ),
     ToLast: (
-      <Button onClick={() => paginationEvents.toLast()}>
+      <Button onClick={() => toLast()}>
         <FiChevronsRight />
       </Button>
     ),

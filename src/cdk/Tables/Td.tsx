@@ -1,10 +1,12 @@
-import React, { ReactNode } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 
-export function Td<T>({ children, item }: TdProps<T>): JSX.Element {
-  return <td>{item !== undefined ? children(item) : null}</td>
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function Td<T>(_: TdProps<T>): JSX.Element {
+  return <></>
 }
 
-interface TdProps<T> {
+export interface TdProps<T> {
   item?: T
-  children: (item: T) => ReactNode
+  styles?: CSSProperties | ((item: T) => CSSProperties)
+  children: ReactNode | ((item: T, index: number) => ReactNode)
 }

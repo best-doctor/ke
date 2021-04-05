@@ -1,7 +1,11 @@
-import React, { PropsWithChildren } from 'react'
+import React, { CSSProperties, ReactElement, ReactNode } from 'react'
 
-export function Th({ children }: ThProps): JSX.Element {
-  return <th>{children}</th>
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function Th(_: ThProps): ReactElement<ThProps> {
+  return <></>
 }
 
-export type ThProps = PropsWithChildren<{}>
+export interface ThProps {
+  styles?: CSSProperties
+  children: ReactNode | ((columnIndex: number) => ReactNode)
+}

@@ -24,6 +24,7 @@
     "jsx": "react",
     "paths": {
       "@cdk/*": ["./cdk/*"],
+      "@features": ["./features"],
     },
     "strict": true,
     "moduleResolution": "Node",

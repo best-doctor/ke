@@ -1,4 +1,4 @@
-import { makePropsValueProxy } from './PropsValueProxy.factory'
+import { makePropsValueProxy } from './PropsValueProxy'
 
 test('Values correctly converted', () => {
   const inner = jest.fn()
