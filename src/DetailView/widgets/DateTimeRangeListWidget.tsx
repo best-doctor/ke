@@ -183,7 +183,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
           const [startDate, endDate] = dateRange
 
           return (
-            <StyledDateTimeRangeListItem className="date-time-list-item">
+            <StyledDateTimeRangeListItem className="date-time-list-item" key={`${startDate}-${endDate}`}>
               <BaseDateTimeRangeWidget
                 startDate={startDate}
                 endDate={endDate}
