@@ -26,8 +26,7 @@ const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string,
  *
  * props.oneDayInterval: boolean - restrict date range to one day length
  *
- * @param props
- * @constructor
+ * @param props - widget props
  */
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props

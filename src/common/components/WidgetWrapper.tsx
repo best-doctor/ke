@@ -13,6 +13,7 @@ import type { BaseNotifier } from '../notifier'
  * @param copyValue - returns of this callback will be copy to clipboard (when use)
  * @param useClipboard - show "copy-to-clipboard" handler
  * @param notifier - object for send notification text on "copy-to-clipboard" event
+ * @param name - name data-attribute
  */
 const WidgetWrapper = ({
   style,

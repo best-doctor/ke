@@ -22,8 +22,7 @@ type DateWidgetProps = {
 /**
  * Render date picker
  *
- * @param props
- * @constructor
+ * @param props - widget props
  */
 const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
   const { name, helpText, style, setInitialValue, containerStore, minDate, maxDate, filterDate } = props

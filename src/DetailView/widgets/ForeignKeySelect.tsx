@@ -33,8 +33,7 @@ const widgetType = WidgetTypeEnum.INPUT
  * props.targetPayload - got selected model and return widget payload
  * props.styles - react-select styles
  *
- * @param props
- * @constructor
+ * @param props - widget props
  */
 const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   const {

@@ -33,6 +33,7 @@ module.exports = {
       'error',
       { functions: false, classes: true, variables: true, typedefs: true },
     ],
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'react/prop-types': 'off',
     'class-methods-use-this': 'off',
     // We need this to write generic code in components mounting
@@ -53,6 +54,8 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   overrides: [
     {
@@ -69,6 +72,8 @@ module.exports = {
         '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/no-unsafe-assignment': 'error',
         '@typescript-eslint/no-unsafe-call': 'error',
+        '@typescript-eslint/no-explicit-any': 'error',
+        '@typescript-eslint/explicit-module-boundary-types': 'error',
       },
     },
     {

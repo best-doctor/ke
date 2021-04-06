@@ -116,8 +116,7 @@ const getInitialValue = (inputCount: number): DateRange[] => {
  *
  * props.oneDayInterval: boolean - restrict date range to one day length
  *
- * @param props
- * @constructor
+ * @param props - widget props
  */
 const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const {

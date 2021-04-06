@@ -13,8 +13,7 @@ import type { WidgetProps } from '../../typing'
  * Render input-checkbox for using in forms
  * Load "value" from props.dataSource and then get content via props.displayValue if exists
  * else get 'data'[props.name].
- * @param props
- * @constructor
+ * @param props - widget props
  */
 const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props

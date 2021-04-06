@@ -24,8 +24,7 @@ type DateTimeWidgetProps = {
  * Render date-time picker
  * Waits for data type: ISO Date-string
  *
- * @param props
- * @constructor
+ * @param props - widget props
  */
 const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element => {
   const { name, helpText, style, setInitialValue, containerStore, minDate, maxDate, filterDate, filterTime } = props
