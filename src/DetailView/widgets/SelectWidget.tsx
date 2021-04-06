@@ -16,7 +16,7 @@ type SelectObject = {
 type SelectWidgetProps = {
   name: string
   mainDetailObject: DetailObject
-  helpText?: string
+  helpText?: string | JSX.Element
   displayValue?: GenericAccessor
   data: Accessor<ValueOrPromise<SelectObject[]>>
   style: object

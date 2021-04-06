@@ -25,7 +25,7 @@ const WidgetWrapper = ({
   name = '',
 }: {
   style: object
-  helpText?: string
+  helpText?: string | JSX.Element
   children: JSX.Element[] | JSX.Element
   copyValue?: Function
   useClipboard?: boolean

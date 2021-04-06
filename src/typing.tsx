@@ -25,7 +25,7 @@ type WidgetProps = {
   mainDetailObject: DetailObject
   resource: string
   provider: Provider
-  helpText?: string
+  helpText?: string | JSX.Element
   displayValue?: GenericAccessor
   targetPayload: Function
   dataSource: GenericAccessor

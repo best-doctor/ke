@@ -47,7 +47,7 @@ type DetailFieldDescription = {
   name: string
   required?: boolean
   widget: FunctionComponent<any> | Function
-  helpText?: string
+  helpText?: string | JSX.Element
   displayValue?: GenericAccessor
   dataSource?: GenericAccessor
   dataTarget?: GenericAccessor
