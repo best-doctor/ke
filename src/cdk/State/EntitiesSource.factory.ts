@@ -1,9 +1,11 @@
-import type { Effect, Store } from 'effector'
-import { combine, createEffect, createStore } from 'effector'
+import { Effect, Store, combine, createEffect, createStore } from 'effector'
 
-import type { Provider } from '../admin/providers'
+import type { Provider } from '../../admin/providers'
 
-export function makeEntitiesSource<Entity>(provider: Pick<Provider, 'getPage'>, url: string): EntitiesSource<Entity> {
+export function makeEntitiesSource<Entity, Filters>(
+  provider: Pick<Provider, 'getPage'>,
+  url: string
+): EntitiesSource<Entity, Filters> {
   const fetch = createEffect(
     async (filters?: Filters): Promise<[models: Entity[], totalCount: number | null]> => {
       const filterPairs = filters ? Object.entries(filters) : []
@@ -32,9 +34,9 @@ export function makeEntitiesSource<Entity>(provider: Pick<Provider, 'getPage'>, 
   }
 }
 
-export interface EntitiesSource<Entity> {
+export interface EntitiesSource<Entity, Filters> {
   store: EntitiesStore<Entity>
-  fetch: Effect<Readonly<Filters> | void, [models: Entity[], totalCount: number | null]>
+  fetch: Effect<Filters | void, [models: Entity[], totalCount: number | null]>
 }
 
 export type EntitiesStore<Entity> = Store<{
@@ -42,6 +44,3 @@ export type EntitiesStore<Entity> = Store<{
   pending: boolean
   totalCount: number | null
 }>
-
-type FilterValue = string | undefined
-type Filters = Record<string, FilterValue>

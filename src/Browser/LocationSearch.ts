@@ -12,4 +12,4 @@ class LocationSearch implements SyncReadWriteProvider<URLSearchParams> {
   }
 }
 
-export const locationSearch = new LocationSearch(window.history, window.location)
+export const locationSearchProvider = new LocationSearch(window.history, window.location)

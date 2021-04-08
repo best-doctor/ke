@@ -87,9 +87,9 @@ export * from './Layouts'
 export * from './features'
 export * from './cdk/Forms'
 export * from './cdk/Hooks'
-export * from './cdk/Funcs'
+export * from './utils/Funcs'
 export * from './LegacySupport'
-export * from './State'
+export * from './cdk/State'
 export * from './Browser'
 
 export {

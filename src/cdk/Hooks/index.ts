@@ -1,3 +1,6 @@
 export { usePropState, useFactoryPropState } from './Prop.state'
-export { useStoreState } from './Store.state'
+export { useStoreApiState } from './Store.state'
 export { usePartialState } from './Partial.state'
+export { useApiState } from './Api.state'
+export { useChangeEffect } from './Change.effect'
+export { usePreEffect } from './Pre.effect'

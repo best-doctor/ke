@@ -1,2 +1,2 @@
 export { CRUDProvider } from './types'
-export { GetSetBased } from './GetSetBased'
+export { makeByGetSet } from './GetSet.factory'

@@ -1,28 +1,27 @@
 import { useEffect, useState } from 'react'
-import { createApi, createStore } from 'effector'
+import { createEvent } from 'effector'
 import { Store } from 'effector/compat'
+import { useStore } from 'effector-react'
 
-export function useStoreState<T, Api extends API<T>>(initial: T, api: Api): readonly [Store<T>, StoreApi<T, Api>] {
-  const [storeApiPair, setStoreApiPair] = useState(() => makeStoreApi(initial, api))
+export function useStoreApiState<T, Api extends ApiConfig<T>>(store$: Store<T>, apiConfig: Api): [T, StoreApi<T, Api>] {
+  const [storeApi] = useState(() =>
+    Object.fromEntries(Object.entries(apiConfig).map(([key]) => [key, createEvent(key)]))
+  )
 
   useEffect(() => {
-    setStoreApiPair(makeStoreApi(initial, api))
-  }, [initial, api])
+    Object.entries(storeApi).forEach(([key, event]) => store$.on(event, apiConfig[key]))
+    return () => Object.entries(storeApi).forEach(([, event]) => store$.off(event))
+  })
 
-  return storeApiPair
+  return [useStore(store$), (storeApi as unknown) as StoreApi<T, Api>]
 }
 
-function makeStoreApi<T, Api extends API<T>>(initial: T, api: Api): [Store<T>, StoreApi<T, Api>] {
-  const store = createStore(initial)
-  return [store, createApi(store, api) as StoreApi<T, Api>]
-}
-
-type API<T> = {
+type ApiConfig<T> = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [name: string]: (prev: T, e: any) => T
 }
 
-type StoreApi<T, Api extends API<T>> = {
+type StoreApi<T, Api extends ApiConfig<T>> = {
   [K in keyof Api]: Api[K] extends (store: T, e: void) => T
     ? () => void
     : Api[K] extends (store: T, e: infer E) => T

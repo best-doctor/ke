@@ -1,43 +1,55 @@
-import { ComponentType, createElement, ReactElement, useEffect } from 'react'
-import type { Store } from 'effector'
+import { ComponentType, createElement, ReactElement, useEffect, useMemo } from 'react'
 import { useStore } from 'effector-react'
-import { useStoreState, useFactoryPropState } from '@cdk/Hooks'
-
-const filtersApi = {
-  onPageChange: <F>(filters: F, page: number) => ({ ...filters, page }),
-  onFiltersChange: <F>(filters: F, changed: Partial<F>): F => ({ ...filters, ...changed }),
-}
+import type { Store } from 'effector'
+import { useChangeEffect, usePreEffect, useStoreApiState } from '@cdk/Hooks'
 
 export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
   filtersComponent: FiltersComponent<Omit<FiltersWithPage, 'page'>>,
   listComponent: ListComponent<Entity>,
   paginationComponent: PaginationComponent,
-  { source, defaultFilters }: EntitiesListProps<Entity, FiltersWithPage>
+  { entitiesSource, filtersSource }: EntitiesListProps<Entity, FiltersWithPage>
 ): { filters: ReactElement; list: ReactElement; pagination: ReactElement } {
-  const [filtersValueWithPage$, { onPageChange, onFiltersChange }] = useStoreState(defaultFilters, filtersApi)
-  const filtersValueWithPage = useStore(filtersValueWithPage$)
-  const [[filtersValue, pageNumber]] = useFactoryPropState(() => {
-    const { page, ...f } = filtersValueWithPage
-    return [f, page] as const
-  }, [filtersValueWithPage])
+  const { store: $filters, fetch: fetchFilters, update } = filtersSource
 
-  const { store, fetch } = source
-  const { data, totalCount } = useStore(store)
+  const filtersFetched = usePreEffect(() => {
+    fetchFilters()
+  }, [fetchFilters])
+
+  const [filters, { onPageChange, onFiltersChange }] = useStoreApiState($filters, {
+    onPageChange: (prevFilters: FiltersWithPage, page: number) => ({ ...prevFilters, page }),
+    onFiltersChange: (prevFilters: FiltersWithPage, changed: Omit<FiltersWithPage, 'page'>) => ({
+      ...prevFilters,
+      ...changed,
+    }),
+  })
+
+  const { store: $entities, fetch: entitiesFetch } = entitiesSource
+  const { data: entities, totalCount } = useStore($entities)
 
   useEffect(() => {
-    const subs = filtersValueWithPage$.watch((changedFilters) => fetch(changedFilters))
+    if (filtersFetched) {
+      entitiesFetch(filters)
+    }
+  }, [filters, entitiesFetch, filtersFetched])
 
-    return () => subs.unsubscribe()
-  }, [filtersValueWithPage$, fetch])
+  useChangeEffect(() => {
+    update(filters)
+  }, [update, filters])
+
+  const filtersWithoutPage = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { page, ...other } = filters
+    return other
+  }, [filters])
 
   return {
     filters: createElement(filtersComponent, {
-      value: filtersValue,
+      value: filtersWithoutPage,
       onChange: onFiltersChange,
     }),
-    list: createElement(listComponent, { data }),
+    list: createElement(listComponent, { data: entities }),
     pagination: createElement(paginationComponent, {
-      value: pageNumber,
+      value: filters.page,
       onChange: onPageChange,
       totalCount: Math.ceil((totalCount || 1) / 30),
     }),
@@ -45,20 +57,23 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
 }
 
 export interface EntitiesListProps<Entity, Filters extends { page?: number }> {
-  source: EntitiesSource<Entity, Filters>
-  defaultFilters: Filters
+  entitiesSource: EntitiesSource<Entity, Filters>
+  filtersSource: FiltersSource<Filters>
 }
 
 interface EntitiesSource<Entity, Filters> {
-  store: EntitiesStore<Entity>
+  store: Store<{
+    data: Entity[]
+    totalCount: number | null
+  }>
   fetch: (filters: Filters) => void
 }
 
-type EntitiesStore<Entity> = Store<{
-  data: Entity[]
-  pending: boolean
-  totalCount: number | null
-}>
+interface FiltersSource<Filters> {
+  store: Store<Filters>
+  update: (changed: Filters) => void
+  fetch: () => void
+}
 
 type FiltersComponent<Filters> = ComponentType<{
   value: Filters

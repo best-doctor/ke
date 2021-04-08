@@ -1,8 +1,7 @@
-import React, { PropsWithChildren, useEffect, useMemo } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/core'
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
-import { useStore } from 'effector-react'
-import { useStoreState } from '@cdk/Hooks'
+import { useApiState, useChangeEffect } from '@cdk/Hooks'
 import { makeSlots, makeWithLayout } from '@cdk/Layouts'
 
 const PaginationLayout = makeSlots(
@@ -25,25 +24,14 @@ const PaginationLayout = makeSlots(
 )
 
 export const Pagination = makeWithLayout(({ value, onChange, totalCount }: PaginationProps) => {
-  const paginationApi = useMemo(
-    () => ({
-      toFirst: () => 1,
-      next: (prev: number) => prev + 1,
-      prev: (prev: number) => prev - 1,
-      toLast: () => totalCount,
-    }),
-    [totalCount]
-  )
+  const [page, { toFirst, prev, toLast, next }] = useApiState(value, {
+    toFirst: () => 1,
+    next: (p: number) => (p < totalCount ? p + 1 : p),
+    prev: (p: number) => (p > 1 ? p - 1 : p),
+    toLast: () => totalCount,
+  })
 
-  const [$pagination, { toFirst, prev, toLast, next }] = useStoreState(value, paginationApi)
-
-  useEffect(() => {
-    const subs = $pagination.watch(onChange)
-
-    return () => subs.unsubscribe()
-  }, [$pagination, onChange])
-
-  const current = useStore($pagination)
+  useChangeEffect(() => onChange(page), [page, onChange])
 
   return {
     ToFirst: (
@@ -56,7 +44,7 @@ export const Pagination = makeWithLayout(({ value, onChange, totalCount }: Pagin
         <FiChevronLeft />
       </Button>
     ),
-    Pages: `${current} / ${totalCount}`,
+    Pages: `${page} / ${totalCount}`,
     ToNext: (
       <Button onClick={() => next()}>
         <FiChevronRight />
