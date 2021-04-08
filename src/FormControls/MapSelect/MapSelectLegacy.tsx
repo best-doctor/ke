@@ -23,6 +23,7 @@ export function MapSelectLegacy<T>({
   name,
   style,
   helpText,
+  description,
   notifier,
   dataSource,
   mainDetailObject,
@@ -30,7 +31,7 @@ export function MapSelectLegacy<T>({
   const options: readonly Option<T>[] = getData(dataSource, mainDetailObject) || []
   const center = options.length ? options[0][1].coords : moscowCoords
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier} description={description}>
       <StyledMapWidget>
         <MapSelect options={options} center={center} zoom={12} />
       </StyledMapWidget>
@@ -42,6 +43,7 @@ interface MapWidgetProps {
   name: string
   style: any
   helpText: string
+  description?: string | JSX.Element
   notifier: any
   dataSource: GenericAccessor
   mainDetailObject: any

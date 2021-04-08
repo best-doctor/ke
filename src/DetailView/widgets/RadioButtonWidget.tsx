@@ -27,6 +27,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     provider,
     style,
     helpText,
+    description,
     optionLabel,
     optionValue,
     cacheTime,
@@ -59,7 +60,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <RadioGroup onChange={handleChange} value={selectedValue}>
         {elements.map((element: RadioButtonElement) => (
           <Radio value={optionValue(element)} key={element.uuid}>

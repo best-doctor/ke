@@ -13,6 +13,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
     containerStore,
     style,
     helpText,
+    description,
     useClipboard,
     copyValue,
     notifier,
@@ -33,6 +34,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
       name={name}
       style={style}
       helpText={helpText}
+      description={description}
       useClipboard={useClipboard}
       copyValue={getCopyHandler(content, copyValue)}
       notifier={notifier}

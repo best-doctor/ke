@@ -41,6 +41,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     mainDetailObject,
     provider,
     helpText,
+    description,
     targetPayload,
     optionLabel,
     optionValue,
@@ -95,6 +96,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
       name={name}
       style={style}
       helpText={helpText}
+      description={description}
       useClipboard={useClipboard}
       copyValue={handleCopyValue}
       notifier={notifier}

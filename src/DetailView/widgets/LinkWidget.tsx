@@ -19,7 +19,7 @@ const StyledLinkWidget = styled.div`
 type LinkWidgetProps = WidgetProps & { href: GenericAccessor; target?: string }
 
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
-  const { name, mainDetailObject, href, helpText, style, containerStore, target = '_blank' } = props
+  const { name, mainDetailObject, href, helpText, description, style, containerStore, target = '_blank' } = props
 
   const context = containerStore.getState()
   const { content } = useWidgetInitialization({ ...props, context })
@@ -36,7 +36,7 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText || ''}>
+    <WidgetWrapper name={name} style={style} helpText={helpText || ''} description={description}>
       <StyledLinkWidget>
         {linkHref ? (
           <Link target={target} href={linkHref} onClick={() => handleClick()} color="teal.500">

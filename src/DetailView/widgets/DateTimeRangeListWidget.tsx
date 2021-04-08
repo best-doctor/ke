@@ -122,6 +122,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   const {
     name,
     helpText,
+    description,
     targetPayload,
     style,
     submitChange,
@@ -177,7 +178,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     setDateRanges(newDateRanges)
   }
   return (
-    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText}>
+    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
       <StyledDateTimeRangeListContainer className="date-time-list-container">
         {dateRanges.map((dateRange: DateRange, itemIndex: number) => {
           const [startDate, endDate] = dateRange

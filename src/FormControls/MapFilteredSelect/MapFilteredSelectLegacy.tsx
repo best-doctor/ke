@@ -18,6 +18,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   name,
   style,
   helpText,
+  description,
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   const Layout = useMemo(
     () =>
@@ -37,7 +38,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   )
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <Filters filters={filters} value={filtersValue} onChange={onFiltersValueChange} layout={Layout} />
     </WidgetWrapper>
   )
@@ -50,4 +51,5 @@ type MapFilteredSelectLegacyProps<T, K extends string> = Pick<MapSelectProps<T>,
   name: string
   style: any
   helpText: string
+  description?: string | JSX.Element
 }

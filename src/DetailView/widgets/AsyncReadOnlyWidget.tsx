@@ -15,7 +15,17 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
  * @param props - standard widget props
  */
 const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
-  const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } = props
+  const {
+    mainDetailObject,
+    containerStore,
+    style,
+    helpText,
+    description,
+    name,
+    provider,
+    displayValue,
+    cacheTime,
+  } = props
 
   const [content, setContent] = useState<string>('')
 
@@ -31,7 +41,7 @@ const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
   }, [provider, dataResourceUrl, context, displayValue, name, effectiveCacheTime])
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
         {content || '\u00a0'}
       </Box>

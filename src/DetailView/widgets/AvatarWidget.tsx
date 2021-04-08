@@ -7,17 +7,19 @@ type AvatarWidgetProps = {
   name: string
   helpText: string
   style: object
+  description?: string | JSX.Element
 }
 
 /**
  * Render initials "BD" styled like avatar image
  *
- * @param helpText - description
+ * @param helpText - label
  * @param style - CSSProperties data
  * @param name - name-attribute
+ * @param description - description
  */
-const AvatarWidget = ({ helpText, style, name }: AvatarWidgetProps): JSX.Element => (
-  <WidgetWrapper name={name} style={style} helpText={helpText}>
+const AvatarWidget = ({ helpText, style, name, description }: AvatarWidgetProps): JSX.Element => (
+  <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
     <Avatar name="BD" src="" />
   </WidgetWrapper>
 )

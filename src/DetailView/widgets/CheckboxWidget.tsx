@@ -16,7 +16,7 @@ import type { WidgetProps } from '../../typing'
  * @param props - widget props
  */
 const CheckboxWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+  const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
 
   const context = containerStore.getState()
 
@@ -42,7 +42,7 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText="&nbsp;">
+    <WidgetWrapper name={name} style={style} helpText="&nbsp;" description={description}>
       <Box>
         <Checkbox isChecked={value} onChange={(e) => handleChange(e)}>
           {helpText}

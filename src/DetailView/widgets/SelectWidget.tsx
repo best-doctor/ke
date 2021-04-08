@@ -16,7 +16,8 @@ type SelectObject = {
 type SelectWidgetProps = {
   name: string
   mainDetailObject: DetailObject
-  helpText?: string | JSX.Element
+  helpText?: string
+  description?: string | JSX.Element
   displayValue?: GenericAccessor
   data: Accessor<ValueOrPromise<SelectObject[]>>
   style: object
@@ -44,6 +45,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
+    description,
     displayValue,
     containerStore,
     mainDetailObject,
@@ -66,7 +68,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   }, [data, mainDetailObject, context])
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <Select name={name} onChange={(e) => handleChange(e)}>
         <option value={value} selected key={value}>
           {text}

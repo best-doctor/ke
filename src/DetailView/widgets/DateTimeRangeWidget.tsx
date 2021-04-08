@@ -29,7 +29,17 @@ const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string,
  * @param props - widget props
  */
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props
+  const {
+    name,
+    helpText,
+    description,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    oneDayInterval,
+    containerStore,
+  } = props
 
   const context = containerStore.getState()
   let iStartDate = null
@@ -86,7 +96,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
     }
   }
   return (
-    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText}>
+    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
       <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />
       <Button variantColor="teal" variant="outline" onClick={() => handleButtonClick()}>
         Весь день

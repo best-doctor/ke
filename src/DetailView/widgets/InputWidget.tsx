@@ -16,6 +16,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
+    description,
     targetPayload,
     style,
     submitChange,
@@ -44,7 +45,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <DebounceInput
         value={content as string}
         resize="none"

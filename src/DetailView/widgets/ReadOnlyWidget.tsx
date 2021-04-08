@@ -8,7 +8,7 @@ import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
 
 const ReadOnlyWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, style, helpText, useClipboard, copyValue, notifier, name } = props
+  const { containerStore, style, helpText, description, useClipboard, copyValue, notifier, name } = props
 
   const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
@@ -17,6 +17,7 @@ const ReadOnlyWidget = (props: WidgetProps): JSX.Element => {
       name={name}
       style={style}
       helpText={helpText}
+      description={description}
       useClipboard={useClipboard}
       copyValue={getCopyHandler(content, copyValue)}
       notifier={notifier}

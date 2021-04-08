@@ -8,12 +8,13 @@ import type { BaseNotifier } from '../notifier'
  * Standard styled container for other widgets
  *
  * @param style - container css styles
- * @param helpText - inner widget(s) description
+ * @param helpText - inner widget(s) label
  * @param children - standard react children
  * @param copyValue - returns of this callback will be copy to clipboard (when use)
  * @param useClipboard - show "copy-to-clipboard" handler
  * @param notifier - object for send notification text on "copy-to-clipboard" event
  * @param name - name data-attribute
+ * @param description - description
  */
 const WidgetWrapper = ({
   style,
@@ -23,14 +24,16 @@ const WidgetWrapper = ({
   useClipboard,
   notifier,
   name = '',
+  description = '',
 }: {
   style: object
-  helpText?: string | JSX.Element
+  helpText?: string
   children: JSX.Element[] | JSX.Element
   copyValue?: Function
   useClipboard?: boolean
   notifier?: BaseNotifier
   name?: string
+  description?: string | JSX.Element
 }): JSX.Element => {
   const handleClipboard = (): void => {
     if (copyValue) {
@@ -46,6 +49,7 @@ const WidgetWrapper = ({
         {useClipboard && (
           <Box as={FiCopy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
         )}
+        {description || ''}
       </FormLabel>
       {children}
     </Box>
