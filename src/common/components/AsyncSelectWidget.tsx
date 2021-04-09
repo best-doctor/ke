@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import AsyncSelect from 'react-select/async'
+import AsyncPaginate from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
 import type { ValueType } from 'react-select'
 import type { Provider } from '../../admin/providers/interfaces'
+import { Pagination } from 'admin/providers/pagination'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -67,25 +68,39 @@ const AsyncSelectWidget = ({
     url.searchParams.append(searchParamName, changeValue)
     return url.href
   }
-
-  const loadOptions = (changeValue: string): Promise<object> => {
-    const url = getUrl(changeValue)
-
-    return new Promise((resolve) => {
-      resolve(provider.getPage(url).then(([data, ,]: [object, object, object]) => data))
+  const [options, setOptions] = useState<object[]>([])
+  const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
+  const getOptionsHandler = async (url: string) => {
+    const res = await provider.getPage(url).then(([data, , meta]: [object, object, Pagination]) => {
+      setNextUrl(meta.nextUrl)
+      setOptions([...(data as [])])
+      return {
+        options,
+        hasMore: !!meta.nextUrl,
+      }
     })
+    return res
+  }
+  const loadOptions = async (changeValue: string) => {
+    const url = getUrl(changeValue)
+    if (nextUrl) {
+      const res = await getOptionsHandler(nextUrl)
+      return res
+    }
+    const res = await getOptionsHandler(url)
+    return res
   }
 
   const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
 
   return (
-    <AsyncSelect
+    <AsyncPaginate
       value={value}
       onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
       loadOptions={debouncedLoadOptions}
       defaultOptions={defaultOptions}
       isClearable={isClearable}
-      isMulti={isMulti}
+      isMulti={isMulti as false | undefined}
       menuPortalTarget={document.body}
       styles={widgetStyles}
       getOptionLabel={(option: object | null) => (option ? getOptionLabel(option) : option)}
