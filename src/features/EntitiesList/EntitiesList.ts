@@ -1,9 +1,9 @@
 import { ComponentType, createElement, ReactElement, useEffect, useMemo } from 'react'
 import { useStore } from 'effector-react'
 import type { Store } from 'effector'
-import { useChangeEffect, usePreEffect, useStoreApiState } from '@cdk/Hooks'
+import { useChangeEffect, useStoreApiState } from '@cdk/Hooks'
 
-export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
+export function entitiesList<Entity, FiltersWithPage extends { page?: number }>(
   filtersComponent: FiltersComponent<Omit<FiltersWithPage, 'page'>>,
   listComponent: ListComponent<Entity>,
   paginationComponent: PaginationComponent,
@@ -11,15 +11,15 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
 ): { filters: ReactElement; list: ReactElement; pagination: ReactElement } {
   const { store: $filters, fetch: fetchFilters, update } = filtersSource
 
-  const filtersFetched = usePreEffect(() => {
+  useEffect(() => {
     fetchFilters()
   }, [fetchFilters])
 
-  const [filters, { onPageChange, onFiltersChange }] = useStoreApiState($filters, {
-    onPageChange: (prevFilters: FiltersWithPage, page: number) => ({ ...prevFilters, page }),
-    onFiltersChange: (prevFilters: FiltersWithPage, changed: Omit<FiltersWithPage, 'page'>) => ({
-      ...prevFilters,
-      ...changed,
+  const [{ data: filters, lastFetch }, { onPageChange, onFiltersChange }] = useStoreApiState($filters, {
+    onPageChange: (filtersData, page: number) => ({ ...filtersData, data: { ...filtersData.data, page } }),
+    onFiltersChange: (filtersData, changed: Omit<FiltersWithPage, 'page'>) => ({
+      ...filtersData,
+      data: { ...filtersData.data, ...changed },
     }),
   })
 
@@ -27,10 +27,10 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
   const { data: entities, totalCount } = useStore($entities)
 
   useEffect(() => {
-    if (filtersFetched) {
+    if (lastFetch) {
       entitiesFetch(filters)
     }
-  }, [filters, entitiesFetch, filtersFetched])
+  }, [filters, entitiesFetch, lastFetch])
 
   useChangeEffect(() => {
     update(filters)
@@ -41,7 +41,6 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
     const { page, ...other } = filters
     return other
   }, [filters])
-
   return {
     filters: createElement(filtersComponent, {
       value: filtersWithoutPage,
@@ -49,7 +48,7 @@ export function entitiesList<Entity, FiltersWithPage extends { page: number }>(
     }),
     list: createElement(listComponent, { data: entities }),
     pagination: createElement(paginationComponent, {
-      value: filters.page,
+      value: filters.page || 1,
       onChange: onPageChange,
       totalCount: Math.ceil((totalCount || 1) / 30),
     }),
@@ -70,9 +69,14 @@ interface EntitiesSource<Entity, Filters> {
 }
 
 interface FiltersSource<Filters> {
-  store: Store<Filters>
+  store: Store<FiltersData<Filters>>
   update: (changed: Filters) => void
   fetch: () => void
+}
+
+interface FiltersData<Filters> {
+  data: Filters
+  lastFetch: {} | null
 }
 
 type FiltersComponent<Filters> = ComponentType<{

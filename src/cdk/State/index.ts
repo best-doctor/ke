@@ -1,2 +1,3 @@
-export { makeEntitiesSource, EntitiesSource, EntitiesStore } from './EntitiesSource.factory'
-export { makeModelSource, ModelStore, ModelSource } from './ModelSource.factory'
+export { makeEntitiesSource, EntitiesSource, EntitiesData } from './EntitiesSource.factory'
+export { makeModelSource, ModelSource } from './ModelSource.factory'
+export { FetchMeta, SourceData } from './types'

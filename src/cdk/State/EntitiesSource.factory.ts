@@ -1,6 +1,7 @@
-import { Effect, Store, combine, createEffect, createStore } from 'effector'
+import { Effect, Store, Event, combine, createEffect, createStore, restore } from 'effector'
 
 import type { Provider } from '../../admin/providers'
+import { FetchMeta, SourceData } from './types'
 
 export function makeEntitiesSource<Entity, Filters>(
   provider: Pick<Provider, 'getPage'>,
@@ -19,28 +20,32 @@ export function makeEntitiesSource<Entity, Filters>(
     }
   )
 
-  const store$ = createStore<[models: Entity[], totalCount: number | null]>([[], null]).on(
+  const $store = createStore<[models: Entity[], totalCount: number | null]>([[], null]).on(
     fetch.doneData,
     (_, entities) => entities
   )
 
+  const $fetchMeta = restore<FetchMeta<Filters> | null>(
+    fetch.finally.map(({ params }) => ({ madeAt: new Date(), params })) as Event<FetchMeta<Filters> | null>,
+    null
+  )
+
   return {
     store: combine({
-      data: store$.map(([models]) => models),
-      totalCount: store$.map(([, totalCount]) => totalCount),
+      data: $store.map(([models]) => models),
+      totalCount: $store.map(([, totalCount]) => totalCount),
       pending: fetch.pending,
+      lastFetch: $fetchMeta,
     }),
     fetch,
   }
 }
 
-export interface EntitiesSource<Entity, Filters> {
-  store: EntitiesStore<Entity>
-  fetch: Effect<Filters | void, [models: Entity[], totalCount: number | null]>
+export interface EntitiesSource<Entity, FetchParams> {
+  store: Store<EntitiesData<Entity, FetchParams>>
+  fetch: Effect<FetchParams | void, [models: Entity[], totalCount: number | null]>
 }
 
-export type EntitiesStore<Entity> = Store<{
-  data: Entity[]
-  pending: boolean
+export interface EntitiesData<Entity, FetchParams> extends SourceData<Entity[], FetchParams> {
   totalCount: number | null
-}>
+}
