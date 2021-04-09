@@ -90,6 +90,7 @@ export * from './cdk/Hooks'
 export * from './utils/Funcs'
 export * from './LegacySupport'
 export * from './cdk/State'
+export { TableProps } from './cdk/Tables'
 export * from './Browser'
 
 export {
