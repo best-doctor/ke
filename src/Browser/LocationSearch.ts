@@ -8,7 +8,8 @@ class LocationSearch implements SyncReadWriteProvider<URLSearchParams> {
   }
 
   write(value: URLSearchParams): void {
-    this.history.pushState({}, '', `?${value.toString()}`)
+    const urlSearch = value.toString()
+    this.history.pushState({}, '', urlSearch ? `?${urlSearch}` : '')
   }
 }
 
