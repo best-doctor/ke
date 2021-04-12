@@ -22,7 +22,7 @@ const mapContainerStyle: DetailedHTMLProps<any, any> = {
   width: '100%',
 }
 
-export function Map({ children, center, ...other }: MapProps): JSX.Element {
+export function Map({ children, center, onSearchMarkerClick, ...other }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapConfig?.apiKey || '',
@@ -73,6 +73,7 @@ export function Map({ children, center, ...other }: MapProps): JSX.Element {
             title={searchBoxMarker.title}
             position={searchBoxMarker.position}
             options={{ icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
+            onClick={() => onSearchMarkerClick && onSearchMarkerClick(searchBoxMarker)}
           />
         )}
       </GoogleMap>
@@ -88,9 +89,10 @@ export type MapProps = PropsWithChildren<{
   onCenterChanged?: () => void
   onZoomChanged?: () => void
   onBoundsChanged?: () => void
+  onSearchMarkerClick?: (marker: Marker) => void
 }>
 
-type Marker = {
+export type Marker = {
   position: Coords
   title?: string
 }
