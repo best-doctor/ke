@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/core'
-import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 import { useApiState, useChangeEffect } from '@cdk/Hooks'
 import { makeSlots, makeWithLayout } from '@cdk/Layouts'
 
@@ -36,23 +36,23 @@ export const Pagination = makeWithLayout(({ value, onChange, totalCount }: Pagin
   return {
     ToFirst: (
       <Button onClick={() => toFirst()}>
-        <FiChevronsLeft />
+        <ChevronsLeft />
       </Button>
     ),
     ToPrev: (
       <Button onClick={() => prev()}>
-        <FiChevronLeft />
+        <ChevronLeft />
       </Button>
     ),
     Pages: `${page} / ${totalCount}`,
     ToNext: (
       <Button onClick={() => next()}>
-        <FiChevronRight />
+        <ChevronRight />
       </Button>
     ),
     ToLast: (
       <Button onClick={() => toLast()}>
-        <FiChevronsRight />
+        <ChevronsRight />
       </Button>
     ),
   }
