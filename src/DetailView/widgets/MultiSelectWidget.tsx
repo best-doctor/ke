@@ -7,23 +7,13 @@ import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import type { WidgetProps } from '../../typing'
-import { getAccessor } from '../utils/dataAccess'
+import { getAccessor, getPayload } from '../utils/dataAccess'
 
 type MultiSelectValue = {
   [key: string]: string
 }
 
-type RawWidgetPayload = (string | number | undefined)[]
-
 type MultiSelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
-
-const extractPayloadIds = (widgetValue: MultiSelectValue[] | undefined): string[] => {
-  if (widgetValue) {
-    return widgetValue.map((element: MultiSelectValue) => element.uuid || element.id)
-  }
-
-  return []
-}
 
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
@@ -39,34 +29,35 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     submitChange,
     containerStore,
     cacheTime,
+    targetPayload,
   } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
-  const [value, setValue] = React.useState<MultiSelectValue[]>(content as MultiSelectValue[])
-  setInitialValue({ [name]: extractPayloadIds(value) })
+  const [value, setValue] = React.useState<object[] | null>(content as object[] | null)
+  setInitialValue(value ? getPayload(value, name, targetPayload) : null)
 
   const handleChange = (changeValue: ValueType<MultiSelectValue, true>): void => {
     setValue(changeValue as MultiSelectValue[])
 
-    let payloadIds: RawWidgetPayload = []
-
-    if (changeValue) {
-      payloadIds = extractPayloadIds(changeValue as MultiSelectValue[])
-    }
+    const widgetPayload = getPayload(changeValue, name, targetPayload)
 
     pushAnalytics({
       eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
-      value: payloadIds,
+      value: widgetPayload,
       objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 
-    submitChange({ url: targetUrl, payload: { [name]: payloadIds } })
+    submitChange({ url: targetUrl, payload: widgetPayload })
   }
+
+  React.useMemo(() => {
+    setValue(content as object[] | null)
+  }, [content])
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
