@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import AsyncSelect from 'react-select/async'
+import AsyncPaginate from 'react-select-async-paginate'
 
 import { AsyncSelectWidget } from '../components/AsyncSelectWidget'
 import { testProvider } from '../../setupTests'
@@ -17,5 +17,5 @@ test('Async select widget properly rendered', () => {
     />
   )
 
-  expect(component.find(AsyncSelect).length).toEqual(1)
+  expect(component.find(AsyncPaginate).length).toEqual(1)
 })

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import AsyncPaginate from 'react-select-async-paginate'
+import AsyncPaginate, { AsyncResult } from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
 import type { ValueType } from 'react-select'
-import type { Provider } from '../../admin/providers/interfaces'
 import { Pagination } from 'admin/providers/pagination'
+import type { Provider } from '../../admin/providers/interfaces'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -22,6 +22,12 @@ type AsyncSelectWidgetProps = {
   searchParamName?: string
   placeholder?: string
   cacheTime?: number
+}
+
+type LoadOptionsType = {
+  options: object
+  hasMore: boolean
+  additional?: Function
 }
 
 /**
@@ -70,7 +76,7 @@ const AsyncSelectWidget = ({
   }
   const [options, setOptions] = useState<object[]>([])
   const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
-  const getOptionsHandler = async (url: string) => {
+  const getOptionsHandler = async (url: string): Promise<LoadOptionsType> => {
     const res = await provider.getPage(url).then(([data, , meta]: [object, object, Pagination]) => {
       setNextUrl(meta.nextUrl)
       setOptions([...(data as [])])
@@ -81,14 +87,10 @@ const AsyncSelectWidget = ({
     })
     return res
   }
-  const loadOptions = async (changeValue: string) => {
-    const url = getUrl(changeValue)
-    if (nextUrl) {
-      const res = await getOptionsHandler(nextUrl)
-      return res
-    }
+  const loadOptions = async (changeValue: string): Promise<AsyncResult<LoadOptionsType>> => {
+    const url = nextUrl || getUrl(changeValue)
     const res = await getOptionsHandler(url)
-    return res
+    return res as AsyncResult<LoadOptionsType>
   }
 
   const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
