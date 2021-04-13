@@ -12,4 +12,6 @@ interface MarkerProps {
   options?: MarkerOptions
   draggable?: boolean
   onDragEnd?: (coordinates: { latLng: { lat: () => number; lng: () => number } }) => void
+  icon?: string
+  label?: string
 }

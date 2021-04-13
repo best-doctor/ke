@@ -18,6 +18,7 @@ const StyledMapWidget = styled.div`
 `
 
 const moscowCoords: LatLng = { lat: 55.75, lng: 37.61 }
+const clusters: never[] = []
 
 export function MapSelectLegacy<T>({
   name,
@@ -33,7 +34,7 @@ export function MapSelectLegacy<T>({
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier} description={description}>
       <StyledMapWidget>
-        <MapSelect options={options} center={center} zoom={12} />
+        <MapSelect options={options} center={center} zoom={12} clusters={clusters} />
       </StyledMapWidget>
     </WidgetWrapper>
   )

@@ -1,17 +1,28 @@
-import React, { Key, ReactNode, useMemo } from 'react'
-import { makeProxied } from '@cdk/Layouts'
+import React, { useCallback, useEffect } from 'react'
+import { usePartialState } from '@cdk/Hooks'
+import styled from 'styled-components'
+import { Box, Flex } from '@chakra-ui/core'
 
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { BlockM1xA1L } from '../../Layouts/BlockM1xA1L'
+import { ListVertical } from '../../Layouts'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }
+
+const StyledMapFilterWidget = styled.div`
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: #cbd5e0;
+  padding: 5.4px;
+  white-space: pre-line;
+`
 
 export function MapFilteredSelectLegacy<T, K extends string>({
   value,
   onChange,
   options,
+  clusters,
   filters,
   filtersValue,
   onFiltersValueChange,
@@ -19,35 +30,54 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   style,
   helpText,
   description,
+  center,
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
-  const Layout = useMemo(
-    () =>
-      makeProxied(BlockM1xA1L, (items: (readonly [Key, ReactNode])[]) => ({
-        M: (
-          <MapSelect
-            value={value}
-            onChange={onChange}
-            options={options}
-            center={options.length ? options[0][1].coords : moscowCoords}
-            zoom={12}
-          />
-        ),
-        S: items,
-      })),
-    [value, onChange, options]
-  )
+  const [currentFiltersValue, setCurrentFiltersValue] = usePartialState({ ...filtersValue, zoom: 12, bbox: undefined })
+
+  const onFiltersChange = useCallback((f: Record<K, unknown>) => setCurrentFiltersValue(f as any), [
+    setCurrentFiltersValue,
+  ])
+  const onZoomChange = useCallback((zoom: number) => setCurrentFiltersValue({ zoom } as any), [setCurrentFiltersValue])
+  const onBboxChange = useCallback((bbox: string | undefined) => setCurrentFiltersValue({ bbox } as any), [
+    setCurrentFiltersValue,
+  ])
+
+  useEffect(() => {
+    onFiltersValueChange(currentFiltersValue)
+  }, [currentFiltersValue, onFiltersValueChange])
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
-      <Filters filters={filters} value={filtersValue} onChange={onFiltersValueChange} layout={Layout} />
+      <StyledMapFilterWidget>
+        <Flex height="448px">
+          <Box flex={1}>
+            <MapSelect
+              value={value}
+              onChange={onChange as any}
+              options={options}
+              clusters={clusters}
+              center={center || moscowCoords}
+              zoom={12}
+              onZoomChanged={onZoomChange}
+              onBoundsChanged={onBboxChange}
+            />
+          </Box>
+          <Box width="300px" marginLeft="5px" height="448px" overflowY="auto">
+            <Filters filters={filters} value={filtersValue} onChange={onFiltersChange} layout={ListVertical} />
+          </Box>
+        </Flex>
+      </StyledMapFilterWidget>
     </WidgetWrapper>
   )
 }
 
-type MapFilteredSelectLegacyProps<T, K extends string> = Pick<MapSelectProps<T>, 'value' | 'onChange' | 'options'> & {
+type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
+  MapSelectProps<T>,
+  'value' | 'onChange' | 'options' | 'clusters' | 'center'
+> & {
   filters: readonly Filter<K>[]
   filtersValue: FiltersValue<K>
-  onFiltersValueChange: (v: FiltersValue<K>) => void
+  onFiltersValueChange: (v: FiltersValue<K | 'zoom' | 'bbox'>) => void
   name: string
   style: any
   helpText: string
