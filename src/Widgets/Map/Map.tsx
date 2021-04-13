@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, PropsWithChildren } from 'react'
+import React, { DetailedHTMLProps, PropsWithChildren, useRef } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/core'
 
@@ -22,11 +22,21 @@ const mapContainerStyle: DetailedHTMLProps<any, any> = {
   width: '100%',
 }
 
-export function Map({ children, center, ...other }: MapProps): JSX.Element {
+const mapLibs: 'places'[] = ['places']
+
+export function Map({
+  children,
+  center,
+  onZoomChanged,
+  onBoundsChanged,
+  zoom,
+  onSearchMarkerClick,
+  ...other
+}: MapProps): JSX.Element {
   const mapConfig = useMapContext()
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: mapConfig?.apiKey || '',
-    libraries: ['places'],
+    libraries: mapLibs,
   })
   const [searchBox, setSearchBox] = React.useState<google.maps.places.SearchBox>()
   const [searchBoxMarker, setSearchBoxMarker] = React.useState<Marker | null>(null)
@@ -60,12 +70,50 @@ export function Map({ children, center, ...other }: MapProps): JSX.Element {
     }
   }
 
+  const zoomRef = useRef(0)
+  function handleZoomChanged(this: google.maps.Map): void {
+    // eslint-disable-next-line react/no-this-in-sfc
+    const changedZoom = this.getZoom()
+    if (changedZoom !== zoomRef.current) {
+      zoomRef.current = changedZoom
+      onZoomChanged && onZoomChanged(zoomRef.current)
+    }
+  }
+
+  const boundsRef = useRef<string | undefined>('')
+  function handleBoundsChanged(this: google.maps.Map): void {
+    let boundsStr: string | undefined
+    // eslint-disable-next-line react/no-this-in-sfc
+    const changedBounds = this.getBounds()
+    if (changedBounds) {
+      const { north, south, east, west } = changedBounds.toJSON()
+      boundsStr = [
+        Math.floor(south * 10) / 10,
+        Math.floor(west * 10) / 10,
+        Math.ceil(north * 10) / 10,
+        Math.ceil(east * 10) / 10,
+      ].join(',')
+    }
+    if (boundsStr !== boundsRef.current) {
+      boundsRef.current = boundsStr
+      onBoundsChanged && onBoundsChanged(boundsRef.current)
+    }
+  }
+
   return isLoaded ? (
     <>
       <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
         <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
       </StandaloneSearchBox>
-      <GoogleMap {...other} center={currentCenter} mapContainerStyle={mapContainerStyle} clickableIcons={false}>
+      <GoogleMap
+        zoom={zoom}
+        onZoomChanged={handleZoomChanged}
+        onBoundsChanged={handleBoundsChanged}
+        {...other}
+        center={currentCenter}
+        mapContainerStyle={mapContainerStyle}
+        clickableIcons={false}
+      >
         {children}
         {searchBoxMarker && (
           <MapMarker
@@ -73,6 +121,7 @@ export function Map({ children, center, ...other }: MapProps): JSX.Element {
             title={searchBoxMarker.title}
             position={searchBoxMarker.position}
             options={{ icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
+            onClick={() => onSearchMarkerClick && onSearchMarkerClick(searchBoxMarker)}
           />
         )}
       </GoogleMap>
@@ -86,11 +135,12 @@ export type MapProps = PropsWithChildren<{
   center?: Coords
   zoom?: number
   onCenterChanged?: () => void
-  onZoomChanged?: () => void
-  onBoundsChanged?: () => void
+  onZoomChanged?: (zoom: number) => void
+  onBoundsChanged?: (bounds: string | undefined) => void
+  onSearchMarkerClick?: (marker: Marker) => void
 }>
 
-type Marker = {
+export type Marker = {
   position: Coords
   title?: string
 }

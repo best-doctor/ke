@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
-import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 
 import type { BaseAnalytic } from '../../../integration/analytics'
 
@@ -63,7 +63,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
             gotoPage(0)
           }}
           isDisabled={!canPreviousPage}
-          icon={() => <FiChevronsLeft size={20} />}
+          icon={() => <ChevronsLeft size={20} />}
         />
         <TableIconButton
           mr={2}
@@ -80,7 +80,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
               ...props,
             })
           }}
-          icon={() => <FiChevronLeft size={20} />}
+          icon={() => <ChevronLeft size={20} />}
         />
       </Flex>
       <Flex justifyContent="center" alignItems="center">
@@ -107,7 +107,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
             })
             nextPage()
           }}
-          icon={() => <FiChevronRight size={20} />}
+          icon={() => <ChevronRight size={20} />}
         />
         <TableIconButton
           ml={2}
@@ -125,7 +125,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
             gotoPage(lastPage)
           }}
           isDisabled={!canNextPage}
-          icon={() => <FiChevronsRight size={20} />}
+          icon={() => <ChevronsRight size={20} />}
         />
       </Flex>
     </Flex>

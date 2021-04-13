@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Box, FormLabel } from '@chakra-ui/core'
-import { FiCopy } from 'react-icons/fi'
+import { Copy } from 'react-feather'
 import type { BaseNotifier } from '../notifier'
 
 /**
@@ -47,7 +47,7 @@ const WidgetWrapper = ({
       <FormLabel mt={5}>
         {helpText || ''}
         {useClipboard && (
-          <Box as={FiCopy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
+          <Box as={Copy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
         )}
         {description || ''}
       </FormLabel>

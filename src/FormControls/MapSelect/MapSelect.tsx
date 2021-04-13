@@ -1,21 +1,53 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { Button } from '@chakra-ui/core'
 import { usePropState } from '@cdk/Hooks'
 
 import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'
 
-import type { Option, OptionKey } from './types'
+import type { LatLng, Option, OptionKey } from './types'
 
-export function MapSelect<T>({ value, onChange, options, ...others }: MapSelectProps<T>): JSX.Element {
+export function MapSelect<T>({
+  value,
+  onChange,
+  options,
+  clusters,
+  zoom,
+  center,
+  onZoomChanged,
+  ...others
+}: MapSelectProps<T>): JSX.Element {
+  const [currentZoom, setCurrentZoom] = useState(zoom)
+  const [currentCenter, setCurrentCenter] = useState(center)
   const [currentKeyByValue] = getOptionByValue(options, value) || []
   const [selectedKey, setSelectedKey] = usePropState(currentKeyByValue)
   const [, selectedLabel, selectedValue] = (selectedKey && getOptionByKey(options, selectedKey)) || []
-
+  const handleZoomChanged = useCallback(
+    (z: number) => {
+      setCurrentZoom(z)
+      onZoomChanged && onZoomChanged(z)
+    },
+    [setCurrentZoom, onZoomChanged]
+  )
   return (
-    <Map {...others}>
+    <Map zoom={currentZoom} center={currentCenter} onZoomChanged={handleZoomChanged} {...others}>
       {options.map(([key, label]) => (
         <MapMarker key={key} position={label.coords} title={label.description} onClick={() => setSelectedKey(key)} />
       ))}
+      {clusters.map((cluster) => {
+        const pos = cluster.point.coordinates
+        return (
+          <MapMarker
+            key={`${pos.lat}-${pos.lng}`}
+            icon="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png"
+            label={cluster.count.toString()}
+            position={pos}
+            onClick={() => {
+              setCurrentZoom((prev) => (prev || 1) + 2)
+              setCurrentCenter(pos)
+            }}
+          />
+        )
+      })}
       {selectedLabel && (
         <MapInfoWindow position={selectedLabel.coords} onCloseClick={() => setSelectedKey(undefined)}>
           <>
@@ -40,5 +72,12 @@ export type MapSelectProps<T> = MapProps & {
   value?: T
   onChange?: (val: T | undefined) => void
   options: readonly Option<T>[]
+  clusters: readonly Cluster[]
   children?: never
+}
+
+interface Cluster {
+  count: number
+  point: { coordinates: LatLng }
+  bbox: [number, number, number, number]
 }

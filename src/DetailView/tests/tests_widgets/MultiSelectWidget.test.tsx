@@ -46,9 +46,9 @@ test('Multiselect widget properly rendered', () => {
 
 test('Submit user multiselect change', () => {
   const component = mount(getComponent())
-  const value = [{ id: 100500 }]
+  const value = [detailObject]
 
   act(() => (component.find('AsyncSelectWidget').props() as { handleChange: Function }).handleChange(value))
 
-  expect(submitChangeMock).toHaveBeenCalledWith({ url: 'test', payload: { test: [100500] } })
+  expect(submitChangeMock).toHaveBeenCalledWith({ url: 'test', payload: { testPayload: [detailObject] } })
 })
