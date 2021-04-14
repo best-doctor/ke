@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function usePropState<T>(initial: T): [T, (val: T) => void] {
+export function usePropState<T>(initial: T): [T, (val: T | ((prev: T) => T)) => void] {
   const [state, updater] = useState(initial)
 
   useEffect(() => {
