@@ -69,27 +69,30 @@ const AsyncSelectWidget = ({
     ...(styles !== undefined ? styles : {}),
   }
 
+  const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
+  const [cachedChangeValue, setCachedChangeValue] = useState<string>('')
+
   const getUrl = (changeValue: string): string => {
     const url = new URL(dataResourceUrl)
     url.searchParams.append(searchParamName, changeValue)
     return url.href
   }
-  const [options, setOptions] = useState<object[]>([])
-  const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
-  const getOptionsHandler = async (url: string): Promise<LoadOptionsType> => {
+
+  const getOptionsHandler = async (url: string, changeValue: string): Promise<LoadOptionsType> => {
     const res = await provider.getPage(url).then(([data, , meta]: [object, object, Pagination]) => {
-      setNextUrl(meta.nextUrl)
-      setOptions([...(data as [])])
+      setCachedChangeValue(changeValue)
+      meta.nextUrl && setNextUrl(meta.nextUrl)
       return {
-        options,
+        options: data,
         hasMore: !!meta.nextUrl,
       }
     })
     return res
   }
+
   const loadOptions = async (changeValue: string): Promise<AsyncResult<LoadOptionsType>> => {
-    const url = nextUrl || getUrl(changeValue)
-    const res = await getOptionsHandler(url)
+    let url = changeValue === cachedChangeValue ? (nextUrl ? nextUrl : getUrl(changeValue)) : getUrl(changeValue)
+    const res = await getOptionsHandler(url, changeValue)
     return res as AsyncResult<LoadOptionsType>
   }
 
