@@ -91,7 +91,16 @@ const AsyncSelectWidget = ({
   }
 
   const loadOptions = async (changeValue: string): Promise<AsyncResult<LoadOptionsType>> => {
-    let url = changeValue === cachedChangeValue ? (nextUrl ? nextUrl : getUrl(changeValue)) : getUrl(changeValue)
+    let url = ''
+    if (changeValue === cachedChangeValue) {
+      if (nextUrl) {
+        url = nextUrl
+      } else {
+        url = getUrl(changeValue)
+      }
+    } else {
+      url = getUrl(changeValue)
+    }
     const res = await getOptionsHandler(url, changeValue)
     return res as AsyncResult<LoadOptionsType>
   }
