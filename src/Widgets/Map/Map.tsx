@@ -87,12 +87,7 @@ export function Map({
     const changedBounds = this.getBounds()
     if (changedBounds) {
       const { north, south, east, west } = changedBounds.toJSON()
-      boundsStr = [
-        Math.floor(south * 10) / 10,
-        Math.floor(west * 10) / 10,
-        Math.ceil(north * 10) / 10,
-        Math.ceil(east * 10) / 10,
-      ].join(',')
+      boundsStr = [south, west, north, east].join(',')
     }
     if (boundsStr !== boundsRef.current) {
       boundsRef.current = boundsStr
