@@ -57,6 +57,8 @@ interface Provider {
   put(resourceUrl: string, payload: object): Promise<Model>
 
   patch(resourceUrl: string, payload: object): Promise<Model>
+
+  delete(resourceUrl: string): Promise<void>
 }
 
 export { Filter, GetListParameters, Provider, ResponseCache, TableFilter }

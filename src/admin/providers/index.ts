@@ -151,6 +151,10 @@ export class BaseProvider implements Provider {
     return response.data.data
   }
 
+  delete = async (resourceUrl: string): Promise<void> => {
+    await this.http.delete(resourceUrl)
+  }
+
   get = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<any> => {
     let effectiveForceCache = forceCache
     if (!effectiveForceCache) {
