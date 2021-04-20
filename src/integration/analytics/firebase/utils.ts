@@ -41,7 +41,7 @@ const getNewValueByCommonFields = (onChangeValue: AnalyticsValue): string => {
   for (const field of commonFieldsList) {
     const newValue = get(onChangeValue as object, field)
 
-    if (newValue) return newValue as string
+    if (newValue !== undefined) return newValue as string
   }
 
   return JSON.stringify(onChangeValue)

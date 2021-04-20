@@ -57,7 +57,7 @@ describe('Forms sample tests', () => {
     const withUpdatedName = { ...sampleData, name: 'new name' }
 
     expect(handleChange).toBeCalledTimes(1)
-    expect(handleChange).toBeCalledWith(withUpdatedName)
+    expect(handleChange).toBeCalledWith(withUpdatedName, expect.anything())
   })
 
   test('Changes fields in form-group should update form-data', () => {
@@ -74,7 +74,7 @@ describe('Forms sample tests', () => {
     const withUpdatedTitle = { ...sampleData, meta: { ...sampleData.meta, title: 'new title' } }
 
     expect(handleChange).toBeCalledTimes(1)
-    expect(handleChange).toBeCalledWith(withUpdatedTitle)
+    expect(handleChange).toBeCalledWith(withUpdatedTitle, expect.anything())
   })
 
   test('Changes fields in form-array should update form-data', () => {
@@ -93,7 +93,7 @@ describe('Forms sample tests', () => {
     const withUpdateRates = { ...sampleData, rates: updatedRates }
 
     expect(handleChange).toBeCalledTimes(1)
-    expect(handleChange).toBeCalledWith(withUpdateRates)
+    expect(handleChange).toBeCalledWith(withUpdateRates, expect.anything())
   })
 
   test('Sequence Changes fields in form should update form-data', () => {
@@ -110,7 +110,7 @@ describe('Forms sample tests', () => {
     const updated = { ...sampleData, name: 'new name', surname: 'new surname' }
 
     expect(handleChange).toBeCalledTimes(2)
-    expect(handleChange).toBeCalledWith(updated)
+    expect(handleChange).toBeCalledWith(updated, expect.anything())
   })
 
   test('Form-data should updates via props', () => {
@@ -137,7 +137,7 @@ describe('Forms sample tests', () => {
     const updated = { ...changedData, name: 'changed name', surname: 'new surname' }
 
     expect(handleChange).toBeCalledTimes(1)
-    expect(handleChange).toBeCalledWith(updated)
+    expect(handleChange).toBeCalledWith(updated, expect.anything())
   })
 
   test('Field with unavailable name must throw exception', () => {
