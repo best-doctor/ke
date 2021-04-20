@@ -68,7 +68,7 @@ function elementsFromChildren<S extends SlotsMap>(children: ReactNode, map: S): 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SlotsMap = Record<string, LayoutComponent<any>>
 
-type SlotsData<S extends SlotsMap> = {
+export type SlotsData<S extends SlotsMap> = {
   [K in keyof S]?: LayoutChildren<S[K]>
 }
 

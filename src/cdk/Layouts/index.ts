@@ -1,5 +1,5 @@
 export { makeList } from './List.factory'
-export { makeSlots } from './Slots.factory'
+export { makeSlots, SlotsData } from './Slots.factory'
 export { makeWithLayout, PropsWithLayout, PropsWithDefaultLayout } from './WithLayout.factory'
 export { makeProxied } from './Proxy.factory'
 export { LayoutComponent, LayoutProps, LayoutElement } from './types'

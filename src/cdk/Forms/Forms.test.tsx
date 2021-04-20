@@ -53,7 +53,7 @@ describe('Forms sample tests', () => {
       </Form>
     )
 
-    form.find({ name: 'name' }).simulate('change', makeChangeEvent('new name'))
+    form.find({ name: 'name' }).find('input').simulate('change', makeChangeEvent('new name'))
     const withUpdatedName = { ...sampleData, name: 'new name' }
 
     expect(handleChange).toBeCalledTimes(1)
@@ -70,7 +70,7 @@ describe('Forms sample tests', () => {
       </Form>
     )
 
-    form.find({ name: 'title' }).simulate('change', makeChangeEvent('new title'))
+    form.find({ name: 'title' }).find('input').simulate('change', makeChangeEvent('new title'))
     const withUpdatedTitle = { ...sampleData, meta: { ...sampleData.meta, title: 'new title' } }
 
     expect(handleChange).toBeCalledTimes(1)
@@ -87,7 +87,7 @@ describe('Forms sample tests', () => {
       </Form>
     )
 
-    form.find({ name: 1 }).simulate('change', makeChangeEvent(10))
+    form.find({ name: 1 }).find('input').simulate('change', makeChangeEvent(10))
     const updatedRates = [...sampleData.rates]
     updatedRates[1] = 10
     const withUpdateRates = { ...sampleData, rates: updatedRates }
@@ -105,8 +105,8 @@ describe('Forms sample tests', () => {
       </Form>
     )
 
-    form.find({ name: 'name' }).simulate('change', makeChangeEvent('new name'))
-    form.find({ name: 'surname' }).simulate('change', makeChangeEvent('new surname'))
+    form.find({ name: 'name' }).find('input').simulate('change', makeChangeEvent('new name'))
+    form.find({ name: 'surname' }).find('input').simulate('change', makeChangeEvent('new surname'))
     const updated = { ...sampleData, name: 'new name', surname: 'new surname' }
 
     expect(handleChange).toBeCalledTimes(2)
@@ -133,7 +133,7 @@ describe('Forms sample tests', () => {
     const form = mount(<UpdatesForm />)
 
     form.find('button').simulate('click')
-    form.find({ name: 'surname' }).simulate('change', makeChangeEvent('new surname'))
+    form.find({ name: 'surname' }).find('input').simulate('change', makeChangeEvent('new surname'))
     const updated = { ...changedData, name: 'changed name', surname: 'new surname' }
 
     expect(handleChange).toBeCalledTimes(1)
