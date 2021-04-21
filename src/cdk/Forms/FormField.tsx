@@ -1,7 +1,7 @@
 import React, { ElementType, PropsWithChildren, FunctionComponentElement } from 'react'
 import { Box, FormLabel } from '@chakra-ui/core'
 
-import type { NodeProps } from './types'
+import type { FormsContextValue, NodeProps } from './types'
 import { useNodeState } from './Forms.context'
 import { LayoutComponent, makeSlots, makeWithLayout, SlotsData } from '../Layouts'
 import { MessagesBlock } from '../../common/components/MessagesBlock'
@@ -30,7 +30,9 @@ export function FormField<T, P extends ControlProps<T>>({
 }: FieldProps<T, P>): FunctionComponentElement<FieldProps<T, P>> {
   const [field, setField] = useNodeState(name)
 
-  const messages: string[] = []
+  const onChange = (value: unknown): void => {
+    setField({ value, errors: (field as FormsContextValue).errors })
+  }
 
   // Don't found why, but type declaration necessary here https://github.com/microsoft/TypeScript/issues/28631#issuecomment-477240245
   const ValueComponent: ElementType = as
@@ -38,8 +40,8 @@ export function FormField<T, P extends ControlProps<T>>({
   const FieldComponent = makeWithLayout(
     () => ({
       Label: label,
-      Value: <ValueComponent value={field} onChange={setField} {...other} />,
-      Errors: <MessagesBlock messages={messages} messageType="error" />,
+      Value: <ValueComponent value={(field as FormsContextValue).value} onChange={onChange} {...other} />,
+      Errors: <MessagesBlock messages={(field as FormsContextValue).errors} messageType="error" />,
     }),
     layout
   )

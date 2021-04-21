@@ -15,15 +15,12 @@ export function Form<T extends FormsContextData>({
 
   useEffect(() => {
     let isFormValid = true
-    const status: FormStatus<T> = { isValid: true }
-    Object.assign(status, { value: {} })
+    const statusValue: { [Key in keyof T]: FormStatusValue } = {}
     Object.entries(formData).forEach(([fieldName, fieldValue]) => {
       const validationErrors: string[] = []
       let isFieldValid = true
       if (validators && fieldName in validators) {
-        // eslint-disable-next-line
-        // @ts-ignore
-        const fieldValidators = validators[fieldName] as Validator<T>
+        const fieldValidators = validators[fieldName as keyof T] as Validator<T>
         const syncValidators = fieldValidators.sync
         const asyncValidators = fieldValidators.async
 
@@ -51,15 +48,13 @@ export function Form<T extends FormsContextData>({
           })
         }
       }
-      Object.assign(status.value, {
-        [fieldName]: {
-          value: fieldValue,
-          isValid: isFieldValid,
-          errors: validationErrors,
-        },
-      })
+      statusValue[fieldName as keyof T] = {
+        value: fieldValue,
+        isValid: isFieldValid,
+        errors: validationErrors,
+      }
     })
-    status.isValid = isFormValid
+    const status: FormStatus<T> = { isValid: isFormValid, value: statusValue }
     setFormStatus(status)
   }, [formData, setFormStatus, validators])
 
@@ -90,13 +85,15 @@ interface Validator<Full> {
   sync?: { check: (val: unknown, full: Full) => boolean; message: string }[]
   async?: { check: (val: unknown, full: Full) => Promise<boolean>; message: string }[]
 }
+
+interface FormStatusValue {
+  value: unknown
+  isValid: boolean
+  errors: string[]
+}
 interface FormStatus<FormValue> {
   isValid: boolean
   value?: {
-    [FormFieldName in keyof FormValue]: {
-      value: FormValue[FormFieldName]
-      isValid: boolean
-      errors: string[]
-    }
+    [FormFieldName in keyof FormValue]: FormStatusValue
   }
 }

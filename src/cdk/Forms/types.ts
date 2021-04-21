@@ -2,4 +2,11 @@ export interface NodeProps {
   name: string | number
 }
 
-export type FormsContextData = Record<string | number, unknown> | unknown[]
+export interface FormsContextValue {
+  value: unknown
+  errors: string[]
+}
+
+export type FormsContextData = {
+  [key in string | number]: FormsContextValue | unknown[]
+}
