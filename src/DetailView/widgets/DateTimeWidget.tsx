@@ -38,6 +38,7 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
     maxDate,
     filterDate,
     filterTime,
+    required = false,
   } = props
 
   const context = containerStore.getState()
@@ -61,7 +62,13 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
   }
 
   return (
-    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
+    <WidgetWrapper
+      name={name}
+      style={{ ...style, zIndex: 1000 }}
+      helpText={helpText}
+      description={description}
+      required={required}
+    >
       <StyleDateTime>
         <DatePicker
           className="styled-date-time"

@@ -24,6 +24,7 @@ type SelectWidgetProps = {
   setInitialValue: Function
   handleChange: Function
   containerStore: Store<object>
+  required?: boolean
 }
 
 const getSelectContent = (
@@ -53,6 +54,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
     style,
     setInitialValue,
     handleChange,
+    required = false,
   } = props
 
   const context = containerStore.getState()
@@ -68,7 +70,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   }, [data, mainDetailObject, context])
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
       <Select name={name} onChange={(e) => handleChange(e)}>
         <option value={value} selected key={value}>
           {text}

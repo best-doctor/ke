@@ -25,7 +25,18 @@ type DateWidgetProps = {
  * @param props - widget props
  */
 const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
-  const { name, helpText, description, style, setInitialValue, containerStore, minDate, maxDate, filterDate } = props
+  const {
+    name,
+    helpText,
+    description,
+    style,
+    setInitialValue,
+    containerStore,
+    minDate,
+    maxDate,
+    filterDate,
+    required = false,
+  } = props
 
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, context })
@@ -46,7 +57,13 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
+    <WidgetWrapper
+      name={name}
+      style={{ ...style, zIndex: 1000 }}
+      helpText={helpText}
+      description={description}
+      required={required}
+    >
       <StyleDateTime>
         <DatePicker
           className="styled-date-time"

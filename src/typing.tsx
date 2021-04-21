@@ -45,6 +45,7 @@ type WidgetProps = {
   useClipboard?: boolean
   copyValue?: GenericAccessor
   cacheTime?: Accessor<number>
+  required?: boolean
 }
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets'
