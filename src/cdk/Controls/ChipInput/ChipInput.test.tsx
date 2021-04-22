@@ -76,7 +76,7 @@ test('Chip Input backspace on empty input does not break on empty list', () => {
   expect(handleChange).toBeCalledTimes(0)
 })
 
-test.only('Chip Input backspace on non-empty input removes last symbol', () => {
+test('Chip Input backspace on non-empty input removes last symbol', () => {
   fc.assert(
     fc.property(arrayArbitrary, stringArbitrary, (content, value) => {
       const handleChange = jest.fn()
@@ -123,4 +123,11 @@ test('Chip Input remove button removes chip', () => {
       }
     )
   )
+})
+
+test('Chip Input does not break on undefined input value', () => {
+  const handleChange = jest.fn()
+  const chipInput = mount(getComponent((undefined as unknown) as string[], handleChange))
+
+  expect(chipInput.find(Tag).length).toEqual(0)
 })

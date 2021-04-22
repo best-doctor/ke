@@ -41,7 +41,7 @@ export const EmailChipInput = (props: WidgetProps): JSX.Element => {
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
       <ChipInput
-        content={content as string[]}
+        content={(content || []) as string[]}
         handleChange={handleChange}
         placeholder="Введите email"
         errorText="Введите валидный email"
