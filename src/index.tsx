@@ -59,6 +59,7 @@ import {
   CodeWidget,
   ReadOnlyWidget,
   AsyncReadOnlyWidget,
+  EmailChipInput,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -177,4 +178,5 @@ export {
   pushError,
   MessagesBlock,
   Filter,
+  EmailChipInput,
 }
