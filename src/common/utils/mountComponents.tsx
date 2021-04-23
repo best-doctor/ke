@@ -121,7 +121,7 @@ const mountComponents = ({
           const colProps: ColProps = getColumnProps(layout)
           const columnKey = `${rowIndex}_${columnIndex}_${name}`
 
-          return (
+          return ComponentToMount ? (
             <div className={colProps.className} key={columnKey}>
               <ComponentToMount
                 key={name}
@@ -142,6 +142,8 @@ const mountComponents = ({
                 {...adminElement}
               />
             </div>
+          ) : (
+            <></>
           )
         })}
       </Row>
