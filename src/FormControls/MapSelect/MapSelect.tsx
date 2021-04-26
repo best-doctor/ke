@@ -17,7 +17,7 @@ export function MapSelect<T>({
   ...others
 }: MapSelectProps<T>): JSX.Element {
   const [currentZoom, setCurrentZoom] = useState(zoom)
-  const [currentCenter, setCurrentCenter] = useState(center)
+  const [currentCenter, setCurrentCenter] = usePropState(center)
   const [currentKeyByValue] = getOptionByValue(options, value) || []
   const [selectedKey, setSelectedKey] = usePropState(currentKeyByValue)
   const [, selectedLabel, selectedValue] = (selectedKey && getOptionByKey(options, selectedKey)) || []

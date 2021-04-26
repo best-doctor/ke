@@ -36,6 +36,7 @@ type ColumnType = {
   id: string
   getHeaderProps: () => any
   toDetailRoute?: string
+  getDetailRouteKey?: (value: unknown) => string
   accessor?: (value: any) => any
   render: (name: string) => ReactNode
 }
@@ -86,7 +87,15 @@ const mountRows = (rows: Row[], prepareRow: Function): ReactNode =>
         {row.cells.map((cell: CellProps) => (
           <TableCell key={cell.row.index} justifyContent="flex-start" p={4} {...cell.getCellProps()}>
             {cell.column.toDetailRoute && cell.column.accessor ? (
-              <Link to={{ pathname: `${cell.column.toDetailRoute}/${cell.column.accessor(cell.row.original)}` }}>
+              <Link
+                to={{
+                  pathname: `${cell.column.toDetailRoute}/${
+                    cell.column.getDetailRouteKey
+                      ? cell.column.getDetailRouteKey(cell.row.original)
+                      : cell.column.accessor(cell.row.original)
+                  }`,
+                }}
+              >
                 {cell.render('Cell')}
               </Link>
             ) : (

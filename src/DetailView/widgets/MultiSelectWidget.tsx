@@ -30,6 +30,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     containerStore,
     cacheTime,
     targetPayload,
+    required = false,
   } = props
 
   const context = containerStore.getState()
@@ -60,7 +61,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   }, [content])
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
       <AsyncSelectWidget
         provider={provider}
         cacheTime={effectiveCacheTime}

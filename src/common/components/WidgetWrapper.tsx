@@ -1,8 +1,19 @@
 import React from 'react'
 
-import { Box, FormLabel } from '@chakra-ui/core'
+import { Box, Flex, Text } from '@chakra-ui/core'
 import { Copy } from 'react-feather'
 import type { BaseNotifier } from '../notifier'
+
+const WidgetLabel = ({ helpText, isRequired }: { helpText: string; isRequired: boolean }): JSX.Element => (
+  <>
+    <Text>{helpText}</Text>
+    {isRequired && (
+      <Text color="#858793" fontSize="0.85em" ml={2}>
+        Обязательное
+      </Text>
+    )}
+  </>
+)
 
 /**
  * Standard styled container for other widgets
@@ -25,6 +36,7 @@ const WidgetWrapper = ({
   notifier,
   name = '',
   description = '',
+  required = false,
 }: {
   style: object
   helpText?: string
@@ -34,6 +46,7 @@ const WidgetWrapper = ({
   notifier?: BaseNotifier
   name?: string
   description?: string | JSX.Element
+  required?: boolean
 }): JSX.Element => {
   const handleClipboard = (): void => {
     if (copyValue) {
@@ -44,13 +57,13 @@ const WidgetWrapper = ({
 
   return (
     <Box {...style} data-name={name}>
-      <FormLabel mt={5}>
-        {helpText || ''}
+      <Flex mt={5} alignItems="center" flexShrink={0}>
+        {helpText && <WidgetLabel helpText={helpText} isRequired={required} />}
         {useClipboard && (
           <Box as={Copy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
         )}
         {description || ''}
-      </FormLabel>
+      </Flex>
       {children}
     </Box>
   )

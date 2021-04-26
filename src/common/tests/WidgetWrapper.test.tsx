@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { FormLabel, Box } from '@chakra-ui/core'
+import { Flex, Box } from '@chakra-ui/core'
 
 import { WidgetWrapper } from '../components/WidgetWrapper'
 
@@ -13,5 +13,5 @@ test('Widget wrapper properly rendered', () => {
 
   expect(component.find(Box).length).toEqual(1)
   expect(component.find('h1').length).toEqual(1)
-  expect(component.find(FormLabel).length).toEqual(1)
+  expect(component.find(Flex).length).toEqual(1)
 })

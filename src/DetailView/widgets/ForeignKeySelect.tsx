@@ -59,6 +59,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     searchParamName,
     notifier,
     cacheTime,
+    required = false,
   } = props
 
   const context = containerStore.getState()
@@ -100,6 +101,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
       useClipboard={useClipboard}
       copyValue={handleCopyValue}
       notifier={notifier}
+      required={required}
     >
       <ValidationWrapper
         notBlockingValidators={notBlockingValidators}
