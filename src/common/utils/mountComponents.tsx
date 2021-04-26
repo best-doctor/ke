@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 // eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps, ColProps } from 'react-flexbox-grid'
@@ -143,7 +143,7 @@ const mountComponents = ({
               />
             </div>
           ) : (
-            <></>
+            <Fragment key={name} />
           )
         })}
       </Row>
