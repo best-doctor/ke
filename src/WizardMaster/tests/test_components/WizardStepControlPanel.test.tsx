@@ -5,7 +5,7 @@ import { mocked } from 'ts-jest/utils'
 
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { WizardStepControlPanel } from '../../components/WizardStepContainer/WizardStepControlPanel'
-import { testWizard, testProvider, testWizardStep } from '../../../setupTests'
+import { testWizard, testProvider, testWizardStep, testNotifier } from '../../../setupTests'
 
 beforeEach(() => {
   window.scrollTo = jest.fn()
@@ -35,6 +35,7 @@ const getComponent = (): JSX.Element => {
         currentState={currentState}
         setCurrentState={jest.fn()}
         refreshMainDetailObject={jest.fn()}
+        notifier={testNotifier}
       />
     </ThemeProvider>
   )
