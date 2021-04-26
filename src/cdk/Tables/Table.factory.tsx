@@ -176,7 +176,7 @@ interface RowConfig<T> {
   styles?: CSSProperties | ((item: T, index: number) => CSSProperties)
 }
 
-interface HeaderConfig {
+export interface HeaderConfig {
   styles?: CSSProperties
   value: ReactNode | ((columnIndex: number) => ReactNode)
 }
