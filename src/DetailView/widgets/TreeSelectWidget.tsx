@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import TreeSelect from 'rc-tree-select'
+import { WidgetProps } from 'typing'
+import { LegacyDataNode, RawValueType } from 'rc-tree-select/lib/interface'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import TreeSelect from 'rc-tree-select'
 import { getPayload } from '../utils/dataAccess'
-import { WidgetProps } from 'typing'
-import { LegacyDataNode, RawValueType } from 'rc-tree-select/lib/interface'
 import 'rc-tree-select/assets/index.less'
 
 type ForeignKeySelectWidgetProps = WidgetProps & {
@@ -72,49 +72,46 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   )
   setInitialValue(value ? getPayload(value, name, targetPayload) : null)
 
-  useEffect(() => {
-    setValue(content as ChangeEvent<HTMLInputElement> | undefined)
-  }, [content])
-
-  useEffect(() => {
-    loadOptions(searchParamName, '1')
-  }, [])
-
   const getUrl = (paramName: string, changeValue: string): string => {
     const url = new URL(dataResourceUrl)
     url.searchParams.append(paramName, changeValue)
     return url.href
   }
-  const loop = (treeData: TreeOptionObject[], key: RawValueType | undefined, additionalData: TreeOptionObject[]) => {
-    treeData.forEach((item) => {
+  const loop = (data: TreeOptionObject[], key: RawValueType | undefined, additionalData: TreeOptionObject[]): void => {
+    const newTreeData = [...data]
+    newTreeData.forEach((item) => {
       if (item.children.length) {
         loop(item.children, key, additionalData)
-      } else {
-        if (item.key === key) {
-          item.children = additionalData
-        }
+      } else if (item.key === key) {
+        item.children = additionalData // eslint-disable-line
       }
     })
+    setTreeData(newTreeData)
   }
-  const prepareData = (paramName: string, res: any[]) => {
+  const prepareData = (paramName: string, res: any[]): TreeOptionObject[] => {
     const data: TreeOptionObject[] = res.map((item: { title: string; uuid: string; children_url: string | null }) => {
+      let isLeaf = null
+      if (paramName === 'search') {
+        isLeaf = true
+      } else if (item.children_url) {
+        isLeaf = false
+      } else {
+        isLeaf = true
+      }
       return {
         key: item.uuid,
         value: item.title,
         label: item.title,
         children: [],
-        // isLeaf: item.children_url === null ? true : paramName === 'search' ? true : false,
-        isLeaf: paramName === 'search' ? true : item.children_url ? false : true,
+        isLeaf,
         childrenUrl: item.children_url,
       }
     })
     return data
   }
   const loadOptions = async (paramName: string, changeValue: string): Promise<TreeOptionObject[]> => {
-    let url = getUrl(paramName, changeValue)
-    const res = await provider.getPage(url).then(([data, ,]: [object, object, object]) => {
-      return data as []
-    })
+    const url = getUrl(paramName, changeValue)
+    const res = await provider.getPage(url).then(([data, ,]: [object, object, object]) => data as [])
     const data = prepareData(paramName, res)
     setTreeData(data)
     return Promise.resolve(data)
@@ -125,27 +122,32 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   }
   const handleLoadData = async (treeNode: LegacyDataNode): Promise<void> => {
     if (treeNode.childrenUrl) {
-      const res = await provider.getPage(treeNode.childrenUrl).then(([data, ,]: [object, object, object]) => {
-        return data as []
-      })
+      const res = await provider.getPage(treeNode.childrenUrl).then(([data, ,]: [object, object, object]) => data as [])
       const data = prepareData('level', res)
-      let newTreeData = [...treeData]
+      const newTreeData = [...treeData]
       loop(newTreeData, treeNode.key, data)
       setTreeData(newTreeData)
     }
   }
-  const handleSearch = (value: string) => {
+  const handleSearch = (searchValue: string): any => {
     clearTimeout(debounce)
     setDebounce(
-      setTimeout(async () => {
-        if (value) {
-          loadOptions('search', value)
+      setTimeout(() => {
+        if (searchValue) {
+          loadOptions('search', searchValue)
         } else {
           loadOptions(searchParamName, '1')
         }
       }, 500)
     )
   }
+  useEffect(() => {
+    setValue(content as ChangeEvent<HTMLInputElement> | undefined)
+  }, [content])
+
+  useEffect(() => {
+    loadOptions(searchParamName, '1')
+  }, []) // eslint-disable-line
 
   return (
     <WidgetWrapper
