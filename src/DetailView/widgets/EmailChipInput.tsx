@@ -43,7 +43,6 @@ export const EmailChipInput = (props: WidgetProps): JSX.Element => {
       <ChipInput
         content={(content || []) as string[]}
         handleChange={handleChange}
-        placeholder="Введите email"
         errorText="Введите валидный email"
         validator={(value) => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)}
         submitKeys={['Enter', 'Tab', ',', ' ', ';']}

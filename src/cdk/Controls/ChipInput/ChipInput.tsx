@@ -1,5 +1,5 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
-import { Tag, TagCloseButton, TagLabel, Input, Box, Flex, Text } from '@chakra-ui/core'
+import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react'
+import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/core'
 
 import { usePropState } from '../../Hooks'
 
@@ -15,6 +15,7 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
   const [chips, setChips] = usePropState<string[]>(content || [])
   const [value, setValue] = useState<string>('')
   const [error, setError] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const isValid = (val: string): boolean => {
     if (!validator(val)) {
@@ -52,41 +53,56 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
   }
 
   return (
-    <Flex borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" alignItems="end">
-      <Box alignItems="center" maxWidth="60%">
+    <>
+      <Flex
+        borderWidth="1px"
+        borderRadius="3px"
+        borderColor="#cbd5e0"
+        alignItems="center"
+        flexWrap="wrap"
+        onClick={() => inputRef && inputRef.current && inputRef.current.focus()}
+      >
         {chips.map((chipValue: string, index: number) => {
           const key = index
           return (
-            <Tag key={key} minWidth={undefined} minHeight={undefined} height="2rem" fontSize="0.85rem" m={2}>
+            <Tag
+              key={key}
+              minWidth={undefined}
+              minHeight={undefined}
+              height="1.5rem"
+              fontSize="0.85rem"
+              m="0.2rem"
+              bg="#E3E5E8"
+            >
               <TagLabel width="100%">{chipValue}</TagLabel>
               <TagCloseButton onClick={() => deleteChip(key)} />
             </Tag>
           )
         })}
-      </Box>
-      <Box flexGrow={1}>
         <Input
-          variant="flushed"
+          variant="unstyled"
           value={value}
           onChange={(e: ChangeEvent<HTMLInputElement>): void => setValue(e.target.value)}
           placeholder={placeholder}
           onKeyDown={handleKeyDown}
           isInvalid={!!error}
+          ref={inputRef}
+          width="auto"
         />
-        {error && (
-          <Text className="error" fontSize="0.7rem" color="red.400">
-            {error}
-          </Text>
-        )}
-      </Box>
-    </Flex>
+      </Flex>
+      {error && (
+        <Text className="error" fontSize="0.7rem" color="red.400">
+          {error}
+        </Text>
+      )}
+    </>
   )
 }
 
 type ChipInputProps = {
   content: string[]
   handleChange: (chips: string[]) => void
-  placeholder: string
+  placeholder?: string
   submitKeys?: string[]
   validator?: (value: string) => boolean
   errorText?: string
