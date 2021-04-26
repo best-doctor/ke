@@ -2,6 +2,7 @@ import { TextValidationWidget } from './TextValidationWidget'
 import { LinkWidget } from './LinkWidget'
 import { SelectWidget, BaseSelectWidget } from './SelectWidget'
 import { ForeignKeySelectWidget } from './ForeignKeySelect'
+import { TreeSelectWidget } from './TreeSelectWidget'
 import { InputWidget } from './InputWidget'
 import { AvatarWidget } from './AvatarWidget'
 import { MultiSelectWidget } from './MultiSelectWidget'
@@ -23,6 +24,7 @@ export {
   SelectWidget,
   BaseSelectWidget,
   ForeignKeySelectWidget,
+  TreeSelectWidget,
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
