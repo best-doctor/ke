@@ -8,7 +8,7 @@ import { OrderDirection } from './types'
 export function Order({ value, onChange }: OrderProps): ReactElement<OrderProps> {
   const [dir, setDir] = usePropState(value)
 
-  const handleChangeDir = (changed: OrderDirection) => {
+  const handleChangeDir = (changed: OrderDirection): void => {
     setDir(changed)
     onChange(changed)
   }
