@@ -2,6 +2,10 @@ import { createEffect, createEvent, createStore } from 'effector'
 
 import type { Provider } from 'admin/providers/interfaces'
 
+type ResourceUrls = {
+  [key: string]: string
+}
+
 type ListEvent = {
   resourceUrl: string
   provider: Provider
@@ -13,6 +17,10 @@ type DetailEvent = {
   provider: Provider
 }
 
+type ResourcesEvent = {
+  resourceUrls: ResourceUrls
+}
+
 type State = {
   [key: string]: any
 }
@@ -20,6 +28,8 @@ type State = {
 const storeListResource = createEvent<ListEvent>()
 
 const storeDetailResource = createEvent<DetailEvent>()
+
+const storeResources = createEvent<ResourcesEvent>()
 
 const storeListEffect = createEffect({
   async handler({ resourceUrl, provider }: { resourceUrl: string; provider: Provider }): Promise<any[]> {
@@ -57,6 +67,11 @@ const effectorStore = createStore<object>({})
     return { ...state, ...{ [resourceUrl]: data } }
   })
 
+const resourceUrlStore = createStore<object>({}).on(storeResources, (state: State, { resourceUrls }): object => ({
+  ...state,
+  ...resourceUrls,
+}))
+
 class StoreManager {
   static storeList(resourceUrl: string, provider: Provider): void {
     storeListResource({ resourceUrl, provider })
@@ -69,6 +84,15 @@ class StoreManager {
   static getResource(resourceKey: string): any {
     const state: State = effectorStore.getState()
 
+    return state[resourceKey]
+  }
+
+  static storeResourceUrls(resourceUrls: ResourceUrls): void {
+    storeResources({ resourceUrls })
+  }
+
+  static getResourceUrl(resourceKey: string): string | undefined {
+    const state: State = resourceUrlStore.getState()
     return state[resourceKey]
   }
 }
