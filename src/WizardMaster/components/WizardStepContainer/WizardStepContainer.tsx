@@ -114,6 +114,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                       submitChange={submitChange}
                       analytics={analytics}
                       refreshMainDetailObject={refreshMainDetailObject}
+                      notifier={notifier}
                     />
                   </Box>
                 </Col>

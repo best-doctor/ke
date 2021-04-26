@@ -15,11 +15,20 @@ export function entitiesList<Entity, FiltersWithPage extends { page?: number }>(
     fetchFilters()
   }, [fetchFilters])
 
-  const [{ data: filters, lastFetch }, { onPageChange, onFiltersChange }] = useStoreApiState($filters, {
+  const [{ data: filters, lastFetch }, { onPageChange, onFiltersChange, onOrderChange }] = useStoreApiState($filters, {
     onPageChange: (filtersData, page: number) => ({ ...filtersData, data: { ...filtersData.data, page } }),
     onFiltersChange: (filtersData, changed: Omit<FiltersWithPage, 'page'>) => ({
       ...filtersData,
       data: { ...filtersData.data, ...changed },
+    }),
+    onOrderChange: (filtersData, ordering: Record<string | number, 'asc' | 'desc'>) => ({
+      ...filtersData,
+      data: {
+        ...filtersData.data,
+        ordering: Object.entries(ordering)
+          .map(([key, direction]) => (direction === 'asc' ? key : `-${key}`))
+          .join(','),
+      },
     }),
   })
 
@@ -46,7 +55,7 @@ export function entitiesList<Entity, FiltersWithPage extends { page?: number }>(
       value: filtersWithoutPage,
       onChange: onFiltersChange,
     }),
-    list: createElement(listComponent, { data: entities }),
+    list: createElement(listComponent, { data: entities, onOrderChange }),
     pagination: createElement(paginationComponent, {
       value: filters.page || 1,
       onChange: onPageChange,
@@ -86,6 +95,7 @@ type FiltersComponent<Filters> = ComponentType<{
 
 type ListComponent<Entity> = ComponentType<{
   data: readonly Entity[]
+  onOrderChange: (ordering: Record<number | string, 'asc' | 'desc'>) => void
 }>
 
 type PaginationComponent = ComponentType<{
