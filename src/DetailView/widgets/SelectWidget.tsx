@@ -31,11 +31,11 @@ const getSelectContent = (
   name: string,
   detailObject: DetailObject,
   displayValue: GenericAccessor,
-  expectedType: string
+  context: {}
 ): [string, string] => {
   // TODO Remove this
   try {
-    const { value, text } = getWidgetContent(name, detailObject, displayValue, expectedType)
+    const { value, text } = getWidgetContent(name, detailObject, displayValue, context)
     return [value, text]
   } catch (TypeError) {
     return ['', '']
@@ -59,7 +59,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
 
   const context = containerStore.getState()
 
-  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, 'object')
+  const [value, text] = getSelectContent(name, mainDetailObject, displayValue, context)
 
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
   setInitialValue({ [name]: value })
@@ -105,7 +105,7 @@ const SelectWidget = (props: WidgetProps): JSX.Element => {
   const context = containerStore.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
-  const [value] = getSelectContent(name, mainDetailObject, displayValue, 'object')
+  const [value] = getSelectContent(name, mainDetailObject, displayValue, context)
 
   setInitialValue({ [name]: value })
 
