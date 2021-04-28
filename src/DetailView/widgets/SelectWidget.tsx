@@ -3,7 +3,14 @@ import { Select } from '@chakra-ui/core'
 import type { Store } from 'effector'
 
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getAccessor, getData, getPayload, getWidgetContent, applyCallback } from '../utils/dataAccess'
+import {
+  getAccessor,
+  getData,
+  getPayload,
+  getWidgetContent,
+  applyCallback,
+  getAccessorWithDefault,
+} from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
@@ -24,7 +31,7 @@ type SelectWidgetProps = {
   setInitialValue: Function
   handleChange: Function
   containerStore: Store<object>
-  required?: boolean
+  required?: Accessor<boolean>
 }
 
 const getSelectContent = (
@@ -54,12 +61,13 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
     style,
     setInitialValue,
     handleChange,
-    required = false,
+    required,
   } = props
 
   const context = containerStore.getState()
 
   const [value, text] = getSelectContent(name, mainDetailObject, displayValue, context)
+  const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)
 
   const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
   setInitialValue({ [name]: value })
@@ -70,7 +78,7 @@ const BaseSelectWidget = (props: SelectWidgetProps): JSX.Element => {
   }, [data, mainDetailObject, context])
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
       <Select name={name} onChange={(e) => handleChange(e)}>
         <option value={value} selected key={value}>
           {text}

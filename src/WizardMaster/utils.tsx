@@ -2,10 +2,12 @@ import { containerStore, initialStore } from './store'
 import { clearErros, pushError, submitChange } from './controllers'
 import type { BaseWizard } from './interfaces'
 import type { WizardFieldElement, DetailFieldDescription } from '../admin/fields/FieldDescription'
+import { getAccessorWithDefault } from '../DetailView/utils/dataAccess'
+import { Accessor, WizardObject } from '../typing'
 
 type WidgetType = {
   widgets?: WidgetType[]
-  required: boolean
+  required: Accessor<boolean>
   helpText: string
   name: string
 }
@@ -43,25 +45,30 @@ const getWizardFromCallable = (wizardInstance: WizardFieldElement, object: objec
   return wizardInstance
 }
 
-const validateRequiredWidgets = (widgets: WidgetType[], wizardContext: { [key: string]: any }): void => {
+const validateRequiredWidgets = (
+  widgets: WidgetType[],
+  mainWizardObject: WizardObject,
+  wizardContext: { [key: string]: any }
+): void => {
   widgets.forEach((widget: WidgetType) => {
     if (widget?.widgets) {
-      validateRequiredWidgets(widget.widgets, wizardContext)
+      validateRequiredWidgets(widget.widgets, mainWizardObject, wizardContext)
     } else {
+      const isRequired = getAccessorWithDefault(widget.required, mainWizardObject, wizardContext, false)
       const widgetContent = wizardContext[widget.name]
-      if (widget.required === true && !widgetContent) {
+      if (isRequired === true && !widgetContent) {
         pushError(`Поле ${widget.helpText} обязательно`)
       }
     }
   })
 }
 
-const validateContext = (widgets: any): void => {
+const validateContext = (widgets: any, mainWizardObject: WizardObject): void => {
   clearErros()
 
   const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
 
-  validateRequiredWidgets(widgets, wizardContext)
+  validateRequiredWidgets(widgets, mainWizardObject, wizardContext)
 }
 
 export { getWizardFromCallable, clearInitialObjectState, clearStorage, validateContext }

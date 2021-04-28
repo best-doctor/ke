@@ -41,20 +41,10 @@ const toolbarConfig = {
 }
 
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    description,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-    containerStore,
-    required = false,
-  } = props
+  const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
   const editorContent = valueToEditorFormat(content as string)
 
   const [value, setValue] = React.useState(editorContent)
@@ -85,7 +75,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
       <StyledTextEditor>
         <RichTextEditor
           // eslint-disable-next-line

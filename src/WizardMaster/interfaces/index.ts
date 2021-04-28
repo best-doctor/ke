@@ -49,7 +49,7 @@ abstract class BaseWizardStep {
   }
 
   validatedNext(props: WizardPayload): WizardState {
-    validateContext(this.widgets)
+    validateContext(this.widgets, props.mainWizardObject)
 
     if (containerErrorsStore.getState().length > 0) {
       return Promise.resolve('invalid_form')

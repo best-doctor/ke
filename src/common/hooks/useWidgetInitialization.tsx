@@ -1,4 +1,4 @@
-import { getData, getWidgetContent } from '../../DetailView/utils/dataAccess'
+import { getAccessorWithDefault, getData, getWidgetContent } from '../../DetailView/utils/dataAccess'
 
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
@@ -12,6 +12,7 @@ type InitializedWidgetAttributes = {
   targetUrl: string
   content: object | string
   dataResourceUrl: string
+  isRequired: boolean
 }
 
 const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObject): string =>
@@ -21,15 +22,17 @@ const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObj
   getData(dataTarget, detailObject) || detailObject.url
 
 const useWidgetInitialization = (initializationArguments: InitializationArguments): InitializedWidgetAttributes => {
-  const { dataTarget, mainDetailObject, name, displayValue, context, dataSource } = initializationArguments
+  const { dataTarget, mainDetailObject, name, displayValue, context, dataSource, required } = initializationArguments
   const targetUrl = getWidgetTargetUrl(dataTarget, mainDetailObject)
   const content = getWidgetContent(name, mainDetailObject, displayValue, context) || ''
   const dataResourceUrl = getData(dataSource, mainDetailObject, context)
+  const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)
 
   return {
     targetUrl,
     content,
     dataResourceUrl,
+    isRequired,
   }
 }
 

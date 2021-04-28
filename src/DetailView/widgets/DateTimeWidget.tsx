@@ -38,11 +38,10 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
     maxDate,
     filterDate,
     filterTime,
-    required = false,
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null
   const [date, setDate] = React.useState<OptionalDate>(contentDate)
@@ -67,7 +66,7 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}
       description={description}
-      required={required}
+      required={isRequired}
     >
       <StyleDateTime>
         <DatePicker
