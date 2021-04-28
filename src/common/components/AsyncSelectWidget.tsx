@@ -114,6 +114,7 @@ const AsyncSelectWidget = ({
       getOptionLabel={(option: object | null) => (option ? getOptionLabel(option) : option)}
       getOptionValue={(option: object | null) => (option ? getOptionValue(option) : option)}
       placeholder={placeholder}
+      cacheUniq={dataResourceUrl}
     />
   )
 }
