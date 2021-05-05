@@ -89,7 +89,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
 
-  const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value))
+  const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value, mainDetailObject))
 
   return (
     <WidgetWrapper
@@ -116,7 +116,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           value={value}
           isClearable={isClearable}
           defaultOptions={defaultOptions}
-          getOptionLabel={optionLabel}
+          getOptionLabel={(val: object | null) => optionLabel(val, mainDetailObject)}
           getOptionValue={optionValue}
           searchParamName={searchParamName}
           styles={styles}
