@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import type { WidgetProps } from 'typing'
+import type { DetailObject, WidgetProps } from 'typing'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
@@ -17,6 +17,8 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   defaultOptions?: boolean
   searchParamName?: string
   styles?: object
+  optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
+  optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -24,7 +26,7 @@ const widgetType = WidgetTypeEnum.INPUT
 
 /**
  * Render select-input with async loaded options from backend
- * onChange - can return full loaded model fro option, not just key
+ * onChange - can return full loaded model for option, not just key
  *
  * Based on AsyncSelectWidget, so have common props.
  *
@@ -32,6 +34,8 @@ const widgetType = WidgetTypeEnum.INPUT
  * props.optionValue - got loaded model and return label for value
  * props.targetPayload - got selected model and return widget payload
  * props.styles - react-select styles
+ * props.optionLabelMenu - got loaded model and return menu label for option
+ * props.optionLabelValue - got loaded model and return value label for option
  *
  * @param props - widget props
  */
@@ -59,6 +63,8 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     searchParamName,
     notifier,
     cacheTime,
+    optionLabelMenu,
+    optionLabelValue,
   } = props
 
   const context = containerStore.getState()
@@ -118,6 +124,12 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           defaultOptions={defaultOptions}
           getOptionLabel={(val: object | null) => optionLabel(val, mainDetailObject)}
           getOptionValue={optionValue}
+          getOptionLabelMenu={
+            optionLabelMenu ? (val: object | null) => optionLabelMenu(val, mainDetailObject) : undefined
+          }
+          getOptionLabelValue={
+            optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
+          }
           searchParamName={searchParamName}
           styles={styles}
         />

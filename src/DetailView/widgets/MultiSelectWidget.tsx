@@ -6,14 +6,19 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
-import type { WidgetProps } from '../../typing'
+import type { DetailObject, WidgetProps } from '../../typing'
 import { getAccessor, getPayload } from '../utils/dataAccess'
 
 type MultiSelectValue = {
   [key: string]: string
 }
 
-type MultiSelectWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function }
+type MultiSelectWidgetProps = WidgetProps & {
+  optionLabel: Function
+  optionValue: Function
+  optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
+  optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
+}
 
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
@@ -30,6 +35,8 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     containerStore,
     cacheTime,
     targetPayload,
+    optionLabelMenu,
+    optionLabelValue,
   } = props
 
   const context = containerStore.getState()
@@ -69,8 +76,14 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
         closeMenuOnSelect={false}
         value={value}
         isMulti
-        getOptionLabel={optionLabel}
+        getOptionLabel={(val: object | null) => optionLabel(val, mainDetailObject)}
         getOptionValue={optionValue}
+        getOptionLabelMenu={
+          optionLabelMenu ? (val: object | null) => optionLabelMenu(val, mainDetailObject) : undefined
+        }
+        getOptionLabelValue={
+          optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
+        }
       />
     </WidgetWrapper>
   )

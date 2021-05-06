@@ -22,6 +22,8 @@ type AsyncSelectWidgetProps = {
   searchParamName?: string
   placeholder?: string
   cacheTime?: number
+  getOptionLabelMenu?: (option: object | object[] | null) => string
+  getOptionLabelValue?: (option: object | object[] | null) => string
 }
 
 type LoadOptionsType = {
@@ -38,6 +40,8 @@ type LoadOptionsType = {
  * @param handleChange - callback for select value changes
  * @param value - initial value
  * @param getOptionLabel - function will get every option model and should return label
+ * @param getOptionLabelMenu - function will get every option model and should return label for meny items display
+ * @param getOptionLabelValue - function will get every option model and should return label for value display
  * @param getOptionValue - function will get every option model and should return value
  * @param styles - react-select styles
  * @param isClearable - add clickable icon for select clear
@@ -59,6 +63,8 @@ const AsyncSelectWidget = ({
   defaultOptions = false,
   searchParamName = 'search',
   placeholder = 'Введите значение',
+  getOptionLabelMenu,
+  getOptionLabelValue,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -101,6 +107,19 @@ const AsyncSelectWidget = ({
 
   const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
 
+  const formatOptionLabel = (
+    option: object | object[] | null,
+    { context }: { context: 'menu' | 'value' }
+  ): string | null => {
+    if (!option) {
+      return option
+    }
+    if (context === 'menu') {
+      return getOptionLabelMenu ? getOptionLabelMenu(option) : getOptionLabel(option)
+    }
+    return getOptionLabelValue ? getOptionLabelValue(option) : getOptionLabel(option)
+  }
+
   return (
     <AsyncPaginate
       value={value}
@@ -111,8 +130,8 @@ const AsyncSelectWidget = ({
       isMulti={isMulti as false | undefined}
       menuPortalTarget={document.body}
       styles={widgetStyles}
-      getOptionLabel={(option: object | null) => (option ? getOptionLabel(option) : option)}
-      getOptionValue={(option: object | null) => (option ? getOptionValue(option) : option)}
+      formatOptionLabel={formatOptionLabel}
+      getOptionValue={(option: object | object[] | null) => (option ? getOptionValue(option) : option)}
       placeholder={placeholder}
       cacheUniq={dataResourceUrl}
     />
