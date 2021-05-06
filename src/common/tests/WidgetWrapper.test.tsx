@@ -11,7 +11,7 @@ test('Widget wrapper properly rendered', () => {
     </WidgetWrapper>
   )
 
-  expect(component.find(Box).length).toEqual(1)
+  expect(component.find(Box).length).toEqual(2)
   expect(component.find('h1').length).toEqual(1)
   expect(component.find(Flex).length).toEqual(1)
 })

@@ -1,6 +1,6 @@
 import { createEvent } from 'effector'
 
-const pushError = createEvent<string>()
+const pushError = createEvent<{ widgetName?: string; errorText: string }>()
 const clearErros = createEvent()
 
 const setInitialValue = createEvent<object>()

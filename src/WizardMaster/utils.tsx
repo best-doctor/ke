@@ -57,7 +57,7 @@ const validateRequiredWidgets = (
       const isRequired = getAccessorWithDefault(widget.required, mainWizardObject, wizardContext, false)
       const widgetContent = wizardContext[widget.name]
       if (isRequired === true && !widgetContent) {
-        pushError(`Поле ${widget.helpText} обязательно`)
+        pushError({ widgetName: widget.name, errorText: `Поле ${widget.helpText} обязательно` })
       }
     }
   })

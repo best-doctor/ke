@@ -101,7 +101,9 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
               <Row>
                 <Col xs={12}>
                   <Box key="errors">
-                    <WizardValidationErrors errors={containerErrorsStore.getState()} />
+                    <WizardValidationErrors
+                      errors={containerErrorsStore.getState().map(({ errorText }) => errorText)}
+                    />
                   </Box>
                   <Box key="steps">
                     <WizardStepControlPanel
