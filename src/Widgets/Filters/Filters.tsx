@@ -1,4 +1,4 @@
-import React, { Key, ReactElement, ReactNode, useMemo } from 'react'
+import React, { ReactElement, useMemo } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
 import { FormField } from '@cdk/Forms'
@@ -13,7 +13,8 @@ export function Filters<K extends string>({
   value,
   onChange,
   layout: Layout = ListVertical,
-}: FiltersProps<K>): ReactElement<FiltersProps<K>> {
+  layoutProxy,
+}: FiltersProps<K, any>): ReactElement<FiltersProps<K, any>> {
   const layoutChildren = useMemo(
     () =>
       filters.map(
@@ -22,18 +23,20 @@ export function Filters<K extends string>({
       ),
     [filters]
   )
-
   return (
     <GroupControl value={value} onChange={onChange}>
-      <Layout>{layoutChildren}</Layout>
+      <Layout>{layoutProxy ? layoutProxy(layoutChildren) : layoutChildren}</Layout>
     </GroupControl>
   )
 }
 
-interface BaseFiltersProps<K extends string> {
+interface BaseFiltersProps<K extends string, LayoutChildren> {
   filters: readonly Filter<K>[]
   value: FiltersValue<K>
   onChange: (v: FiltersValue<K>) => void
+  layoutProxy?: (elements: [string, ReactElement][]) => LayoutChildren
 }
-
-export type FiltersProps<K extends string> = PropsWithDefaultLayout<BaseFiltersProps<K>, (readonly [Key, ReactNode])[]>
+export type FiltersProps<K extends string, LayoutChildren> = PropsWithDefaultLayout<
+  BaseFiltersProps<K, LayoutChildren>,
+  LayoutChildren
+>

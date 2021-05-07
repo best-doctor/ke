@@ -73,6 +73,7 @@ import {
   MaskFilter,
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
+import { FilterClinics } from './common/components/FilterClinics'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
@@ -113,6 +114,7 @@ export {
   MaskFilter,
   StoreManager,
   AsyncSelectWidget,
+  FilterClinics,
   EnableSentry,
   EnableELK,
   TextValidationWidget,
