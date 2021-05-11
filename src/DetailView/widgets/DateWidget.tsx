@@ -25,21 +25,10 @@ type DateWidgetProps = {
  * @param props - widget props
  */
 const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    description,
-    style,
-    setInitialValue,
-    containerStore,
-    minDate,
-    maxDate,
-    filterDate,
-    required = false,
-  } = props
+  const { name, helpText, description, style, setInitialValue, containerStore, minDate, maxDate, filterDate } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null
   const [date, setDate] = React.useState<OptionalDate>(contentDate)
@@ -62,7 +51,7 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}
       description={description}
-      required={required}
+      required={isRequired}
     >
       <StyleDateTime>
         <DatePicker

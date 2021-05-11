@@ -9,6 +9,7 @@ import type { BaseAnalytic } from '../../../integration/analytics/base'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../../integration/analytics'
 import type { WizardObject } from '../../../typing'
+import { BaseNotifier } from '../../../common/notifier'
 
 type WizardStepControlPanelProps = {
   wizardStep: BaseWizardStep
@@ -20,6 +21,7 @@ type WizardStepControlPanelProps = {
   mainWizardObject: WizardObject
   analytics: BaseAnalytic | undefined
   refreshMainDetailObject: Function
+  notifier: BaseNotifier
 }
 
 const sendPushAnalytics = (

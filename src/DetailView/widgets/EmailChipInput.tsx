@@ -8,20 +8,10 @@ import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
 
 export const EmailChipInput = (props: WidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    description,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-    containerStore,
-    required = false,
-  } = props
+  const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
   const context = containerStore.getState()
 
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
@@ -39,11 +29,10 @@ export const EmailChipInput = (props: WidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
       <ChipInput
         content={(content || []) as string[]}
         handleChange={handleChange}
-        placeholder="Введите email"
         errorText="Введите валидный email"
         validator={(value) => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)}
         submitKeys={['Enter', 'Tab', ',', ' ', ';']}

@@ -20,6 +20,9 @@ const StyleDateTime = styled.div`
     height: 40px;
     width: 150px;
   }
+  .react-datepicker-popper {
+    z-index: 1001 !important;
+  }
 `
 
 const StyleDateTimeItem = styled.div`

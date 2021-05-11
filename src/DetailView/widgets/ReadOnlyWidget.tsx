@@ -8,19 +8,9 @@ import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
 
 const ReadOnlyWidget = (props: WidgetProps): JSX.Element => {
-  const {
-    containerStore,
-    style,
-    helpText,
-    description,
-    useClipboard,
-    copyValue,
-    notifier,
-    name,
-    required = false,
-  } = props
+  const { containerStore, style, helpText, description, useClipboard, copyValue, notifier, name } = props
 
-  const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
+  const { content, isRequired } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
   return (
     <WidgetWrapper
@@ -31,7 +21,7 @@ const ReadOnlyWidget = (props: WidgetProps): JSX.Element => {
       useClipboard={useClipboard}
       copyValue={getCopyHandler(content, copyValue)}
       notifier={notifier}
-      required={required}
+      required={isRequired}
     >
       <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
         {content || '\u00a0'}

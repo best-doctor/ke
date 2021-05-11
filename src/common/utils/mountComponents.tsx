@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 // eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps, ColProps } from 'react-flexbox-grid'
+import { Store } from 'effector'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
@@ -25,18 +26,23 @@ type MountComponentsKwargs = {
   user: object
   analytics: BaseAnalytic | undefined
   ViewType: string
-  containerStore?: object | undefined
+  containerStore?: Store<{ [key: string]: object | null }> | Store<object> | undefined
   setCurrentState?: Function
 }
 
-const getComponentFromCallable = (widget: GenericAccessor, user: object, detailObject: DetailObject): any => {
+const getComponentFromCallable = (
+  widget: GenericAccessor,
+  user: object,
+  detailObject: DetailObject,
+  context = {}
+): any => {
   // Widget can be defined as callable. In this case, we inject some payload to arrow function.
   let ComponentToMount = null
 
   if (isValidComponent(widget as JSX.Element)) {
     ComponentToMount = widget
   } else {
-    ComponentToMount = (widget as Function)(user, detailObject)
+    ComponentToMount = (widget as Function)(user, detailObject, context)
   }
 
   return ComponentToMount
@@ -116,8 +122,9 @@ const mountComponents = ({
       <Row key={rowKey}>
         {rowColumns.map((adminElement: DetailFieldDescription, columnIndex) => {
           const { widget, name, layout, widgetAnalytics } = adminElement
+          const context = containerStore?.getState()
 
-          const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject)
+          const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject, context)
           const colProps: ColProps = getColumnProps(layout)
           const columnKey = `${rowIndex}_${columnIndex}_${name}`
 

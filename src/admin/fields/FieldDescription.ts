@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react'
-import type { GenericAccessor } from 'typing'
+import type { Accessor, GenericAccessor } from 'typing'
 import type { BaseWizard } from '../../WizardMaster/interfaces'
 
 type ListFieldDescription = {
@@ -45,7 +45,7 @@ type WidgetValueValidator = Function
 
 type DetailFieldDescription = {
   name: string
-  required?: boolean
+  required?: Accessor<boolean>
   widget: FunctionComponent<any> | Function
   helpText?: string
   description?: string | JSX.Element

@@ -14,6 +14,8 @@ ALPHA VERSION – NOT FOR PRODUCTION USE
 
 ## Usage example
 
+[API Documentation](https://best-doctor.github.io/ke/)
+
 This is an example of the future API
 
 To use `ke` you should implement several base classes.

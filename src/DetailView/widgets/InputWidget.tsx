@@ -25,11 +25,10 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
     isTextarea = true,
     height,
     debounce = 1000,
-    required = false,
   } = props
   const context = containerStore.getState()
 
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
@@ -47,7 +46,7 @@ const InputWidget = (props: InputWidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={required}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
       <DebounceInput
         value={content as string}
         resize="none"

@@ -3,6 +3,7 @@ import React from 'react'
 import { Box, Flex, Text } from '@chakra-ui/core'
 import { Copy } from 'react-feather'
 import type { BaseNotifier } from '../notifier'
+import { containerErrorsStore } from '../../WizardMaster/store'
 
 const WidgetLabel = ({ helpText, isRequired }: { helpText: string; isRequired: boolean }): JSX.Element => (
   <>
@@ -55,6 +56,8 @@ const WidgetWrapper = ({
     }
   }
 
+  const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
+
   return (
     <Box {...style} data-name={name}>
       <Flex mt={5} alignItems="center" flexShrink={0}>
@@ -64,7 +67,9 @@ const WidgetWrapper = ({
         )}
         {description || ''}
       </Flex>
-      {children}
+      <Box borderColor={hasError ? 'red.500' : null} borderWidth={hasError ? 1 : 0} borderRadius={3}>
+        {children}
+      </Box>
     </Box>
   )
 }
