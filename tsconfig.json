@@ -21,7 +21,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "importsNotUsedAsValues": "remove",
+    "importsNotUsedAsValues": "preserve",
     "jsx": "react",
     "paths": {
       "@cdk/*": ["./cdk/*"],
@@ -37,6 +37,7 @@
     "removeComments": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "incremental": true
   }
 }
