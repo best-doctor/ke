@@ -4,7 +4,7 @@ import AsyncPaginate, { AsyncResult } from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
 import type { ValueType } from 'react-select'
-import { Pagination } from 'admin/providers/pagination'
+import { Pagination } from '../../admin/providers/pagination'
 import type { Provider } from '../../admin/providers/interfaces'
 
 type AsyncSelectWidgetProps = {
