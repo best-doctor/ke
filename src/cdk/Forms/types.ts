@@ -1,5 +1,1 @@
-export interface NodeProps {
-  name: string | number
-}
-
-export type FormsContextData = Record<string | number, unknown> | unknown[]
+export type FormValue = Record<string | number, unknown> | unknown[]

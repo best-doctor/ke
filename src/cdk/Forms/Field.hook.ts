@@ -1,13 +1,9 @@
-import { createContext, useContext } from 'react'
+import { useContext } from 'react'
 
-import type { FormsContextData } from './types'
+import { ValueContext } from './Value.context'
 
-const FormsContext = createContext<[FormsContextData, (data: FormsContextData) => void]>([{}, () => {}])
-
-export const FormsContextProvider = FormsContext.Provider
-
-export function useNodeState(key: string | number): [unknown, (value: unknown) => void] {
-  const [data, setData] = useContext(FormsContext)
+export function useField(key: string | number): [data: unknown, setData: (value: unknown) => void] {
+  const [data, setData] = useContext(ValueContext)
 
   if (Array.isArray(data)) {
     if (!Number.isInteger(key) || key < 0) {

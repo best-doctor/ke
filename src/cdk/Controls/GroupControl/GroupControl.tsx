@@ -1,6 +1,5 @@
-import * as React from 'react'
-import { PropsWithChildren, useCallback } from 'react'
-import { FormsContextProvider, FormsContextData } from '@cdk/Forms'
+import React, { PropsWithChildren, useCallback } from 'react'
+import { useRoot } from '@cdk/Forms'
 import { usePropState } from '@cdk/Hooks'
 
 export function GroupControl<T extends Record<string, unknown>>({
@@ -18,11 +17,9 @@ export function GroupControl<T extends Record<string, unknown>>({
     [onChange, setCurrentValue]
   )
 
-  return (
-    <FormsContextProvider value={[currentValue, handleChange as (val: FormsContextData) => void]}>
-      {children}
-    </FormsContextProvider>
-  )
+  const { root: Root } = useRoot(currentValue, handleChange)
+
+  return <Root>{children}</Root>
 }
 
 type GroupControlProps<T extends Record<string, unknown>> = PropsWithChildren<{

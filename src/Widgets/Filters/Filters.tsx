@@ -1,7 +1,7 @@
 import React, { Key, ReactElement, ReactNode, useMemo } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
-import { FormField } from '@cdk/Forms'
+import { Field } from '@django-spa/Forms'
 import { PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import { ListVertical } from '../../Layouts'
@@ -18,7 +18,7 @@ export function Filters<K extends string>({
     () =>
       filters.map(
         ({ control, name, ...other }) =>
-          [name, <FormField name={name} as={control} {...other} />] as [key: K, field: ReactElement]
+          [name, <Field name={name} as={control} {...other} />] as [key: K, field: ReactElement]
       ),
     [filters]
   )

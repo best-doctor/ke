@@ -3,8 +3,9 @@ import * as fc from 'fast-check'
 import { act, renderHook } from '@testing-library/react-hooks'
 import type { ReactNode } from 'react'
 
-import { FormsContextProvider, useNodeState } from './Forms.context'
-import type { FormsContextData } from './types'
+import { useField } from './Field.hook'
+import { ValueContext } from './Value.context'
+import type { FormValue } from './types'
 import {
   arrContextWithInvalidKeyArbitrary,
   arrContextWithValidKeyArbitrary,
@@ -12,13 +13,15 @@ import {
   dictContextWithValidKeyArbitrary,
 } from './fixtures'
 
-function makeContextWrapper(context: FormsContextData, setCallback: (val: FormsContextData) => void) {
+const FormValueProvider = ValueContext.Provider
+
+function makeContextWrapper(context: FormValue, setCallback: (val: FormValue) => void) {
   return ({ children }: { children: ReactNode }): JSX.Element => (
-    <FormsContextProvider value={[context, setCallback]}>{children}</FormsContextProvider>
+    <FormValueProvider value={[context, setCallback]}>{children}</FormValueProvider>
   )
 }
 
-describe('useNodeState - return state tuple from current context for got key', () => {
+describe('useField - return state tuple from current context for got key', () => {
   test.each([
     ['dict', dictContextWithValidKeyArbitrary],
     ['array', arrContextWithValidKeyArbitrary],
@@ -29,7 +32,7 @@ describe('useNodeState - return state tuple from current context for got key', (
       fc.property(arbitrary, ([context, key]) => {
         const wrapper = makeContextWrapper(context, jest.fn())
 
-        const { result } = renderHook(() => useNodeState(key), { wrapper })
+        const { result } = renderHook(() => useField(key), { wrapper })
 
         expect(result.current[0]).toBe(context[key])
       })
@@ -42,7 +45,7 @@ describe('useNodeState - return state tuple from current context for got key', (
         const setter = jest.fn()
         const wrapper = makeContextWrapper(dict, setter)
 
-        const { result } = renderHook(() => useNodeState(key), { wrapper })
+        const { result } = renderHook(() => useField(key), { wrapper })
 
         const [, keySetter] = result.current
         act(() => {
@@ -61,7 +64,7 @@ describe('useNodeState - return state tuple from current context for got key', (
         const setter = jest.fn()
         const wrapper = makeContextWrapper(arr, setter)
 
-        const { result } = renderHook(() => useNodeState(key), { wrapper })
+        const { result } = renderHook(() => useField(key), { wrapper })
         const [, keySetter] = result.current
         act(() => {
           keySetter(updates)
@@ -80,7 +83,7 @@ describe('useNodeState - return state tuple from current context for got key', (
       fc.property(dictContextWithInvalidKeyArbitrary, ([dict, key]) => {
         const wrapper = makeContextWrapper(dict, jest.fn())
 
-        const { result } = renderHook(() => useNodeState(key), { wrapper })
+        const { result } = renderHook(() => useField(key), { wrapper })
 
         expect(result.error).toBeInstanceOf(RangeError)
       })
@@ -92,7 +95,7 @@ describe('useNodeState - return state tuple from current context for got key', (
       fc.property(arrContextWithInvalidKeyArbitrary, ([arr, key]) => {
         const wrapper = makeContextWrapper(arr, jest.fn())
 
-        const { result } = renderHook(() => useNodeState(key), { wrapper })
+        const { result } = renderHook(() => useField(key), { wrapper })
 
         expect(result.error).toBeInstanceOf(TypeError)
       })

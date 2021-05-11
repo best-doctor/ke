@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react'
 import { HeaderConfig, TableProps } from '@cdk/Tables'
-import { FormField } from '@cdk/Forms'
+import { Field } from '@django-spa/Forms'
 import { GroupControl } from '@cdk/Controls'
 
 import { OrderDirection } from './types'
@@ -38,13 +38,13 @@ function addOrdering(header: HeaderConfig | ReactNode, orderingName: string | nu
       (columnIndex: number) => (
         <>
           {value(columnIndex)}
-          <FormField name={orderingName} as={Order} />
+          <Field name={orderingName} as={Order} />
         </>
       )
     ) : (
       <>
         {value}
-        <FormField name={orderingName} as={Order} />
+        <Field name={orderingName} as={Order} />
       </>
     )
 
