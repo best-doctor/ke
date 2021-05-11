@@ -1,15 +1,8 @@
-import React, { PropsWithChildren, ReactElement } from 'react'
+import React, { PropsWithChildren, ReactElement, useState } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/core'
 import { makeSlots } from '@cdk/Layouts'
 
 export const FilterClinics = (mainSlot: string) => {
-  let isOpen = false
-  const handleOpen = () => {
-    isOpen = true
-  }
-  const handleClose = () => {
-    isOpen = false
-  }
   const Additional = ({ children, isOpen }: PropsWithChildren<{ isOpen: boolean }>) => {
     return isOpen ? (
       <Flex flexWrap="wrap" border="1px" borderColor="gray.200" borderRadius="md" my={2} p={3}>
@@ -17,13 +10,10 @@ export const FilterClinics = (mainSlot: string) => {
       </Flex>
     ) : null
   }
-  const Buttons = ({ isOpen, open, close }: { isOpen: boolean; open: () => void; close: () => void }) => {
-    const toggleAdditional = () => {
-      isOpen ? open() : close()
-    }
+  const Buttons = ({ isOpen, additionalHandler }: { isOpen: boolean; additionalHandler: () => void }) => {
     return (
       <Box ml={2}>
-        <Button mr={2} onClick={toggleAdditional}>
+        <Button mr={2} isActive={isOpen} onClick={additionalHandler}>
           {isOpen ? 'Скрыть фильтры' : 'Раскрыть фильтры'}
         </Button>
         <Button>Сбросить</Button>
@@ -48,16 +38,26 @@ export const FilterClinics = (mainSlot: string) => {
     filterClinicsLayout: makeSlots(
       {
         main: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-        buttons: () => <Buttons isOpen={isOpen} open={handleOpen} close={handleClose} />,
-        additional: ({ children }: PropsWithChildren<{}>) => <Additional isOpen={isOpen}>{children}</Additional>,
+        buttons: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
+        additional: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
       },
-      (slotElements) => (
-        <Flex flexWrap="wrap">
-          <Box flex={'2 0 0%'}>{slotElements.main}</Box>
-          <Box flex={'1 0 0%'}>{slotElements.buttons}</Box>
-          <Box flex={'1 0 100%'}>{slotElements.additional}</Box>
-        </Flex>
-      )
+      (slotElements) => {
+        const [additional, setAdditional] = useState(false)
+        const handleClick = () => {
+          setAdditional(!additional)
+        }
+        return (
+          <Flex flexWrap="wrap">
+            <Box flex={'2 0 0%'}>{slotElements.main}</Box>
+            <Box flex={'1 0 0%'}>
+              <Buttons isOpen={additional} additionalHandler={handleClick} />
+            </Box>
+            <Box flex={'1 0 100%'}>
+              <Additional isOpen={additional}>{slotElements.additional}</Additional>
+            </Box>
+          </Flex>
+        )
+      }
     ),
   }
 }
