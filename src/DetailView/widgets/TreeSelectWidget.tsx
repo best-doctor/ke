@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 
 import TreeSelect from 'rc-tree-select'
 import { WidgetProps } from 'typing'
-import { LegacyDataNode, RawValueType } from 'rc-tree-select/lib/interface'
+import { ChangeEventExtra, LegacyDataNode, RawValueType } from 'rc-tree-select/lib/interface'
 import { createGlobalStyle } from 'styled-components'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
@@ -225,9 +225,9 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   }
 
   const handleChangeValue = (
-    changeValue: React.ChangeEvent<HTMLInputElement>,
-    _: any,
-    extra: { triggerNode: { key: string } }
+    changeValue: ChangeEvent<HTMLInputElement>,
+    _: ReactNode[],
+    extra: ChangeEventExtra
   ): void => {
     if (changeValue) {
       const { key } = extra.triggerNode
