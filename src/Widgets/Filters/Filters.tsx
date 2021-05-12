@@ -1,4 +1,4 @@
-import React, { Key, ReactElement, ReactNode, useMemo } from 'react'
+import React, { Key, ReactElement, ReactNode, useMemo, FC } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
 import { Field } from '@django-spa/Forms'
@@ -12,7 +12,7 @@ export function Filters<K extends string>({
   filters,
   value,
   onChange,
-  layout: Layout = ListVertical,
+  layout = ListVertical,
 }: FiltersProps<K>): ReactElement<FiltersProps<K>> {
   const layoutChildren = useMemo(
     () =>
@@ -22,7 +22,8 @@ export function Filters<K extends string>({
       ),
     [filters]
   )
-
+  // TODO: Rewrite this component to use makeWithLayout
+  const Layout = layout as FC
   return (
     <GroupControl value={value} onChange={onChange}>
       <Layout>{layoutChildren}</Layout>

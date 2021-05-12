@@ -1,19 +1,19 @@
-import React, { FunctionComponentElement, ElementType } from 'react'
+import React, { ElementType } from 'react'
 import { useField } from '@cdk/Forms'
+import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import type { NodeProps } from './types'
+import { Simple } from './Layouts'
 
-export function Field<T, P extends ControlProps<T>>({
-  name,
-  as,
-  ...other
-}: FieldProps<T, P>): FunctionComponentElement<FieldProps<T, P>> {
+export const Field = makeWithLayout(({ name, as, ...other }: FieldProps<unknown, ControlProps<unknown>>) => {
   const [field, setField] = useField(name)
 
   // Don't found why, but type declaration necessary here https://github.com/microsoft/TypeScript/issues/28631#issuecomment-477240245
   const Component: ElementType = as
-  return <Component value={field} onChange={setField} {...other} />
-}
+  return { Control: <Component value={field} onChange={setField} {...other} /> }
+}, Simple) as <T, P extends ControlProps<T>>(
+  props: PropsWithDefaultLayout<FieldProps<T, P>, { Control: JSX.Element }>
+) => JSX.Element
 
 interface ControlProps<T> {
   value: T

@@ -7,9 +7,7 @@ export function makeSlots<S extends SlotsMap>(
   mapping: (elements: SlotsElement<S>) => ReactElement
 ): LayoutComponent<SlotsData<S>> & S {
   const Layout = ({ children }: LayoutProps<SlotsData<S>>): LayoutElement<SlotsData<S>> => {
-    let elements: SlotsElement<S> = {}
-
-    elements = isSlotsData(children)
+    const elements = isSlotsData(children)
       ? elementsFromSlotsData(children, slotsMap)
       : elementsFromChildren(children, slotsMap)
 
