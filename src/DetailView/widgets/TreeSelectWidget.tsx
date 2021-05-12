@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import TreeSelect from 'rc-tree-select'
 import { WidgetProps } from 'typing'
@@ -25,6 +25,14 @@ type TreeOptionObject = {
   children: TreeOptionObject[] | []
   isLeaf: boolean
   childrenUrl: string | null
+}
+type InitialTreeObject = {
+  children_url: string | null
+  is_doctor_referral_required: boolean
+  is_stop_service: boolean
+  title: string
+  url: string
+  uuid: string
 }
 const StyledTreeSelect = createGlobalStyle`
   .rc-tree-select-single:not(.rc-tree-select-customize-input) .rc-tree-select-selector {
@@ -127,12 +135,10 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   } = props
   const context = containerStore.getState()
   const { content, dataResourceUrl } = useWidgetInitialization({ ...props, context })
-
   const [treeData, setTreeData] = useState<TreeOptionObject[]>([])
+  const [initialTreeData, setInitialTreeData] = useState<InitialTreeObject[]>([])
   const [debounce, setDebounce] = useState<any>(null)
-  const [value, setValue] = React.useState<ChangeEvent<HTMLInputElement> | undefined>(
-    content as ChangeEvent<HTMLInputElement> | undefined
-  )
+  const [value, setValue] = React.useState<InitialTreeObject | undefined>(content as InitialTreeObject)
   setInitialValue(value ? getPayload(value, name, targetPayload) : null)
 
   const arrowPath =
@@ -175,9 +181,7 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
     switcherIcon,
   }
   const getUrl = (paramName: string, changeValue: string): string => {
-    console.log(dataResourceUrl)
-
-    const url = new URL('https://staging-svct.bestdoctor.ru/api/medical_program/service_tree_node/')
+    const url = new URL(dataResourceUrl)
     url.searchParams.append(paramName, changeValue)
     return url.href
   }
@@ -217,12 +221,19 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
     const url = getUrl(paramName, changeValue)
     const res = await provider.getPage(url).then(([data, ,]: [object, object, object]) => data as [])
     const data = prepareData(paramName, res)
+    setInitialTreeData(res)
     setTreeData(data)
     return Promise.resolve(data)
   }
 
-  const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(changeValue)
+  const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>, _: any, extra: any): void => {
+    if (changeValue) {
+      const key = extra.triggerNode.key
+      const returnValue = initialTreeData.find((item) => item.uuid === key)
+      setValue(returnValue)
+    } else {
+      setValue(undefined)
+    }
   }
   const handleLoadData = async (treeNode: LegacyDataNode): Promise<void> => {
     if (treeNode.childrenUrl) {
@@ -246,7 +257,7 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
     )
   }
   useEffect(() => {
-    setValue(content as ChangeEvent<HTMLInputElement> | undefined)
+    setValue(content as InitialTreeObject)
   }, [content])
 
   useEffect(() => {
@@ -272,7 +283,6 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
         <TreeSelect
           style={{ width: '100%', fontSize: '1rem' }}
           treeData={treeData}
-          value={value}
           onChange={handleChangeValue}
           loadData={handleLoadData}
           searchPlaceholder={optionLabel}
