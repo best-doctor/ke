@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import TreeSelect from 'rc-tree-select'
 import { WidgetProps } from 'typing'
 import { LegacyDataNode, RawValueType } from 'rc-tree-select/lib/interface'
+import { createGlobalStyle } from 'styled-components'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
-import { createGlobalStyle } from 'styled-components'
 import 'rc-tree-select/assets/index.less'
 
 type ForeignKeySelectWidgetProps = WidgetProps & {
@@ -148,23 +148,21 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
     '.7 7.7 10.4 12.9 6.3l450.8-352.1c16.4-12.8 16.4-3' +
     '7.6 0-50.4z'
 
-  const getSvg = (path: string, iStyle = {}, style = {}) => {
-    return (
-      <i style={iStyle}>
-        <svg
-          viewBox="0 0 1024 1024"
-          width="1em"
-          height="1em"
-          fill="currentColor"
-          style={{ verticalAlign: '-.125em', ...style }}
-        >
-          <path d={path} />
-        </svg>
-      </i>
-    )
-  }
+  const getSvg = (path: string, iStyle = {}, svgStyle = {}): JSX.Element => (
+    <i style={iStyle}>
+      <svg
+        viewBox="0 0 1024 1024"
+        width="1em"
+        height="1em"
+        fill="currentColor"
+        style={{ verticalAlign: '-.125em', ...svgStyle }}
+      >
+        <path d={path} />
+      </svg>
+    </i>
+  )
 
-  const switcherIcon = (obj: any) => {
+  const switcherIcon = (obj: { isLeaf: boolean; expanded: boolean }): JSX.Element => {
     if (obj.isLeaf) {
       return getSvg('', { cursor: 'pointer', background: 'white' }, { transform: 'rotate(270deg)' })
     }
@@ -226,9 +224,13 @@ const TreeSelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
     return Promise.resolve(data)
   }
 
-  const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>, _: any, extra: any): void => {
+  const handleChangeValue = (
+    changeValue: React.ChangeEvent<HTMLInputElement>,
+    _: any,
+    extra: { triggerNode: { key: string } }
+  ): void => {
     if (changeValue) {
-      const key = extra.triggerNode.key
+      const { key } = extra.triggerNode
       const returnValue = initialTreeData.find((item) => item.uuid === key)
       setValue(returnValue)
     } else {
