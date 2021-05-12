@@ -1,6 +1,5 @@
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/index',
@@ -31,9 +30,6 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin({ watch: true }),
-  ],
   externals: {
     react: 'react',
     'react-dom': 'react-dom',
