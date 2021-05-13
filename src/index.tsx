@@ -60,6 +60,7 @@ import {
   ReadOnlyWidget,
   AsyncReadOnlyWidget,
   EmailChipInput,
+  PhoneChipInput,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -181,4 +182,5 @@ export {
   MessagesBlock,
   Filter,
   EmailChipInput,
+  PhoneChipInput,
 }
