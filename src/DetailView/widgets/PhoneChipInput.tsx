@@ -33,7 +33,7 @@ export const PhoneChipInput = (props: WidgetProps): JSX.Element => {
       <ChipInput
         content={(content || []) as string[]}
         handleChange={handleChange}
-        errorText="Введите валидный нормер телефона"
+        errorText="Введите валидный номер телефона"
         validator={(value: string) => /^\+?[1-9]\d{1,14}$/.test(value)}
         submitKeys={['Enter', 'Tab', ',', ' ', ';']}
       />
