@@ -1,18 +1,28 @@
-import React, { FunctionComponentElement, ReactNode } from 'react'
-import { useField, useRoot } from '@cdk/Forms'
+import React, { FunctionComponentElement, ReactNode, useCallback } from 'react'
+import { ArrRoot, RootValueDesc, FieldError, useRoot, useValue } from '@cdk/Forms'
 
 import type { NodeProps } from './types'
 
 export function Arr({ name, children: makeNodeItem }: ArrProps): FunctionComponentElement<ArrProps> {
-  const [data, setData] = useField(name)
+  const { value, setValue } = useValue(name)
 
-  if (!Array.isArray(data)) {
-    throw new TypeError(`Form Array for name ${name} got ${typeof data} but waited for array`)
+  if (!Array.isArray(value)) {
+    throw new TypeError(`Form Array for name ${name} got ${typeof value} but waited for array`)
   }
 
-  const { root: Root } = useRoot(data, setData)
+  const handleChange = useCallback(
+    (desc: RootValueDesc<ArrRoot>) => {
+      setValue({
+        value: desc.value,
+        errors: desc.errors.indexOf(null) < 0 ? (desc.errors.flat() as FieldError[]) : null,
+      })
+    },
+    [setValue]
+  )
 
-  return <Root>{data.map(makeNodeItem)}</Root>
+  const { Root } = useRoot(value, handleChange)
+
+  return <Root>{value.map(makeNodeItem)}</Root>
 }
 
 interface ArrProps extends NodeProps {

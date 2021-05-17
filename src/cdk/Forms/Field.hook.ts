@@ -1,27 +1,53 @@
-import { useContext } from 'react'
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react'
 
-import { ValueContext } from './Value.context'
+import { ValidatedResult, Validator, ValidateError, ControlRefProps } from './types'
+import { useValue } from './Value.hook'
 
-export function useField(key: string | number): [data: unknown, setData: (value: unknown) => void] {
-  const [data, setData] = useContext(ValueContext)
+export function useField(
+  key: string | number,
+  controlRef?: RefObject<ControlRefProps | undefined>,
+  validate: Validator = defaultValidate
+): UseFieldResult<unknown> {
+  const { value, setValue } = useValue(key)
+  const [errors, setErrors] = useState<ValidateError[]>([])
+  const defaultRef = useRef()
 
-  if (Array.isArray(data)) {
-    if (!Number.isInteger(key) || key < 0) {
-      throw new TypeError(`Key "${key}" not acceptable for array form data`)
-    }
-    return [
-      data[key as number],
-      (val) => {
-        const updatedArr = [...data]
-        updatedArr[key as number] = val
-        setData(updatedArr)
-      },
-    ]
+  useEffect(() => {
+    validate(value).then((result) => {
+      setErrors(result.errors || [])
+      setValue({
+        value,
+        errors: (result.errors || []).map((validateError) => ({
+          ...validateError,
+          relatedRef: controlRef || defaultRef,
+        })),
+      })
+    })
+  }, [value, validate, setValue, controlRef])
+
+  const onChange = useCallback(
+    (val) => {
+      setValue({
+        value: val,
+        errors: null,
+      })
+    },
+    [setValue]
+  )
+
+  return {
+    value,
+    onChange,
+    errors,
   }
+}
 
-  if (!(key in data)) {
-    throw new RangeError(`Key "${key}" not in provided data: ${JSON.stringify(data)}`)
-  }
+function defaultValidate(): Promise<ValidatedResult> {
+  return Promise.resolve({ success: true })
+}
 
-  return [data[key], (val) => setData({ ...data, [key]: val })]
+interface UseFieldResult<T> {
+  value: T
+  onChange: (val: T) => void
+  errors: readonly ValidateError[]
 }

@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useCallback } from 'react'
-import { useRoot } from '@cdk/Forms'
+import { RootValueDesc, useRoot } from '@cdk/Forms'
 import { usePropState } from '@cdk/Hooks'
 
 export function GroupControl<T extends Record<string, unknown>>({
@@ -10,14 +10,14 @@ export function GroupControl<T extends Record<string, unknown>>({
   const [currentValue, setCurrentValue] = usePropState(value)
 
   const handleChange = useCallback(
-    (val: T) => {
-      setCurrentValue(val)
-      onChange(val)
+    (desc: RootValueDesc<T>) => {
+      setCurrentValue(desc.value)
+      onChange(desc.value)
     },
     [onChange, setCurrentValue]
   )
 
-  const { root: Root } = useRoot(currentValue, handleChange)
+  const { Root } = useRoot(currentValue, handleChange)
 
   return <Root>{children}</Root>
 }
