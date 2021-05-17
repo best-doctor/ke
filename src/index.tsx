@@ -60,6 +60,7 @@ import {
   ReadOnlyWidget,
   AsyncReadOnlyWidget,
   EmailChipInput,
+  PhoneChipInput,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -73,6 +74,7 @@ import {
   MaskFilter,
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
+import { HiddenAdditionalFilter } from './common/components/HiddenAdditionalFilter'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
@@ -113,6 +115,7 @@ export {
   MaskFilter,
   StoreManager,
   AsyncSelectWidget,
+  HiddenAdditionalFilter,
   EnableSentry,
   EnableELK,
   TextValidationWidget,
@@ -179,4 +182,5 @@ export {
   MessagesBlock,
   Filter,
   EmailChipInput,
+  PhoneChipInput,
 }
