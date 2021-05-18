@@ -112,4 +112,4 @@ const Wizard = (props: WizardProps): JSX.Element => {
   )
 }
 
-export { Wizard }
+export { Wizard, WizardProps }
