@@ -9,6 +9,7 @@ import type { BaseAnalytic } from 'integration/analytics/base'
 import type { FieldsTypeInAdminClass } from 'typing'
 
 import { mountWizards } from '../WizardMaster/mountWizards'
+import { mountWizards as updatedMountWizards } from '../Wizard/mountWizards'
 import { mountDetailFields } from './mountDetailFields'
 import { ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'
@@ -35,6 +36,7 @@ const getContainersToMount = (): { [key in FieldsTypeInAdminClass]: Function } =
   ({
     detail_fields: mountDetailFields,
     wizards: mountWizards,
+    updated_wizards: updatedMountWizards,
     additional_detail_widgets: mountDetailFields,
   })
 

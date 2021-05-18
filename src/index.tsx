@@ -95,6 +95,7 @@ export * from './LegacySupport'
 export * from './cdk/State'
 export { TableProps } from './cdk/Tables'
 export * from './Browser'
+export { Wizard as UpdatedWizard } from './Wizard'
 
 export {
   BaseAdmin,
