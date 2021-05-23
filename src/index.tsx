@@ -27,7 +27,7 @@ import { RenderList } from 'ListView/RenderList'
 import { RenderDetail } from 'DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
-import { pushError } from 'WizardMaster/events'
+import { pushError, clearErros } from 'WizardMaster/events'
 import { useWidgetInitialization } from 'common/hooks/useWidgetInitialization'
 import { StoreManager } from 'common/store'
 import { handleUserAction } from 'common/utils/handleUserAction'
@@ -95,6 +95,7 @@ export * from './LegacySupport'
 export * from './cdk/State'
 export { TableProps } from './cdk/Tables'
 export * from './Browser'
+export { Wizard as UpdatedWizard } from './Wizard'
 
 export {
   BaseAdmin,
@@ -179,6 +180,7 @@ export {
   PagedPagination,
   CursorPagination,
   pushError,
+  clearErros,
   MessagesBlock,
   Filter,
   EmailChipInput,

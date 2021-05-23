@@ -78,6 +78,10 @@ const AsyncSelectWidget = ({
   const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
   const [cachedChangeValue, setCachedChangeValue] = useState<string>('')
 
+  React.useEffect(() => {
+    setNextUrl('')
+  }, [dataResourceUrl])
+
   const getUrl = (changeValue: string): string => {
     const url = new URL(dataResourceUrl)
     url.searchParams.append(searchParamName, changeValue)
