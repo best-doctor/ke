@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, IconButton } from '@chakra-ui/core'
+import { Flex, IconButton } from '@chakra-ui/react'
 import { color, justifyContent, space, SpaceProps } from 'styled-system'
 
 const StyledTable = styled.div<SpaceProps>`
@@ -50,7 +50,7 @@ type TableIconButtonProps = SpaceProps & {
   onClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined
   isDisabled: boolean
   children?: JSX.Element
-  variantColor?: string
+  colorScheme?: string
 }
 
 const TableIconButton = ({
@@ -58,16 +58,18 @@ const TableIconButton = ({
   onClick,
   isDisabled,
   children,
-  variantColor,
+  colorScheme,
   ...rest
 }: TableIconButtonProps): JSX.Element => (
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   <IconButton
     size="sm"
     {...rest}
     icon={icon}
     borderWidth={1}
     onClick={onClick}
-    variantColor={variantColor}
+    colorScheme={colorScheme}
     isDisabled={isDisabled}
     aria-label="Table Icon button"
   >

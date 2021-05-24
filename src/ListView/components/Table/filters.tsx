@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import InputMask, { Props as InputMaskProps } from 'react-input-mask'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 import Select from 'react-select'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'

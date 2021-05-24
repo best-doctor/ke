@@ -33,7 +33,7 @@ const getNextButton = (
   const { next, validatedNext, requireValidation } = wizardStep
 
   return {
-    style: style || { variantColor: 'blue', m: 5 },
+    style: style || { colorScheme: 'blue', m: 5 },
     handler: requireValidation ? validatedNext : next,
     label: label || wizardStep.forwardStepLabel,
     name: name || 'next',

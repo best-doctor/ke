@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import type { BaseAdmin } from 'admin'
 import type { Provider } from 'admin/providers/interfaces'
@@ -66,7 +66,7 @@ const ResourceComposer = ({
   const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
   return (
     <Router>
-      <ThemeProvider>
+      <ChakraProvider>
         {withSideBar && (
           <SideBar header="Разделы">
             {React.Children.map(children, (resource: JSX.Element) => {
@@ -93,7 +93,7 @@ const ResourceComposer = ({
           }
           return resource
         })}
-      </ThemeProvider>
+      </ChakraProvider>
     </Router>
   )
 }

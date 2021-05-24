@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react'
-import { Box, Button, Flex } from '@chakra-ui/core'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import { makeSlots } from '@cdk/Layouts'
 
 const Additional = ({ children, isOpen }: PropsWithChildren<{ isOpen: boolean }>): JSX.Element | null =>

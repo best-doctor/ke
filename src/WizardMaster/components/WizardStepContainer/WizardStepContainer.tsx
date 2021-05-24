@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Box } from '@chakra-ui/core'
+import { Heading, Box } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
 
 import { WizardStepComponents } from './WizardStepComponents'
@@ -14,7 +14,7 @@ import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
 
-type WizardStepContainerRef = HTMLElement | null
+type WizardStepContainerRef = HTMLDivElement | null
 
 type WizardViewContainerProps = {
   wizard: BaseWizard

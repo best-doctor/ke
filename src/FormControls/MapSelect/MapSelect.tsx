@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Button } from '@chakra-ui/core'
+import { Button } from '@chakra-ui/react'
 import { usePropState } from '@cdk/Hooks'
 
 import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'

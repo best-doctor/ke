@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { mocked } from 'ts-jest/utils'
 import { Menu } from 'react-feather'
-import { Drawer, DrawerContent, ThemeProvider } from '@chakra-ui/core'
+import { Drawer, DrawerContent, ChakraProvider } from '@chakra-ui/react'
 
 import { SideBar, SideBarElement } from '../components/SideBar'
 import { AdminResource } from '../../ResourceComposer'
@@ -27,9 +27,9 @@ const testResource = (
 )
 
 const getSideBarElement = (): JSX.Element => (
-  <ThemeProvider>
+  <ChakraProvider>
     <SideBarElement resource={testResource} />
-  </ThemeProvider>
+  </ChakraProvider>
 )
 
 test('Side bar component properly rendered', () => {

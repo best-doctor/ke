@@ -1,6 +1,6 @@
 import React from 'react'
 import { DebounceInput } from 'react-debounce-input'
-import { Textarea, Input } from '@chakra-ui/core'
+import { Textarea, Input } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'

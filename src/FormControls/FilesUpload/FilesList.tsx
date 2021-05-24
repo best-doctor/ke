@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { List, ListIcon, ListItem, IconButton } from '@chakra-ui/core'
+import { List, ListIcon, ListItem, IconButton } from '@chakra-ui/react'
 import { Paperclip, X } from 'react-feather'
 import { usePropState } from '@cdk/Hooks'
 
@@ -18,9 +18,9 @@ export function FilesList({ value, onChange }: FilesListProps): ReactElement<Fil
     <List>
       {files.map((file) => (
         <ListItem key={file.uuid}>
-          <ListIcon icon={Paperclip} />
+          <ListIcon icon={<Paperclip />} />
           {file.name}
-          <IconButton aria-label="Удалить" icon={X} onClick={() => deleteFile(file)} />
+          <IconButton aria-label="Удалить" icon={<X />} onClick={() => deleteFile(file)} />
         </ListItem>
       ))}
     </List>

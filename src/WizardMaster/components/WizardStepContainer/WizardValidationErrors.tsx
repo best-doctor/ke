@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Heading, Box } from '@chakra-ui/core'
+import { Heading, Box } from '@chakra-ui/react'
 
 const WizardValidationErrors = ({ errors }: { errors: string[] }): JSX.Element => {
   const ErrorDisplay = (): JSX.Element => (

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { usePropState } from '@cdk/Hooks'
-import { IconButton } from '@chakra-ui/core'
+import { IconButton } from '@chakra-ui/react'
 import { ChevronsUp, ChevronsDown } from 'react-feather'
 
 import { OrderDirection } from './types'
@@ -15,9 +15,9 @@ export function Order({ value, onChange }: OrderProps): ReactElement<OrderProps>
 
   switch (dir) {
     case 'asc':
-      return <IconButton aria-label="По возрастанию" icon={ChevronsDown} onClick={() => handleChangeDir('desc')} />
+      return <IconButton aria-label="По возрастанию" icon={<ChevronsDown />} onClick={() => handleChangeDir('desc')} />
     case 'desc':
-      return <IconButton aria-label="По убыванию" icon={ChevronsUp} onClick={() => handleChangeDir('asc')} />
+      return <IconButton aria-label="По убыванию" icon={<ChevronsUp />} onClick={() => handleChangeDir('asc')} />
     default:
       throw new TypeError(`Unknown order direction: ${dir}. Awaiting for 'asc' or 'desc'`)
   }

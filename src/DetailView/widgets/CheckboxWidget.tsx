@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Box } from '@chakra-ui/core'
+import { Checkbox, Box } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'

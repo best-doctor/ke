@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { act } from 'react-dom/test-utils'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateTimeRangeWidget } from '../../widgets/DateTimeRangeWidget'
@@ -17,7 +17,7 @@ const detailObject = {
 }
 
 const getComponent = (): JSX.Element => (
-  <ThemeProvider>
+  <ChakraProvider>
     <DateTimeRangeWidget
       name="test"
       resource="test-resource"
@@ -38,7 +38,7 @@ const getComponent = (): JSX.Element => (
       submitChange={submitChangeMock}
       containerStore={mockedEffectorContainerStore}
     />
-  </ThemeProvider>
+  </ChakraProvider>
 )
 
 test('DateTimeRangeWidget properly rendered', () => {

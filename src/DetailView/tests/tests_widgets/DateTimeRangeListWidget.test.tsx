@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 import { mount } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 
@@ -17,7 +17,7 @@ const detailObject = {
 }
 
 const getComponent = (): JSX.Element => (
-  <ThemeProvider>
+  <ChakraProvider>
     <DateTimeRangeListWidget
       name="test"
       resource="test-resource"
@@ -38,7 +38,7 @@ const getComponent = (): JSX.Element => (
       submitChange={submitChangeMock}
       containerStore={mockedEffectorContainerStore}
     />
-  </ThemeProvider>
+  </ChakraProvider>
 )
 
 test('DateTimeRangeListWidget properly rendered', () => {

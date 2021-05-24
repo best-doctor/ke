@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Link } from '@chakra-ui/core'
+import { Link } from '@chakra-ui/react'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { LinkWidget } from '../../widgets/LinkWidget'

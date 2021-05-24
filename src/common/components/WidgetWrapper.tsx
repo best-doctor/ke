@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, Flex, Text } from '@chakra-ui/core'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { Copy } from 'react-feather'
 import type { BaseNotifier } from '../notifier'
 import { containerErrorsStore } from '../../WizardMaster/store'
@@ -67,7 +67,7 @@ const WidgetWrapper = ({
         )}
         {description || ''}
       </Flex>
-      <Box borderColor={hasError ? 'red.500' : null} borderWidth={hasError ? 1 : 0} borderRadius={3}>
+      <Box borderColor={hasError ? 'red.500' : undefined} borderWidth={hasError ? 1 : 0} borderRadius={3}>
         {children}
       </Box>
     </Box>

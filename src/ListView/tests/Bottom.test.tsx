@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { mocked } from 'ts-jest/utils'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { pushAnalytics } from '../../integration/analytics/utils'
 
@@ -28,7 +28,7 @@ test.each([[0], [1], [2], [3]])('Table bottom component', (buttonIndex) => {
   const previousPage = jest.fn()
 
   const component = mount(
-    <ThemeProvider>
+    <ChakraProvider>
       <Bottom
         analytics={analytics}
         pageIndex={pageIndex}
@@ -41,7 +41,7 @@ test.each([[0], [1], [2], [3]])('Table bottom component', (buttonIndex) => {
         nextPage={nextPage}
         previousPage={previousPage}
       />
-    </ThemeProvider>
+    </ChakraProvider>
   )
   component.find('button').get(buttonIndex).props.onClick()
 

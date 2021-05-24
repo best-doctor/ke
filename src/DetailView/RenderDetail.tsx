@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useToast, Box } from '@chakra-ui/core'
+import { useToast, Box } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
 

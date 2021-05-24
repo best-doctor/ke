@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Box } from '@chakra-ui/core'
+import { Button, Box } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
 
 import { submitChange } from '../controllers'
@@ -84,7 +84,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
               <Button
                 key="wizardToggleButton"
                 onClick={handleToggle}
-                variantColor="green"
+                colorScheme="green"
                 width="inherit"
                 style={{ width: '100%', height: '60px' }}
               >

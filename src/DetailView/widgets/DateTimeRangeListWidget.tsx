@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@chakra-ui/core'
+import { Button } from '@chakra-ui/react'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 
@@ -92,7 +92,7 @@ const AllDayDateTimeRangeAction = (props: DateTimeRangeActionProps): JSX.Element
   }
 
   return (
-    <Button variantColor="teal" variant="outline" onClick={handleButtonClick}>
+    <Button colorScheme="teal" variant="outline" onClick={handleButtonClick}>
       Весь день
     </Button>
   )
@@ -205,12 +205,12 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
                 />
               </StyledButton>
               <StyledButton>
-                <Button variantColor="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
+                <Button colorScheme="teal" variant="outline" onClick={() => handleRemove(itemIndex)}>
                   -
                 </Button>
               </StyledButton>
               <StyledButton>
-                <Button variantColor="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
+                <Button colorScheme="teal" variant="outline" onClick={() => handleAdd(itemIndex)}>
                   +
                 </Button>
               </StyledButton>

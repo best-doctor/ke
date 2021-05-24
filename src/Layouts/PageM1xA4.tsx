@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 import { makeSlots } from '@cdk/Layouts'
 
 export const PageM1xA4 = makeSlots(

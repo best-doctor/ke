@@ -1,5 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react'
-import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/core'
+import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/react'
 
 import { usePropState } from '../../Hooks'
 

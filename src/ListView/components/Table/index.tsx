@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Flex, Text } from '@chakra-ui/core'
+import { Flex, Text } from '@chakra-ui/react'
 import { usePagination, useTable, useFilters, ActionType, TableState } from 'react-table'
 import { Link } from 'react-router-dom'
 

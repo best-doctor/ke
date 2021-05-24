@@ -20,7 +20,7 @@ type ListFilterTemplateDescription = {
   filters: Function
   style?: {
     variant?: 'outline' | 'ghost' | 'unstyled' | 'link' | 'solid'
-    variantColor?: string
+    colorScheme?: string
   }
 }
 
