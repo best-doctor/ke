@@ -7,6 +7,8 @@ type WizardStepButtonDescription = {
   handler: (props: any) => Promise<string>
   label: string | undefined
   name: string
+  needValidation?: boolean
+  needErrorClean?: boolean
 }
 
 const getPrevButton = (
