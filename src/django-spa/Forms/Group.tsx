@@ -1,29 +1,28 @@
-import React, { FunctionComponentElement, PropsWithChildren, useCallback } from 'react'
-import { FieldError, RecRoot, RootValueDesc, useRoot, useValue } from '@cdk/Forms'
+import React, { ReactNode, useCallback } from 'react'
+import { RecordData, RecordValidator, useField, useRecord } from '@cdk/Forms'
 
 import { NodeProps } from './types'
 
-export function Group({ name, children }: GroupProps): FunctionComponentElement<GroupProps> {
-  const { value, setValue } = useValue(name)
+export function Group({ name, children }: GroupProps): JSX.Element {
+  const { value, onChange } = useField(name)
 
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
     throw new TypeError(`Form Group for name ${name} got "${JSON.stringify(value)}" but waited for dictionary`)
   }
 
   const handleChange = useCallback(
-    (desc: RootValueDesc<RecRoot>) => {
-      const arrErrors = Object.values(desc.errors)
-      setValue({
-        value: desc.value,
-        errors: arrErrors.indexOf(null) < 0 ? (arrErrors.flat() as FieldError[]) : null,
-      })
+    (data: RecordData) => {
+      onChange(Object.fromEntries(Object.entries(data).map(([key, field]) => [key, field.value])))
     },
-    [setValue]
+    [onChange]
   )
 
-  const { Root } = useRoot(value as Record<string | number, unknown>, handleChange)
+  const [Root, props] = useRecord(value as Record<string | number, unknown>, handleChange)
 
-  return <Root>{children}</Root>
+  return <Root {...props}>{children}</Root>
 }
 
-type GroupProps = PropsWithChildren<NodeProps>
+interface GroupProps extends NodeProps {
+  validator: RecordValidator
+  children: ReactNode
+}

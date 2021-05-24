@@ -1,22 +1,18 @@
-import React, { FunctionComponentElement, PropsWithChildren } from 'react'
-import { RootValue, RootValueDesc, useRoot, Validator } from '@cdk/Forms'
+import React, { ReactNode } from 'react'
+import { FieldKey, useForm, FormData } from '@cdk/Forms'
 
-export function Form<T extends RootValue>({
-  value,
-  onChange,
-  children,
-}: FormProps<T>): FunctionComponentElement<FormProps<T>> {
-  const { Root } = useRoot(value, onChange)
+export function Form<K extends FieldKey>({ value, onChange, children }: FormProps<K>): JSX.Element {
+  const [Root, props] = useForm(value, onChange)
 
   return (
-    <Root>
+    <Root {...props}>
       <form>{children}</form>
     </Root>
   )
 }
 
-type FormProps<T extends RootValue> = PropsWithChildren<{
-  value: T
-  onChange: (value: RootValueDesc<T>) => void
-  validator?: Validator
-}>
+interface FormProps<K extends FieldKey> {
+  value: Record<K, unknown>
+  onChange: (value: FormData<K>) => void
+  children: ReactNode
+}

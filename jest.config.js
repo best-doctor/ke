@@ -1,4 +1,4 @@
-const esModules = ['react-icons', 'lodash-es'].join('|');
+const esModules = ['react-icons', 'lodash-es'].join('|')
 
 module.exports = {
   preset: 'ts-jest',
@@ -6,16 +6,17 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   collectCoverageFrom: ['./src/**/*.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    "^@cdk(.*)$": "<rootDir>/src/cdk$1"
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '^@cdk(.*)$': '<rootDir>/src/cdk$1',
+    '^@utils(.*)$': '<rootDir>/src/utils$1',
   },
   transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
   transform: {
-    'js': 'jest-esm-transformer'
+    js: 'jest-esm-transformer',
   },
   globals: {
     'ts-jest': {
-      tsconfig: './tsconfig.spec.json'
-    }
+      tsconfig: './tsconfig.spec.json',
+    },
   },
 }

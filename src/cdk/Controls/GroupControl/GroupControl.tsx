@@ -1,28 +1,25 @@
 import React, { PropsWithChildren, useCallback } from 'react'
-import { RootValueDesc, useRoot } from '@cdk/Forms'
 import { usePropState } from '@cdk/Hooks'
+import { RecordData, useRecord } from '@cdk/Forms'
 
-export function GroupControl<T extends Record<string, unknown>>({
-  value,
-  onChange,
-  children,
-}: GroupControlProps<T>): JSX.Element {
+export function GroupControl({ value, onChange, children }: GroupControlProps): JSX.Element {
   const [currentValue, setCurrentValue] = usePropState(value)
 
   const handleChange = useCallback(
-    (desc: RootValueDesc<T>) => {
-      setCurrentValue(desc.value)
-      onChange(desc.value)
+    (data: RecordData) => {
+      const updated = Object.fromEntries(Object.entries(data).map(([key, field]) => [key, field.value]))
+      setCurrentValue(updated)
+      onChange(updated)
     },
     [onChange, setCurrentValue]
   )
 
-  const { Root } = useRoot(currentValue, handleChange)
+  const [Root, props] = useRecord(currentValue, handleChange)
 
-  return <Root>{children}</Root>
+  return <Root {...props}>{children}</Root>
 }
 
-type GroupControlProps<T extends Record<string, unknown>> = PropsWithChildren<{
-  value: T
-  onChange: (val: T) => void
+type GroupControlProps = PropsWithChildren<{
+  value: Record<string | number, unknown>
+  onChange: (val: Record<string | number, unknown>) => void
 }>

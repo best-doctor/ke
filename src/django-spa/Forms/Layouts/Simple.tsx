@@ -4,6 +4,7 @@ import React, { PropsWithChildren } from 'react'
 export const Simple = makeSlots(
   {
     Control: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
+    Errors: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
   },
   (slotElements) => <>{slotElements.Control}</>
 )

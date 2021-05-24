@@ -19,7 +19,7 @@ export function makeOrderedTable(table: TableComponent): OrderedTableComponent {
     }))
 
     return (
-      <GroupControl value={ordering} onChange={onOrderChange}>
+      <GroupControl value={ordering} onChange={onOrderChange as (ordering: Record<string | number, unknown>) => void}>
         {table({
           ...other,
           columns: orderedColumns,

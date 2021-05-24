@@ -1,30 +1,28 @@
 import React, { FunctionComponentElement, ReactNode, useCallback } from 'react'
-import { ArrRoot, RootValueDesc, FieldError, useRoot, useValue } from '@cdk/Forms'
+import { useArray, useField, ArrayData } from '@cdk/Forms'
 
 import type { NodeProps } from './types'
 
-export function Arr({ name, children: makeNodeItem }: ArrProps): FunctionComponentElement<ArrProps> {
-  const { value, setValue } = useValue(name)
+export function Arr({ name, getKey, children: makeNodeItem }: ArrProps): FunctionComponentElement<ArrProps> {
+  const { value, onChange } = useField(name)
 
   if (!Array.isArray(value)) {
     throw new TypeError(`Form Array for name ${name} got ${typeof value} but waited for array`)
   }
 
   const handleChange = useCallback(
-    (desc: RootValueDesc<ArrRoot>) => {
-      setValue({
-        value: desc.value,
-        errors: desc.errors.indexOf(null) < 0 ? (desc.errors.flat() as FieldError[]) : null,
-      })
+    (arrData: ArrayData) => {
+      onChange(arrData.map((field) => field.value))
     },
-    [setValue]
+    [onChange]
   )
 
-  const { Root } = useRoot(value, handleChange)
+  const [Root, props] = useArray(value, handleChange, getKey)
 
-  return <Root>{value.map(makeNodeItem)}</Root>
+  return <Root {...props}>{value.map(makeNodeItem)}</Root>
 }
 
 interface ArrProps extends NodeProps {
+  getKey: (item: unknown) => string | number
   children: (val: unknown, index: number) => ReactNode
 }
