@@ -17,7 +17,6 @@
         "axios": "^0.21.1",
         "css-loader": "^3.6.0",
         "debounce-promise": "^3.1.2",
-        "emotion-theming": "^10.0.27",
         "firebase": "^7.17.1",
         "framer-motion": "^4.1.15",
         "html-react-parser": "^1.2.4",

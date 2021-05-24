@@ -3,6 +3,7 @@
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import axios from 'axios'
+import fc from 'fast-check'
 
 import type { Store } from 'effector'
 import { BaseWizard, BaseWizardStep } from './WizardMaster/interfaces'
@@ -12,6 +13,7 @@ import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
 import type { ResponseCache } from './admin/providers/interfaces'
 
+fc.configureGlobal({ numRuns: 10 })
 configure({ adapter: new Adapter() })
 
 const testNotifier = new ChakraUINotifier(jest.fn())
