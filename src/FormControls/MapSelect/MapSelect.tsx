@@ -30,8 +30,14 @@ export function MapSelect<T>({
   )
   return (
     <Map zoom={currentZoom} center={currentCenter} onZoomChanged={handleZoomChanged} {...others}>
-      {options.map(([key, label]) => (
-        <MapMarker key={key} position={label.coords} title={label.description} onClick={() => setSelectedKey(key)} />
+      {options.map(([key, optionDesc]) => (
+        <MapMarker
+          key={key}
+          position={optionDesc.coords}
+          title={optionDesc.description}
+          label={optionDesc.label}
+          onClick={() => setSelectedKey(key)}
+        />
       ))}
       {clusters.map((cluster) => {
         const pos = cluster.point.coordinates

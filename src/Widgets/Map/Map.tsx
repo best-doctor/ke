@@ -63,6 +63,7 @@ export function Map({
           marker = {
             position: location,
             title: place?.name,
+            label: place?.name,
           }
         }
       }
@@ -138,4 +139,5 @@ export type MapProps = PropsWithChildren<{
 export type Marker = {
   position: Coords
   title?: string
+  label?: string
 }
