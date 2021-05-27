@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { usePartialState } from '@cdk/Hooks'
 import styled from 'styled-components'
-import { Box, Flex } from '@chakra-ui/core'
+import { Box, Flex } from '@chakra-ui/react'
 
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 import { MapSelect, MapSelectProps } from '../MapSelect'

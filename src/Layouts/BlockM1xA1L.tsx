@@ -1,5 +1,5 @@
 import { makeSlots } from '@cdk/Layouts'
-import { Box, Flex } from '@chakra-ui/core'
+import { Box, Flex } from '@chakra-ui/react'
 import React, { Key, PropsWithChildren, ReactNode } from 'react'
 import styled from 'styled-components'
 

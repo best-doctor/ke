@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { Select, ThemeProvider } from '@chakra-ui/core'
+import { Select, ChakraProvider } from '@chakra-ui/react'
 import { act } from 'react-dom/test-utils'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
@@ -26,7 +26,7 @@ const submitChangeMock = jest.fn()
 const handleChangeMock = jest.fn()
 
 const getSelectWidgetComponent = (): JSX.Element => (
-  <ThemeProvider>
+  <ChakraProvider>
     <SelectWidget
       name="status.text"
       resource="test-resource"
@@ -47,11 +47,11 @@ const getSelectWidgetComponent = (): JSX.Element => (
       submitChange={submitChangeMock}
       containerStore={mockedEffectorContainerStore}
     />
-  </ThemeProvider>
+  </ChakraProvider>
 )
 
 const getBaseSelectWidgetComponent = (): JSX.Element => (
-  <ThemeProvider>
+  <ChakraProvider>
     <BaseSelectWidget
       name="status.text"
       helpText="test"
@@ -63,7 +63,7 @@ const getBaseSelectWidgetComponent = (): JSX.Element => (
       containerStore={mockedEffectorContainerStore}
       data={options}
     />
-  </ThemeProvider>
+  </ChakraProvider>
 )
 
 test('Select widget properly rendered', () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Select } from '@chakra-ui/core'
+import { Select } from '@chakra-ui/react'
 import type { Store } from 'effector'
 
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'

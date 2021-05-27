@@ -2,14 +2,14 @@ import React from 'react'
 import { mount } from 'enzyme'
 
 import { MemoryRouter } from 'react-router-dom'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { testAdmin, testProvider, dataMockResponse, mockPagination } from '../../setupTests'
 import { RenderList } from '../RenderList'
 
 const getComponent = (): JSX.Element => (
   <MemoryRouter initialEntries={['/test/']}>
-    <ThemeProvider>
+    <ChakraProvider>
       <RenderList
         resourceName="test"
         admin={testAdmin}
@@ -17,7 +17,7 @@ const getComponent = (): JSX.Element => (
         user={undefined}
         analytics={undefined}
       />
-    </ThemeProvider>
+    </ChakraProvider>
   </MemoryRouter>
 )
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { WizardStepContainer } from '../../components/WizardStepContainer'
 import { testWizard, testProvider, testNotifier, testWizardStep } from '../../../setupTests'
@@ -17,7 +17,7 @@ const getComponent = (): JSX.Element => {
   const user = {}
 
   return (
-    <ThemeProvider>
+    <ChakraProvider>
       <WizardStepContainer
         wizardStep={testWizardStep}
         wizard={testWizard}
@@ -34,7 +34,7 @@ const getComponent = (): JSX.Element => {
         currentState={currentState}
         setCurrentState={jest.fn()}
       />
-    </ThemeProvider>
+    </ChakraProvider>
   )
 }
 

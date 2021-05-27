@@ -1,5 +1,5 @@
 import React from 'react'
-import { Radio, RadioGroup } from '@chakra-ui/core'
+import { Radio, RadioGroup } from '@chakra-ui/react'
 
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -52,9 +52,8 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     setSelectedValue(getSelectedValue(context))
   }, [context, getSelectedValue])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const widgetValueId = e.target.value
-    const widgetValue = elements.find((element: RadioButtonElement) => element.uuid === widgetValueId)
+  const handleChange = (nextValue: string): void => {
+    const widgetValue = elements.find((element: RadioButtonElement) => element.uuid === nextValue)
 
     handleUserAction({ ...props, eventName, widgetType, widgetValue })
   }

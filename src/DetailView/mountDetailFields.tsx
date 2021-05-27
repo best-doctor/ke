@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
 import type { Provider } from 'admin/providers/interfaces'

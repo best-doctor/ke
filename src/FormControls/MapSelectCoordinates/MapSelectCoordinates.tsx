@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Box, Button, FormLabel, Input } from '@chakra-ui/core'
+import { Box, Button, FormLabel, Input } from '@chakra-ui/react'
 import { DebounceInput } from 'react-debounce-input'
 
 import { MapMarker, Map } from '../../Widgets/Map'

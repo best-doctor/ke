@@ -9,7 +9,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import { Menu } from 'react-feather'
 import { useHistory } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ const SideBarElement = ({ resource }: { resource: SideBarElementType }): JSX.Ele
     goToResourceEvent()
   }
   return (
-    <Button variantColor="teal" m={2} key={name} onClick={goToResource} id="go-to-resource-button">
+    <Button colorScheme="teal" m={2} key={name} onClick={goToResource} id="go-to-resource-button">
       {admin.verboseName}
     </Button>
   )
@@ -43,13 +43,12 @@ const SideBarElement = ({ resource }: { resource: SideBarElementType }): JSX.Ele
 
 const SideBar = ({ header, children }: { header: string; children: JSX.Element[] }): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
 
   goToResourceEvent.watch(onClose)
 
   return (
     <>
-      <Button variantColor="teal" m={2} width={20} ref={btnRef} onClick={onOpen}>
+      <Button colorScheme="teal" m={2} width={20} onClick={onOpen}>
         <Menu size="1em" />
       </Button>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>

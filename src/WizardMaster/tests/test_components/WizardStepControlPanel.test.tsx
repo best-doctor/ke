@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 import { mocked } from 'ts-jest/utils'
 
 import { pushAnalytics } from '../../../integration/analytics/utils'
@@ -24,7 +24,7 @@ const getComponent = (): JSX.Element => {
   const analytics = undefined
 
   return (
-    <ThemeProvider>
+    <ChakraProvider>
       <WizardStepControlPanel
         wizardStep={testWizardStep}
         wizard={testWizard}
@@ -37,7 +37,7 @@ const getComponent = (): JSX.Element => {
         refreshMainDetailObject={jest.fn()}
         notifier={testNotifier}
       />
-    </ThemeProvider>
+    </ChakraProvider>
   )
 }
 

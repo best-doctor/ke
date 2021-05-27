@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Avatar } from '@chakra-ui/core'
+import { Avatar } from '@chakra-ui/react'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 
 type AvatarWidgetProps = {

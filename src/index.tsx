@@ -74,7 +74,7 @@ import {
   MaskFilter,
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
-import { HiddenAdditionalFilter } from './common/components/HiddenAdditionalFilter'
+import { HiddenAdditionalFilter } from './Layouts/HiddenAdditionalFilter'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'

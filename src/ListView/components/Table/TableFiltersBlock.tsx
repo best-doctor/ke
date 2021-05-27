@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/core'
+import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/react'
 
 import type { ListFilterDescription, ListFilterTemplateDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics'
@@ -61,7 +61,7 @@ const mountFilterTemplates = (props: FilterBlockProps, history: any): JSX.Elemen
       {listFilterTemplates &&
         listFilterTemplates.map((listFilterTemplate: ListFilterTemplateDescription) => {
           const style = listFilterTemplate.style || {
-            variantColor: 'teal',
+            colorScheme: 'teal',
             variant: 'outline',
           }
           return (
@@ -107,17 +107,17 @@ const FilterBlock = (props: FilterBlockProps): JSX.Element => {
   return (
     <>
       <Flex flexDirection="row">
-        <Button variantColor="teal" onClick={handleToggle} maxWidth={130} m={2}>
+        <Button colorScheme="teal" onClick={handleToggle} maxWidth={130} m={2}>
           Фильтровать
         </Button>
-        <Button id="reset-filters" variantColor="teal" onClick={() => resetFiltersOnClick()} maxWidth={130} m={2}>
+        <Button id="reset-filters" colorScheme="teal" onClick={() => resetFiltersOnClick()} maxWidth={130} m={2}>
           Сбросить
         </Button>
       </Flex>
       {mountFilterTemplates(props, history)}
-      <Collapse mt={19} isOpen={show}>
-        {mountFilters(props)}
-      </Collapse>
+      <Box marginTop={19}>
+        <Collapse in={show}>{mountFilters(props)}</Collapse>
+      </Box>
     </>
   )
 }

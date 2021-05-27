@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { Box, Button, Flex } from '@chakra-ui/core'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 import { useApiState, useChangeEffect } from '@cdk/Hooks'
 import { makeSlots, makeWithLayout } from '@cdk/Layouts'

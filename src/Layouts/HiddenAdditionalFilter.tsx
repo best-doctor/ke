@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, ReactElement, useState } from 'react'
-import { Box, Button, Flex } from '@chakra-ui/core'
+import React, { PropsWithChildren, useState } from 'react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import { makeSlots } from '@cdk/Layouts'
 
 const Additional = ({ children, isOpen }: PropsWithChildren<{ isOpen: boolean }>): JSX.Element | null =>
@@ -13,10 +13,10 @@ const Buttons = ({ isOpen, additionalHandler }: { isOpen: boolean; additionalHan
     <Button mr={2} isActive={isOpen} onClick={additionalHandler}>
       {isOpen ? 'Скрыть фильтры' : 'Раскрыть фильтры'}
     </Button>
-    <Button>Сбросить</Button>
   </Box>
 )
-const layoutSlots = makeSlots(
+
+export const HiddenAdditionalFilter = makeSlots(
   {
     main: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
     buttons: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
@@ -40,27 +40,3 @@ const layoutSlots = makeSlots(
     )
   }
 )
-export const HiddenAdditionalFilter = (mainSlot: string): HiddenAdditionalFilterType => ({
-  layoutProxy: (elements: [string, ReactElement][]): void =>
-    elements.reduce(
-      (slots: any, [key, element]: [string, any]) => {
-        const customSlots = { ...slots }
-        switch (key) {
-          case mainSlot:
-            customSlots.main = element // eslint-disable-line
-            break
-          default:
-            customSlots.additional.push(element) // eslint-disable-line
-            break
-        }
-        return customSlots
-      },
-      { main: null, additional: [], buttons: null }
-    ),
-  hiddenAdditionalFilterLayout: layoutSlots,
-})
-
-type HiddenAdditionalFilterType = {
-  layoutProxy: (elements: [string, ReactElement][]) => void
-  hiddenAdditionalFilterLayout: object
-}

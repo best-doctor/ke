@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@chakra-ui/core'
+import { Button } from '@chakra-ui/react'
 import { format } from 'date-fns'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
@@ -98,7 +98,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
       <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />
-      <Button variantColor="teal" variant="outline" onClick={() => handleButtonClick()}>
+      <Button colorScheme="teal" variant="outline" onClick={() => handleButtonClick()}>
         Весь день
       </Button>
     </WidgetWrapper>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Flex, Box } from '@chakra-ui/core'
+import { Flex, Box } from '@chakra-ui/react'
 
 import { WidgetWrapper } from '../components/WidgetWrapper'
 

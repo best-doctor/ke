@@ -1,6 +1,6 @@
 import React, { DetailedHTMLProps, PropsWithChildren, useRef } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
-import { Spinner } from '@chakra-ui/core'
+import { Spinner } from '@chakra-ui/react'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
@@ -63,6 +63,7 @@ export function Map({
           marker = {
             position: location,
             title: place?.name,
+            label: place?.name,
           }
         }
       }
@@ -138,4 +139,5 @@ export type MapProps = PropsWithChildren<{
 export type Marker = {
   position: Coords
   title?: string
+  label?: string
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import fc from 'fast-check'
 import { mount } from 'enzyme'
-import { Tag, TagCloseButton, TagLabel, ThemeProvider } from '@chakra-ui/core'
+import { Tag, TagCloseButton, TagLabel, ChakraProvider } from '@chakra-ui/react'
 
 import { ChipInput } from './ChipInput'
 
@@ -15,7 +15,7 @@ const getComponent = (
   validator?: (value: string) => boolean,
   errorText?: string
 ): JSX.Element => (
-  <ThemeProvider>
+  <ChakraProvider>
     <ChipInput
       content={content}
       handleChange={handleChange}
@@ -23,7 +23,7 @@ const getComponent = (
       validator={validator}
       errorText={errorText}
     />
-  </ThemeProvider>
+  </ChakraProvider>
 )
 
 test('Chip Input initial values are rendered', () => {

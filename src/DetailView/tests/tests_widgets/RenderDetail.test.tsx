@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
-import { ThemeProvider } from '@chakra-ui/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { testAdmin, testProvider } from '../../../setupTests'
 import { RenderDetail } from '../../RenderDetail'
@@ -11,9 +11,9 @@ test('Render detail mount', () => {
 
   const component = mount(
     <MemoryRouter initialEntries={['/test/']}>
-      <ThemeProvider>
+      <ChakraProvider>
         <RenderDetail resourceName="test" admin={testAdmin} provider={testProvider} user={{}} analytics={undefined} />
-      </ThemeProvider>
+      </ChakraProvider>
     </MemoryRouter>
   )
 
