@@ -32,17 +32,21 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
     handleChange(newChips)
   }
 
+  const finishInput = (): void => {
+    const trimmedValue = value.trim()
+    if (trimmedValue && isValid(trimmedValue)) {
+      const newChips = [...chips, trimmedValue]
+      setChips(newChips)
+      handleChange(newChips)
+      setValue('')
+      setError('')
+    }
+  }
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (submitKeys.includes(e.key)) {
       e.preventDefault()
-      const trimmedValue = value.trim()
-      if (trimmedValue && isValid(trimmedValue)) {
-        const newChips = [...chips, trimmedValue]
-        setChips(newChips)
-        handleChange(newChips)
-        setValue('')
-        setError('')
-      }
+      finishInput()
     }
     if (e.key === 'Backspace') {
       if (!value && chips.length > 0) {
@@ -88,6 +92,9 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
           isInvalid={!!error}
           ref={inputRef}
           width="auto"
+          height="2rem"
+          borderRadius="0px"
+          onBlur={finishInput}
         />
       </Flex>
       {error && (
