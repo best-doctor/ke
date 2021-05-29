@@ -63,7 +63,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
             gotoPage(0)
           }}
           isDisabled={!canPreviousPage}
-          icon={() => <ChevronsLeft size={20} />}
+          icon={<ChevronsLeft size={20} />}
         />
         <TableIconButton
           mr={2}
@@ -80,7 +80,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
               ...props,
             })
           }}
-          icon={() => <ChevronLeft size={20} />}
+          icon={<ChevronLeft size={20} />}
         />
       </Flex>
       <Flex justifyContent="center" alignItems="center">
@@ -107,7 +107,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
             })
             nextPage()
           }}
-          icon={() => <ChevronRight size={20} />}
+          icon={<ChevronRight size={20} />}
         />
         <TableIconButton
           ml={2}
@@ -125,7 +125,7 @@ const Bottom = (props: BottonProps): JSX.Element => {
             gotoPage(lastPage)
           }}
           isDisabled={!canNextPage}
-          icon={() => <ChevronsRight size={20} />}
+          icon={<ChevronsRight size={20} />}
         />
       </Flex>
     </Flex>

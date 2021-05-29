@@ -131,3 +131,19 @@ test('Chip Input does not break on undefined input value', () => {
 
   expect(chipInput.find(Tag).length).toEqual(0)
 })
+
+test('Chip Input adds value on blur event', () => {
+  fc.assert(
+    fc.property(stringArbitrary, (value) => {
+      const handleChange = jest.fn()
+      const chipInput = mount(getComponent([], handleChange))
+
+      chipInput.find('input').simulate('change', makeChangeEvent(value))
+      chipInput.find('input').simulate('blur')
+
+      expect(chipInput.find(Tag).length).toEqual(1)
+      expect(chipInput.find(TagLabel).text()).toEqual(value.trim())
+      expect(handleChange).toBeCalledWith([value.trim()])
+    })
+  )
+})
