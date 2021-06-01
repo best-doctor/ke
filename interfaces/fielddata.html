@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EntitiesPageProps | @bestdoctor/ke</title>
+	<title>FieldData | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="entitiespageprops.html">EntitiesPageProps</a>
+					<a href="fielddata.html">FieldData</a>
 				</li>
 			</ul>
-			<h1>Interface EntitiesPageProps&lt;Entity, Filters&gt;</h1>
+			<h1>Interface FieldData&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -69,10 +69,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>Entity</h4>
-					</li>
-					<li>
-						<h4>Filters</h4>
+						<h4>T = <span class="tsd-signature-type">unknown</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -80,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EntitiesPageProps</span>
+						<span class="target">FieldData</span>
 					</li>
 				</ul>
 			</section>
@@ -91,8 +88,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiespageprops.html#entitiessource" class="tsd-kind-icon">entities<wbr>Source</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiespageprops.html#filtersprovider" class="tsd-kind-icon">filters<wbr>Provider</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielddata.html#errors" class="tsd-kind-icon">errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielddata.html#invalidating" class="tsd-kind-icon">in<wbr>Validating</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielddata.html#istouched" class="tsd-kind-icon">is<wbr>Touched</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielddata.html#relatedref" class="tsd-kind-icon">related<wbr>Ref</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielddata.html#validated" class="tsd-kind-icon">validated</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielddata.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,22 +102,62 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="entitiessource" class="tsd-anchor"></a>
-					<h3>entities<wbr>Source</h3>
-					<div class="tsd-signature tsd-kind-icon">entities<wbr>Source<span class="tsd-signature-symbol">:</span> <a href="entitiessource.html" class="tsd-signature-type" data-tsd-kind="Interface">EntitiesSource</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Filters</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="errors" class="tsd-anchor"></a>
+					<h3>errors</h3>
+					<div class="tsd-signature tsd-kind-icon">errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="fielderror.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldError</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/features/EntitiesPage/EntitiesPage.ts#L23">src/features/EntitiesPage/EntitiesPage.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/cdk/Forms/types.ts#L14">src/cdk/Forms/types.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="filtersprovider" class="tsd-anchor"></a>
-					<h3>filters<wbr>Provider</h3>
-					<div class="tsd-signature tsd-kind-icon">filters<wbr>Provider<span class="tsd-signature-symbol">:</span> <a href="asyncreadwriteprovider.html" class="tsd-signature-type" data-tsd-kind="Interface">AsyncReadWriteProvider</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Filters</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="invalidating" class="tsd-anchor"></a>
+					<h3>in<wbr>Validating</h3>
+					<div class="tsd-signature tsd-kind-icon">in<wbr>Validating<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/features/EntitiesPage/EntitiesPage.ts#L24">src/features/EntitiesPage/EntitiesPage.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/cdk/Forms/types.ts#L17">src/cdk/Forms/types.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="istouched" class="tsd-anchor"></a>
+					<h3>is<wbr>Touched</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Touched<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/cdk/Forms/types.ts#L16">src/cdk/Forms/types.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="relatedref" class="tsd-anchor"></a>
+					<h3>related<wbr>Ref</h3>
+					<div class="tsd-signature tsd-kind-icon">related<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RefObject</span><span class="tsd-signature-symbol">&lt;</span><a href="controlrefprops.html" class="tsd-signature-type" data-tsd-kind="Interface">ControlRefProps</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/cdk/Forms/types.ts#L15">src/cdk/Forms/types.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="validated" class="tsd-anchor"></a>
+					<h3>validated</h3>
+					<div class="tsd-signature tsd-kind-icon">validated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/cdk/Forms/types.ts#L18">src/cdk/Forms/types.ts:18</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/40c161a/src/cdk/Forms/types.ts#L13">src/cdk/Forms/types.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -135,13 +176,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="entitiespageprops.html" class="tsd-kind-icon">Entities<wbr>Page<wbr>Props</a>
+						<a href="fielddata.html" class="tsd-kind-icon">Field<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entitiespageprops.html#entitiessource" class="tsd-kind-icon">entities<wbr>Source</a>
+								<a href="fielddata.html#errors" class="tsd-kind-icon">errors</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entitiespageprops.html#filtersprovider" class="tsd-kind-icon">filters<wbr>Provider</a>
+								<a href="fielddata.html#invalidating" class="tsd-kind-icon">in<wbr>Validating</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="fielddata.html#istouched" class="tsd-kind-icon">is<wbr>Touched</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="fielddata.html#relatedref" class="tsd-kind-icon">related<wbr>Ref</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="fielddata.html#validated" class="tsd-kind-icon">validated</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="fielddata.html#value" class="tsd-kind-icon">value</a>
 							</li>
 						</ul>
 					</li>
