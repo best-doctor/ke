@@ -23,6 +23,6 @@ export function Group({ name, children }: GroupProps): JSX.Element {
 }
 
 interface GroupProps extends NodeProps {
-  validator: RecordValidator
+  validator: RecordValidator<string | number>
   children: ReactNode
 }

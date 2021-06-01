@@ -10,7 +10,6 @@ export const Field = makeWithLayout(({ name, as, validator, ...other }: FieldPro
   const { value, onChange, errors } = useField(name, controlRef, validator)
 
   // Don't found why, but type declaration necessary here https://github.com/microsoft/TypeScript/issues/28631#issuecomment-477240245
-  console.log('field', name, value, errors)
   const Component: ElementType = as
   return {
     Control: <Component ref={controlRef} value={value} onChange={onChange} {...other} />,

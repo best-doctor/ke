@@ -1,6 +1,6 @@
 import { makeSlots } from '@cdk/Layouts'
 import React, { PropsWithChildren } from 'react'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 
 export const Full = makeSlots(
   {

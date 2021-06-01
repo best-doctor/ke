@@ -1,29 +1,33 @@
 import { Provider, useCallback } from 'react'
+import { isEqual } from '@utils/Types'
 
 import { TreeContext } from './Tree.context'
-import { RootContext, RootProviderDesc } from './types'
+import { RootContext, RootProviderDesc, Updater } from './types'
 
 export function useArrayRoot<T>(
   arrRoot: T[],
-  onChange: (arrRoot: T[]) => void,
+  onChange: (updater: Updater<T[]>) => void,
   getKey: (value: T, index: number) => string | number
 ): RootProviderDesc<T> {
   const setter = useCallback(
-    (key: number | string, updater: (val: T) => T) => {
-      const updatedIndex = arrRoot.findIndex((item, index) => key === getKey(item, index))
+    (key: number | string, updater: Updater<T>) =>
+      onChange((prev) => {
+        const updatedIndex = prev.findIndex((item, index) => key === getKey(item, index))
 
-      if (updatedIndex < 0) {
-        throw new RangeError(`Invalid key "${key}" for update Array Root. Available keys: ${arrRoot.map(getKey)}`)
-      }
+        if (updatedIndex < 0) {
+          throw new RangeError(`Invalid key "${key}" for update Array Root. Available keys: ${prev.map(getKey)}`)
+        }
 
-      const updated = updater(arrRoot[updatedIndex])
-      if (arrRoot[updatedIndex] !== updated) {
-        const updatedRoot = [...arrRoot]
-        updatedRoot[updatedIndex] = updated
-        onChange(updatedRoot)
-      }
-    },
-    [arrRoot, onChange, getKey]
+        const updated = updater(prev[updatedIndex])
+        if (!isEqual(prev[updatedIndex], updated)) {
+          const updatedRoot = [...prev]
+          updatedRoot[updatedIndex] = updated
+          return updatedRoot
+        }
+
+        return prev
+      }),
+    [onChange, getKey]
   )
 
   const getter = useCallback(

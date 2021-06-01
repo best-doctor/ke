@@ -1,10 +1,11 @@
 import { partial } from '@utils/Funcs'
-import { useRecord } from './Record.hook'
+
+import { useArrayRoot, useRecordRoot } from './ContextTree'
+import { useRecord as genericUseRecord } from './Record.hook'
 import { useForm as genericUseForm } from './Form.hook'
+import { useArray as genericUseArray } from './Array.hook'
 
 export { useField } from './Field.hook'
-export { useArray } from './Array.hook'
-export { useRecord } from './Record.hook'
 export {
   ControlRefProps,
   FieldKey,
@@ -18,4 +19,6 @@ export {
   ArrayValidator,
 } from './types'
 
+export const useRecord = partial(genericUseRecord, useRecordRoot)
 export const useForm = partial(genericUseForm, useRecord)
+export const useArray = partial(genericUseArray, useArrayRoot)

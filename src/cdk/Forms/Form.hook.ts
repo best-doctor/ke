@@ -1,46 +1,71 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { isEqual } from '@utils/Types'
 
-import { FieldError, FieldKey, RecordData, FormData, FieldData } from './types'
-import { useRecordRoot } from './ContextTree'
+import { FieldKey, RecordData, FormData, FieldData, RootProviderDesc, RecordValidator, FieldError } from './types'
 
 export function useForm<K extends FieldKey>(
-  recordHook: (val: Record<K, unknown>, onChange: (val: RecordData<K>) => void) => ReturnType<typeof useRecordRoot>,
+  recordHook: (
+    val: Record<K, unknown>,
+    onChange: (val: RecordData<K>) => void,
+    validate?: RecordValidator<K>
+  ) => RootProviderDesc,
   value: Record<K, unknown>,
-  onChange: (val: FormData<K>) => void
-): ReturnType<typeof useRecordRoot> {
-  const handleChange = useCallback(
-    (record: RecordData<K>) => {
-      console.log('form on change', 'record', record, 'form', {
-        value: extractValue(record),
-        errors: extractErrors(record),
+  onChange: (val: FormData<K>) => void,
+  validate?: RecordValidator<K>
+): RootProviderDesc {
+  const [formValue, setFormValue] = useState((): FormData<K> => makeDefaultForm(value))
+
+  useEffect(() => {
+    onChange(formValue)
+  }, [formValue, onChange])
+
+  useEffect(() => {
+    setFormValue((prev) => (value === prev.value ? prev : makeDefaultForm(value)))
+  }, [value])
+
+  const handleChange = useCallback((record: RecordData<K>) => {
+    setFormValue((prev) => {
+      const changedErrors = extract(record, 'errors')
+      const changedValue = extract(record, 'value')
+      const changed = {
+        value: isEqual(prev.value, changedValue) ? prev.value : changedValue,
+        errors: changedErrors,
+        relatedRefs: extract(record, 'relatedRef'),
         isTouched: !!Object.values(record).find((field) => (field as FieldData).isTouched),
         inValidating: !!Object.values(record).find((field) => (field as FieldData).inValidating),
-        maxErrorLevel: null,
-      })
-      onChange({
-        value: extractValue(record),
-        errors: extractErrors(record),
-        isTouched: !!Object.values(record).find((field) => (field as FieldData).isTouched),
-        inValidating: !!Object.values(record).find((field) => (field as FieldData).inValidating),
-        maxErrorLevel: null,
-      })
-    },
-    [onChange]
-  )
-  console.log('form hook', value)
-  return recordHook(value, handleChange)
+        validated: Object.values(record).every((field) => (field as FieldData).validated),
+        maxErrorLevel: Math.max(
+          ...Object.values(changedErrors)
+            .filter(Boolean)
+            .flat()
+            .map((err) => (err as FieldError).level),
+          Number.MIN_SAFE_INTEGER
+        ),
+      }
+      return isEqual(prev, changed) ? prev : changed
+    })
+  }, [])
+
+  return recordHook(value, handleChange, validate)
 }
 
-function extractValue<K extends FieldKey>(data: RecordData<K>): Record<K, unknown> {
-  return Object.fromEntries(Object.entries(data).map(([key, field]) => [key, (field as FieldData).value])) as Record<
-    K,
-    unknown
-  >
+function extract<K extends FieldKey, FK extends keyof FieldData>(
+  data: RecordData<K>,
+  fieldKey: FK
+): Record<K, FieldData[FK]> {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, field]) => [key, (field as FieldData)[fieldKey]])
+  ) as Record<K, FieldData[FK]>
 }
 
-function extractErrors<K extends FieldKey>(data: RecordData<K>): Record<K, FieldError[] | null> {
-  return Object.fromEntries(Object.entries(data).map(([key, field]) => [key, (field as FieldData).errors])) as Record<
-    K,
-    FieldError[] | null
-  >
+function makeDefaultForm<K extends FieldKey>(value: Record<K, unknown>): FormData<K> {
+  return {
+    value,
+    errors: Object.fromEntries(Object.keys(value).map((key) => [key, null])) as Record<K, null>,
+    relatedRefs: Object.fromEntries(Object.keys(value).map((key) => [key, null])) as Record<K, null>,
+    isTouched: false,
+    inValidating: false,
+    validated: false,
+    maxErrorLevel: null,
+  }
 }

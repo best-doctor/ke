@@ -1,39 +1,14 @@
-import { createElement, FC, PropsWithChildren } from 'react'
+import { createElement } from 'react'
 import fc from 'fast-check'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useRecordRoot } from './ContextTree'
 import { useField } from './Field.hook'
-
-const refArbitrary = fc.record({
-  current: fc.constant(null),
-})
-const fieldArbitrary = fc.record({
-  value: fc.anything(),
-  isTouched: fc.constant(false),
-  inValidating: fc.constant(false),
-  errors: fc.constant(null),
-  relatedRef: refArbitrary,
-})
-const recordArbitrary = fc.dictionary(fc.string(), fieldArbitrary)
-const recordWithValidKeyArbitrary = recordArbitrary
-  .filter((record) => Object.keys(record).length > 0)
-  .chain((record) => fc.tuple(fc.constant(record), fc.constantFrom(...Object.keys(record))))
-
-function makeProvider(record: Record<string, unknown>, onChange: (val: unknown) => void): FC<PropsWithChildren<{}>> {
-  const {
-    result: {
-      current: [provider, providerProps],
-    },
-  } = renderHook(() => useRecordRoot(record, onChange))
-
-  return ({ children }) => createElement(provider, { ...providerProps, children })
-}
+import { fieldValidateResultArbitrary, makeRecordProvider, recordWithValidKeyArbitrary, refArbitrary } from './fixtures'
 
 test('Return correct value from context by key', () => {
   fc.assert(
     fc.property(recordWithValidKeyArbitrary, ([record, key]) => {
-      const provider = makeProvider(record, jest.fn())
+      const provider = makeRecordProvider(record, jest.fn())
       const { result } = renderHook(() => useField(key), {
         wrapper: ({ children }) => createElement(provider, { children }),
       })
@@ -46,16 +21,15 @@ test('Return correct value from context by key', () => {
 test('onChange callback propose changed value to context', () => {
   fc.assert(
     fc.property(recordWithValidKeyArbitrary, fc.anything(), ([record, key], value) => {
-      const onChangeSpy = jest.fn()
-      const provider = makeProvider(record, onChangeSpy)
+      const onChangeSpy = jest.fn().mockImplementation((cb: (prev: Record<string, unknown>) => void) => cb(record))
+      const provider = makeRecordProvider(record, onChangeSpy)
       const { result } = renderHook(() => useField(key), {
         wrapper: ({ children }) => createElement(provider, { children }),
       })
 
       result.current.onChange(value)
 
-      const callsCount = onChangeSpy.mock.calls.length
-      expect(onChangeSpy.mock.calls[callsCount - 1][0]).toEqual({
+      expect(onChangeSpy).toHaveLastReturnedWith({
         ...record,
         [key]: { ...record[key], value, isTouched: true },
       })
@@ -66,7 +40,7 @@ test('onChange callback propose changed value to context', () => {
 test('isTouched is false by default', () => {
   fc.assert(
     fc.property(recordWithValidKeyArbitrary, ([record, key]) => {
-      const provider = makeProvider(record, jest.fn())
+      const provider = makeRecordProvider(record, jest.fn())
       const { result } = renderHook(() => useField(key), {
         wrapper: ({ children }) => createElement(provider, { children }),
       })
@@ -79,16 +53,15 @@ test('isTouched is false by default', () => {
 test('Propose controlRef param to context data as related ref', () => {
   fc.assert(
     fc.property(recordWithValidKeyArbitrary, refArbitrary, ([record, key], ref) => {
-      const onChangeSpy = jest.fn()
-      const provider = makeProvider(record, onChangeSpy)
+      const onChangeSpy = jest.fn().mockImplementation((cb: (prev: Record<string, unknown>) => void) => cb(record))
+      const provider = makeRecordProvider(record, onChangeSpy)
       renderHook(() => useField(key, ref), {
         wrapper: ({ children }) => createElement(provider, { children }),
       })
 
-      const callsCount = onChangeSpy.mock.calls.length
-      expect(onChangeSpy.mock.calls[callsCount - 1][0]).toEqual({
+      expect(onChangeSpy).toHaveLastReturnedWith({
         ...record,
-        [key]: { ...record[key], relatedRef: ref },
+        [key]: { ...record[key], validated: true, relatedRef: ref },
       })
     })
   )
@@ -97,7 +70,7 @@ test('Propose controlRef param to context data as related ref', () => {
 test('Without validate callback errors set to null and inValidating set to false', () => {
   fc.assert(
     fc.property(recordWithValidKeyArbitrary, ([record, key]) => {
-      const provider = makeProvider(record, jest.fn())
+      const provider = makeRecordProvider(record, jest.fn())
       const { result } = renderHook(() => useField(key), {
         wrapper: ({ children }) => createElement(provider, { children }),
       })
@@ -105,5 +78,57 @@ test('Without validate callback errors set to null and inValidating set to false
       expect(result.current.inValidating).toBe(false)
       expect(result.current.errors).toBe(null)
     })
+  )
+})
+
+test('Expect inValidating will be passed to context onChange as true in validation process', async () => {
+  await fc.assert(
+    fc.asyncProperty(recordWithValidKeyArbitrary, async ([record, key]) => {
+      const onChangeSpy = jest.fn().mockImplementation((cb: (prev: Record<string, unknown>) => void) => cb(record))
+      const provider = makeRecordProvider(record, onChangeSpy)
+      const validateSpy = jest.fn().mockResolvedValue({ success: true })
+      const { waitFor } = renderHook(() => useField(key, undefined, validateSpy), {
+        wrapper: ({ children }) => createElement(provider, { children }),
+      })
+
+      await waitFor(() => expect(onChangeSpy).toBeCalledTimes(3))
+
+      expect(onChangeSpy).nthReturnedWith(2, {
+        ...record,
+        [key]: {
+          ...record[key],
+          inValidating: true,
+        },
+      })
+    })
+  )
+})
+
+test('Expect errors from validate callback will be passed to context onChange', async () => {
+  await fc.assert(
+    fc.asyncProperty(
+      recordWithValidKeyArbitrary,
+      fieldValidateResultArbitrary,
+      async ([record, key], validateResult) => {
+        const onChangeSpy = jest.fn().mockImplementation((cb: (prev: Record<string, unknown>) => void) => cb(record))
+        const provider = makeRecordProvider(record, onChangeSpy)
+        const validateSpy = jest.fn().mockResolvedValue(validateResult)
+        const { waitFor } = renderHook(() => useField(key, undefined, validateSpy), {
+          wrapper: ({ children }) => createElement(provider, { children }),
+        })
+
+        await waitFor(() => expect(onChangeSpy).toBeCalledTimes(3))
+
+        expect(onChangeSpy).toHaveLastReturnedWith({
+          ...record,
+          [key]: {
+            ...record[key],
+            errors: validateResult.errors,
+            inValidating: false,
+            validated: true,
+          },
+        })
+      }
+    )
   )
 })

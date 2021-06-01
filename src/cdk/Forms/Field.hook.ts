@@ -1,9 +1,9 @@
-import { RefObject, useCallback, useEffect, useRef } from 'react'
+import { RefObject, useCallback, useEffect } from 'react'
 import { isEqual } from '@utils/Types'
 
 import { useLeaf } from './ContextTree'
 
-import { ControlRefProps, FieldData, FieldError, FieldValidator, FieldKey, FieldUpdater } from './types'
+import { ControlRefProps, FieldData, FieldError, FieldValidator, FieldKey, Updater } from './types'
 
 export function useField(
   key: FieldKey,
@@ -12,21 +12,18 @@ export function useField(
 ): UseFieldResult {
   const [{ value, errors, isTouched, inValidating }, updateLeaf] = useLeaf(key) as [
     FieldData,
-    (updater: FieldUpdater) => void
+    (updater: Updater<FieldData>) => void
   ]
-  const defaultRef = useRef(null)
 
   useEffect(() => {
-    updateLeaf((prev) => mergeField(prev, { relatedRef: controlRef || defaultRef }))
+    updateLeaf((prev) => mergeField(prev, { relatedRef: controlRef || null }))
   }, [controlRef, updateLeaf])
 
   useEffect(() => {
     let rejected = false
 
-    if (!validate) {
-      updateLeaf((prev) => mergeField(prev, { inValidating: false, errors: null }))
-    } else {
-      updateLeaf((prev) => mergeField(prev, { inValidating: true }))
+    if (validate) {
+      updateLeaf((prev) => mergeField(prev, { inValidating: true, validated: false }))
       validate(value).then((result) => {
         if (!rejected) {
           updateLeaf((prev) =>
@@ -34,6 +31,7 @@ export function useField(
               value,
               errors: result.errors || null,
               inValidating: false,
+              validated: true,
             })
           )
         }
@@ -51,6 +49,7 @@ export function useField(
         mergeField(prev, {
           value: val,
           isTouched: true,
+          validated: false,
         })
       )
     },
@@ -72,7 +71,7 @@ function mergeField(field: FieldData, ext: Partial<FieldData>): FieldData {
     ...ext,
   }
 
-  return isEqual(field, merged) && field.relatedRef === merged.relatedRef ? field : merged
+  return isEqual(field, merged) ? field : merged
 }
 
 interface UseFieldResult<T = unknown> {

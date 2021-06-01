@@ -10,4 +10,4 @@ export type KeyGetter<T> = (key: string | number) => T
 
 export type KeyUpdater<T> = (key: string | number, updater: (val: T) => T) => void
 
-export type LeafUpdater = (leaf: unknown) => unknown
+export type Updater<T = unknown> = (prev: T) => T

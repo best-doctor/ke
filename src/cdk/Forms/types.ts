@@ -12,12 +12,13 @@ export type FieldKey = string | number
 export interface FieldData<T = unknown> {
   value: T
   errors: FieldError[] | null
-  relatedRef: RefObject<ControlRefProps>
+  relatedRef: RefObject<ControlRefProps> | null
   isTouched: boolean
   inValidating: boolean
+  validated: boolean
 }
 
-export type FieldUpdater = (prev: FieldData) => FieldData
+export type Updater<T = unknown> = (prev: T) => T
 
 export type RecordData<K extends FieldKey = FieldKey> = Record<K, FieldData>
 
@@ -26,8 +27,10 @@ export type ArrayData<T = unknown> = FieldData<T>[]
 export interface FormData<K extends FieldKey> {
   value: Record<K, unknown>
   errors: Record<K, FieldError[] | null>
+  relatedRefs: Record<K, RefObject<ControlRefProps> | null>
   isTouched: boolean
   inValidating: boolean
+  validated: boolean
   maxErrorLevel: number | null
 }
 

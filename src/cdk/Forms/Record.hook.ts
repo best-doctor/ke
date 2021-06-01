@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react'
 import { isEqual } from '@utils/Types'
 
-import { FieldData, FieldKey, RecordData, RecordValidator, RootProviderDesc } from './types'
-import { useRecordRoot } from './ContextTree'
+import { FieldData, FieldKey, RecordData, RecordValidator, RootProviderDesc, Updater } from './types'
 
 export function useRecord<K extends FieldKey>(
+  rootHook: (record: RecordData<K>, onChange: (updater: Updater<RecordData<K>>) => void) => RootProviderDesc,
   value: Record<K, unknown>,
   onChange: (val: RecordData<K>) => void,
   validate?: RecordValidator<K>
 ): RootProviderDesc {
-  const [record, setRecord] = useState(() => makeDefaultRecordData(value))
+  const [record, setRecord] = useState(() => makeDefaultRecord(value))
 
   useEffect(() => {
-    setRecord((prev) => updateRecordValue(prev, value))
+    setRecord((prev) => updateRecord(prev, value))
   }, [value])
+
+  useEffect(() => {
+    onChange(record)
+  }, [onChange, record])
 
   useEffect(() => {
     let rejected = false
     if (validate) {
-      setRecord((prev) => updateRecordFields(prev, { inValidating: true }))
+      setRecord((prev) => updateRecordFields(prev, { inValidating: true, validated: false }))
       validate(value).then((result) => {
         if (!rejected) {
           const forMerge = Object.fromEntries(
@@ -26,6 +30,7 @@ export function useRecord<K extends FieldKey>(
               key,
               {
                 inValidating: false,
+                validated: true,
                 errors: result[key as K]?.errors || null,
               },
             ])
@@ -39,59 +44,50 @@ export function useRecord<K extends FieldKey>(
       rejected = true
     }
   }, [value, validate])
-  return useRecordRoot(record, onChange)
+
+  return rootHook(record, setRecord)
 }
 
 const defaultField: Omit<FieldData, 'value'> = {
   errors: null,
   isTouched: false,
   inValidating: false,
-  relatedRef: {
-    current: null,
-  },
+  validated: false,
+  relatedRef: null,
 }
 
-function makeDefaultRecordData<K extends FieldKey>(value: Record<K, unknown>): RecordData<K> {
+function makeDefaultRecord<K extends FieldKey>(value: Record<K, unknown>): RecordData<K> {
   return Object.fromEntries(
     Object.entries(value).map(([key, item]) => [key, { ...defaultField, value: item }])
   ) as RecordData<K>
 }
 
-function updateRecordValue<K extends FieldKey>(data: RecordData, value: Record<K, unknown>): RecordData<K> {
-  if (
-    Object.keys(data).length !== Object.keys(value).length ||
-    Object.entries(value).find(([key, val]) => !isEqual(data[key]?.value, val))
-  ) {
-    return Object.fromEntries(
-      Object.entries(value).map(([key, val]) => {
-        const prevField = data[key]
-        return [key, { ...defaultField, ...prevField, value: val }]
-      })
-    ) as RecordData<K>
-  }
+function updateRecord<K extends FieldKey>(record: RecordData, value: Record<K, unknown>): RecordData<K> {
+  const updated = Object.fromEntries(
+    Object.entries(value).map(([key, item]) => [
+      key,
+      key in record && isEqual(item, record[key].value) ? record[key] : { ...defaultField, value: item },
+    ])
+  ) as RecordData<K>
 
-  return data
+  return isEqual(updated, record) ? record : updated
 }
 
-function updateRecordFields<K extends FieldKey>(data: RecordData<K>, ext: Partial<FieldData>): RecordData<K> {
+function updateRecordFields<K extends FieldKey>(baseRecord: RecordData<K>, ext: Partial<FieldData>): RecordData<K> {
   return mergeRecord(
-    data,
-    Object.fromEntries(Object.keys(data).map((key) => [key, ext])) as Record<K, Partial<FieldData>>
+    baseRecord,
+    Object.fromEntries(Object.keys(baseRecord).map((key) => [key, ext])) as Record<K, Partial<FieldData>>
   )
 }
 
-function mergeRecord<K extends FieldKey>(data: RecordData<K>, ext: Record<K, Partial<FieldData>>): RecordData<K> {
-  const updatedFields = Object.entries(ext).reduce((acc, [key, extField]) => {
-    const field = data[key as K]
-    const updated = { ...field, ...(extField as Partial<FieldData>) }
-    if (!isEqual(field, updated)) {
-      return {
-        ...acc,
-        [key]: updated,
-      }
-    }
-    return acc
-  }, {} as Partial<RecordData<K>>)
+function mergeRecord<K extends FieldKey>(baseRecord: RecordData<K>, ext: Record<K, Partial<FieldData>>): RecordData<K> {
+  const updated = Object.fromEntries(
+    Object.entries(ext).map(([key, extField]) => {
+      const baseField = baseRecord[key as K]
+      const updatedField = { ...baseField, ...(extField as Partial<FieldData>) }
+      return [key, isEqual(baseField, updatedField) ? baseField : updatedField]
+    })
+  ) as RecordData<K>
 
-  return Object.keys(updatedFields).length ? { ...data, ...updatedFields } : data
+  return isEqual(baseRecord, updated) ? baseRecord : updated
 }

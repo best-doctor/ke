@@ -1,2 +1,2 @@
 export { useZod, convertZod } from './Zod'
-export { useCombine, combine } from './Combine'
+export { useCombine, combine, recordCombine } from './Combine'

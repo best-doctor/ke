@@ -1,24 +1,21 @@
 import { Provider, useCallback } from 'react'
+import { isEqual } from '@utils/Types'
 
 import { TreeContext } from './Tree.context'
-import { RootContext, RootProviderDesc } from './types'
+import { RootContext, RootProviderDesc, Updater } from './types'
 
 export function useRecordRoot<K extends string | number, T>(
   recRoot: Record<K, T>,
-  onChange: (recRoot: Record<K, T>) => void
+  onChange: (updater: Updater<Record<K, T>>) => void
 ): RootProviderDesc<T> {
   const setter = useCallback(
-    (key: string | number, updater: (val: T) => T) => {
-      checkKeyInRecord(key, recRoot)
-      const updated = updater(recRoot[key as K])
-      if (recRoot[key as K] !== updated) {
-        onChange({
-          ...recRoot,
-          [key]: updated,
-        })
-      }
-    },
-    [recRoot, onChange]
+    (key: string | number, updater: Updater<T>) =>
+      onChange((prev) => {
+        checkKeyInRecord(key, prev)
+        const updated = updater(prev[key as K])
+        return isEqual(prev[key as K], updated) ? prev : { ...prev, [key]: updated }
+      }),
+    [onChange]
   )
 
   const getter = useCallback(

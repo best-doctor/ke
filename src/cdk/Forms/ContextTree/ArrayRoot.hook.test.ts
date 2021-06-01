@@ -42,7 +42,7 @@ test('Getter from context throw error if key not exists in data', () => {
 test('Updater from context update correct value', () => {
   fc.assert(
     fc.property(arrayWithNewValueArbitrary, ([array, value]) => {
-      const onChangeSpy = jest.fn()
+      const onChangeSpy = jest.fn().mockImplementation((cb: (prev: unknown[]) => void) => cb(array))
       const { result } = renderHook(() => useArrayRoot(array, onChangeSpy, getKeyIndex))
       const updater = result.current[1].value[1]
 
@@ -53,7 +53,7 @@ test('Updater from context update correct value', () => {
         expect(keyUpdaterSpy.mock.calls[0][0]).toBe(array[index])
         const updated = [...array]
         updated[index] = value
-        expect(onChangeSpy.mock.calls[onChangeSpy.mock.calls.length - 1][0]).toEqual(updated)
+        expect(onChangeSpy).toHaveLastReturnedWith(updated)
       })
     })
   )
@@ -62,7 +62,8 @@ test('Updater from context update correct value', () => {
 test('Updater from context throw error if key not exists in data', () => {
   fc.assert(
     fc.property(arrayWithInvalidKeyArbitrary, ([array, invalidKey]) => {
-      const { result } = renderHook(() => useArrayRoot(array, jest.fn(), getKeyIndex))
+      const onChangeSpy = jest.fn().mockImplementation((cb: (prev: unknown[]) => void) => cb(array))
+      const { result } = renderHook(() => useArrayRoot(array, onChangeSpy, getKeyIndex))
       const updater = result.current[1].value[1]
 
       expect(() => updater(invalidKey, () => undefined)).toThrow(RangeError)
@@ -82,22 +83,6 @@ test('onChange callback has called on set new value', () => {
       })
 
       expect(onChangeSpy.mock.calls.length).toBe(Object.keys(array).length)
-    })
-  )
-})
-
-test('onChange callback has not called on set same value', () => {
-  fc.assert(
-    fc.property(arrayArbitrary, (array) => {
-      const onChangeSpy = jest.fn()
-      const { result } = renderHook(() => useArrayRoot(array, onChangeSpy, getKeyIndex))
-      const updater = result.current[1].value[1]
-
-      array.forEach((_, key) => {
-        updater(key, (prev) => prev)
-      })
-
-      expect(onChangeSpy.mock.calls.length).toBe(0)
     })
   )
 })
