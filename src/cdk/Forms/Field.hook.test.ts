@@ -61,7 +61,7 @@ test('Propose controlRef param to context data as related ref', () => {
 
       expect(onChangeSpy).toHaveLastReturnedWith({
         ...record,
-        [key]: { ...record[key], validated: true, relatedRef: ref },
+        [key]: { ...record[key], validated: false, relatedRef: ref },
       })
     })
   )
