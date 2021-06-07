@@ -2,16 +2,22 @@ import { Box } from '@chakra-ui/react'
 import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 import { WizardProps } from './types'
 
-export const Wizard = (props: WizardProps<string>): JSX.Element => {
+export const Wizard = <Key extends string, Action extends string>(props: WizardProps<Key, Action>): JSX.Element => {
   const { start, steps, onFinish, onRestart, name, map } = props
   const [currentStep, setCurrentStep] = useState(start.step)
   const [currentData, setCurrentData] = useState(start.data)
   const [currentForm, setCurrentForm] = useState<ReactNode>(null)
 
   const next = useCallback(
-    (action: string, newData: object, submit): void => {
-      const newStep = map[currentStep][action]
-      setCurrentStep(newStep)
+    (action: Action, newData: object, submit): void => {
+      const possibleActions = map[currentStep]
+      const newStep = possibleActions[action]
+      if (newStep === undefined) {
+        throw new RangeError(
+          `Unknown action ${action} for step ${currentStep}. Expected one of ${Object.keys(possibleActions)}`
+        )
+      }
+      setCurrentStep(newStep as Key)
       setCurrentData(newData)
       submit && submit(currentData)
     },
