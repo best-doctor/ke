@@ -31,6 +31,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   helpText,
   description,
   center,
+  mapHeigth = 448,
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   const [currentFiltersValue, setCurrentFiltersValue] = usePartialState({ ...filtersValue, zoom: 12, bbox: undefined })
 
@@ -49,7 +50,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <StyledMapFilterWidget>
-        <Flex height="448px">
+        <Flex height={mapHeigth}>
           <Box flex={1}>
             <MapSelect
               value={value}
@@ -62,7 +63,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
               onBoundsChanged={onBboxChange}
             />
           </Box>
-          <Box width="300px" marginLeft="5px" height="448px" overflowY="auto">
+          <Box width="300px" marginLeft="5px" height={mapHeigth} overflowY="auto">
             <Filters filters={filters} value={filtersValue} onChange={onFiltersChange} layout={ListVertical} />
           </Box>
         </Flex>
@@ -82,4 +83,5 @@ type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   style: any
   helpText: string
   description?: string | JSX.Element
+  mapHeigth?: number
 }
