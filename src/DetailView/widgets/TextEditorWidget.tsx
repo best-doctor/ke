@@ -15,10 +15,13 @@ type TextEditorProps = WidgetProps & {
 }
 
 const StyledTextEditor = styled.div`
+  .text-editor {
+    border-radius: 0.375rem;
+    border-color: #cbd5e0;
+  }
   .text-editor-widget {
-    height: 200px;
-    max-height: 200px;
-    overflow: scroll;
+    height: 208px;
+    max-height: 208px;
   }
 `
 
@@ -81,6 +84,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
           // eslint-disable-next-line
           // @ts-ignore
           toolbarConfig={toolbarConfig}
+          className="text-editor"
           editorClassName="text-editor-widget"
           value={value}
           onChange={handleChange}
