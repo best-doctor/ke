@@ -1,6 +1,7 @@
 import React from 'react'
 import { Heading, Box } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
+import { useStore } from 'effector-react'
 
 import { WizardStepComponents } from './WizardStepComponents'
 import { WizardValidationErrors } from './WizardValidationErrors'
@@ -13,7 +14,6 @@ import type { BaseNotifier } from '../../../common/notifier'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
-import { useStore } from 'effector-react'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
