@@ -1,6 +1,5 @@
-import React from 'react'
-import { Link } from '@chakra-ui/react'
-import styled from 'styled-components'
+import React, { CSSProperties } from 'react'
+import { Link, Box } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -9,17 +8,27 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 
 import type { GenericAccessor, WidgetProps } from '../../typing'
 
-const StyledLinkWidget = styled.div`
-  border-width: 1px;
-  border-radius: 3px;
-  border-color: #cbd5e0;
-  padding: 5.4px;
-`
+const defaultBoxStyles: CSSProperties = {
+  borderWidth: '1px',
+  borderRadius: '3px',
+  borderColor: '#cbd5e0',
+  padding: '5.4px',
+}
 
-type LinkWidgetProps = WidgetProps & { href: GenericAccessor; target?: string }
+type LinkWidgetProps = WidgetProps & { href: GenericAccessor; target?: string; boxStyle?: object }
 
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
-  const { name, mainDetailObject, href, helpText, description, style, containerStore, target = '_blank' } = props
+  const {
+    name,
+    mainDetailObject,
+    href,
+    helpText,
+    description,
+    style,
+    containerStore,
+    target = '_blank',
+    boxStyle = defaultBoxStyles,
+  } = props
 
   const context = containerStore.getState()
   const { content } = useWidgetInitialization({ ...props, context })
@@ -37,7 +46,7 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText || ''} description={description}>
-      <StyledLinkWidget>
+      <Box style={boxStyle}>
         {linkHref ? (
           <Link target={target} href={linkHref} onClick={() => handleClick()} color="teal.500">
             {content || 'Ссылка'}
@@ -45,7 +54,7 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
         ) : (
           '\u00a0'
         )}
-      </StyledLinkWidget>
+      </Box>
     </WidgetWrapper>
   )
 }
