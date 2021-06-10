@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FieldError | @bestdoctor/ke</title>
+	<title>ValidationResult | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="fielderror.html">FieldError</a>
+					<a href="validationresult.html">ValidationResult</a>
 				</li>
 			</ul>
-			<h1>Interface FieldError</h1>
+			<h1>Interface ValidationResult</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">FieldError</span>
+						<span class="target">ValidationResult</span>
 					</li>
 				</ul>
 			</section>
@@ -80,8 +80,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielderror.html#level" class="tsd-kind-icon">level</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fielderror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validationresult.html#errors" class="tsd-kind-icon">errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validationresult.html#success" class="tsd-kind-icon">success</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,22 +90,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="level" class="tsd-anchor"></a>
-					<h3>level</h3>
-					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="errors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> errors</h3>
+					<div class="tsd-signature tsd-kind-icon">errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ValidationError</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/efadc75/src/cdk/Forms/types.ts#L43">src/cdk/Forms/types.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/c908d05/src/cdk/Forms/Validation/Checks/types.ts#L8">src/cdk/Forms/Validation/Checks/types.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="message" class="tsd-anchor"></a>
-					<h3>message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="success" class="tsd-anchor"></a>
+					<h3>success</h3>
+					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/efadc75/src/cdk/Forms/types.ts#L44">src/cdk/Forms/types.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/c908d05/src/cdk/Forms/Validation/Checks/types.ts#L7">src/cdk/Forms/Validation/Checks/types.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -124,13 +124,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="fielderror.html" class="tsd-kind-icon">Field<wbr>Error</a>
+						<a href="validationresult.html" class="tsd-kind-icon">Validation<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="fielderror.html#level" class="tsd-kind-icon">level</a>
+								<a href="validationresult.html#errors" class="tsd-kind-icon">errors</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="fielderror.html#message" class="tsd-kind-icon">message</a>
+								<a href="validationresult.html#success" class="tsd-kind-icon">success</a>
 							</li>
 						</ul>
 					</li>
