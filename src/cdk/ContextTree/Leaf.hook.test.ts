@@ -1,18 +1,20 @@
-import { createElement } from 'react'
+import { createContext, createElement } from 'react'
 import fc from 'fast-check'
 import { renderHook } from '@testing-library/react-hooks'
 
 import { useLeaf } from './Leaf.hook'
-import { TreeContext } from './Tree.context'
+import { RootContext } from './types'
 
 const keyArbitrary = fc.oneof(fc.string(), fc.integer({ min: 0 }))
+
+const TestContext = createContext<RootContext>([() => undefined, () => undefined])
 
 test('Retrieve correct value from context by key', () => {
   fc.assert(
     fc.property(keyArbitrary, fc.anything(), (key, value) => {
       const getterSpy = jest.fn().mockReturnValue(value)
-      const { result } = renderHook(() => useLeaf(key), {
-        wrapper: ({ children }) => createElement(TreeContext.Provider, { value: [getterSpy, jest.fn()], children }),
+      const { result } = renderHook(() => useLeaf(TestContext, key), {
+        wrapper: ({ children }) => createElement(TestContext.Provider, { value: [getterSpy, jest.fn()], children }),
       })
 
       expect(result.current[0]).toBe(value)
@@ -25,8 +27,8 @@ test('Updater try to set value from context by key', () => {
   fc.assert(
     fc.property(keyArbitrary, (key) => {
       const setterSpy = jest.fn()
-      const { result } = renderHook(() => useLeaf(key), {
-        wrapper: ({ children }) => createElement(TreeContext.Provider, { value: [jest.fn(), setterSpy], children }),
+      const { result } = renderHook(() => useLeaf(TestContext, key), {
+        wrapper: ({ children }) => createElement(TestContext.Provider, { value: [jest.fn(), setterSpy], children }),
       })
 
       const updateLeaf = result.current[1]

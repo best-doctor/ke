@@ -1,10 +1,10 @@
-import { Provider, useCallback } from 'react'
+import { Context, Provider, useCallback } from 'react'
 import { isEqual } from '@utils/Types'
 
-import { TreeContext } from './Tree.context'
 import { RootContext, RootProviderDesc, Updater } from './types'
 
 export function useArrayRoot<T>(
+  context: Context<RootContext>,
   arrRoot: T[],
   onChange: (updater: Updater<T[]>) => void,
   getKey: (value: T, index: number) => string | number
@@ -43,5 +43,5 @@ export function useArrayRoot<T>(
     [arrRoot, getKey]
   )
 
-  return [TreeContext.Provider as Provider<RootContext<T>>, { value: [getter, setter] }]
+  return [context.Provider as Provider<RootContext<T>>, { value: [getter, setter] }]
 }

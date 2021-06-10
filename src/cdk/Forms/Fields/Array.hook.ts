@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { isEqual } from '@utils/Types'
 
-import { ArrayData, ArrayValidator, FieldData, FieldKey, RootProviderDesc, Updater } from './types'
+import { ArrayData, FieldData, FieldKey, RootProviderDesc, Updater } from './types'
 
 export function useArray<T>(
   arrayHook: (
@@ -11,8 +11,7 @@ export function useArray<T>(
   ) => RootProviderDesc,
   value: T[],
   onChange: (val: ArrayData<T>) => void,
-  getKey: (item: T, index: number) => FieldKey,
-  validate?: ArrayValidator
+  getKey: (item: T, index: number) => FieldKey
 ): RootProviderDesc {
   const [array, setArray] = useState(() => makeDefaultArray(value))
 
@@ -24,39 +23,13 @@ export function useArray<T>(
     onChange(array)
   }, [onChange, array])
 
-  useEffect(() => {
-    let rejected = false
-    if (validate) {
-      setArray((prev) => updateArrayFields(prev, { inValidating: true, validated: false }))
-      validate(value).then((result) => {
-        if (!rejected) {
-          const forMerge = Array(value.length)
-            .fill(null)
-            .map((_, index) => ({
-              inValidating: false,
-              validated: true,
-              errors: result[index]?.errors || null,
-            }))
-          setArray((prev) => mergeArray(prev, forMerge))
-        }
-      })
-    }
-
-    return () => {
-      rejected = true
-    }
-  }, [value, validate])
-
   const getFieldKey = useCallback((field: FieldData<T>, index: number) => getKey(field.value, index), [getKey])
 
   return arrayHook(array, setArray, getFieldKey)
 }
 
 const defaultField: Omit<FieldData, 'value'> = {
-  errors: null,
   isTouched: false,
-  inValidating: false,
-  validated: false,
   relatedRef: null,
 }
 
@@ -73,18 +46,4 @@ function updateArray<T>(array: ArrayData<T>, value: T[], getKey: (item: T, index
   })
 
   return isEqual(array, updated) ? array : updated
-}
-
-function updateArrayFields<T>(baseArray: ArrayData<T>, changes: Partial<FieldData>): ArrayData<T> {
-  return mergeArray(baseArray, Array(baseArray.length).fill(changes))
-}
-
-function mergeArray<T>(baseArray: ArrayData<T>, ext: Partial<FieldData>[]): ArrayData<T> {
-  const updated = ext.map((extField, index) => {
-    const baseField = baseArray[index]
-    const updatedField = { ...baseArray[index], ...extField }
-    return isEqual(baseField, updatedField) ? baseField : updatedField
-  }) as ArrayData<T>
-
-  return isEqual(baseArray, updated) ? baseArray : updated
 }

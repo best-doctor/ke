@@ -1,7 +1,9 @@
+import { createContext } from 'react'
 import fc from 'fast-check'
 import { renderHook } from '@testing-library/react-hooks'
 
 import { useArrayRoot } from './ArrayRoot.hook'
+import { RootContext } from './types'
 
 const arrayArbitrary = fc.array(fc.anything())
 const arrayWithInvalidKeyArbitrary = fc
@@ -15,10 +17,12 @@ function getKeyIndex(_: unknown, index: number): number {
   return index
 }
 
+const TestContext = createContext<RootContext>([() => undefined, () => undefined])
+
 test('Getter from context return correct value', () => {
   fc.assert(
     fc.property(arrayArbitrary, (array) => {
-      const { result } = renderHook(() => useArrayRoot(array, jest.fn(), getKeyIndex))
+      const { result } = renderHook(() => useArrayRoot(TestContext, array, jest.fn(), getKeyIndex))
       const getter = result.current[1].value[0]
 
       const gotValue = array.map((_, index) => getter(index))
@@ -31,7 +35,7 @@ test('Getter from context return correct value', () => {
 test('Getter from context throw error if key not exists in data', () => {
   fc.assert(
     fc.property(arrayWithInvalidKeyArbitrary, ([array, invalidKey]) => {
-      const { result } = renderHook(() => useArrayRoot(array, jest.fn(), getKeyIndex))
+      const { result } = renderHook(() => useArrayRoot(TestContext, array, jest.fn(), getKeyIndex))
       const getter = result.current[1].value[0]
 
       expect(() => getter(invalidKey)).toThrow(RangeError)
@@ -43,7 +47,7 @@ test('Updater from context update correct value', () => {
   fc.assert(
     fc.property(arrayWithNewValueArbitrary, ([array, value]) => {
       const onChangeSpy = jest.fn().mockImplementation((cb: (prev: unknown[]) => void) => cb(array))
-      const { result } = renderHook(() => useArrayRoot(array, onChangeSpy, getKeyIndex))
+      const { result } = renderHook(() => useArrayRoot(TestContext, array, onChangeSpy, getKeyIndex))
       const updater = result.current[1].value[1]
 
       array.forEach((_, index) => {
@@ -63,7 +67,7 @@ test('Updater from context throw error if key not exists in data', () => {
   fc.assert(
     fc.property(arrayWithInvalidKeyArbitrary, ([array, invalidKey]) => {
       const onChangeSpy = jest.fn().mockImplementation((cb: (prev: unknown[]) => void) => cb(array))
-      const { result } = renderHook(() => useArrayRoot(array, onChangeSpy, getKeyIndex))
+      const { result } = renderHook(() => useArrayRoot(TestContext, array, onChangeSpy, getKeyIndex))
       const updater = result.current[1].value[1]
 
       expect(() => updater(invalidKey, () => undefined)).toThrow(RangeError)
@@ -75,7 +79,7 @@ test('onChange callback has called on set new value', () => {
   fc.assert(
     fc.property(arrayWithNewValueArbitrary, ([array, value]) => {
       const onChangeSpy = jest.fn()
-      const { result } = renderHook(() => useArrayRoot(array, onChangeSpy, getKeyIndex))
+      const { result } = renderHook(() => useArrayRoot(TestContext, array, onChangeSpy, getKeyIndex))
       const updater = result.current[1].value[1]
 
       array.forEach((_, key) => {
