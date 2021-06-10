@@ -13,6 +13,7 @@ import type { BaseNotifier } from '../../../common/notifier'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
+import { useStore } from 'effector-react'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -64,6 +65,8 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
   }
 
+  const errors = useStore(containerErrorsStore)
+
   return (
     <>
       {show && (
@@ -101,9 +104,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
               <Row>
                 <Col xs={12}>
                   <Box key="errors">
-                    <WizardValidationErrors
-                      errors={containerErrorsStore.getState().map(({ errorText }) => errorText)}
-                    />
+                    <WizardValidationErrors errors={errors.map(({ errorText }) => errorText)} />
                   </Box>
                   <Box key="steps">
                     <WizardStepControlPanel
