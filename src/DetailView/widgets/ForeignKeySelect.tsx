@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import type { DetailObject, WidgetProps } from 'typing'
+import type { Accessor, DetailObject, WidgetProps } from 'typing'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
@@ -16,7 +16,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   isClearable?: boolean
   defaultOptions?: boolean
   searchParamName?: string
-  styles?: object
+  styles?: Accessor<object>
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
 }
@@ -71,6 +71,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization({ ...props, context })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
+  const selectStyle = getAccessor(styles, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object | null>(content as object | null)
   setInitialValue(value ? getPayload(value, name, targetPayload) : null)
@@ -131,7 +132,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
             optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
           }
           searchParamName={searchParamName}
-          styles={styles}
+          styles={selectStyle}
         />
       </ValidationWrapper>
     </WidgetWrapper>
