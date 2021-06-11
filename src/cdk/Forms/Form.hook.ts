@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { isEqual } from '@utils/Types'
 
 import { FieldKey, RecordData, FieldData, RootProviderDesc } from './Fields'
-import { FormData } from './types'
+import { FormData, ValueData } from './types'
 import { RecordValidator } from './Validation'
 
 export function useForm<K extends FieldKey>(
@@ -17,33 +17,27 @@ export function useForm<K extends FieldKey>(
 ): UseFormResult {
   const { errorsRoot, recursiveValidate } = useValidation(value, validator)
 
-  const [formValue, setFormValue] = useState((): FormData<K> => makeDefaultForm(value, recursiveValidate))
+  const [formValue, setFormValue] = useState((): ValueData<K> => makeDefaultForm(value))
 
   useEffect(() => {
-    onChange(formValue)
-  }, [formValue, onChange])
+    onChange({ ...formValue, validate: () => recursiveValidate(formValue.value) })
+  }, [formValue, recursiveValidate, onChange])
 
   useEffect(() => {
-    setFormValue((prev) =>
-      value === prev.value && recursiveValidate === prev.validate ? prev : makeDefaultForm(value, recursiveValidate)
-    )
-  }, [value, recursiveValidate])
+    setFormValue((prev) => (value === prev.value ? prev : replaceFormValue(prev, value)))
+  }, [value])
 
-  const handleChange = useCallback(
-    (record: RecordData<K>) => {
-      setFormValue((prev) => {
-        const changedValue = extract(record, 'value')
-        const changed = {
-          value: isEqual(prev.value, changedValue) ? prev.value : changedValue,
-          relatedRefs: extract(record, 'relatedRef'),
-          isTouched: !!Object.values(record).find((field) => (field as FieldData).isTouched),
-          validate: isEqual(prev.value, changedValue) ? prev.validate : () => recursiveValidate(changedValue),
-        }
-        return isEqual(prev, changed) ? prev : changed
-      })
-    },
-    [recursiveValidate]
-  )
+  const handleChange = useCallback((record: RecordData<K>) => {
+    setFormValue((prev) => {
+      const changedValue = extract(record, 'value')
+      const changed = {
+        value: isEqual(prev.value, changedValue) ? prev.value : changedValue,
+        relatedRefs: extract(record, 'relatedRef'),
+        isTouched: !!Object.values(record).find((field) => (field as FieldData).isTouched),
+      }
+      return isEqual(prev, changed) ? prev : changed
+    })
+  }, [])
 
   return {
     valuesRoot: useRecord(value, handleChange),
@@ -60,13 +54,25 @@ function extract<K extends FieldKey, FK extends keyof FieldData>(
   ) as Record<K, FieldData[FK]>
 }
 
-function makeDefaultForm<K extends FieldKey>(value: Record<K, unknown>, validator: RecordValidator): FormData<K> {
+function makeDefaultForm<K extends FieldKey>(value: Record<K, unknown>): ValueData<K> {
   return {
     value,
     relatedRefs: Object.fromEntries(Object.keys(value).map((key) => [key, null])) as Record<K, null>,
     isTouched: false,
-    validate: () => validator(value),
   }
+}
+
+function replaceFormValue<K extends FieldKey>(prev: ValueData<FieldKey>, value: Record<K, unknown>): ValueData<K> {
+  const replaced = {
+    value,
+    relatedRefs: Object.fromEntries(Object.keys(value).map((key) => [key, prev.relatedRefs[key] || null])) as Record<
+      K,
+      null
+    >,
+    isTouched: false,
+  }
+
+  return isEqual(prev, replaced) ? prev : replaced
 }
 
 export interface UseFormResult {
