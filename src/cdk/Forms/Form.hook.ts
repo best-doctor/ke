@@ -9,11 +9,11 @@ export function useForm<K extends FieldKey>(
   useRecord: (val: Record<K, unknown>, onChange: (val: RecordData<K>) => void) => RootProviderDesc,
   useValidation: (
     v: Record<K, unknown>,
-    validator: RecordValidator
+    validator?: RecordValidator
   ) => { errorsRoot: RootProviderDesc; recursiveValidate: RecordValidator },
   value: Record<K, unknown>,
   onChange: (val: FormData<K>) => void,
-  validator: RecordValidator
+  validator?: RecordValidator
 ): UseFormResult {
   const { errorsRoot, recursiveValidate } = useValidation(value, validator)
 
