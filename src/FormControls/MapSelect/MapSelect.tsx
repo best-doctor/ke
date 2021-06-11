@@ -36,6 +36,7 @@ export function MapSelect<T>({
           position={optionDesc.coords}
           title={optionDesc.description}
           label={optionDesc.label}
+          icon={optionDesc.icon}
           onClick={() => setSelectedKey(key)}
         />
       ))}
