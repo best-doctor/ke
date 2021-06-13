@@ -1,10 +1,15 @@
-import React, { PropsWithChildren, useCallback } from 'react'
+import React, { PropsWithChildren, useCallback, useRef } from 'react'
 import { useForm, FormData } from '@cdk/Forms'
+import { isEqual } from '@utils/Types'
 
 export function GroupControl({ value, onChange, children }: GroupControlProps): JSX.Element {
+  const prevValueRef = useRef(value)
+  prevValueRef.current = value
   const controlChange = useCallback(
     (formData: FormData<string>) => {
-      onChange(formData.value)
+      if (!isEqual(prevValueRef.current, formData.value)) {
+        onChange(formData.value)
+      }
     },
     [onChange]
   )

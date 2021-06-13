@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
-import { usePartialState } from '@cdk/Hooks'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Box, Flex } from '@chakra-ui/react'
 
@@ -31,26 +30,27 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   helpText,
   description,
   center,
-  mapHeigth = 448,
+  mapHeight = 448,
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
-  const [currentFiltersValue, setCurrentFiltersValue] = usePartialState({ ...filtersValue, zoom: 12, bbox: undefined })
-
-  const onFiltersChange = useCallback((f: Record<K, unknown>) => setCurrentFiltersValue(f as any), [
-    setCurrentFiltersValue,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { bbox, zoom, ...otherFilters } = filtersValue
+  const onFiltersChange = useCallback((f: Record<K, unknown>) => onFiltersValueChange({ ...filtersValue, ...f }), [
+    filtersValue,
+    onFiltersValueChange,
   ])
-  const onZoomChange = useCallback((zoom: number) => setCurrentFiltersValue({ zoom } as any), [setCurrentFiltersValue])
-  const onBboxChange = useCallback((bbox: string | undefined) => setCurrentFiltersValue({ bbox } as any), [
-    setCurrentFiltersValue,
+  const onZoomChange = useCallback((z: number) => onFiltersValueChange({ ...filtersValue, zoom: z }), [
+    filtersValue,
+    onFiltersValueChange,
   ])
-
-  useEffect(() => {
-    onFiltersValueChange(currentFiltersValue)
-  }, [currentFiltersValue, onFiltersValueChange])
+  const onBboxChange = useCallback((b: string | undefined) => onFiltersValueChange({ ...filtersValue, bbox: b }), [
+    filtersValue,
+    onFiltersValueChange,
+  ])
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <StyledMapFilterWidget>
-        <Flex height={mapHeigth}>
+        <Flex height={mapHeight}>
           <Box flex={1}>
             <MapSelect
               value={value}
@@ -58,13 +58,18 @@ export function MapFilteredSelectLegacy<T, K extends string>({
               options={options}
               clusters={clusters}
               center={center || moscowCoords}
-              zoom={12}
+              zoom={zoom || 12}
               onZoomChanged={onZoomChange}
               onBoundsChanged={onBboxChange}
             />
           </Box>
-          <Box width="300px" marginLeft="5px" height={mapHeigth} overflowY="auto">
-            <Filters filters={filters} value={filtersValue} onChange={onFiltersChange} layout={ListVertical} />
+          <Box width="300px" marginLeft="5px" height={mapHeight} overflowY="auto">
+            <Filters
+              filters={filters}
+              value={otherFilters as FiltersValue<K>}
+              onChange={onFiltersChange}
+              layout={ListVertical}
+            />
           </Box>
         </Flex>
       </StyledMapFilterWidget>
@@ -77,11 +82,11 @@ type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   'value' | 'onChange' | 'options' | 'clusters' | 'center'
 > & {
   filters: readonly Filter<K>[]
-  filtersValue: FiltersValue<K>
-  onFiltersValueChange: (v: FiltersValue<K | 'zoom' | 'bbox'>) => void
+  filtersValue: FiltersValue<K> & { zoom?: number; bbox?: string }
+  onFiltersValueChange: (v: FiltersValue<K> & { zoom?: number; bbox?: string }) => void
   name: string
   style: any
   helpText: string
   description?: string | JSX.Element
-  mapHeigth?: number
+  mapHeight?: number
 }

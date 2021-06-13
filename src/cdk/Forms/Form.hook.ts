@@ -12,7 +12,7 @@ export function useForm<K extends FieldKey>(
     validator?: RecordValidator
   ) => { errorsRoot: RootProviderDesc; recursiveValidate: RecordValidator },
   value: Record<K, unknown>,
-  onChange: (val: FormData<K>) => void,
+  onFormChange: (val: FormData<K>) => void,
   validator?: RecordValidator
 ): UseFormResult {
   const { errorsRoot, recursiveValidate } = useValidation(value, validator)
@@ -20,8 +20,8 @@ export function useForm<K extends FieldKey>(
   const [formValue, setFormValue] = useState((): ValueData<K> => makeDefaultForm(value))
 
   useEffect(() => {
-    onChange({ ...formValue, validate: () => recursiveValidate(formValue.value) })
-  }, [formValue, recursiveValidate, onChange])
+    onFormChange({ ...formValue, validate: () => recursiveValidate(formValue.value) })
+  }, [formValue, recursiveValidate, onFormChange])
 
   useEffect(() => {
     setFormValue((prev) => (value === prev.value ? prev : replaceFormValue(prev, value)))
