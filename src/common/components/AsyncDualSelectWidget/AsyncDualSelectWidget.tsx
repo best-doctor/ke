@@ -91,7 +91,7 @@ const AsyncDualSelectWidget = ({
       setOptions(res.options)
     })
     setSelectedItems([])
-  }, [])
+  }, [loadOptions])
 
   const allDeselect = useCallback(() => {
     setSelectedSelected([])
@@ -113,7 +113,7 @@ const AsyncDualSelectWidget = ({
 
   useEffect(() => {
     onChange()
-  }, [selectedItems])
+  }, [selectedItems, onChange])
 
   return (
     <>
