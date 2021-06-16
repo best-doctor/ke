@@ -9,6 +9,7 @@ import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
 import { FilterManager } from '../../../common/filterManager'
 import type { Provider } from '../../../admin/providers/interfaces'
+import { getAccessor } from '../../../DetailView/utils/dataAccess'
 
 type FilterBlockProps = {
   resourceName: string
@@ -44,12 +45,25 @@ const mountFilters = (props: FilterBlockProps): ReactNode => {
   return (
     <Flex flexWrap="wrap" key="custom_filters">
       {listFilters &&
-        listFilters.map((listFilter: ListFilterDescription) => (
-          <Flex flexDirection="column" m={2} key={listFilter.name}>
-            <Text fontWeight="bold">{listFilter.label}</Text>
-            <Box>{React.createElement(listFilter.Filter, { ...listFilter, analytics, resourceName, provider })}</Box>
-          </Flex>
-        ))}
+        listFilters.map((listFilter: ListFilterDescription) => {
+          const name = getAccessor(listFilter.name)
+          return name ? (
+            <Flex flexDirection="column" m={2} key={name}>
+              <Text fontWeight="bold">{listFilter.label}</Text>
+              <Box>
+                {React.createElement(listFilter.Filter, {
+                  ...listFilter,
+                  name,
+                  analytics,
+                  resourceName,
+                  provider,
+                })}
+              </Box>
+            </Flex>
+          ) : (
+            <></>
+          )
+        })}
     </Flex>
   )
 }

@@ -9,7 +9,7 @@ type ListFieldDescription = {
 }
 
 type ListFilterDescription = {
-  name: string
+  name: Accessor<string>
   label: string
   Filter: FunctionComponent<any>
 }
