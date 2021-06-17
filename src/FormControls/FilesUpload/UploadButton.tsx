@@ -43,7 +43,7 @@ export function UploadButton({ onSelect, onUpload }: UploadButtonProps): ReactEl
   return (
     <>
       <UploadingList files={loadingFiles} />
-      <Button leftIcon={<Paperclip />} onClick={handleClick}>
+      <Button leftIcon={<Paperclip />} onClick={handleClick} size="sm" mt="5px">
         Прикрепить ещё один файл
       </Button>
       <input type="file" ref={hiddenFileInput} onChange={handleFileSelect} style={{ display: 'none' }} />
