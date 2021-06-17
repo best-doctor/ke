@@ -15,9 +15,25 @@ export function Order({ value, onChange }: OrderProps): ReactElement<OrderProps>
 
   switch (dir) {
     case 'asc':
-      return <IconButton aria-label="По возрастанию" icon={<ChevronsDown />} onClick={() => handleChangeDir('desc')} />
+      return (
+        <IconButton
+          background={{}}
+          aria-label="По возрастанию"
+          icon={<ChevronsDown />}
+          onClick={() => handleChangeDir('desc')}
+          size="xs"
+        />
+      )
     case 'desc':
-      return <IconButton aria-label="По убыванию" icon={<ChevronsUp />} onClick={() => handleChangeDir('asc')} />
+      return (
+        <IconButton
+          background={{}}
+          aria-label="По убыванию"
+          icon={<ChevronsUp />}
+          onClick={() => handleChangeDir('asc')}
+          size="xs"
+        />
+      )
     default:
       throw new TypeError(`Unknown order direction: ${dir}. Awaiting for 'asc' or 'desc'`)
   }
