@@ -94,7 +94,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
     <>
       <Row>
         <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
-          <Box padding="8px">
+          <Box padding="8px 0px">
             <ToListViewLink name={resourceName} />
           </Box>
         </Col>
