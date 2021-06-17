@@ -1,6 +1,6 @@
 import React, { ChangeEvent, ReactElement, useCallback, useRef, useState } from 'react'
 import { Button, List, ListIcon, ListItem, Progress } from '@chakra-ui/react'
-import { Paperclip } from 'react-feather'
+import { Loader, Paperclip } from 'react-feather'
 
 import { FileDescriptor, LoadingFileDescriptor } from './types'
 
@@ -43,7 +43,7 @@ export function UploadButton({ onSelect, onUpload }: UploadButtonProps): ReactEl
   return (
     <>
       <UploadingList files={loadingFiles} />
-      <Button leftIcon={<Paperclip />} onClick={handleClick} size="sm" mt="5px">
+      <Button leftIcon={<Paperclip size={18} />} onClick={handleClick} size="sm" mt="5px">
         Прикрепить ещё один файл
       </Button>
       <input type="file" ref={hiddenFileInput} onChange={handleFileSelect} style={{ display: 'none' }} />
@@ -56,7 +56,7 @@ function UploadingList({ files }: UploadingListProps): ReactElement<UploadingLis
     <List>
       {files.map((file) => (
         <ListItem key={file.key}>
-          <ListIcon icon={Paperclip} />
+          <ListIcon as={Loader} />
           {file.name}
           <Progress hasStripe isAnimated value={Math.floor((file.loaded / file.total) * 100)} />
         </ListItem>
