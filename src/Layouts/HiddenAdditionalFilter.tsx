@@ -1,17 +1,24 @@
 import React, { PropsWithChildren, useState } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import { makeSlots } from '@cdk/Layouts'
+import { Filter } from 'react-feather'
 
 const Additional = ({ children, isOpen }: PropsWithChildren<{ isOpen: boolean }>): JSX.Element | null =>
   isOpen ? (
-    <Flex flexWrap="wrap" border="1px" borderColor="gray.200" borderRadius="md" my={2} p={3}>
+    <Flex flexWrap="wrap" mt={4}>
       {children}
     </Flex>
   ) : null
 const Buttons = ({ isOpen, additionalHandler }: { isOpen: boolean; additionalHandler: () => void }): JSX.Element => (
-  <Box ml={2}>
-    <Button mr={2} isActive={isOpen} onClick={additionalHandler}>
-      {isOpen ? 'Скрыть фильтры' : 'Раскрыть фильтры'}
+  <Box>
+    <Button
+      bg={isOpen ? '#C7CAD1' : '#F1F2F4'}
+      leftIcon={<Filter />}
+      mr={2}
+      isActive={isOpen}
+      onClick={additionalHandler}
+    >
+      Фильтры
     </Button>
   </Box>
 )
@@ -23,16 +30,16 @@ export const HiddenAdditionalFilter = makeSlots(
     additional: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
   },
   (slotElements) => {
-    const [additional, setAdditional] = useState(false) // eslint-disable-line
+    const [additional, setAdditional] = useState(false)
     const handleClick = (): void => {
       setAdditional(!additional)
     }
     return (
-      <Flex flexWrap="wrap">
-        <Box flex="2 0 0%">{slotElements.main}</Box>
-        <Box flex="1 0 0%">
+      <Flex flexWrap="wrap" mb={4}>
+        <Box flex="1 1 0%">
           <Buttons isOpen={additional} additionalHandler={handleClick} />
         </Box>
+        <Box flex="0 0 0%">{slotElements.main}</Box>
         <Box flex="1 0 100%">
           <Additional isOpen={additional}>{slotElements.additional}</Additional>
         </Box>
