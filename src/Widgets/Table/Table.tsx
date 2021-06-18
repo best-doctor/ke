@@ -17,6 +17,9 @@ export const StyledTable = makeTable(
     }
     border-bottom-width: 1px;
     border-color: #e3e5e8;
+    &:hover {
+      background-color: #dde6f4;
+    }
   `,
   styled.th`
     height: 3em;
