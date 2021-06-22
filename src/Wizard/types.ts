@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 interface WizardProps<Key extends string, Action extends string> {
+  knownSteps: Key[]
   steps: Record<Key, (args: StepArgs<Action>) => ReactNode>
   map: Record<Key, Partial<Record<Action, Key>>>
   start: Start<Key>
