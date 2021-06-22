@@ -6,6 +6,8 @@ import debouncePromise from 'debounce-promise'
 import type { ValueType } from 'react-select'
 import { Pagination } from '../../admin/providers/pagination'
 import type { Provider } from '../../admin/providers/interfaces'
+import { Accessor } from '../../typing'
+import { getAccessor } from '../../DetailView/utils/dataAccess'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -24,10 +26,11 @@ type AsyncSelectWidgetProps = {
   cacheTime?: number
   getOptionLabelMenu?: (option: object | object[] | null) => string
   getOptionLabelValue?: (option: object | object[] | null) => string
+  additionalValues?: object[]
 }
 
 type LoadOptionsType = {
-  options: object
+  options: Accessor<object[]>
   hasMore: boolean
   additional?: Function
 }
@@ -49,6 +52,7 @@ type LoadOptionsType = {
  * @param defaultOptions - if array, when used as initial models for options list, if true when fire load options on render, else waiting for input
  * @param searchParamName - url parameter name which will be used with input value on options requests to backend
  * @param placeholder - text for empty select
+ * @param additionalValues - some fixed values to be added into options as Accessor
  */
 const AsyncSelectWidget = ({
   provider,
@@ -65,6 +69,7 @@ const AsyncSelectWidget = ({
   placeholder = 'Введите значение',
   getOptionLabelMenu,
   getOptionLabelValue,
+  additionalValues = [],
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -77,6 +82,7 @@ const AsyncSelectWidget = ({
 
   const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
   const [cachedChangeValue, setCachedChangeValue] = useState<string>('')
+  const [usedAdditionalValues, setUsedAdditionalValues] = useState(false)
 
   React.useEffect(() => {
     setNextUrl('')
@@ -89,7 +95,7 @@ const AsyncSelectWidget = ({
   }
 
   const getOptionsHandler = async (url: string, changeValue: string): Promise<LoadOptionsType> => {
-    const res = await provider.getPage(url).then(([data, , meta]: [object, object, Pagination]) => {
+    const res = await provider.getPage(url).then(([data, , meta]: [object[], object, Pagination]) => {
       setCachedChangeValue(changeValue)
       meta.nextUrl && setNextUrl(meta.nextUrl)
       return {
@@ -106,6 +112,11 @@ const AsyncSelectWidget = ({
       url = nextUrl
     }
     const res = await getOptionsHandler(url, changeValue)
+    if (!usedAdditionalValues && Array.isArray(res.options)) {
+      const values = getAccessor(additionalValues)
+      res.options = values.concat(res.options)
+      setUsedAdditionalValues(true)
+    }
     return res as AsyncResult<LoadOptionsType>
   }
 
