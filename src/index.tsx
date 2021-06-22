@@ -79,6 +79,7 @@ import { HiddenAdditionalFilter } from './Layouts/HiddenAdditionalFilter'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
+import { ToClipboard } from './common/components/ToClipboard'
 
 export * from './Widgets/Map'
 export * from './Widgets/Table'
@@ -189,4 +190,5 @@ export {
   Filter,
   EmailChipInput,
   PhoneChipInput,
+  ToClipboard,
 }
