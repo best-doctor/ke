@@ -113,7 +113,7 @@ const AsyncSelectWidget = ({
     }
     const res = await getOptionsHandler(url, changeValue)
     if (!usedAdditionalValues && Array.isArray(res.options)) {
-      const values = getAccessor(additionalValues)
+      const values: object[] = getAccessor(additionalValues)
       res.options = values.concat(res.options)
       setUsedAdditionalValues(true)
     }
