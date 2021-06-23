@@ -1,9 +1,8 @@
 import React from 'react'
-
 import { Box, Flex, Text } from '@chakra-ui/react'
-import { Copy } from 'react-feather'
 import type { BaseNotifier } from '../notifier'
 import { containerErrorsStore } from '../../WizardMaster/store'
+import { ToClipboard } from './ToClipboard'
 
 const WidgetLabel = ({ helpText, isRequired }: { helpText: string; isRequired: boolean }): JSX.Element => (
   <>
@@ -49,22 +48,13 @@ const WidgetWrapper = ({
   description?: string | JSX.Element
   required?: boolean
 }): JSX.Element => {
-  const handleClipboard = (): void => {
-    if (copyValue) {
-      navigator.clipboard.writeText(copyValue())
-      if (notifier) notifier.notifySuccess('Скопировано в буфер обмена')
-    }
-  }
-
   const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
 
   return (
     <Box {...style} data-name={name}>
       <Flex mt={5} alignItems="center" flexShrink={0}>
         {helpText && <WidgetLabel helpText={helpText} isRequired={required} />}
-        {useClipboard && (
-          <Box as={Copy} size="1em" ml={5} display="inline" color="blue.500" onClick={handleClipboard} />
-        )}
+        {useClipboard && <ToClipboard ml={5} value={copyValue} notifier={notifier} />}
         {description || ''}
       </Flex>
       <Box borderColor={hasError ? 'red.500' : undefined} borderWidth={hasError ? 1 : 0} borderRadius={3}>
