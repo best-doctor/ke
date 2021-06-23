@@ -81,6 +81,7 @@ import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
 
+export * from './Widgets/FilesList'
 export * from './Widgets/Map'
 export * from './Widgets/Table'
 export { Filters as UpdatedFilters } from './Widgets/Filters'
