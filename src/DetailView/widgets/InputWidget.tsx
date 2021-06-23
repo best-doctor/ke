@@ -4,7 +4,7 @@ import { Textarea, Input } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getPayload } from '../utils/dataAccess'
+import { getCopyHandler, getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 
@@ -26,6 +26,9 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
       isTextarea = true,
       height,
       debounce = 1000,
+      notifier,
+      copyValue,
+      useClipboard,
     } = props
     const context = containerStore.getState()
 
@@ -46,8 +49,19 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
       submitChange({ url: targetUrl, payload: inputPayload })
     }
 
+    const handleCopyValue = getCopyHandler(content, copyValue)
+
     return (
-      <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
+      <WidgetWrapper
+        name={name}
+        style={style}
+        helpText={helpText}
+        description={description}
+        required={isRequired}
+        notifier={notifier}
+        useClipboard={useClipboard}
+        copyValue={handleCopyValue}
+      >
         <DebounceInput
           value={content as string}
           resize="none"
