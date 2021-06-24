@@ -80,6 +80,7 @@ import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
+import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
 
 export * from './Widgets/FilesList'
 export * from './Widgets/Map'
@@ -192,4 +193,6 @@ export {
   EmailChipInput,
   PhoneChipInput,
   ToClipboard,
+  TPathRules,
+  TVerboseNames,
 }
