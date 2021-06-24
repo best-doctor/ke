@@ -11,6 +11,7 @@ import { RenderDetail } from '../DetailView/RenderDetail'
 import { SideBar, SideBarElement } from '../ListView/components/SideBar'
 import { mountElement } from '../common/permissions'
 import { SideBarElementCompatible } from '../LegacySupport'
+import { TPathRules } from '../ListView/components/Breadcrumbs/Breadcrumbs'
 
 type ResourceProps = {
   props: {
@@ -58,19 +59,20 @@ const ResourceComposer = ({
   children,
   withSideBar = true,
   permissions = [],
-  breadCrumbChildren,
+  breadcrumbsRules,
 }: {
   permissions?: string[]
   withSideBar?: boolean
   children: JSX.Element[]
-  breadCrumbChildren?: JSX.Element
+  breadcrumbsRules?: TPathRules
 }): JSX.Element => {
   const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
+
   return (
     <Router>
       <ChakraProvider>
         {withSideBar && (
-          <SideBar header="Разделы" breadCrumbChildren={breadCrumbChildren}>
+          <SideBar header="Разделы" breadcrumbsRules={breadcrumbsRules}>
             {React.Children.map(children, (resource: JSX.Element) => {
               if (isAdminResource(resource)) {
                 const { props } = resource as ResourceProps
