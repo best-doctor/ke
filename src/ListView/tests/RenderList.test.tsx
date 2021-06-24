@@ -4,7 +4,7 @@ import { mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
 
-import { testAdmin, testProvider, dataMockResponse, mockPagination } from '../../setupTests'
+import { testAdmin, testProvider, dataMockResponse, mockPagination, waitForComponentToPaint } from '../../setupTests'
 import { RenderList } from '../RenderList'
 
 const getComponent = (): JSX.Element => (
@@ -25,6 +25,7 @@ test('Render list mount', () => {
   jest.spyOn(testProvider, 'getPage').mockImplementation(() => Promise.resolve([dataMockResponse, [], mockPagination]))
 
   const component = mount(getComponent())
+  waitForComponentToPaint(component)
 
-  expect(component.find('Table').length).toEqual(1)
+  expect(component?.find('Table').length).toEqual(1)
 })
