@@ -58,17 +58,19 @@ const ResourceComposer = ({
   children,
   withSideBar = true,
   permissions = [],
+  breadCrumbChildren,
 }: {
   permissions?: string[]
   withSideBar?: boolean
   children: JSX.Element[]
+  breadCrumbChildren?: JSX.Element
 }): JSX.Element => {
   const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
   return (
     <Router>
       <ChakraProvider>
         {withSideBar && (
-          <SideBar header="Разделы">
+          <SideBar header="Разделы" breadCrumbChildren={breadCrumbChildren}>
             {React.Children.map(children, (resource: JSX.Element) => {
               if (isAdminResource(resource)) {
                 const { props } = resource as ResourceProps
