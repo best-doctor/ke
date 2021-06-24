@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { Col, Row } from 'react-flexbox-grid'
 import { goToResourceEvent } from '../events'
+import { Breadcrumbs, TPathRules } from './Breadcrumbs/Breadcrumbs'
 
 type SideBarProps = {
   name: string
@@ -55,11 +56,11 @@ const BreadCrumbContainer = styled.div`
 const SideBar = ({
   header,
   children,
-  breadCrumbChildren,
+  breadcrumbsRules,
 }: {
   header: string
   children: JSX.Element[]
-  breadCrumbChildren?: JSX.Element
+  breadcrumbsRules?: TPathRules
 }): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -73,7 +74,7 @@ const SideBar = ({
             <Button colorScheme="teal" m={2} width={20} onClick={onOpen}>
               <Menu size="1em" />
             </Button>
-            <BreadCrumbContainer>{breadCrumbChildren}</BreadCrumbContainer>
+            <BreadCrumbContainer>{breadcrumbsRules && <Breadcrumbs rules={breadcrumbsRules} />}</BreadCrumbContainer>
           </SidebarButtonContainer>
         </Col>
       </Row>
