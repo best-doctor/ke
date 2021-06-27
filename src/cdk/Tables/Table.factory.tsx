@@ -1,9 +1,4 @@
-import React, { Children, ReactElement, ReactNode, CSSProperties, ComponentType } from 'react'
-
-import { Column, ColumnProps } from './Column'
-import { Th, ThProps } from './Th'
-import { Td, TdProps } from './Td'
-import { Row, RowProps } from './Row'
+import React, { ReactElement, ReactNode, CSSProperties, ComponentType } from 'react'
 
 export function makeTable(
   TableComponent: StyledContainer | string = 'table',
@@ -11,11 +6,8 @@ export function makeTable(
   HeadComponent: StyledContainer | string = 'th',
   CellComponent: StyledContainer | string = 'td'
 ): <T>(props: TableProps<T>) => ReactElement {
-  return ({ children, data, getKey, row, columns }) => {
-    const [columnConfigs, { styles: rowStyles }] = children
-      ? configsFromChildren(children)
-      : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        [columns!, row || {}]
+  return ({ data, getKey, row, columns }) => {
+    const [columnConfigs, { styles: rowStyles }] = [columns, row || {}]
 
     return (
       <TableComponent>
@@ -84,86 +76,13 @@ function getter<T extends Record<string, string>, K extends string>(item: T, key
   return key
 }
 
-function configsFromChildren<T>(children: ReactNode): [ColumnConfig<T>[], RowConfig<T>] {
-  const columns: ColumnConfig<T>[] = Children.toArray(children)
-    .filter((child) => (child as ReactElement).type === Column)
-    .map((columnElement) => (columnElement as ReactElement<ColumnProps>).props)
-    .map(({ name, styles, children: columnChildren }, index) => ({
-      name: name || index,
-      styles,
-      header: headerConfigFromChildren(columnChildren),
-      cell: cellConfigFromChildren(columnChildren),
-    }))
-
-  const row = rowConfigFromChildren(children)
-
-  return [columns, row]
-}
-
-function headerConfigFromChildren(children: ReactNode): HeaderConfig {
-  const headers = Children.toArray(children).filter(
-    (child) => (child as ReactElement).type === Th
-  ) as ReactElement<ThProps>[]
-
-  if (headers.length > 1) {
-    throw new Error(`Awaited for 1 or 0 Th elements, got ${headers.length}. Headers: ${JSON.stringify(headers)}`)
-  }
-
-  const { styles, children: value }: ThProps = headers.length ? headers[0].props : { children: null }
-
-  return {
-    styles,
-    value,
-  }
-}
-
-function cellConfigFromChildren<T>(children: ReactNode): CellConfig<T> {
-  const cells = Children.toArray(children).filter((child) => (child as ReactElement).type === Td) as ReactElement<
-    TdProps<T>
-  >[]
-
-  if (cells.length > 1) {
-    throw new Error(`Awaited for 1 or 0 Td elements, got ${cells.length}. Cells: ${JSON.stringify(cells)}`)
-  }
-
-  const { styles, children: value }: TdProps<T> = cells.length ? cells[0].props : { children: null }
-
-  return {
-    styles,
-    value,
-  }
-}
-
-function rowConfigFromChildren<T>(children: ReactNode): RowConfig<T> {
-  const rows = Children.toArray(children).filter((child) => (child as ReactElement).type === Row) as ReactElement<
-    RowProps<T>
-  >[]
-
-  if (rows.length > 1) {
-    throw new Error(`Awaited for 1 or 0 Row elements, got ${rows.length}. Rows: ${JSON.stringify(rows)}`)
-  }
-
-  return rows.length ? rows[0].props : {}
-}
-
-interface CommonTableProps<T> {
+export interface TableProps<T> {
   data: readonly T[]
   getKey?: (item: T) => string | number
-}
-
-interface ChildrenTableProps<T> extends CommonTableProps<T> {
-  columns?: never
-  row?: never
-  children: ReactNode
-}
-
-interface ConfigTableProps<T> extends CommonTableProps<T> {
   columns: readonly ColumnConfig<T>[]
   row?: RowConfig<T>
   children?: never
 }
-
-export type TableProps<T> = ChildrenTableProps<T> | ConfigTableProps<T>
 
 interface ColumnConfig<T> {
   name: string | number
