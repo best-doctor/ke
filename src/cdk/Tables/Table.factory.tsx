@@ -1,5 +1,7 @@
 import React, { ReactElement, ReactNode, CSSProperties, ComponentType } from 'react'
 
+import { CellConfig, ColumnConfig, HeaderConfig, RowConfig } from './types'
+
 export function makeTable(
   TableComponent: StyledContainer | string = 'table',
   RowComponent: StyledContainer | string = 'tr',
@@ -82,27 +84,6 @@ export interface TableProps<T> {
   columns: readonly ColumnConfig<T>[]
   row?: RowConfig<T>
   children?: never
-}
-
-interface ColumnConfig<T> {
-  name: string | number
-  styles?: CSSProperties | ((columnIndex: number) => CSSProperties)
-  header: HeaderConfig | ReactNode
-  cell: CellConfig<T> | ReactNode | keyof T | ((item: T, index: number) => ReactNode)
-}
-
-interface RowConfig<T> {
-  styles?: CSSProperties | ((item: T, index: number) => CSSProperties)
-}
-
-export interface HeaderConfig {
-  styles?: CSSProperties
-  value: ReactNode | ((columnIndex: number) => ReactNode)
-}
-
-interface CellConfig<T> {
-  styles?: CSSProperties | ((item: T, index: number) => CSSProperties)
-  value: ((item: T, index: number) => ReactNode) | keyof T | ReactNode
 }
 
 type StyledContainer = ComponentType<{
