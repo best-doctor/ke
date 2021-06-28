@@ -1,9 +1,10 @@
 /* eslint max-classes-per-file: 0 */
 
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { configure, ReactWrapper } from 'enzyme'
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
 import axios from 'axios'
 import fc from 'fast-check'
+import { act } from 'react-dom/test-utils'
 
 import type { Store } from 'effector'
 import { BaseWizard, BaseWizardStep } from './WizardMaster/interfaces'
@@ -98,6 +99,13 @@ const mockedEffectorContainerStore = {
   getState: () => {},
 } as Store<object>
 
+const waitForComponentToPaint = async (wrapper: ReactWrapper): Promise<any> => {
+  await act(async () => {
+    await new Promise((resolve) => setTimeout(resolve))
+    wrapper.update()
+  })
+}
+
 export {
   testAdmin,
   testProvider,
@@ -107,4 +115,5 @@ export {
   dataMockResponse,
   mockPagination,
   mockedEffectorContainerStore,
+  waitForComponentToPaint,
 }
