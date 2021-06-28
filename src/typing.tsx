@@ -2,6 +2,7 @@ import type { Store } from 'effector'
 import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
+import { CSSProperties } from 'react'
 
 type Accessor<T> = T | Function | undefined
 
@@ -25,23 +26,23 @@ type WidgetProps = {
   mainDetailObject: DetailObject
   resource: string
   provider: Provider
-  helpText?: string
-  description?: string | JSX.Element
-  displayValue?: GenericAccessor
   targetPayload: Function
   dataSource: GenericAccessor
   dataTarget: GenericAccessor
   setMainDetailObject: Function
   notifier: BaseNotifier
-  analytics?: BaseAnalytic | undefined
   viewType: string
-  widgetAnalytics?: Function | boolean | undefined
-  style: object
+  style: CSSProperties
   setInitialValue: Function
   submitChange: Function
   notBlockingValidators?: ValidatorFunction[]
   blockingValidators?: ValidatorFunction[]
   containerStore: Store<object>
+  helpText?: string
+  description?: string | JSX.Element
+  displayValue?: GenericAccessor
+  analytics?: BaseAnalytic | undefined
+  widgetAnalytics?: Function | boolean | undefined
   useClipboard?: boolean
   copyValue?: GenericAccessor
   cacheTime?: Accessor<number>

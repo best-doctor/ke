@@ -3,9 +3,10 @@ import { mount } from 'enzyme'
 import { Select, ChakraProvider } from '@chakra-ui/react'
 import { act } from 'react-dom/test-utils'
 
+import type { BaseProvider } from 'admin/providers'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { SelectWidget, BaseSelectWidget } from '../../widgets/SelectWidget'
-import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
+import { testProvider, testNotifier, mockedEffectorContainerStore, waitForComponentToPaint } from '../../../setupTests'
 
 const detailObject = {
   id: 100500,
@@ -25,6 +26,13 @@ const options = [
 const submitChangeMock = jest.fn()
 const handleChangeMock = jest.fn()
 
+const mockedProvider = { ...testProvider }
+const getPageMock = (mockedProvider.getPage = jest.fn()).mockReturnValue(
+  Promise.resolve([[{ text: 'some_text', value: 'some_value' }]])
+)
+
+mockedProvider.getPage = getPageMock
+
 const getSelectWidgetComponent = (): JSX.Element => (
   <ChakraProvider>
     <SelectWidget
@@ -35,11 +43,11 @@ const getSelectWidgetComponent = (): JSX.Element => (
       helpText="test"
       displayValue={undefined}
       mainDetailObject={detailObject}
-      dataSource={jest.fn()}
+      dataSource={() => 'https://test.com'}
       dataTarget="https://test.com"
       targetPayload={(value: string) => ({ testPayload: value })}
       setMainDetailObject={jest.fn()}
-      provider={testProvider}
+      provider={mockedProvider as BaseProvider}
       style={{}}
       viewType="test_view"
       notifier={testNotifier}
@@ -66,34 +74,37 @@ const getBaseSelectWidgetComponent = (): JSX.Element => (
   </ChakraProvider>
 )
 
-test('Select widget properly rendered', () => {
+test('Select widget properly rendered', async () => {
   const component = mount(getSelectWidgetComponent())
 
+  await waitForComponentToPaint(component)
   expect(component.find(Select).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
 })
 
-test('Select widget user change select', () => {
+test('Select widget user change select', async () => {
   const widget = getSelectWidgetComponent()
   const component = mount(widget)
   const value = { target: { value: 'some_value' } }
 
+  await waitForComponentToPaint(component)
   act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))
 
   expect(submitChangeMock).toHaveBeenCalledWith({ url: 'https://test.com', payload: { testPayload: 'some_value' } })
 })
 
-test('Base select widget properly rendered', () => {
+test('Base select widget properly rendered', async () => {
   jest.spyOn(React, 'useEffect').mockImplementation((f) => f())
   const component = mount(getBaseSelectWidgetComponent())
-
+  await waitForComponentToPaint(component)
   expect(component.find(Select).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
 })
 
-test('Base select widget user change select', () => {
+test('Base select widget user change select', async () => {
   const widget = getBaseSelectWidgetComponent()
   const component = mount(widget)
+  await waitForComponentToPaint(component)
   const value = { target: { value: 'some_value' } }
 
   act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))

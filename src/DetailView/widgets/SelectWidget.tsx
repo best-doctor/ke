@@ -80,8 +80,8 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
 
     return (
       <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-        <Select ref={ref} name={name} onChange={(e) => handleChange(e)}>
-          <option value={value} selected key={value}>
+        <Select ref={ref} defaultValue={value} name={name} onChange={(e) => handleChange(e)}>
+          <option value={value} key={value}>
             {text}
           </option>
           {resultOptions
