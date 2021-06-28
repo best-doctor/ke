@@ -2,7 +2,7 @@ import { Flex, Input, usePrevious } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import type { Provider } from 'admin/providers/interfaces'
 import type { Pagination } from 'admin/providers/pagination/interfaces'
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { ArrowLeft, ArrowRight } from 'react-feather'
 import { DebounceInput } from 'react-debounce-input'
 import {
   SelectButton,
@@ -249,7 +249,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
         <CenterContainer>
           <SelectButton
             isDisabled={isDisableSelect}
-            rightIcon={<ArrowForwardIcon />}
+            rightIcon={<ArrowRight />}
             variant="outline"
             onClick={selectButtonHandler}
           >
@@ -257,7 +257,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
           </SelectButton>
           <SelectButton
             isDisabled={isDisableUnselect}
-            leftIcon={<ArrowBackIcon />}
+            leftIcon={<ArrowLeft />}
             variant="outline"
             onClick={unselectButtonHandler}
           >

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Box, Button, Text } from '@chakra-ui/react'
-import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
+import * as Icon from 'react-feather'
 
 const defaultSideContainerWidth = '200px'
 const defaultContainerHeight = '250px'
@@ -39,7 +39,7 @@ const SelectButton = styled(Button)`
   margin-bottom: 5px;
 `
 
-const StyledSearchIcon = styled(SearchIcon)`
+const StyledSearchIcon = styled(Icon.Search)`
   cursor: pointer;
   transition: color 0.2s linear;
   margin-left: 5px;
@@ -49,7 +49,7 @@ const StyledSearchIcon = styled(SearchIcon)`
   }
 `
 
-const StyledCloseIcon = styled(CloseIcon)`
+const StyledCloseIcon = styled(Icon.X)`
   cursor: pointer;
   color: dodgerblue !important;
   transition: color 0.2s linear;
