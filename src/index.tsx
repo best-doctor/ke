@@ -109,6 +109,7 @@ export * from './cdk/Forms'
 export { TableProps } from './cdk/Tables'
 export * from './Browser'
 export { Wizard as UpdatedWizard } from './Wizard'
+export { setDefaultLocale, registerLocale } from 'react-datepicker'
 
 export {
   BaseAdmin,
