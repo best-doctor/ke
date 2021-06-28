@@ -80,7 +80,9 @@ import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
+import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
 
+export * from './Widgets/FilesList'
 export * from './Widgets/Map'
 export * from './Widgets/Table'
 export { Filters as UpdatedFilters } from './Widgets/Filters'
@@ -94,12 +96,14 @@ export * from './features'
 export * from './django-spa/Forms'
 export * from './cdk/Hooks'
 export * from './utils/Funcs'
+export * from './utils/Types'
 export * from './LegacySupport'
 export * from './cdk/State'
 export * from './cdk/Forms'
 export { TableProps } from './cdk/Tables'
 export * from './Browser'
 export { Wizard as UpdatedWizard } from './Wizard'
+export { setDefaultLocale, registerLocale } from 'react-datepicker'
 
 export {
   BaseAdmin,
@@ -191,4 +195,6 @@ export {
   EmailChipInput,
   PhoneChipInput,
   ToClipboard,
+  TPathRules,
+  TVerboseNames,
 }

@@ -12,8 +12,10 @@ import {
 } from '@chakra-ui/react'
 import { Menu } from 'react-feather'
 import { useHistory } from 'react-router-dom'
-
+import styled from 'styled-components'
+import { Col, Row } from 'react-flexbox-grid'
 import { goToResourceEvent } from '../events'
+import { Breadcrumbs, TPathRules } from './Breadcrumbs/Breadcrumbs'
 
 type SideBarProps = {
   name: string
@@ -41,16 +43,41 @@ const SideBarElement = ({ resource }: { resource: SideBarElementType }): JSX.Ele
   )
 }
 
-const SideBar = ({ header, children }: { header: string; children: JSX.Element[] }): JSX.Element => {
+const SidebarButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const BreadCrumbContainer = styled.div`
+  padding-left: 15px;
+`
+
+const SideBar = ({
+  header,
+  children,
+  breadcrumbsRules,
+}: {
+  header: string
+  children: JSX.Element[]
+  breadcrumbsRules?: TPathRules
+}): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   goToResourceEvent.watch(onClose)
 
   return (
     <>
-      <Button colorScheme="teal" m={2} width={20} onClick={onOpen}>
-        <Menu size="1em" />
-      </Button>
+      <Row>
+        <Col xs={12}>
+          <SidebarButtonContainer>
+            <Button colorScheme="teal" m={2} width={20} onClick={onOpen}>
+              <Menu size="1em" />
+            </Button>
+            <BreadCrumbContainer>{breadcrumbsRules && <Breadcrumbs rules={breadcrumbsRules} />}</BreadCrumbContainer>
+          </SidebarButtonContainer>
+        </Col>
+      </Row>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>

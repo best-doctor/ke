@@ -1,4 +1,2 @@
-export { makeTable, TableProps, HeaderConfig } from './Table.factory'
-export { Column } from './Column'
-export { Th } from './Th'
-export { Td } from './Td'
+export { makeTable, TableProps } from './Table.factory'
+export { ColumnConfig, RowConfig, HeaderConfig, CellConfig } from './types'
