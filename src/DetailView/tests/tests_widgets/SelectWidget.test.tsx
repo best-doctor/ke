@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { Select, ChakraProvider } from '@chakra-ui/react'
 import { act } from 'react-dom/test-utils'
+import Select from 'react-select'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { SelectWidget, BaseSelectWidget } from '../../widgets/SelectWidget'
@@ -26,44 +26,40 @@ const submitChangeMock = jest.fn()
 const handleChangeMock = jest.fn()
 
 const getSelectWidgetComponent = (): JSX.Element => (
-  <ChakraProvider>
-    <SelectWidget
-      name="status.text"
-      resource="test-resource"
-      analytics={undefined}
-      widgetAnalytics={jest.fn()}
-      helpText="test"
-      displayValue={undefined}
-      mainDetailObject={detailObject}
-      dataSource={jest.fn()}
-      dataTarget="https://test.com"
-      targetPayload={(value: string) => ({ testPayload: value })}
-      setMainDetailObject={jest.fn()}
-      provider={testProvider}
-      style={{}}
-      viewType="test_view"
-      notifier={testNotifier}
-      setInitialValue={jest.fn()}
-      submitChange={submitChangeMock}
-      containerStore={mockedEffectorContainerStore}
-    />
-  </ChakraProvider>
+  <SelectWidget
+    name="status.text"
+    resource="test-resource"
+    analytics={undefined}
+    widgetAnalytics={jest.fn()}
+    helpText="test"
+    displayValue={undefined}
+    mainDetailObject={detailObject}
+    dataSource={jest.fn()}
+    dataTarget="https://test.com"
+    targetPayload={(value: string) => ({ testPayload: value })}
+    setMainDetailObject={jest.fn()}
+    provider={testProvider}
+    style={{}}
+    viewType="test_view"
+    notifier={testNotifier}
+    setInitialValue={jest.fn()}
+    submitChange={submitChangeMock}
+    containerStore={mockedEffectorContainerStore}
+  />
 )
 
 const getBaseSelectWidgetComponent = (): JSX.Element => (
-  <ChakraProvider>
-    <BaseSelectWidget
-      name="status.text"
-      helpText="test"
-      displayValue={undefined}
-      mainDetailObject={detailObject}
-      style={{}}
-      setInitialValue={jest.fn()}
-      handleChange={handleChangeMock}
-      containerStore={mockedEffectorContainerStore}
-      data={options}
-    />
-  </ChakraProvider>
+  <BaseSelectWidget
+    name="status.text"
+    helpText="test"
+    displayValue={undefined}
+    mainDetailObject={detailObject}
+    style={{}}
+    setInitialValue={jest.fn()}
+    handleChange={handleChangeMock}
+    containerStore={mockedEffectorContainerStore}
+    data={options}
+  />
 )
 
 test('Select widget properly rendered', () => {
@@ -76,7 +72,7 @@ test('Select widget properly rendered', () => {
 test('Select widget user change select', () => {
   const widget = getSelectWidgetComponent()
   const component = mount(widget)
-  const value = { target: { value: 'some_value' } }
+  const value = { value: 'some_value', label: 'Some value' }
 
   act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))
 
@@ -94,7 +90,7 @@ test('Base select widget properly rendered', () => {
 test('Base select widget user change select', () => {
   const widget = getBaseSelectWidgetComponent()
   const component = mount(widget)
-  const value = { target: { value: 'some_value' } }
+  const value = { value: 'some_value', label: 'Some value' }
 
   act(() => (component.find('Select').props() as { onChange: Function }).onChange(value))
 
