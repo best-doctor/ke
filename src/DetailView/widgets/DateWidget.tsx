@@ -17,6 +17,7 @@ type DateWidgetProps = {
   minDate?: Date
   maxDate?: Date
   filterDate?: (dateValue: Date) => boolean
+  dateFormat?: string
 }
 
 /**
@@ -25,7 +26,18 @@ type DateWidgetProps = {
  * @param props - widget props
  */
 const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
-  const { name, helpText, description, style, setInitialValue, containerStore, minDate, maxDate, filterDate } = props
+  const {
+    name,
+    helpText,
+    description,
+    style,
+    setInitialValue,
+    containerStore,
+    minDate,
+    maxDate,
+    filterDate,
+    dateFormat = 'dd.MM.yyyy',
+  } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
@@ -58,7 +70,7 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
           className="styled-date-time"
           selected={date}
           onChange={(value: Date) => handleChange(value)}
-          dateFormat="yyyy-MM-dd"
+          dateFormat={dateFormat}
           minDate={minDate}
           maxDate={maxDate}
           filterDate={filterDate}
