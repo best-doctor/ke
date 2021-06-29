@@ -19,6 +19,7 @@ type AsyncSelectWidgetProps = {
   styles?: object
   isClearable?: boolean
   isMulti?: boolean
+  isDisabled?: boolean
   defaultOptions?: boolean
   closeMenuOnSelect?: boolean
   searchParamName?: string
@@ -53,6 +54,7 @@ type LoadOptionsType = {
  * @param searchParamName - url parameter name which will be used with input value on options requests to backend
  * @param placeholder - text for empty select
  * @param additionalValues - some fixed values to be added into options as Accessor
+ * @param isDisabled - disable select
  */
 const AsyncSelectWidget = ({
   provider,
@@ -70,6 +72,7 @@ const AsyncSelectWidget = ({
   getOptionLabelMenu,
   getOptionLabelValue,
   additionalValues = [],
+  isDisabled = false,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -149,6 +152,7 @@ const AsyncSelectWidget = ({
       getOptionValue={(option: object | object[] | null) => (option ? getOptionValue(option) : option)}
       placeholder={placeholder}
       cacheUniq={dataResourceUrl}
+      isDisabled={isDisabled}
     />
   )
 }
