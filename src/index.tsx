@@ -106,6 +106,7 @@ export * from './Browser'
 export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
+export * as Sentry from '@sentry/react'
 
 export {
   BaseAdmin,
