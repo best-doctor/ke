@@ -140,7 +140,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
     loadOptions({ first: true }).then((res) => {
       setOptions(res.options)
     })
-  }, [])
+  }, [loadOptions])
 
   const allDeselect = useCallback(() => {
     setSelectedSelected([])
