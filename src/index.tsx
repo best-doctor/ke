@@ -105,6 +105,7 @@ export { TableProps } from './cdk/Tables'
 export * from './Browser'
 export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
+export { SyncReadWriteStoreProvider } from './Providers'
 
 export {
   BaseAdmin,
