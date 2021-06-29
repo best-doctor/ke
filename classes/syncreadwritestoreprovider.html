@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LocalCache | @bestdoctor/ke</title>
+	<title>SyncReadWriteStoreProvider | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="localcache.html">LocalCache</a>
+					<a href="syncreadwritestoreprovider.html">SyncReadWriteStoreProvider</a>
 				</li>
 			</ul>
-			<h1>Class LocalCache</h1>
+			<h1>Class SyncReadWriteStoreProvider</h1>
 		</div>
 	</div>
 </header>
@@ -69,14 +69,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LocalCache</span>
+						<span class="target">SyncReadWriteStoreProvider</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/responsecache.html" class="tsd-signature-type" data-tsd-kind="Interface">ResponseCache</a></li>
+					<li><a href="../interfaces/syncreadwriteprovider.html" class="tsd-signature-type" data-tsd-kind="Interface">SyncReadWriteProvider</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StoreData</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -86,21 +86,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="localcache.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="syncreadwritestoreprovider.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="localcache.html#cachetime" class="tsd-kind-icon">cache<wbr>Time</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="localcache.html#keyspace" class="tsd-kind-icon">key<wbr>Space</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="syncreadwritestoreprovider.html#saveevent" class="tsd-kind-icon">save<wbr>Event</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="syncreadwritestoreprovider.html#store" class="tsd-kind-icon">store</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localcache.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localcache.html#set" class="tsd-kind-icon">set</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="syncreadwritestoreprovider.html#read" class="tsd-kind-icon">read</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="syncreadwritestoreprovider.html#write" class="tsd-kind-icon">write</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,22 +112,16 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Local<wbr>Cache<span class="tsd-signature-symbol">(</span>cacheTime<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="localcache.html" class="tsd-signature-type" data-tsd-kind="Class">LocalCache</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Sync<wbr>Read<wbr>Write<wbr>Store<wbr>Provider<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="syncreadwritestoreprovider.html" class="tsd-signature-type" data-tsd-kind="Class">SyncReadWriteStoreProvider</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/admin/providers/caches.ts#L8">src/admin/providers/caches.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts#L10">src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts:10</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cacheTime: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="localcache.html" class="tsd-signature-type" data-tsd-kind="Class">LocalCache</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="syncreadwritestoreprovider.html" class="tsd-signature-type" data-tsd-kind="Class">SyncReadWriteStoreProvider</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -135,20 +129,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="cachetime" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cache<wbr>Time</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+					<a name="saveevent" class="tsd-anchor"></a>
+					<h3>save<wbr>Event</h3>
+					<div class="tsd-signature tsd-kind-icon">save<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StoreData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/responsecache.html">ResponseCache</a>.<a href="../interfaces/responsecache.html#cachetime">cacheTime</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts#L10">src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts:10</a></li>
+						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="keyspace" class="tsd-anchor"></a>
-					<h3>key<wbr>Space</h3>
-					<div class="tsd-signature tsd-kind-icon">key<wbr>Space<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CachedValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<a name="store" class="tsd-anchor"></a>
+					<h3>store</h3>
+					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Store</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StoreData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/admin/providers/caches.ts#L11">src/admin/providers/caches.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts#L9">src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,53 +152,39 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="get" class="tsd-anchor"></a>
-					<h3>get</h3>
+					<a name="read" class="tsd-anchor"></a>
+					<h3>read</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>cacheKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, cacheTime<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">read<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StoreData</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/responsecache.html">ResponseCache</a>.<a href="../interfaces/responsecache.html#get">get</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/admin/providers/caches.ts#L13">src/admin/providers/caches.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts#L17">src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts:17</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cacheKey: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>cacheTime: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">StoreData</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="set" class="tsd-anchor"></a>
-					<h3>set</h3>
+					<a name="write" class="tsd-anchor"></a>
+					<h3>write</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<span class="tsd-signature-symbol">(</span>cacheKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StoreData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/responsecache.html">ResponseCache</a>.<a href="../interfaces/responsecache.html#set">set</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/admin/providers/caches.ts#L25">src/admin/providers/caches.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/94ab1f6/src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts#L21">src/Providers/ReadWrite/SyncReadWriteStoreProvider.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cacheKey: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<h5>value: <span class="tsd-signature-type">StoreData</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -224,22 +206,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="localcache.html" class="tsd-kind-icon">Local<wbr>Cache</a>
+						<a href="syncreadwritestoreprovider.html" class="tsd-kind-icon">Sync<wbr>Read<wbr>Write<wbr>Store<wbr>Provider</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="localcache.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="syncreadwritestoreprovider.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="localcache.html#cachetime" class="tsd-kind-icon">cache<wbr>Time</a>
+								<a href="syncreadwritestoreprovider.html#saveevent" class="tsd-kind-icon">save<wbr>Event</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="localcache.html#keyspace" class="tsd-kind-icon">key<wbr>Space</a>
+								<a href="syncreadwritestoreprovider.html#store" class="tsd-kind-icon">store</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="localcache.html#get" class="tsd-kind-icon">get</a>
+								<a href="syncreadwritestoreprovider.html#read" class="tsd-kind-icon">read</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="localcache.html#set" class="tsd-kind-icon">set</a>
+								<a href="syncreadwritestoreprovider.html#write" class="tsd-kind-icon">write</a>
 							</li>
 						</ul>
 					</li>
