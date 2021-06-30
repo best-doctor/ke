@@ -12,12 +12,11 @@ import { SideBar, SideBarElement } from '../ListView/components/SideBar'
 import { mountElement } from '../common/permissions'
 import { SideBarElementCompatible } from '../LegacySupport'
 import { TPathRules } from '../ListView/components/Breadcrumbs/Breadcrumbs'
+import { getAccessor } from '../DetailView/utils/dataAccess'
 
 type ResourceProps = {
   props: {
-    admin?: {
-      permissions: string[]
-    }
+    admin?: BaseAdmin
   }
 }
 
@@ -44,9 +43,11 @@ const AdminResource = ({
 }): JSX.Element => (
   <Switch>
     <Redirect exact strict from={`/${name}`} to={`/${name}/`} />
-    <Route exact strict path={`/${name}/`}>
-      <RenderList resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
-    </Route>
+    {!getAccessor(admin.hideListView) && (
+      <Route exact strict path={`/${name}/`}>
+        <RenderList resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+      </Route>
+    )}
     <Route exact path={`/${name}/:id`}>
       <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
     </Route>
@@ -77,9 +78,12 @@ const ResourceComposer = ({
               if (isAdminResource(resource)) {
                 const { props } = resource as ResourceProps
                 const adminPermissions = props?.admin?.permissions || []
-                const element = <SideBarElement resource={resource} />
+                const showSideBar = !getAccessor(props?.admin?.hideSideBar)
+                if (showSideBar) {
+                  const element = <SideBarElement resource={resource} />
 
-                return mountElement(permissions, adminPermissions, element) || <></>
+                  return mountElement(permissions, adminPermissions, element) || <></>
+                }
               }
               if ('path' in resource.props && 'navTitle' in resource.props) {
                 return <SideBarElementCompatible {...resource.props} />

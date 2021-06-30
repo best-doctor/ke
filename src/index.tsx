@@ -82,6 +82,7 @@ import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
 import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
+import { WizardProps } from './WizardMaster/components/Wizard'
 
 export * from './Widgets/FilesList'
 export * from './Widgets/Map'
@@ -101,7 +102,7 @@ export * from './utils/Types'
 export * from './LegacySupport'
 export * from './cdk/State'
 export * from './cdk/Forms'
-export { TableProps } from './cdk/Tables'
+export { TableProps, ColumnConfig } from './cdk/Tables'
 export * from './Browser'
 export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
@@ -201,4 +202,5 @@ export {
   TPathRules,
   TVerboseNames,
   StyleDateTime,
+  WizardProps,
 }
