@@ -32,6 +32,7 @@ type SelectWidgetProps = {
   handleChange: Function
   containerStore: Store<object>
   required?: Accessor<boolean>
+  isDisabled?: boolean
 }
 
 const getSelectContent = (
@@ -63,6 +64,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
       setInitialValue,
       handleChange,
       required,
+      isDisabled = false,
     } = props
 
     const context = containerStore.getState()
@@ -80,7 +82,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
 
     return (
       <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-        <Select ref={ref} defaultValue={value} name={name} onChange={(e) => handleChange(e)}>
+        <Select ref={ref} defaultValue={value} name={name} onChange={(e) => handleChange(e)} isDisabled={isDisabled}>
           <option value={value} key={value}>
             {text}
           </option>

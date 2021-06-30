@@ -81,6 +81,7 @@ import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
 import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
+import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
 
 export * from './Widgets/FilesList'
 export * from './Widgets/Map'
@@ -102,8 +103,10 @@ export * from './cdk/State'
 export * from './cdk/Forms'
 export { TableProps } from './cdk/Tables'
 export * from './Browser'
-export { Wizard as UpdatedWizard } from './Wizard'
+export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
+export { SyncReadWriteStoreProvider } from './Providers'
+export * as Sentry from '@sentry/react'
 
 export {
   BaseAdmin,
@@ -197,4 +200,5 @@ export {
   ToClipboard,
   TPathRules,
   TVerboseNames,
+  StyleDateTime,
 }
