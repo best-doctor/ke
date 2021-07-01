@@ -40,6 +40,7 @@ type FilterProps = {
   name: string
   label: string
   resourceName: string
+  gotoPage?: (page: number) => void
 }
 type ResourceFilterProps = FilterProps & {
   filterResource: string
@@ -75,10 +76,12 @@ const setFilterValue = (
   location: Location,
   filterName: string,
   filterValue: Accessor<string>,
-  history: History
+  history: History,
+  setPage?: (page: number) => void
 ): void => {
   const filters = FilterManager.getFilters(location.search)
   filters.push({ filterName, filterOperation: undefined, value: filterValue })
+  FilterManager.resetPagination(setPage)
   FilterManager.setFilters(location, filters, history)
 }
 
@@ -86,7 +89,7 @@ const getDateFromDatePicker = (value: DatePickerValue): Date | null | undefined 
   Array.isArray(value) ? value[0] : value
 
 const BaseFilter = (params: FilterProps): JSX.Element => {
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -99,7 +102,7 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, value, history)
+    setFilterValue(location, name, value, history, gotoPage)
   }
 
   return (
@@ -115,7 +118,7 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
 }
 
 const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
-  const { name, label, resourceName, ...maskProps } = params
+  const { name, label, resourceName, gotoPage, ...maskProps } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -128,7 +131,7 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, value, history)
+    setFilterValue(location, name, value, history, gotoPage)
   }
 
   const MaskElement = (props: React.InputHTMLAttributes<HTMLInputElement>): JSX.Element => (
@@ -150,7 +153,7 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
 
 const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
-  const { name, label, filterResource, resourceName } = params
+  const { name, label, filterResource, resourceName, gotoPage } = params
   const storedOptions = StoreManager.getResource(filterResource) as []
   const history = useHistory()
   const location = useLocation()
@@ -184,7 +187,7 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, selectedValueId, history)
+    setFilterValue(location, name, selectedValueId, history, gotoPage)
   }
 
   return (
@@ -204,7 +207,7 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
 }
 
 const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
-  const { name, label, resourceName, filterResource } = params
+  const { name, label, resourceName, filterResource, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -217,7 +220,7 @@ const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
   }
 
   return (
@@ -244,6 +247,7 @@ const BooleanFilter = (params: BooleanFilterProps): JSX.Element => {
     trueText = 'Да',
     falseValue = 'false',
     falseText = 'Нет',
+    gotoPage,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -261,7 +265,7 @@ const BooleanFilter = (params: BooleanFilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
   }
 
   return (
@@ -290,6 +294,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     optionValue,
     defaultOptions = false,
     isMulti = false,
+    gotoPage,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -313,7 +318,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
   }
 
   return (
@@ -338,7 +343,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
 
 const DateFilter = (params: FilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -352,7 +357,7 @@ const DateFilter = (params: FilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
     setCurrentDate(singleValue)
   }
 
@@ -371,7 +376,7 @@ const DateFilter = (params: FilterProps): JSX.Element => {
 
 const DateTimeFilter = (params: FilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -385,7 +390,7 @@ const DateTimeFilter = (params: FilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
     setCurrentDate(singleValue)
   }
 
