@@ -75,7 +75,6 @@ import {
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
-import { HiddenAdditionalFilter } from './Layouts/HiddenAdditionalFilter'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
@@ -130,7 +129,6 @@ export {
   StoreManager,
   AsyncSelectWidget,
   AsyncDualSelectWidget,
-  HiddenAdditionalFilter,
   EnableSentry,
   EnableELK,
   TextValidationWidget,
