@@ -12,6 +12,8 @@ type DateInputProps = {
   filterDate?: (v: Date) => boolean
   onChange: (v: Date) => void
   dateFormat?: string
+  className?: string
+  isClearable?: boolean
 }
 
 /**
@@ -23,9 +25,20 @@ type DateInputProps = {
  * @param props.filterDate - function to filter available dates
  * @param props.onChange - handler on value change
  * @param props.dateFormat - displayed date format
+ * @param props.className - class name for element
+ * @param props.isClearable - allow input to be clearable
  */
 const DateInput = (props: DateInputProps): JSX.Element => {
-  const { value, minDate, maxDate, filterDate, onChange, dateFormat = 'dd.MM.yyyy' } = props
+  const {
+    value,
+    minDate,
+    maxDate,
+    filterDate,
+    onChange,
+    dateFormat = 'dd.MM.yyyy',
+    className = 'styled-date-time',
+    isClearable = false,
+  } = props
 
   const [date, setDate] = React.useState<OptionalDate>(value)
   if (format(value || new Date(), 'yyyy-MM-dd') !== format(date || new Date(), 'yyyy-MM-dd')) {
@@ -35,7 +48,7 @@ const DateInput = (props: DateInputProps): JSX.Element => {
   return (
     <StyleDateTime>
       <DatePicker
-        className="styled-date-time"
+        className={className}
         selected={date}
         onChange={(v: Date) => {
           setDate(v)
@@ -46,6 +59,7 @@ const DateInput = (props: DateInputProps): JSX.Element => {
         maxDate={maxDate}
         filterDate={filterDate}
         showDisabledMonthNavigation
+        isClearable={isClearable}
       />
     </StyleDateTime>
   )

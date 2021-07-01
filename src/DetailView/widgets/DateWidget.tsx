@@ -18,6 +18,8 @@ type DateWidgetProps = {
   maxDate?: Date
   filterDate?: (dateValue: Date) => boolean
   dateFormat?: string
+  className?: string
+  isClearable?: boolean
 }
 
 /**
@@ -37,6 +39,8 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
     maxDate,
     filterDate,
     dateFormat = 'dd.MM.yyyy',
+    className,
+    isClearable,
   } = props
 
   const context = containerStore.getState()
@@ -66,6 +70,8 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
         minDate={minDate}
         maxDate={maxDate}
         filterDate={filterDate}
+        className={className}
+        isClearable={isClearable}
       />
     </WidgetWrapper>
   )

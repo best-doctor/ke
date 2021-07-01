@@ -32,3 +32,16 @@ test('DateInput should pass dateFormat into DatePicker', () => {
 
   expect(component.find(DatePicker).first().props().dateFormat).toBe('yyyy.MM.dd')
 })
+
+test('DateInput should pass className into DatePicker', () => {
+  const component = mount(<DateInput value={new Date()} onChange={onChangeMock} className="some-class-name" />)
+
+  expect(component.find(DatePicker).first().props().className).toBe('some-class-name')
+})
+
+test('DateInput should pass isClearable into DatePicker', () => {
+  const component = mount(<DateInput value={new Date()} onChange={onChangeMock} isClearable />)
+
+  expect(component.find(DatePicker).first().props().isClearable).toBe(true)
+  expect(component.find(DatePicker).first().find('button').length).toEqual(1)
+})
