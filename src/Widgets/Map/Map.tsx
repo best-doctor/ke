@@ -1,6 +1,7 @@
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/react'
+import { css, Global } from '@emotion/react'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
@@ -23,6 +24,12 @@ const mapContainerStyle: CSSProperties = {
   height: '100%',
   width: '100%',
 }
+
+const pacCss = css`
+  .pac-container {
+    z-index: 1500;
+  }
+`
 
 const mapLibs: 'places'[] = ['places']
 
@@ -100,6 +107,7 @@ export function Map({
 
   return isLoaded ? (
     <>
+      <Global styles={pacCss} />
       <GoogleMap
         zoom={zoom}
         onZoomChanged={handleZoomChanged}
