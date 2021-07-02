@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, PropsWithChildren, useRef } from 'react'
+import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/react'
 
@@ -6,19 +6,21 @@ import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 import { MapMarker } from './Marker'
 
-const searchBoxInputStyle: DetailedHTMLProps<any, any> = {
+const searchBoxInputStyle: CSSProperties = {
   boxSizing: 'border-box',
   border: `1px solid #cbd5e0`,
-  width: `100%`,
+  width: `60%`,
   height: `40px`,
   padding: `0 12px`,
   marginBottom: '5.4px',
   outline: `none`,
+  position: 'absolute',
   textOverflow: `ellipses`,
+  top: 0,
 }
 
-const mapContainerStyle: DetailedHTMLProps<any, any> = {
-  height: 'calc(100% - 45.4px)',
+const mapContainerStyle: CSSProperties = {
+  height: '100%',
   width: '100%',
 }
 
@@ -98,9 +100,6 @@ export function Map({
 
   return isLoaded ? (
     <>
-      <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-        <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
-      </StandaloneSearchBox>
       <GoogleMap
         zoom={zoom}
         onZoomChanged={handleZoomChanged}
@@ -110,6 +109,9 @@ export function Map({
         mapContainerStyle={mapContainerStyle}
         clickableIcons={false}
       >
+        <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+          <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
+        </StandaloneSearchBox>
         {children}
         {searchBoxMarker && (
           <MapMarker
