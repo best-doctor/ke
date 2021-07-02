@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ChipInput } from '../../cdk/Controls'
+import { PhoneChipInputComponent } from '../../cdk/Controls'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -30,13 +30,7 @@ export const PhoneChipInput = (props: WidgetProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <ChipInput
-        content={(content || []) as string[]}
-        handleChange={handleChange}
-        errorText="Введите валидный номер телефона"
-        validator={(value: string) => /^\+?[1-9]\d{1,14}$/.test(value)}
-        submitKeys={['Enter', 'Tab', ',', ' ', ';']}
-      />
+      <PhoneChipInputComponent content={(content || []) as string[]} handleChange={handleChange} />
     </WidgetWrapper>
   )
 }
