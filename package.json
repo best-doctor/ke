@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "0.47.4",
+    "version": "0.47.5",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -11,7 +11,7 @@
         "@emotion/react": "^11.4.0",
         "@emotion/styled": "^11.3.0",
         "@emotion/styled-base": "^11.0.0",
-        "@react-google-maps/api": "^2.1.0",
+        "@react-google-maps/api": "^2.2.0",
         "@sentry/react": "^5.19.0",
         "@types/styled-system": "^5.1.11",
         "axios": "^0.21.1",
