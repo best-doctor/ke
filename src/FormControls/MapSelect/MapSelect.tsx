@@ -4,7 +4,7 @@ import { usePropState } from '@cdk/Hooks'
 
 import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'
 
-import type { LatLng, Option, OptionKey } from './types'
+import type { LatLng, Option } from './types'
 
 export function MapSelect<T>({
   value,
@@ -18,9 +18,14 @@ export function MapSelect<T>({
 }: MapSelectProps<T>): JSX.Element {
   const [currentZoom, setCurrentZoom] = useState(zoom)
   const [currentCenter, setCurrentCenter] = usePropState(center)
-  const [currentKeyByValue] = getOptionByValue(options, value) || []
-  const [selectedKey, setSelectedKey] = usePropState(currentKeyByValue)
-  const [, selectedLabel, selectedValue] = (selectedKey && getOptionByKey(options, selectedKey)) || []
+  const currentOption = getOptionByValue(options, value)
+  const [openedOption, setOpenedOption] = useState(currentOption)
+
+  const allOptions = [...options]
+  if (openedOption && !options.find((option) => option[0] === openedOption[0])) {
+    allOptions.push(openedOption)
+  }
+
   const handleZoomChanged = useCallback(
     (z: number) => {
       setCurrentZoom(z)
@@ -28,16 +33,17 @@ export function MapSelect<T>({
     },
     [setCurrentZoom, onZoomChanged]
   )
+
   return (
     <Map zoom={currentZoom} center={currentCenter} onZoomChanged={handleZoomChanged} {...others}>
-      {options.map(([key, optionDesc]) => (
+      {allOptions.map((option) => (
         <MapMarker
-          key={key}
-          position={optionDesc.coords}
-          title={optionDesc.description}
-          label={optionDesc.label}
-          icon={optionDesc.icon}
-          onClick={() => setSelectedKey(key)}
+          key={option[0]}
+          position={option[1].coords}
+          title={option[1].description}
+          label={option[1].label}
+          icon={option[1].icon}
+          onClick={() => setOpenedOption(option)}
         />
       ))}
       {clusters.map((cluster) => {
@@ -65,11 +71,11 @@ export function MapSelect<T>({
           />
         )
       })}
-      {selectedLabel && (
-        <MapInfoWindow position={selectedLabel.coords} onCloseClick={() => setSelectedKey(undefined)}>
+      {openedOption && (
+        <MapInfoWindow position={openedOption[1].coords} onCloseClick={() => setOpenedOption(undefined)}>
           <>
-            {selectedLabel.infoView}
-            {onChange && <Button onClick={() => onChange(selectedValue)}>Выбрать</Button>}
+            {openedOption[1].infoView}
+            {onChange && <Button onClick={() => onChange(openedOption[2])}>Выбрать</Button>}
           </>
         </MapInfoWindow>
       )}
@@ -77,11 +83,7 @@ export function MapSelect<T>({
   )
 }
 
-function getOptionByKey<T>(options: readonly Option<T>[], searchKey: OptionKey): Option<T> | undefined {
-  return options.find(([key]) => key === searchKey)
-}
-
-function getOptionByValue<T>(options: readonly Option<T>[], searchValue: T): Option<T> | undefined {
+function getOptionByValue<T>(options: readonly Option<T>[], searchValue: T | undefined): Option<T> | undefined {
   return options.find(([, , value]) => value === searchValue)
 }
 
