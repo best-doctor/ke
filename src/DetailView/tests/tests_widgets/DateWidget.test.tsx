@@ -1,12 +1,12 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'
-
 import DatePicker from 'react-datepicker'
+
+import { DateInput } from '@cdk/Controls'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateWidget } from '../../widgets/DateWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
-import { StyleDateTime } from '../../../common/components/BaseDateTimeRangeWidget'
 
 const submitChangeMock = jest.fn()
 
@@ -42,8 +42,7 @@ const getComponent = (): JSX.Element => (
 test('DateTimeWidget properly rendered', () => {
   const component = shallow(getComponent())
 
-  expect(component.find(DatePicker).length).toEqual(1)
-  expect(component.find(StyleDateTime).length).toEqual(1)
+  expect(component.find(DateInput).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
 })
 

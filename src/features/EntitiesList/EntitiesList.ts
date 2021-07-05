@@ -60,7 +60,7 @@ export function entitiesList<Entity, ExtFilters extends { page?: number; orderin
     pagination: createElement(paginationComponent, {
       value: filters.page || 1,
       onChange: onPageChange,
-      totalCount: Math.ceil((totalCount || 1) / 30),
+      totalCount: Math.ceil((totalCount || 1) / 20),
     }),
   }
 }

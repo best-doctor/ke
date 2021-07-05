@@ -97,6 +97,10 @@ class FilterManager {
 
     history.replace({ ...history.location, search: query.toString() })
   }
+
+  static resetPagination(setPage?: (p: number) => void): void {
+    return setPage && setPage(0)
+  }
 }
 
 export { FilterManager }

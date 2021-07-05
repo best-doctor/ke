@@ -17,12 +17,13 @@ export function makeOrderedTable(table: TableComponent): OrderedTableComponent {
       name,
       header: orderedColumnNames.includes(name) ? addOrdering(header, name) : header,
     }))
-    const fullOrdering = useMemo(() => {
-      return {
+    const fullOrdering = useMemo(
+      () => ({
         ...Object.fromEntries(orderedColumnNames.map((name) => [name, null])),
         ...ordering,
-      }
-    }, [ordering, orderedColumnNames])
+      }),
+      [ordering, orderedColumnNames]
+    )
     return (
       <GroupControl
         value={fullOrdering}

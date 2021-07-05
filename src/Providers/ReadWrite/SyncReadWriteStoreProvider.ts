@@ -7,6 +7,7 @@ interface StoreData {
 
 export class SyncReadWriteStoreProvider implements SyncReadWriteProvider<StoreData> {
   store: Store<StoreData>
+
   saveEvent: Event<StoreData>
 
   constructor() {

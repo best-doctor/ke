@@ -23,10 +23,14 @@ export function Filters<K extends string>({
       ),
     [filters]
   )
+
+  const handleChange = (v: Record<K, unknown>): void => {
+    onChange({ ...v, page: undefined })
+  }
   // TODO: Rewrite this component to use makeWithLayout
   const Layout = layout as FC
   return (
-    <GroupControl value={value} onChange={onChange}>
+    <GroupControl value={value} onChange={handleChange}>
       <Layout>{layoutProxy ? layoutProxy(layoutChildren) : layoutChildren}</Layout>
     </GroupControl>
   )

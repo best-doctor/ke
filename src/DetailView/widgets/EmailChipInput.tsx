@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ChipInput } from '../../cdk/Controls'
+import { EmailChipInputComponent } from '../../cdk/Controls'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -30,13 +30,7 @@ export const EmailChipInput = (props: WidgetProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <ChipInput
-        content={(content || []) as string[]}
-        handleChange={handleChange}
-        errorText="Введите валидный email"
-        validator={(value) => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)}
-        submitKeys={['Enter', 'Tab', ',', ' ', ';']}
-      />
+      <EmailChipInputComponent content={(content || []) as string[]} handleChange={handleChange} />
     </WidgetWrapper>
   )
 }

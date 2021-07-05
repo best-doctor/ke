@@ -81,7 +81,6 @@ import {
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
-import { HiddenAdditionalFilter } from './Layouts/HiddenAdditionalFilter'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
@@ -114,6 +113,7 @@ export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
 export * as Sentry from '@sentry/react'
+export { DateInput, EmailChipInputComponent, PhoneChipInputComponent } from './cdk/Controls'
 
 export {
   BaseAdmin,
@@ -135,7 +135,6 @@ export {
   StoreManager,
   AsyncSelectWidget,
   AsyncDualSelectWidget,
-  HiddenAdditionalFilter,
   EnableSentry,
   EnableELK,
   TextValidationWidget,
