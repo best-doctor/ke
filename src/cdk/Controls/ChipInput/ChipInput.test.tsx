@@ -125,13 +125,6 @@ test('Chip Input remove button removes chip', () => {
   )
 })
 
-test('Chip Input does not break on undefined input value', () => {
-  const handleChange = jest.fn()
-  const chipInput = mount(getComponent((undefined as unknown) as string[], handleChange))
-
-  expect(chipInput.find(Tag).length).toEqual(0)
-})
-
 test('Chip Input adds value on blur event', () => {
   fc.assert(
     fc.property(stringArbitrary, (value) => {

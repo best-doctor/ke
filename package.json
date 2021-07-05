@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "0.48.0",
+    "version": "1.0.0-beta",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
