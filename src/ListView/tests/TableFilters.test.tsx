@@ -45,13 +45,15 @@ test('Mask table filter rendering', () => {
 })
 
 test('Select table filter rendering', () => {
-  const component = mount(<SelectFilter {...filterProps} filterResource="filterResource" />)
+  const component = mount(<SelectFilter {...filterProps} provider={testProvider} filterResource="filterResource" />)
 
   expect(component.find(Select).length).toEqual(1)
 })
 
 test('Multi select table filter rendering', () => {
-  const component = mount(<MultiSelectFilter {...filterProps} filterResource="filterResource" />)
+  const component = mount(
+    <MultiSelectFilter {...filterProps} provider={testProvider} filterResource="filterResource" />
+  )
 
   expect(component.find(Select).length).toEqual(1)
 })
@@ -72,8 +74,8 @@ test('ForeignKeySelectFilter filter rendering', () => {
   const component = mount(
     <ForeignKeySelectFilter
       {...filterProps}
-      filterResource="filterResource"
       provider={testProvider}
+      filterResource="filterResource"
       optionLabel={() => ''}
       optionValue={() => ''}
     />

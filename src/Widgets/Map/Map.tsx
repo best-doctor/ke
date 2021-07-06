@@ -10,18 +10,16 @@ import { MapMarker } from './Marker'
 const searchBoxInputStyle: CSSProperties = {
   boxSizing: 'border-box',
   border: `1px solid #cbd5e0`,
-  width: `60%`,
+  width: `100%`,
   height: `40px`,
   padding: `0 12px`,
   marginBottom: '5.4px',
   outline: `none`,
-  position: 'absolute',
   textOverflow: `ellipses`,
-  top: 0,
 }
 
 const mapContainerStyle: CSSProperties = {
-  height: '100%',
+  height: 'calc(100% - 45px)',
   width: '100%',
 }
 
@@ -108,6 +106,9 @@ export function Map({
   return isLoaded ? (
     <>
       <Global styles={pacCss} />
+      <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+        <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
+      </StandaloneSearchBox>
       <GoogleMap
         zoom={zoom}
         onZoomChanged={handleZoomChanged}
@@ -117,9 +118,6 @@ export function Map({
         mapContainerStyle={mapContainerStyle}
         clickableIcons={false}
       >
-        <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-          <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
-        </StandaloneSearchBox>
         {children}
         {searchBoxMarker && (
           <MapMarker
@@ -140,7 +138,6 @@ export function Map({
 export type MapProps = PropsWithChildren<{
   center?: Coords
   zoom?: number
-  onCenterChanged?: () => void
   onZoomChanged?: (zoom: number) => void
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void

@@ -1,12 +1,11 @@
 import React from 'react'
-import RichTextEditor from 'react-rte'
-import styled from 'styled-components'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
+import { TextEditor } from '../../cdk/Controls'
 
 import type { WidgetProps } from '../../typing'
 
@@ -14,83 +13,30 @@ type TextEditorProps = WidgetProps & {
   debounceValue?: number | undefined
 }
 
-const StyledTextEditor = styled.div`
-  .text-editor {
-    border-radius: 0.375rem;
-    border-color: #cbd5e0;
-  }
-  .text-editor-widget {
-    height: 208px;
-    max-height: 208px;
-  }
-`
-
-const valueToEditorFormat = (value: string, format = 'html'): any => RichTextEditor.createValueFromString(value, format)
-
-const valueFromEditorFormat = (value: { toString: Function }, format = 'html'): string => value.toString(format)
-
-const toolbarConfig = {
-  // Optionally specify the groups to display (displayed in the order listed).
-  display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'LINK_BUTTONS'],
-  INLINE_STYLE_BUTTONS: [
-    { label: 'Bold', style: 'BOLD', className: 'custom-css-class' },
-    { label: 'Italic', style: 'ITALIC' },
-    { label: 'Underline', style: 'UNDERLINE' },
-  ],
-  BLOCK_TYPE_BUTTONS: [
-    { label: 'UL', style: 'unordered-list-item' },
-    { label: 'OL', style: 'ordered-list-item' },
-  ],
-}
-
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
-  const editorContent = valueToEditorFormat(content as string)
-
-  const [value, setValue] = React.useState(editorContent)
-
-  React.useEffect(() => {
-    setValue(editorContent)
-    // eslint-disable-next-line
-  }, [content])
 
   setInitialValue({ [name]: content })
 
-  const handleChange = (editorValue: any): void => {
-    setValue(editorValue)
-  }
-
-  const handleBlur = (): void => {
-    const formatedValue = valueFromEditorFormat(value)
+  const handleBlur = (value: string): void => {
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
-      value: formatedValue,
+      value,
       objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 
-    const inputPayload = getPayload(formatedValue, name, targetPayload)
+    const inputPayload = getPayload(value, name, targetPayload)
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <StyledTextEditor>
-        <RichTextEditor
-          // eslint-disable-next-line
-          // @ts-ignore
-          toolbarConfig={toolbarConfig}
-          className="text-editor"
-          editorClassName="text-editor-widget"
-          value={value}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-      </StyledTextEditor>
+      <TextEditor value={content as string} onChange={handleBlur} />
     </WidgetWrapper>
   )
 }
