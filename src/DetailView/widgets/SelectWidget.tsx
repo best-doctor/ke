@@ -32,6 +32,7 @@ type SelectWidgetProps = {
   handleChange: Function
   containerStore: Store<object>
   required?: Accessor<boolean>
+  isDisabled?: boolean
 }
 
 const getSelectContent = (
@@ -63,6 +64,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
       setInitialValue,
       handleChange,
       required,
+      isDisabled = false,
     } = props
 
     const context = containerStore.getState()
@@ -97,6 +99,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
           defaultValue={{ value, label }}
           onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
           styles={widgetStyles}
+          isDisabled={isDisabled}
         />
       </WidgetWrapper>
     )

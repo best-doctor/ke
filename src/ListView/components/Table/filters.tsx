@@ -15,7 +15,6 @@ import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
-import { StoreManager } from '../../../common/store'
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
 import { Provider } from '../../../admin/providers'
@@ -40,9 +39,12 @@ type FilterProps = {
   name: string
   label: string
   resourceName: string
+  gotoPage?: (page: number) => void
 }
 type ResourceFilterProps = FilterProps & {
   filterResource: string
+  provider: Provider
+  cacheTime?: number
 }
 type BooleanFilterProps = FilterProps & {
   trueValue?: string
@@ -51,7 +53,6 @@ type BooleanFilterProps = FilterProps & {
   falseText?: string
 }
 type ForeignKeySelectFilterProps = ResourceFilterProps & {
-  provider: Provider
   optionLabel: (value: OptionValueType | OptionValueType[]) => string
   optionValue: (value: OptionValueType | OptionValueType[]) => string
   defaultOptions?: boolean
@@ -75,10 +76,12 @@ const setFilterValue = (
   location: Location,
   filterName: string,
   filterValue: Accessor<string>,
-  history: History
+  history: History,
+  setPage?: (page: number) => void
 ): void => {
   const filters = FilterManager.getFilters(location.search)
   filters.push({ filterName, filterOperation: undefined, value: filterValue })
+  FilterManager.resetPagination(setPage)
   FilterManager.setFilters(location, filters, history)
 }
 
@@ -86,7 +89,7 @@ const getDateFromDatePicker = (value: DatePickerValue): Date | null | undefined 
   Array.isArray(value) ? value[0] : value
 
 const BaseFilter = (params: FilterProps): JSX.Element => {
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -99,7 +102,7 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, value, history)
+    setFilterValue(location, name, value, history, gotoPage)
   }
 
   return (
@@ -115,7 +118,7 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
 }
 
 const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
-  const { name, label, resourceName, ...maskProps } = params
+  const { name, label, resourceName, gotoPage, ...maskProps } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -128,7 +131,7 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, value, history)
+    setFilterValue(location, name, value, history, gotoPage)
   }
 
   const MaskElement = (props: React.InputHTMLAttributes<HTMLInputElement>): JSX.Element => (
@@ -150,19 +153,21 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
 
 const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
-  const { name, label, filterResource, resourceName } = params
-  const storedOptions = StoreManager.getResource(filterResource) as []
+  const [storedOptions, setStoredOptions] = React.useState<Model[]>([])
+  const { name, label, filterResource, resourceName, gotoPage, provider, cacheTime } = params
   const history = useHistory()
   const location = useLocation()
+
+  React.useEffect(() => {
+    provider.getList(filterResource, null, null, cacheTime).then((result) => setStoredOptions(result))
+  }, [cacheTime, filterResource, provider])
 
   React.useEffect(() => {
     setOptions(storedOptions)
   }, [storedOptions])
 
-  const getFilteredOptions = (selectedValueId: string): string[] => {
-    const filteredOptions = storedOptions.filter(
-      (element: { parent: number }) => element.parent === parseInt(selectedValueId, 10)
-    )
+  const getFilteredOptions = (selectedValueId: string): unknown[] => {
+    const filteredOptions = storedOptions.filter((element) => element.parent === parseInt(selectedValueId, 10))
 
     return filteredOptions
   }
@@ -184,7 +189,7 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, selectedValueId, history)
+    setFilterValue(location, name, selectedValueId, history, gotoPage)
   }
 
   return (
@@ -204,9 +209,10 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
 }
 
 const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
-  const { name, label, resourceName, filterResource } = params
+  const { name, label, resourceName, filterResource, gotoPage, provider, cacheTime } = params
   const history = useHistory()
   const location = useLocation()
+  const [options, setOptions] = React.useState<any>([])
 
   const handleChange = (value: ValueType): void => {
     const filterValue = value ? value.value : ''
@@ -217,15 +223,19 @@ const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
   }
+
+  React.useEffect(() => {
+    provider.getList(filterResource, null, null, cacheTime).then((result) => setOptions(result))
+  }, [cacheTime, filterResource, provider])
 
   return (
     <StyledFilter>
       <Select
         className="styled-filter"
         onChange={(value: any) => handleChange(value)}
-        options={StoreManager.getResource(filterResource)}
+        options={options}
         isClearable
         getOptionLabel={(option: OptionValueType) => option.text}
         getOptionValue={(option: OptionValueType) => option.value}
@@ -244,6 +254,7 @@ const BooleanFilter = (params: BooleanFilterProps): JSX.Element => {
     trueText = 'Да',
     falseValue = 'false',
     falseText = 'Нет',
+    gotoPage,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -261,7 +272,7 @@ const BooleanFilter = (params: BooleanFilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
   }
 
   return (
@@ -290,6 +301,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     optionValue,
     defaultOptions = false,
     isMulti = false,
+    gotoPage,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -313,7 +325,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
   }
 
   return (
@@ -338,7 +350,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
 
 const DateFilter = (params: FilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -352,7 +364,7 @@ const DateFilter = (params: FilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
     setCurrentDate(singleValue)
   }
 
@@ -371,7 +383,7 @@ const DateFilter = (params: FilterProps): JSX.Element => {
 
 const DateTimeFilter = (params: FilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label, resourceName } = params
+  const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -385,7 +397,7 @@ const DateTimeFilter = (params: FilterProps): JSX.Element => {
       ...params,
     })
 
-    setFilterValue(location, name, filterValue, history)
+    setFilterValue(location, name, filterValue, history, gotoPage)
     setCurrentDate(singleValue)
   }
 

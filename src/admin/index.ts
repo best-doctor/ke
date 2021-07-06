@@ -5,10 +5,13 @@ import type {
   ListFilterTemplateDescription,
   WizardFieldDescription,
 } from './fields/FieldDescription'
+import { Accessor } from '../typing'
 
 export interface BaseAdmin {
   getPageTitle?(val: Record<string, unknown> | undefined): string
   getPageFavicon?(val: Record<string, unknown> | undefined): string
+  hideListView?: Accessor<boolean>
+  hideSideBar?: Accessor<boolean>
 }
 
 export abstract class BaseAdmin {

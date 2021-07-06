@@ -3,11 +3,11 @@ import { useStore } from 'effector-react'
 import type { Store } from 'effector'
 import { useChangeEffect, useStoreApiState } from '@cdk/Hooks'
 
-export function entitiesList<Entity, FiltersWithPage extends { page?: number }>(
-  filtersComponent: FiltersComponent<Omit<FiltersWithPage, 'page'>>,
+export function entitiesList<Entity, ExtFilters extends { page?: number; ordering?: string }>(
+  filtersComponent: FiltersComponent<Omit<ExtFilters, 'page' | 'ordering'>>,
   listComponent: ListComponent<Entity>,
   paginationComponent: PaginationComponent,
-  { entitiesSource, filtersSource }: EntitiesListProps<Entity, FiltersWithPage>
+  { entitiesSource, filtersSource }: EntitiesListProps<Entity, ExtFilters>
 ): { filters: ReactElement; list: ReactElement; pagination: ReactElement } {
   const { store: $filters, fetch: fetchFilters, update } = filtersSource
 
@@ -17,17 +17,15 @@ export function entitiesList<Entity, FiltersWithPage extends { page?: number }>(
 
   const [{ data: filters, lastFetch }, { onPageChange, onFiltersChange, onOrderChange }] = useStoreApiState($filters, {
     onPageChange: (filtersData, page: number) => ({ ...filtersData, data: { ...filtersData.data, page } }),
-    onFiltersChange: (filtersData, changed: Omit<FiltersWithPage, 'page'>) => ({
+    onFiltersChange: (filtersData, changed: Omit<ExtFilters, 'page' | 'ordering'>) => ({
       ...filtersData,
       data: { ...filtersData.data, ...changed },
     }),
-    onOrderChange: (filtersData, ordering: Record<string | number, 'asc' | 'desc'>) => ({
+    onOrderChange: (filtersData, ordering: Ordering) => ({
       ...filtersData,
       data: {
         ...filtersData.data,
-        ordering: Object.entries(ordering)
-          .map(([key, direction]) => (direction === 'asc' ? key : `-${key}`))
-          .join(','),
+        ordering: orderingToStr(ordering),
       },
     }),
   })
@@ -47,21 +45,42 @@ export function entitiesList<Entity, FiltersWithPage extends { page?: number }>(
 
   const filtersWithoutPage = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { page, ...other } = filters
+    const { page, ordering, ...other } = filters
     return other
   }, [filters])
+
+  const ordering = useMemo(() => (filters.ordering ? strToOrdering(filters.ordering) : undefined), [filters.ordering])
+
   return {
     filters: createElement(filtersComponent, {
       value: filtersWithoutPage,
       onChange: onFiltersChange,
     }),
-    list: createElement(listComponent, { data: entities, onOrderChange }),
+    list: createElement(listComponent, { data: entities, onOrderChange, ordering }),
     pagination: createElement(paginationComponent, {
       value: filters.page || 1,
       onChange: onPageChange,
-      totalCount: Math.ceil((totalCount || 1) / 30),
+      totalCount: Math.ceil((totalCount || 1) / 20),
     }),
   }
+}
+
+function orderingToStr(ordering: Ordering): string {
+  return Object.entries(ordering)
+    .filter(([, direction]) => Boolean(direction))
+    .map(([key, direction]) => (direction === 'asc' ? key : `-${key}`))
+    .join(',')
+}
+
+function strToOrdering(str: string): Ordering {
+  return Object.fromEntries(
+    str.split(',').map((order) => {
+      if (order.startsWith('-')) {
+        return [order.slice(1), 'desc']
+      }
+      return [order, 'asc']
+    })
+  )
 }
 
 export interface EntitiesListProps<Entity, Filters extends { page?: number }> {
@@ -95,7 +114,8 @@ type FiltersComponent<Filters> = ComponentType<{
 
 type ListComponent<Entity> = ComponentType<{
   data: readonly Entity[]
-  onOrderChange: (ordering: Record<number | string, 'asc' | 'desc'>) => void
+  onOrderChange: (ordering: Ordering) => void
+  ordering?: Ordering
 }>
 
 type PaginationComponent = ComponentType<{
@@ -103,3 +123,5 @@ type PaginationComponent = ComponentType<{
   onChange: (page: number) => void
   totalCount: number
 }>
+
+type Ordering = Record<number | string, 'asc' | 'desc' | null>

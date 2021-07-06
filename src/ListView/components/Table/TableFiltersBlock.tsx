@@ -18,6 +18,7 @@ type FilterBlockProps = {
   user: any
   analytics: BaseAnalytic | undefined
   provider?: Provider
+  gotoPage?: (page: number) => void
 }
 
 const filterTemplatesOnClick = (
@@ -26,6 +27,7 @@ const filterTemplatesOnClick = (
   history: any
 ): void => {
   const { user, resourceName } = props
+  FilterManager.resetPagination(props.gotoPage)
   FilterManager.overrideFilters(listFilterTemplate.filters(user), history)
 
   pushAnalytics({
@@ -40,7 +42,7 @@ const filterTemplatesOnClick = (
 }
 
 const mountFilters = (props: FilterBlockProps): ReactNode => {
-  const { listFilters, analytics, resourceName, provider } = props
+  const { listFilters, analytics, resourceName, provider, gotoPage } = props
   // eslint-disable-next-line
   return (
     <Flex flexWrap="wrap" key="custom_filters">
@@ -57,6 +59,7 @@ const mountFilters = (props: FilterBlockProps): ReactNode => {
                   analytics,
                   resourceName,
                   provider,
+                  gotoPage,
                 })}
               </Box>
             </Flex>

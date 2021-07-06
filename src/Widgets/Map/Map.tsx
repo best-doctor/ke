@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, PropsWithChildren, useRef } from 'react'
+import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/react'
 
@@ -6,7 +6,7 @@ import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 import { MapMarker } from './Marker'
 
-const searchBoxInputStyle: DetailedHTMLProps<any, any> = {
+const searchBoxInputStyle: CSSProperties = {
   boxSizing: 'border-box',
   border: `1px solid #cbd5e0`,
   width: `100%`,
@@ -17,8 +17,8 @@ const searchBoxInputStyle: DetailedHTMLProps<any, any> = {
   textOverflow: `ellipses`,
 }
 
-const mapContainerStyle: DetailedHTMLProps<any, any> = {
-  height: 'calc(100% - 45.4px)',
+const mapContainerStyle: CSSProperties = {
+  height: 'calc(100% - 45px)',
   width: '100%',
 }
 
@@ -130,7 +130,6 @@ export function Map({
 export type MapProps = PropsWithChildren<{
   center?: Coords
   zoom?: number
-  onCenterChanged?: () => void
   onZoomChanged?: (zoom: number) => void
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void

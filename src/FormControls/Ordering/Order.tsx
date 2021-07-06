@@ -1,26 +1,18 @@
 import React, { ReactElement } from 'react'
-import { usePropState } from '@cdk/Hooks'
 import { IconButton } from '@chakra-ui/react'
-import { ChevronsUp, ChevronsDown } from 'react-feather'
+import { ChevronsUp, ChevronsDown, Minus } from 'react-feather'
 
 import { OrderDirection } from './types'
 
 export function Order({ value, onChange }: OrderProps): ReactElement<OrderProps> {
-  const [dir, setDir] = usePropState(value)
-
-  const handleChangeDir = (changed: OrderDirection): void => {
-    setDir(changed)
-    onChange(changed)
-  }
-
-  switch (dir) {
+  switch (value) {
     case 'asc':
       return (
         <IconButton
           background={{}}
           aria-label="По возрастанию"
           icon={<ChevronsDown />}
-          onClick={() => handleChangeDir('desc')}
+          onClick={() => onChange('desc')}
           size="xs"
         />
       )
@@ -30,12 +22,22 @@ export function Order({ value, onChange }: OrderProps): ReactElement<OrderProps>
           background={{}}
           aria-label="По убыванию"
           icon={<ChevronsUp />}
-          onClick={() => handleChangeDir('asc')}
+          onClick={() => onChange(null)}
+          size="xs"
+        />
+      )
+    case null:
+      return (
+        <IconButton
+          background={{}}
+          aria-label="Сортировать"
+          icon={<Minus />}
+          onClick={() => onChange('asc')}
           size="xs"
         />
       )
     default:
-      throw new TypeError(`Unknown order direction: ${dir}. Awaiting for 'asc' or 'desc'`)
+      throw new TypeError(`Unknown order direction: ${value}. Awaiting for 'asc' | 'desc' | null`)
   }
 }
 

@@ -59,3 +59,31 @@ test('DateTimeWidget properly handle event', () => {
     payload: { testPayload: '2021-01-02T00:00:00' },
   })
 })
+
+test('DateTimeWidget should pass dateFormat into DatePicker', () => {
+  const component = mount(
+    <DateTimeWidget
+      name="test"
+      resource="test-resource"
+      analytics={undefined}
+      widgetAnalytics={jest.fn()}
+      helpText="test"
+      mainDetailObject={detailObject}
+      dataSource={jest.fn()}
+      setMainDetailObject={jest.fn()}
+      displayValue="2021-01-01"
+      dataTarget="https://some-test-target.com"
+      targetPayload={(value: string) => ({ testPayload: value })}
+      notifier={testNotifier}
+      provider={testProvider}
+      viewType="test_view"
+      style={{}}
+      setInitialValue={jest.fn()}
+      submitChange={submitChangeMock}
+      containerStore={mockedEffectorContainerStore}
+      dateFormat="yyyy.MM.dd HH:MM"
+    />
+  )
+
+  expect(component.find(DatePicker).first().props().dateFormat).toBe('yyyy.MM.dd HH:MM')
+})

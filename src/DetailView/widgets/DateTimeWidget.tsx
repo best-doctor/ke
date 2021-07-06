@@ -18,6 +18,7 @@ type DateTimeWidgetProps = {
   maxDate?: Date
   filterDate?: (dateValue: Date) => boolean
   filterTime?: (dateValue: Date) => boolean
+  dateFormat?: string
 }
 
 /**
@@ -38,6 +39,7 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
     maxDate,
     filterDate,
     filterTime,
+    dateFormat = 'dd.MM.yyyy HH:mm',
   } = props
 
   const context = containerStore.getState()
@@ -74,7 +76,7 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
           selected={date}
           onChange={(value: Date) => handleChange(value)}
           showTimeSelect
-          dateFormat="yyyy-MM-dd HH:mm"
+          dateFormat={dateFormat}
           minDate={minDate}
           maxDate={maxDate}
           filterDate={filterDate}
