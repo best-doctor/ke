@@ -1,6 +1,6 @@
 import { TextValidationWidget } from './TextValidationWidget'
 import { LinkWidget } from './LinkWidget'
-import { SelectWidget, BaseSelectWidget } from './SelectWidget'
+import { SelectWidget, BaseSelectWidget, SelectObject } from './SelectWidget'
 import { ForeignKeySelectWidget } from './ForeignKeySelect'
 import { InputWidget } from './InputWidget'
 import { AvatarWidget } from './AvatarWidget'
@@ -23,6 +23,7 @@ export {
   TextValidationWidget,
   LinkWidget,
   SelectWidget,
+  SelectObject,
   BaseSelectWidget,
   ForeignKeySelectWidget,
   InputWidget,

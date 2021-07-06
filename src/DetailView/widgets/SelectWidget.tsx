@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Select } from '@chakra-ui/react'
+import Select, { ValueType } from 'react-select'
 import type { Store } from 'effector'
 
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -15,7 +15,7 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
 
-type SelectObject = {
+export type SelectObject = {
   value: string
   text: string
 }
@@ -69,31 +69,38 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
 
     const context = containerStore.getState()
 
-    const [value, text] = getSelectContent(name, mainDetailObject, displayValue, context)
+    const [value, label] = getSelectContent(name, mainDetailObject, displayValue, context)
     const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)
 
     const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
     setInitialValue({ [name]: value })
+
+    const widgetStyles = {
+      menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
+    }
 
     useEffect(() => {
       const responseOptions = getAccessor(data, mainDetailObject, context)
       return applyCallback(responseOptions, setResultOptions)
     }, [data, mainDetailObject, context])
 
+    const formatOption = (option: { value: any; label?: string; text?: string }): { value: any; label: string } => ({
+      value: option.value,
+      label: option?.label || option?.text || '',
+    })
+
+    const options = React.useMemo(() => resultOptions.map((option) => formatOption(option)), [resultOptions])
+
     return (
       <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-        <Select ref={ref} defaultValue={value} name={name} onChange={(e) => handleChange(e)} isDisabled={isDisabled}>
-          <option value={value} key={value}>
-            {text}
-          </option>
-          {resultOptions
-            .filter((element) => element.value !== value)
-            .map((resultOption) => (
-              <option value={resultOption.value} key={resultOption.value}>
-                {resultOption.text}
-              </option>
-            ))}
-        </Select>
+        <Select
+          inputRef={ref}
+          options={options}
+          defaultValue={{ value, label }}
+          onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
+          styles={widgetStyles}
+          isDisabled={isDisabled}
+        />
       </WidgetWrapper>
     )
   }
@@ -129,13 +136,13 @@ const SelectWidget = forwardRef<HTMLSelectElement, WidgetProps>(
         .then(([responseOptions, ,]: [any, object, object]) => responseOptions as SelectObject[])
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-      const widgetPayload = getPayload(e.target.value, name, targetPayload)
+    const handleChange = (changeValue: SelectObject): void => {
+      const widgetPayload = getPayload(changeValue.value, name, targetPayload)
 
       pushAnalytics({
         eventName: EventNameEnum.SELECT_OPTION_CHANGE,
         widgetType: WidgetTypeEnum.INPUT,
-        value: e,
+        value: changeValue,
         objectForAnalytics: props.mainDetailObject,
         ...props,
       })
