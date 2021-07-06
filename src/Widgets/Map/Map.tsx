@@ -25,7 +25,7 @@ const mapContainerStyle: CSSProperties = {
 
 const pacCss = css`
   .pac-container {
-    z-index: 1500;
+    z-index: calc(var(--chakra-zIndices-modal) + 100);
   }
 `
 
