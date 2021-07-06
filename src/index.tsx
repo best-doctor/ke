@@ -12,7 +12,7 @@ import type {
   WizardFieldDescription,
 } from './admin/fields/FieldDescription'
 import { BaseForm } from './admin/adminForm'
-import type { WizardState, WizardPayload } from './WizardMaster/interfaces'
+import type { WizardState, WizardPayload, WizardStepButtonDescription } from './WizardMaster/interfaces'
 import {
   FirebaseAnalytic,
   FirebaseEventPayload,
@@ -211,4 +211,5 @@ export {
   StyleDateTime,
   WizardProps,
   WizardFieldDescription,
+  WizardStepButtonDescription,
 }
