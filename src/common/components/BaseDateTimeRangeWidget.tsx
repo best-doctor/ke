@@ -23,6 +23,14 @@ const StyleDateTime = styled.div`
   .react-datepicker-popper {
     z-index: 1001 !important;
   }
+  .react-datepicker__close-icon {
+    height: 40px;
+  }
+  .react-datepicker__close-icon::after {
+    color: #cccccc;
+    background-color: transparent;
+    font-size: 24px;
+  }
 `
 
 const StyleDateTimeItem = styled.div`

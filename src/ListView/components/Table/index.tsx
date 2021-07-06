@@ -25,7 +25,7 @@ type TableProps = {
   columns: ListFieldDescription[]
   pageCount: number | undefined
   backendPagination: Pagination | undefined
-  setBackendPage: Function | undefined
+  setBackendPage?: (page: number) => void
   user: any
   filterable: boolean
   analytics: BaseAnalytic | undefined
@@ -173,6 +173,7 @@ const Table = ({
             analytics={analytics}
             resourceName={resourceName}
             provider={provider}
+            gotoPage={gotoPage}
           />
         )}
 

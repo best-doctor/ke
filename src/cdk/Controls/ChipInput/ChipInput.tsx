@@ -12,7 +12,7 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
     validator = () => true,
     errorText = 'Invalid value',
   } = props
-  const [chips, setChips] = usePropState<string[]>(content || [])
+  const [chips, setChips] = usePropState<string[]>(content)
   const [value, setValue] = useState<string>('')
   const [error, setError] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)

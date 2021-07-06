@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AsyncPaginate, { AsyncResult } from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
-import type { ValueType } from 'react-select'
+import type { ValueType, MenuPlacement } from 'react-select'
 import { Pagination } from '../../admin/providers/pagination'
 import type { Provider } from '../../admin/providers/interfaces'
 import { Accessor } from '../../typing'
@@ -28,6 +28,7 @@ type AsyncSelectWidgetProps = {
   getOptionLabelMenu?: (option: object | object[] | null) => string
   getOptionLabelValue?: (option: object | object[] | null) => string
   additionalValues?: object[]
+  menuPlacement?: MenuPlacement
 }
 
 type LoadOptionsType = {
@@ -73,6 +74,7 @@ const AsyncSelectWidget = ({
   getOptionLabelValue,
   additionalValues = [],
   isDisabled = false,
+  menuPlacement,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -153,6 +155,7 @@ const AsyncSelectWidget = ({
       placeholder={placeholder}
       cacheUniq={dataResourceUrl}
       isDisabled={isDisabled}
+      menuPlacement={menuPlacement}
     />
   )
 }

@@ -75,17 +75,18 @@ import {
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
-import { HiddenAdditionalFilter } from './Layouts/HiddenAdditionalFilter'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
 import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
+import { WizardProps } from './WizardMaster/components/Wizard'
 
 export * from './Widgets/FilesList'
 export * from './Widgets/Map'
 export * from './Widgets/Table'
+export * from './Widgets/Charts'
 export { Filters as UpdatedFilters } from './Widgets/Filters'
 export * from './FormControls'
 export * from './cdk/Compatibility'
@@ -101,10 +102,13 @@ export * from './utils/Types'
 export * from './LegacySupport'
 export * from './cdk/State'
 export * from './cdk/Forms'
-export { TableProps } from './cdk/Tables'
+export { TableProps, ColumnConfig } from './cdk/Tables'
 export * from './Browser'
 export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
+export { SyncReadWriteStoreProvider } from './Providers'
+export * as Sentry from '@sentry/react'
+export { DateInput, EmailChipInputComponent, PhoneChipInputComponent } from './cdk/Controls'
 
 export {
   BaseAdmin,
@@ -126,7 +130,6 @@ export {
   StoreManager,
   AsyncSelectWidget,
   AsyncDualSelectWidget,
-  HiddenAdditionalFilter,
   EnableSentry,
   EnableELK,
   TextValidationWidget,
@@ -199,4 +202,5 @@ export {
   TPathRules,
   TVerboseNames,
   StyleDateTime,
+  WizardProps,
 }
