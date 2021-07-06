@@ -9,6 +9,7 @@ import type {
   DetailFieldDescription,
   ListFilterDescription,
   ListFilterTemplateDescription,
+  WizardFieldDescription,
 } from './admin/fields/FieldDescription'
 import { BaseForm } from './admin/adminForm'
 import type { WizardState, WizardPayload } from './WizardMaster/interfaces'
@@ -208,4 +209,5 @@ export {
   TVerboseNames,
   StyleDateTime,
   WizardProps,
+  WizardFieldDescription,
 }
