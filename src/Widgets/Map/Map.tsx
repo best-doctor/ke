@@ -1,6 +1,7 @@
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/react'
+import { css, Global } from '@emotion/react'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
@@ -21,6 +22,12 @@ const mapContainerStyle: CSSProperties = {
   height: 'calc(100% - 45px)',
   width: '100%',
 }
+
+const pacCss = css`
+  .pac-container {
+    z-index: calc(var(--chakra-zIndices-modal) + 100);
+  }
+`
 
 const mapLibs: 'places'[] = ['places']
 
@@ -98,6 +105,7 @@ export function Map({
 
   return isLoaded ? (
     <>
+      <Global styles={pacCss} />
       <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
         <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
       </StandaloneSearchBox>
