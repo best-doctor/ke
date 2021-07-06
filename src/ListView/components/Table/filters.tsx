@@ -15,7 +15,6 @@ import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
-import { StoreManager } from '../../../common/store'
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
 import { Provider } from '../../../admin/providers'
@@ -44,6 +43,8 @@ type FilterProps = {
 }
 type ResourceFilterProps = FilterProps & {
   filterResource: string
+  provider: Provider
+  cacheTime?: number
 }
 type BooleanFilterProps = FilterProps & {
   trueValue?: string
@@ -52,7 +53,6 @@ type BooleanFilterProps = FilterProps & {
   falseText?: string
 }
 type ForeignKeySelectFilterProps = ResourceFilterProps & {
-  provider: Provider
   optionLabel: (value: OptionValueType | OptionValueType[]) => string
   optionValue: (value: OptionValueType | OptionValueType[]) => string
   defaultOptions?: boolean
@@ -153,19 +153,21 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
 
 const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
-  const { name, label, filterResource, resourceName, gotoPage } = params
-  const storedOptions = StoreManager.getResource(filterResource) as []
+  const [storedOptions, setStoredOptions] = React.useState<Model[]>([])
+  const { name, label, filterResource, resourceName, gotoPage, provider, cacheTime } = params
   const history = useHistory()
   const location = useLocation()
+
+  React.useEffect(() => {
+    provider.getList(filterResource, null, null, cacheTime).then((result) => setStoredOptions(result))
+  }, [cacheTime, filterResource, provider])
 
   React.useEffect(() => {
     setOptions(storedOptions)
   }, [storedOptions])
 
-  const getFilteredOptions = (selectedValueId: string): string[] => {
-    const filteredOptions = storedOptions.filter(
-      (element: { parent: number }) => element.parent === parseInt(selectedValueId, 10)
-    )
+  const getFilteredOptions = (selectedValueId: string): unknown[] => {
+    const filteredOptions = storedOptions.filter((element) => element.parent === parseInt(selectedValueId, 10))
 
     return filteredOptions
   }
@@ -207,9 +209,10 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
 }
 
 const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
-  const { name, label, resourceName, filterResource, gotoPage } = params
+  const { name, label, resourceName, filterResource, gotoPage, provider, cacheTime } = params
   const history = useHistory()
   const location = useLocation()
+  const [options, setOptions] = React.useState<any>([])
 
   const handleChange = (value: ValueType): void => {
     const filterValue = value ? value.value : ''
@@ -223,12 +226,16 @@ const SelectFilter = (params: ResourceFilterProps): JSX.Element => {
     setFilterValue(location, name, filterValue, history, gotoPage)
   }
 
+  React.useEffect(() => {
+    provider.getList(filterResource, null, null, cacheTime).then((result) => setOptions(result))
+  }, [cacheTime, filterResource, provider])
+
   return (
     <StyledFilter>
       <Select
         className="styled-filter"
         onChange={(value: any) => handleChange(value)}
-        options={StoreManager.getResource(filterResource)}
+        options={options}
         isClearable
         getOptionLabel={(option: OptionValueType) => option.text}
         getOptionValue={(option: OptionValueType) => option.value}

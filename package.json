@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "0.48.0",
+    "version": "1.1.0-beta",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -21,6 +21,7 @@
         "firebase": "^7.17.1",
         "framer-motion": "^4.1.15",
         "html-react-parser": "^1.2.4",
+        "react-charts": "^2.0.0-beta.7",
         "react-datepicker": "^3.6.0",
         "react-debounce-input": "^3.2.2",
         "react-feather": "^2.0.9",
