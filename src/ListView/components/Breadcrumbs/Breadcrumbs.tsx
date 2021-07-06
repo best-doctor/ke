@@ -76,7 +76,7 @@ const Breadcrumbs = ({ rules }: { rules: TPathRules }): JSX.Element => {
   return (
     <Breadcrumb separator="/">
       {breadcrumbData.map((bd) => (
-        <BreadcrumbItem>
+        <BreadcrumbItem key={bd.title}>
           <BreadcrumbLink
             href={bd.href || '#'}
             style={{
