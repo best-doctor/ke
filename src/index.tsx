@@ -109,7 +109,7 @@ export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
 export * as Sentry from '@sentry/react'
-export { DateInput, EmailChipInputComponent, PhoneChipInputComponent, TextEditor } from './cdk/Controls'
+export { DateInput, EmailChipInputComponent, PhoneChipInputComponent, TextEditor, Button } from './cdk/Controls'
 
 export {
   BaseAdmin,
