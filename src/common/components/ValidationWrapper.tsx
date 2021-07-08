@@ -12,6 +12,7 @@ type ValidationWrapperProps = {
   notBlockingValidators: ValidatorFunction[]
   provider: Provider
   detailObject: DetailObject
+  context?: Record<string, unknown>
 }
 
 /**
@@ -23,6 +24,7 @@ type ValidationWrapperProps = {
  * @param notBlockingValidators - fail in this validators will be shown as info
  * @param provider - provider for backend request, will be passed as second param to validators
  * @param detailObject - addition object, will be passed as third param to validators
+ * @param context - current context
  */
 const ValidationWrapper = ({
   children,
@@ -30,6 +32,7 @@ const ValidationWrapper = ({
   notBlockingValidators,
   provider,
   detailObject,
+  context,
 }: ValidationWrapperProps): JSX.Element => {
   const { props } = children as { props: { handleChange?: Function; onChange?: Function; onClick: Function } }
   const { handleChange, onChange, onClick } = props
@@ -40,7 +43,8 @@ const ValidationWrapper = ({
     blockingValidators,
     notBlockingValidators,
     provider,
-    detailObject
+    detailObject,
+    context
   )
 
   return (
