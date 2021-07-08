@@ -1,6 +1,6 @@
-import React from 'react'
-import { Button } from '@chakra-ui/react'
+import React, { useState } from 'react'
 
+import { Button } from '@cdk/Controls'
 import { containerErrorsStore, containerStore, initialStore } from '../../store'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseWizard, BaseWizardStep } from '../../interfaces'
@@ -45,6 +45,7 @@ const sendPushAnalytics = (
 
 const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element => {
   const { wizardStep, wizard, submitChange, currentState, setCurrentState, mainWizardObject } = props
+  const [isDisabled, setIsDisabled] = useState(false)
 
   const getWizardStepControlPayload = (): object => {
     const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
@@ -65,7 +66,9 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
         <Button
           key={button.name}
           {...button.style}
+          isDisabled={isDisabled}
           onClick={() => {
+            setIsDisabled(true)
             sendPushAnalytics(
               wizardStep.resourceName ? wizardStep.resourceName : '',
               `wizard_${button.name}_step`,
@@ -83,11 +86,14 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
               }
             }
 
-            button.handler.call(wizardStep, getWizardStepControlPayload()).then((action: string | undefined) => {
-              if (action) {
-                setCurrentState(wizard.transition(currentState, action))
-              }
-            })
+            return button.handler
+              .call(wizardStep, getWizardStepControlPayload())
+              .then((action: string | undefined) => {
+                if (action) {
+                  setCurrentState(wizard.transition(currentState, action))
+                }
+              })
+              .finally(() => setIsDisabled(false))
           }}
         >
           {button.label}
