@@ -47,7 +47,7 @@ const handleUserAction = (actionHandlerArguments: ActionHandlerArguments): void 
     viewType,
   })
 
-  submitChange({ url: targetUrl, payload: widgetPayload })
+  return submitChange({ url: targetUrl, payload: widgetPayload })
 }
 
 export { handleUserAction }
