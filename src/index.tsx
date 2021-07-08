@@ -78,6 +78,7 @@ import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
+import { ValidatorFunction } from './typing'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
 import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
@@ -205,4 +206,5 @@ export {
   TVerboseNames,
   StyleDateTime,
   WizardProps,
+  ValidatorFunction,
 }
