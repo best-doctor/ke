@@ -35,7 +35,13 @@ export function MapSelect<T>({
   )
 
   return (
-    <Map zoom={currentZoom} center={currentCenter} onZoomChanged={handleZoomChanged} {...others}>
+    <Map
+      zoom={currentZoom}
+      center={currentCenter}
+      onZoomChanged={handleZoomChanged}
+      searchMarkerRadius={2000}
+      {...others}
+    >
       {allOptions.map((option) => (
         <MapMarker
           key={option[0]}
