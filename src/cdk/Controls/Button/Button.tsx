@@ -12,7 +12,7 @@ export const Button = (props: ButtonProps): JSX.Element => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
     if (onClick) {
       setIsDisabled(true)
-      return ensurePromise(onClick(e)).then(() => {
+      return ensurePromise(onClick(e)).finally(() => {
         setIsDisabled(false)
       })
     }
