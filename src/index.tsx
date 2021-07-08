@@ -31,7 +31,14 @@ import { pushError, clearErros } from 'WizardMaster/events'
 import { useWidgetInitialization } from 'common/hooks/useWidgetInitialization'
 import { StoreManager } from 'common/store'
 import { handleUserAction } from 'common/utils/handleUserAction'
-import { getData, getAccessor, getAccessorWithDefault, getWidgetContent, getPayload } from 'DetailView/utils/dataAccess'
+import {
+  getData,
+  getAccessor,
+  getAccessorWithDefault,
+  getWidgetContent,
+  getPayload,
+  getCopyHandler,
+} from 'DetailView/utils/dataAccess'
 import { hasPermission } from 'common/permissions'
 import { BaseNotifier } from 'common/notifier'
 import { EnableELK } from 'integration/EnableELK'
@@ -207,4 +214,5 @@ export {
   StyleDateTime,
   WizardProps,
   ValidatorFunction,
+  getCopyHandler,
 }
