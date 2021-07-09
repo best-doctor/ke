@@ -29,6 +29,7 @@ type AsyncSelectWidgetProps = {
   getOptionLabelValue?: (option: object | object[] | null) => string
   additionalValues?: object[]
   menuPlacement?: MenuPlacement
+  className?: string
 }
 
 type LoadOptionsType = {
@@ -75,6 +76,7 @@ const AsyncSelectWidget = ({
   additionalValues = [],
   isDisabled = false,
   menuPlacement,
+  className,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -156,6 +158,7 @@ const AsyncSelectWidget = ({
       cacheUniq={dataResourceUrl}
       isDisabled={isDisabled}
       menuPlacement={menuPlacement}
+      className={className}
     />
   )
 }

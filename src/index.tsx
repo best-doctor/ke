@@ -38,6 +38,7 @@ import {
   getAccessorWithDefault,
   getWidgetContent,
   getPayload,
+  getCopyHandler,
 } from './DetailView/utils/dataAccess'
 import { hasPermission } from './common/permissions'
 import { BaseNotifier } from './common/notifier'
@@ -85,6 +86,7 @@ import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
+import { ValidatorFunction } from './typing'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
 import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
@@ -212,6 +214,8 @@ export {
   TVerboseNames,
   StyleDateTime,
   WizardProps,
+  ValidatorFunction,
+  getCopyHandler,
   WizardFieldDescription,
   WizardStepButtonDescription,
 }
