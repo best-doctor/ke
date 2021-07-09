@@ -85,4 +85,4 @@ abstract class BaseWizard {
   }
 }
 
-export { BaseWizardStep, WizardState, BaseWizard, WizardPayload }
+export { BaseWizardStep, WizardState, BaseWizard, WizardPayload, WizardStepButtonDescription }

@@ -116,6 +116,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
         blockingValidators={blockingValidators}
         provider={provider}
         detailObject={mainDetailObject}
+        context={context as Record<string, unknown>}
       >
         <AsyncSelectWidget
           provider={provider}

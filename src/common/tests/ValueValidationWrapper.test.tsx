@@ -12,6 +12,7 @@ test('Value validation wrapper properly rendered', () => {
       notBlockingValidators={[]}
       detailObject={{}}
       provider={testProvider}
+      context={{}}
       value="test"
     >
       <></>

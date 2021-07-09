@@ -1,17 +1,18 @@
-import { BaseAdmin } from 'admin'
-import type { WidgetProps } from 'typing'
-import { Filter, Provider, ResponseCache } from 'admin/providers/interfaces'
-import { LocalCache } from 'admin/providers/caches'
-import { BaseProvider } from 'admin/providers'
-import { makeUpdateWithNotification } from 'admin/providers/utils'
+import { BaseAdmin } from './admin'
+import type { WidgetProps } from './typing'
+import { Filter, Provider, ResponseCache } from './admin/providers/interfaces'
+import { LocalCache } from './admin/providers/caches'
+import { BaseProvider } from './admin/providers'
+import { makeUpdateWithNotification } from './admin/providers/utils'
 import type {
   ListFieldDescription,
   DetailFieldDescription,
   ListFilterDescription,
   ListFilterTemplateDescription,
-} from 'admin/fields/FieldDescription'
-import { BaseForm } from 'admin/adminForm'
-import type { WizardState, WizardPayload } from 'WizardMaster/interfaces'
+  WizardFieldDescription,
+} from './admin/fields/FieldDescription'
+import { BaseForm } from './admin/adminForm'
+import type { WizardState, WizardPayload, WizardStepButtonDescription } from './WizardMaster/interfaces'
 import {
   FirebaseAnalytic,
   FirebaseEventPayload,
@@ -21,16 +22,16 @@ import {
   EventNameEnum,
   WidgetTypeEnum,
   FirebaseConfigType,
-} from 'integration/analytics'
-import { ResourceComposer, Resource, AdminResource } from 'ResourceComposer'
-import { RenderList } from 'ListView/RenderList'
-import { RenderDetail } from 'DetailView/RenderDetail'
-import { BaseWizardStep, BaseWizard } from 'WizardMaster/interfaces'
-import { SuccessDisplay, ErrorDisplay } from 'WizardMaster/commonSteps'
-import { pushError, clearErros } from 'WizardMaster/events'
-import { useWidgetInitialization } from 'common/hooks/useWidgetInitialization'
-import { StoreManager } from 'common/store'
-import { handleUserAction } from 'common/utils/handleUserAction'
+} from './integration/analytics'
+import { ResourceComposer, Resource, AdminResource } from './ResourceComposer'
+import { RenderList } from './ListView/RenderList'
+import { RenderDetail } from './DetailView/RenderDetail'
+import { BaseWizardStep, BaseWizard } from './WizardMaster/interfaces'
+import { SuccessDisplay, ErrorDisplay } from './WizardMaster/commonSteps'
+import { pushError, clearErros } from './WizardMaster/events'
+import { useWidgetInitialization } from './common/hooks/useWidgetInitialization'
+import { StoreManager } from './common/store'
+import { handleUserAction } from './common/utils/handleUserAction'
 import {
   getData,
   getAccessor,
@@ -38,14 +39,14 @@ import {
   getWidgetContent,
   getPayload,
   getCopyHandler,
-} from 'DetailView/utils/dataAccess'
-import { hasPermission } from 'common/permissions'
-import { BaseNotifier } from 'common/notifier'
-import { EnableELK } from 'integration/EnableELK'
-import { EnableSentry } from 'integration/EnableSentry'
-import { getDefaultButtons, getPrevButton, getNextButton } from 'WizardMaster/buttons'
-import type { WidgetPayload } from 'DetailView/events'
-import type { CursorPagination, PagedPagination } from 'admin/providers/pagination'
+} from './DetailView/utils/dataAccess'
+import { hasPermission } from './common/permissions'
+import { BaseNotifier } from './common/notifier'
+import { EnableELK } from './integration/EnableELK'
+import { EnableSentry } from './integration/EnableSentry'
+import { getDefaultButtons, getPrevButton, getNextButton } from './WizardMaster/buttons'
+import type { WidgetPayload } from './DetailView/events'
+import type { CursorPagination, PagedPagination } from './admin/providers/pagination'
 import {
   TextValidationWidget,
   LinkWidget,
@@ -215,4 +216,6 @@ export {
   WizardProps,
   ValidatorFunction,
   getCopyHandler,
+  WizardFieldDescription,
+  WizardStepButtonDescription,
 }

@@ -54,7 +54,8 @@ type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_w
 type ValidatorFunction = (
   changeValue: object | string,
   provider: Provider,
-  detailObject: DetailObject
+  detailObject: DetailObject,
+  context?: Record<string, unknown>
 ) => Promise<string>
 
 export {

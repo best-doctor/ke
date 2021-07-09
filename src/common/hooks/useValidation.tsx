@@ -7,10 +7,11 @@ const makeCheck = (
   changeValue: object | string,
   setMessage: Function,
   provider: Provider,
-  detailObject: DetailObject
+  detailObject: DetailObject,
+  context?: Record<string, unknown>
 ): void => {
   validators.forEach((validator: ValidatorFunction) => {
-    validator(changeValue, provider, detailObject).then((validationResult: string) =>
+    validator(changeValue, provider, detailObject, context).then((validationResult: string) =>
       setMessage((oldState: string[]) => [...oldState, validationResult])
     )
   })
@@ -21,7 +22,8 @@ const useValidation = (
   blockingValidators: ValidatorFunction[],
   notBlockingValidators: ValidatorFunction[],
   provider: Provider,
-  detailObject: DetailObject
+  detailObject: DetailObject,
+  context?: Record<string, unknown>
 ): { infoMessages: string[]; errorMessages: string[]; handleAction: Function } => {
   const [infoMessages, setInfoMessage] = React.useState<string[]>([])
   const [errorMessages, setErrorMessage] = React.useState<string[]>([])
@@ -29,8 +31,8 @@ const useValidation = (
   const handleAction = (changeValue: object | string): void | null => {
     setErrorMessage([])
     setInfoMessage([])
-    makeCheck(blockingValidators, changeValue, setErrorMessage, provider, detailObject)
-    makeCheck(notBlockingValidators, changeValue, setInfoMessage, provider, detailObject)
+    makeCheck(blockingValidators, changeValue, setErrorMessage, provider, detailObject, context)
+    makeCheck(notBlockingValidators, changeValue, setInfoMessage, provider, detailObject, context)
 
     if (!errorMessages.length) return callback(changeValue)
   }
@@ -47,7 +49,8 @@ const useValueValidation = (
   notBlockingValidators: ValidatorFunction[],
   provider: Provider,
   detailObject: DetailObject,
-  value: string | object
+  value: string | object,
+  context?: Record<string, unknown>
 ): { infoMessages: string[]; errorMessages: string[] } => {
   const [infoMessages, setInfoMessage] = React.useState<string[]>([])
   const [errorMessages, setErrorMessage] = React.useState<string[]>([])
@@ -57,11 +60,11 @@ const useValueValidation = (
     if (initialValue.current !== value) {
       setErrorMessage([])
       setInfoMessage([])
-      makeCheck(blockingValidators, value, setErrorMessage, provider, detailObject)
-      makeCheck(notBlockingValidators, value, setInfoMessage, provider, detailObject)
+      makeCheck(blockingValidators, value, setErrorMessage, provider, detailObject, context)
+      makeCheck(notBlockingValidators, value, setInfoMessage, provider, detailObject, context)
       initialValue.current = value
     }
-  }, [blockingValidators, notBlockingValidators, provider, detailObject, value])
+  }, [blockingValidators, notBlockingValidators, provider, detailObject, context, value])
 
   return {
     infoMessages,
