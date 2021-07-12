@@ -13,6 +13,7 @@ type ValueValidationWrapperProps = {
   provider: Provider
   detailObject: DetailObject
   value: string | object
+  context?: Record<string, unknown>
 }
 
 /**
@@ -24,6 +25,7 @@ type ValueValidationWrapperProps = {
  * @param provider - provider for backend request, will be passed as second param to validators
  * @param detailObject - addition object, will be passed as third param to validators
  * @param value - value to validate, will be passed as first param to validators
+ * @param context - current context
  */
 const ValueValidationWrapper = ({
   children,
@@ -32,13 +34,15 @@ const ValueValidationWrapper = ({
   provider,
   detailObject,
   value,
+  context,
 }: ValueValidationWrapperProps): JSX.Element => {
   const { infoMessages, errorMessages } = useValueValidation(
     blockingValidators,
     notBlockingValidators,
     provider,
     detailObject,
-    value
+    value,
+    context
   )
 
   return (

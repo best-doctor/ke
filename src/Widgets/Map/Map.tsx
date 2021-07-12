@@ -1,6 +1,7 @@
-import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
-import { GoogleMap, useLoadScript, StandaloneSearchBox } from '@react-google-maps/api'
+import React, { CSSProperties, PropsWithChildren, useMemo, useRef, useState } from 'react'
+import { GoogleMap, useLoadScript, StandaloneSearchBox, Circle } from '@react-google-maps/api'
 import { Spinner } from '@chakra-ui/react'
+import { css, Global } from '@emotion/react'
 
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
@@ -22,7 +23,21 @@ const mapContainerStyle: CSSProperties = {
   width: '100%',
 }
 
+const pacCss = css`
+  .pac-container {
+    z-index: calc(var(--chakra-zIndices-modal) + 100);
+  }
+`
+
 const mapLibs: 'places'[] = ['places']
+
+const circleOptions = {
+  strokeColor: '#002aff',
+  strokeOpacity: 0.6,
+  strokeWeight: 2,
+  fillColor: '#0748ee',
+  fillOpacity: 0.25,
+}
 
 export function Map({
   children,
@@ -31,6 +46,7 @@ export function Map({
   onBoundsChanged,
   zoom,
   onSearchMarkerClick,
+  searchMarkerRadius,
   ...other
 }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
@@ -38,10 +54,10 @@ export function Map({
     googleMapsApiKey: mapConfig?.apiKey || '',
     libraries: mapLibs,
   })
-  const [searchBox, setSearchBox] = React.useState<google.maps.places.SearchBox>()
-  const [searchBoxMarker, setSearchBoxMarker] = React.useState<Marker | null>(null)
+  const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>()
+  const [searchBoxMarker, setSearchBoxMarker] = useState<Marker | null>(null)
 
-  const currentCenter = React.useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
+  const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
 
   const onLoad = (ref: any): void => {
     setSearchBox(ref)
@@ -72,6 +88,7 @@ export function Map({
   }
 
   const zoomRef = useRef(0)
+
   function handleZoomChanged(this: google.maps.Map): void {
     // eslint-disable-next-line react/no-this-in-sfc
     const changedZoom = this.getZoom()
@@ -82,6 +99,7 @@ export function Map({
   }
 
   const boundsRef = useRef<string | undefined>('')
+
   function handleBoundsChanged(this: google.maps.Map): void {
     let boundsStr: string | undefined
     // eslint-disable-next-line react/no-this-in-sfc
@@ -98,6 +116,7 @@ export function Map({
 
   return isLoaded ? (
     <>
+      <Global styles={pacCss} />
       <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
         <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
       </StandaloneSearchBox>
@@ -112,13 +131,18 @@ export function Map({
       >
         {children}
         {searchBoxMarker && (
-          <MapMarker
-            key="searchBoxResult"
-            title={searchBoxMarker.title}
-            position={searchBoxMarker.position}
-            options={{ icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
-            onClick={() => onSearchMarkerClick && onSearchMarkerClick(searchBoxMarker)}
-          />
+          <>
+            <MapMarker
+              key="searchBoxResult"
+              title={searchBoxMarker.title}
+              position={searchBoxMarker.position}
+              options={{ icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
+              onClick={() => onSearchMarkerClick && onSearchMarkerClick(searchBoxMarker)}
+            />
+            {searchMarkerRadius && (
+              <Circle center={searchBoxMarker.position} options={circleOptions} radius={searchMarkerRadius} />
+            )}
+          </>
         )}
       </GoogleMap>
     </>
@@ -133,6 +157,7 @@ export type MapProps = PropsWithChildren<{
   onZoomChanged?: (zoom: number) => void
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void
+  searchMarkerRadius?: number
 }>
 
 export type Marker = {

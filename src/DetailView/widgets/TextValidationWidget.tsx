@@ -44,6 +44,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
         blockingValidators={blockingValidators}
         provider={provider}
         detailObject={mainDetailObject}
+        context={context as Record<string, unknown>}
         value={value}
       >
         <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
