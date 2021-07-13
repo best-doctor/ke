@@ -14,7 +14,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   optionLabel: Function
   optionValue: Function
   isClearable?: boolean
-  isDisabled?: boolean
+  isDisabled?: Accessor<boolean>
   defaultOptions?: boolean
   searchParamName?: string
   styles?: Accessor<object>
@@ -66,7 +66,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     cacheTime,
     optionLabelMenu,
     optionLabelValue,
-    isDisabled,
+    isDisabled = false,
   } = props
 
   const context = containerStore.getState()
@@ -136,7 +136,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           }
           searchParamName={searchParamName}
           styles={selectStyle}
-          isDisabled={isDisabled}
+          isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
         />
       </ValidationWrapper>
     </WidgetWrapper>

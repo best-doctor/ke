@@ -1,5 +1,5 @@
 import { BaseAdmin } from './admin'
-import type { WidgetProps } from './typing'
+import type { Accessor, GenericAccessor, WidgetProps } from './typing'
 import { Filter, Provider, ResponseCache } from './admin/providers/interfaces'
 import { LocalCache } from './admin/providers/caches'
 import { BaseProvider } from './admin/providers'
@@ -218,4 +218,6 @@ export {
   getCopyHandler,
   WizardFieldDescription,
   WizardStepButtonDescription,
+  Accessor,
+  GenericAccessor,
 }

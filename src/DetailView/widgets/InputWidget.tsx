@@ -4,13 +4,18 @@ import { Textarea, Input } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getCopyHandler, getPayload } from '../utils/dataAccess'
+import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 
-import type { WidgetProps } from '../../typing'
+import type { Accessor, WidgetProps } from '../../typing'
 
-type InputWidgetProps = WidgetProps & { isTextarea?: boolean; height?: number; debounce?: number }
+type InputWidgetProps = WidgetProps & {
+  isTextarea?: boolean
+  height?: number
+  debounce?: number
+  isDisabled?: Accessor<boolean>
+}
 
 const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
   (props: InputWidgetProps, ref): JSX.Element => {
@@ -29,6 +34,8 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
       notifier,
       copyValue,
       useClipboard,
+      isDisabled,
+      mainDetailObject,
     } = props
     const context = containerStore.getState()
 
@@ -72,6 +79,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
           element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
           onChange={(e) => handleChange(e)}
           inputRef={ref}
+          disabled={getAccessor(isDisabled, mainDetailObject, context)}
         />
       </WidgetWrapper>
     )
