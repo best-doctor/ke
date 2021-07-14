@@ -1,6 +1,6 @@
 import React from 'react'
-import { Checkbox, Box } from '@chakra-ui/react'
 
+import { CheckBox } from '../../django-spa/Controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
@@ -25,29 +25,25 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
 
   setInitialValue({ [name]: content })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.checked)
+  const handleChange = (v: boolean): void => {
+    setValue(v)
 
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
-      value: e.target.checked,
+      value: v,
       objectForAnalytics: props.mainDetailObject,
       ...props,
     })
 
-    const inputPayload = getPayload(e.target.checked, name, targetPayload)
+    const inputPayload = getPayload(v, name, targetPayload)
 
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
   return (
     <WidgetWrapper name={name} style={style} helpText="&nbsp;" description={description}>
-      <Box>
-        <Checkbox isChecked={value} onChange={(e) => handleChange(e)}>
-          {helpText}
-        </Checkbox>
-      </Box>
+      <CheckBox value={value} onChange={handleChange} helpText={helpText} />
     </WidgetWrapper>
   )
 }
