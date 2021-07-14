@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 import DatePicker from 'react-datepicker'
 
@@ -11,10 +11,11 @@ const onChangeMock = jest.fn()
 const getComponent = (): JSX.Element => <DateInput value={new Date()} onChange={onChangeMock} />
 
 test('DateInput properly rendered', () => {
-  const component = shallow(getComponent())
+  const component = mount(getComponent())
 
   expect(component.find(StyleDateTime).length).toEqual(1)
   expect(component.find(DatePicker).length).toEqual(1)
+  expect(component.find(DatePicker).first().props().showTimeSelect).toEqual(false)
 })
 
 test('DateInput properly handle event', () => {
