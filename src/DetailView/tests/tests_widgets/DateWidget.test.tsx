@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 import DatePicker from 'react-datepicker'
 
-import { DateInput } from '@cdk/Controls'
+import { DateInput } from '../../../django-spa/Controls'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateWidget } from '../../widgets/DateWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'

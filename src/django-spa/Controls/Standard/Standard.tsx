@@ -1,5 +1,13 @@
-import * as React from 'react'
-import { useCallback, ChangeEvent, forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react'
+import React, {
+  useCallback,
+  ChangeEvent,
+  forwardRef,
+  ForwardRefExoticComponent,
+  PropsWithoutRef,
+  RefAttributes,
+} from 'react'
+
+import { ControlProps } from '../types'
 
 export const Input = makeAdapter('input')
 
@@ -24,8 +32,3 @@ type HTMLControls = {
 }
 
 type AdapterProps<ElementName extends keyof HTMLControls> = JSX.IntrinsicElements[ElementName] & ControlProps<string>
-
-interface ControlProps<T> {
-  value: T
-  onChange: (val: T) => void
-}

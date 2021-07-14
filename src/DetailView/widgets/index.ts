@@ -16,8 +16,8 @@ import { CheckboxWidget } from './CheckboxWidget'
 import { CodeWidget } from './CodeWidget'
 import { ReadOnlyWidget } from './ReadOnlyWidget'
 import { AsyncReadOnlyWidget } from './AsyncReadOnlyWidget'
-import { EmailChipInput } from './EmailChipInput'
-import { PhoneChipInput } from './PhoneChipInput'
+import { EmailChipInputWidget } from './EmailChipInputWidget'
+import { PhoneChipInputWidget } from './PhoneChipInputWidget'
 
 export {
   TextValidationWidget,
@@ -40,6 +40,6 @@ export {
   CodeWidget,
   ReadOnlyWidget,
   AsyncReadOnlyWidget,
-  EmailChipInput,
-  PhoneChipInput,
+  EmailChipInputWidget,
+  PhoneChipInputWidget,
 }

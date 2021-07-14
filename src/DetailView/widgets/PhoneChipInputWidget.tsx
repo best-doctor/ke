@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { EmailChipInputComponent } from '../../cdk/Controls'
+import { PhoneChipInput } from '../../django-spa/Controls'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
 
-export const EmailChipInput = (props: WidgetProps): JSX.Element => {
+export const PhoneChipInputWidget = (props: WidgetProps): JSX.Element => {
   const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
   const context = containerStore.getState()
 
@@ -30,7 +30,7 @@ export const EmailChipInput = (props: WidgetProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <EmailChipInputComponent content={(content || []) as string[]} handleChange={handleChange} />
+      <PhoneChipInput value={(content || []) as string[]} onChange={handleChange} />
     </WidgetWrapper>
   )
 }

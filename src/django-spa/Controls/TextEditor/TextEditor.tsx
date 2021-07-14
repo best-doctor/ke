@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import RichTextEditor, { EditorValue } from 'react-rte'
 
+import { ControlProps } from '../types'
+
 export const StyledTextEditor = styled.div`
   .text-editor {
     border-radius: 0.375rem;
@@ -12,11 +14,6 @@ export const StyledTextEditor = styled.div`
     max-height: 208px;
   }
 `
-
-type TextEditorProps = {
-  value: string
-  onChange: (v: string) => void
-}
 
 const valueToEditorFormat = (value: string, format = 'html'): EditorValue =>
   RichTextEditor.createValueFromString(value, format)
@@ -38,7 +35,7 @@ const toolbarConfig = {
   ],
 }
 
-export const TextEditor = (props: TextEditorProps): JSX.Element => {
+export const TextEditor = (props: ControlProps<string>): JSX.Element => {
   const { value: inputValue, onChange } = props
   const [value, setValue] = useState(valueToEditorFormat(inputValue))
 

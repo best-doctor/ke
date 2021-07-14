@@ -1,18 +1,27 @@
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react'
 import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/react'
 
-import { usePropState } from '../../Hooks'
+import { usePropState } from '@cdk/Hooks'
+
+import { ControlProps } from '../types'
+
+type ChipInputProps = ControlProps<string[]> & {
+  placeholder?: string
+  submitKeys?: string[]
+  validator?: (value: string) => boolean
+  errorText?: string
+}
 
 export const ChipInput = (props: ChipInputProps): JSX.Element => {
   const {
-    content,
-    handleChange,
+    value: inputValue,
+    onChange,
     placeholder,
     submitKeys = ['Enter', 'Tab'],
     validator = () => true,
     errorText = 'Invalid value',
   } = props
-  const [chips, setChips] = usePropState<string[]>(content)
+  const [chips, setChips] = usePropState<string[]>(inputValue)
   const [value, setValue] = useState<string>('')
   const [error, setError] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -29,7 +38,7 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
   const deleteChip = (index: number): void => {
     const newChips = chips.filter((_, chipIndex) => chipIndex !== index)
     setChips(newChips)
-    handleChange(newChips)
+    onChange(newChips)
   }
 
   const finishInput = (): void => {
@@ -37,7 +46,7 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
     if (trimmedValue && isValid(trimmedValue)) {
       const newChips = [...chips, trimmedValue]
       setChips(newChips)
-      handleChange(newChips)
+      onChange(newChips)
       setValue('')
       setError('')
     }
@@ -64,7 +73,7 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
         borderColor="#cbd5e0"
         alignItems="center"
         flexWrap="wrap"
-        onClick={() => inputRef && inputRef.current && inputRef.current.focus()}
+        onClick={() => inputRef?.current?.focus?.()}
       >
         {chips.map((chipValue: string, index: number) => {
           const key = index
@@ -104,13 +113,4 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
       )}
     </>
   )
-}
-
-type ChipInputProps = {
-  content: string[]
-  handleChange: (chips: string[]) => void
-  placeholder?: string
-  submitKeys?: string[]
-  validator?: (value: string) => boolean
-  errorText?: string
 }

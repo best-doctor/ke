@@ -3,8 +3,8 @@ import { mount, shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 import DatePicker from 'react-datepicker'
 
-import { DateInput } from '@cdk/Controls'
-import { StyleDateTime } from '../../../common/components/BaseDateTimeRangeWidget'
+import { DateInput } from './DateInput'
+import { StyleDateTime } from './styles'
 
 const onChangeMock = jest.fn()
 

@@ -1,8 +1,7 @@
 import React from 'react'
 import { format } from 'date-fns'
 
-import { DateInput } from '@cdk/Controls/DateInput/DateInput'
-
+import { DateInput } from '../../django-spa/Controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
@@ -65,7 +64,7 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
     >
       <DateInput
         value={contentDate}
-        onChange={(value: Date) => handleChange(value)}
+        onChange={(value: OptionalDate) => handleChange(value)}
         dateFormat={dateFormat}
         minDate={minDate}
         maxDate={maxDate}

@@ -16,13 +16,7 @@ const getComponent = (
   errorText?: string
 ): JSX.Element => (
   <ChakraProvider>
-    <ChipInput
-      content={content}
-      handleChange={handleChange}
-      placeholder="test"
-      validator={validator}
-      errorText={errorText}
-    />
+    <ChipInput value={content} onChange={handleChange} placeholder="test" validator={validator} errorText={errorText} />
   </ChakraProvider>
 )
 

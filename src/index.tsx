@@ -68,8 +68,8 @@ import {
   CodeWidget,
   ReadOnlyWidget,
   AsyncReadOnlyWidget,
-  EmailChipInput,
-  PhoneChipInput,
+  EmailChipInputWidget,
+  PhoneChipInputWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -118,7 +118,8 @@ export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
 export * as Sentry from '@sentry/react'
-export { DateInput, EmailChipInputComponent, PhoneChipInputComponent, TextEditor, Button } from './cdk/Controls'
+export { Button } from './cdk/Controls'
+export { DateInput, EmailChipInput, PhoneChipInput, TextEditor } from './django-spa/Controls'
 
 export {
   BaseAdmin,
@@ -207,8 +208,8 @@ export {
   clearErros,
   MessagesBlock,
   Filter,
-  EmailChipInput,
-  PhoneChipInput,
+  EmailChipInputWidget,
+  PhoneChipInputWidget,
   ToClipboard,
   TPathRules,
   TVerboseNames,
