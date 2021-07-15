@@ -128,6 +128,7 @@ export {
   DateTimeInput,
   CheckBox,
   CheckBoxGroup,
+  RadioGroup,
 } from './django-spa/Controls'
 
 export {
