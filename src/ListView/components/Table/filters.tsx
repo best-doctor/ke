@@ -1,5 +1,4 @@
-import React, { ChangeEvent } from 'react'
-import { DebounceInput } from 'react-debounce-input'
+import React, { useState } from 'react'
 import InputMask, { Props as InputMaskProps } from 'react-input-mask'
 import { Box } from '@chakra-ui/react'
 import Select from 'react-select'
@@ -11,6 +10,7 @@ import type { Location, History } from 'history'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
+import { DebounceInput } from '../../../django-spa/Controls'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
@@ -92,26 +92,26 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
   const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
+  const [value, setValue] = useState('')
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = event.target
-
+  const handleChange = (newValue: string): void => {
+    setValue(newValue)
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
-      ...getCommonFilterAnalyticsPayload(resourceName, value, name),
+      ...getCommonFilterAnalyticsPayload(resourceName, newValue, name),
       ...params,
     })
 
-    setFilterValue(location, name, value, history, gotoPage)
+    setFilterValue(location, name, newValue, history, gotoPage)
   }
 
   return (
     <StyledFilter>
       <DebounceInput
         className="styled-filter base-styled-filter"
-        debounceTimeout={1000}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        onChange={handleChange}
         placeholder={`Фильтр по ${label}` as const}
+        value={value}
       />
     </StyledFilter>
   )
@@ -121,17 +121,17 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
   const { name, label, resourceName, gotoPage, ...maskProps } = params
   const history = useHistory()
   const location = useLocation()
+  const [value, setValue] = useState('')
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = event.target
-
+  const handleChange = (newValue: string): void => {
+    setValue(newValue)
     pushAnalytics({
       eventName: EventNameEnum.INPUT_CHANGE,
-      ...getCommonFilterAnalyticsPayload(resourceName, value, name),
+      ...getCommonFilterAnalyticsPayload(resourceName, newValue, name),
       ...params,
     })
 
-    setFilterValue(location, name, value, history, gotoPage)
+    setFilterValue(location, name, newValue, history, gotoPage)
   }
 
   const MaskElement = (props: React.InputHTMLAttributes<HTMLInputElement>): JSX.Element => (
@@ -142,10 +142,10 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
     <StyledFilter>
       <DebounceInput
         className="styled-filter base-styled-filter"
-        debounceTimeout={1000}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        onChange={handleChange}
         placeholder={`Фильтр по ${label}` as const}
         element={MaskElement}
+        value={value}
       />
     </StyledFilter>
   )

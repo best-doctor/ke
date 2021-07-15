@@ -1,9 +1,10 @@
-import { Flex, Input, usePrevious } from '@chakra-ui/react'
+import { Flex, usePrevious } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import type { Provider } from 'admin/providers/interfaces'
 import type { Pagination } from 'admin/providers/pagination/interfaces'
 import { ArrowLeft, ArrowRight } from 'react-feather'
-import { DebounceInput } from 'react-debounce-input'
+
+import { DebounceInput } from '../../../django-spa/Controls'
 import {
   SelectButton,
   CenterContainer,
@@ -203,20 +204,17 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
               <DebounceInput
                 autoFocus
                 value={searchValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const newValue = e.target.value
+                onChange={(newValue) => {
                   loadOptions({ first: true, searchQueryValue: newValue }).then((res) => {
                     setOptions(res.options)
                   })
                   setSearchValue(newValue)
                 }}
                 style={{ paddingLeft: 5 }}
-                resize="none"
                 borderWidth="1px"
                 borderColor="gray.300"
                 height="20px"
                 debounceTimeout={700}
-                element={Input}
               />
             ) : (
               availableTitle

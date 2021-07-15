@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Box, Button, FormLabel, Input } from '@chakra-ui/react'
-import { DebounceInput } from 'react-debounce-input'
+import React, { useEffect, useState } from 'react'
+import { Box, Button, FormLabel } from '@chakra-ui/react'
 
+import { DebounceInput } from '../../django-spa/Controls'
 import { MapMarker, Map } from '../../Widgets/Map'
 import { Coords } from '../../Widgets/Map/types'
 import { Marker } from '../../Widgets/Map/Map'
@@ -49,23 +49,19 @@ export const MapSelectCoordinates = (props: MapSelectCoordinatesProps): JSX.Elem
       <Box display="flex">
         <FormLabel mt={5}>Широта</FormLabel>
         <DebounceInput
-          value={lat === undefined ? '' : lat}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setLat(safeParse(event.target.value))
+          value={lat === undefined ? '' : lat.toString()}
+          onChange={(v) => {
+            setLat(safeParse(v))
           }}
-          debounceTimeout={1000}
-          element={Input as React.FC}
         />
         <FormLabel mt={5} ml={5}>
           Долгота
         </FormLabel>
         <DebounceInput
-          value={lng === undefined ? '' : lng}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setLng(safeParse(event.target.value))
+          value={lng === undefined ? '' : lng.toString()}
+          onChange={(v) => {
+            setLng(safeParse(v))
           }}
-          debounceTimeout={1000}
-          element={Input as React.FC}
         />
       </Box>
       <Box display="flex" mb={5}>

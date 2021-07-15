@@ -129,6 +129,7 @@ export {
   CheckBox,
   CheckBoxGroup,
   RadioGroup,
+  DebounceInput,
 } from './django-spa/Controls'
 
 export {

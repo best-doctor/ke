@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
-import { DebounceInput } from 'react-debounce-input'
 import { Textarea, Input } from '@chakra-ui/react'
 
+import { DebounceInput } from '../../django-spa/Controls/DebounceInput'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
@@ -43,16 +43,16 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
 
     setInitialValue({ [name]: content })
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleChange = (value: string): void => {
       pushAnalytics({
         eventName: EventNameEnum.INPUT_CHANGE,
         widgetType: WidgetTypeEnum.INPUT,
-        value: e,
+        value,
         objectForAnalytics: props.mainDetailObject,
         ...props,
       })
 
-      const inputPayload = getPayload(e.target.value, name, targetPayload)
+      const inputPayload = getPayload(value, name, targetPayload)
       submitChange({ url: targetUrl, payload: inputPayload })
     }
 
@@ -71,13 +71,12 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
       >
         <DebounceInput
           value={content as string}
-          resize="none"
           height={height || (isTextarea ? 263 : 33)}
           borderWidth="1px"
           borderColor="gray.300"
           debounceTimeout={debounce}
           element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           inputRef={ref}
           disabled={getAccessor(isDisabled, mainDetailObject, context)}
         />

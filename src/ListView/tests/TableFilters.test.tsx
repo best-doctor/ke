@@ -1,10 +1,10 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { DebounceInput } from 'react-debounce-input'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 
+import { DebounceInput } from '../../django-spa/Controls'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import {
   BaseFilter,
