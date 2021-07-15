@@ -119,7 +119,16 @@ export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
 export * as Sentry from '@sentry/react'
 export { Button } from './cdk/Controls'
-export { DateInput, EmailChipInput, PhoneChipInput, TextEditor, DateTimeInput, CheckBox } from './django-spa/Controls'
+export {
+  DateInput,
+  ChipInput,
+  EmailChipInput,
+  PhoneChipInput,
+  TextEditor,
+  DateTimeInput,
+  CheckBox,
+  CheckBoxGroup,
+} from './django-spa/Controls'
 
 export {
   BaseAdmin,

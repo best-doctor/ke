@@ -3,17 +3,15 @@ import { render, RenderResult, fireEvent } from '@testing-library/react'
 
 import { CheckBox } from './CheckBox'
 
-describe('CheckBox', () => {
-  const onChangeMock = jest.fn()
+const onChangeMock = jest.fn()
 
-  const getComponent = (value: boolean): RenderResult =>
-    render(<CheckBox value={value} onChange={onChangeMock} helpText="Test CheckBox" />)
+const getComponent = (value: boolean): RenderResult =>
+  render(<CheckBox value={value} onChange={onChangeMock} helpText="Test CheckBox" />)
 
-  it.each([true, false])('should call onChange on click', (startValue) => {
-    const checkBox = getComponent(startValue)
+test.each([true, false])('CheckBox should call onChange on click', (startValue) => {
+  const checkBox = getComponent(startValue)
 
-    fireEvent.click(checkBox.getByText('Test CheckBox'))
+  fireEvent.click(checkBox.getByText('Test CheckBox'))
 
-    expect(onChangeMock).toBeCalledWith(!startValue)
-  })
+  expect(onChangeMock).toBeCalledWith(!startValue)
 })
