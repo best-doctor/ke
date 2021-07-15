@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import RichTextEditor, { EditorValue } from 'react-rte'
 
@@ -43,14 +43,14 @@ export const TextEditor = (props: ControlProps<string>): JSX.Element => {
     setValue(valueToEditorFormat(inputValue))
   }, [inputValue])
 
-  const onBlur = (): void => {
+  const onBlur = useCallback((): void => {
     const formattedValue = valueFromEditorFormat(value)
     onChange(formattedValue)
-  }
+  }, [onChange, value])
 
-  const handleChange = (v: EditorValue): void => {
+  const handleChange = useCallback((v: EditorValue): void => {
     setValue(v)
-  }
+  }, [])
 
   return (
     <StyledTextEditor>

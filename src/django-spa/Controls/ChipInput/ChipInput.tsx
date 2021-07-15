@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
 import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/react'
 
 import { usePropState } from '@cdk/Hooks'
@@ -26,22 +26,28 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
   const [error, setError] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const isValid = (val: string): boolean => {
-    if (!validator(val)) {
-      setError(errorText)
-      return false
-    }
-    setError('')
-    return true
-  }
+  const isValid = useCallback(
+    (val: string): boolean => {
+      if (!validator(val)) {
+        setError(errorText)
+        return false
+      }
+      setError('')
+      return true
+    },
+    [errorText, validator]
+  )
 
-  const deleteChip = (index: number): void => {
-    const newChips = chips.filter((_, chipIndex) => chipIndex !== index)
-    setChips(newChips)
-    onChange(newChips)
-  }
+  const deleteChip = useCallback(
+    (index: number): void => {
+      const newChips = chips.filter((_, chipIndex) => chipIndex !== index)
+      setChips(newChips)
+      onChange(newChips)
+    },
+    [onChange, chips, setChips]
+  )
 
-  const finishInput = (): void => {
+  const finishInput = useCallback((): void => {
     const trimmedValue = value.trim()
     if (trimmedValue && isValid(trimmedValue)) {
       const newChips = [...chips, trimmedValue]
@@ -50,20 +56,23 @@ export const ChipInput = (props: ChipInputProps): JSX.Element => {
       setValue('')
       setError('')
     }
-  }
+  }, [onChange, chips, setChips, isValid, value])
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
-    if (submitKeys.includes(e.key)) {
-      e.preventDefault()
-      finishInput()
-    }
-    if (e.key === 'Backspace') {
-      if (!value && chips.length > 0) {
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>): void => {
+      if (submitKeys.includes(e.key)) {
         e.preventDefault()
-        deleteChip(chips.length - 1)
+        finishInput()
       }
-    }
-  }
+      if (e.key === 'Backspace') {
+        if (!value && chips.length > 0) {
+          e.preventDefault()
+          deleteChip(chips.length - 1)
+        }
+      }
+    },
+    [chips.length, deleteChip, finishInput, submitKeys, value]
+  )
 
   return (
     <>

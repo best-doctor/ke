@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 
@@ -48,15 +48,20 @@ export const BaseDateInput = ({
     setDate(value)
   }
 
+  const handleChange = useCallback(
+    (v: OptionalDate) => {
+      setDate(v)
+      onChange(v)
+    },
+    [onChange]
+  )
+
   return (
     <StyleDateTime>
       <DatePicker
         className={className}
         selected={date}
-        onChange={(v: Date) => {
-          setDate(v)
-          onChange(v)
-        }}
+        onChange={handleChange}
         dateFormat={dateFormat}
         minDate={minDate}
         maxDate={maxDate}
