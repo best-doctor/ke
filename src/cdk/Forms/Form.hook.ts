@@ -12,7 +12,7 @@ export function useForm<K extends FieldKey>(
     validator?: RecordValidator
   ) => { errorsRoot: RootProviderDesc; recursiveValidate: RecordValidator },
   value: Record<K, unknown>,
-  onFormChange: (val: FormData<K>) => void,
+  onFormChange: (value: Record<K, unknown>, meta: Omit<FormData<K>, 'value'>) => void,
   validator?: RecordValidator
 ): UseFormResult {
   const { errorsRoot, recursiveValidate } = useValidation(value, validator)
@@ -20,8 +20,13 @@ export function useForm<K extends FieldKey>(
   const [formValue, setFormValue] = useState((): ValueData<K> => makeDefaultForm(value))
 
   useEffect(() => {
-    onFormChange({ ...formValue, validate: () => recursiveValidate(formValue.value) })
-  }, [formValue, recursiveValidate, onFormChange])
+    onFormChange(formValue.value, {
+      relatedRefs: formValue.relatedRefs,
+      isTouched: formValue.isTouched,
+      validate: () => recursiveValidate(formValue.value),
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formValue, recursiveValidate]) // We explicitly do not want to change data on onFormChange changes
 
   useEffect(() => {
     setFormValue((prev) => (value === prev.value ? prev : replaceFormValue(prev, value)))
