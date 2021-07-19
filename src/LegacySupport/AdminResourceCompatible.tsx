@@ -1,11 +1,12 @@
 import React, { PropsWithChildren } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { ErrorBoundary } from '../common/components/ErrorBoundary'
 
 export function AdminResourceCompatible({ path, children }: AdminResourceCompatibleProps): JSX.Element {
   return (
     <Switch>
       <Route exact strict path={path}>
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </Route>
     </Switch>
   )

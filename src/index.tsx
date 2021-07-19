@@ -84,6 +84,7 @@ import {
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
+import { ErrorBoundary } from './common/components/ErrorBoundary'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { ValidatorFunction } from './typing'
@@ -232,4 +233,5 @@ export {
   WizardStepButtonDescription,
   Accessor,
   GenericAccessor,
+  ErrorBoundary,
 }

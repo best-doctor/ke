@@ -14,6 +14,7 @@ import type { BaseNotifier } from '../../../common/notifier'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
+import { ErrorBoundary } from '../../../common/components/ErrorBoundary'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -87,41 +88,43 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                   </Heading>
                 </Col>
               </Row>
-              <WizardStepComponents
-                elements={elements}
-                resourceName={resourceName}
-                provider={provider}
-                mainWizardObject={mainWizardObject}
-                setMainDetailObject={setMainDetailObject}
-                refreshMainDetailObject={refreshMainDetailObject}
-                notifier={notifier}
-                analytics={analytics}
-                user={user}
-                ViewType={ViewType}
-                submitChange={submitChange}
-                setCurrentState={setCurrentState}
-              />
-              <Row>
-                <Col xs={12}>
-                  <Box key="errors">
-                    <WizardValidationErrors errors={errors.map(({ errorText }) => errorText)} />
-                  </Box>
-                  <Box key="steps">
-                    <WizardStepControlPanel
-                      wizardStep={wizardStep}
-                      wizard={wizard}
-                      provider={provider}
-                      currentState={currentState}
-                      setCurrentState={setCurrentState}
-                      mainWizardObject={mainWizardObject}
-                      submitChange={submitChange}
-                      analytics={analytics}
-                      refreshMainDetailObject={refreshMainDetailObject}
-                      notifier={notifier}
-                    />
-                  </Box>
-                </Col>
-              </Row>
+              <ErrorBoundary>
+                <WizardStepComponents
+                  elements={elements}
+                  resourceName={resourceName}
+                  provider={provider}
+                  mainWizardObject={mainWizardObject}
+                  setMainDetailObject={setMainDetailObject}
+                  refreshMainDetailObject={refreshMainDetailObject}
+                  notifier={notifier}
+                  analytics={analytics}
+                  user={user}
+                  ViewType={ViewType}
+                  submitChange={submitChange}
+                  setCurrentState={setCurrentState}
+                />
+                <Row>
+                  <Col xs={12}>
+                    <Box key="errors">
+                      <WizardValidationErrors errors={errors.map(({ errorText }) => errorText)} />
+                    </Box>
+                    <Box key="steps">
+                      <WizardStepControlPanel
+                        wizardStep={wizardStep}
+                        wizard={wizard}
+                        provider={provider}
+                        currentState={currentState}
+                        setCurrentState={setCurrentState}
+                        mainWizardObject={mainWizardObject}
+                        submitChange={submitChange}
+                        analytics={analytics}
+                        refreshMainDetailObject={refreshMainDetailObject}
+                        notifier={notifier}
+                      />
+                    </Box>
+                  </Col>
+                </Row>
+              </ErrorBoundary>
             </Box>
           </Col>
         </Row>

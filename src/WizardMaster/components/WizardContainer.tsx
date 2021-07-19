@@ -10,6 +10,7 @@ import type { Provider } from '../../admin/providers/interfaces'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
+import { ErrorBoundary } from '../../common/components/ErrorBoundary'
 
 type WizardContainerProps = {
   wizard: BaseWizard
@@ -60,22 +61,24 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
   }
 
   return (
-    <WizardStepContainer
-      wizard={wizard}
-      wizardStep={wizard.stateWidgetMapping[currentState]}
-      provider={provider}
-      mainWizardObject={getMainWizardObject()}
-      currentState={currentState}
-      setCurrentState={setCurrentState}
-      setMainDetailObject={setMainDetailObject}
-      refreshMainDetailObject={refreshMainDetailObject}
-      notifier={notifier}
-      analytics={analytics}
-      user={user}
-      ViewType={ViewType}
-      show={show}
-      submitChange={submitChange}
-    />
+    <ErrorBoundary>
+      <WizardStepContainer
+        wizard={wizard}
+        wizardStep={wizard.stateWidgetMapping[currentState]}
+        provider={provider}
+        mainWizardObject={getMainWizardObject()}
+        currentState={currentState}
+        setCurrentState={setCurrentState}
+        setMainDetailObject={setMainDetailObject}
+        refreshMainDetailObject={refreshMainDetailObject}
+        notifier={notifier}
+        analytics={analytics}
+        user={user}
+        ViewType={ViewType}
+        show={show}
+        submitChange={submitChange}
+      />
+    </ErrorBoundary>
   )
 }
 
