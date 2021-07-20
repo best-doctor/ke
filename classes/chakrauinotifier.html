@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseNotifier | @bestdoctor/ke</title>
+	<title>ChakraUINotifier | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="basenotifier.html">BaseNotifier</a>
+					<a href="chakrauinotifier.html">ChakraUINotifier</a>
 				</li>
 			</ul>
-			<h1>Class BaseNotifier</h1>
+			<h1>Class ChakraUINotifier</h1>
 		</div>
 	</div>
 </header>
@@ -69,10 +69,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BaseNotifier</span>
+						<a href="basenotifier.html" class="tsd-signature-type" data-tsd-kind="Class">BaseNotifier</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="chakrauinotifier.html" class="tsd-signature-type" data-tsd-kind="Class">ChakraUINotifier</a>
+								<span class="target">ChakraUINotifier</span>
 							</li>
 						</ul>
 					</li>
@@ -85,20 +85,22 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="basenotifier.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="chakrauinotifier.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="basenotifier.html#notifierhanlder" class="tsd-kind-icon">notifier<wbr>Hanlder</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="chakrauinotifier.html#defaultnotifierconfig" class="tsd-kind-icon">default<wbr>Notifier<wbr>Config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="chakrauinotifier.html#notifierhanlder" class="tsd-kind-icon">notifier<wbr>Hanlder</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="basenotifier.html#notifyerror" class="tsd-kind-icon">notify<wbr>Error</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="basenotifier.html#notifysuccess" class="tsd-kind-icon">notify<wbr>Success</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="chakrauinotifier.html#notify" class="tsd-kind-icon">notify</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="chakrauinotifier.html#notifyerror" class="tsd-kind-icon">notify<wbr>Error</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="chakrauinotifier.html#notifysuccess" class="tsd-kind-icon">notify<wbr>Success</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,15 +108,16 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Notifier<span class="tsd-signature-symbol">(</span>notifierHandler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="basenotifier.html" class="tsd-signature-type" data-tsd-kind="Class">BaseNotifier</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>ChakraUINotifier<span class="tsd-signature-symbol">(</span>notifierHandler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="chakrauinotifier.html" class="tsd-signature-type" data-tsd-kind="Class">ChakraUINotifier</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#constructor">constructor</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L4">src/common/notifier.ts:4</a></li>
 								</ul>
@@ -125,7 +128,7 @@
 									<h5>notifierHandler: <span class="tsd-signature-type">Function</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="basenotifier.html" class="tsd-signature-type" data-tsd-kind="Class">BaseNotifier</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="chakrauinotifier.html" class="tsd-signature-type" data-tsd-kind="Class">ChakraUINotifier</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -133,10 +136,21 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="defaultnotifierconfig" class="tsd-anchor"></a>
+					<h3>default<wbr>Notifier<wbr>Config</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Notifier<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChakraUINotifierConfig</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L22">src/common/notifier.ts:22</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="notifierhanlder" class="tsd-anchor"></a>
 					<h3>notifier<wbr>Hanlder</h3>
 					<div class="tsd-signature tsd-kind-icon">notifier<wbr>Hanlder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#notifierhanlder">notifierHanlder</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L4">src/common/notifier.ts:4</a></li>
 						</ul>
@@ -146,45 +160,73 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="notifyerror" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> notify<wbr>Error</h3>
+					<a name="notify" class="tsd-anchor"></a>
+					<h3>notify</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">notify<wbr>Error<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L12">src/common/notifier.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L28">src/common/notifier.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> message: <span class="tsd-signature-type">string</span></h5>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>status: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="notifysuccess" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> notify<wbr>Success</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">notify<wbr>Success<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="notifyerror" class="tsd-anchor"></a>
+					<h3>notify<wbr>Error</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">notify<wbr>Error<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#notifyerror">notifyError</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L10">src/common/notifier.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L40">src/common/notifier.ts:40</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> message: <span class="tsd-signature-type">string</span></h5>
+									<h5>message: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Ошибка&#x27;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="notifysuccess" class="tsd-anchor"></a>
+					<h3>notify<wbr>Success</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">notify<wbr>Success<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#notifysuccess">notifySuccess</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/724b67f/src/common/notifier.ts#L36">src/common/notifier.ts:36</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Обновлено&#x27;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -206,19 +248,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="basenotifier.html" class="tsd-kind-icon">Base<wbr>Notifier</a>
+						<a href="chakrauinotifier.html" class="tsd-kind-icon">ChakraUINotifier</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="basenotifier.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+								<a href="chakrauinotifier.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="basenotifier.html#notifierhanlder" class="tsd-kind-icon">notifier<wbr>Hanlder</a>
+								<a href="chakrauinotifier.html#defaultnotifierconfig" class="tsd-kind-icon">default<wbr>Notifier<wbr>Config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="chakrauinotifier.html#notifierhanlder" class="tsd-kind-icon">notifier<wbr>Hanlder</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="basenotifier.html#notifyerror" class="tsd-kind-icon">notify<wbr>Error</a>
+								<a href="chakrauinotifier.html#notify" class="tsd-kind-icon">notify</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="basenotifier.html#notifysuccess" class="tsd-kind-icon">notify<wbr>Success</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="chakrauinotifier.html#notifyerror" class="tsd-kind-icon">notify<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="chakrauinotifier.html#notifysuccess" class="tsd-kind-icon">notify<wbr>Success</a>
 							</li>
 						</ul>
 					</li>
