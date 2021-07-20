@@ -1,10 +1,11 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "2.6.0-beta",
+    "version": "2.7.0-beta",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "license": "MIT",
     "dependencies": {
         "@chakra-ui/react": "^1.6.3",
         "@elastic/apm-rum": "^5.3.0",
