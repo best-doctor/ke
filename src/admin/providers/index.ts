@@ -5,13 +5,7 @@ import { FilterManager } from '../../common/filterManager'
 import type { Filter, ResponseCache, Provider, TableFilter, GetListParameters } from './interfaces'
 import { CursorPagination, Pagination, PagedPagination, PaginationParameters } from './pagination'
 import { setPaginationParameters } from './utils'
-
-type BaseResponse = {
-  data: {
-    data: any
-    meta: any
-  }
-}
+import type { BaseResponse, ProviderOptions } from './types'
 
 /**
  * Base for Django REST API interactions
@@ -37,10 +31,16 @@ export class BaseProvider implements Provider {
   /**
    * @param http - axios-instance used for all http requests
    * @param cache - optional cache-object for temporary store all got results by their URLs
+   * @param options - provider options
    */
-  constructor(private readonly http: AxiosInstance = axios.create({}), readonly cache?: ResponseCache) {
+  constructor(
+    private readonly http: AxiosInstance = axios.create({}),
+    readonly cache?: ResponseCache,
+    readonly options: ProviderOptions = {}
+  ) {
     this.cache = cache
     this.http = http
+    this.options = options
   }
 
   public get httpClient(): AxiosInstance {
@@ -137,22 +137,42 @@ export class BaseProvider implements Provider {
   }
 
   post = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response: BaseResponse = await this.http.post(resourceUrl, payload)
-    return response.data.data
+    try {
+      const response: BaseResponse = await this.http.post(resourceUrl, payload)
+      return response.data?.data
+    } catch (error) {
+      this.onErrorHandler(error)
+      throw error
+    }
   }
 
   put = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response: BaseResponse = await this.http.put(resourceUrl, payload)
-    return response.data.data
+    try {
+      const response: BaseResponse = await this.http.put(resourceUrl, payload)
+      return response.data.data
+    } catch (error) {
+      this.onErrorHandler(error)
+      throw error
+    }
   }
 
   patch = async (resourceUrl: string, payload: object): Promise<Model> => {
-    const response: BaseResponse = await this.http.patch(resourceUrl, payload)
-    return response.data.data
+    try {
+      const response: BaseResponse = await this.http.patch(resourceUrl, payload)
+      return response.data.data
+    } catch (error) {
+      this.onErrorHandler(error)
+      throw error
+    }
   }
 
   delete = async (resourceUrl: string): Promise<void> => {
-    await this.http.delete(resourceUrl)
+    try {
+      await this.http.delete(resourceUrl)
+    } catch (error) {
+      this.onErrorHandler(error)
+      throw error
+    }
   }
 
   get = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<any> => {
@@ -164,6 +184,7 @@ export class BaseProvider implements Provider {
     }
     const response = this.http.get(resourceUrl)
     if (effectiveForceCache) response.then((data) => this.cache?.set(resourceUrl, data))
+    response.catch(this.onErrorHandler)
     return response
   }
 
@@ -277,6 +298,13 @@ export class BaseProvider implements Provider {
       }
     })
     return tableFilters
+  }
+
+  onErrorHandler = (error: Error): void => {
+    const { onError } = this.options
+    if (onError) {
+      onError(error)
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import type { AxiosInstance } from 'axios'
 import { Accessor } from '../../typing'
 import type { Pagination, PaginationParameters } from './pagination'
+import { ProviderOptions } from './types'
 
 interface Filter {
   filterName: string
@@ -30,6 +31,7 @@ type GetListParameters = {
 
 interface Provider {
   readonly cache?: ResponseCache
+  readonly options: ProviderOptions
   httpClient: AxiosInstance
 
   getPage(
@@ -59,6 +61,8 @@ interface Provider {
   patch(resourceUrl: string, payload: object): Promise<Model>
 
   delete(resourceUrl: string): Promise<void>
+
+  onErrorHandler(error: Error): void
 }
 
 export { Filter, GetListParameters, Provider, ResponseCache, TableFilter }

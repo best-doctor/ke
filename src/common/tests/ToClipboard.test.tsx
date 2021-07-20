@@ -30,7 +30,7 @@ describe('ToClipboard', () => {
 
       notifyError = jest.fn((_?: string) => {})
 
-      notifierHanlder = jest.fn((_?: string) => {})
+      notifierHandler = jest.fn((_?: string) => {})
     }
     const notifier = new Notifier(() => {})
     render(

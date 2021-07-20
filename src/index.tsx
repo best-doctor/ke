@@ -3,6 +3,7 @@ import type { Accessor, GenericAccessor, WidgetProps } from './typing'
 import { Filter, Provider, ResponseCache } from './admin/providers/interfaces'
 import { LocalCache } from './admin/providers/caches'
 import { BaseProvider } from './admin/providers'
+import type { ProviderOptions } from './admin/providers/types'
 import { makeUpdateWithNotification } from './admin/providers/utils'
 import type {
   ListFieldDescription,
@@ -41,7 +42,7 @@ import {
   getCopyHandler,
 } from './DetailView/utils/dataAccess'
 import { hasPermission } from './common/permissions'
-import { BaseNotifier } from './common/notifier'
+import { BaseNotifier, ChakraUINotifier } from './common/notifier'
 import { EnableELK } from './integration/EnableELK'
 import { EnableSentry } from './integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from './WizardMaster/buttons'
@@ -234,4 +235,6 @@ export {
   Accessor,
   GenericAccessor,
   ErrorBoundary,
+  ChakraUINotifier,
+  ProviderOptions,
 }
