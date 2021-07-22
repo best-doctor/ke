@@ -33,5 +33,6 @@ module.exports = {
   externals: {
     react: 'react',
     'react-dom': 'react-dom',
+    '@chakra-ui/react': '@chakra-ui/react',
   },
 }

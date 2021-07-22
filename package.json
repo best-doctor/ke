@@ -112,6 +112,7 @@
         "y18n": "^4.0.1"
     },
     "peerDependencies": {
+        "@chakra-ui/react": "^1.6.3",
         "date-fns": "^2.16.1",
         "effector": "^21.8.5",
         "effector-react": "^21.2.1",
