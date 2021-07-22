@@ -37,7 +37,7 @@ const SideBarElement = ({ resource }: { resource: SideBarElementType }): JSX.Ele
     goToResourceEvent()
   }
   return (
-    <Button colorScheme="teal" m={2} key={name} onClick={goToResource} id="go-to-resource-button">
+    <Button colorScheme="brand" m={2} key={name} onClick={goToResource} id="go-to-resource-button">
       {admin.verboseName}
     </Button>
   )
@@ -71,7 +71,7 @@ const SideBar = ({
       <Row>
         <Col xs={12}>
           <SidebarButtonContainer>
-            <Button colorScheme="teal" m={2} width={20} onClick={onOpen}>
+            <Button colorScheme="brand" m={2} width={20} onClick={onOpen}>
               <Menu size="1em" />
             </Button>
             <BreadCrumbContainer>{breadcrumbsRules && <Breadcrumbs rules={breadcrumbsRules} />}</BreadCrumbContainer>

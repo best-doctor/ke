@@ -21,7 +21,7 @@ export const CheckBoxGroup = <T extends object>(props: CheckBoxGroupProps<T>): J
   )
 
   return (
-    <CheckboxGroup colorScheme="teal" defaultValue={defaultValue} onChange={(values) => handleChange(values)}>
+    <CheckboxGroup colorScheme="brand" defaultValue={defaultValue} onChange={(values) => handleChange(values)}>
       {value.map((v: T) => (
         <Checkbox spacing={8} key={getKey(v)} value={getValue(v)}>
           {getLabel(v)}
