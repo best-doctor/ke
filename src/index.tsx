@@ -1,8 +1,9 @@
 import { BaseAdmin } from './admin'
-import type { WidgetProps } from './typing'
+import type { Accessor, GenericAccessor, WidgetProps } from './typing'
 import { Filter, Provider, ResponseCache } from './admin/providers/interfaces'
 import { LocalCache } from './admin/providers/caches'
 import { BaseProvider } from './admin/providers'
+import type { ProviderOptions } from './admin/providers/types'
 import { makeUpdateWithNotification } from './admin/providers/utils'
 import type {
   ListFieldDescription,
@@ -41,7 +42,7 @@ import {
   getCopyHandler,
 } from './DetailView/utils/dataAccess'
 import { hasPermission } from './common/permissions'
-import { BaseNotifier } from './common/notifier'
+import { BaseNotifier, ChakraUINotifier } from './common/notifier'
 import { EnableELK } from './integration/EnableELK'
 import { EnableSentry } from './integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from './WizardMaster/buttons'
@@ -68,8 +69,8 @@ import {
   CodeWidget,
   ReadOnlyWidget,
   AsyncReadOnlyWidget,
-  EmailChipInput,
-  PhoneChipInput,
+  EmailChipInputWidget,
+  PhoneChipInputWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -84,6 +85,7 @@ import {
 } from './ListView/components/Table/filters'
 import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
+import { ErrorBoundary } from './common/components/ErrorBoundary'
 import { WidgetWrapper } from './common/components/WidgetWrapper'
 import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { ValidatorFunction } from './typing'
@@ -118,7 +120,20 @@ export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
 export * as Sentry from '@sentry/react'
-export { DateInput, EmailChipInputComponent, PhoneChipInputComponent, TextEditor, Button } from './cdk/Controls'
+export { Button } from './cdk/Controls'
+export {
+  DateInput,
+  ChipInput,
+  EmailChipInput,
+  PhoneChipInput,
+  TextEditor,
+  DateTimeInput,
+  CheckBox,
+  CheckBoxGroup,
+  RadioGroup,
+  DebounceInput,
+} from './django-spa/Controls'
+export { AnalyticsProvider, useAnalytics, AnalyticsConfigProvider, useFirebase } from './django-spa/aspects'
 
 export {
   BaseAdmin,
@@ -207,8 +222,8 @@ export {
   clearErros,
   MessagesBlock,
   Filter,
-  EmailChipInput,
-  PhoneChipInput,
+  EmailChipInputWidget,
+  PhoneChipInputWidget,
   ToClipboard,
   TPathRules,
   TVerboseNames,
@@ -218,4 +233,9 @@ export {
   getCopyHandler,
   WizardFieldDescription,
   WizardStepButtonDescription,
+  Accessor,
+  GenericAccessor,
+  ErrorBoundary,
+  ChakraUINotifier,
+  ProviderOptions,
 }

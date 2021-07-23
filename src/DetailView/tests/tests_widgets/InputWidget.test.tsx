@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import { DebounceInput } from 'react-debounce-input'
 
+import { DebounceInput } from '../../../django-spa/Controls'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { InputWidget } from '../../widgets/InputWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
@@ -46,7 +46,7 @@ test('Input widget properly rendered', () => {
 
 test('Submit user input', () => {
   const component = mount(getComponent())
-  const event = { target: { value: 'sometext' } }
+  const event = 'sometext'
 
   ;(component.find(DebounceInput).props() as { onChange: Function }).onChange(event)
 

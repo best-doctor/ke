@@ -1,0 +1,125 @@
+import React, { ChangeEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/react'
+
+import { usePropState } from '@cdk/Hooks'
+
+import { ControlProps } from '../types'
+
+type ChipInputProps = ControlProps<string[]> & {
+  placeholder?: string
+  submitKeys?: string[]
+  validator?: (value: string) => boolean
+  errorText?: string
+}
+
+export const ChipInput = (props: ChipInputProps): JSX.Element => {
+  const {
+    value: inputValue,
+    onChange,
+    placeholder,
+    submitKeys = ['Enter', 'Tab'],
+    validator = () => true,
+    errorText = 'Invalid value',
+  } = props
+  const [chips, setChips] = usePropState<string[]>(inputValue)
+  const [value, setValue] = useState<string>('')
+  const [error, setError] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const isValid = useCallback(
+    (val: string): boolean => {
+      if (!validator(val)) {
+        setError(errorText)
+        return false
+      }
+      setError('')
+      return true
+    },
+    [errorText, validator]
+  )
+
+  const deleteChip = useCallback(
+    (index: number): void => {
+      const newChips = chips.filter((_, chipIndex) => chipIndex !== index)
+      setChips(newChips)
+      onChange(newChips)
+    },
+    [onChange, chips, setChips]
+  )
+
+  const finishInput = useCallback((): void => {
+    const trimmedValue = value.trim()
+    if (trimmedValue && isValid(trimmedValue)) {
+      const newChips = [...chips, trimmedValue]
+      setChips(newChips)
+      onChange(newChips)
+      setValue('')
+      setError('')
+    }
+  }, [onChange, chips, setChips, isValid, value])
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>): void => {
+      if (submitKeys.includes(e.key)) {
+        e.preventDefault()
+        finishInput()
+      }
+      if (e.key === 'Backspace') {
+        if (!value && chips.length > 0) {
+          e.preventDefault()
+          deleteChip(chips.length - 1)
+        }
+      }
+    },
+    [chips.length, deleteChip, finishInput, submitKeys, value]
+  )
+
+  return (
+    <>
+      <Flex
+        borderWidth="1px"
+        borderRadius="3px"
+        borderColor="#cbd5e0"
+        alignItems="center"
+        flexWrap="wrap"
+        onClick={() => inputRef?.current?.focus?.()}
+      >
+        {chips.map((chipValue: string, index: number) => {
+          const key = index
+          return (
+            <Tag
+              key={key}
+              minWidth={undefined}
+              minHeight={undefined}
+              height="1.5rem"
+              fontSize="0.85rem"
+              m="0.2rem"
+              bg="#E3E5E8"
+            >
+              <TagLabel width="100%">{chipValue}</TagLabel>
+              <TagCloseButton onClick={() => deleteChip(key)} />
+            </Tag>
+          )
+        })}
+        <Input
+          variant="unstyled"
+          value={value}
+          onChange={(e: ChangeEvent<HTMLInputElement>): void => setValue(e.target.value)}
+          placeholder={placeholder}
+          onKeyDown={handleKeyDown}
+          isInvalid={!!error}
+          ref={inputRef}
+          width="auto"
+          height="2rem"
+          borderRadius="0px"
+          onBlur={finishInput}
+        />
+      </Flex>
+      {error && (
+        <Text className="error" fontSize="0.7rem" color="red.400">
+          {error}
+        </Text>
+      )}
+    </>
+  )
+}

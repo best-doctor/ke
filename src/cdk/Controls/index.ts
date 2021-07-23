@@ -1,7 +1,2 @@
 export * from './GroupControl'
-export { Input, Textarea } from './Standard'
-export * from './DebounceInput'
-export { ChipInput, EmailChipInputComponent, PhoneChipInputComponent } from './ChipInput'
-export { DateInput } from './DateInput'
-export { TextEditor } from './TextEditor'
 export { Button } from './Button'

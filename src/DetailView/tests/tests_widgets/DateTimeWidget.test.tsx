@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateTimeWidget } from '../../widgets/DateTimeWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
-import { StyleDateTime } from '../../../common/components/BaseDateTimeRangeWidget'
+import { DateTimeInput } from '../../../django-spa/Controls'
 
 const submitChangeMock = jest.fn()
 
@@ -42,8 +42,7 @@ const getComponent = (): JSX.Element => (
 test('DateTimeWidget properly rendered', () => {
   const component = shallow(getComponent())
 
-  expect(component.find(DatePicker).length).toEqual(1)
-  expect(component.find(StyleDateTime).length).toEqual(1)
+  expect(component.find(DateTimeInput).length).toEqual(1)
   expect(component.find(WidgetWrapper).length).toEqual(1)
 })
 

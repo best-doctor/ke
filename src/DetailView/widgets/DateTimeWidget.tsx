@@ -1,8 +1,7 @@
 import React from 'react'
-import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 
-import { StyleDateTime } from '../../common/components/BaseDateTimeRangeWidget'
+import { DateTimeInput } from '../../django-spa/Controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
@@ -19,6 +18,8 @@ type DateTimeWidgetProps = {
   filterDate?: (dateValue: Date) => boolean
   filterTime?: (dateValue: Date) => boolean
   dateFormat?: string
+  className?: string
+  isClearable?: boolean
 }
 
 /**
@@ -40,23 +41,17 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
     filterDate,
     filterTime,
     dateFormat = 'dd.MM.yyyy HH:mm',
+    className,
+    isClearable,
   } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null
-  const [date, setDate] = React.useState<OptionalDate>(contentDate)
-  if (
-    format(contentDate || new Date(), "yyyy-MM-dd'T'HH:mm:ss") !== format(date || new Date(), "yyyy-MM-dd'T'HH:mm:ss")
-  ) {
-    setDate(contentDate)
-  }
-
   setInitialValue({ [name]: content })
 
   const handleChange = (value: OptionalDate): void => {
-    setDate(value)
     const widgetValue = value ? format(value, "yyyy-MM-dd'T'HH:mm:ss") : ''
 
     handleUserAction({ ...props, widgetValue, targetUrl, eventName, widgetType })
@@ -70,20 +65,17 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
       description={description}
       required={isRequired}
     >
-      <StyleDateTime>
-        <DatePicker
-          className="styled-date-time"
-          selected={date}
-          onChange={(value: Date) => handleChange(value)}
-          showTimeSelect
-          dateFormat={dateFormat}
-          minDate={minDate}
-          maxDate={maxDate}
-          filterDate={filterDate}
-          filterTime={filterTime}
-          showDisabledMonthNavigation
-        />
-      </StyleDateTime>
+      <DateTimeInput
+        value={contentDate}
+        onChange={(value: OptionalDate) => handleChange(value)}
+        dateFormat={dateFormat}
+        minDate={minDate}
+        maxDate={maxDate}
+        filterDate={filterDate}
+        filterTime={filterTime}
+        className={className}
+        isClearable={isClearable}
+      />
     </WidgetWrapper>
   )
 }

@@ -5,7 +5,7 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
-import { TextEditor } from '../../cdk/Controls'
+import { TextEditor } from '../../django-spa/Controls'
 
 import type { WidgetProps } from '../../typing'
 

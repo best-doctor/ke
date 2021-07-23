@@ -13,6 +13,7 @@ import { mountElement } from '../common/permissions'
 import { SideBarElementCompatible } from '../LegacySupport'
 import { TPathRules } from '../ListView/components/Breadcrumbs/Breadcrumbs'
 import { getAccessor } from '../DetailView/utils/dataAccess'
+import { ErrorBoundary } from '../common/components/ErrorBoundary'
 
 type ResourceProps = {
   props: {
@@ -23,7 +24,7 @@ type ResourceProps = {
 const Resource = ({ name, children }: { name: string; children: JSX.Element }): JSX.Element => (
   <Switch>
     <Route exact path={`/${name}/`}>
-      {children}
+      <ErrorBoundary>{children}</ErrorBoundary>
     </Route>
   </Switch>
 )
@@ -45,11 +46,15 @@ const AdminResource = ({
     <Redirect exact strict from={`/${name}`} to={`/${name}/`} />
     {!getAccessor(admin.hideListView) && (
       <Route exact strict path={`/${name}/`}>
-        <RenderList resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+        <ErrorBoundary>
+          <RenderList resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+        </ErrorBoundary>
       </Route>
     )}
     <Route exact path={`/${name}/:id`}>
-      <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+      <ErrorBoundary>
+        <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+      </ErrorBoundary>
     </Route>
   </Switch>
 )

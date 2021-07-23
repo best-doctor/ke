@@ -1,6 +1,6 @@
 import React from 'react'
-import { Radio, RadioGroup } from '@chakra-ui/react'
 
+import { RadioGroup } from '../../django-spa/Controls'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -17,7 +17,11 @@ type RadioButtonElement = {
   title: string
 }
 
-type RadioButtonWidgetProps = WidgetProps & { optionLabel: Function; optionValue: Function; getSelectedValue: Function }
+type RadioButtonWidgetProps = WidgetProps & {
+  optionLabel: (v: RadioButtonElement) => string
+  optionValue: (v: RadioButtonElement) => string
+  getSelectedValue: (v: unknown) => RadioButtonElement
+}
 
 const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   const {
@@ -38,7 +42,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
 
   const { dataResourceUrl, content } = useWidgetInitialization({ ...props, context })
   const [elements, setElements] = React.useState<RadioButtonElement[]>(content as RadioButtonElement[])
-  const [selectedValue, setSelectedValue] = React.useState<string>('')
+  const [selectedValue, setSelectedValue] = React.useState<RadioButtonElement | undefined>(undefined)
 
   React.useEffect(() => {
     if (dataResourceUrl) {
@@ -52,21 +56,20 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     setSelectedValue(getSelectedValue(context))
   }, [context, getSelectedValue])
 
-  const handleChange = (nextValue: string): void => {
-    const widgetValue = elements.find((element: RadioButtonElement) => element.uuid === nextValue)
-
-    handleUserAction({ ...props, eventName, widgetType, widgetValue })
+  const handleChange = (nextValue: RadioButtonElement | undefined): void => {
+    handleUserAction({ ...props, eventName, widgetType, widgetValue: nextValue })
   }
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
-      <RadioGroup onChange={handleChange} value={selectedValue}>
-        {elements.map((element: RadioButtonElement) => (
-          <Radio value={optionValue(element)} key={element.uuid}>
-            {optionLabel(element)}
-          </Radio>
-        ))}
-      </RadioGroup>
+      <RadioGroup
+        getKey={optionValue}
+        getLabel={optionLabel}
+        getValue={optionValue}
+        items={elements}
+        onChange={handleChange}
+        value={selectedValue}
+      />
     </WidgetWrapper>
   )
 }

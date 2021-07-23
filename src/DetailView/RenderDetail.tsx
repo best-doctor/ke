@@ -14,6 +14,7 @@ import { mountDetailFields } from './mountDetailFields'
 import { ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'
 import { setFavicon } from '../Browser/Favicon'
+import { ErrorBoundary } from '../common/components/ErrorBoundary'
 
 const ViewType = 'detail_view'
 
@@ -106,16 +107,20 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
               const elements = admin[elementsKey as keyof typeof admin]
               if (!elements) return []
 
-              return container({
-                mainDetailObject,
-                setMainDetailObject,
-                notifier,
-                ViewType,
-                elements,
-                elementsKey,
-                refreshMainDetailObject,
-                ...props,
-              })
+              return (
+                <ErrorBoundary>
+                  {container({
+                    mainDetailObject,
+                    setMainDetailObject,
+                    notifier,
+                    ViewType,
+                    elements,
+                    elementsKey,
+                    refreshMainDetailObject,
+                    ...props,
+                  })}
+                </ErrorBoundary>
+              )
             })}
         </Col>
       </Row>
