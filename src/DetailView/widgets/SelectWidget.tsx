@@ -33,6 +33,7 @@ type SelectWidgetProps = {
   containerStore: Store<object>
   required?: Accessor<boolean>
   isDisabled?: boolean
+  isClearable?: boolean
 }
 
 const getSelectContent = (
@@ -65,6 +66,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
       handleChange,
       required,
       isDisabled = false,
+      isClearable = false,
     } = props
 
     const context = containerStore.getState()
@@ -100,6 +102,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
           onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
           styles={widgetStyles}
           isDisabled={isDisabled}
+          isClearable={isClearable}
         />
       </WidgetWrapper>
     )
@@ -137,7 +140,7 @@ const SelectWidget = forwardRef<HTMLSelectElement, WidgetProps>(
     }
 
     const handleChange = (changeValue: SelectObject): void => {
-      const widgetPayload = getPayload(changeValue.value, name, targetPayload)
+      const widgetPayload = getPayload(changeValue?.value || null, name, targetPayload)
 
       pushAnalytics({
         eventName: EventNameEnum.SELECT_OPTION_CHANGE,
