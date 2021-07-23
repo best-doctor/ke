@@ -1,19 +1,10 @@
 import React from 'react'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
+
 import type { BaseNotifier } from '../notifier'
 import { containerErrorsStore } from '../../WizardMaster/store'
 import { ToClipboard } from './ToClipboard'
-
-const WidgetLabel = ({ helpText, isRequired }: { helpText: string; isRequired: boolean }): JSX.Element => (
-  <>
-    <Text>{helpText}</Text>
-    {isRequired && (
-      <Text color="#858793" fontSize="0.85em" ml={2}>
-        Обязательное
-      </Text>
-    )}
-  </>
-)
+import { Label } from './Label'
 
 /**
  * Standard styled container for other widgets
@@ -53,11 +44,11 @@ const WidgetWrapper = ({
   return (
     <Box {...style} data-name={name}>
       <Flex mt={5} alignItems="center" flexShrink={0}>
-        {helpText && <WidgetLabel helpText={helpText} isRequired={required} />}
-        {useClipboard && <ToClipboard ml={5} value={copyValue} notifier={notifier} />}
+        {helpText && <Label isRequired={required}>{helpText}</Label>}
+        {useClipboard && <ToClipboard ml={1} value={copyValue} notifier={notifier} />}
         {description || ''}
       </Flex>
-      <Box borderColor={hasError ? 'red.500' : undefined} borderWidth={hasError ? 1 : 0} borderRadius={3}>
+      <Box borderColor={hasError ? 'red.500' : undefined} mt={2} borderWidth={hasError ? 1 : 0} borderRadius={3}>
         {children}
       </Box>
     </Box>

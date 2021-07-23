@@ -8,6 +8,7 @@ import { Pagination } from '../../admin/providers/pagination'
 import type { Provider } from '../../admin/providers/interfaces'
 import { Accessor } from '../../typing'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
+import { components } from './ReactSelectCustomization'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -159,6 +160,7 @@ const AsyncSelectWidget = ({
       isDisabled={isDisabled}
       menuPlacement={menuPlacement}
       className={className}
+      components={components}
     />
   )
 }

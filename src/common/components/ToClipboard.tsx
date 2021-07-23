@@ -1,7 +1,7 @@
-import { Box, BoxProps } from '@chakra-ui/react'
-import type { BaseNotifier } from 'common/notifier'
+import { Box, BoxProps, Icon } from '@chakra-ui/react'
+import { Copy } from '@bestdoctor/icons'
 import React, { useCallback } from 'react'
-import { Copy } from 'react-feather'
+import type { BaseNotifier } from 'common/notifier'
 
 interface ToClipboardProps extends BoxProps {
   value?: string | Function
@@ -25,8 +25,8 @@ export const ToClipboard = ({ value, onClick, notifier, children, ...rest }: ToC
   }, [onClick, notifier, value])
 
   return (
-    <Box display="flex" alignItems="center" onClick={handleClick} {...rest}>
-      <Box className="icon" as={Copy} size="1em" display="inline" color="blue.500" />
+    <Box as="button" display="flex" alignItems="center" onClick={handleClick} {...rest}>
+      <Icon as={Copy} h={4} w={4} display="inline-block" color="blue.500" />
       {!!children && <Box ml={3}>{children}</Box>}
     </Box>
   )
