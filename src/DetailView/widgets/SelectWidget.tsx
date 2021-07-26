@@ -34,6 +34,7 @@ type SelectWidgetProps = {
   required?: Accessor<boolean>
   isDisabled?: boolean
   isClearable?: boolean
+  placeholder?: string
 }
 
 const getSelectContent = (
@@ -67,6 +68,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
       required,
       isDisabled = false,
       isClearable = false,
+      placeholder = 'Выберите значение',
     } = props
 
     const context = containerStore.getState()
@@ -98,11 +100,12 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
         <Select
           inputRef={ref}
           options={options}
-          defaultValue={{ value, label }}
+          defaultValue={value ? { value, label } : undefined}
           onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
           styles={widgetStyles}
           isDisabled={isDisabled}
           isClearable={isClearable}
+          placeholder={placeholder}
         />
       </WidgetWrapper>
     )
