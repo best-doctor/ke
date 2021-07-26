@@ -7,13 +7,6 @@ type TVerboseName = {
   verbose: string
 }
 
-type TVerboseNames = {
-  home: TVerboseName
-  quotations: TVerboseName
-  quotation: TVerboseName
-  quotationsCreate: TVerboseName
-}
-
 type TPathRule = {
   self?: string
   left?: string
@@ -92,4 +85,4 @@ const Breadcrumbs = ({ rules }: { rules: TPathRules }): JSX.Element => {
   )
 }
 
-export { Breadcrumbs, TVerboseNames, TPathRule, TPathRules, TBreadcrumbElement }
+export { Breadcrumbs, TVerboseName, TPathRule, TPathRules, TBreadcrumbElement }
