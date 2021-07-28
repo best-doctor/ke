@@ -12,6 +12,7 @@ interface OptionDesc {
   infoView: ReactElement
   label?: string | MarkerLabel
   icon?: string | object | Icon
+  secondaryAction?: ReactElement
 }
 
 export type LatLng = { lat: number; lng: number }
