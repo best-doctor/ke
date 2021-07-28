@@ -119,7 +119,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/198f5a4/src/common/notifier.ts#L4">src/common/notifier.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/34fb07f/src/common/notifier.ts#L6">src/common/notifier.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -141,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Notifier<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChakraUINotifierConfig</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/198f5a4/src/common/notifier.ts#L22">src/common/notifier.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/34fb07f/src/common/notifier.ts#L24">src/common/notifier.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +152,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#notifierhanlder">notifierHanlder</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/198f5a4/src/common/notifier.ts#L4">src/common/notifier.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/34fb07f/src/common/notifier.ts#L6">src/common/notifier.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -163,22 +163,25 @@
 					<a name="notify" class="tsd-anchor"></a>
 					<h3>notify</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReactNode</span>, status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, description<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReactNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/198f5a4/src/common/notifier.ts#L28">src/common/notifier.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/34fb07f/src/common/notifier.ts#L30">src/common/notifier.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <span class="tsd-signature-type">string</span></h5>
+									<h5>title: <span class="tsd-signature-type">ReactNode</span></h5>
 								</li>
 								<li>
 									<h5>status: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <span class="tsd-signature-type">ReactNode</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -189,20 +192,23 @@
 					<a name="notifyerror" class="tsd-anchor"></a>
 					<h3>notify<wbr>Error</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">notify<wbr>Error<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">notify<wbr>Error<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReactNode</span>, description<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReactNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#notifyerror">notifyError</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/198f5a4/src/common/notifier.ts#L40">src/common/notifier.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/34fb07f/src/common/notifier.ts#L43">src/common/notifier.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Ошибка&#x27;</span></h5>
+									<h5>title: <span class="tsd-signature-type">ReactNode</span><span class="tsd-signature-symbol"> = &#x27;Ошибка&#x27;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <span class="tsd-signature-type">ReactNode</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -213,20 +219,23 @@
 					<a name="notifysuccess" class="tsd-anchor"></a>
 					<h3>notify<wbr>Success</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">notify<wbr>Success<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">notify<wbr>Success<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReactNode</span>, description<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReactNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="basenotifier.html">BaseNotifier</a>.<a href="basenotifier.html#notifysuccess">notifySuccess</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/198f5a4/src/common/notifier.ts#L36">src/common/notifier.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/best-doctor/ke/blob/34fb07f/src/common/notifier.ts#L39">src/common/notifier.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Обновлено&#x27;</span></h5>
+									<h5>title: <span class="tsd-signature-type">ReactNode</span><span class="tsd-signature-symbol"> = &#x27;Обновлено&#x27;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <span class="tsd-signature-type">ReactNode</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
