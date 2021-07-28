@@ -91,7 +91,7 @@ import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { ValidatorFunction } from './typing'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
-import { TPathRules, TVerboseNames } from './ListView/components/Breadcrumbs/Breadcrumbs'
+import { TPathRules } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
 import { WizardProps } from './WizardMaster/components/Wizard'
 
@@ -228,7 +228,6 @@ export {
   PhoneChipInputWidget,
   ToClipboard,
   TPathRules,
-  TVerboseNames,
   StyleDateTime,
   WizardProps,
   ValidatorFunction,

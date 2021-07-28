@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Button } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 import { usePropState } from '@cdk/Hooks'
 
 import { Map, MapProps, MapMarker, MapInfoWindow } from '../../Widgets/Map'
@@ -81,7 +81,10 @@ export function MapSelect<T>({
         <MapInfoWindow position={openedOption[1].coords} onCloseClick={() => setOpenedOption(undefined)}>
           <>
             {openedOption[1].infoView}
-            {onChange && <Button onClick={() => onChange(openedOption[2])}>Выбрать</Button>}
+            <Flex alignItems="center" mt={5}>
+              {onChange && <Button onClick={() => onChange(openedOption[2])}>Выбрать</Button>}
+              {openedOption[1].secondaryAction}
+            </Flex>
           </>
         </MapInfoWindow>
       )}

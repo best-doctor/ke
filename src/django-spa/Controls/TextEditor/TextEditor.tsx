@@ -45,7 +45,11 @@ export const TextEditor = (props: ControlProps<string>): JSX.Element => {
 
   const onBlur = useCallback((): void => {
     const formattedValue = valueFromEditorFormat(value)
-    onChange(formattedValue)
+    if (formattedValue === '<p><br></p>') {
+      onChange('')
+    } else {
+      onChange(formattedValue)
+    }
   }, [onChange, value])
 
   const handleChange = useCallback((v: EditorValue): void => {
