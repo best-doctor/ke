@@ -11,7 +11,7 @@ import type { FieldsTypeInAdminClass } from 'typing'
 import { mountWizards } from '../WizardMaster/mountWizards'
 import { mountWizards as updatedMountWizards } from '../Wizard/mountWizards'
 import { mountDetailFields } from './mountDetailFields'
-import { ChakraUINotifier } from '../common/notifier'
+import { BaseNotifier, ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'
 import { setFavicon } from '../Browser/Favicon'
 import { ErrorBoundary } from '../common/components/ErrorBoundary'
@@ -26,6 +26,7 @@ type RenderDetailProps = {
   provider: Provider
   user: object
   analytics: BaseAnalytic | undefined
+  notifier?: BaseNotifier
 }
 
 const getContainersToMount = (): { [key in FieldsTypeInAdminClass]: Function } =>
@@ -55,10 +56,9 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const [mainDetailObject, setMainDetailObject] = useState<Model>()
   const [needRefreshDetailObject, setNeedRefreshDetailObject] = useState<boolean>(true)
   const { id } = useParams<{ id: string }>()
+  const { resourceName, admin, provider, notifier } = props
   const toast = useToast()
-  const notifier = new ChakraUINotifier(toast)
-
-  const { resourceName, admin, provider } = props
+  const detailNotifier = notifier || new ChakraUINotifier(toast)
 
   let title = `${admin.verboseName} # ${id}`
   if (admin.getPageTitle) {
@@ -112,12 +112,12 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
                   {container({
                     mainDetailObject,
                     setMainDetailObject,
-                    notifier,
                     ViewType,
                     elements,
                     elementsKey,
                     refreshMainDetailObject,
                     ...props,
+                    notifier: detailNotifier,
                   })}
                 </ErrorBoundary>
               )
