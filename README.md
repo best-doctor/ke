@@ -152,21 +152,23 @@ which makes all magic under the hood and get your user component.
 
 ```tsx
 import { ResourceComposer } from '@bestdoctor/ke';
-
+import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'provider';
 
 const provider = new Provider()
 
 const App = () => (
-  <ResourceComposer>
-    <AdminResource
-      name="patients"
-      admin={new PatientAdmin()}
-      provider={provider}
-      user={{ name: 'name', permissions: ['admin_user'] }}
-      analytics={analyticsInstnace}
-    />
-  </ResourceComposer>
+  <ChakraProvider>
+    <ResourceComposer>
+      <AdminResource
+        name="patients"
+        admin={new PatientAdmin()}
+        provider={provider}
+        user={{ name: 'name', permissions: ['admin_user'] }}
+        analytics={analyticsInstnace}
+      />
+    </ResourceComposer>
+  </ChakraProvider>
 )
 ```
 
@@ -447,14 +449,11 @@ After cloning this repo if you'd like to use it in another project using React
   ```bash
   yarn install
   ```
-* link `react` from `ke`: 
+* link all external dependencies and `ke`: 
   ```
-  yarn link react
+  yarn link react @chakra-ui/react @bestdoctor/ke
   ```
-* link `@chakra-ui/react` from `ke`: 
-  ```
-  yarn link @chakra-ui/react
-  ```
+
 
 Here are useful tips:
 
