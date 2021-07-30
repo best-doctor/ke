@@ -8,7 +8,7 @@ import { Pagination } from '../../admin/providers/pagination'
 import type { Provider } from '../../admin/providers/interfaces'
 import { Accessor } from '../../typing'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
-import { components } from './ReactSelectCustomization'
+import { components, modifyStyles } from './ReactSelectCustomization'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -152,7 +152,7 @@ const AsyncSelectWidget = ({
       isClearable={isClearable}
       isMulti={isMulti as false | undefined}
       menuPortalTarget={document.body}
-      styles={widgetStyles}
+      styles={modifyStyles(widgetStyles)}
       formatOptionLabel={formatOptionLabel}
       getOptionValue={(option: object | object[] | null) => (option ? getOptionValue(option) : option)}
       placeholder={placeholder}

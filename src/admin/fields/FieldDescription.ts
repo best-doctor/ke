@@ -1,3 +1,4 @@
+import { BoxProps } from '@chakra-ui/react'
 import type { FunctionComponent } from 'react'
 import type { Accessor, GenericAccessor } from 'typing'
 import type { BaseWizard } from '../../WizardMaster/interfaces'
@@ -38,6 +39,7 @@ type LayoutData = {
   mdOffset?: number
   lgOffset?: number
   xlOffset?: number
+  colProps?: BoxProps
 }
 
 type WizardFieldElement = BaseWizard | ((object: any) => BaseWizard | null)

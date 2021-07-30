@@ -1,7 +1,8 @@
 import { ChakraProvider, ChakraProviderProps, extendTheme, Theme, theme as chakraTheme } from '@chakra-ui/react'
 
 import React from 'react'
-import { SelectWidgtet } from './theme/SelectWidget'
+import { SelectWidget } from './theme/SelectWidget'
+import { ReadOnlyWidget } from './theme/ReadOnlyWidget'
 
 export const defaultTheme = extendTheme({
   colors: {
@@ -19,7 +20,8 @@ export const defaultTheme = extendTheme({
         },
       },
     },
-    SelectWidget: SelectWidgtet,
+    SelectWidget,
+    ReadOnlyWidget,
   },
 })
 

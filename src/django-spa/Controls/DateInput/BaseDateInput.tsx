@@ -2,9 +2,11 @@ import React, { useCallback } from 'react'
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 
-import { StyleDateTime } from './styles'
+import styled from '@emotion/styled'
+// import { StyleDateTime } from './styles'
 import { OptionalDate } from './types'
 import { ControlProps } from '../types'
+import { ChakraDateInput } from './ChakraDateInput'
 
 export type BaseDateInputProps = ControlProps<OptionalDate> & {
   minDate?: Date
@@ -15,6 +17,7 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
   className?: string
   isClearable?: boolean
   showTimeSelect: boolean
+  placeholder?: string
 }
 
 /**
@@ -31,6 +34,20 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
  * @param isClearable - allow input to be clearable
  * @param showTimeSelect - show time select
  */
+
+const StyledDatePicker = styled(DatePicker)({
+  '& .react-datepicker-popper': {
+    zIndex: '1001 !important' as any,
+  },
+  '& .react-datepicker__close-icon': {
+    height: '40px',
+  },
+  '& .react-datepicker__close-icon::after': {
+    color: '#cccccc',
+    backgroundColor: 'transparent',
+    fontSize: '24px',
+  },
+})
 export const BaseDateInput = ({
   value,
   minDate,
@@ -42,6 +59,7 @@ export const BaseDateInput = ({
   className = 'styled-date-time',
   isClearable = false,
   showTimeSelect,
+  placeholder,
 }: BaseDateInputProps): JSX.Element => {
   const [date, setDate] = React.useState<OptionalDate>(value)
   if (format(value || new Date(), dateFormat) !== format(date || new Date(), dateFormat)) {
@@ -57,20 +75,20 @@ export const BaseDateInput = ({
   )
 
   return (
-    <StyleDateTime>
-      <DatePicker
-        className={className}
-        selected={date}
-        onChange={handleChange}
-        dateFormat={dateFormat}
-        minDate={minDate}
-        maxDate={maxDate}
-        filterDate={filterDate}
-        filterTime={filterTime}
-        showDisabledMonthNavigation
-        isClearable={isClearable}
-        showTimeSelect={showTimeSelect}
-      />
-    </StyleDateTime>
+    <StyledDatePicker
+      className={className}
+      selected={date}
+      onChange={handleChange}
+      dateFormat={dateFormat}
+      minDate={minDate}
+      maxDate={maxDate}
+      filterDate={filterDate}
+      filterTime={filterTime}
+      showDisabledMonthNavigation
+      isClearable={isClearable}
+      showTimeSelect={showTimeSelect}
+      placeholderText={placeholder}
+      customInput={<ChakraDateInput />}
+    />
   )
 }

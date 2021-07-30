@@ -16,7 +16,16 @@ import type { WidgetProps } from '../../typing'
  * @param props - widget props
  */
 const CheckboxWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+  const {
+    name,
+    helpText,
+    description,
+    targetPayload,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    style: externalStyle,
+  } = props
 
   const context = containerStore.getState()
 
@@ -41,8 +50,10 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
+  const style = { pt: 4, ...externalStyle }
+
   return (
-    <WidgetWrapper name={name} style={style} helpText="&nbsp;" description={description}>
+    <WidgetWrapper containerProps={{ mt: 0 }} name={name} style={style} description={description}>
       <CheckBox value={value} onChange={handleChange} helpText={helpText} />
     </WidgetWrapper>
   )

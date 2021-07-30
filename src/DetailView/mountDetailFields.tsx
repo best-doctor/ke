@@ -48,7 +48,7 @@ const mountDetailFields = ({
   const [setInitialValue, submitChange] = initDetailViewControllers(provider, setMainDetailObject, notifier)
 
   return (
-    <Box marginBottom="16px" key={elementsKey}>
+    <Box pb={8} key={elementsKey}>
       {mountComponents({
         setInitialValue,
         submitChange,

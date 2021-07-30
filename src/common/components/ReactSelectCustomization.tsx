@@ -1,7 +1,14 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Flex, StylesProvider, useMultiStyleConfig, useStyles } from '@chakra-ui/react'
+import { Flex, StylesProvider, Tag, TagCloseButton, TagLabel, useMultiStyleConfig, useStyles } from '@chakra-ui/react'
+import { ClassNames } from '@emotion/react'
 import React from 'react'
-import { ControlProps, IndicatorProps, components as selectComponents } from 'react-select'
+import {
+  ControlProps,
+  IndicatorProps,
+  components as selectComponents,
+  StylesConfig,
+  MultiValueProps,
+} from 'react-select'
 
 export const Control = <OptionType, IsMulti extends boolean = false>({
   innerRef,
@@ -19,7 +26,6 @@ export const Control = <OptionType, IsMulti extends boolean = false>({
         ref={innerRef}
         sx={{
           ...styles.control,
-          p: 0,
           overflow: 'hidden',
         }}
         {...innerProps}
@@ -43,4 +49,78 @@ const DropdownIndicator = <OptionType, IsMulti extends boolean = false>(
   )
 }
 
-export const components = { Control, DropdownIndicator }
+export function MultiValue<OptionType>(props: MultiValueProps<OptionType>): JSX.Element {
+  const { children, className, cx, getStyles, innerProps, isDisabled, removeProps, data, selectProps } = props
+
+  const { multiValueContainer, multiValueLabel, multiValueRemove } = useStyles()
+
+  return (
+    <ClassNames>
+      {({ css, cx: emotionCx }) => (
+        <Tag
+          data={data}
+          innerProps={{
+            className: emotionCx(
+              css(getStyles('multiValue', props)),
+              cx(
+                {
+                  'multi-value': true,
+                  'multi-value--is-disabled': isDisabled,
+                },
+                className
+              )
+            ),
+            ...innerProps,
+          }}
+          selectProps={selectProps}
+          sx={multiValueContainer}
+        >
+          <TagLabel
+            data={data}
+            innerProps={{
+              className: emotionCx(
+                css(getStyles('multiValueLabel', props)),
+                cx(
+                  {
+                    'multi-value__label': true,
+                  },
+                  className
+                )
+              ),
+            }}
+            selectProps={selectProps}
+            sx={multiValueLabel}
+          >
+            {children}
+          </TagLabel>
+          <TagCloseButton
+            className={emotionCx(
+              css(getStyles('multiValueRemove', props)),
+              cx(
+                {
+                  'multi-value__remove': true,
+                },
+                className
+              )
+            )}
+            {...removeProps}
+            sx={multiValueRemove}
+          />
+        </Tag>
+      )}
+    </ClassNames>
+  )
+}
+
+export const modifyStyles = (externalStyles?: StylesConfig<any, false>): StylesConfig<any, false> => ({
+  ...externalStyles,
+  valueContainer(prevStyles, state) {
+    const defaultStyles: React.CSSProperties = { ...prevStyles, padding: '0, 2px' }
+    if (externalStyles?.valueContainer) {
+      return externalStyles.valueContainer(defaultStyles, state)
+    }
+    return defaultStyles
+  },
+})
+
+export const components = { Control, DropdownIndicator, MultiValue }

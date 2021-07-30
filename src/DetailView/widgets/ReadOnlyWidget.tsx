@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Box } from '@chakra-ui/react'
+import { Text, useStyleConfig } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -8,9 +8,6 @@ import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
 
 const defaultInnerProps = {
-  borderWidth: '1px',
-  borderRadius: '3px',
-  borderColor: '#cbd5e0',
   padding: '5.4px',
   whiteSpace: 'pre-line',
 } as const
@@ -25,6 +22,8 @@ const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JS
       }
     : defaultInnerProps
 
+  const styles = useStyleConfig('ReadOnlyWidget', props)
+
   return (
     <WidgetWrapper
       name={name}
@@ -36,7 +35,9 @@ const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JS
       notifier={notifier}
       required={isRequired}
     >
-      <Box {...innerProps}>{content || '\u00a0'}</Box>
+      <Text sx={styles} {...innerProps}>
+        {content || '\u00a0'}
+      </Text>
     </WidgetWrapper>
   )
 }

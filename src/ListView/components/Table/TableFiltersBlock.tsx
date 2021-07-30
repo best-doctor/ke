@@ -74,11 +74,11 @@ const mountFilters = (props: FilterBlockProps): ReactNode => {
 const mountFilterTemplates = (props: FilterBlockProps, history: any): JSX.Element => {
   const { listFilterTemplates } = props
   return (
-    <Flex flexDirection="row">
+    <Flex flexDirection="row" flexWrap="wrap">
       {listFilterTemplates &&
         listFilterTemplates.map((listFilterTemplate: ListFilterTemplateDescription) => {
           const style = listFilterTemplate.style || {
-            colorScheme: 'teal',
+            colorScheme: 'brand',
             variant: 'outline',
           }
           return (

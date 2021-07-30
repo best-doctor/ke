@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Box } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
 import { useStore } from 'effector-react'
 
@@ -73,19 +73,20 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
       {show && (
         <Row>
           <Col xs={12}>
-            <Box
-              ref={wizardStepRef}
-              marginBottom="16px"
-              borderTopWidth="1px"
-              borderBottomWidth="1px"
-              padding="8px"
-              borderColor="gray.300"
-            >
+            <Box ref={wizardStepRef} py={8}>
               <Row>
                 <Col xs={12}>
-                  <Heading key="header" size="md" data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}>
+                  <Text
+                    as="h2"
+                    key="header"
+                    fontSize="3xl"
+                    color="black"
+                    fontWeight="medium"
+                    lineHeight="9"
+                    data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}
+                  >
                     {wizard.title}
-                  </Heading>
+                  </Text>
                 </Col>
               </Row>
               <ErrorBoundary>
@@ -108,7 +109,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                     <Box key="errors">
                       <WizardValidationErrors errors={errors.map(({ errorText }) => errorText)} />
                     </Box>
-                    <Box key="steps">
+                    <Flex alignItems="center" key="steps">
                       <WizardStepControlPanel
                         wizardStep={wizardStep}
                         wizard={wizard}
@@ -121,7 +122,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                         refreshMainDetailObject={refreshMainDetailObject}
                         notifier={notifier}
                       />
-                    </Box>
+                    </Flex>
                   </Col>
                 </Row>
               </ErrorBoundary>
