@@ -1,4 +1,5 @@
 import React, { ElementType, ReactElement, RefObject, useCallback, useRef } from 'react'
+import { ForwardRef } from 'react-is'
 import { ControlRefProps, useField, useFieldValidation, ValidationResult, Validator } from '@cdk/Forms'
 import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
 
@@ -21,8 +22,20 @@ export const Field = makeWithLayout(
 
     // Don't found why, but type declaration necessary here https://github.com/microsoft/TypeScript/issues/28631#issuecomment-477240245
     const Component: ElementType = as
+    // isForwardRef from react-is only works for rendered components (i.e. elements),
+    // so we use $$typeof of Component to check if it supports ref pass.
+    const isComponentHasRef = ((Component as unknown) as { $$typeof: symbol }).$$typeof === ForwardRef
+
     return {
-      Control: <Component ref={controlRef} value={value} onChange={handleChange} {...other} />,
+      Control: (
+        <Component
+          // Fix for warning: Function components cannot be given refs.
+          {...(isComponentHasRef ? { ref: controlRef } : {})}
+          value={value}
+          onChange={handleChange}
+          {...other}
+        />
+      ),
       Errors: errors && errors.length ? errors[0].message : '',
       Label: label,
     }
