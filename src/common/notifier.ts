@@ -1,5 +1,7 @@
 /* eslint max-classes-per-file: 0 */
 
+import { ReactNode } from 'react'
+
 abstract class BaseNotifier {
   notifierHanlder: Function | object
 
@@ -7,9 +9,9 @@ abstract class BaseNotifier {
     this.notifierHanlder = notifierHandler
   }
 
-  abstract notifySuccess(message?: string | undefined): void
+  abstract notifySuccess(title?: ReactNode | string, description?: ReactNode | string): void
 
-  abstract notifyError(message?: string | undefined): void
+  abstract notifyError(title?: ReactNode | string, description?: ReactNode | string): void
 }
 
 type ChakraUINotifierConfig = {
@@ -25,20 +27,21 @@ class ChakraUINotifier extends BaseNotifier {
     isClosable: true,
   }
 
-  notify(message: string, status: string): void {
+  notify(title: ReactNode | string, status: string, description?: ReactNode | string): void {
     ;(this.notifierHanlder as Function)({
-      title: message,
+      title,
+      description,
       status,
       ...this.defaultNotifierConfig,
     })
   }
 
-  notifySuccess(message: string | undefined = 'Обновлено'): void {
-    this.notify(message, 'success')
+  notifySuccess(title: ReactNode | string = 'Обновлено', description?: ReactNode | string): void {
+    this.notify(title, 'success', description)
   }
 
-  notifyError(message: string | undefined = 'Ошибка'): void {
-    this.notify(message, 'error')
+  notifyError(title: ReactNode | string = 'Ошибка', description?: ReactNode | string): void {
+    this.notify(title, 'error', description)
   }
 }
 

@@ -13,6 +13,7 @@ import { SideBarElementCompatible } from '../LegacySupport'
 import { TPathRules } from '../ListView/components/Breadcrumbs/Breadcrumbs'
 import { getAccessor } from '../DetailView/utils/dataAccess'
 import { ErrorBoundary } from '../common/components/ErrorBoundary'
+import { BaseNotifier } from '../common/notifier'
 
 type ResourceProps = {
   props: {
@@ -34,12 +35,14 @@ const AdminResource = ({
   provider,
   user,
   analytics,
+  notifier,
 }: {
   name: string
   admin: BaseAdmin
   provider: Provider
   user: object
   analytics: BaseAnalytic | undefined
+  notifier?: BaseNotifier
 }): JSX.Element => (
   <Switch>
     <Redirect exact strict from={`/${name}`} to={`/${name}/`} />
@@ -52,7 +55,14 @@ const AdminResource = ({
     )}
     <Route exact path={`/${name}/:id`}>
       <ErrorBoundary>
-        <RenderDetail resourceName={name} admin={admin} provider={provider} user={user} analytics={analytics} />
+        <RenderDetail
+          resourceName={name}
+          admin={admin}
+          provider={provider}
+          user={user}
+          analytics={analytics}
+          notifier={notifier}
+        />
       </ErrorBoundary>
     </Route>
   </Switch>
