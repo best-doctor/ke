@@ -3,7 +3,9 @@ import { ComponentStyleConfig } from '@chakra-ui/react'
 export const ReadOnlyWidget: ComponentStyleConfig = {
   baseStyle: {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
 
     width: '100%',
     minWidth: 0,
