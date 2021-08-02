@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { CheckboxGroup, Checkbox } from '@chakra-ui/react'
+import { StyledWrapper } from './styles'
 
 import { ControlProps } from '../types'
 
@@ -10,7 +11,10 @@ type CheckBoxGroupProps<T> = ControlProps<T[]> & {
   defaultValue?: string[]
 }
 
-export const CheckBoxGroup = <T extends object>(props: CheckBoxGroupProps<T>): JSX.Element => {
+const CheckBoxGroupInner = <T extends object>(
+  props: CheckBoxGroupProps<T>,
+  ref?: React.ForwardedRef<HTMLInputElement>
+): JSX.Element => {
   const { value, onChange, getKey, getValue, getLabel, defaultValue } = props
 
   const handleChange = useCallback(
@@ -21,12 +25,18 @@ export const CheckBoxGroup = <T extends object>(props: CheckBoxGroupProps<T>): J
   )
 
   return (
-    <CheckboxGroup colorScheme="teal" defaultValue={defaultValue} onChange={(values) => handleChange(values)}>
-      {value.map((v: T) => (
-        <Checkbox spacing={8} key={getKey(v)} value={getValue(v)}>
-          {getLabel(v)}
-        </Checkbox>
-      ))}
-    </CheckboxGroup>
+    <StyledWrapper ref={ref}>
+      <CheckboxGroup colorScheme="teal" defaultValue={defaultValue} onChange={(values) => handleChange(values)}>
+        {value.map((v: T) => (
+          <Checkbox spacing={8} key={getKey(v)} value={getValue(v)}>
+            {getLabel(v)}
+          </Checkbox>
+        ))}
+      </CheckboxGroup>
+    </StyledWrapper>
   )
 }
+
+export const CheckBoxGroup = React.forwardRef(CheckBoxGroupInner) as <T extends object>(
+  props: CheckBoxGroupProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+) => ReturnType<typeof CheckBoxGroupInner>

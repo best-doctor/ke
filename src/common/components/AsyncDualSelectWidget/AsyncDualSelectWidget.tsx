@@ -4,7 +4,7 @@ import type { Provider } from 'admin/providers/interfaces'
 import type { Pagination } from 'admin/providers/pagination/interfaces'
 import { ArrowLeft, ArrowRight } from 'react-feather'
 
-import { DebounceInput } from '../../../django-spa/Controls'
+import { DebounceInput } from '../../../django-spa/Controls/DebounceInput'
 import {
   SelectButton,
   CenterContainer,
@@ -202,7 +202,6 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
           <SideContainerTitle fontSize="md">
             {searchActive ? (
               <DebounceInput
-                autoFocus
                 value={searchValue}
                 onChange={(newValue) => {
                   loadOptions({ first: true, searchQueryValue: newValue }).then((res) => {
