@@ -134,7 +134,16 @@ export {
   RadioGroup,
   DebounceInput,
 } from './django-spa/Controls'
-export { AnalyticsProvider, useAnalytics, AnalyticsConfigProvider, useFirebase } from './django-spa/aspects'
+export {
+  AnalyticsProvider,
+  useAnalytics,
+  AnalyticsConfigProvider,
+  useFirebase,
+  LoggerProvider,
+  useLogger,
+  LoggerConfigProvider,
+  useConsoleLogger,
+} from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'
 
