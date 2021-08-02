@@ -198,21 +198,23 @@
 					<li><code>analytcs</code> – analytics object instance. See below for more details.</li>
 				</ul>
 				<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ResourceComposer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@bestdoctor/ke&#039;</span><span style="color: #000000">;</span>
-
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ChakraProvider</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@chakra-ui/react&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Provider</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;provider&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">provider</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Provider</span><span style="color: #000000">()</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">App</span><span style="color: #000000"> = () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span>
-<span style="color: #000000">  </span><span style="color: #800000">&lt;</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">AdminResource</span>
-<span style="color: #000000">      </span><span style="color: #FF0000">name</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;patients&quot;</span>
-<span style="color: #000000">      </span><span style="color: #FF0000">admin</span><span style="color: #000000">=</span><span style="color: #0000FF">{new</span><span style="color: #000000FF"> </span><span style="color: #795E26">PatientAdmin</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span>
-<span style="color: #000000">      </span><span style="color: #FF0000">provider</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">provider</span><span style="color: #0000FF">}</span>
-<span style="color: #000000">      </span><span style="color: #FF0000">user</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #000000FF">{ </span><span style="color: #001080">name:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;name&#039;</span><span style="color: #000000FF">, </span><span style="color: #001080">permissions:</span><span style="color: #000000FF"> [</span><span style="color: #A31515">&#039;admin_user&#039;</span><span style="color: #000000FF">] }</span><span style="color: #0000FF">}</span>
-<span style="color: #000000">      </span><span style="color: #FF0000">analytics</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">analyticsInstnace</span><span style="color: #0000FF">}</span>
-<span style="color: #000000">    </span><span style="color: #800000">/&gt;</span>
-<span style="color: #000000">  </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;</span><span style="color: #267F99">ChakraProvider</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">      </span><span style="color: #800000">&lt;</span><span style="color: #267F99">AdminResource</span>
+<span style="color: #000000">        </span><span style="color: #FF0000">name</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;patients&quot;</span>
+<span style="color: #000000">        </span><span style="color: #FF0000">admin</span><span style="color: #000000">=</span><span style="color: #0000FF">{new</span><span style="color: #000000FF"> </span><span style="color: #795E26">PatientAdmin</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">        </span><span style="color: #FF0000">provider</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">provider</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">        </span><span style="color: #FF0000">user</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #000000FF">{ </span><span style="color: #001080">name:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;name&#039;</span><span style="color: #000000FF">, </span><span style="color: #001080">permissions:</span><span style="color: #000000FF"> [</span><span style="color: #A31515">&#039;admin_user&#039;</span><span style="color: #000000FF">] }</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">        </span><span style="color: #FF0000">analytics</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">analyticsInstnace</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">      </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">ResourceComposer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">ChakraProvider</span><span style="color: #800000">&gt;</span>
 <span style="color: #000000">)</span>
 </code></pre>
 				<p><code>App</code> will have routes for the list and detail view with the
@@ -429,14 +431,32 @@
 				</a>
 				<p>After cloning this repo if you&#39;d like to use it in another project using React
 				(placed at e.g. <code>/path/to/your/awesome/project/</code>) you should follow these steps:</p>
+				<a href="#in-ke-folder" id="in-ke-folder" style="color: inherit; text-decoration: none;">
+					<h4>In <code>ke</code> folder</h4>
+				</a>
 				<ul>
-					<li>install all deps: <code>yarn install</code></li>
-					<li>create link to <code>@bestdoctor/ke</code>: <code>yarn link</code></li>
-					<li>link existing React in order to prevent hooks
-						<a href="https://ru.reactjs.org/warnings/invalid-hook-call-warning.html">problem</a>:
-					<code>npm link /path/to/your/awesome/project/node_modules/react</code></li>
-					<li>link <code>@bestdoctor/ke</code> to your project:
-					<code>yarn link &quot;@bestdoctor/ke&quot;</code> (must be run in your project&#39;s folder)</li>
+					<li>install all deps: <pre><code class="language-bash"><span style="color: #000000">yarn install</span>
+</code></pre>
+					</li>
+					<li>create link to <code>@bestdoctor/ke</code>: <pre><code class="language-bash"><span style="color: #000000">yarn link</span>
+</code></pre>
+					</li>
+					<li>link existing React and Chakra UI in order to prevent hooks
+						<a href="https://ru.reactjs.org/warnings/invalid-hook-call-warning.html">problem</a> <code>react</code> in <code>ke</code> <code>node_modules</code>:<pre><code class="language-bash"><span style="color: #795E26">cd</span><span style="color: #000000"> node_modules/react</span>
+<span style="color: #000000">yarn link</span>
+<span style="color: #795E26">cd</span><span style="color: #000000"> ../@chakra-ui/react</span>
+<span style="color: #000000">yarn link</span>
+</code></pre>
+						<a href="#in-your-project-folder" id="in-your-project-folder" style="color: inherit; text-decoration: none;">
+							<h4>In <code>your-project-folder</code></h4>
+						</a>
+					</li>
+					<li>install all deps: <pre><code class="language-bash"><span style="color: #000000">yarn install</span>
+</code></pre>
+					</li>
+					<li>link all external dependencies and <code>ke</code>: <pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">link</span><span style="color: #000000"> </span><span style="color: #001080">react</span><span style="color: #000000"> @</span><span style="color: #001080">chakra</span><span style="color: #000000">-</span><span style="color: #001080">ui</span><span style="color: #000000">/</span><span style="color: #001080">react</span><span style="color: #000000"> @</span><span style="color: #001080">bestdoctor</span><span style="color: #000000">/</span><span style="color: #001080">ke</span>
+</code></pre>
+					</li>
 				</ul>
 				<p>Here are useful tips:</p>
 				<ul>
@@ -746,6 +766,9 @@
 						<a href="modules.html#clearerros" class="tsd-kind-icon">clear<wbr>Erros</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="modules.html#defaulttheme" class="tsd-kind-icon">default<wbr>Theme</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="modules.html#localstorageprovider" class="tsd-kind-icon">local<wbr>Storage<wbr>Provider</a>
 					</li>
 					<li class=" tsd-kind-variable">
@@ -934,6 +957,9 @@
 					<li class=" tsd-kind-function">
 						<a href="modules.html#resourcecomposer" class="tsd-kind-icon">Resource<wbr>Composer</a>
 					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#select" class="tsd-kind-icon">Select</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#selectfilter" class="tsd-kind-icon">Select<wbr>Filter</a>
 					</li>
@@ -954,6 +980,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#textvalidationwidget" class="tsd-kind-icon">Text<wbr>Validation<wbr>Widget</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#themeprovider" class="tsd-kind-icon">Theme<wbr>Provider</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#toclipboard" class="tsd-kind-icon">To<wbr>Clipboard</a>
