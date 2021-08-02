@@ -3,11 +3,11 @@ import { useStore } from 'effector-react'
 import type { Store } from 'effector'
 import { useChangeEffect, useStoreApiState } from '@cdk/Hooks'
 
-export function entitiesList<Entity, ExtFilters extends { page?: number; ordering?: string }>(
+export function entitiesList<Entity, ExtFilters extends { page?: number; ordering?: string; per_page?: number }>(
   filtersComponent: FiltersComponent<Omit<ExtFilters, 'page' | 'ordering'>>,
   listComponent: ListComponent<Entity>,
   paginationComponent: PaginationComponent,
-  { entitiesSource, filtersSource }: EntitiesListProps<Entity, ExtFilters>
+  { entitiesSource, filtersSource, perPage = 20 }: EntitiesListProps<Entity, ExtFilters>
 ): { filters: ReactElement; list: ReactElement; pagination: ReactElement } {
   const { store: $filters, fetch: fetchFilters, update } = filtersSource
 
@@ -32,6 +32,8 @@ export function entitiesList<Entity, ExtFilters extends { page?: number; orderin
 
   const { store: $entities, fetch: entitiesFetch } = entitiesSource
   const { data: entities, totalCount } = useStore($entities)
+
+  filters.per_page = perPage
 
   useEffect(() => {
     if (lastFetch) {
@@ -60,7 +62,7 @@ export function entitiesList<Entity, ExtFilters extends { page?: number; orderin
     pagination: createElement(paginationComponent, {
       value: filters.page || 1,
       onChange: onPageChange,
-      totalCount: Math.ceil((totalCount || 1) / 20),
+      totalCount: Math.ceil((totalCount || 1) / perPage),
     }),
   }
 }
@@ -86,6 +88,7 @@ function strToOrdering(str: string): Ordering {
 export interface EntitiesListProps<Entity, Filters extends { page?: number }> {
   entitiesSource: EntitiesSource<Entity, Filters>
   filtersSource: FiltersSource<Filters>
+  perPage: number
 }
 
 interface EntitiesSource<Entity, Filters> {
