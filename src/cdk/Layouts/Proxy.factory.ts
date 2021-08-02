@@ -7,5 +7,5 @@ export function makeProxied<SC, TC>(
   mapping: (targetChildren: TC) => SC
 ): LayoutComponent<TC> {
   return ({ children }: LayoutProps<TC>) =>
-    (layout({ children: mapping(children) }) as unknown) as ReactElement<LayoutProps<TC>>
+    layout({ children: mapping(children) }) as unknown as ReactElement<LayoutProps<TC>>
 }

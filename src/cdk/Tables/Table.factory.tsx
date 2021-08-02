@@ -65,7 +65,7 @@ function normalizeCell<T>(
 
   const value =
     typeof keyOrValue === 'string'
-      ? (item: T) => getter((item as unknown) as Record<string, string>, keyOrValue)
+      ? (item: T) => getter(item as unknown as Record<string, string>, keyOrValue)
       : keyOrValue
 
   return {
