@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { Flex } from '@chakra-ui/react'
 import { Button } from '@cdk/Controls'
 import { containerErrorsStore, containerStore, initialStore } from '../../store'
 import type { Provider } from '../../../admin/providers/interfaces'
@@ -61,10 +62,14 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
   const buttons = getButtons.call(wizardStep, getWizardStepControlPayload())
 
   return (
-    <>
+    <Flex alignItems="center" flexGrow={1} mt={8} {...wizardStep.wrapperProps}>
       {buttons.map((button) => (
         <Button
           key={button.name}
+          ml={4}
+          _first={{
+            ml: 0,
+          }}
           {...button.style}
           isDisabled={isDisabled}
           onClick={() => {
@@ -99,7 +104,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
           {button.label}
         </Button>
       ))}
-    </>
+    </Flex>
   )
 }
 

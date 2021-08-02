@@ -1,6 +1,7 @@
 /* eslint max-classes-per-file: 0 */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["beforeShow", "next", "prev"] }] */
 
+import { FlexProps } from '@chakra-ui/react'
 import { containerErrorsStore } from '../store'
 import { validateContext } from '../utils'
 import type { DetailFieldDescription } from '../../admin/fields/FieldDescription'
@@ -16,6 +17,8 @@ const defaultLayout = { x: 1, y: 1, xs: 12 }
 
 abstract class BaseWizardStep {
   title: string
+
+  wrapperProps?: FlexProps
 
   resourceName?: string
 

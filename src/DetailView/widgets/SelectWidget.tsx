@@ -14,6 +14,7 @@ import {
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
+import { components, modifyStyles } from '../../common/components/ReactSelectCustomization'
 
 export type SelectObject = {
   value: string
@@ -102,8 +103,9 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
           options={options}
           defaultValue={value ? { value, label } : undefined}
           onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
-          styles={widgetStyles}
+          styles={modifyStyles(widgetStyles)}
           isDisabled={isDisabled}
+          components={components}
           isClearable={isClearable}
           placeholder={placeholder}
         />

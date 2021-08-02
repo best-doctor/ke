@@ -71,9 +71,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
       >
         <DebounceInput
           value={content as string}
-          height={height || (isTextarea ? 263 : 33)}
-          borderWidth="1px"
-          borderColor="gray.300"
+          height={height || (isTextarea ? 263 : undefined)}
           debounceTimeout={debounce}
           element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
           onChange={handleChange}

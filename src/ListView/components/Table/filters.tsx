@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputMask, { Props as InputMaskProps } from 'react-input-mask'
 import { Box } from '@chakra-ui/react'
-import Select from 'react-select'
+
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -18,6 +18,7 @@ import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
 import { Provider } from '../../../admin/providers'
+import { Select } from '../../../common/components/Select'
 
 type Option = {
   text: string
@@ -40,6 +41,7 @@ type FilterProps = {
   label: string
   resourceName: string
   gotoPage?: (page: number) => void
+  className?: string
 }
 type ResourceFilterProps = FilterProps & {
   filterResource: string
@@ -106,14 +108,12 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
   }
 
   return (
-    <StyledFilter>
-      <DebounceInput
-        className="styled-filter base-styled-filter"
-        onChange={handleChange}
-        placeholder={`Фильтр по ${label}` as const}
-        value={value}
-      />
-    </StyledFilter>
+    <DebounceInput
+      className="styled-filter base-styled-filter"
+      onChange={handleChange}
+      placeholder={`Фильтр по ${label}` as const}
+      value={value}
+    />
   )
 }
 
@@ -150,6 +150,10 @@ const MaskFilter = (params: FilterProps & InputMaskProps): JSX.Element => {
     </StyledFilter>
   )
 }
+
+const StyledMultiSelect = styled(Select)`
+  min-width: 300px;
+`
 
 const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
@@ -193,18 +197,16 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   }
 
   return (
-    <StyledFilter>
-      <Select
-        className="styled-filter"
-        onChange={(value: any) => handleChange(value)}
-        isMulti
-        isClearable
-        options={options}
-        getOptionLabel={(option: OptionIdType) => option.text}
-        getOptionValue={(option: OptionIdType) => option.id}
-        placeholder={`Фильтр по ${label}`}
-      />
-    </StyledFilter>
+    <StyledMultiSelect
+      className={params.className}
+      onChange={(value: any) => handleChange(value)}
+      isMulti
+      isClearable
+      options={options}
+      getOptionLabel={(option: OptionIdType) => option.text}
+      getOptionValue={(option: OptionIdType) => option.id}
+      placeholder={`Фильтр по ${label}`}
+    />
   )
 }
 

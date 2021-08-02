@@ -152,21 +152,23 @@ which makes all magic under the hood and get your user component.
 
 ```tsx
 import { ResourceComposer } from '@bestdoctor/ke';
-
+import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'provider';
 
 const provider = new Provider()
 
 const App = () => (
-  <ResourceComposer>
-    <AdminResource
-      name="patients"
-      admin={new PatientAdmin()}
-      provider={provider}
-      user={{ name: 'name', permissions: ['admin_user'] }}
-      analytics={analyticsInstnace}
-    />
-  </ResourceComposer>
+  <ChakraProvider>
+    <ResourceComposer>
+      <AdminResource
+        name="patients"
+        admin={new PatientAdmin()}
+        provider={provider}
+        user={{ name: 'name', permissions: ['admin_user'] }}
+        analytics={analyticsInstnace}
+      />
+    </ResourceComposer>
+  </ChakraProvider>
 )
 ```
 
@@ -425,13 +427,33 @@ We would love you to contribute to our project. It's simple:
 After cloning this repo if you'd like to use it in another project using React
 (placed at e.g. `/path/to/your/awesome/project/`) you should follow these steps:
 
-* install all deps: `yarn install`
-* create link to `@bestdoctor/ke`: `yarn link`
-* link existing React in order to prevent hooks
-  [problem](https://ru.reactjs.org/warnings/invalid-hook-call-warning.html):
-  `npm link /path/to/your/awesome/project/node_modules/react`
-* link `@bestdoctor/ke` to your project:
-  `yarn link "@bestdoctor/ke"` (must be run in your project's folder)
+#### In `ke` folder
+* install all deps: 
+  ```bash
+  yarn install
+  ```
+* create link to `@bestdoctor/ke`: 
+  ```bash
+  yarn link
+  ```
+* link existing React and Chakra UI in order to prevent hooks
+  [problem](https://ru.reactjs.org/warnings/invalid-hook-call-warning.html) `react` in `ke` `node_modules`:
+  ```bash
+  cd node_modules/react
+  yarn link
+  cd ../@chakra-ui/react
+  yarn link
+  ```
+#### In `your-project-folder`
+* install all deps: 
+  ```bash
+  yarn install
+  ```
+* link all external dependencies and `ke`: 
+  ```
+  yarn link react @chakra-ui/react @bestdoctor/ke
+  ```
+
 
 Here are useful tips:
 
