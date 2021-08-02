@@ -12,6 +12,7 @@ const sizes = {
     fontSize: 'lg',
     pl: 4,
     pr: 1,
+    py: 1,
     minHeight: 12,
     borderRadius: 'md',
   },
@@ -20,6 +21,7 @@ const sizes = {
     fontSize: 'md',
     pl: 4,
     pr: 1,
+    py: 1,
     minHeight: 10,
     borderRadius: 'md',
   },
@@ -28,6 +30,7 @@ const sizes = {
     fontSize: 'sm',
     pl: 3,
     pr: 1,
+    py: 1,
     minHeight: 8,
     borderRadius: 'sm',
   },
@@ -36,6 +39,7 @@ const sizes = {
     fontSize: 'xs',
     pl: 2,
     pr: 1,
+    py: 1,
     minHeight: 6,
     borderRadius: 'sm',
   },
@@ -62,9 +66,7 @@ export const SelectWidget = {
     multiValueContainer: {
       bgColor: 'blackAlpha.100',
       borderRadius: 'md',
-      '& + &': {
-        ml: 2,
-      },
+      m: '2px',
     },
     multiValueLabel: {
       fontSize: 'md',

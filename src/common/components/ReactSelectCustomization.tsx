@@ -8,6 +8,7 @@ import {
   components as selectComponents,
   StylesConfig,
   MultiValueProps,
+  OptionTypeBase,
 } from 'react-select'
 
 export const Control = <OptionType, IsMulti extends boolean = false>({
@@ -112,10 +113,16 @@ export function MultiValue<OptionType>(props: MultiValueProps<OptionType>): JSX.
   )
 }
 
-export const modifyStyles = (externalStyles?: StylesConfig<any, false>): StylesConfig<any, false> => ({
+export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends boolean>(
+  externalStyles?: StylesConfig<OptionType, IsMulti>
+): StylesConfig<OptionType, IsMulti> => ({
   ...externalStyles,
   valueContainer(prevStyles, state) {
-    const defaultStyles: React.CSSProperties = { ...prevStyles, padding: '0, 2px' }
+    const defaultStyles: React.CSSProperties = {
+      ...prevStyles,
+      padding: '0, 2px',
+      marginLeft: state.isMulti ? '-2px' : undefined,
+    }
     if (externalStyles?.valueContainer) {
       return externalStyles.valueContainer(defaultStyles, state)
     }
