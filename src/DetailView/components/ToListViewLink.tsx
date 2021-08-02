@@ -4,13 +4,9 @@ import { Button } from '@chakra-ui/react'
 import { ArrowLeft } from 'react-feather'
 
 const ToListViewLink = ({ name }: { name: string }): JSX.Element => (
-  <>
-    <Link to={`/${name}/`}>
-      <Button colorScheme="teal" variant="outline">
-        <ArrowLeft size="1em" />К списку
-      </Button>
-    </Link>
-  </>
+  <Button leftIcon={<ArrowLeft size="1em" />} as={Link} to={`/${name}/`} colorScheme="brand" variant="outline">
+    К списку
+  </Button>
 )
 
 export { ToListViewLink }

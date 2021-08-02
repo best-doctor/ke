@@ -17,72 +17,68 @@ type InputWidgetProps = WidgetProps & {
   isDisabled?: Accessor<boolean>
 }
 
-const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
-  (props: InputWidgetProps, ref): JSX.Element => {
-    const {
-      name,
-      helpText,
-      description,
-      targetPayload,
-      style,
-      submitChange,
-      setInitialValue,
-      containerStore,
-      isTextarea = true,
-      height,
-      debounce = 1000,
-      notifier,
-      copyValue,
-      useClipboard,
-      isDisabled,
-      mainDetailObject,
-    } = props
-    const context = containerStore.getState()
+const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: InputWidgetProps, ref): JSX.Element => {
+  const {
+    name,
+    helpText,
+    description,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    isTextarea = true,
+    height,
+    debounce = 1000,
+    notifier,
+    copyValue,
+    useClipboard,
+    isDisabled,
+    mainDetailObject,
+  } = props
+  const context = containerStore.getState()
 
-    const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
 
-    setInitialValue({ [name]: content })
+  setInitialValue({ [name]: content })
 
-    const handleChange = (value: string): void => {
-      pushAnalytics({
-        eventName: EventNameEnum.INPUT_CHANGE,
-        widgetType: WidgetTypeEnum.INPUT,
-        value,
-        objectForAnalytics: props.mainDetailObject,
-        ...props,
-      })
+  const handleChange = (value: string): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value,
+      objectForAnalytics: props.mainDetailObject,
+      ...props,
+    })
 
-      const inputPayload = getPayload(value, name, targetPayload)
-      submitChange({ url: targetUrl, payload: inputPayload })
-    }
-
-    const handleCopyValue = getCopyHandler(content, copyValue)
-
-    return (
-      <WidgetWrapper
-        name={name}
-        style={style}
-        helpText={helpText}
-        description={description}
-        required={isRequired}
-        notifier={notifier}
-        useClipboard={useClipboard}
-        copyValue={handleCopyValue}
-      >
-        <DebounceInput
-          value={content as string}
-          height={height || (isTextarea ? 263 : 33)}
-          borderWidth="1px"
-          borderColor="gray.300"
-          debounceTimeout={debounce}
-          element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
-          onChange={handleChange}
-          inputRef={ref}
-          disabled={getAccessor(isDisabled, mainDetailObject, context)}
-        />
-      </WidgetWrapper>
-    )
+    const inputPayload = getPayload(value, name, targetPayload)
+    submitChange({ url: targetUrl, payload: inputPayload })
   }
-)
+
+  const handleCopyValue = getCopyHandler(content, copyValue)
+
+  return (
+    <WidgetWrapper
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={description}
+      required={isRequired}
+      notifier={notifier}
+      useClipboard={useClipboard}
+      copyValue={handleCopyValue}
+    >
+      <DebounceInput
+        value={content as string}
+        height={height || (isTextarea ? 263 : undefined)}
+        debounceTimeout={debounce}
+        element={isTextarea ? (Textarea as React.FC) : (Input as React.FC)}
+        onChange={handleChange}
+        inputRef={ref}
+        disabled={getAccessor(isDisabled, mainDetailObject, context)}
+      />
+    </WidgetWrapper>
+  )
+})
 
 export { InputWidget }

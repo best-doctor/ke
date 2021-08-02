@@ -1,6 +1,5 @@
 import React from 'react'
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
 
 import type { BaseAdmin } from 'admin'
 import type { Provider } from 'admin/providers/interfaces'
@@ -86,37 +85,35 @@ const ResourceComposer = ({
 
   return (
     <Router>
-      <ChakraProvider>
-        {withSideBar && (
-          <SideBar header="Разделы" breadcrumbsRules={breadcrumbsRules}>
-            {React.Children.map(children, (resource: JSX.Element) => {
-              if (isAdminResource(resource)) {
-                const { props } = resource as ResourceProps
-                const adminPermissions = props?.admin?.permissions || []
-                const showSideBar = !getAccessor(props?.admin?.hideSideBar)
-                if (showSideBar) {
-                  const element = <SideBarElement resource={resource} />
+      {withSideBar && (
+        <SideBar header="Разделы" breadcrumbsRules={breadcrumbsRules}>
+          {React.Children.map(children, (resource: JSX.Element) => {
+            if (isAdminResource(resource)) {
+              const { props } = resource as ResourceProps
+              const adminPermissions = props?.admin?.permissions || []
+              const showSideBar = !getAccessor(props?.admin?.hideSideBar)
+              if (showSideBar) {
+                const element = <SideBarElement resource={resource} />
 
-                  return mountElement(permissions, adminPermissions, element) || <></>
-                }
+                return mountElement(permissions, adminPermissions, element) || <></>
               }
-              if ('path' in resource.props && 'navTitle' in resource.props) {
-                return <SideBarElementCompatible {...resource.props} />
-              }
-              return <></>
-            })}
-          </SideBar>
-        )}
-        {React.Children.map(children, (resource: JSX.Element) => {
-          if (isAdminResource(resource)) {
-            const { props } = resource as ResourceProps
-            const adminPermissions = props?.admin?.permissions || []
+            }
+            if ('path' in resource.props && 'navTitle' in resource.props) {
+              return <SideBarElementCompatible {...resource.props} />
+            }
+            return <></>
+          })}
+        </SideBar>
+      )}
+      {React.Children.map(children, (resource: JSX.Element) => {
+        if (isAdminResource(resource)) {
+          const { props } = resource as ResourceProps
+          const adminPermissions = props?.admin?.permissions || []
 
-            return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
-          }
-          return resource
-        })}
-      </ChakraProvider>
+          return mountElement(permissions, adminPermissions, resource) || forbiddenResourceElement
+        }
+        return resource
+      })}
     </Router>
   )
 }

@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils'
 import DatePicker from 'react-datepicker'
 
 import { DateTimeInput } from './DateTimeInput'
-import { StyleDateTime } from './styles'
+import { ChakraDateInput } from './ChakraDateInput'
 
 const onChangeMock = jest.fn()
 
@@ -13,7 +13,7 @@ const getComponent = (): JSX.Element => <DateTimeInput value={new Date()} onChan
 test('DateTimeInput properly rendered', () => {
   const component = mount(getComponent())
 
-  expect(component.find(StyleDateTime).length).toEqual(1)
+  expect(component.find(ChakraDateInput).length).toEqual(1)
   expect(component.find(DatePicker).length).toEqual(1)
   expect(component.find(DatePicker).first().props().showTimeSelect).toEqual(true)
 })
@@ -37,7 +37,7 @@ test('DateTimeInput should pass dateFormat into DatePicker', () => {
 test('DateTimeInput should pass className into DatePicker', () => {
   const component = mount(<DateTimeInput value={new Date()} onChange={onChangeMock} className="some-class-name" />)
 
-  expect(component.find(DatePicker).first().props().className).toBe('some-class-name')
+  expect(component.find(DatePicker).first().props().className).toContain('some-class-name')
 })
 
 test('DateTimeInput should pass isClearable into DatePicker', () => {

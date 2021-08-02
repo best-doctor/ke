@@ -47,7 +47,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
   } = kwargs
 
   return (
-    <Box key={elementsKey}>
+    <Box borderTop="1px solid" borderColor="blackAlpha.300" key={elementsKey}>
       {elements.map((wizardInstance: WizardFieldElement, index) => {
         const wizard = getWizardFromCallable(wizardInstance, mainDetailObject)
         const key = `wizard-element_${index}`

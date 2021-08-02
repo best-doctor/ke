@@ -19,7 +19,7 @@ const getPrevButton = (
 ): WizardStepButtonDescription => {
   const { prev } = wizardStep
   return {
-    style: style || { variant: 'ghost', mr: 5 },
+    style: style || { variant: 'ghost' },
     handler: prev,
     label: label || wizardStep.backStepLabel,
     name: name || 'prev',
@@ -35,7 +35,7 @@ const getNextButton = (
   const { next, validatedNext, requireValidation } = wizardStep
 
   return {
-    style: style || { colorScheme: 'blue', m: 5 },
+    style: style || { variant: 'outline' },
     handler: requireValidation ? validatedNext : next,
     label: label || wizardStep.forwardStepLabel,
     name: name || 'next',

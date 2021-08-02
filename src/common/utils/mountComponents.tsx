@@ -6,6 +6,7 @@ import { Store } from 'effector'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics/base'
+import { Box } from '@chakra-ui/react'
 import type { Provider } from '../../admin/providers/interfaces'
 import type { BaseNotifier } from '../notifier'
 import type { DetailObject, GenericAccessor } from '../../typing'
@@ -129,7 +130,7 @@ const mountComponents = ({
           const columnKey = `${rowIndex}_${columnIndex}_${name}`
 
           return ComponentToMount ? (
-            <div className={colProps.className} key={columnKey}>
+            <Box className={colProps.className} key={columnKey} {...layout.colProps}>
               <ComponentToMount
                 key={name}
                 resource={resourceName}
@@ -148,7 +149,7 @@ const mountComponents = ({
                 setCurrentState={setCurrentState}
                 {...adminElement}
               />
-            </div>
+            </Box>
           ) : (
             <Fragment key={name} />
           )

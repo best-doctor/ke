@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Box } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
 import { ReadOnlyWidget } from '../../widgets/ReadOnlyWidget'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
@@ -37,5 +37,5 @@ test('Read only widget properly rendered', () => {
   )
 
   expect(component.find(WidgetWrapper).length).toEqual(1)
-  expect(component.find(Box).length).toEqual(1)
+  expect(component.find(Text).length).toEqual(1)
 })

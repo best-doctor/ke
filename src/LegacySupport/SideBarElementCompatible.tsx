@@ -8,7 +8,7 @@ export function SideBarElementCompatible({ path, navTitle }: SideBarElementProps
 
   return (
     <Button
-      colorScheme="teal"
+      colorScheme="brand"
       m={2}
       key={path}
       onClick={() => {
