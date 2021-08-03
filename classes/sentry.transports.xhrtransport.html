@@ -106,7 +106,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_api" class="tsd-kind-icon">_api</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_buffer" class="tsd-kind-icon">_buffer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="sentry.transports.xhrtransport.html#_disableduntil" class="tsd-kind-icon">_disabled<wbr>Until</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_ratelimits" class="tsd-kind-icon">_rate<wbr>Limits</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="sentry.transports.xhrtransport.html#_sendrequest" class="tsd-kind-icon">_send<wbr>Request</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="sentry.transports.xhrtransport.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="sentry.transports.xhrtransport.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
@@ -114,8 +115,13 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_disableduntil" class="tsd-kind-icon">_disabled<wbr>Until</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_handleratelimit" class="tsd-kind-icon">_handle<wbr>Rate<wbr>Limit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_handleresponse" class="tsd-kind-icon">_handle<wbr>Response</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="sentry.transports.xhrtransport.html#_isratelimited" class="tsd-kind-icon">_is<wbr>Rate<wbr>Limited</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="sentry.transports.xhrtransport.html#close" class="tsd-kind-icon">close</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="sentry.transports.xhrtransport.html#sendevent" class="tsd-kind-icon">send<wbr>Event</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.transports.xhrtransport.html#sendsession" class="tsd-kind-icon">send<wbr>Session</a></li>
 							</ul>
 						</section>
 					</div>
@@ -134,7 +140,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:14</li>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:16</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -182,19 +188,40 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="_disableduntil" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _disabled<wbr>Until</h3>
-					<div class="tsd-signature tsd-kind-icon">_disabled<wbr>Until<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_ratelimits" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> _rate<wbr>Limits</h3>
+					<div class="tsd-signature tsd-kind-icon">_rate<wbr>Limits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#_ratelimits">_rateLimits</a></p>
 						<ul>
-							<li>Defined in node_modules/@sentry/browser/dist/transports/xhr.d.ts:6</li>
+							<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:16</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Locks transport after receiving 429 response</p>
+							<p>Locks transport after receiving rate limits in a response</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_sendrequest" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _send<wbr>Request</h3>
+					<div class="tsd-signature tsd-kind-icon">_send<wbr>Request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/browser/dist/transports/xhr.d.ts:17</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>Prepared SentryRequest to be delivered</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Original payload used to create SentryRequest</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -228,6 +255,175 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_disableduntil" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _disabled<wbr>Until</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_disabled<wbr>Until<span class="tsd-signature-symbol">(</span>requestType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SentryRequestType</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#_disableduntil">_disabledUntil</a></p>
+								<ul>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:39</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the time that given category is disabled until for rate limiting</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>requestType: <span class="tsd-signature-type">SentryRequestType</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_handleratelimit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _handle<wbr>Rate<wbr>Limit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_handle<wbr>Rate<wbr>Limit<span class="tsd-signature-symbol">(</span>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#_handleratelimit">_handleRateLimit</a></p>
+								<ul>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:47</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets internal _rateLimits from incoming headers. Returns true if headers contains a non-empty rate limiting header.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>headers: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_handleresponse" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _handle<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_handle<wbr>Response<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>reject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>requestType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SentryRequestType</span><span class="tsd-signature-symbol">; </span>resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">XMLHttpRequest</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#_handleresponse">_handleResponse</a></p>
+								<ul>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:29</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Handle Sentry repsonse for promise-based transports.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>reject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>requestType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SentryRequestType</span><span class="tsd-signature-symbol">; </span>resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">XMLHttpRequest</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>reject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+											<ul class="tsd-parameters">
+												<li class="tsd-parameter-signature">
+													<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal tsd-is-external">
+														<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+													</ul>
+													<ul class="tsd-descriptions">
+														<li class="tsd-description">
+															<h4 class="tsd-parameters-title">Parameters</h4>
+															<ul class="tsd-parameters">
+																<li>
+																	<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">unknown</span></h5>
+																</li>
+															</ul>
+															<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="tsd-parameter">
+											<h5>request<wbr>Type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SentryRequestType</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+											<ul class="tsd-parameters">
+												<li class="tsd-parameter-signature">
+													<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal tsd-is-external">
+														<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+													</ul>
+													<ul class="tsd-descriptions">
+														<li class="tsd-description">
+															<h4 class="tsd-parameters-title">Parameters</h4>
+															<ul class="tsd-parameters">
+																<li>
+																	<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span></h5>
+																</li>
+															</ul>
+															<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="tsd-parameter">
+											<h5>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">XMLHttpRequest</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_isratelimited" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _is<wbr>Rate<wbr>Limited</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_is<wbr>Rate<wbr>Limited<span class="tsd-signature-symbol">(</span>requestType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SentryRequestType</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#_isratelimited">_isRateLimited</a></p>
+								<ul>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:43</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if a category is rate limited</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>requestType: <span class="tsd-signature-type">SentryRequestType</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="close" class="tsd-anchor"></a>
 					<h3>close</h3>
@@ -239,7 +435,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#close">close</a></p>
 								<ul>
-									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:23</li>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/base.d.ts:25</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -269,7 +465,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="sentry.transports.basetransport.html">BaseTransport</a>.<a href="sentry.transports.basetransport.html#sendevent">sendEvent</a></p>
 								<ul>
-									<li>Defined in node_modules/@sentry/browser/dist/transports/xhr.d.ts:10</li>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/xhr.d.ts:8</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,6 +478,35 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>event: <a href="../interfaces/sentry.event.html" class="tsd-signature-type" data-tsd-kind="Interface">Event</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="sendsession" class="tsd-anchor"></a>
+					<h3>send<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Session<span class="tsd-signature-symbol">(</span>session<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Session</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@sentry/browser/dist/transports/xhr.d.ts:12</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>inheritdoc</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>session: <span class="tsd-signature-type">Session</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sentry.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -335,8 +560,11 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 								<a href="sentry.transports.xhrtransport.html#_buffer" class="tsd-kind-icon">_buffer</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="sentry.transports.xhrtransport.html#_ratelimits" class="tsd-kind-icon">_rate<wbr>Limits</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
-								<a href="sentry.transports.xhrtransport.html#_disableduntil" class="tsd-kind-icon">_disabled<wbr>Until</a>
+								<a href="sentry.transports.xhrtransport.html#_sendrequest" class="tsd-kind-icon">_send<wbr>Request</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="sentry.transports.xhrtransport.html#options" class="tsd-kind-icon">options</a>
@@ -344,11 +572,26 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="sentry.transports.xhrtransport.html#url" class="tsd-kind-icon">url</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="sentry.transports.xhrtransport.html#_disableduntil" class="tsd-kind-icon">_disabled<wbr>Until</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="sentry.transports.xhrtransport.html#_handleratelimit" class="tsd-kind-icon">_handle<wbr>Rate<wbr>Limit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="sentry.transports.xhrtransport.html#_handleresponse" class="tsd-kind-icon">_handle<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="sentry.transports.xhrtransport.html#_isratelimited" class="tsd-kind-icon">_is<wbr>Rate<wbr>Limited</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="sentry.transports.xhrtransport.html#close" class="tsd-kind-icon">close</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 								<a href="sentry.transports.xhrtransport.html#sendevent" class="tsd-kind-icon">send<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="sentry.transports.xhrtransport.html#sendsession" class="tsd-kind-icon">send<wbr>Session</a>
 							</li>
 						</ul>
 					</li>

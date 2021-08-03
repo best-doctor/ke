@@ -132,11 +132,15 @@
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#capturemessage" class="tsd-kind-icon">capture<wbr>Message</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#close" class="tsd-kind-icon">close</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#configurescope" class="tsd-kind-icon">configure<wbr>Scope</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#createreduxenhancer" class="tsd-kind-icon">create<wbr>Redux<wbr>Enhancer</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#flush" class="tsd-kind-icon">flush</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#getcurrenthub" class="tsd-kind-icon">get<wbr>Current<wbr>Hub</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#init" class="tsd-kind-icon">init</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#lasteventid" class="tsd-kind-icon">last<wbr>Event<wbr>Id</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#makemain" class="tsd-kind-icon">make<wbr>Main</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#reactrouterv3instrumentation" class="tsd-kind-icon">react<wbr>Router<wbr>V3Instrumentation</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#reactrouterv4instrumentation" class="tsd-kind-icon">react<wbr>Router<wbr>V4Instrumentation</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#reactrouterv5instrumentation" class="tsd-kind-icon">react<wbr>Router<wbr>V5Instrumentation</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#setcontext" class="tsd-kind-icon">set<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#setextra" class="tsd-kind-icon">set<wbr>Extra</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#setextras" class="tsd-kind-icon">set<wbr>Extras</a></li>
@@ -149,6 +153,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="sentry.html#witherrorboundary" class="tsd-kind-icon">with<wbr>Error<wbr>Boundary</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="sentry.html#withprofiler" class="tsd-kind-icon">with<wbr>Profiler</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#withscope" class="tsd-kind-icon">with<wbr>Scope</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external"><a href="sentry.html#withsentryrouting" class="tsd-kind-icon">with<wbr>Sentry<wbr>Routing</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-external"><a href="sentry.html#wrap" class="tsd-kind-icon">wrap</a></li>
 							</ul>
 						</section>
@@ -160,7 +165,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
 					<a name="integrations" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> Integrations</h3>
-					<div class="tsd-signature tsd-kind-icon">Integrations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>Breadcrumbs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.Breadcrumbs</span><span class="tsd-signature-symbol">; </span>FunctionToString<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">CoreIntegrations.FunctionToString</span><span class="tsd-signature-symbol">; </span>GlobalHandlers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.GlobalHandlers</span><span class="tsd-signature-symbol">; </span>InboundFilters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">CoreIntegrations.InboundFilters</span><span class="tsd-signature-symbol">; </span>LinkedErrors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.LinkedErrors</span><span class="tsd-signature-symbol">; </span>TryCatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.TryCatch</span><span class="tsd-signature-symbol">; </span>UserAgent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.UserAgent</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Integrations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>Breadcrumbs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.Breadcrumbs</span><span class="tsd-signature-symbol">; </span>Dedupe<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.Dedupe</span><span class="tsd-signature-symbol">; </span>FunctionToString<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">CoreIntegrations.FunctionToString</span><span class="tsd-signature-symbol">; </span>GlobalHandlers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.GlobalHandlers</span><span class="tsd-signature-symbol">; </span>InboundFilters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">CoreIntegrations.InboundFilters</span><span class="tsd-signature-symbol">; </span>LinkedErrors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.LinkedErrors</span><span class="tsd-signature-symbol">; </span>TryCatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.TryCatch</span><span class="tsd-signature-symbol">; </span>UserAgent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.UserAgent</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/browser/dist/index.d.ts:5</li>
@@ -171,6 +176,9 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
 								<h5>Breadcrumbs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.Breadcrumbs</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>Dedupe<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">BrowserIntegrations.Dedupe</span></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5>Function<wbr>ToString<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">CoreIntegrations.FunctionToString</span></h5>
@@ -206,17 +214,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
 					<a name="sdk_version" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> SDK_<wbr>VERSION</h3>
-					<div class="tsd-signature tsd-kind-icon">SDK_<wbr>VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;5.19.0&quot;</span><span class="tsd-signature-symbol"> = &quot;5.19.0&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">SDK_<wbr>VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;6.10.0&quot;</span><span class="tsd-signature-symbol"> = &quot;6.10.0&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/browser/dist/version.d.ts:2</li>
+							<li>Defined in node_modules/@sentry/core/dist/version.d.ts:1</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace tsd-is-external">
 					<a name="defaultintegrations" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> default<wbr>Integrations</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Integrations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">CoreIntegrations.FunctionToString</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">CoreIntegrations.InboundFilters</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">GlobalHandlers</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TryCatch</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Breadcrumbs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LinkedErrors</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserAgent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Integrations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">CoreIntegrations.FunctionToString</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">CoreIntegrations.InboundFilters</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">GlobalHandlers</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TryCatch</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Breadcrumbs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LinkedErrors</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserAgent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dedupe</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/browser/dist/sdk.d.ts:5</li>
@@ -269,7 +277,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:153</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:170</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -474,6 +482,37 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="createreduxenhancer" class="tsd-anchor"></a>
+					<h3>create<wbr>Redux<wbr>Enhancer</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Redux<wbr>Enhancer<span class="tsd-signature-symbol">(</span>enhancerOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SentryEnhancerOptions</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@sentry/react/dist/redux.d.ts:31</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an enhancer that would be passed to Redux&#39;s createStore to log actions and the latest state to Sentry.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> enhancerOptions: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SentryEnhancerOptions</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Options to pass to the enhancer</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 					<a name="flush" class="tsd-anchor"></a>
 					<h3>flush</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
@@ -515,7 +554,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/hub.d.ts:164</li>
+									<li>Defined in node_modules/@sentry/hub/dist/hub.d.ts:223</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -534,74 +573,24 @@
 					<a name="init" class="tsd-anchor"></a>
 					<h3>init</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/sentry.browseroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BrowserOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/sentry.browseroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BrowserOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/browser/dist/sdk.d.ts:63</li>
+									<li>Defined in node_modules/@sentry/react/dist/sdk.d.ts:5</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The Sentry Browser SDK Client.</p>
+									<p>Inits the React SDK</p>
 								</div>
-								<p>To use this SDK, call the <a href="sentry.html#init">init</a> function as early as possible when
-									loading the web page. To set context information or send manual events, use
-								the provided methods.</p>
-								<dl class="tsd-comment-tags">
-									<dt>example</dt>
-									<dd><pre><code>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">init</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@sentry/browser&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #795E26">init</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">dsn:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;__DSN__&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #008000">// ...</span>
-<span style="color: #000000">});</span>
-</code></pre>
-									</dd>
-									<dt>example</dt>
-									<dd><pre><code>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">configureScope</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@sentry/browser&#039;</span><span style="color: #000000">;</span>
-<span style="color: #795E26">configureScope</span><span style="color: #000000">((</span><span style="color: #001080">scope</span><span style="color: #000000">: </span><span style="color: #267F99">Scope</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">scope</span><span style="color: #000000">.</span><span style="color: #795E26">setExtra</span><span style="color: #000000">({ </span><span style="color: #001080">battery:</span><span style="color: #000000"> </span><span style="color: #098658">0.7</span><span style="color: #000000"> });</span>
-<span style="color: #000000">  </span><span style="color: #001080">scope</span><span style="color: #000000">.</span><span style="color: #795E26">setTag</span><span style="color: #000000">({ </span><span style="color: #001080">user_mode:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;admin&#039;</span><span style="color: #000000"> });</span>
-<span style="color: #000000">  </span><span style="color: #001080">scope</span><span style="color: #000000">.</span><span style="color: #795E26">setUser</span><span style="color: #000000">({ </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;4711&#039;</span><span style="color: #000000"> });</span>
-<span style="color: #000000">});</span>
-</code></pre>
-									</dd>
-									<dt>example</dt>
-									<dd><pre><code>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">addBreadcrumb</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@sentry/browser&#039;</span><span style="color: #000000">;</span>
-<span style="color: #795E26">addBreadcrumb</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">message:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;My Breadcrumb&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #008000">// ...</span>
-<span style="color: #000000">});</span>
-</code></pre>
-									</dd>
-									<dt>example</dt>
-									<dd><pre><code>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">Sentry</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@sentry/browser&#039;</span><span style="color: #000000">;</span>
-<span style="color: #001080">Sentry</span><span style="color: #000000">.</span><span style="color: #795E26">captureMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Hello, world!&#039;</span><span style="color: #000000">);</span>
-<span style="color: #001080">Sentry</span><span style="color: #000000">.</span><span style="color: #795E26">captureException</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Good bye&#039;</span><span style="color: #000000">));</span>
-<span style="color: #001080">Sentry</span><span style="color: #000000">.</span><span style="color: #795E26">captureEvent</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">message:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Manual&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">stacktrace:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">    </span><span style="color: #008000">// ...</span>
-<span style="color: #000000">  ],</span>
-<span style="color: #000000">});</span>
-</code></pre>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="../interfaces/sentry.browseroptions.html">BrowserOptions</a> for documentation on configuration options.</p>
-									</dd>
-								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/sentry.browseroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BrowserOptions</a></h5>
+									<h5>options: <a href="../interfaces/sentry.browseroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BrowserOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -641,7 +630,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/hub.d.ts:156</li>
+									<li>Defined in node_modules/@sentry/hub/dist/hub.d.ts:215</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -657,6 +646,108 @@
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/sentry.hub.html" class="tsd-signature-type" data-tsd-kind="Class">Hub</a></h4>
 							<p>The old replaced hub</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="reactrouterv3instrumentation" class="tsd-anchor"></a>
+					<h3>react<wbr>Router<wbr>V3Instrumentation</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">react<wbr>Router<wbr>V3Instrumentation<span class="tsd-signature-symbol">(</span>history<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HistoryV3</span>, routes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">[]</span>, match<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Match</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReactRouterInstrumentation</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@sentry/react/dist/reactrouterv3.d.ts:24</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates routing instrumentation for React Router v3
+									Works for React Router &gt;= 3.2.0 and &lt; 4.0.0</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>history: <span class="tsd-signature-type">HistoryV3</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>object from the <code>history</code> library</p>
+									</div>
+								</li>
+								<li>
+									<h5>routes: <span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>a list of all routes, should be</p>
+									</div>
+								</li>
+								<li>
+									<h5>match: <span class="tsd-signature-type">Match</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p><code>Router.match</code> utility</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReactRouterInstrumentation</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="reactrouterv4instrumentation" class="tsd-anchor"></a>
+					<h3>react<wbr>Router<wbr>V4Instrumentation</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">react<wbr>Router<wbr>V4Instrumentation<span class="tsd-signature-symbol">(</span>history<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RouterHistory</span>, routes<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RouteConfig</span><span class="tsd-signature-symbol">[]</span>, matchPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MatchPath</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReactRouterInstrumentation</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@sentry/react/dist/reactrouter.d.ts:21</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>history: <span class="tsd-signature-type">RouterHistory</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> routes: <span class="tsd-signature-type">RouteConfig</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> matchPath: <span class="tsd-signature-type">MatchPath</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReactRouterInstrumentation</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+					<a name="reactrouterv5instrumentation" class="tsd-anchor"></a>
+					<h3>react<wbr>Router<wbr>V5Instrumentation</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">react<wbr>Router<wbr>V5Instrumentation<span class="tsd-signature-symbol">(</span>history<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RouterHistory</span>, routes<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RouteConfig</span><span class="tsd-signature-symbol">[]</span>, matchPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MatchPath</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReactRouterInstrumentation</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@sentry/react/dist/reactrouter.d.ts:22</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>history: <span class="tsd-signature-type">RouterHistory</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> routes: <span class="tsd-signature-type">RouteConfig</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> matchPath: <span class="tsd-signature-type">MatchPath</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReactRouterInstrumentation</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -701,13 +792,13 @@
 					<a name="setextra" class="tsd-anchor"></a>
 					<h3>set<wbr>Extra</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Extra<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extra<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Extra<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extra<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extra</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:66</li>
+									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:64</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -724,7 +815,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>extra: <span class="tsd-signature-type">any</span></h5>
+									<h5>extra: <span class="tsd-signature-type">Extra</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Any kind of data. This data will be normalized.</p>
 									</div>
@@ -738,7 +829,7 @@
 					<a name="setextras" class="tsd-anchor"></a>
 					<h3>set<wbr>Extras</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Extras<span class="tsd-signature-symbol">(</span>extras<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Extras<span class="tsd-signature-symbol">(</span>extras<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extras</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -755,15 +846,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>extras: <span class="tsd-signature-symbol">{}</span></h5>
+									<h5>extras: <span class="tsd-signature-type">Extras</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Extras object to merge into current context.</p>
 									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
-										</li>
-									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -774,19 +860,20 @@
 					<a name="settag" class="tsd-anchor"></a>
 					<h3>set<wbr>Tag</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Tag<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Tag<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Primitive</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:72</li>
+									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:73</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Set key:value that will be sent as tags data with the event.</p>
 								</div>
+								<p>Can also be used to unset a tag, by passing <code>undefined</code>.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -797,9 +884,9 @@
 									</div>
 								</li>
 								<li>
-									<h5>value: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">Primitive</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>String value of tag</p>
+										<p>Value of tag</p>
 									</div>
 								</li>
 							</ul>
@@ -817,7 +904,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:58</li>
+									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:56</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -834,7 +921,7 @@
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">Primitive</span></h5>
 										</li>
 									</ul>
 								</li>
@@ -853,7 +940,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:78</li>
+									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:79</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -909,28 +996,24 @@
 					<a name="starttransaction" class="tsd-anchor"></a>
 					<h3>start<wbr>Transaction</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>Transaction<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TransactionContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Transaction</span></li>
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Transaction<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TransactionContext</span>, customSamplingContext<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CustomSamplingContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Transaction</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:121</li>
+									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:122</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Starts a new <code>Transaction</code> and returns it. This is the entry point to manual
-									tracing instrumentation.</p>
+									<p>Starts a new <code>Transaction</code> and returns it. This is the entry point to manual tracing instrumentation.</p>
 								</div>
-								<p>A tree structure can be built by adding child spans to the transaction, and
-									child spans to other spans. To start a new child span within the transaction
-								or any span, call the respective <code>.startChild()</code> method.</p>
-								<p>Every child span must be finished before the transaction is finished,
-								otherwise the unfinished spans are discarded.</p>
-								<p>The transaction must be finished with a call to its <code>.finish()</code> method, at
-									which point the transaction with all its finished child spans will be sent to
-								Sentry.</p>
+								<p>A tree structure can be built by adding child spans to the transaction, and child spans to other spans. To start a
+								new child span within the transaction or any span, call the respective <code>.startChild()</code> method.</p>
+								<p>Every child span must be finished before the transaction is finished, otherwise the unfinished spans are discarded.</p>
+								<p>The transaction must be finished with a call to its <code>.finish()</code> method, at which point the transaction with all its
+								finished child spans will be sent to Sentry.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -940,8 +1023,16 @@
 										<p>Properties of the new <code>Transaction</code>.</p>
 									</div>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> customSamplingContext: <span class="tsd-signature-type">CustomSamplingContext</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Information given to the transaction sampling function (along with context-dependent
+										default values). See {@link Options.tracesSampler}.</p>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Transaction</span></h4>
+							<p>The transaction which was just started</p>
 						</li>
 					</ul>
 				</section>
@@ -998,13 +1089,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/react/dist/errorboundary.d.ts:53</li>
+									<li>Defined in node_modules/@sentry/react/dist/errorboundary.d.ts:57</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h4>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1043,7 +1134,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h4>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1075,7 +1166,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:92</li>
+									<li>Defined in node_modules/@sentry/minimal/dist/index.d.ts:93</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1121,11 +1212,43 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+					<a name="withsentryrouting" class="tsd-anchor"></a>
+					<h3>with<wbr>Sentry<wbr>Routing</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">with<wbr>Sentry<wbr>Routing&lt;P, R&gt;<span class="tsd-signature-symbol">(</span>Route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">R</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@sentry/react/dist/reactrouter.d.ts:23</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+								<li>
+									<h4>R<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>Route: <span class="tsd-signature-type">R</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">R</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 					<a name="wrap" class="tsd-anchor"></a>
 					<h3>wrap</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">wrap<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">wrap<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -1142,10 +1265,28 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
+									<h5>fn: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A function to wrap.</p>
 									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1277,6 +1418,9 @@
 						<a href="sentry.html#configurescope" class="tsd-kind-icon">configure<wbr>Scope</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="sentry.html#createreduxenhancer" class="tsd-kind-icon">create<wbr>Redux<wbr>Enhancer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="sentry.html#flush" class="tsd-kind-icon">flush</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
@@ -1290,6 +1434,15 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="sentry.html#makemain" class="tsd-kind-icon">make<wbr>Main</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="sentry.html#reactrouterv3instrumentation" class="tsd-kind-icon">react<wbr>Router<wbr>V3Instrumentation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="sentry.html#reactrouterv4instrumentation" class="tsd-kind-icon">react<wbr>Router<wbr>V4Instrumentation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
+						<a href="sentry.html#reactrouterv5instrumentation" class="tsd-kind-icon">react<wbr>Router<wbr>V5Instrumentation</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="sentry.html#setcontext" class="tsd-kind-icon">set<wbr>Context</a>
@@ -1326,6 +1479,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="sentry.html#withscope" class="tsd-kind-icon">with<wbr>Scope</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
+						<a href="sentry.html#withsentryrouting" class="tsd-kind-icon">with<wbr>Sentry<wbr>Routing</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-external">
 						<a href="sentry.html#wrap" class="tsd-kind-icon">wrap</a>
