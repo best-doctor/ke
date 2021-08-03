@@ -137,6 +137,8 @@ export {
 export { AnalyticsProvider, useAnalytics, AnalyticsConfigProvider, useFirebase } from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'
+export * from './data-provider'
+export * from './django-spa/StatefulControls'
 
 export {
   BaseAdmin,
