@@ -58,7 +58,9 @@ export function convertZodRecord(schema: ZodType, level: number): RecordValidato
 }
 
 interface ZodType {
-  safeParseAsync: (x: unknown) => Promise<
+  safeParseAsync: (
+    x: unknown
+  ) => Promise<
     | {
         success: true
       }

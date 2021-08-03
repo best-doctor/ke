@@ -13,7 +13,7 @@ export function useStoreApiState<T, Api extends ApiConfig<T>>(store$: Store<T>, 
     return () => Object.entries(storeApi).forEach(([, event]) => store$.off(event))
   })
 
-  return [useStore(store$), storeApi as unknown as StoreApi<T, Api>]
+  return [useStore(store$), (storeApi as unknown) as StoreApi<T, Api>]
 }
 
 type ApiConfig<T> = {

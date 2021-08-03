@@ -15,8 +15,17 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
  * @param props - standard widget props
  */
 const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
-  const { mainDetailObject, containerStore, style, helpText, description, name, provider, displayValue, cacheTime } =
-    props
+  const {
+    mainDetailObject,
+    containerStore,
+    style,
+    helpText,
+    description,
+    name,
+    provider,
+    displayValue,
+    cacheTime,
+  } = props
 
   const [content, setContent] = useState<string>('')
 

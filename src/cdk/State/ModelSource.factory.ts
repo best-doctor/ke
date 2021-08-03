@@ -21,7 +21,7 @@ export function makeModelSource<Model>(
   })
 
   const $fetchMeta = restore<FetchMeta | null>(
-    fetch.finally.map(({ params }) => ({ madeAt: new Date(), params })) as unknown as Event<FetchMeta | null>,
+    (fetch.finally.map(({ params }) => ({ madeAt: new Date(), params })) as unknown) as Event<FetchMeta | null>,
     null
   )
 

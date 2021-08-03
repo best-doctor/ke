@@ -5,7 +5,7 @@ import type { Coords, MarkerOptions } from './types'
 import MarkerLabel = google.maps.MarkerLabel
 import Icon = google.maps.Icon
 
-export const MapMarker = GoogleMarker as unknown as FunctionComponent<MarkerProps>
+export const MapMarker = (GoogleMarker as unknown) as FunctionComponent<MarkerProps>
 
 interface MarkerProps {
   position: Coords
