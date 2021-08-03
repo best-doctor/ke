@@ -11,6 +11,7 @@ export interface LoggingHandler {
 
 export type LoggerConfig = {
   logLevel?: LogLevel
+  [key: string]: string | number | undefined
 }
 
 export interface LogHandler {
