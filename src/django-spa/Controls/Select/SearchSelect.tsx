@@ -4,7 +4,7 @@ import BaseSelect from 'react-select/async'
 import type { BaseSelectProps, Option } from './types'
 
 const SearchSelectInner = <T extends Option>(
-  { value, onChange, ...other }: SearchSelectProps<T>,
+  { value, onChange, ...other }: SearchSelectInnerProps<T>,
   ref?: React.ForwardedRef<HTMLDivElement>
 ): JSX.Element => (
   <BaseSelect
@@ -15,11 +15,13 @@ const SearchSelectInner = <T extends Option>(
   />
 )
 
-export const SearchSelect = forwardRef(SearchSelectInner) as <T extends Option>(
-  props: SearchSelectProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+export const SearchSelect = forwardRef(SearchSelectInner) as SearchSelectProps
+
+type SearchSelectProps = <T extends Option>(
+  props: SearchSelectInnerProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof SearchSelectInner>
 
-type SearchSelectProps<T extends Option> = BaseSelectProps<T> & {
+type SearchSelectInnerProps<T extends Option> = BaseSelectProps<T> & {
   defaultOptions: readonly T[]
   loadOptions: (search: string) => Promise<T[]>
 }

@@ -3,10 +3,10 @@ import BaseSelect from 'react-select'
 import { useStore } from 'effector-react'
 import type { Store } from 'effector'
 
-import type { BaseSelectProps, Option } from './types'
+import { BaseSelectProps, Option } from './types'
 
 const AsyncSelectInner = <T extends Option>(
-  { value, onChange, $options, ...other }: AsyncSelectProps<T>,
+  { value, onChange, $options, ...other }: AsyncSelectInnerProps<T>,
   ref?: React.ForwardedRef<HTMLDivElement>
 ): JSX.Element => {
   const options = useStore($options)
@@ -21,10 +21,12 @@ const AsyncSelectInner = <T extends Option>(
   )
 }
 
-export const AsyncSelect = forwardRef(AsyncSelectInner) as <T extends Option>(
-  props: AsyncSelectProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+export const AsyncSelect = forwardRef(AsyncSelectInner) as AsyncSelectProps
+
+type AsyncSelectProps = <T extends Option>(
+  props: AsyncSelectInnerProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof AsyncSelectInner>
 
-type AsyncSelectProps<T extends Option> = BaseSelectProps<T> & {
+type AsyncSelectInnerProps<T extends Option> = BaseSelectProps<T> & {
   $options: Store<readonly T[]>
 }
