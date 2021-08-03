@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import RichTextEditor, { EditorValue } from 'react-rte'
 
@@ -35,39 +35,41 @@ const toolbarConfig = {
   ],
 }
 
-export const TextEditor = (props: ControlProps<string>): JSX.Element => {
-  const { value: inputValue, onChange } = props
-  const [value, setValue] = useState(valueToEditorFormat(inputValue))
+export const TextEditor = forwardRef<HTMLDivElement, ControlProps<string>>(
+  (props, ref): JSX.Element => {
+    const { value: inputValue, onChange } = props
+    const [value, setValue] = useState(valueToEditorFormat(inputValue))
 
-  useEffect(() => {
-    setValue(valueToEditorFormat(inputValue))
-  }, [inputValue])
+    useEffect(() => {
+      setValue(valueToEditorFormat(inputValue))
+    }, [inputValue])
 
-  const onBlur = useCallback((): void => {
-    const formattedValue = valueFromEditorFormat(value)
-    if (formattedValue === '<p><br></p>') {
-      onChange('')
-    } else {
-      onChange(formattedValue)
-    }
-  }, [onChange, value])
+    const onBlur = useCallback((): void => {
+      const formattedValue = valueFromEditorFormat(value)
+      if (formattedValue === '<p><br></p>') {
+        onChange('')
+      } else {
+        onChange(formattedValue)
+      }
+    }, [onChange, value])
 
-  const handleChange = useCallback((v: EditorValue): void => {
-    setValue(v)
-  }, [])
+    const handleChange = useCallback((v: EditorValue): void => {
+      setValue(v)
+    }, [])
 
-  return (
-    <StyledTextEditor>
-      <RichTextEditor
-        // eslint-disable-next-line
-        // @ts-ignore
-        toolbarConfig={toolbarConfig}
-        className="text-editor"
-        editorClassName="text-editor-widget"
-        value={value}
-        onChange={handleChange}
-        onBlur={onBlur}
-      />
-    </StyledTextEditor>
-  )
-}
+    return (
+      <StyledTextEditor ref={ref}>
+        <RichTextEditor
+          // eslint-disable-next-line
+          // @ts-ignore
+          toolbarConfig={toolbarConfig}
+          className="text-editor"
+          editorClassName="text-editor-widget"
+          value={value}
+          onChange={handleChange}
+          onBlur={onBlur}
+        />
+      </StyledTextEditor>
+    )
+  }
+)

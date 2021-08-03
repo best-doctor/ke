@@ -202,7 +202,6 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
           <SideContainerTitle fontSize="md">
             {searchActive ? (
               <DebounceInput
-                autoFocus
                 value={searchValue}
                 onChange={(newValue) => {
                   loadOptions({ first: true, searchQueryValue: newValue }).then((res) => {

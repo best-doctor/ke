@@ -7,7 +7,7 @@ interface ChakraDateInputProps extends InputProps {
   inputClassName?: string
 }
 
-export const ChakraDateInput: React.FC<ChakraDateInputProps> = forwardRef<HTMLInputElement, ChakraDateInputProps>(
+export const ChakraDateInput = forwardRef<HTMLInputElement, ChakraDateInputProps>(
   ({ className, inputClassName, ...props }, ref) => (
     <InputGroup className={className}>
       <InputLeftElement pointerEvents="none">

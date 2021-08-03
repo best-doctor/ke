@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 
@@ -48,47 +48,52 @@ const StyledDatePicker = styled(DatePicker)({
     fontSize: '24px',
   },
 })
-export const BaseDateInput = ({
-  value,
-  minDate,
-  maxDate,
-  filterDate,
-  filterTime,
-  onChange,
-  dateFormat = 'dd.MM.yyyy',
-  className = 'styled-date-time',
-  isClearable = false,
-  showTimeSelect,
-  placeholder,
-}: BaseDateInputProps): JSX.Element => {
-  const [date, setDate] = React.useState<OptionalDate>(value)
-  if (format(value || new Date(), dateFormat) !== format(date || new Date(), dateFormat)) {
-    setDate(value)
-  }
-
-  const handleChange = useCallback(
-    (v: OptionalDate) => {
-      setDate(v)
-      onChange(v)
+export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
+  (
+    {
+      value,
+      minDate,
+      maxDate,
+      filterDate,
+      filterTime,
+      onChange,
+      dateFormat = 'dd.MM.yyyy',
+      className = 'styled-date-time',
+      isClearable = false,
+      showTimeSelect,
+      placeholder,
     },
-    [onChange]
-  )
+    ref
+  ): JSX.Element => {
+    const [date, setDate] = React.useState<OptionalDate>(value)
+    if (format(value || new Date(), dateFormat) !== format(date || new Date(), dateFormat)) {
+      setDate(value)
+    }
 
-  return (
-    <StyledDatePicker
-      className={className}
-      selected={date}
-      onChange={handleChange}
-      dateFormat={dateFormat}
-      minDate={minDate}
-      maxDate={maxDate}
-      filterDate={filterDate}
-      filterTime={filterTime}
-      showDisabledMonthNavigation
-      isClearable={isClearable}
-      showTimeSelect={showTimeSelect}
-      placeholderText={placeholder}
-      customInput={<ChakraDateInput />}
-    />
-  )
-}
+    const handleChange = useCallback(
+      (v: OptionalDate) => {
+        setDate(v)
+        onChange(v)
+      },
+      [onChange]
+    )
+
+    return (
+      <StyledDatePicker
+        className={className}
+        selected={date}
+        onChange={handleChange}
+        dateFormat={dateFormat}
+        minDate={minDate}
+        maxDate={maxDate}
+        filterDate={filterDate}
+        filterTime={filterTime}
+        showDisabledMonthNavigation
+        isClearable={isClearable}
+        showTimeSelect={showTimeSelect}
+        placeholderText={placeholder}
+        customInput={<ChakraDateInput ref={ref} />}
+      />
+    )
+  }
+)
