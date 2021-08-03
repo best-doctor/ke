@@ -6,10 +6,19 @@ import type {
   WizardFieldDescription,
 } from './fields/FieldDescription'
 import { Accessor } from '../typing'
+import { Provider } from './providers'
+
+export type OnDetailObjectLoadedProps = {
+  mainDetailObject: Model
+  provider: Provider
+  context: object
+  setInitialValue: Function
+}
 
 export interface BaseAdmin {
   getPageTitle?(val: Record<string, unknown> | undefined): string
   getPageFavicon?(val: Record<string, unknown> | undefined): string
+  onDetailObjectLoaded?(props: OnDetailObjectLoadedProps): Promise<void>
   hideListView?: Accessor<boolean>
   hideSideBar?: Accessor<boolean>
 }
