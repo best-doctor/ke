@@ -4,7 +4,7 @@ import type { Provider } from 'admin/providers/interfaces'
 import type { Pagination } from 'admin/providers/pagination/interfaces'
 import { ArrowLeft, ArrowRight } from 'react-feather'
 
-import { DebounceInput } from '../../../django-spa/Controls/DebounceInput'
+import { DebounceInput } from '../../../django-spa/Controls'
 import {
   SelectButton,
   CenterContainer,
