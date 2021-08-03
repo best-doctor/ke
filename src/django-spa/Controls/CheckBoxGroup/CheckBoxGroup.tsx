@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
 import { CheckboxGroup, Checkbox } from '@chakra-ui/react'
-import { StyledWrapper } from './styles'
 
 import { ControlProps } from '../types'
 
@@ -25,7 +24,7 @@ const CheckBoxGroupInner = <T extends object>(
   )
 
   return (
-    <StyledWrapper ref={ref}>
+    <div ref={ref}>
       <CheckboxGroup colorScheme="brand" defaultValue={defaultValue} onChange={(values) => handleChange(values)}>
         {value.map((v: T) => (
           <Checkbox spacing={8} key={getKey(v)} value={getValue(v)}>
@@ -33,7 +32,7 @@ const CheckBoxGroupInner = <T extends object>(
           </Checkbox>
         ))}
       </CheckboxGroup>
-    </StyledWrapper>
+    </div>
   )
 }
 
