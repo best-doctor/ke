@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-import AsyncPaginate from 'react-select-async-paginate'
+import { AsyncPaginate } from 'react-select-async-paginate'
 
 import { AsyncSelectWidget } from '../components/AsyncSelectWidget'
 import { testProvider } from '../../setupTests'

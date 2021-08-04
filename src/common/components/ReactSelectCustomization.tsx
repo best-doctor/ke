@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Flex, StylesProvider, Tag, TagCloseButton, TagLabel, useMultiStyleConfig, useStyles } from '@chakra-ui/react'
-import { ClassNames } from '@emotion/react'
+import { ClassNames, CSSObject } from '@emotion/react'
 import React from 'react'
 import {
   ControlProps,
@@ -118,7 +118,7 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
 ): StylesConfig<OptionType, IsMulti> => ({
   ...externalStyles,
   valueContainer(prevStyles, state) {
-    const defaultStyles: React.CSSProperties = {
+    const defaultStyles: CSSObject = {
       ...prevStyles,
       padding: '0, 2px',
       marginLeft: state.isMulti ? '-2px' : undefined,
