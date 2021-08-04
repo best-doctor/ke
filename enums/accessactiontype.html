@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EntitiesData | @bestdoctor/ke</title>
+	<title>AccessActionType | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,98 +55,71 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="entitiesdata.html">EntitiesData</a>
+					<a href="accessactiontype.html">AccessActionType</a>
 				</li>
 			</ul>
-			<h1>Interface EntitiesData&lt;Entity, FetchParams&gt;</h1>
+			<h1>Enumeration AccessActionType</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>Entity</h4>
-					</li>
-					<li>
-						<h4>FetchParams</h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<a href="sourcedata.html" class="tsd-signature-type" data-tsd-kind="Interface">SourceData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">FetchParams</span><span class="tsd-signature-symbol">&gt;</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">EntitiesData</span>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="entitiesdata.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="entitiesdata.html#lastfetch" class="tsd-kind-icon">last<wbr>Fetch</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="entitiesdata.html#pending" class="tsd-kind-icon">pending</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiesdata.html#totalcount" class="tsd-kind-icon">total<wbr>Count</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="accessactiontype.html#change" class="tsd-kind-icon">CHANGE</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="accessactiontype.html#create" class="tsd-kind-icon">CREATE</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="accessactiontype.html#delete" class="tsd-kind-icon">DELETE</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="accessactiontype.html#view" class="tsd-kind-icon">VIEW</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">[]</span></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="change" class="tsd-anchor"></a>
+					<h3>CHANGE</h3>
+					<div class="tsd-signature tsd-kind-icon">CHANGE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;change&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="sourcedata.html">SourceData</a>.<a href="sourcedata.html#data">data</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/cdk/State/types.ts#L2">src/cdk/State/types.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/django-spa/aspects/access/enums.ts#L10">src/django-spa/aspects/access/enums.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="lastfetch" class="tsd-anchor"></a>
-					<h3>last<wbr>Fetch</h3>
-					<div class="tsd-signature tsd-kind-icon">last<wbr>Fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="fetchmeta.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchMeta</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FetchParams</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="create" class="tsd-anchor"></a>
+					<h3>CREATE</h3>
+					<div class="tsd-signature tsd-kind-icon">CREATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;create&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="sourcedata.html">SourceData</a>.<a href="sourcedata.html#lastfetch">lastFetch</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/cdk/State/types.ts#L4">src/cdk/State/types.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/django-spa/aspects/access/enums.ts#L8">src/django-spa/aspects/access/enums.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="pending" class="tsd-anchor"></a>
-					<h3>pending</h3>
-					<div class="tsd-signature tsd-kind-icon">pending<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="delete" class="tsd-anchor"></a>
+					<h3>DELETE</h3>
+					<div class="tsd-signature tsd-kind-icon">DELETE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;delete&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="sourcedata.html">SourceData</a>.<a href="sourcedata.html#pending">pending</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/cdk/State/types.ts#L3">src/cdk/State/types.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/django-spa/aspects/access/enums.ts#L11">src/django-spa/aspects/access/enums.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="totalcount" class="tsd-anchor"></a>
-					<h3>total<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">total<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="view" class="tsd-anchor"></a>
+					<h3>VIEW</h3>
+					<div class="tsd-signature tsd-kind-icon">VIEW<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;view&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/cdk/State/EntitiesSource.factory.ts#L50">src/cdk/State/EntitiesSource.factory.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/d380e79/src/django-spa/aspects/access/enums.ts#L9">src/django-spa/aspects/access/enums.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -164,20 +137,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="entitiesdata.html" class="tsd-kind-icon">Entities<wbr>Data</a>
+					<li class="current tsd-kind-enum">
+						<a href="accessactiontype.html" class="tsd-kind-icon">Access<wbr>Action<wbr>Type</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="entitiesdata.html#data" class="tsd-kind-icon">data</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="accessactiontype.html#change" class="tsd-kind-icon">CHANGE</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="entitiesdata.html#lastfetch" class="tsd-kind-icon">last<wbr>Fetch</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="accessactiontype.html#create" class="tsd-kind-icon">CREATE</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="entitiesdata.html#pending" class="tsd-kind-icon">pending</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="accessactiontype.html#delete" class="tsd-kind-icon">DELETE</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entitiesdata.html#totalcount" class="tsd-kind-icon">total<wbr>Count</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="accessactiontype.html#view" class="tsd-kind-icon">VIEW</a>
 							</li>
 						</ul>
 					</li>
