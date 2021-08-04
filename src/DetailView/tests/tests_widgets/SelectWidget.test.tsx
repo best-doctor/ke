@@ -7,6 +7,7 @@ import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { SelectWidget, BaseSelectWidget } from '../../widgets/SelectWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore, waitForComponentToPaint } from '../../../setupTests'
 import { BaseProvider } from '../../../admin/providers'
+import { ThemeProvider } from '../../../styles'
 
 const detailObject = {
   id: 100500,
@@ -34,40 +35,44 @@ const getPageMock = (mockedProvider.getPage = jest.fn()).mockReturnValue(
 mockedProvider.getPage = getPageMock
 
 const getSelectWidgetComponent = (): JSX.Element => (
-  <SelectWidget
-    name="status.text"
-    resource="test-resource"
-    analytics={undefined}
-    widgetAnalytics={jest.fn()}
-    helpText="test"
-    displayValue={undefined}
-    mainDetailObject={detailObject}
-    dataSource={jest.fn()}
-    dataTarget="https://test.com"
-    targetPayload={(value: string) => ({ testPayload: value })}
-    setMainDetailObject={jest.fn()}
-    provider={mockedProvider as BaseProvider}
-    style={{}}
-    viewType="test_view"
-    notifier={testNotifier}
-    setInitialValue={jest.fn()}
-    submitChange={submitChangeMock}
-    containerStore={mockedEffectorContainerStore}
-  />
+  <ThemeProvider>
+    <SelectWidget
+      name="status.text"
+      resource="test-resource"
+      analytics={undefined}
+      widgetAnalytics={jest.fn()}
+      helpText="test"
+      displayValue={undefined}
+      mainDetailObject={detailObject}
+      dataSource={jest.fn()}
+      dataTarget="https://test.com"
+      targetPayload={(value: string) => ({ testPayload: value })}
+      setMainDetailObject={jest.fn()}
+      provider={mockedProvider as BaseProvider}
+      style={{}}
+      viewType="test_view"
+      notifier={testNotifier}
+      setInitialValue={jest.fn()}
+      submitChange={submitChangeMock}
+      containerStore={mockedEffectorContainerStore}
+    />
+  </ThemeProvider>
 )
 
 const getBaseSelectWidgetComponent = (): JSX.Element => (
-  <BaseSelectWidget
-    name="status.text"
-    helpText="test"
-    displayValue={undefined}
-    mainDetailObject={detailObject}
-    style={{}}
-    setInitialValue={jest.fn()}
-    handleChange={handleChangeMock}
-    containerStore={mockedEffectorContainerStore}
-    data={options}
-  />
+  <ThemeProvider>
+    <BaseSelectWidget
+      name="status.text"
+      helpText="test"
+      displayValue={undefined}
+      mainDetailObject={detailObject}
+      style={{}}
+      setInitialValue={jest.fn()}
+      handleChange={handleChangeMock}
+      containerStore={mockedEffectorContainerStore}
+      data={options}
+    />
+  </ThemeProvider>
 )
 
 test('Select widget properly rendered', async () => {
