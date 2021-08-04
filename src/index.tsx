@@ -143,6 +143,10 @@ export {
   useLogger,
   LoggerConfigProvider,
   useConsoleLogger,
+  useAccess,
+  AccessConfigProvider,
+  AccessActionType,
+  AccessDecision,
 } from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'
