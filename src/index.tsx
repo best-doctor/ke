@@ -1,4 +1,4 @@
-import { BaseAdmin } from './admin'
+import { BaseAdmin, OnDetailObjectLoadedProps } from './admin'
 import type { Accessor, GenericAccessor, WidgetProps } from './typing'
 import { Filter, Provider, ResponseCache } from './admin/providers/interfaces'
 import { LocalCache } from './admin/providers/caches'
@@ -249,4 +249,5 @@ export {
   ErrorBoundary,
   ChakraUINotifier,
   ProviderOptions,
+  OnDetailObjectLoadedProps,
 }
