@@ -73,7 +73,7 @@ function SingleValue<OptionType>({ ...props }: SingleValueProps<OptionType>): JS
         <selectComponents.SingleValue
           {...props}
           className={emotionCx(className, {
-            [css(chakraCss((singleValue as any)._disabled)(theme))]: isDisabled,
+            [css(chakraCss((singleValue as any)?._disabled)(theme))]: isDisabled,
           })}
         />
       )}
