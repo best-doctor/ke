@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { AsyncPaginate } from 'react-select-async-paginate'
 
 import { AsyncSelectWidget } from '../components/AsyncSelectWidget'
@@ -7,7 +7,7 @@ import { testProvider } from '../../setupTests'
 import { ThemeProvider } from '../../styles'
 
 test('Async select widget properly rendered', () => {
-  const component = shallow(
+  const component = mount(
     <AsyncSelectWidget
       provider={testProvider}
       dataResourceUrl="test.com"
