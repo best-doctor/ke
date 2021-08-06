@@ -92,6 +92,7 @@ import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { ValidatorFunction } from './typing'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
+import { Label } from './common/components/Label'
 import { TPathRules } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
 import { WizardProps } from './WizardMaster/components/Wizard'
@@ -254,4 +255,5 @@ export {
   ChakraUINotifier,
   ProviderOptions,
   OnDetailObjectLoadedProps,
+  Label,
 }
