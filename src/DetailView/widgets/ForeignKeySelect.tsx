@@ -20,7 +20,6 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   styles?: Accessor<object>
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
-  getSingleValueLabel?: (option: unknown, mainObject: DetailObject) => React.ReactElement
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -68,7 +67,6 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     optionLabelMenu,
     optionLabelValue,
     isDisabled = false,
-    getSingleValueLabel,
   } = props
 
   const context = containerStore.getState()
@@ -128,9 +126,6 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           value={value}
           isClearable={isClearable}
           defaultOptions={defaultOptions}
-          getSingleValueLabel={
-            getSingleValueLabel ? (object: unknown) => getSingleValueLabel(object, mainDetailObject) : undefined
-          }
           getOptionLabel={(val: object | null) => optionLabel(val, mainDetailObject)}
           getOptionValue={optionValue}
           getOptionLabelMenu={

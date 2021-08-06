@@ -22,9 +22,7 @@ import {
   MultiValueProps,
   OptionTypeBase,
   SingleValueProps,
-  GroupTypeBase,
 } from 'react-select'
-import { Props } from 'react-select/async'
 
 export const Control = <OptionType, IsMulti extends boolean = false>({
   innerRef,
@@ -67,9 +65,7 @@ const DropdownIndicator = <OptionType, IsMulti extends boolean = false>(
 
 function SingleValue<OptionType>({ ...props }: SingleValueProps<OptionType>): JSX.Element {
   const { singleValue } = useStyles()
-  const { className, isDisabled, children } = props
-  // eslint-disable-next-line react/destructuring-assignment
-  const { getSingleValueLabel, value } = props.selectProps as CustomProps<OptionType, false, GroupTypeBase<OptionType>>
+  const { className, isDisabled } = props
   const theme = useTheme()
   return (
     <ClassNames>
@@ -79,9 +75,7 @@ function SingleValue<OptionType>({ ...props }: SingleValueProps<OptionType>): JS
           className={emotionCx(className, {
             [css(chakraCss((singleValue as any)?._disabled)(theme))]: isDisabled,
           })}
-        >
-          {value && getSingleValueLabel ? getSingleValueLabel(value as OptionType) : children}
-        </selectComponents.SingleValue>
+        />
       )}
     </ClassNames>
   )
@@ -168,11 +162,3 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
 })
 
 export const components = { Control, DropdownIndicator, MultiValue, SingleValue }
-
-export interface CustomProps<
-  OptionType extends OptionTypeBase,
-  IsMulti extends boolean,
-  GroupType extends GroupTypeBase<OptionType> = GroupTypeBase<OptionType>
-> extends Props<OptionType, IsMulti, GroupType> {
-  getSingleValueLabel?: (option: OptionType) => React.ReactElement
-}

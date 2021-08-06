@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Response } from 'react-select-async-paginate'
+import { Response, AsyncPaginate } from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
 import type { ValueType, MenuPlacement } from 'react-select'
@@ -9,7 +9,6 @@ import type { Provider } from '../../admin/providers/interfaces'
 import { Accessor } from '../../typing'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 import { components, modifyStyles } from './ReactSelectCustomization'
-import { AsyncPaginatedSelect } from './AsyncPaginatedSelect'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -18,7 +17,6 @@ type AsyncSelectWidgetProps = {
   value: object | null
   getOptionLabel: Function
   getOptionValue: Function
-  getSingleValueLabel?: (option: any) => React.ReactElement
   styles?: object
   isClearable?: boolean
   isMulti?: boolean
@@ -61,7 +59,7 @@ type LoadOptionsType = {
  * @param additionalValues - some fixed values to be added into options as Accessor
  * @param isDisabled - disable select
  */
-function AsyncSelectWidget({
+const AsyncSelectWidget = ({
   provider,
   dataResourceUrl,
   handleChange,
@@ -80,8 +78,7 @@ function AsyncSelectWidget({
   isDisabled = false,
   menuPlacement,
   className,
-  getSingleValueLabel,
-}: AsyncSelectWidgetProps): JSX.Element {
+}: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
   const widgetStyles = {
@@ -147,7 +144,7 @@ function AsyncSelectWidget({
   }
 
   return (
-    <AsyncPaginatedSelect
+    <AsyncPaginate
       value={value}
       onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
       loadOptions={debouncedLoadOptions}
@@ -164,7 +161,6 @@ function AsyncSelectWidget({
       menuPlacement={menuPlacement}
       className={className}
       components={components}
-      getSingleValueLabel={getSingleValueLabel}
     />
   )
 }
