@@ -51,7 +51,7 @@ export const ReadOnlyWidget: ComponentStyleConfig = {
       color: 'black',
     },
     disabled: {
-      color: 'blackAlpha.600',
+      color: 'gray.700',
       borderColor: 'gray.200',
       _hover: {
         borderColor: 'gray.300',

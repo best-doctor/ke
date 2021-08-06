@@ -56,7 +56,7 @@ export const SelectWidget = {
       },
       singleValue: {
         _disabled: {
-          color: 'blackAlpha.600',
+          color: 'gray.700',
         },
       },
     }),
