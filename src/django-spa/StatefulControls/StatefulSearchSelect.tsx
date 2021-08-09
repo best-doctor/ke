@@ -41,12 +41,3 @@ export const StatefulSearchSelect = <T extends Option, IsMulti extends boolean =
   const Component = withDataProvider(StatelessSearchSelect)
   return <Component {...(props as any)} />
 }
-
-// type T = {
-//   key: string
-//   value: string
-// }
-
-// const fc = () => {
-//   return <StatefulSearchSelect<T>  resource="test" />
-// }

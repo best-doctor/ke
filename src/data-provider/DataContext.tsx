@@ -2,6 +2,7 @@ import { partial } from '@utils/Funcs'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import deepmerge from 'deepmerge'
 import React, { useContext, useMemo } from 'react'
+import { BaseConfig } from './config-provider'
 
 import {
   FetchResourceByKey,
@@ -19,13 +20,16 @@ export interface DataProviderValue {
   mutateResource: MutateResourceProvider
   fetchResource: FetchResourceByKey<unknown>
   fetchList: FetchResourceByKey<unknown>
+
+  globalConfig: BaseConfig
 }
 
 export const DataContext = React.createContext<DataProviderValue | null>(null)
 
-interface DataProviderProps {
+interface DataProviderProps<GlobalConfig extends BaseConfig> {
   children: React.ReactNode
   resourcesConfig?: Partial<ResourceProviderConfig>
+  globalConfig?: GlobalConfig
 }
 
 function concat(base: string, lookupField?: string | number): string {
@@ -56,7 +60,11 @@ export function getDefaultResourceConfig(client: AxiosInstance = axios): Partial
   }
 }
 
-export const DataProvider = ({ children, resourcesConfig = {} }: DataProviderProps): JSX.Element => {
+export const DataProvider = <GlobalConfig extends BaseConfig>({
+  children,
+  resourcesConfig = {},
+  globalConfig = {} as GlobalConfig,
+}: DataProviderProps<GlobalConfig>): JSX.Element => {
   const value: DataProviderValue = useMemo(() => {
     const mergedResourcesConfig = deepmerge<ResourceProviderConfig>(getDefaultResourceConfig(axios), resourcesConfig)
     return {
@@ -64,8 +72,9 @@ export const DataProvider = ({ children, resourcesConfig = {} }: DataProviderPro
       mutateResource: partial(mutateResourceProvider, mergedResourcesConfig.mutateResource),
       fetchResource: mergedResourcesConfig.fetchResource,
       fetchList: mergedResourcesConfig.fetchList,
+      globalConfig,
     }
-  }, [resourcesConfig])
+  }, [globalConfig, resourcesConfig])
 
   return (
     <ResourceProviderClient config={resourcesConfig?.clientConfig}>

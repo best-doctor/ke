@@ -6,3 +6,4 @@ export {
   DataProviderConfig,
 } from './withDataProvider'
 export { ResourceProviderConfig } from './resource-provider'
+export { BaseConfig } from './config-provider'
