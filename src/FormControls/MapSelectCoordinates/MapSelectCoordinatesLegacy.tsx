@@ -8,16 +8,13 @@ import { MapSelectCoordinates } from './MapSelectCoordinates'
 import { Coords } from '../../Widgets/Map/types'
 
 const StyledMapWidget = styled.div`
-  border-width: 1px;
-  border-radius: 3px;
-  border-color: #cbd5e0;
   padding: 5.4px;
   white-space: pre-line;
   height: 600px;
 `
 
-export const MapSelectCoordinatesLegacy = (props: WidgetProps): JSX.Element => {
-  const { name, style, helpText, notifier, submitChange, targetPayload, containerStore } = props
+export const MapSelectCoordinatesLegacy = (props: WidgetProps & { isClearable?: boolean }): JSX.Element => {
+  const { name, style, helpText, notifier, submitChange, targetPayload, containerStore, isClearable } = props
   const context = containerStore.getState()
   const { targetUrl, content } = useWidgetInitialization({ ...props, context })
 
@@ -33,6 +30,7 @@ export const MapSelectCoordinatesLegacy = (props: WidgetProps): JSX.Element => {
           updateCoordinates={updateCoordinates}
           initialPosition={content as Coords}
           mapHeight={480}
+          isClearable={isClearable}
         />
       </StyledMapWidget>
     </WidgetWrapper>

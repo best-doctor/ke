@@ -23,21 +23,21 @@ const initDataUpdateHandler = (provider: Provider, setMainDetailObject: Function
   })
 }
 
+/*
+  setInitialValue function used to store widget initial data.
+
+  There are two types of setInitialValue function – for Detail View and for Wizard View.
+
+  In case of DetailView, setInitialValue does nothing and
+  is only needed to comply with the interface (for compatibility with the Wizard View)
+*/
+containerStore.on(setInitialValue, (state: object, value: object) => ({ ...state, ...value }))
+
 const initDetailViewControllers = (
   provider: Provider,
   setMainDetailObject: Function,
   notifier: BaseNotifier
 ): Function[] => {
-  /*
-    setInitialValue function used to store widget initial data.
-
-    There are two types of setInitialValue function – for Detail View and for Wizard View.
-
-    In case of DetailView, setInitialValue does nothing and
-    is only needed to comply with the interface (for compatibility with the Wizard View)
-  */
-  containerStore.on(setInitialValue, (state: object, value: object) => ({ ...state, ...value }))
-
   initDataUpdateHandler(provider, setMainDetailObject, notifier)
 
   return [setInitialValue, submitChange]

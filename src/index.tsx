@@ -1,4 +1,4 @@
-import { BaseAdmin } from './admin'
+import { BaseAdmin, OnDetailObjectLoadedProps } from './admin'
 import type { Accessor, GenericAccessor, WidgetProps } from './typing'
 import { Filter, Provider, ResponseCache } from './admin/providers/interfaces'
 import { LocalCache } from './admin/providers/caches'
@@ -92,6 +92,7 @@ import { ValidationWrapper } from './common/components/ValidationWrapper'
 import { ValidatorFunction } from './typing'
 import { MessagesBlock } from './common/components/MessagesBlock'
 import { ToClipboard } from './common/components/ToClipboard'
+import { Label } from './common/components/Label'
 import { TPathRules } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
 import { WizardProps } from './WizardMaster/components/Wizard'
@@ -134,7 +135,20 @@ export {
   RadioGroup,
   DebounceInput,
 } from './django-spa/Controls'
-export { AnalyticsProvider, useAnalytics, AnalyticsConfigProvider, useFirebase } from './django-spa/aspects'
+export {
+  AnalyticsProvider,
+  useAnalytics,
+  AnalyticsConfigProvider,
+  useFirebase,
+  LoggerProvider,
+  useLogger,
+  LoggerConfigProvider,
+  useConsoleLogger,
+  useAccess,
+  AccessConfigProvider,
+  AccessActionType,
+  AccessDecision,
+} from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'
 export * from './data-provider'
@@ -242,4 +256,6 @@ export {
   ErrorBoundary,
   ChakraUINotifier,
   ProviderOptions,
+  OnDetailObjectLoadedProps,
+  Label,
 }

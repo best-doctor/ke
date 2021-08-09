@@ -21,6 +21,7 @@ export const Field = makeWithLayout(
 
     // Don't found why, but type declaration necessary here https://github.com/microsoft/TypeScript/issues/28631#issuecomment-477240245
     const Component: ElementType = as
+
     return {
       Control: <Component ref={controlRef} value={value} onChange={handleChange} {...other} />,
       Errors: errors && errors.length ? errors[0].message : '',

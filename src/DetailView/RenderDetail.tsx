@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useToast, Box } from '@chakra-ui/react'
+import { useToast, Box, Spinner } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -15,6 +15,8 @@ import { BaseNotifier, ChakraUINotifier } from '../common/notifier'
 import { ToListViewLink } from './components/ToListViewLink'
 import { setFavicon } from '../Browser/Favicon'
 import { ErrorBoundary } from '../common/components/ErrorBoundary'
+import { containerStore } from './store'
+import { setInitialValue } from './events'
 
 const ViewType = 'detail_view'
 
@@ -59,6 +61,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const { resourceName, admin, provider, notifier } = props
   const toast = useToast()
   const detailNotifier = notifier || new ChakraUINotifier(toast)
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   let title = `${admin.verboseName} # ${id}`
   if (admin.getPageTitle) {
@@ -85,11 +88,22 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
 
   useEffect(() => {
     const backendResourceUrl = admin.getResource(id)
-    provider.getObject(backendResourceUrl).then((res) => {
-      setMainDetailObject(res)
-      setNeedRefreshDetailObject(false)
-    })
-  }, [id, provider, admin, needRefreshDetailObject])
+    if (needRefreshDetailObject) {
+      provider.getObject(backendResourceUrl).then(async (res) => {
+        setNeedRefreshDetailObject(false)
+        setMainDetailObject(res)
+        if (admin?.onDetailObjectLoaded !== undefined) {
+          await admin.onDetailObjectLoaded({
+            mainDetailObject: res,
+            provider,
+            context: containerStore,
+            setInitialValue,
+          })
+        }
+        setIsLoaded(true)
+      })
+    }
+  }, [id, provider, admin, needRefreshDetailObject, props, mainDetailObject])
 
   return (
     <>
@@ -102,7 +116,9 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
       </Row>
       <Row>
         <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
-          {mainDetailObject &&
+          {!isLoaded ? (
+            <Spinner />
+          ) : (
             Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
               const elements = admin[elementsKey as keyof typeof admin]
               if (!elements) return []
@@ -121,7 +137,8 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
                   })}
                 </ErrorBoundary>
               )
-            })}
+            })
+          )}
         </Col>
       </Row>
     </>

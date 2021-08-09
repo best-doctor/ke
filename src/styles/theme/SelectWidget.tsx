@@ -12,7 +12,6 @@ const sizes = {
     fontSize: 'lg',
     pl: 4,
     pr: 1,
-    py: 1,
     minHeight: 12,
     borderRadius: 'md',
   },
@@ -21,7 +20,6 @@ const sizes = {
     fontSize: 'md',
     pl: 4,
     pr: 1,
-    py: 1,
     minHeight: 10,
     borderRadius: 'md',
   },
@@ -30,7 +28,6 @@ const sizes = {
     fontSize: 'sm',
     pl: 3,
     pr: 1,
-    py: 1,
     minHeight: 8,
     borderRadius: 'sm',
   },
@@ -39,7 +36,6 @@ const sizes = {
     fontSize: 'xs',
     pl: 2,
     pr: 1,
-    py: 1,
     minHeight: 6,
     borderRadius: 'sm',
   },
@@ -48,10 +44,22 @@ const sizes = {
 type Sizes = keyof typeof sizes
 
 export const SelectWidget = {
-  part: ['control', 'dropdownIndicator'],
+  part: ['control', 'dropdownIndicator', 'multiValueContainer', 'multiValueLabel', 'multiValueRemove', 'singleValue'],
   defaultProps: chakraTheme.components.Input.defaultProps,
   variants: {
-    outline: fieldToControlFunction(chakraTheme.components.Input.variants.outline),
+    outline: (props: Record<string, any>) => ({
+      control: {
+        ...chakraTheme.components.Input.variants.outline(props).field,
+        _disabled: {
+          opacity: 1,
+        },
+      },
+      singleValue: {
+        _disabled: {
+          color: 'gray.700',
+        },
+      },
+    }),
     filled: fieldToControlFunction(chakraTheme.components.Input.variants.filled),
     flushed: fieldToControlFunction(chakraTheme.components.Input.variants.flushed),
     unstyled: { control: chakraTheme.components.Input.variants.unstyled.field },

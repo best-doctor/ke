@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, chakra } from '@chakra-ui/react'
 import { Wizard } from './components'
 
 import { getWizardFromCallable } from './utils'
@@ -22,6 +22,20 @@ type MountWizardsKwargs = {
   refreshMainDetailObject: Function
   analytics: BaseAnalytic | undefined
   user: object
+}
+
+const WizardWrapper = chakra(Box, {
+  baseStyle: {
+    borderTop: '1px solid',
+    borderColor: 'blackAlpha.300',
+    _empty: {
+      border: 0,
+    },
+  },
+})
+
+function isWizardEmpty({ elements, mainDetailObject }: MountWizardsKwargs): boolean {
+  return elements.every((wizardInstance) => !getWizardFromCallable(wizardInstance, mainDetailObject))
 }
 
 const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
@@ -47,7 +61,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
   } = kwargs
 
   return (
-    <Box borderTop="1px solid" borderColor="blackAlpha.300" key={elementsKey}>
+    <WizardWrapper border={isWizardEmpty(kwargs) ? 0 : undefined} key={elementsKey}>
       {elements.map((wizardInstance: WizardFieldElement, index) => {
         const wizard = getWizardFromCallable(wizardInstance, mainDetailObject)
         const key = `wizard-element_${index}`
@@ -73,7 +87,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
           />
         )
       })}
-    </Box>
+    </WizardWrapper>
   )
 }
 

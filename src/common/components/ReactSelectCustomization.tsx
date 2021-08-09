@@ -1,6 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable no-underscore-dangle */
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Flex, StylesProvider, Tag, TagCloseButton, TagLabel, useMultiStyleConfig, useStyles } from '@chakra-ui/react'
-import { ClassNames } from '@emotion/react'
+import {
+  css as chakraCss,
+  Flex,
+  StylesProvider,
+  Tag,
+  TagCloseButton,
+  TagLabel,
+  useMultiStyleConfig,
+  useStyles,
+  useTheme,
+} from '@chakra-ui/react'
+import { ClassNames, CSSObject } from '@emotion/react'
 import React from 'react'
 import {
   ControlProps,
@@ -9,6 +21,7 @@ import {
   StylesConfig,
   MultiValueProps,
   OptionTypeBase,
+  SingleValueProps,
 } from 'react-select'
 
 export const Control = <OptionType, IsMulti extends boolean = false>({
@@ -47,6 +60,24 @@ const DropdownIndicator = <OptionType, IsMulti extends boolean = false>(
     <selectComponents.DropdownIndicator {...props}>
       <ChevronDownIcon sx={dropdownIndicator} />
     </selectComponents.DropdownIndicator>
+  )
+}
+
+function SingleValue<OptionType>({ ...props }: SingleValueProps<OptionType>): JSX.Element {
+  const { singleValue } = useStyles()
+  const { className, isDisabled } = props
+  const theme = useTheme()
+  return (
+    <ClassNames>
+      {({ cx: emotionCx, css }) => (
+        <selectComponents.SingleValue
+          {...props}
+          className={emotionCx(className, {
+            [css(chakraCss((singleValue as any)?._disabled)(theme))]: isDisabled,
+          })}
+        />
+      )}
+    </ClassNames>
   )
 }
 
@@ -118,9 +149,9 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
 ): StylesConfig<OptionType, IsMulti> => ({
   ...externalStyles,
   valueContainer(prevStyles, state) {
-    const defaultStyles: React.CSSProperties = {
+    const defaultStyles: CSSObject = {
       ...prevStyles,
-      padding: '0, 2px',
+      padding: '2px 0',
       marginLeft: state.isMulti ? '-2px' : undefined,
     }
     if (externalStyles?.valueContainer) {
@@ -130,4 +161,4 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
   },
 })
 
-export const components = { Control, DropdownIndicator, MultiValue }
+export const components = { Control, DropdownIndicator, MultiValue, SingleValue }

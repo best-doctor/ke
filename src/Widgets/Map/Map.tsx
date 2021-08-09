@@ -18,10 +18,10 @@ const searchBoxInputStyle: CSSProperties = {
   textOverflow: `ellipses`,
 }
 
-const mapContainerStyle: CSSProperties = {
-  height: 'calc(100% - 45px)',
+const mapContainerStyle = (showSearch: boolean): CSSProperties => ({
+  height: `calc(100% - ${showSearch ? 45 : 0}px)`,
   width: '100%',
-}
+})
 
 const pacCss = css`
   .pac-container {
@@ -47,6 +47,7 @@ export function Map({
   zoom,
   onSearchMarkerClick,
   searchMarkerRadius,
+  showSearch = true,
   ...other
 }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
@@ -117,16 +118,18 @@ export function Map({
   return isLoaded ? (
     <>
       <Global styles={pacCss} />
-      <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-        <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
-      </StandaloneSearchBox>
+      {showSearch && (
+        <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+          <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
+        </StandaloneSearchBox>
+      )}
       <GoogleMap
         zoom={zoom}
         onZoomChanged={handleZoomChanged}
         onBoundsChanged={handleBoundsChanged}
         {...other}
         center={currentCenter}
-        mapContainerStyle={mapContainerStyle}
+        mapContainerStyle={mapContainerStyle(showSearch)}
         clickableIcons={false}
       >
         {children}
@@ -158,6 +161,7 @@ export type MapProps = PropsWithChildren<{
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void
   searchMarkerRadius?: number
+  showSearch?: boolean
 }>
 
 export type Marker = {

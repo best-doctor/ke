@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import AsyncPaginate, { AsyncResult } from 'react-select-async-paginate'
+import { Response, AsyncPaginate } from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
 import type { ValueType, MenuPlacement } from 'react-select'
@@ -114,7 +114,7 @@ const AsyncSelectWidget = ({
     return res
   }
 
-  const loadOptions = async (changeValue: string): Promise<AsyncResult<LoadOptionsType>> => {
+  const loadOptions = async (changeValue: string): Promise<Response<LoadOptionsType, unknown>> => {
     let url = getUrl(changeValue)
     if (changeValue === cachedChangeValue && nextUrl) {
       url = nextUrl
@@ -125,7 +125,7 @@ const AsyncSelectWidget = ({
       res.options = values.concat(res.options)
       setUsedAdditionalValues(true)
     }
-    return res as AsyncResult<LoadOptionsType>
+    return res as Response<LoadOptionsType, unknown>
   }
 
   const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
