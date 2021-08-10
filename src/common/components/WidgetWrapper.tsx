@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, BoxProps, Flex, Text } from '@chakra-ui/react'
+import { Box, BoxProps, Flex, Text, useStyles } from '@chakra-ui/react'
 
 import type { BaseNotifier } from '../notifier'
 import { containerErrorsStore } from '../../WizardMaster/store'
@@ -44,7 +44,6 @@ const WidgetWrapper = ({
   containerProps,
 }: WidgetWrapperProps): JSX.Element => {
   const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
-
   return (
     <Box {...style} data-name={name}>
       {(helpText || useClipboard) && (
@@ -71,4 +70,57 @@ const WidgetWrapper = ({
   )
 }
 
-export { WidgetWrapper }
+/**
+ * Standard styled container for other widgets
+ *
+ * @param style - container css styles
+ * @param helpText - inner widget(s) label
+ * @param children - standard react children
+ * @param copyValue - returns of this callback will be copy to clipboard (when use)
+ * @param useClipboard - show "copy-to-clipboard" handler
+ * @param notifier - object for send notification text on "copy-to-clipboard" event
+ * @param name - name data-attribute
+ * @param description - description
+ */
+const StyledWidgetWrapper = ({
+  style,
+  helpText,
+  children,
+  copyValue,
+  useClipboard,
+  notifier,
+  name = '',
+  description = '',
+  required = false,
+  containerProps,
+}: WidgetWrapperProps): JSX.Element => {
+  const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
+  const styles = useStyles()
+  const widgetWrapperStyle = { ...(styles.widgetWrapper || {}), ...(style || {}) }
+  return (
+    <Box sx={widgetWrapperStyle} data-name={name}>
+      {(helpText || useClipboard) && (
+        <Flex sx={styles.labelWrapper}>
+          {helpText && (
+            <Label isRequired={required} sx={styles.label}>
+              {helpText}
+            </Label>
+          )}
+          {useClipboard && <ToClipboard ml={1} value={copyValue} notifier={notifier} />}
+        </Flex>
+      )}
+      <Box
+        borderColor={hasError ? 'red.500' : undefined}
+        borderWidth={hasError ? 1 : 0}
+        borderRadius={3}
+        sx={styles.controlWrapper}
+        {...containerProps}
+      >
+        {children}
+      </Box>
+      {description && <Text sx={styles.description}>{description}</Text>}
+    </Box>
+  )
+}
+
+export { WidgetWrapper, StyledWidgetWrapper }
