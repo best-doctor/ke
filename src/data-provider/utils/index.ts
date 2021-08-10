@@ -1,0 +1,1 @@
+export { configResolver } from './configResolver'

@@ -17,7 +17,9 @@ interface ResourceProviderClientProps {
   children?: React.ReactNode
   config?: ResourceProviderClientConfig
 }
-
+/**
+ * Обертка над react-query
+ */
 export const ResourceProviderClient = ({ children, config }: ResourceProviderClientProps): JSX.Element => {
   const queryClient = useMemo(() => new ReactQueryClient(config), [config])
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

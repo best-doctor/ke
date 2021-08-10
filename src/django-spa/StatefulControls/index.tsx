@@ -1,1 +1,1 @@
-export { StatefulSearchSelect } from './StatefulSearchSelect'
+export { StatefullAsyncSelect } from './StatefulAsyncSelect'

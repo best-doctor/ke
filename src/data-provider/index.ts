@@ -1,9 +1,5 @@
-export { DataContext, DataProvider, DataProviderValue, useDataProvider, getDefaultResourceConfig } from './DataContext'
-export {
-  withDataProvider,
-  WithDataProviderProps as WithDataProviderConfig,
-  ProviderObject,
-  DataProviderConfig,
-} from './withDataProvider'
-export { ResourceProviderConfig } from './resource-provider'
-export { BaseConfig } from './config-provider'
+export { DataProvider } from './DataContext'
+export * from './resource-provider'
+
+export { useConfigResolver } from './hooks/useConfigResolver'
+export * from './config-provider'

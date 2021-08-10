@@ -1,32 +1,34 @@
-import React, { forwardRef } from 'react'
-import BaseSelect from 'react-select'
-import { useStore } from 'effector-react'
-import type { Store } from 'effector'
+import React from 'react'
+import {
+  useAsyncPaginate,
+  UseAsyncPaginateParams,
+  useComponents,
+  ComponentProps,
+  AsyncPaginate,
+} from 'react-select-async-paginate'
+import { Props as SelectProps } from 'react-select'
 
-import { BaseSelectProps, Option } from './types'
+import type { Option } from './types'
 
-const AsyncSelectInner = <T extends Option>(
-  { value, onChange, $options, ...other }: AsyncSelectInnerProps<T>,
-  ref?: React.ForwardedRef<HTMLDivElement>
-): JSX.Element => {
-  const options = useStore($options)
-  return (
-    <BaseSelect
-      options={options}
-      value={value}
-      onChange={onChange as (v: T | readonly T[] | undefined | null) => void}
-      inputRef={ref}
-      {...other}
-    />
-  )
-}
+export type Props<OptionType, Additional, IsMulti extends boolean> = SelectProps<OptionType, IsMulti> &
+  UseAsyncPaginateParams<OptionType, Additional> &
+  ComponentProps & {
+    useComponents?: typeof useComponents
+    useAsyncPaginate?: typeof useAsyncPaginate
+  }
 
-export const AsyncSelect = forwardRef(AsyncSelectInner) as AsyncSelectProps
+export type StatefullProps<OptionType, Additional, IsMulti extends boolean> = SelectProps<OptionType, IsMulti> &
+  Omit<UseAsyncPaginateParams<OptionType, Additional>, 'loadOptions'> &
+  ComponentProps & {
+    useComponents?: typeof useComponents
+    useAsyncPaginate?: typeof useAsyncPaginate
+  }
 
-type AsyncSelectProps = <T extends Option>(
-  props: AsyncSelectInnerProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
-) => ReturnType<typeof AsyncSelectInner>
+export interface AsyncSelectProps<OptionType, Additional = any, IsMulti extends boolean = false>
+  extends Props<OptionType, Additional, IsMulti> {}
 
-type AsyncSelectInnerProps<T extends Option> = BaseSelectProps<T> & {
-  $options: Store<readonly T[]>
+export function AsyncSelect<T extends Option, Additional = any, IsMulti extends boolean = false>(
+  props: AsyncSelectProps<T, Additional, IsMulti>
+): React.ReactElement {
+  return <AsyncPaginate {...(props as any)} />
 }
