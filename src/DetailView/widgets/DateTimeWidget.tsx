@@ -21,6 +21,7 @@ type DateTimeWidgetProps = {
   className?: string
   isClearable?: boolean
   placeholder?: string
+  wrapperClassName?: string
 }
 
 /**
@@ -45,6 +46,7 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
     className,
     isClearable,
     placeholder,
+    wrapperClassName,
   } = props
 
   const context = containerStore.getState()
@@ -78,6 +80,7 @@ const DateTimeWidget = (props: WidgetProps & DateTimeWidgetProps): JSX.Element =
         className={className}
         isClearable={isClearable}
         placeholder={placeholder}
+        wrapperClassName={wrapperClassName}
       />
     </WidgetWrapper>
   )
