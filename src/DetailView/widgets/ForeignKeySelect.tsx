@@ -20,6 +20,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   styles?: Accessor<object>
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
+  placeholder?: string
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -67,6 +68,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     optionLabelMenu,
     optionLabelValue,
     isDisabled = false,
+    placeholder,
   } = props
 
   const context = containerStore.getState()
@@ -137,6 +139,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           searchParamName={searchParamName}
           styles={selectStyle}
           isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
+          placeholder={placeholder}
         />
       </ValidationWrapper>
     </WidgetWrapper>
