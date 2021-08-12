@@ -15,6 +15,7 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
   filterTime?: (v: Date) => boolean
   dateFormat?: string
   className?: string
+  wrapperClassName?: string
   isClearable?: boolean
   showTimeSelect: boolean
   placeholder?: string
@@ -62,6 +63,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
       isClearable = false,
       showTimeSelect,
       placeholder,
+      wrapperClassName,
     },
     ref
   ): JSX.Element => {
@@ -81,6 +83,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
     return (
       <StyledDatePicker
         className={className}
+        wrapperClassName={wrapperClassName}
         selected={date}
         onChange={handleChange}
         dateFormat={dateFormat}
