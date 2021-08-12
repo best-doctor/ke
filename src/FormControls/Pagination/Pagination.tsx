@@ -30,7 +30,7 @@ const PaginationButton = ({ disabled, onClick, element }: PaginationButtonProps)
     _hover={{ bg: undefined }}
     _focus={{ boxShadow: undefined }}
     disabled={disabled}
-    bg={undefined}
+    bg="transparent"
     onClick={onClick}
   />
 )
