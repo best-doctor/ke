@@ -1,5 +1,5 @@
 import React, { useCallback, forwardRef } from 'react'
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
+import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 
 import { css } from '@emotion/css'
@@ -8,21 +8,20 @@ import { OptionalDate } from './types'
 import { ControlProps } from '../types'
 import { ChakraDateInput } from './ChakraDateInput'
 
-export type BaseDateInputProps = Pick<
-  ReactDatePickerProps,
-  'clearButtonClassName' | 'wrapperClassName' | 'popperClassName'
-> &
-  ControlProps<OptionalDate> & {
-    minDate?: Date
-    maxDate?: Date
-    filterDate?: (v: Date) => boolean
-    filterTime?: (v: Date) => boolean
-    dateFormat?: string
-    className?: string
-    isClearable?: boolean
-    showTimeSelect: boolean
-    placeholder?: string
-  }
+export type BaseDateInputProps = ControlProps<OptionalDate> & {
+  minDate?: Date
+  maxDate?: Date
+  filterDate?: (v: Date) => boolean
+  filterTime?: (v: Date) => boolean
+  dateFormat?: string
+  className?: string
+  isClearable?: boolean
+  showTimeSelect: boolean
+  placeholder?: string
+  clearButtonClassName?: string
+  wrapperClassName?: string
+  popperClassName?: string
+}
 
 /**
  * Render date/datetime picker
