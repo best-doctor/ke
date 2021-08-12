@@ -34,7 +34,7 @@ type IdType = {
 
 type OptionIdType = Option & IdType
 type OptionValueType = Option & ValueType
-type DatePickerValue = Date | [Date, Date] | null | undefined
+type DatePickerValue = Date | [Date | null, Date | null] | null
 
 type FilterProps = {
   name: string
