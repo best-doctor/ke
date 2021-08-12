@@ -8649,9 +8649,9 @@ react-datepicker@^4.2.0:
     react-popper "^2.2.5"
 
 react-debounce-input@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/react-debounce-input/-/react-debounce-input-3.2.2.tgz"
-  integrity sha512-RIBu68Cq/gImKz/2h1cE042REDqyqj3D+7SJ3lnnIpJX0ht9D9PfH7KAnL+SgDz6hvKa9pZS2CnAxlkrLmnQlg==
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-debounce-input/-/react-debounce-input-3.2.4.tgz#8204373a6498776536a2fcc7e467d054c3b729d4"
+  integrity sha512-fX70bNj0fLEYO2Zcvuh7eh9wOUQ29GIx6r8IxIJlc0i0mpUH++9ax0BhfAYfzndADli3RAMROrZQ014J01owrg==
   dependencies:
     lodash.debounce "^4"
     prop-types "^15.7.2"
