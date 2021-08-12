@@ -11,13 +11,13 @@ export const ResourceConfigContext = React.createContext<ResourceDefaultConfig |
 
 interface ResourceConfigProviderProps {
   children?: React.ReactNode
-  config?: ResourceProviderOptions
+  options?: ResourceProviderOptions
 }
 
 const defaultFunctions = getDefaultResourceConfig(axios)
 
-export const ResourceProvider = ({ config = {}, children }: ResourceConfigProviderProps): React.ReactElement => {
-  const { clientConfig, ...apiFunctions } = config
+export const ResourceProvider = ({ options = {}, children }: ResourceConfigProviderProps): React.ReactElement => {
+  const { clientConfig, ...apiFunctions } = options
 
   const api = useMemo(() => deepmerge(defaultFunctions, apiFunctions) as ResourceDefaultConfig, [apiFunctions])
   return (
