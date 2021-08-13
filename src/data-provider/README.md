@@ -4,9 +4,9 @@
 
 ## Пользовательский API
 
-1. [`ResourceProvider`]("resource-provider/README.md") - Набор функций для получения данных с сервера, внутри компонентов приложения
+1. [`ResourceProvider`](resource-provider/README.md) - Набор функций для получения данных с сервера, внутри компонентов приложения
 
-1. [`ConfigProvider`]("config-provider/README.md") - Набор функций для предоставления компонентам конфигурационных данных
+1. [`ConfigProvider`](config-provider/README.md) - Набор функций для предоставления компонентам конфигурационных данных
 
 ## API для разработки
 
