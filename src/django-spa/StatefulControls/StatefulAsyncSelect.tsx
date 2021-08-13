@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { OptionTypeBase } from 'react-select'
 import { AsyncPaginate, LoadOptions } from 'react-select-async-paginate'
 import { StatefullProps } from '../Controls/Select/AsyncSelect'
@@ -15,7 +15,6 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
   resource,
   ...props
 }: StatefullAsyncSelecProps<OptionType, number>): React.ReactElement => {
-  const [inputValue, setInputValue] = useState('')
   const fetchResource = useFetchResource<ListResponse<OptionType>>(resource)
 
   const handleLoadOptoins: LoadOptions<OptionType, number> = useCallback(
@@ -38,12 +37,5 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
     [fetchResource]
   )
 
-  return (
-    <AsyncPaginate
-      {...(props as any)}
-      inputValue={inputValue}
-      onInputChange={setInputValue}
-      loadOptions={handleLoadOptoins}
-    />
-  )
+  return <AsyncPaginate {...(props as any)} loadOptions={handleLoadOptoins} />
 }
