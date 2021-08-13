@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SourceData | @bestdoctor/ke</title>
+	<title>ResourceDefaultConfig | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="sourcedata.html">SourceData</a>
+					<a href="resourcedefaultconfig.html">ResourceDefaultConfig</a>
 				</li>
 			</ul>
-			<h1>Interface SourceData&lt;T, FetchParams&gt;</h1>
+			<h1>Interface ResourceDefaultConfig&lt;ResourceData, SourceData&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -69,10 +69,10 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T</h4>
+						<h4>ResourceData = <span class="tsd-signature-type">unknown</span></h4>
 					</li>
 					<li>
-						<h4>FetchParams = <span class="tsd-signature-type">undefined</span></h4>
+						<h4>SourceData = <span class="tsd-signature-type">ResourceData</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -80,10 +80,15 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SourceData</span>
+						<span class="tsd-signature-type">ResourceQueriesConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SourceData</span><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="entitiesdata.html" class="tsd-signature-type" data-tsd-kind="Interface">EntitiesData</a>
+								<span class="target">ResourceDefaultConfig</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="resourceproviderconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">ResourceProviderConfig</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
@@ -96,9 +101,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sourcedata.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sourcedata.html#lastfetch" class="tsd-kind-icon">last<wbr>Fetch</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sourcedata.html#pending" class="tsd-kind-icon">pending</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="resourcedefaultconfig.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="resourcedefaultconfig.html#fetchlist" class="tsd-kind-icon">fetch<wbr>List</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="resourcedefaultconfig.html#fetchresource" class="tsd-kind-icon">fetch<wbr>Resource</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="resourcedefaultconfig.html#mutate" class="tsd-kind-icon">mutate</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,32 +113,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
+					<a name="client" class="tsd-anchor"></a>
+					<h3>client</h3>
+					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AxiosInstance</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/cdk/State/types.ts#L2">src/cdk/State/types.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/data-provider/resource-provider/interfaces.ts#L34">src/data-provider/resource-provider/interfaces.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lastfetch" class="tsd-anchor"></a>
-					<h3>last<wbr>Fetch</h3>
-					<div class="tsd-signature tsd-kind-icon">last<wbr>Fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="fetchmeta.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchMeta</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FetchParams</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="fetchlist" class="tsd-anchor"></a>
+					<h3>fetch<wbr>List</h3>
+					<div class="tsd-signature tsd-kind-icon">fetch<wbr>List<span class="tsd-signature-symbol">:</span> <a href="fetchresourceconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchResourceConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/cdk/State/types.ts#L4">src/cdk/State/types.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/data-provider/resource-provider/interfaces.ts#L24">src/data-provider/resource-provider/interfaces.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="pending" class="tsd-anchor"></a>
-					<h3>pending</h3>
-					<div class="tsd-signature tsd-kind-icon">pending<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="fetchresource" class="tsd-anchor"></a>
+					<h3>fetch<wbr>Resource</h3>
+					<div class="tsd-signature tsd-kind-icon">fetch<wbr>Resource<span class="tsd-signature-symbol">:</span> <a href="fetchresourceconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchResourceConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/cdk/State/types.ts#L3">src/cdk/State/types.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/data-provider/resource-provider/interfaces.ts#L23">src/data-provider/resource-provider/interfaces.ts:23</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="mutate" class="tsd-anchor"></a>
+					<h3>mutate</h3>
+					<div class="tsd-signature tsd-kind-icon">mutate<span class="tsd-signature-symbol">:</span> <a href="mutateresourceconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">MutateResourceConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/5ff7f17/src/data-provider/resource-provider/interfaces.ts#L22">src/data-provider/resource-provider/interfaces.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -151,16 +167,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="sourcedata.html" class="tsd-kind-icon">Source<wbr>Data</a>
+						<a href="resourcedefaultconfig.html" class="tsd-kind-icon">Resource<wbr>Default<wbr>Config</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="sourcedata.html#data" class="tsd-kind-icon">data</a>
+								<a href="resourcedefaultconfig.html#client" class="tsd-kind-icon">client</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="sourcedata.html#lastfetch" class="tsd-kind-icon">last<wbr>Fetch</a>
+								<a href="resourcedefaultconfig.html#fetchlist" class="tsd-kind-icon">fetch<wbr>List</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="sourcedata.html#pending" class="tsd-kind-icon">pending</a>
+								<a href="resourcedefaultconfig.html#fetchresource" class="tsd-kind-icon">fetch<wbr>Resource</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="resourcedefaultconfig.html#mutate" class="tsd-kind-icon">mutate</a>
 							</li>
 						</ul>
 					</li>
