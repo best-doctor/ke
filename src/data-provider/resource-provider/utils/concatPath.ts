@@ -10,5 +10,8 @@ export function concatPath(base: string, lookupField?: string | number): string 
     }
     url = url.concat(param)
   }
+  if (!url.endsWith('/')) {
+    url = url.concat('/')
+  }
   return url
 }

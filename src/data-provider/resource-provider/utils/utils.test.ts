@@ -16,15 +16,19 @@ describe('concatPath', () => {
   })
 
   it('should remove slash for lookup field', () => {
-    expect(concatPath('https://test.com/', '/lookup')).toBe('https://test.com/lookup')
+    expect(concatPath('https://test.com/', '/lookup')).toBe('https://test.com/lookup/')
   })
 
   it('should works fine with numbers', () => {
-    expect(concatPath('https://test.com/', 1)).toBe('https://test.com/1')
+    expect(concatPath('https://test.com/', 1)).toBe('https://test.com/1/')
   })
 
   it('should split base url and lookup field with slash', () => {
-    expect(concatPath('https://test.com', 'lookup')).toBe('https://test.com/lookup')
+    expect(concatPath('https://test.com', 'lookup')).toBe('https://test.com/lookup/')
+  })
+
+  it('should ends with slash', () => {
+    expect(concatPath('https://test.com', 'lookup')).toBe('https://test.com/lookup/')
   })
 })
 
