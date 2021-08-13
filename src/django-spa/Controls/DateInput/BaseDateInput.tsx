@@ -2,8 +2,8 @@ import React, { useCallback, forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 
-import styled from '@emotion/styled'
-// import { StyleDateTime } from './styles'
+import { css } from '@emotion/css'
+import cn from 'classnames'
 import { OptionalDate } from './types'
 import { ControlProps } from '../types'
 import { ChakraDateInput } from './ChakraDateInput'
@@ -15,10 +15,12 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
   filterTime?: (v: Date) => boolean
   dateFormat?: string
   className?: string
-  wrapperClassName?: string
   isClearable?: boolean
   showTimeSelect: boolean
   placeholder?: string
+  clearButtonClassName?: string
+  wrapperClassName?: string
+  popperClassName?: string
 }
 
 /**
@@ -36,19 +38,18 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
  * @param showTimeSelect - show time select
  */
 
-const StyledDatePicker = styled(DatePicker)({
-  '& .react-datepicker-popper': {
-    zIndex: '1001 !important' as any,
-  },
-  '& .react-datepicker__close-icon': {
-    height: '40px',
-  },
-  '& .react-datepicker__close-icon::after': {
-    color: '#cccccc',
-    backgroundColor: 'transparent',
-    fontSize: '24px',
-  },
-})
+const clearButonCss = css`
+  &::after {
+    color: #cccccc;
+    background-color: transparent;
+    font-size: 24px;
+  }
+`
+
+const pooperCss = css`
+  z-index: 1001;
+`
+
 export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
   (
     {
@@ -64,6 +65,8 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
       showTimeSelect,
       placeholder,
       wrapperClassName,
+      clearButtonClassName,
+      popperClassName,
     },
     ref
   ): JSX.Element => {
@@ -81,8 +84,9 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
     )
 
     return (
-      <StyledDatePicker
+      <DatePicker
         className={className}
+        clearButtonClassName={cn(clearButonCss, clearButtonClassName)}
         wrapperClassName={wrapperClassName}
         selected={date}
         onChange={handleChange}
@@ -95,6 +99,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
         isClearable={isClearable}
         showTimeSelect={showTimeSelect}
         placeholderText={placeholder}
+        popperClassName={cn(pooperCss, popperClassName)}
         customInput={<ChakraDateInput ref={ref} />}
       />
     )

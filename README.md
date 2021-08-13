@@ -450,6 +450,8 @@ After cloning this repo if you'd like to use it in another project using React
   yarn link
   cd ../@chakra-ui/react
   yarn link
+  cd ../react-query
+  yarn link
   ```
 
 #### In `your-project-folder`
@@ -463,7 +465,7 @@ After cloning this repo if you'd like to use it in another project using React
 * link all external dependencies and `ke`:
 
   ```
-  yarn link react @chakra-ui/react @bestdoctor/ke
+  yarn link react @chakra-ui/react @bestdoctor/ke react-query
   ```
 
 Here are useful tips:
