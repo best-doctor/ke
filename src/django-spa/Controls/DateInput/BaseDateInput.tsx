@@ -21,6 +21,7 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
   clearButtonClassName?: string
   wrapperClassName?: string
   popperClassName?: string
+  timeCaption?: string
 }
 
 /**
@@ -36,6 +37,11 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
  * @param className - class name for element
  * @param isClearable - allow input to be clearable
  * @param showTimeSelect - show time select
+ * @param placeholder - displayed placeholder
+ * @param clearButtonClassName - class name for clear button
+ * @param wrapperClassName - class name for wrapper
+ * @param popperClassName - class name for popper
+ * @param timeCaption - title of time input
  */
 
 const clearButonCss = css`
@@ -67,6 +73,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
       wrapperClassName,
       clearButtonClassName,
       popperClassName,
+      timeCaption = 'Время',
     },
     ref
   ): JSX.Element => {
@@ -101,6 +108,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
         placeholderText={placeholder}
         popperClassName={cn(pooperCss, popperClassName)}
         customInput={<ChakraDateInput ref={ref} />}
+        timeCaption={timeCaption}
       />
     )
   }
