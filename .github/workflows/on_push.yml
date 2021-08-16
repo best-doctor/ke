@@ -15,6 +15,7 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: install docs gem
         run: |
+          gem update --system
           gem install chef-utils -v 16.6.14 --install-dir /usr/local/bin/ruby/gems
           gem install mdl --install-dir /usr/local/bin/ruby/gems
       - name: eslint
@@ -30,5 +31,5 @@ jobs:
       - name: lint docs
         run: |
           ls -a /usr/local/bin/ruby/gems/bin
-          PATH=/usr/local/bin/ruby/gems/bin:$PATH mdl README.md
-          PATH=/usr/local/bin/ruby/gems/bin:$PATH mdl docs/
+          GEM_PATH=/usr/local/bin/ruby/gems/gems PATH=/usr/local/bin/ruby/gems/bin:$PATH mdl README.md
+          GEM_PATH=/usr/local/bin/ruby/gems/gems PATH=/usr/local/bin/ruby/gems/bin:$PATH mdl docs/
