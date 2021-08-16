@@ -23,8 +23,8 @@ jobs:
         run: yarn typecheck
       - name: lint docs
         run: |
-          GEM_HOME="/usr/local/bin/ruby/gems" mdl README.md
-          GEM_HOME="/usr/local/bin/ruby/gems" mdl docs/
+          GEM_PATH="/usr/local/bin/ruby/gems" mdl README.md
+          GEM_PATH="/usr/local/bin/ruby/gems" mdl docs/
       - name: run tests and publish coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
