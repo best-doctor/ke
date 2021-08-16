@@ -15,8 +15,8 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: install docs gem
         run: |
-          gem install chef-utils -v 16.6.14
-          gem install mdl
+          gem install chef-utils -v 16.6.14 --install-dir /usr/local/bin/ruby/gems
+          gem install mdl --install-dir /usr/local/bin/ruby/gems
       - name: eslint
         uses: wearerequired/lint-action@v1
         with:
@@ -27,8 +27,8 @@ jobs:
         run: yarn typecheck
       - name: lint docs
         run: |
-          mdl README.md
-          mdl docs/
+          GEM_HOME="/usr/local/bin/ruby/gems" mdl README.md
+          GEM_HOME="/usr/local/bin/ruby/gems" mdl docs/
       - name: run tests and publish coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
