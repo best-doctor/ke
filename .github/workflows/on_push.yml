@@ -1,8 +1,7 @@
 name: Lint and test
 on:
   push:
-    branches:
-      - all
+    branches: [*]
   pull_request:
     branches: [master]
 
