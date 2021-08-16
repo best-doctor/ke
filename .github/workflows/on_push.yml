@@ -21,13 +21,14 @@ jobs:
         run: yarn lint
       - name: typecheck
         run: yarn typecheck
-      - name: lint docs
-        run: |
-          PATH=/usr/local/bin/ruby/gems:$PATH mdl README.md
-          PATH=/usr/local/bin/ruby/gems:$PATH mdl docs/
       - name: run tests and publish coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: yarn test --coverageDirectory=. --coverage
+      - name: lint docs
+        run: |
+          ls -a /usr/local/bin/ruby/gems
+          PATH=/usr/local/bin/ruby/gems:$PATH mdl README.md
+          PATH=/usr/local/bin/ruby/gems:$PATH mdl docs/
