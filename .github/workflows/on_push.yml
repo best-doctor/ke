@@ -29,6 +29,6 @@ jobs:
           coverageCommand: yarn test --coverageDirectory=. --coverage
       - name: lint docs
         run: |
-          ls -a /usr/local/bin/ruby/gems
-          PATH=/usr/local/bin/ruby/gems:$PATH mdl README.md
-          PATH=/usr/local/bin/ruby/gems:$PATH mdl docs/
+          ls -a /usr/local/bin/ruby/gems/gems
+          PATH=/usr/local/bin/ruby/gems/gems:$PATH mdl README.md
+          PATH=/usr/local/bin/ruby/gems/gems:$PATH mdl docs/
