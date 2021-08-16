@@ -23,8 +23,8 @@ jobs:
         run: yarn typecheck
       - name: lint docs
         run: |
-          /usr/local/bin/ruby/gems/mdl README.md
-          /usr/local/bin/ruby/gems/mdl docs/
+          PATH=/usr/local/bin/ruby/gems:$PATH mdl README.md
+          PATH=/usr/local/bin/ruby/gems:$PATH mdl docs/
       - name: run tests and publish coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
