@@ -36,7 +36,7 @@
         "react-grid-layout": "1.2.5",
         "react-input-mask": "^2.0.4",
         "react-query": "^3.19.0",
-        "react-router-dom": "^5.1.2",
+        "react-router-dom": "^5.2.0",
         "react-rte": "^0.16.3",
         "react-select": "^4.3.1",
         "react-select-async-paginate": "0.5.3",
