@@ -1,4 +1,4 @@
-name: docs
+name: Lint and test
 on:
   push:
     branches:
