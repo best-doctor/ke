@@ -1,7 +1,14 @@
-import React, { ReactNode } from 'react'
-import { FieldKey, useForm, FormData, RecordValidator } from '@cdk/Forms'
+import React, { PropsWithChildren } from 'react'
+import { FieldKey, useForm } from '@cdk/Forms'
 
-export function Form<K extends FieldKey, T>({ data, onFormChange, children, validator }: FormProps<K, T>): JSX.Element {
+import { FormProps } from './types'
+
+export function Form<K extends FieldKey, T>({
+  data,
+  onFormChange,
+  children,
+  validator,
+}: PropsWithChildren<FormProps<K, T>>): JSX.Element {
   const {
     valuesRoot: [Root, props],
     errorsRoot: [ErrorsRoot, errorsProps],
@@ -14,11 +21,4 @@ export function Form<K extends FieldKey, T>({ data, onFormChange, children, vali
       </ErrorsRoot>
     </Root>
   )
-}
-
-interface FormProps<K extends FieldKey, T> {
-  data: T
-  onFormChange: (value: T, meta: Omit<FormData<K>, 'value'>) => void
-  validator?: RecordValidator
-  children: ReactNode
 }

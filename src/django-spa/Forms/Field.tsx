@@ -1,8 +1,8 @@
-import React, { ElementType, ReactElement, RefObject, useCallback, useRef } from 'react'
-import { ControlRefProps, useField, useFieldValidation, ValidationResult, Validator } from '@cdk/Forms'
+import React, { ElementType, useCallback, useRef } from 'react'
+import { ControlRefProps, useField, useFieldValidation, ValidationResult } from '@cdk/Forms'
 import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
 
-import type { NodeProps } from './types'
+import type { ControlProps, FieldProps } from './types'
 import { Simple } from './Layouts'
 
 export const Field = makeWithLayout(
@@ -36,19 +36,3 @@ export const Field = makeWithLayout(
 function defaultValidator(): Promise<ValidationResult> {
   return Promise.resolve({ success: true })
 }
-
-interface ControlProps<T> {
-  value: T
-  onChange: (val: T) => void
-  ref: RefObject<ControlRefProps | undefined>
-}
-
-interface BaseFieldProps<T, P> extends NodeProps {
-  as: ElementType<P & ControlProps<T>>
-  validator?: Validator
-}
-
-type FieldProps<T, P> = BaseFieldProps<T, P> &
-  Omit<P, keyof BaseFieldProps<T, P> | keyof ControlProps<T>> & {
-    label?: ReactElement
-  }

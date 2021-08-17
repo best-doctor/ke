@@ -16,7 +16,7 @@ const StyledMapFilterWidget = styled.div`
 export const BlockM1xA1L = makeSlots(
   {
     M: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    S: ({ children }: { children: (readonly [Key, ReactNode])[] }) => <ListVertical>{children}</ListVertical>,
+    S: ({ children }: { children: [Key, ReactNode][] }) => <ListVertical>{children}</ListVertical>,
   },
   (slotElements) => (
     <StyledMapFilterWidget>
