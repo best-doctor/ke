@@ -4,6 +4,7 @@ import React from 'react'
 import { SelectWidget } from './theme/SelectWidget'
 import { ReadOnlyWidget } from './theme/ReadOnlyWidget'
 import { LinkWidget } from './theme/LinkWidget'
+import { ChipInput } from './theme/ChipInput'
 
 export const defaultTheme = extendTheme({
   colors: {
@@ -24,6 +25,7 @@ export const defaultTheme = extendTheme({
     SelectWidget,
     ReadOnlyWidget,
     LinkWidget,
+    ChipInput,
   },
 })
 

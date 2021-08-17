@@ -17,6 +17,7 @@ interface WidgetWrapperProps {
   description?: string | JSX.Element
   required?: boolean
   containerProps?: BoxProps
+  labelContainerProps?: BoxProps
 }
 
 /**
@@ -42,12 +43,13 @@ const WidgetWrapper = ({
   description = '',
   required = false,
   containerProps,
+  labelContainerProps,
 }: WidgetWrapperProps): JSX.Element => {
   const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
   return (
     <Box {...style} data-name={name}>
       {(helpText || useClipboard) && (
-        <Flex mt={5} alignItems="center" flexShrink={0}>
+        <Flex mt={6} alignItems="center" flexShrink={0} {...labelContainerProps}>
           {helpText && <Label isRequired={required}>{helpText}</Label>}
           {useClipboard && <ToClipboard ml={1} value={copyValue} notifier={notifier} />}
         </Flex>
@@ -93,6 +95,7 @@ const StyledWidgetWrapper = ({
   description = '',
   required = false,
   containerProps,
+  labelContainerProps,
 }: WidgetWrapperProps): JSX.Element => {
   const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
   const styles = useStyles()
@@ -100,7 +103,7 @@ const StyledWidgetWrapper = ({
   return (
     <Box sx={widgetWrapperStyle} data-name={name}>
       {(helpText || useClipboard) && (
-        <Flex sx={styles.labelWrapper}>
+        <Flex {...(styles.labelWrapper as any)} {...labelContainerProps}>
           {helpText && (
             <Label isRequired={required} sx={styles.label}>
               {helpText}

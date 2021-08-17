@@ -66,7 +66,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
       {buttons.map((button) => (
         <Button
           key={button.name}
-          ml={4}
+          ml={2}
           _first={{
             ml: 0,
           }}

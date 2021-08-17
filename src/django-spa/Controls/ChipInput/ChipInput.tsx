@@ -1,5 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useRef, useState, forwardRef, RefObject } from 'react'
-import { Tag, TagCloseButton, TagLabel, Input, Flex, Text } from '@chakra-ui/react'
+import { Tag, TagCloseButton, TagLabel, Input, Flex, Text, useMultiStyleConfig } from '@chakra-ui/react'
 
 import { usePropState } from '@cdk/Hooks'
 
@@ -75,16 +75,11 @@ export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>(
       [chips.length, deleteChip, finishInput, submitKeys, value]
     )
 
+    const { container, input, chip, chipLabel } = useMultiStyleConfig('ChipInput', props)
+
     return (
       <>
-        <Flex
-          borderWidth="1px"
-          borderRadius="3px"
-          borderColor="#cbd5e0"
-          alignItems="center"
-          flexWrap="wrap"
-          onClick={() => inputRef?.current?.focus?.()}
-        >
+        <Flex __css={container} onClick={() => inputRef?.current?.focus?.()}>
           {chips.map((chipValue: string, index: number) => {
             const key = index
             return (
@@ -92,18 +87,22 @@ export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>(
                 key={key}
                 minWidth={undefined}
                 minHeight={undefined}
-                height="1.5rem"
-                fontSize="0.85rem"
-                m="0.2rem"
-                bg="#E3E5E8"
+                sx={chip}
+                // height="1.5rem"
+                // fontSize="0.85rem"
+                // m="0.2rem"
+                // bg="#E3E5E8"
               >
-                <TagLabel width="100%">{chipValue}</TagLabel>
+                <TagLabel sx={chipLabel} width="100%">
+                  {chipValue}
+                </TagLabel>
                 <TagCloseButton onClick={() => deleteChip(key)} />
               </Tag>
             )
           })}
           <Input
             variant="unstyled"
+            sx={input}
             value={value}
             onChange={(e: ChangeEvent<HTMLInputElement>): void => setValue(e.target.value)}
             placeholder={placeholder}

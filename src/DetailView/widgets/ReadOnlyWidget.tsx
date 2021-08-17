@@ -8,7 +8,19 @@ import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
 
 const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JSX.Element => {
-  const { containerStore, style, helpText, description, useClipboard, copyValue, notifier, name, innerStyle } = props
+  const {
+    containerStore,
+    style,
+    helpText,
+    description,
+    useClipboard,
+    copyValue,
+    notifier,
+    name,
+    innerStyle,
+    containerProps,
+    labelContainerProps,
+  } = props
 
   const { content, isRequired } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
@@ -27,6 +39,8 @@ const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JS
         copyValue={getCopyHandler(content, copyValue)}
         notifier={notifier}
         required={isRequired}
+        containerProps={containerProps}
+        labelContainerProps={labelContainerProps}
       >
         <Text sx={controlStyles}>{content || '\u00a0'}</Text>
       </StyledWidgetWrapper>

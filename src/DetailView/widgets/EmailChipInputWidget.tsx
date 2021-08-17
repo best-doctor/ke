@@ -8,7 +8,18 @@ import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
 
 export const EmailChipInputWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+  const {
+    name,
+    helpText,
+    description,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    labelContainerProps,
+    containerProps,
+  } = props
   const context = containerStore.getState()
 
   const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
@@ -29,7 +40,15 @@ export const EmailChipInputWidget = (props: WidgetProps): JSX.Element => {
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
+    <WidgetWrapper
+      containerProps={containerProps}
+      labelContainerProps={labelContainerProps}
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={description}
+      required={isRequired}
+    >
       <EmailChipInput value={(content || []) as string[]} onChange={handleChange} />
     </WidgetWrapper>
   )

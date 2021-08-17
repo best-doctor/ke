@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Textarea, Input } from '@chakra-ui/react'
+import { Textarea, Input, TextareaProps } from '@chakra-ui/react'
 
 import { DebounceInput } from '../../django-spa/Controls/DebounceInput'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -15,6 +15,7 @@ type InputWidgetProps = WidgetProps & {
   height?: number
   debounce?: number
   isDisabled?: Accessor<boolean>
+  textareaResize?: TextareaProps['resize']
 }
 
 const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
@@ -36,6 +37,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
       useClipboard,
       isDisabled,
       mainDetailObject,
+      textareaResize = 'none',
     } = props
     const context = containerStore.getState()
 
@@ -77,6 +79,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>(
           onChange={handleChange}
           inputRef={ref}
           disabled={getAccessor(isDisabled, mainDetailObject, context)}
+          resize={isTextarea ? textareaResize : undefined}
         />
       </WidgetWrapper>
     )

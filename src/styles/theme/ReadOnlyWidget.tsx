@@ -3,11 +3,8 @@ import { ComponentStyleConfig } from '@chakra-ui/react'
 export const ReadOnlyWidget: ComponentStyleConfig = {
   parts: ['widgetWrapper', 'labelWrapper', 'label', 'description', 'controlWrapper', 'control'],
   baseStyle: {
-    widgetWrapper: {
-      pt: 2,
-    },
     labelWrapper: {
-      mt: 5,
+      mt: 6,
       alignItems: 'center',
       flexShrink: 0,
     },
@@ -96,6 +93,7 @@ export const ReadOnlyWidget: ComponentStyleConfig = {
         mt: 0,
       },
       control: {
+        minHeight: 0,
         border: '0px',
         padding: 0,
         paddingInlineStart: 0,

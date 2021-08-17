@@ -29,6 +29,11 @@ const ContainerWidget = (props: any): JSX.Element => {
     name,
     isCollapsible = false,
     helpText = '',
+    style,
+    accordionProps,
+    accordionItemProps,
+    accordionPanelProps,
+    AccordionButton: UserAccordionButton,
   } = props
   const containerContent = mountComponents({
     setInitialValue,
@@ -49,21 +54,29 @@ const ContainerWidget = (props: any): JSX.Element => {
   const isContainerCollapsible = getAccessor(isCollapsible, mainDetailObject, context)
 
   return isContainerCollapsible ? (
-    <Accordion allowToggle pt={4}>
-      <AccordionItem>
-        <h2>
-          <AccordionButton>
-            <Box flex="1" textAlign="left">
-              {helpText}
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>{containerContent}</AccordionPanel>
+    <Accordion allowToggle pt={4} {...accordionProps}>
+      <AccordionItem {...accordionItemProps}>
+        {UserAccordionButton ? (
+          <UserAccordionButton>{helpText}</UserAccordionButton>
+        ) : (
+          <h2>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                {helpText}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+        )}
+        <AccordionPanel pb={4} {...accordionPanelProps}>
+          {containerContent}
+        </AccordionPanel>
       </AccordionItem>
     </Accordion>
   ) : (
-    <Box data-name={name}>{containerContent}</Box>
+    <Box data-name={name} {...style}>
+      {containerContent}
+    </Box>
   )
 }
 

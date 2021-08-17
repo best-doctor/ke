@@ -19,7 +19,7 @@ const getPrevButton = (
 ): WizardStepButtonDescription => {
   const { prev } = wizardStep
   return {
-    style: style || { variant: 'ghost' },
+    style: style || { variant: 'outline' },
     handler: prev,
     label: label || wizardStep.backStepLabel,
     name: name || 'prev',

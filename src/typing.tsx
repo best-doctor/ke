@@ -3,6 +3,7 @@ import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import { CSSProperties } from 'react'
+import { BoxProps } from '@chakra-ui/react'
 
 type Accessor<T> = T | Function | undefined
 
@@ -47,6 +48,8 @@ type WidgetProps = {
   copyValue?: GenericAccessor
   cacheTime?: Accessor<number>
   required?: Accessor<boolean>
+  labelContainerProps?: BoxProps
+  containerProps?: BoxProps
 }
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets' | 'updated_wizards'
