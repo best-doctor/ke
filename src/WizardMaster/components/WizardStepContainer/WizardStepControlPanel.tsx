@@ -104,6 +104,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
           {button.label}
         </Button>
       ))}
+      {wizardStep.customButtons}
     </Flex>
   )
 }

@@ -2,6 +2,7 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["beforeShow", "next", "prev"] }] */
 
 import { FlexProps } from '@chakra-ui/react'
+import React from 'react'
 import { containerErrorsStore } from '../store'
 import { validateContext } from '../utils'
 import type { DetailFieldDescription } from '../../admin/fields/FieldDescription'
@@ -29,6 +30,8 @@ abstract class BaseWizardStep {
   requireValidation?: boolean = true
 
   buttons: WizardStepButtonDescription[] = getDefaultButtons(this)
+
+  customButtons?: React.ReactNode
 
   abstract widgets: DetailFieldDescription[]
 
