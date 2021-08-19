@@ -1,7 +1,8 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import Select, { ValueType } from 'react-select'
+import Select, { StylesConfig, ValueType } from 'react-select'
 import type { Store } from 'effector'
 
+import { BoxProps } from '@chakra-ui/react'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import {
   getAccessor,
@@ -21,7 +22,7 @@ export type SelectObject = {
   text: string
 }
 
-type SelectWidgetProps = {
+type BaseSelectWidgetProps = {
   name: string
   mainDetailObject: DetailObject
   helpText?: string
@@ -36,6 +37,9 @@ type SelectWidgetProps = {
   isDisabled?: boolean
   isClearable?: boolean
   placeholder?: string
+  labelContainerProps?: BoxProps
+  containerProps?: BoxProps
+  widgetStyles?: StylesConfig<any, false>
 }
 
 const getSelectContent = (
@@ -53,8 +57,8 @@ const getSelectContent = (
   }
 }
 
-const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
-  (props: SelectWidgetProps, ref): JSX.Element => {
+const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
+  (props: BaseSelectWidgetProps, ref): JSX.Element => {
     const {
       name,
       helpText,
@@ -70,6 +74,9 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
       isDisabled = false,
       isClearable = false,
       placeholder = 'Выберите значение',
+      containerProps,
+      labelContainerProps,
+      widgetStyles: extenrnalStyles,
     } = props
 
     const context = containerStore.getState()
@@ -82,6 +89,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
 
     const widgetStyles = {
       menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
+      ...extenrnalStyles,
     }
 
     useEffect(() => {
@@ -97,7 +105,15 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
     const options = React.useMemo(() => resultOptions.map((option) => formatOption(option)), [resultOptions])
 
     return (
-      <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
+      <WidgetWrapper
+        name={name}
+        style={style}
+        helpText={helpText}
+        description={description}
+        required={isRequired}
+        containerProps={containerProps}
+        labelContainerProps={labelContainerProps}
+      >
         <Select
           inputRef={ref}
           options={options}
@@ -114,8 +130,12 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
   }
 )
 
-const SelectWidget = forwardRef<HTMLSelectElement, WidgetProps>(
-  (props: WidgetProps, ref): JSX.Element => {
+interface SelectWidgetProps extends WidgetProps {
+  widgetStyles?: StylesConfig<any, false>
+}
+
+const SelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
+  (props: SelectWidgetProps, ref): JSX.Element => {
     const {
       name,
       displayValue,

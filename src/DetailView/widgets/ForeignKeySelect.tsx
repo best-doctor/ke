@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import type { Accessor, DetailObject, WidgetProps } from 'typing'
 
+import { BoxProps } from '@chakra-ui/react'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
@@ -21,6 +22,8 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
   placeholder?: string
+  containerProps?: BoxProps
+  labelContainerProps?: BoxProps
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -69,6 +72,8 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     optionLabelValue,
     isDisabled = false,
     placeholder,
+    containerProps,
+    labelContainerProps,
   } = props
 
   const context = containerStore.getState()
@@ -112,6 +117,8 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
       copyValue={handleCopyValue}
       notifier={notifier}
       required={isRequired}
+      containerProps={containerProps}
+      labelContainerProps={labelContainerProps}
     >
       <ValidationWrapper
         notBlockingValidators={notBlockingValidators}

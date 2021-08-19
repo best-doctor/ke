@@ -1,10 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Text } from '@chakra-ui/react'
-
 import { ReadOnlyWidget } from '../../widgets/ReadOnlyWidget'
 import { StyledWidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
+import { EmptyText } from '../../../common/components/EmptyText'
 
 const detailObject = {
   test: {
@@ -37,5 +36,5 @@ test('Read only widget properly rendered', () => {
   )
 
   expect(component.find(StyledWidgetWrapper).length).toEqual(1)
-  expect(component.find(Text).length).toEqual(1)
+  expect(component.find(EmptyText).length).toEqual(1)
 })

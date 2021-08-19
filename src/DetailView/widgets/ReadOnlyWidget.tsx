@@ -1,13 +1,16 @@
 import React, { CSSProperties } from 'react'
-import { StylesProvider, Text, useMultiStyleConfig } from '@chakra-ui/react'
+import { StylesProvider, useMultiStyleConfig } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { StyledWidgetWrapper } from '../../common/components/WidgetWrapper'
 
 import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
+import { EmptyText } from '../../common/components/EmptyText'
 
-const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JSX.Element => {
+const ReadOnlyWidget = (
+  props: WidgetProps & { innerStyle?: CSSProperties; className?: string; widgetClassName?: string }
+): JSX.Element => {
   const {
     containerStore,
     style,
@@ -20,6 +23,8 @@ const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JS
     innerStyle,
     containerProps,
     labelContainerProps,
+    className,
+    widgetClassName,
   } = props
 
   const { content, isRequired } = useWidgetInitialization({ ...props, context: containerStore.getState() })
@@ -31,6 +36,7 @@ const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JS
   return (
     <StylesProvider value={styles}>
       <StyledWidgetWrapper
+        className={className}
         name={name}
         style={style}
         helpText={helpText}
@@ -42,7 +48,9 @@ const ReadOnlyWidget = (props: WidgetProps & { innerStyle?: CSSProperties }): JS
         containerProps={containerProps}
         labelContainerProps={labelContainerProps}
       >
-        <Text sx={controlStyles}>{content || '\u00a0'}</Text>
+        <EmptyText sx={controlStyles} className={widgetClassName}>
+          {content}
+        </EmptyText>
       </StyledWidgetWrapper>
     </StylesProvider>
   )

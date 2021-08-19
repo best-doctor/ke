@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useMultiStyleConfig, StylesProvider } from '@chakra-ui/react'
+import { Link, useMultiStyleConfig, StylesProvider, LinkProps } from '@chakra-ui/react'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { StyledWidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -8,10 +8,25 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 
 import type { GenericAccessor, WidgetProps } from '../../typing'
 
-type LinkWidgetProps = WidgetProps & { href: GenericAccessor; target?: string; boxStyle?: object }
+type LinkWidgetProps = WidgetProps & {
+  href: GenericAccessor
+  target?: string
+  boxStyle?: object
+  linkProps?: Omit<LinkProps, 'href'>
+}
 
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
-  const { name, mainDetailObject, href, helpText, description, style, containerStore, target = '_blank' } = props
+  const {
+    name,
+    mainDetailObject,
+    href,
+    helpText,
+    description,
+    style,
+    containerStore,
+    target = '_blank',
+    linkProps,
+  } = props
 
   const context = containerStore.getState()
   const { content } = useWidgetInitialization({ ...props, context })
@@ -34,11 +49,11 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
       <StyledWidgetWrapper name={name} style={style} helpText={helpText || ''} description={description}>
         <>
           {linkHref ? (
-            <Link target={target} href={linkHref} onClick={() => handleClick()} sx={styles.control}>
+            <Link target={target} href={linkHref} onClick={() => handleClick()} sx={styles.control} {...linkProps}>
               {content || 'Ссылка'}
             </Link>
           ) : (
-            '\u00a0'
+            '-'
           )}
         </>
       </StyledWidgetWrapper>

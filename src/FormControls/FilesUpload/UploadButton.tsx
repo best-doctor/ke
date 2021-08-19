@@ -1,10 +1,15 @@
 import React, { ChangeEvent, ReactElement, useCallback, useRef, useState } from 'react'
-import { Button, List, ListIcon, ListItem, Progress } from '@chakra-ui/react'
+import { Button, ButtonProps, List, ListIcon, ListItem, Progress } from '@chakra-ui/react'
 import { Loader, Paperclip } from 'react-feather'
 
 import { FileDescriptor, LoadingFileDescriptor } from './types'
 
-export function UploadButton({ onSelect, onUpload }: UploadButtonProps): ReactElement<UploadButtonProps> {
+export function UploadButton({
+  onSelect,
+  onUpload,
+  label = 'Прикрепить ещё один файл',
+  buttonProps,
+}: UploadButtonProps): ReactElement<UploadButtonProps> {
   const [loadingFiles, setLoadingFiles] = useState<LoadingFileDescriptor[]>([])
 
   const hiddenFileInput = useRef<HTMLInputElement>(null)
@@ -43,8 +48,8 @@ export function UploadButton({ onSelect, onUpload }: UploadButtonProps): ReactEl
   return (
     <>
       <UploadingList files={loadingFiles} />
-      <Button leftIcon={<Paperclip size={18} />} onClick={handleClick} size="sm" mt="5px">
-        Прикрепить ещё один файл
+      <Button leftIcon={<Paperclip size={18} />} size="sm" mt="5px" {...buttonProps} onClick={handleClick}>
+        {label}
       </Button>
       <input type="file" ref={hiddenFileInput} onChange={handleFileSelect} style={{ display: 'none' }} />
     </>
@@ -66,6 +71,8 @@ function UploadingList({ files }: UploadingListProps): ReactElement<UploadingLis
 }
 
 interface UploadButtonProps {
+  buttonProps?: ButtonProps
+  label?: React.ReactChild
   onSelect: (file: File, onProgress: OnProgress) => Promise<FileDescriptor>
   onUpload: (desc: FileDescriptor) => void
 }

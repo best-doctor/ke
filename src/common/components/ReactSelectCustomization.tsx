@@ -30,6 +30,7 @@ export const Control = <OptionType, IsMulti extends boolean = false>({
   isFocused,
   isDisabled,
   children,
+  getStyles,
   ...props
 }: ControlProps<OptionType, IsMulti>): JSX.Element => {
   const styles = useMultiStyleConfig('SelectWidget', props)
@@ -37,6 +38,7 @@ export const Control = <OptionType, IsMulti extends boolean = false>({
   return (
     <StylesProvider value={styles}>
       <Flex
+        css={getStyles('control', props)}
         ref={innerRef}
         sx={{
           ...styles.control,
@@ -158,6 +160,12 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
       return externalStyles.valueContainer(defaultStyles, state)
     }
     return defaultStyles
+  },
+  control(_, state) {
+    if (externalStyles?.control) {
+      return externalStyles.control({}, state)
+    }
+    return {}
   },
 })
 
