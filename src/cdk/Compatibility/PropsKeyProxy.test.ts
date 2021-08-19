@@ -1,17 +1,28 @@
+import fc from 'fast-check'
+
 import { makePropsKeyProxy } from './PropsKeyProxy'
 
+const propsDescArbitrary = fc.dictionary(fc.string(), fc.tuple(fc.string(), fc.anything())).filter((propsDesc) => {
+  const targetKeys = Object.values(propsDesc).map(([targetKey]) => targetKey)
+  const uniqueTargetKeys = [...new Set(targetKeys).values()]
+  return targetKeys.length === uniqueTargetKeys.length
+})
+
 test('Keys correctly mapped', () => {
-  const inner = jest.fn()
-  const proxied = makePropsKeyProxy(
-    inner,
-    new Map([
-      ['a', 'A'],
-      ['b', 'B'],
-    ])
+  fc.assert(
+    fc.property(propsDescArbitrary, (propsDesc) => {
+      const SourceComponent = jest.fn()
+      const propsDescPairs = Object.entries(propsDesc)
+      const keysMap = new Map(propsDescPairs.map(([sourceKey, [targetKey]]) => [sourceKey, targetKey]))
+      const props = Object.fromEntries(propsDescPairs.map(([, [targetKey, targetValue]]) => [targetKey, targetValue]))
+      const ProxiedComponent = makePropsKeyProxy(SourceComponent, keysMap)
+
+      ProxiedComponent(props)
+
+      expect(SourceComponent.mock.calls.length).toBe(1)
+      expect(SourceComponent.mock.calls[0]).toEqual([
+        Object.fromEntries(propsDescPairs.map(([sourceKey, [, targetValue]]) => [sourceKey, targetValue])),
+      ])
+    })
   )
-
-  proxied({ A: 1, B: 2, c: 3 })
-
-  expect(inner.mock.calls.length).toBe(1)
-  expect(inner.mock.calls[0][0]).toEqual({ a: 1, b: 2, c: 3 })
 })
