@@ -450,7 +450,7 @@ After cloning this repo if you'd like to use it in another project using React
   yarn link
   cd ../@chakra-ui/react
   yarn link
-  cd ../react-query
+  cd ../../react-query
   yarn link
   ```
 
