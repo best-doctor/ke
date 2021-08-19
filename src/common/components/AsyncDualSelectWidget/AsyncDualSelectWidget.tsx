@@ -198,7 +198,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
       copyValue={handleCopyValue}
     >
       <Flex>
-        <SideContainer>
+        <SideContainer data-testid="ds-left-list">
           <SideContainerTitle fontSize="md">
             {searchActive ? (
               <DebounceInput
@@ -261,7 +261,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
             {unselectButtonTitle}
           </SelectButton>
         </CenterContainer>
-        <SideContainer>
+        <SideContainer data-testid="ds-right-list">
           <SideContainerTitle fontSize="md">{selectedTitle}</SideContainerTitle>
           <SelectList
             values={selectedOptions}
