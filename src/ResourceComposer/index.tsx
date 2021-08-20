@@ -75,19 +75,26 @@ const ResourceComposer = ({
   withSideBar = true,
   permissions = [],
   breadcrumbsRules,
+  initialPage = null,
 }: {
   permissions?: string[]
   withSideBar?: boolean
   children: JSX.Element[]
   breadcrumbsRules?: TPathRules
+  initialPage?: null | string | JSX.Element
 }): JSX.Element => {
   const forbiddenResourceElement = <p>Простите, вам сюда нельзя :(</p>
+  const newChildren = [
+    typeof initialPage === 'object' && initialPage !== null ? <Resource name="">{initialPage}</Resource> : <></>,
+    ...children,
+  ]
 
   return (
     <Router>
+      {typeof initialPage === 'string' && <Redirect from="/" to={initialPage} />}
       {withSideBar && (
         <SideBar header="Разделы" breadcrumbsRules={breadcrumbsRules}>
-          {React.Children.map(children, (resource: JSX.Element) => {
+          {React.Children.map(newChildren, (resource: JSX.Element) => {
             if (isAdminResource(resource)) {
               const { props } = resource as ResourceProps
               const adminPermissions = props?.admin?.permissions || []
@@ -105,7 +112,7 @@ const ResourceComposer = ({
           })}
         </SideBar>
       )}
-      {React.Children.map(children, (resource: JSX.Element) => {
+      {React.Children.map(newChildren, (resource: JSX.Element) => {
         if (isAdminResource(resource)) {
           const { props } = resource as ResourceProps
           const adminPermissions = props?.admin?.permissions || []
