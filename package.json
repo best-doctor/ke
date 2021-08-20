@@ -96,6 +96,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-test-renderer": "^16.13.1",
+        "standard-version": "^9.3.1",
         "ts-jest": "^26.5.2",
         "ts-loader": "^7.0.4",
         "tsconfig-paths-webpack-plugin": "^3.3.0",
@@ -144,7 +145,9 @@
         "preversion": "yarn lint",
         "version": "yarn format && git add -A src",
         "postversion": "git push && git push --tags",
-        "docs": "typedoc --out docs/generated  src/index.tsx"
+        "docs": "typedoc --out docs/generated  src/index.tsx",
+        "release": "standard-version --prerelease beta",
+        "release:dry": "standard-version --dry-run --prerelease beta"
     },
     "husky": {
         "hooks": {
@@ -171,5 +174,10 @@
         "singleQuote": true,
         "tabWidth": 2,
         "trailingComma": "es5"
+    },
+    "standard-version": {
+      "skip": {
+        "changelog": true
+      }
     }
 }
