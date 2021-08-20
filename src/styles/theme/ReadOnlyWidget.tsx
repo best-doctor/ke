@@ -22,6 +22,7 @@ export const ReadOnlyWidget: ComponentStyleConfig = {
       flexDirection: 'column',
       alignItems: 'flex-start',
       justifyContent: 'center',
+      mt: 1,
 
       width: '100%',
       minWidth: 0,
