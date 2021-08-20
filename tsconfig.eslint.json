@@ -2,9 +2,8 @@
   "extends": "./tsconfig.json",
   "include": [
     "src",
+    ".eslintrc.js",
+    "jest.config.js",
     "jest-setup.ts",
   ],
-  "compilerOptions": {
-      "module": "commonjs",
-  }
 }

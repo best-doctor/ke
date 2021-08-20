@@ -3,7 +3,7 @@ const esModules = ['react-icons', 'lodash-es'].join('|')
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts', '<rootDir>/jest-setup.ts'],
   collectCoverageFrom: ['./src/**/*.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
