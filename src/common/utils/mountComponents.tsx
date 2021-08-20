@@ -31,7 +31,7 @@ type MountComponentsKwargs = {
   setCurrentState?: Function
 }
 
-const getComponentFromCallable = (
+export const getComponentFromCallable = (
   widget: GenericAccessor,
   user: object,
   detailObject: DetailObject,

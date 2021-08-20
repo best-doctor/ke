@@ -4,7 +4,7 @@ export const LinkWidget: ComponentStyleConfig = {
   parts: ['widgetWrapper', 'labelWrapper', 'label', 'description', 'controlWrapper', 'control'],
   baseStyle: {
     widgetWrapper: {
-      pt: 2,
+      pt: 1,
     },
     labelWrapper: {
       mt: 5,

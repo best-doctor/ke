@@ -19,6 +19,8 @@ import { AsyncReadOnlyWidget } from './AsyncReadOnlyWidget'
 import { EmailChipInputWidget } from './EmailChipInputWidget'
 import { PhoneChipInputWidget } from './PhoneChipInputWidget'
 
+export { RowWidget } from './RowWidget'
+
 export {
   TextValidationWidget,
   LinkWidget,
