@@ -474,3 +474,14 @@ Here are useful tips:
   Please do it before TravisCI does.
 * We respect [Django CoC](https://www.djangoproject.com/conduct/).
   Make soft, not bullshit.
+
+#### Commit Message Guidelines
+
+We have rules over how our git commit messages can be formatted. This leads to more
+readable messages that are easy to follow when looking through the project history.
+In general, the rules for describing development commits are [here](https://www.conventionalcommits.org/en/v1.0.0/).
+
+To check commits, we use [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
+I also recommend reading the [Angular contributing guide](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#commit)
+if you want to learn more about regular commits and see examples.
+
