@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { omit } from '@utils/Dicts'
 
 /**
  * Создаёт компонент-обёртку, переименовывая часть или все props перед передачей
@@ -27,16 +28,15 @@ export function makePropsKeyProxy<SP, SK extends keyof SP, TK extends string>(
   map: ReadonlyMap<SK, TK>
 ): FC<Omit<SP, SK> & Record<TK, SP[SK]>> {
   return (targetProps) => {
-    const sourceProps = [...map.entries()].reduce(
-      (acc, [sourceKey, targetKey]) => {
-        const { [targetKey]: targetVal, ...other } = acc
-        return {
-          ...other,
-          [sourceKey]: targetVal,
-        } as {}
-      },
-      { ...targetProps } as {}
+    const mappedProps = [...map.entries()].reduce(
+      (acc, [sourceKey, targetKey]) => ({
+        ...acc,
+        [sourceKey]: targetProps[targetKey],
+      }),
+      {}
     )
-    return source(sourceProps as SP)
+    const notMappedProps = omit(targetProps, [...map.values()])
+
+    return source(({ ...notMappedProps, ...mappedProps } as unknown) as SP)
   }
 }
