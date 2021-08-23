@@ -1,10 +1,10 @@
 import { TextValidationWidget } from './TextValidationWidget'
 import { LinkWidget } from './LinkWidget'
 import { SelectWidget, BaseSelectWidget, SelectObject } from './SelectWidget'
-import { ForeignKeySelectWidget } from './ForeignKeySelect'
+import { ForeignKeySelectWidget, ForeignKeySelectWidgetDeprecated } from './ForeignKeySelect'
 import { InputWidget } from './InputWidget'
 import { AvatarWidget } from './AvatarWidget'
-import { MultiSelectWidget } from './MultiSelectWidget'
+import { MultiSelectWidget, MultiSelectWidgetDeprecated } from './MultiSelectWidget'
 import { DateTimeRangeWidget } from './DateTimeRangeWidget'
 import { TextEditorWidget } from './TextEditorWidget'
 import { DateTimeRangeListWidget } from './DateTimeRangeListWidget'
@@ -28,9 +28,11 @@ export {
   SelectObject,
   BaseSelectWidget,
   ForeignKeySelectWidget,
+  ForeignKeySelectWidgetDeprecated,
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
+  MultiSelectWidgetDeprecated,
   DateTimeRangeWidget,
   TextEditorWidget,
   DateTimeRangeListWidget,

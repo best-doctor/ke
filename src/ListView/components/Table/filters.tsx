@@ -13,7 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { DebounceInput } from '../../../django-spa/Controls'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
-import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
+import { AsyncSelectWidget, AsyncSelectWidgetDeprecated } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
@@ -59,6 +59,7 @@ type ForeignKeySelectFilterProps = ResourceFilterProps & {
   optionValue: (value: OptionValueType | OptionValueType[]) => string
   defaultOptions?: boolean
   isMulti?: boolean
+  staleTime?: number
 }
 
 const StyledFilter = styled.div`
@@ -304,6 +305,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     defaultOptions = false,
     isMulti = false,
     gotoPage,
+    staleTime,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -334,6 +336,65 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     <StyledFilter>
       <Box className="styled-filter">
         <AsyncSelectWidget
+          provider={provider}
+          dataResourceUrl={filterResource}
+          handleChange={handleChange}
+          value={value}
+          isClearable={isClearable}
+          defaultOptions={defaultOptions}
+          getOptionLabel={optionLabel}
+          getOptionValue={optionValue}
+          placeholder={`Фильтр по ${label}`}
+          isMulti={isMulti}
+          staleTime={staleTime}
+        />
+      </Box>
+    </StyledFilter>
+  )
+}
+
+const ForeignKeySelectFilterDeprecated = (params: ForeignKeySelectFilterProps): JSX.Element => {
+  const {
+    name,
+    label,
+    resourceName,
+    provider,
+    filterResource,
+    optionLabel,
+    optionValue,
+    defaultOptions = false,
+    isMulti = false,
+    gotoPage,
+  } = params
+  const history = useHistory()
+  const location = useLocation()
+  const isClearable = true
+  const [value, setValue] = React.useState<object | null>(null)
+
+  const handleChange = (changeValue: []): void => {
+    setValue(changeValue)
+    let filterValue
+    if (!changeValue) {
+      filterValue = ''
+    } else if (isMulti) {
+      filterValue = changeValue.map((option: OptionValueType) => optionValue(option)).join(',')
+    } else {
+      filterValue = optionValue(changeValue)
+    }
+
+    pushAnalytics({
+      eventName: EventNameEnum.SELECT_OPTION_CHANGE,
+      ...getCommonFilterAnalyticsPayload(resourceName, filterValue, name),
+      ...params,
+    })
+
+    setFilterValue(location, name, filterValue, history, gotoPage)
+  }
+
+  return (
+    <StyledFilter>
+      <Box className="styled-filter">
+        <AsyncSelectWidgetDeprecated
           provider={provider}
           dataResourceUrl={filterResource}
           handleChange={handleChange}
@@ -426,4 +487,5 @@ export {
   DateTimeFilter,
   ForeignKeySelectFilter,
   MaskFilter,
+  ForeignKeySelectFilterDeprecated,
 }

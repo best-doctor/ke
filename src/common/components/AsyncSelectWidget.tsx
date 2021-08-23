@@ -1,4 +1,7 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
+
+import { Response, AsyncPaginate } from 'react-select-async-paginate'
+import debouncePromise from 'debounce-promise'
 
 import type { ValueType, MenuPlacement } from 'react-select'
 
@@ -7,6 +10,8 @@ import type { Provider } from '../../admin/providers/interfaces'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 import { components, modifyStyles } from './ReactSelectCustomization'
 import { StatefullAsyncSelect } from '../../django-spa/StatefulControls'
+import { Pagination } from '../../admin/providers/pagination'
+import { Accessor } from '../../typing'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -140,4 +145,116 @@ const AsyncSelectWidget = ({
   )
 }
 
-export { AsyncSelectWidget }
+type LoadOptionsType = {
+  options: Accessor<object[]>
+  hasMore: boolean
+  additional?: Function
+}
+
+const AsyncSelectWidgetDeprecated = ({
+  provider,
+  dataResourceUrl,
+  handleChange,
+  value,
+  getOptionLabel,
+  getOptionValue,
+  styles,
+  isClearable = false,
+  isMulti = false,
+  defaultOptions = false,
+  searchParamName = 'search',
+  placeholder = 'Введите значение',
+  getOptionLabelMenu,
+  getOptionLabelValue,
+  additionalValues = [],
+  isDisabled = false,
+  menuPlacement,
+  className,
+}: AsyncSelectWidgetProps): JSX.Element => {
+  const debounceValue = 500
+
+  const widgetStyles = {
+    ...{
+      menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
+    },
+    ...(styles !== undefined ? styles : {}),
+  }
+
+  const [nextUrl, setNextUrl] = useState<string | null | undefined>('')
+  const [cachedChangeValue, setCachedChangeValue] = useState<string>('')
+  const [usedAdditionalValues, setUsedAdditionalValues] = useState(false)
+
+  React.useEffect(() => {
+    setNextUrl('')
+  }, [dataResourceUrl])
+
+  const getUrl = (changeValue: string): string => {
+    const url = new URL(dataResourceUrl)
+    url.searchParams.append(searchParamName, changeValue)
+    return url.href
+  }
+
+  const getOptionsHandler = async (url: string, changeValue: string): Promise<LoadOptionsType> => {
+    const res = await provider.getPage(url).then(([data, , meta]: [object[], object, Pagination]) => {
+      setCachedChangeValue(changeValue)
+      meta.nextUrl && setNextUrl(meta.nextUrl)
+      return {
+        options: data,
+        hasMore: !!meta.nextUrl,
+      }
+    })
+    return res
+  }
+
+  const loadOptions = async (changeValue: string): Promise<Response<LoadOptionsType, unknown>> => {
+    let url = getUrl(changeValue)
+    if (changeValue === cachedChangeValue && nextUrl) {
+      url = nextUrl
+    }
+    const res = await getOptionsHandler(url, changeValue)
+    if (!usedAdditionalValues && Array.isArray(res.options)) {
+      const values: object[] = getAccessor(additionalValues)
+      res.options = values.concat(res.options)
+      setUsedAdditionalValues(true)
+    }
+    return res as Response<LoadOptionsType, unknown>
+  }
+
+  const debouncedLoadOptions = debouncePromise(loadOptions, debounceValue)
+
+  const formatOptionLabel = (
+    option: object | object[] | null,
+    { context }: { context: 'menu' | 'value' }
+  ): string | null => {
+    if (!option) {
+      return option
+    }
+    if (context === 'menu') {
+      return getOptionLabelMenu ? getOptionLabelMenu(option) : getOptionLabel(option)
+    }
+    return getOptionLabelValue ? getOptionLabelValue(option) : getOptionLabel(option)
+  }
+
+  return (
+    <AsyncPaginate
+      value={value}
+      onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
+      loadOptions={debouncedLoadOptions}
+      defaultOptions={defaultOptions}
+      isClearable={isClearable}
+      isMulti={isMulti as false | undefined}
+      menuPortalTarget={document.body}
+      styles={modifyStyles(widgetStyles)}
+      formatOptionLabel={formatOptionLabel}
+      getOptionValue={(option: object | object[] | null) => (option ? getOptionValue(option) : option)}
+      placeholder={placeholder}
+      cacheUniq={dataResourceUrl}
+      isDisabled={isDisabled}
+      menuPlacement={menuPlacement}
+      className={className}
+      components={components}
+    />
+  )
+}
+
+export { AsyncSelectWidget, AsyncSelectWidgetDeprecated }
