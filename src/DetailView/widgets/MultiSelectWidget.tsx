@@ -18,6 +18,7 @@ type MultiSelectWidgetProps = WidgetProps & {
   optionValue: Function
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
+  staleTime?: number
 }
 
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
@@ -37,6 +38,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     targetPayload,
     optionLabelMenu,
     optionLabelValue,
+    staleTime,
   } = props
 
   const context = containerStore.getState()
@@ -84,6 +86,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
         getOptionLabelValue={
           optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
         }
+        staleTime={staleTime}
       />
     </WidgetWrapper>
   )
