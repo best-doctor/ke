@@ -24,6 +24,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   placeholder?: string
   containerProps?: BoxProps
   labelContainerProps?: BoxProps
+  staleTime?: number
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -74,6 +75,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     placeholder,
     containerProps,
     labelContainerProps,
+    staleTime,
   } = props
 
   const context = containerStore.getState()
@@ -147,6 +149,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           styles={selectStyle}
           isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
           placeholder={placeholder}
+          staleTime={staleTime}
         />
       </ValidationWrapper>
     </WidgetWrapper>
