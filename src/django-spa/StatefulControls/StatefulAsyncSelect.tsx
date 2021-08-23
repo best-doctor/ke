@@ -9,10 +9,13 @@ export interface StatefullAsyncSelecProps<
   Additinal = unknown,
   IsMulti extends boolean = false
 > extends StatefullProps<OptionType, Additinal, IsMulti>,
-    ResourceProps<ListResponse<OptionType>> {}
+    ResourceProps<ListResponse<OptionType>> {
+  searchParamName?: string
+}
 
 export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
   resource,
+  searchParamName = 'search',
   ...props
 }: StatefullAsyncSelecProps<OptionType, number>): React.ReactElement => {
   const fetchResource = useFetchResource<ListResponse<OptionType>>(resource)
@@ -22,7 +25,7 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
       const data = await fetchResource({
         requestConfig: {
           params: {
-            search,
+            [searchParamName]: search,
             page,
           },
         },
@@ -34,7 +37,7 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
         additional: data.meta.page + 1,
       }
     },
-    [fetchResource]
+    [fetchResource, searchParamName]
   )
 
   return <AsyncPaginate {...(props as any)} loadOptions={handleLoadOptoins} />
