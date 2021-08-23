@@ -1,5 +1,5 @@
 import React, { ElementType, useCallback, useRef } from 'react'
-import { ControlRefProps, useField, useFieldValidation, ValidationResult } from '@cdk/Forms'
+import { ControlRefProps, useField, useFieldValidation } from '@cdk/Forms'
 import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import type { ControlProps, FieldProps } from './types'
@@ -9,7 +9,7 @@ export const Field = makeWithLayout(
   ({ name, as, validator, label, ...other }: FieldProps<unknown, ControlProps<unknown>>) => {
     const controlRef = useRef<ControlRefProps>(null)
     const { value, onChange } = useField(name, controlRef)
-    const { errors, validate } = useFieldValidation(name, value, validator || defaultValidator)
+    const { errors, validate } = useFieldValidation(name, value, validator)
 
     const handleChange = useCallback(
       async (v: unknown) => {
@@ -32,7 +32,3 @@ export const Field = makeWithLayout(
 ) as <T, P extends ControlProps<T>>(
   props: PropsWithDefaultLayout<FieldProps<T, P>, { Control: JSX.Element }>
 ) => JSX.Element
-
-function defaultValidator(): Promise<ValidationResult> {
-  return Promise.resolve({ success: true })
-}

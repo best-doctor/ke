@@ -56,6 +56,6 @@ export function Group({ name, children, validator }: GroupProps): JSX.Element {
 }
 
 interface GroupProps extends NodeProps {
-  validator: RecordValidator
+  validator?: RecordValidator
   children: ReactNode
 }

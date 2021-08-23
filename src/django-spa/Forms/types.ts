@@ -1,4 +1,4 @@
-import { ElementType, ReactElement, RefObject } from 'react'
+import { ElementType, ReactElement, Ref } from 'react'
 import { ControlRefProps, FieldKey, FormData, RecordValidator, Validator } from '@cdk/Forms'
 
 export interface NodeProps {
@@ -8,7 +8,7 @@ export interface NodeProps {
 export interface ControlProps<T> {
   value: T
   onChange: (val: T) => void
-  ref: RefObject<ControlRefProps | undefined>
+  ref?: Ref<ControlRefProps | undefined>
 }
 
 export type FieldProps<T, P> = BaseFieldProps<T, P> &
