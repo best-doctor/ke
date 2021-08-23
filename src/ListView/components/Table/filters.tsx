@@ -54,7 +54,7 @@ type BooleanFilterProps = FilterProps & {
   falseValue?: string
   falseText?: string
 }
-type ForeignKeySelectFilterProps = ResourceFilterProps & {
+export type ForeignKeySelectFilterProps = ResourceFilterProps & {
   optionLabel: (value: OptionValueType | OptionValueType[]) => string
   optionValue: (value: OptionValueType | OptionValueType[]) => string
   defaultOptions?: boolean

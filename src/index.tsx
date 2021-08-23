@@ -59,6 +59,7 @@ import {
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
+  MultiSelectWidgetDeprecated,
   DateTimeRangeWidget,
   TextEditorWidget,
   DateTimeRangeListWidget,
@@ -82,6 +83,7 @@ import {
   DateFilter,
   DateTimeFilter,
   ForeignKeySelectFilter,
+  ForeignKeySelectFilterProps,
   ForeignKeySelectFilterDeprecated,
   BooleanFilter,
   MaskFilter,
@@ -265,4 +267,6 @@ export {
   AsyncSelectWidgetDeprecated,
   ForeignKeySelectWidgetDeprecated,
   ForeignKeySelectFilterDeprecated,
+  MultiSelectWidgetDeprecated,
+  ForeignKeySelectFilterProps,
 }

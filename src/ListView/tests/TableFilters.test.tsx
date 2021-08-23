@@ -16,6 +16,7 @@ import {
   MaskFilter,
 } from '../components/Table/filters'
 import { testProvider } from '../../setupTests'
+import { ResourceProvider } from '../../data-provider'
 
 const filterProps = {
   name: 'name',
@@ -72,13 +73,15 @@ test('DateTime table filter rendering', () => {
 
 test('ForeignKeySelectFilter filter rendering', () => {
   const component = mount(
-    <ForeignKeySelectFilter
-      {...filterProps}
-      provider={testProvider}
-      filterResource="filterResource"
-      optionLabel={() => ''}
-      optionValue={() => ''}
-    />
+    <ResourceProvider>
+      <ForeignKeySelectFilter
+        {...filterProps}
+        provider={testProvider}
+        filterResource="https://test.com/filterResource"
+        optionLabel={() => ''}
+        optionValue={() => ''}
+      />
+    </ResourceProvider>
   )
 
   expect(component.find(AsyncSelectWidget).length).toEqual(1)
