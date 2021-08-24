@@ -3,7 +3,7 @@ import { useArray, useField, ArrayData, useArrayValidation, ArrayValidator, useF
 
 import type { NodeProps } from './types'
 
-export function Arr({ name, getKey, validator, children: makeNodeItem }: ArrProps): JSX.Element {
+export function Arr<T>({ name, getKey, validator, children: makeNodeItem }: ArrProps<T>): JSX.Element {
   const { value, onChange } = useField(name)
 
   if (!Array.isArray(value)) {
@@ -49,7 +49,7 @@ export function Arr({ name, getKey, validator, children: makeNodeItem }: ArrProp
   return (
     <Root {...props}>
       <ErrorsRoot {...errorsProps}>
-        {value.map((item: unknown, index) => (
+        {value.map((item: T, index) => (
           <ArrItem key={getKey(item, index)}>{makeNodeItem(item, index)}</ArrItem>
         ))}
       </ErrorsRoot>
@@ -61,8 +61,8 @@ function ArrItem({ children }: PropsWithChildren<{}>): JSX.Element {
   return <>{children}</>
 }
 
-interface ArrProps extends NodeProps {
-  getKey: (item: unknown, index: number) => string | number
+interface ArrProps<T> extends NodeProps {
+  getKey: (item: T, index: number) => string | number
   validator?: ArrayValidator
-  children: (val: any, index: number) => ReactNode
+  children: (val: T, index: number) => ReactNode
 }
