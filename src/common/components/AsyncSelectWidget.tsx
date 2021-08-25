@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { Response, AsyncPaginate } from 'react-select-async-paginate'
 import debouncePromise from 'debounce-promise'
 
 import type { ValueType, MenuPlacement } from 'react-select'
-import { Pagination } from '../../admin/providers/pagination'
+
 import type { Provider } from '../../admin/providers/interfaces'
-import { Accessor } from '../../typing'
+
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 import { components, modifyStyles } from './ReactSelectCustomization'
+import { StatefullAsyncSelect } from '../../django-spa/StatefulControls'
+import { Pagination } from '../../admin/providers/pagination'
+import { Accessor } from '../../typing'
 
 type AsyncSelectWidgetProps = {
   provider: Provider
@@ -31,12 +34,7 @@ type AsyncSelectWidgetProps = {
   additionalValues?: object[]
   menuPlacement?: MenuPlacement
   className?: string
-}
-
-type LoadOptionsType = {
-  options: Accessor<object[]>
-  hasMore: boolean
-  additional?: Function
+  staleTime?: Accessor<number>
 }
 
 /**
@@ -59,6 +57,100 @@ type LoadOptionsType = {
  * @param additionalValues - some fixed values to be added into options as Accessor
  * @param isDisabled - disable select
  */
+const AsyncSelectWidgetNew = ({
+  dataResourceUrl,
+  handleChange,
+  value,
+  getOptionLabel,
+  getOptionValue,
+  styles,
+  isClearable = false,
+  isMulti = false,
+  defaultOptions = false,
+  searchParamName = 'search',
+  placeholder = 'Введите значение',
+  getOptionLabelMenu,
+  getOptionLabelValue,
+  additionalValues = [],
+  isDisabled = false,
+  menuPlacement,
+  className,
+  staleTime,
+}: AsyncSelectWidgetProps): JSX.Element => {
+  const debounceValue = 500
+
+  const widgetStyles = {
+    ...{
+      menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
+    },
+    ...(styles !== undefined ? styles : {}),
+  }
+
+  const additionalValuesFromAccessor = getAccessor(additionalValues)
+
+  const formatOptionLabel = (
+    option: object | object[] | null,
+    { context }: { context: 'menu' | 'value' }
+  ): string | null => {
+    if (!option) {
+      return option
+    }
+    if (context === 'menu') {
+      return getOptionLabelMenu ? getOptionLabelMenu(option) : getOptionLabel(option)
+    }
+    return getOptionLabelValue ? getOptionLabelValue(option) : getOptionLabel(option)
+  }
+
+  const { resourceKey, params } = useMemo(() => {
+    const url = new URL(dataResourceUrl)
+    return {
+      resourceKey: url.origin.concat(url.pathname),
+      params: Object.fromEntries(url.searchParams.entries()),
+    }
+  }, [dataResourceUrl])
+
+  const cacheUniqs = useMemo(() => [dataResourceUrl], [dataResourceUrl])
+
+  return (
+    <StatefullAsyncSelect
+      resource={{
+        key: resourceKey,
+        fetchResource: {
+          fetch: {
+            requestConfig: {
+              params,
+            },
+            staleTime: getAccessor(staleTime),
+          },
+        },
+      }}
+      value={value}
+      onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}
+      defaultOptions={defaultOptions || additionalValuesFromAccessor}
+      isClearable={isClearable}
+      isMulti={isMulti as false | undefined}
+      menuPortalTarget={document.body}
+      styles={modifyStyles(widgetStyles)}
+      formatOptionLabel={formatOptionLabel}
+      getOptionValue={(option: object | object[] | null) => (option ? getOptionValue(option) : option)}
+      placeholder={placeholder}
+      isDisabled={isDisabled}
+      menuPlacement={menuPlacement}
+      className={className}
+      components={components}
+      debounceTimeout={debounceValue}
+      searchParamName={searchParamName}
+      cacheUniqs={cacheUniqs}
+    />
+  )
+}
+
+type LoadOptionsType = {
+  options: Accessor<object[]>
+  hasMore: boolean
+  additional?: Function
+}
+
 const AsyncSelectWidget = ({
   provider,
   dataResourceUrl,
@@ -165,4 +257,4 @@ const AsyncSelectWidget = ({
   )
 }
 
-export { AsyncSelectWidget }
+export { AsyncSelectWidgetNew, AsyncSelectWidget }
