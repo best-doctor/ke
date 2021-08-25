@@ -3,10 +3,10 @@ import React from 'react'
 import type { ValueType } from 'react-select'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
-import { AsyncSelectWidget, AsyncSelectWidgetDeprecated } from '../../common/components/AsyncSelectWidget'
+import { AsyncSelectWidgetNew, AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
-import type { DetailObject, WidgetProps } from '../../typing'
+import type { Accessor, DetailObject, WidgetProps } from '../../typing'
 import { getAccessor, getPayload } from '../utils/dataAccess'
 
 type MultiSelectValue = {
@@ -18,10 +18,10 @@ type MultiSelectWidgetProps = WidgetProps & {
   optionValue: Function
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
-  staleTime?: number
+  staleTime?: Accessor<number>
 }
 
-const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
+const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
     name,
     mainDetailObject,
@@ -70,7 +70,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <AsyncSelectWidget
+      <AsyncSelectWidgetNew
         provider={provider}
         cacheTime={effectiveCacheTime}
         dataResourceUrl={dataResourceUrl}
@@ -92,7 +92,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   )
 }
 
-const MultiSelectWidgetDeprecated = (props: MultiSelectWidgetProps): JSX.Element => {
+const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
     name,
     mainDetailObject,
@@ -140,7 +140,7 @@ const MultiSelectWidgetDeprecated = (props: MultiSelectWidgetProps): JSX.Element
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <AsyncSelectWidgetDeprecated
+      <AsyncSelectWidget
         provider={provider}
         cacheTime={effectiveCacheTime}
         dataResourceUrl={dataResourceUrl}
@@ -161,4 +161,4 @@ const MultiSelectWidgetDeprecated = (props: MultiSelectWidgetProps): JSX.Element
   )
 }
 
-export { MultiSelectWidget, MultiSelectWidgetDeprecated }
+export { MultiSelectWidgetNew, MultiSelectWidget }

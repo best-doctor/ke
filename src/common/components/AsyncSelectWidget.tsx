@@ -34,7 +34,7 @@ type AsyncSelectWidgetProps = {
   additionalValues?: object[]
   menuPlacement?: MenuPlacement
   className?: string
-  staleTime?: number
+  staleTime?: Accessor<number>
 }
 
 /**
@@ -57,7 +57,7 @@ type AsyncSelectWidgetProps = {
  * @param additionalValues - some fixed values to be added into options as Accessor
  * @param isDisabled - disable select
  */
-const AsyncSelectWidget = ({
+const AsyncSelectWidgetNew = ({
   dataResourceUrl,
   handleChange,
   value,
@@ -120,7 +120,7 @@ const AsyncSelectWidget = ({
             requestConfig: {
               params,
             },
-            staleTime,
+            staleTime: getAccessor(staleTime),
           },
         },
       }}
@@ -151,7 +151,7 @@ type LoadOptionsType = {
   additional?: Function
 }
 
-const AsyncSelectWidgetDeprecated = ({
+const AsyncSelectWidget = ({
   provider,
   dataResourceUrl,
   handleChange,
@@ -257,4 +257,4 @@ const AsyncSelectWidgetDeprecated = ({
   )
 }
 
-export { AsyncSelectWidget, AsyncSelectWidgetDeprecated }
+export { AsyncSelectWidgetNew, AsyncSelectWidget }

@@ -5,7 +5,7 @@ import type { Accessor, DetailObject, WidgetProps } from 'typing'
 import { BoxProps } from '@chakra-ui/react'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
-import { AsyncSelectWidget, AsyncSelectWidgetDeprecated } from '../../common/components/AsyncSelectWidget'
+import { AsyncSelectWidgetNew, AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
@@ -24,7 +24,7 @@ type ForeignKeySelectWidgetProps = WidgetProps & {
   placeholder?: string
   containerProps?: BoxProps
   labelContainerProps?: BoxProps
-  staleTime?: number
+  staleTime?: Accessor<number>
 }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -45,7 +45,7 @@ const widgetType = WidgetTypeEnum.INPUT
  *
  * @param props - widget props
  */
-const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
+const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   const {
     name,
     mainDetailObject,
@@ -129,7 +129,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
         detailObject={mainDetailObject}
         context={context as Record<string, unknown>}
       >
-        <AsyncSelectWidget
+        <AsyncSelectWidgetNew
           provider={provider}
           cacheTime={effectiveCacheTime}
           dataResourceUrl={dataResourceUrl}
@@ -155,7 +155,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     </WidgetWrapper>
   )
 }
-const ForeignKeySelectWidgetDeprecated = (props: ForeignKeySelectWidgetProps): JSX.Element => {
+const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element => {
   const {
     name,
     mainDetailObject,
@@ -238,7 +238,7 @@ const ForeignKeySelectWidgetDeprecated = (props: ForeignKeySelectWidgetProps): J
         detailObject={mainDetailObject}
         context={context as Record<string, unknown>}
       >
-        <AsyncSelectWidgetDeprecated
+        <AsyncSelectWidget
           provider={provider}
           cacheTime={effectiveCacheTime}
           dataResourceUrl={dataResourceUrl}
@@ -264,4 +264,4 @@ const ForeignKeySelectWidgetDeprecated = (props: ForeignKeySelectWidgetProps): J
   )
 }
 
-export { ForeignKeySelectWidget, ForeignKeySelectWidgetDeprecated }
+export { ForeignKeySelectWidgetNew, ForeignKeySelectWidget }

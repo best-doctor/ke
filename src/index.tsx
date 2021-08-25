@@ -55,11 +55,11 @@ import {
   SelectObject,
   BaseSelectWidget,
   ForeignKeySelectWidget,
-  ForeignKeySelectWidgetDeprecated,
+  ForeignKeySelectWidgetNew,
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
-  MultiSelectWidgetDeprecated,
+  MultiSelectWidgetNew,
   DateTimeRangeWidget,
   TextEditorWidget,
   DateTimeRangeListWidget,
@@ -82,13 +82,13 @@ import {
   BaseFilter,
   DateFilter,
   DateTimeFilter,
-  ForeignKeySelectFilter,
+  ForeignKeySelectFilterNew,
   ForeignKeySelectFilterProps,
-  ForeignKeySelectFilterDeprecated,
+  ForeignKeySelectFilter,
   BooleanFilter,
   MaskFilter,
 } from './ListView/components/Table/filters'
-import { AsyncSelectWidget, AsyncSelectWidgetDeprecated } from './common/components/AsyncSelectWidget'
+import { AsyncSelectWidgetNew, AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
 import { ErrorBoundary } from './common/components/ErrorBoundary'
@@ -168,7 +168,6 @@ export {
   AdminResource,
   RenderList,
   RenderDetail,
-  ForeignKeySelectFilter,
   SelectFilter,
   MultiSelectFilter,
   DateFilter,
@@ -177,7 +176,6 @@ export {
   BooleanFilter,
   MaskFilter,
   StoreManager,
-  AsyncSelectWidget,
   AsyncDualSelectWidget,
   EnableSentry,
   EnableELK,
@@ -264,9 +262,11 @@ export {
   ProviderOptions,
   OnDetailObjectLoadedProps,
   Label,
-  AsyncSelectWidgetDeprecated,
-  ForeignKeySelectWidgetDeprecated,
-  ForeignKeySelectFilterDeprecated,
-  MultiSelectWidgetDeprecated,
+  AsyncSelectWidget,
+  ForeignKeySelectWidgetNew,
+  ForeignKeySelectFilter,
+  MultiSelectWidgetNew,
   ForeignKeySelectFilterProps,
+  ForeignKeySelectFilterNew,
+  AsyncSelectWidgetNew,
 }

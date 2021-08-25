@@ -13,7 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { DebounceInput } from '../../../django-spa/Controls'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
-import { AsyncSelectWidget, AsyncSelectWidgetDeprecated } from '../../../common/components/AsyncSelectWidget'
+import { AsyncSelectWidgetNew, AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
@@ -59,7 +59,7 @@ export type ForeignKeySelectFilterProps = ResourceFilterProps & {
   optionValue: (value: OptionValueType | OptionValueType[]) => string
   defaultOptions?: boolean
   isMulti?: boolean
-  staleTime?: number
+  staleTime?: Accessor<number>
 }
 
 const StyledFilter = styled.div`
@@ -293,7 +293,7 @@ const BooleanFilter = (params: BooleanFilterProps): JSX.Element => {
   )
 }
 
-const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Element => {
+const ForeignKeySelectFilterNew = (params: ForeignKeySelectFilterProps): JSX.Element => {
   const {
     name,
     label,
@@ -335,7 +335,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
   return (
     <StyledFilter>
       <Box className="styled-filter">
-        <AsyncSelectWidget
+        <AsyncSelectWidgetNew
           provider={provider}
           dataResourceUrl={filterResource}
           handleChange={handleChange}
@@ -353,7 +353,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
   )
 }
 
-const ForeignKeySelectFilterDeprecated = (params: ForeignKeySelectFilterProps): JSX.Element => {
+const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Element => {
   const {
     name,
     label,
@@ -394,7 +394,7 @@ const ForeignKeySelectFilterDeprecated = (params: ForeignKeySelectFilterProps): 
   return (
     <StyledFilter>
       <Box className="styled-filter">
-        <AsyncSelectWidgetDeprecated
+        <AsyncSelectWidget
           provider={provider}
           dataResourceUrl={filterResource}
           handleChange={handleChange}
@@ -485,7 +485,7 @@ export {
   SelectFilter,
   DateFilter,
   DateTimeFilter,
-  ForeignKeySelectFilter,
+  ForeignKeySelectFilterNew,
   MaskFilter,
-  ForeignKeySelectFilterDeprecated,
+  ForeignKeySelectFilter,
 }
