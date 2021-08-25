@@ -5,6 +5,7 @@ import { GroupControl } from '@cdk/Controls'
 
 import { OrderDirection } from './types'
 import { Order } from './Order'
+import {Box, Center, Flex, Spacer} from "@chakra-ui/react";
 
 export function makeOrderedTable(table: TableComponent): OrderedTableComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -45,16 +46,22 @@ function addOrdering(header: HeaderConfig | ReactNode, orderingName: string | nu
   const orderedValue =
     typeof value === 'function' ? (
       (columnIndex: number) => (
-        <>
-          {value(columnIndex)}
-          <Field name={orderingName} as={Order} />
-        </>
+        <Flex>
+          <Box p="2">{value(columnIndex)}</Box>
+          <Spacer />
+          <Center>
+            <Field name={orderingName} as={Order} />
+          </Center>
+        </Flex>
       )
     ) : (
-      <>
-        {value}
-        <Field name={orderingName} as={Order} />
-      </>
+      <Flex>
+        <Box pr="2">{value}</Box>
+        <Spacer />
+        <Center>
+          <Field name={orderingName} as={Order} />
+        </Center>
+      </Flex>
     )
 
   return {
