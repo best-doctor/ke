@@ -13,6 +13,7 @@ import { ReadOnlyWidget } from './DetailView/widgets/ReadOnlyWidget'
 import { BaseAdmin } from './admin/index'
 import { BaseProvider } from './admin/providers/index'
 import type { ResponseCache } from './admin/providers/interfaces'
+import { ProviderOptions } from './admin/providers/types'
 
 fc.configureGlobal({ numRuns: 10 })
 configure({ adapter: new Adapter() })
@@ -58,12 +59,18 @@ const mockedHTTP = axios.create({})
 mockedHTTP.defaults = { baseURL: 'https://test.com/' }
 
 class TestProvider extends BaseProvider {
-  constructor(cache?: ResponseCache) {
-    super(mockedHTTP, cache)
+  constructor(cache?: ResponseCache, options?: ProviderOptions) {
+    super(mockedHTTP, cache, options)
   }
 }
 
 const testProvider = new TestProvider()
+
+const testProviderWithOptions = new TestProvider(undefined, {
+  requestConfig: {
+    headers: { Accept: 'custom.accept' },
+  },
+})
 
 class TestWizardStep extends BaseWizardStep {
   widgets = testAdmin.detail_fields
@@ -109,6 +116,7 @@ const waitForComponentToPaint = async (wrapper: ReactWrapper): Promise<any> => {
 export {
   testAdmin,
   testProvider,
+  testProviderWithOptions,
   testNotifier,
   testWizard,
   testWizardStep,

@@ -1,4 +1,4 @@
-import { testProvider } from '../../setupTests'
+import { testProvider, testProviderWithOptions } from '../../setupTests'
 
 const resourceFilter = {
   filterName: 'id',
@@ -142,5 +142,19 @@ test('Provider get object', () => {
     () => {}
   )
 
-  expect(testProvider.httpClient.get).toHaveBeenCalledWith('https://test.com/test-url/100500/')
+  expect(testProvider.httpClient.get).toHaveBeenCalledWith('https://test.com/test-url/100500/', undefined)
+})
+
+test('Provider get object with custom config', () => {
+  testProviderWithOptions.httpClient.get = jest.fn() // eslint-disable-line
+  const resourceUrl = 'https://test.com/test-url/100500/'
+
+  testProviderWithOptions.getObject(resourceUrl).then(
+    () => {},
+    () => {}
+  )
+
+  expect(testProviderWithOptions.httpClient.get).toHaveBeenCalledWith('https://test.com/test-url/100500/', {
+    headers: { Accept: 'custom.accept' },
+  })
 })
