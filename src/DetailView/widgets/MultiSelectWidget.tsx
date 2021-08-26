@@ -8,6 +8,7 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import type { Accessor, DetailObject, WidgetProps } from '../../typing'
 import { getAccessor, getPayload } from '../utils/dataAccess'
+import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 
 type MultiSelectValue = {
   [key: string]: string
@@ -19,7 +20,7 @@ type MultiSelectWidgetProps = WidgetProps & {
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
   staleTime?: Accessor<number>
-}
+} & ExtendedProps
 
 const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
@@ -39,6 +40,7 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
     optionLabelMenu,
     optionLabelValue,
     staleTime,
+    componentsClasses,
   } = props
 
   const context = containerStore.getState()
@@ -87,6 +89,7 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
           optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
         }
         staleTime={staleTime}
+        componentsClasses={componentsClasses}
       />
     </WidgetWrapper>
   )
@@ -109,6 +112,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     targetPayload,
     optionLabelMenu,
     optionLabelValue,
+    componentsClasses,
   } = props
 
   const context = containerStore.getState()
@@ -156,6 +160,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
         getOptionLabelValue={
           optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
         }
+        componentsClasses={componentsClasses}
       />
     </WidgetWrapper>
   )

@@ -7,7 +7,12 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
 
-export const PhoneChipInputWidget = (props: WidgetProps): JSX.Element => {
+interface PhoneChipInputWidgetProps extends WidgetProps {
+  chipClassName?: string
+  inputClassName?: string
+}
+
+export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
@@ -19,6 +24,8 @@ export const PhoneChipInputWidget = (props: WidgetProps): JSX.Element => {
     containerStore,
     containerProps,
     labelContainerProps,
+    chipClassName,
+    inputClassName,
   } = props
   const context = containerStore.getState()
 
@@ -49,7 +56,12 @@ export const PhoneChipInputWidget = (props: WidgetProps): JSX.Element => {
       containerProps={containerProps}
       labelContainerProps={labelContainerProps}
     >
-      <PhoneChipInput value={(content || []) as string[]} onChange={handleChange} />
+      <PhoneChipInput
+        chipClassName={chipClassName}
+        inputClassName={inputClassName}
+        value={(content || []) as string[]}
+        onChange={handleChange}
+      />
     </WidgetWrapper>
   )
 }

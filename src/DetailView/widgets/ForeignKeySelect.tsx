@@ -76,6 +76,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
     containerProps,
     labelContainerProps,
     staleTime,
+    widgetClassName,
   } = props
 
   const context = containerStore.getState()
@@ -150,6 +151,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
           isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
           placeholder={placeholder}
           staleTime={staleTime}
+          className={widgetClassName}
         />
       </ValidationWrapper>
     </WidgetWrapper>
@@ -185,6 +187,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     placeholder,
     containerProps,
     labelContainerProps,
+    widgetClassName,
   } = props
 
   const context = containerStore.getState()
@@ -258,6 +261,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           styles={selectStyle}
           isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
           placeholder={placeholder}
+          className={widgetClassName}
         />
       </ValidationWrapper>
     </WidgetWrapper>

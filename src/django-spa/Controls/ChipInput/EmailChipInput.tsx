@@ -3,7 +3,12 @@ import React, { forwardRef } from 'react'
 import { ChipInput } from './ChipInput'
 import { ControlProps } from '../types'
 
-export const EmailChipInput = forwardRef<HTMLInputElement, ControlProps<string[]>>(
+interface EmailChipInputProps extends ControlProps<string[]> {
+  chipClassName?: string
+  inputClassName?: string
+}
+
+export const EmailChipInput = forwardRef<HTMLInputElement, EmailChipInputProps>(
   (props, ref): JSX.Element => (
     <ChipInput
       {...props}

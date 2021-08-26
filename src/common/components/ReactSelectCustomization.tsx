@@ -13,6 +13,7 @@ import {
   useTheme,
 } from '@chakra-ui/react'
 import { ClassNames, CSSObject } from '@emotion/react'
+import classNames from 'classnames'
 import React from 'react'
 import {
   ControlProps,
@@ -23,6 +24,14 @@ import {
   OptionTypeBase,
   SingleValueProps,
 } from 'react-select'
+
+export interface ComponentsClassNames {
+  MultiValue?: string
+}
+
+export interface ExtendedProps {
+  componentsClasses?: ComponentsClassNames
+}
 
 export const Control = <OptionType, IsMulti extends boolean = false>({
   innerRef,
@@ -88,43 +97,19 @@ export function MultiValue<OptionType>(props: MultiValueProps<OptionType>): JSX.
 
   const { multiValueContainer, multiValueLabel, multiValueRemove } = useStyles()
 
+  const externalClassName = (selectProps as ExtendedProps).componentsClasses?.MultiValue
+
   return (
     <ClassNames>
       {({ css, cx: emotionCx }) => (
         <Tag
           data={data}
-          innerProps={{
-            className: emotionCx(
-              css(getStyles('multiValue', props)),
-              cx(
-                {
-                  'multi-value': true,
-                  'multi-value--is-disabled': isDisabled,
-                },
-                className
-              )
-            ),
-            ...innerProps,
-          }}
           selectProps={selectProps}
           sx={multiValueContainer}
+          {...innerProps}
+          className={classNames(className, externalClassName)}
         >
-          <TagLabel
-            data={data}
-            innerProps={{
-              className: emotionCx(
-                css(getStyles('multiValueLabel', props)),
-                cx(
-                  {
-                    'multi-value__label': true,
-                  },
-                  className
-                )
-              ),
-            }}
-            selectProps={selectProps}
-            sx={multiValueLabel}
-          >
+          <TagLabel data={data} selectProps={selectProps} sx={multiValueLabel} className={className}>
             {children}
           </TagLabel>
           <TagCloseButton
@@ -137,6 +122,7 @@ export function MultiValue<OptionType>(props: MultiValueProps<OptionType>): JSX.
                 className
               )
             )}
+            isDisabled={isDisabled}
             {...removeProps}
             sx={multiValueRemove}
           />

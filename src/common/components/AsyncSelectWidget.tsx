@@ -8,12 +8,12 @@ import type { ValueType, MenuPlacement } from 'react-select'
 import type { Provider } from '../../admin/providers/interfaces'
 
 import { getAccessor } from '../../DetailView/utils/dataAccess'
-import { components, modifyStyles } from './ReactSelectCustomization'
+import { components, ExtendedProps, modifyStyles } from './ReactSelectCustomization'
 import { StatefullAsyncSelect } from '../../django-spa/StatefulControls'
 import { Pagination } from '../../admin/providers/pagination'
 import { Accessor } from '../../typing'
 
-type AsyncSelectWidgetProps = {
+interface AsyncSelectWidgetProps extends ExtendedProps {
   provider: Provider
   dataResourceUrl: string
   handleChange: Function
@@ -76,6 +76,7 @@ const AsyncSelectWidgetNew = ({
   menuPlacement,
   className,
   staleTime,
+  componentsClasses,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -141,6 +142,7 @@ const AsyncSelectWidgetNew = ({
       debounceTimeout={debounceValue}
       searchParamName={searchParamName}
       cacheUniqs={cacheUniqs}
+      componentsClasses={componentsClasses}
     />
   )
 }
@@ -170,6 +172,7 @@ const AsyncSelectWidget = ({
   isDisabled = false,
   menuPlacement,
   className,
+  componentsClasses,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -253,6 +256,7 @@ const AsyncSelectWidget = ({
       menuPlacement={menuPlacement}
       className={className}
       components={components}
+      componentsClasses={componentsClasses}
     />
   )
 }

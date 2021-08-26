@@ -10,6 +10,7 @@ import type { Location, History } from 'history'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
+import classNames from 'classnames'
 import { DebounceInput } from '../../../django-spa/Controls'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
@@ -91,7 +92,7 @@ const setFilterValue = (
 const getDateFromDatePicker = (value: DatePickerValue): Date | null | undefined =>
   Array.isArray(value) ? value[0] : value
 
-const BaseFilter = (params: FilterProps): JSX.Element => {
+const BaseFilter = ({ className, ...params }: FilterProps): JSX.Element => {
   const { name, label, resourceName, gotoPage } = params
   const history = useHistory()
   const location = useLocation()
@@ -110,7 +111,7 @@ const BaseFilter = (params: FilterProps): JSX.Element => {
 
   return (
     <DebounceInput
-      className="styled-filter base-styled-filter"
+      className={classNames('styled-filter base-styled-filter', className)}
       onChange={handleChange}
       placeholder={`Фильтр по ${label}` as const}
       value={value}
@@ -306,6 +307,7 @@ const ForeignKeySelectFilterNew = (params: ForeignKeySelectFilterProps): JSX.Ele
     isMulti = false,
     gotoPage,
     staleTime,
+    className,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -347,6 +349,7 @@ const ForeignKeySelectFilterNew = (params: ForeignKeySelectFilterProps): JSX.Ele
           placeholder={`Фильтр по ${label}`}
           isMulti={isMulti}
           staleTime={staleTime}
+          className={className}
         />
       </Box>
     </StyledFilter>
@@ -365,6 +368,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     defaultOptions = false,
     isMulti = false,
     gotoPage,
+    className,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -405,6 +409,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
           getOptionValue={optionValue}
           placeholder={`Фильтр по ${label}`}
           isMulti={isMulti}
+          className={className}
         />
       </Box>
     </StyledFilter>

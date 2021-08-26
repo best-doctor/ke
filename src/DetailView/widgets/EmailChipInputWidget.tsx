@@ -7,7 +7,12 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
 
-export const EmailChipInputWidget = (props: WidgetProps): JSX.Element => {
+interface EmailChipInputWidgetProps extends WidgetProps {
+  chipClassName?: string
+  inputClassName?: string
+}
+
+export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
@@ -19,6 +24,8 @@ export const EmailChipInputWidget = (props: WidgetProps): JSX.Element => {
     containerStore,
     labelContainerProps,
     containerProps,
+    chipClassName,
+    inputClassName,
   } = props
   const context = containerStore.getState()
 
@@ -49,7 +56,12 @@ export const EmailChipInputWidget = (props: WidgetProps): JSX.Element => {
       description={description}
       required={isRequired}
     >
-      <EmailChipInput value={(content || []) as string[]} onChange={handleChange} />
+      <EmailChipInput
+        chipClassName={chipClassName}
+        inputClassName={inputClassName}
+        value={(content || []) as string[]}
+        onChange={handleChange}
+      />
     </WidgetWrapper>
   )
 }

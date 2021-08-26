@@ -10,6 +10,8 @@ type ChipInputProps = ControlProps<string[]> & {
   submitKeys?: string[]
   validator?: (value: string) => boolean
   errorText?: string
+  chipClassName?: string
+  inputClassName?: string
 }
 
 export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>(
@@ -21,6 +23,8 @@ export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>(
       submitKeys = ['Enter', 'Tab'],
       validator = () => true,
       errorText = 'Invalid value',
+      chipClassName,
+      inputClassName,
     } = props
     const [chips, setChips] = usePropState<string[]>(inputValue)
     const [value, setValue] = useState<string>('')
@@ -83,16 +87,7 @@ export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>(
           {chips.map((chipValue: string, index: number) => {
             const key = index
             return (
-              <Tag
-                key={key}
-                minWidth={undefined}
-                minHeight={undefined}
-                sx={chip}
-                // height="1.5rem"
-                // fontSize="0.85rem"
-                // m="0.2rem"
-                // bg="#E3E5E8"
-              >
+              <Tag key={key} minWidth={undefined} minHeight={undefined} sx={chip} className={chipClassName}>
                 <TagLabel sx={chipLabel} width="100%">
                   {chipValue}
                 </TagLabel>
@@ -113,6 +108,7 @@ export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>(
             height="2rem"
             borderRadius="0px"
             onBlur={finishInput}
+            className={inputClassName}
           />
         </Flex>
         {error && (

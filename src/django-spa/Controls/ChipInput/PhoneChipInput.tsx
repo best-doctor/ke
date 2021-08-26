@@ -3,7 +3,12 @@ import React, { forwardRef } from 'react'
 import { ChipInput } from './ChipInput'
 import { ControlProps } from '../types'
 
-export const PhoneChipInput = forwardRef<HTMLInputElement, ControlProps<string[]>>(
+interface PhoneChipInputProps extends ControlProps<string[]> {
+  chipClassName?: string
+  inputClassName?: string
+}
+
+export const PhoneChipInput = forwardRef<HTMLInputElement, PhoneChipInputProps>(
   (props, ref): JSX.Element => (
     <ChipInput
       {...props}

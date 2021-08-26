@@ -3,13 +3,15 @@ import { OptionTypeBase } from 'react-select'
 import { AsyncPaginate, LoadOptions } from 'react-select-async-paginate'
 import { StatefullProps } from '../Controls/Select/AsyncSelect'
 import { ListResponse, ResourceProps, useFetchResource } from '../../data-provider/resource-provider'
+import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 
 export interface StatefullAsyncSelecProps<
   OptionType extends OptionTypeBase,
   Additinal = unknown,
   IsMulti extends boolean = false
 > extends StatefullProps<OptionType, Additinal, IsMulti>,
-    ResourceProps<ListResponse<OptionType>> {
+    ResourceProps<ListResponse<OptionType>>,
+    ExtendedProps {
   searchParamName?: string
 }
 

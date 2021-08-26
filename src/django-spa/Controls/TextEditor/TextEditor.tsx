@@ -2,6 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import RichTextEditor, { EditorValue } from 'react-rte'
 
+import classNames from 'classnames'
 import { ControlProps } from '../types'
 
 export const StyledTextEditor = styled.div`
@@ -35,9 +36,13 @@ const toolbarConfig = {
   ],
 }
 
-export const TextEditor = forwardRef<HTMLDivElement, ControlProps<string>>(
+interface TextEditorProps extends ControlProps<string> {
+  className?: string
+}
+
+export const TextEditor = forwardRef<HTMLDivElement, TextEditorProps>(
   (props, ref): JSX.Element => {
-    const { value: inputValue, onChange } = props
+    const { value: inputValue, onChange, className } = props
     const [value, setValue] = useState(valueToEditorFormat(inputValue))
 
     useEffect(() => {
@@ -63,7 +68,7 @@ export const TextEditor = forwardRef<HTMLDivElement, ControlProps<string>>(
           // eslint-disable-next-line
           // @ts-ignore
           toolbarConfig={toolbarConfig}
-          className="text-editor"
+          className={classNames('text-editor', className)}
           editorClassName="text-editor-widget"
           value={value}
           onChange={handleChange}

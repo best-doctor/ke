@@ -50,6 +50,8 @@ type WidgetProps = {
   required?: Accessor<boolean>
   labelContainerProps?: BoxProps
   containerProps?: BoxProps
+  widgetClassName?: string
+  className?: string
 }
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets' | 'updated_wizards'

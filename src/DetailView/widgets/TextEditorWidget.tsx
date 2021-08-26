@@ -14,7 +14,17 @@ type TextEditorProps = WidgetProps & {
 }
 
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
-  const { name, helpText, description, targetPayload, style, submitChange, setInitialValue, containerStore } = props
+  const {
+    name,
+    helpText,
+    description,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    widgetClassName,
+  } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
@@ -36,7 +46,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
-      <TextEditor value={content as string} onChange={handleBlur} />
+      <TextEditor className={widgetClassName} value={content as string} onChange={handleBlur} />
     </WidgetWrapper>
   )
 }
