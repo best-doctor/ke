@@ -1,4 +1,4 @@
-import type { AxiosError } from 'axios'
+import type { AxiosError, AxiosRequestConfig } from 'axios'
 
 type BaseResponse = {
   data: {
@@ -11,6 +11,7 @@ type ErrorHandler = (error: Error | AxiosError) => void
 
 type ProviderOptions = {
   onError?: ErrorHandler
+  requestConfig?: AxiosRequestConfig
 }
 
 export { BaseResponse, ErrorHandler, ProviderOptions }

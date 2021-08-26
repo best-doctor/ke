@@ -137,8 +137,9 @@ export class BaseProvider implements Provider {
   }
 
   post = async (resourceUrl: string, payload: object): Promise<Model> => {
+    const { requestConfig } = this.options
     try {
-      const response: BaseResponse = await this.http.post(resourceUrl, payload)
+      const response: BaseResponse = await this.http.post(resourceUrl, payload, requestConfig)
       return response.data?.data
     } catch (error) {
       this.onErrorHandler(error)
@@ -147,8 +148,9 @@ export class BaseProvider implements Provider {
   }
 
   put = async (resourceUrl: string, payload: object): Promise<Model> => {
+    const { requestConfig } = this.options
     try {
-      const response: BaseResponse = await this.http.put(resourceUrl, payload)
+      const response: BaseResponse = await this.http.put(resourceUrl, payload, requestConfig)
       return response.data.data
     } catch (error) {
       this.onErrorHandler(error)
@@ -157,8 +159,9 @@ export class BaseProvider implements Provider {
   }
 
   patch = async (resourceUrl: string, payload: object): Promise<Model> => {
+    const { requestConfig } = this.options
     try {
-      const response: BaseResponse = await this.http.patch(resourceUrl, payload)
+      const response: BaseResponse = await this.http.patch(resourceUrl, payload, requestConfig)
       return response.data.data
     } catch (error) {
       this.onErrorHandler(error)
@@ -167,8 +170,9 @@ export class BaseProvider implements Provider {
   }
 
   delete = async (resourceUrl: string): Promise<void> => {
+    const { requestConfig } = this.options
     try {
-      await this.http.delete(resourceUrl)
+      await this.http.delete(resourceUrl, requestConfig)
     } catch (error) {
       this.onErrorHandler(error)
       throw error
@@ -176,13 +180,14 @@ export class BaseProvider implements Provider {
   }
 
   get = async (resourceUrl: string, cacheTime?: number, forceCache?: boolean): Promise<any> => {
+    const { requestConfig } = this.options
     let effectiveForceCache = forceCache
     if (!effectiveForceCache) {
       const cached = this.cache?.get(resourceUrl, cacheTime) || undefined
       if (cached !== undefined) return Promise.resolve(cached)
       effectiveForceCache = true
     }
-    const response = this.http.get(resourceUrl)
+    const response = this.http.get(resourceUrl, requestConfig)
     if (effectiveForceCache) response.then((data) => this.cache?.set(resourceUrl, data))
     response.catch(this.onErrorHandler)
     return response
