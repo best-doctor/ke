@@ -1,4 +1,4 @@
-module.exports = {
+const baseTypescript = {
   plugins: ['@typescript-eslint', 'eslint-plugin-tsdoc'],
   extends: [
     'airbnb-typescript',
@@ -9,7 +9,7 @@ module.exports = {
     'prettier',
   ],
   parserOptions: {
-    project: './tsconfig.eslint.json',
+    project: './tsconfig.spec.json',
   },
   rules: {
     'no-prototype-builtins': 'off',
@@ -19,7 +19,18 @@ module.exports = {
     'import/no-default-export': 'error',
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx', '**/fixtures.ts', '**/setupTests.ts', 'jest-setup.ts'] },
+      {
+        devDependencies: [
+          '**/*.test.ts',
+          '**/*.test.tsx',
+          '**/*.spec.ts',
+          '**/*.spec.tsx',
+          '**/fixtures.ts',
+          '**/setupTests.ts',
+          './*.ts',
+          './*.js',
+        ],
+      },
     ],
     // Makes no sense to allow type inference for expression parameters, but require typing the response
     '@typescript-eslint/explicit-function-return-type': [
@@ -57,10 +68,27 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
+}
+
+module.exports = {
+  root: true,
+  extends: ['eslint:recommended', 'prettier'],
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+    jest: true,
+  },
   overrides: [
     {
+      files: ['**/*.ts', '**/*.tsx'],
+      ...baseTypescript,
+    },
+    {
       files: ['**/*.test.ts', '**/*.test.tsx'],
+      ...baseTypescript,
       rules: {
+        ...baseTypescript.rules,
         '@typescript-eslint/ban-ts-ignore': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
@@ -68,7 +96,9 @@ module.exports = {
     },
     {
       files: ['src/cdk/**/*.ts*', 'src/features/**/*.ts*'],
+      ...baseTypescript,
       rules: {
+        ...baseTypescript.rules,
         '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/no-unsafe-assignment': 'error',
         '@typescript-eslint/no-unsafe-call': 'error',
@@ -77,9 +107,10 @@ module.exports = {
       },
     },
     {
-      // Special kinds of function which must used only as part of React components
       files: ['src/features/**/*.ts*'],
+      ...baseTypescript,
       rules: {
+        ...baseTypescript.rules,
         'react-hooks/rules-of-hooks': 'off',
       },
     },
