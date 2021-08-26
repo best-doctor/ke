@@ -1,11 +1,11 @@
 import React, { ReactElement, ReactNode, useMemo } from 'react'
+import { Box, Center, Flex, Spacer } from '@chakra-ui/react'
 import { HeaderConfig, TableProps } from '@cdk/Tables'
 import { Field } from '@django-spa/Forms'
 import { GroupControl } from '@cdk/Controls'
 
 import { OrderDirection } from './types'
 import { Order } from './Order'
-import {Box, Center, Flex, Spacer} from "@chakra-ui/react";
 
 export function makeOrderedTable(table: TableComponent): OrderedTableComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
