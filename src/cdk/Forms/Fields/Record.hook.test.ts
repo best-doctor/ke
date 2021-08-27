@@ -34,7 +34,7 @@ test('By default all fields untouched, has not errors and not in validating', ()
 
       renderHook(() => useRecord(rootHookSpy, value, jest.fn()))
 
-      expect(rootHookSpy.mock.calls[0][0]).toEqual(
+      expect((rootHookSpy.mock.calls[0] as unknown[])[0]).toEqual(
         Object.fromEntries(
           Object.entries(value).map(([key, item]) => [
             key,
@@ -58,7 +58,7 @@ test('Passthroughs to recordHook same record for same value on rerender', () => 
       const { rerender } = renderHook(() => useRecord(rootHookSpy, value, jest.fn()))
       rerender()
 
-      expect(rootHookSpy.mock.calls[0][0]).toBe(rootHookSpy.mock.calls[1][0])
+      expect((rootHookSpy.mock.calls[0] as unknown[])[0]).toBe((rootHookSpy.mock.calls[1] as unknown[])[0])
     })
   )
 })

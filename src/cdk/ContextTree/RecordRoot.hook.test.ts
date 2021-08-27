@@ -45,7 +45,7 @@ test('Updater from context update correct value', () => {
       const updater = result.current[1].value[1]
 
       Object.keys(record).forEach((key) => {
-        const keyUpdaterSpy = jest.fn().mockReturnValue(value)
+        const keyUpdaterSpy = jest.fn<unknown, unknown[]>().mockReturnValue(value)
         updater(key, keyUpdaterSpy)
 
         expect(keyUpdaterSpy.mock.calls[0][0]).toBe(record[key])
