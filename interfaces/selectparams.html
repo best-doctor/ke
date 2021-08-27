@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EntitiesSource | @bestdoctor/ke</title>
+	<title>SelectParams | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,32 +55,21 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="entitiessource.html">EntitiesSource</a>
+					<a href="selectparams.html">SelectParams</a>
 				</li>
 			</ul>
-			<h1>Interface EntitiesSource&lt;Entity, FetchParams&gt;</h1>
+			<h1>Interface SelectParams</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>Entity</h4>
-					</li>
-					<li>
-						<h4>FetchParams</h4>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EntitiesSource</span>
+						<span class="target">SelectParams</span>
 					</li>
 				</ul>
 			</section>
@@ -91,8 +80,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiessource.html#fetch" class="tsd-kind-icon">fetch</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entitiessource.html#store" class="tsd-kind-icon">store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selectparams.html#filters" class="tsd-kind-icon">filters</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selectparams.html#orderby" class="tsd-kind-icon">order<wbr>By</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selectparams.html#pagination" class="tsd-kind-icon">pagination</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,22 +91,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="fetch" class="tsd-anchor"></a>
-					<h3>fetch</h3>
-					<div class="tsd-signature tsd-kind-icon">fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FetchParams</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">[</span>models<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span>totalCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="filters" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> filters</h3>
+					<div class="tsd-signature tsd-kind-icon">filters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/6898bc1/src/cdk/State/EntitiesSource.factory.ts#L46">src/cdk/State/EntitiesSource.factory.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/6898bc1/src/django-spa/components/SelectView/Contexts/types.ts#L19">src/django-spa/components/SelectView/Contexts/types.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="store" class="tsd-anchor"></a>
-					<h3>store</h3>
-					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Store</span><span class="tsd-signature-symbol">&lt;</span><a href="entitiesdata.html" class="tsd-signature-type" data-tsd-kind="Interface">EntitiesData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entity</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">FetchParams</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="orderby" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> order<wbr>By</h3>
+					<div class="tsd-signature tsd-kind-icon">order<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">OrderDirection</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/6898bc1/src/cdk/State/EntitiesSource.factory.ts#L45">src/cdk/State/EntitiesSource.factory.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/6898bc1/src/django-spa/components/SelectView/Contexts/types.ts#L20">src/django-spa/components/SelectView/Contexts/types.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pagination" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> pagination</h3>
+					<div class="tsd-signature tsd-kind-icon">pagination<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Pagination</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/6898bc1/src/django-spa/components/SelectView/Contexts/types.ts#L21">src/django-spa/components/SelectView/Contexts/types.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -134,14 +134,17 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="entitiessource.html" class="tsd-kind-icon">Entities<wbr>Source</a>
+					<li class="current tsd-kind-interface">
+						<a href="selectparams.html" class="tsd-kind-icon">Select<wbr>Params</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entitiessource.html#fetch" class="tsd-kind-icon">fetch</a>
+								<a href="selectparams.html#filters" class="tsd-kind-icon">filters</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entitiessource.html#store" class="tsd-kind-icon">store</a>
+								<a href="selectparams.html#orderby" class="tsd-kind-icon">order<wbr>By</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="selectparams.html#pagination" class="tsd-kind-icon">pagination</a>
 							</li>
 						</ul>
 					</li>
