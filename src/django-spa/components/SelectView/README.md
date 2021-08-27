@@ -1,4 +1,4 @@
-# EntitiesList
+# SelectView
 
 Группа компонентов для работы со списками сущностей. Прежде всего обеспечивают
 вывод, фильтрацию и сортировку.
@@ -7,12 +7,11 @@
 по-умолчанию, но предоставляют обёртки для правильной функциональной связи
 других чистых компонентов.
 
-
 Пример:
 ```typescript jsx
-<EntitiesList dataProvider={provider}>
-  <EntitiesFilters as={MyFilter} configs={filterConfigs} />
-  <EntitiesData as={MyTable} columns={columnConfigs} />
-  <EntitiesPagination as={MyPagination} />
-</EntitiesList>
+<SelectView dataProvider={provider}>
+  <SelectFilters as={MyFilter} configs={filterConfigs} />
+  <SelectData as={MyTable} columns={columnConfigs} />
+  <SelectPagination as={MyPagination} />
+</SelectView>
 ```
