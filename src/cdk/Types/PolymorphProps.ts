@@ -37,7 +37,7 @@ type AsProp<TargetProps> = {
  * ```
  *
  * @param RequiredProps - обязательные props целевого компонента, будут недоступны в новом
- * @param TargetProps - дополнительные свойства целевого компонента, будут доступны в новом
+ * @param TargetProps - свойства целевого компонента
  * @param BaseProps - свойства компонента-обёртки
  */
 export type PolymorphProps<RequiredProps, TargetProps extends RequiredProps, BaseProps = {}> = BaseProps &
