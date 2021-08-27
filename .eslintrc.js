@@ -95,7 +95,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/cdk/**/*.ts*', 'src/features/**/*.ts*'],
+      files: ['src/cdk/**/*.ts*', 'src/features/**/*.ts*', 'src/django-spa/components/**/*.ts*'],
       ...baseTypescript,
       rules: {
         ...baseTypescript.rules,
