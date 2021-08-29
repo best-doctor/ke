@@ -10,17 +10,24 @@ import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
 
 test('Use component from `as`-props', () => {
   fc.assert(
-    fc.property(selectParamsArbitrary, selectResultArbitrary, fc.boolean(), (params, result, isLoading) => {
-      const paginationSpy = jest.fn().mockReturnValue('pages')
+    fc.property(
+      selectParamsArbitrary,
+      selectResultArbitrary,
+      fc.boolean(),
+      fc.lorem(),
+      (params, result, isLoading, display) => {
+        const paginationSpy = jest.fn().mockReturnValue(display)
 
-      render(
-        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-          <SelectPages as={paginationSpy} />
-        </SelectContainer>
-      )
+        const { getByText } = render(
+          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+            <SelectPages as={paginationSpy} />
+          </SelectContainer>
+        )
 
-      expect(paginationSpy).toBeCalledTimes(1)
-    })
+        expect(paginationSpy).toBeCalledTimes(1)
+        expect(getByText(display)).toBeInTheDocument()
+      }
+    )
   )
 })
 

@@ -10,24 +10,31 @@ import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from '
 
 test('Use component from `as`-props', () => {
   fc.assert(
-    fc.property(selectParamsArbitrary, selectResultArbitrary, fc.boolean(), (params, result, isLoading) => {
-      const orderSpy = jest.fn().mockReturnValue('order')
+    fc.property(
+      selectParamsArbitrary,
+      selectResultArbitrary,
+      fc.boolean(),
+      fc.lorem(),
+      (params, result, isLoading, display) => {
+        const orderSpy = jest.fn().mockReturnValue(display)
 
-      render(
-        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-          <SelectSorting as={orderSpy} />
-        </SelectContainer>
-      )
+        const { getByText } = render(
+          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+            <SelectSorting as={orderSpy} />
+          </SelectContainer>
+        )
 
-      expect(orderSpy).toBeCalledTimes(1)
-    })
+        expect(orderSpy).toBeCalledTimes(1)
+        expect(getByText(display)).toBeInTheDocument()
+      }
+    )
   )
 })
 
 test('Pass correct props to sorting component', () => {
   fc.assert(
     fc.property(selectParamsArbitrary, selectResultArbitrary, fc.boolean(), (params, result, isLoading) => {
-      const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>order</>)
+      const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
       render(
         <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>

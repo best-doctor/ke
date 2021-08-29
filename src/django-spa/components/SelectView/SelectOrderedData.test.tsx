@@ -10,17 +10,24 @@ import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from '
 
 test('Use component from `as`-props', () => {
   fc.assert(
-    fc.property(selectParamsArbitrary, selectResultArbitrary, fc.boolean(), (params, result, isLoading) => {
-      const orderDataSpy = jest.fn().mockReturnValue('ordered data')
+    fc.property(
+      selectParamsArbitrary,
+      selectResultArbitrary,
+      fc.boolean(),
+      fc.lorem(),
+      (params, result, isLoading, display) => {
+        const orderDataSpy = jest.fn().mockReturnValue(display)
 
-      render(
-        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-          <SelectOrderedData as={orderDataSpy} />
-        </SelectContainer>
-      )
+        const { getByText } = render(
+          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+            <SelectOrderedData as={orderDataSpy} />
+          </SelectContainer>
+        )
 
-      expect(orderDataSpy).toBeCalledTimes(1)
-    })
+        expect(orderDataSpy).toBeCalledTimes(1)
+        expect(getByText(display)).toBeInTheDocument()
+      }
+    )
   )
 })
 
