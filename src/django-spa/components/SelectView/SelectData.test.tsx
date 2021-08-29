@@ -2,7 +2,7 @@ import React from 'react'
 import fc from 'fast-check'
 import { render } from '@testing-library/react'
 
-import { SelectView } from './SelectView'
+import { SelectContainer } from './SelectContainer'
 import { SelectData } from './SelectData'
 
 import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
@@ -13,9 +13,9 @@ test('Use component from `as`-props', () => {
       const dataSpy = jest.fn().mockReturnValue('data')
 
       render(
-        <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectData as={dataSpy} />
-        </SelectView>
+        </SelectContainer>
       )
 
       expect(dataSpy).toBeCalledTimes(1)
@@ -29,9 +29,9 @@ test('Pass correct props to data component', () => {
       const dataSpy = jest.fn().mockReturnValue('data')
 
       render(
-        <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectData as={dataSpy} />
-        </SelectView>
+        </SelectContainer>
       )
 
       expect(dataSpy).toHaveBeenCalledWith(

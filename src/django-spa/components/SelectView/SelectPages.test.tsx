@@ -3,7 +3,7 @@ import fc from 'fast-check'
 import { render, act } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectView } from './SelectView'
+import { SelectContainer } from './SelectContainer'
 import { SelectPages } from './SelectPages'
 
 import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
@@ -14,9 +14,9 @@ test('Use component from `as`-props', () => {
       const paginationSpy = jest.fn().mockReturnValue('pages')
 
       render(
-        <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectPages as={paginationSpy} />
-        </SelectView>
+        </SelectContainer>
       )
 
       expect(paginationSpy).toBeCalledTimes(1)
@@ -30,9 +30,9 @@ test('Pass correct props to pagination component', () => {
       const paginationSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
 
       render(
-        <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectPages as={paginationSpy} />
-        </SelectView>
+        </SelectContainer>
       )
 
       expect(omit(paginationSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -54,9 +54,9 @@ test('On change from pagination pass through onChangeParams', () => {
         const paramsSpy = jest.fn()
         const paginationSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
         render(
-          <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
             <SelectPages as={paginationSpy} />
-          </SelectView>
+          </SelectContainer>
         )
         const paginationOnChange = (paginationSpy.mock.calls[0][0] as Record<'onChange', (p: number) => void>).onChange
 
