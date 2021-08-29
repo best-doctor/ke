@@ -10,8 +10,10 @@ export const orderByArbitrary = fc.dictionary(
   fc.constantFrom('asc', 'desc', null) as Arbitrary<'asc' | 'desc' | null>
 )
 
+export const filtersArbitrary = fc.dictionary(fc.string(), fc.anything())
+
 export const selectParamsArbitrary = fc.record({
-  filters: fc.dictionary(fc.string(), fc.anything()),
+  filters: filtersArbitrary,
   orderBy: orderByArbitrary,
   pagination: fc.record({
     page: fc.nat(),
