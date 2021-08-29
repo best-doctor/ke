@@ -12,10 +12,12 @@ export const orderByArbitrary = fc.dictionary(
 
 export const filtersArbitrary = fc.dictionary(fc.string(), fc.anything())
 
+export const paginationArbitrary = fc.record({
+  page: fc.nat(),
+})
+
 export const selectParamsArbitrary = fc.record({
   filters: filtersArbitrary,
   orderBy: orderByArbitrary,
-  pagination: fc.record({
-    page: fc.nat(),
-  }),
+  pagination: paginationArbitrary,
 })
