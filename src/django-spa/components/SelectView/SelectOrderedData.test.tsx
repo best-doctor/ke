@@ -3,7 +3,7 @@ import fc from 'fast-check'
 import { render, act } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectContainer } from './SelectContainer'
+import { SelectViewContainer } from './SelectViewContainer'
 import { SelectOrderedData } from './SelectOrderedData'
 
 import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from './fixtures'
@@ -19,9 +19,9 @@ test('Use component from `as`-props', () => {
         const orderDataSpy = jest.fn().mockReturnValue(display)
 
         const { getByText } = render(
-          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
             <SelectOrderedData as={orderDataSpy} />
-          </SelectContainer>
+          </SelectViewContainer>
         )
 
         expect(orderDataSpy).toBeCalledTimes(1)
@@ -37,9 +37,9 @@ test('Pass correct props to ordered data component', () => {
       const orderDataSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>ordered data</>)
 
       render(
-        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectOrderedData as={orderDataSpy} />
-        </SelectContainer>
+        </SelectViewContainer>
       )
 
       expect(omit(orderDataSpy.mock.calls[0][0] as Record<string, unknown>, ['onOrderChange'])).toEqual({
@@ -62,9 +62,9 @@ test('On change from sorting pass through onChangeParams', () => {
         const paramsSpy = jest.fn()
         const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
         render(
-          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
             <SelectOrderedData as={orderSpy} />
-          </SelectContainer>
+          </SelectViewContainer>
         )
         const sortingOnChange = (orderSpy.mock.calls[0][0] as Record<
           'onOrderChange',

@@ -3,7 +3,7 @@ import fc from 'fast-check'
 import { render, act } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectContainer } from './SelectContainer'
+import { SelectViewContainer } from './SelectViewContainer'
 import { SelectSorting } from './SelectSorting'
 
 import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from './fixtures'
@@ -19,9 +19,9 @@ test('Use component from `as`-props', () => {
         const orderSpy = jest.fn().mockReturnValue(display)
 
         const { getByText } = render(
-          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
             <SelectSorting as={orderSpy} />
-          </SelectContainer>
+          </SelectViewContainer>
         )
 
         expect(orderSpy).toBeCalledTimes(1)
@@ -37,9 +37,9 @@ test('Pass correct props to sorting component', () => {
       const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
       render(
-        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectSorting as={orderSpy} />
-        </SelectContainer>
+        </SelectViewContainer>
       )
 
       expect(omit(orderSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -60,9 +60,9 @@ test('On change from sorting pass through onChangeParams', () => {
         const paramsSpy = jest.fn()
         const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
         render(
-          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
             <SelectSorting as={orderSpy} />
-          </SelectContainer>
+          </SelectViewContainer>
         )
         const sortingOnChange = (orderSpy.mock.calls[0][0] as Record<
           'onChange',

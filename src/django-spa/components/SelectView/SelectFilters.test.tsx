@@ -3,7 +3,7 @@ import fc from 'fast-check'
 import { render, act } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectContainer } from './SelectContainer'
+import { SelectViewContainer } from './SelectViewContainer'
 import { SelectFilters } from './SelectFilters'
 
 import { selectParamsArbitrary, selectResultArbitrary, filtersArbitrary } from './fixtures'
@@ -19,9 +19,9 @@ test('Use component from `as`-props', () => {
         const filtersSpy = jest.fn().mockReturnValue(display)
 
         const { getByText } = render(
-          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
             <SelectFilters as={filtersSpy} />
-          </SelectContainer>
+          </SelectViewContainer>
         )
 
         expect(filtersSpy).toBeCalledTimes(1)
@@ -37,9 +37,9 @@ test('Pass correct props to filters component', () => {
       const filtersSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
       render(
-        <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
           <SelectFilters as={filtersSpy} />
-        </SelectContainer>
+        </SelectViewContainer>
       )
 
       expect(omit(filtersSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -60,9 +60,9 @@ test('On change from filters pass through onChangeParams', () => {
         const paramsSpy = jest.fn()
         const filtersSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
         render(
-          <SelectContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
             <SelectFilters as={filtersSpy} />
-          </SelectContainer>
+          </SelectViewContainer>
         )
         const filtersOnChange = (filtersSpy.mock.calls[0][0] as Record<
           'onChange',

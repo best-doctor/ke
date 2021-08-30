@@ -1,4 +1,4 @@
-export { SelectContainer } from './SelectContainer'
+export { SelectViewContainer } from './SelectViewContainer'
 export { SelectData } from './SelectData'
 export { SelectFilters } from './SelectFilters'
 export { SelectSorting } from './SelectSorting'
