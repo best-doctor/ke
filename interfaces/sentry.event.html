@@ -100,6 +100,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#fingerprint" class="tsd-kind-icon">fingerprint</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#level" class="tsd-kind-icon">level</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#logger" class="tsd-kind-icon">logger</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#measurements" class="tsd-kind-icon">measurements</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#message" class="tsd-kind-icon">message</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#modules" class="tsd-kind-icon">modules</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="sentry.event.html#platform" class="tsd-kind-icon">platform</a></li>
@@ -125,117 +126,37 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="breadcrumbs" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> breadcrumbs</h3>
-					<div class="tsd-signature tsd-kind-icon">breadcrumbs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="sentry.breadcrumb.html" class="tsd-signature-type" data-tsd-kind="Interface">Breadcrumb</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">breadcrumbs<span class="tsd-signature-symbol">:</span> <a href="sentry.breadcrumb.html" class="tsd-signature-type" data-tsd-kind="Interface">Breadcrumb</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:34</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:38</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="contexts" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> contexts</h3>
-					<div class="tsd-signature tsd-kind-icon">contexts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">contexts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:35</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:39</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="dist" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> dist</h3>
-					<div class="tsd-signature tsd-kind-icon">dist<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">dist<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:21</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:25</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="environment" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> environment</h3>
-					<div class="tsd-signature tsd-kind-icon">environment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:22</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="event_id" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> event_<wbr>id</h3>
-					<div class="tsd-signature tsd-kind-icon">event_<wbr>id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:12</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="exception" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exception</h3>
-					<div class="tsd-signature tsd-kind-icon">exception<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>values<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="sentry.exception.html" class="tsd-signature-type" data-tsd-kind="Interface">Exception</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:30</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="extra" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> extra</h3>
-					<div class="tsd-signature tsd-kind-icon">extra<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:41</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="fingerprint" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> fingerprint</h3>
-					<div class="tsd-signature tsd-kind-icon">fingerprint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:29</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="level" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> level</h3>
-					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#fatal" class="tsd-signature-type" data-tsd-kind="Enumeration member">Fatal</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#error" class="tsd-signature-type" data-tsd-kind="Enumeration member">Error</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#warning" class="tsd-signature-type" data-tsd-kind="Enumeration member">Warning</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#log" class="tsd-signature-type" data-tsd-kind="Enumeration member">Log</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#info" class="tsd-signature-type" data-tsd-kind="Enumeration member">Info</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#debug" class="tsd-signature-type" data-tsd-kind="Enumeration member">Debug</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#critical" class="tsd-signature-type" data-tsd-kind="Enumeration member">Critical</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:16</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="logger" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> logger</h3>
-					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:18</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="message" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:13</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="modules" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> modules</h3>
-					<div class="tsd-signature tsd-kind-icon">modules<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">environment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:26</li>
@@ -243,19 +164,57 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="platform" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> platform</h3>
-					<div class="tsd-signature tsd-kind-icon">platform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="event_id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> event_<wbr>id</h3>
+					<div class="tsd-signature tsd-kind-icon">event_<wbr>id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:17</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:16</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="release" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> release</h3>
-					<div class="tsd-signature tsd-kind-icon">release<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="exception" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exception</h3>
+					<div class="tsd-signature tsd-kind-icon">exception<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>values<span class="tsd-signature-symbol">?: </span><a href="sentry.exception.html" class="tsd-signature-type" data-tsd-kind="Interface">Exception</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:34</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> values<span class="tsd-signature-symbol">?: </span><a href="sentry.exception.html" class="tsd-signature-type" data-tsd-kind="Interface">Exception</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="extra" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> extra</h3>
+					<div class="tsd-signature tsd-kind-icon">extra<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:43</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="fingerprint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> fingerprint</h3>
+					<div class="tsd-signature tsd-kind-icon">fingerprint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="level" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> level</h3>
+					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <a href="../enums/sentry.severity-1.html#fatal" class="tsd-signature-type" data-tsd-kind="Enumeration member">Fatal</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#error" class="tsd-signature-type" data-tsd-kind="Enumeration member">Error</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#warning" class="tsd-signature-type" data-tsd-kind="Enumeration member">Warning</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#log" class="tsd-signature-type" data-tsd-kind="Enumeration member">Log</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#info" class="tsd-signature-type" data-tsd-kind="Enumeration member">Info</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#debug" class="tsd-signature-type" data-tsd-kind="Enumeration member">Debug</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#critical" class="tsd-signature-type" data-tsd-kind="Enumeration member">Critical</a></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:20</li>
@@ -263,9 +222,67 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="request" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> request</h3>
-					<div class="tsd-signature tsd-kind-icon">request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="sentry.request.html" class="tsd-signature-type" data-tsd-kind="Interface">Request</a></div>
+					<a name="logger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> logger</h3>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:22</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="measurements" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> measurements</h3>
+					<div class="tsd-signature tsd-kind-icon">measurements<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:47</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="message" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:17</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="modules" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> modules</h3>
+					<div class="tsd-signature tsd-kind-icon">modules<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:30</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="platform" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> platform</h3>
+					<div class="tsd-signature tsd-kind-icon">platform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:21</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="release" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> release</h3>
+					<div class="tsd-signature tsd-kind-icon">release<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:24</li>
@@ -273,9 +290,29 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="request" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> request</h3>
+					<div class="tsd-signature tsd-kind-icon">request<span class="tsd-signature-symbol">:</span> <a href="sentry.request.html" class="tsd-signature-type" data-tsd-kind="Interface">Request</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:28</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="sdk" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sdk</h3>
-					<div class="tsd-signature tsd-kind-icon">sdk<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="sentry.sdkinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">SdkInfo</a></div>
+					<div class="tsd-signature tsd-kind-icon">sdk<span class="tsd-signature-symbol">:</span> <a href="sentry.sdkinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">SdkInfo</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:27</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="server_name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> server_<wbr>name</h3>
+					<div class="tsd-signature tsd-kind-icon">server_<wbr>name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:23</li>
@@ -283,19 +320,9 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="server_name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> server_<wbr>name</h3>
-					<div class="tsd-signature tsd-kind-icon">server_<wbr>name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:19</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="spans" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> spans</h3>
-					<div class="tsd-signature tsd-kind-icon">spans<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Span</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">spans<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Span</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:46</li>
@@ -305,57 +332,65 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="stacktrace" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stacktrace</h3>
-					<div class="tsd-signature tsd-kind-icon">stacktrace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="sentry.stacktrace.html" class="tsd-signature-type" data-tsd-kind="Interface">Stacktrace</a></div>
+					<div class="tsd-signature tsd-kind-icon">stacktrace<span class="tsd-signature-symbol">:</span> <a href="sentry.stacktrace.html" class="tsd-signature-type" data-tsd-kind="Interface">Stacktrace</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:33</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:37</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="start_timestamp" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> start_<wbr>timestamp</h3>
-					<div class="tsd-signature tsd-kind-icon">start_<wbr>timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">start_<wbr>timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:15</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:19</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="tags" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> tags</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:38</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:40</li>
 						</ul>
 					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">Primitive</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="timestamp" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timestamp</h3>
-					<div class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:14</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:18</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="transaction" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> transaction</h3>
-					<div class="tsd-signature tsd-kind-icon">transaction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">transaction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:25</li>
+							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:29</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;transaction&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;transaction&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:45</li>
@@ -365,7 +400,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="user" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user</h3>
-					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="sentry.user.html" class="tsd-signature-type" data-tsd-kind="Interface">User</a></div>
+					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <a href="sentry.user.html" class="tsd-signature-type" data-tsd-kind="Interface">User</a></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/@sentry/types/dist/event.d.ts:44</li>
@@ -433,6 +468,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="sentry.event.html#logger" class="tsd-kind-icon">logger</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="sentry.event.html#measurements" class="tsd-kind-icon">measurements</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="sentry.event.html#message" class="tsd-kind-icon">message</a>

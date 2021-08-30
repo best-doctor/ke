@@ -112,6 +112,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_level" class="tsd-kind-icon">_level</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_notifyinglisteners" class="tsd-kind-icon">_notifying<wbr>Listeners</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_scopelisteners" class="tsd-kind-icon">_scope<wbr>Listeners</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_session" class="tsd-kind-icon">_session</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_span" class="tsd-kind-icon">_span</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_tags" class="tsd-kind-icon">_tags</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="sentry.scope.html#_transactionname" class="tsd-kind-icon">_transaction<wbr>Name</a></li>
@@ -127,13 +128,16 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#addeventprocessor" class="tsd-kind-icon">add<wbr>Event<wbr>Processor</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#clear" class="tsd-kind-icon">clear</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#clearbreadcrumbs" class="tsd-kind-icon">clear<wbr>Breadcrumbs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#getsession" class="tsd-kind-icon">get<wbr>Session</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#getspan" class="tsd-kind-icon">get<wbr>Span</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#gettransaction" class="tsd-kind-icon">get<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#getuser" class="tsd-kind-icon">get<wbr>User</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setcontext" class="tsd-kind-icon">set<wbr>Context</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setextra" class="tsd-kind-icon">set<wbr>Extra</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setextras" class="tsd-kind-icon">set<wbr>Extras</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setfingerprint" class="tsd-kind-icon">set<wbr>Fingerprint</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setlevel" class="tsd-kind-icon">set<wbr>Level</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setsession" class="tsd-kind-icon">set<wbr>Session</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#setspan" class="tsd-kind-icon">set<wbr>Span</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#settag" class="tsd-kind-icon">set<wbr>Tag</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="sentry.scope.html#settags" class="tsd-kind-icon">set<wbr>Tags</a></li>
@@ -172,7 +176,7 @@
 					<div class="tsd-signature tsd-kind-icon">_apply<wbr>Fingerprint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:138</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:154</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">_breadcrumbs<span class="tsd-signature-symbol">:</span> <a href="../interfaces/sentry.breadcrumb.html" class="tsd-signature-type" data-tsd-kind="Interface">Breadcrumb</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:14</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:15</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -200,24 +204,16 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 					<a name="_contexts" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _contexts</h3>
-					<div class="tsd-signature tsd-kind-icon">_contexts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">_contexts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:26</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:25</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contexts</p>
 						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
-							</li>
-						</ul>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
@@ -226,7 +222,7 @@
 					<div class="tsd-signature tsd-kind-icon">_event<wbr>Processors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventProcessor</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:12</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:13</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,10 +234,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 					<a name="_extra" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _extra</h3>
-					<div class="tsd-signature tsd-kind-icon">_extra<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">_extra<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:22</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:23</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -249,22 +245,14 @@
 							<p>Extra</p>
 						</div>
 					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
-							</li>
-						</ul>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 					<a name="_fingerprint" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> _fingerprint</h3>
-					<div class="tsd-signature tsd-kind-icon">_fingerprint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">_fingerprint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:30</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:27</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -276,10 +264,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 					<a name="_level" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> _level</h3>
-					<div class="tsd-signature tsd-kind-icon">_level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#fatal" class="tsd-signature-type" data-tsd-kind="Enumeration member">Fatal</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#error" class="tsd-signature-type" data-tsd-kind="Enumeration member">Error</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#warning" class="tsd-signature-type" data-tsd-kind="Enumeration member">Warning</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#log" class="tsd-signature-type" data-tsd-kind="Enumeration member">Log</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#info" class="tsd-signature-type" data-tsd-kind="Enumeration member">Info</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#debug" class="tsd-signature-type" data-tsd-kind="Enumeration member">Debug</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#critical" class="tsd-signature-type" data-tsd-kind="Enumeration member">Critical</a></div>
+					<div class="tsd-signature tsd-kind-icon">_level<span class="tsd-signature-symbol">:</span> <a href="../enums/sentry.severity-1.html#fatal" class="tsd-signature-type" data-tsd-kind="Enumeration member">Fatal</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#error" class="tsd-signature-type" data-tsd-kind="Enumeration member">Error</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#warning" class="tsd-signature-type" data-tsd-kind="Enumeration member">Warning</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#log" class="tsd-signature-type" data-tsd-kind="Enumeration member">Log</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#info" class="tsd-signature-type" data-tsd-kind="Enumeration member">Info</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#debug" class="tsd-signature-type" data-tsd-kind="Enumeration member">Debug</a><span class="tsd-signature-symbol"> | </span><a href="../enums/sentry.severity-1.html#critical" class="tsd-signature-type" data-tsd-kind="Enumeration member">Critical</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:32</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:29</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -294,7 +282,7 @@
 					<div class="tsd-signature tsd-kind-icon">_notifying<wbr>Listeners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:8</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:9</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -309,7 +297,7 @@
 					<div class="tsd-signature tsd-kind-icon">_scope<wbr>Listeners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>scope<span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:10</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:11</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -319,12 +307,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
-					<a name="_span" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> _span</h3>
-					<div class="tsd-signature tsd-kind-icon">_span<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Span</span></div>
+					<a name="_session" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> _session</h3>
+					<div class="tsd-signature tsd-kind-icon">_session<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Session</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:36</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:35</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Session</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="_span" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> _span</h3>
+					<div class="tsd-signature tsd-kind-icon">_span<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Span</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:33</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -339,7 +342,7 @@
 					<div class="tsd-signature tsd-kind-icon">_tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:18</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:19</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -351,7 +354,7 @@
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">Primitive</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -359,10 +362,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 					<a name="_transactionname" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> _transaction<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">_transaction<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">_transaction<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:34</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:31</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -377,7 +380,7 @@
 					<div class="tsd-signature tsd-kind-icon">_user<span class="tsd-signature-symbol">:</span> <a href="../interfaces/sentry.user.html" class="tsd-signature-type" data-tsd-kind="Interface">User</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:16</li>
+							<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:17</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -399,7 +402,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:53</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:145</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -436,7 +439,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:49</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:149</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -457,8 +460,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.addBreadcrumb</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:129</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:128</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -489,8 +493,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.addEventProcessor</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:45</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:49</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -518,8 +523,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.clear</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:125</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:124</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -541,8 +547,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.clearBreadcrumbs</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:133</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:132</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -556,6 +563,30 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getsession" class="tsd-anchor"></a>
+					<h3>get<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Session</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.getSession</p>
+								<ul>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:116</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>inheritdoc</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Session</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="getspan" class="tsd-anchor"></a>
 					<h3>get<wbr>Span</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
@@ -564,8 +595,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.getSpan</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:108</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:104</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -587,8 +619,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.getTransaction</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:112</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:108</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -602,16 +635,41 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="setcontext" class="tsd-anchor"></a>
-					<h3>set<wbr>Context</h3>
+					<a name="getuser" class="tsd-anchor"></a>
+					<h3>get<wbr>User</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Context<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>User<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.user.html" class="tsd-signature-type" data-tsd-kind="Interface">User</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.getUser</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:98</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:57</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>inheritdoc</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/sentry.user.html" class="tsd-signature-type" data-tsd-kind="Interface">User</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="setcontext" class="tsd-anchor"></a>
+					<h3>set<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Context<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setContext</p>
+								<ul>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:96</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -626,7 +684,7 @@
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>context: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></h5>
+									<h5>context: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></h4>
@@ -637,13 +695,14 @@
 					<a name="setextra" class="tsd-anchor"></a>
 					<h3>set<wbr>Extra</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Extra<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extra<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Extra<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extra<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setExtra</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:77</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:75</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -658,7 +717,7 @@
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>extra: <span class="tsd-signature-type">any</span></h5>
+									<h5>extra: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></h4>
@@ -669,11 +728,12 @@
 					<a name="setextras" class="tsd-anchor"></a>
 					<h3>set<wbr>Extras</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Extras<span class="tsd-signature-symbol">(</span>extras<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Extras<span class="tsd-signature-symbol">(</span>extras<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setExtras</p>
 								<ul>
 									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:71</li>
 								</ul>
@@ -687,12 +747,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>extras: <span class="tsd-signature-symbol">{}</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
-										</li>
-									</ul>
+									<h5>extras: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></h4>
@@ -708,8 +763,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setFingerprint</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:81</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:79</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -737,8 +793,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setLevel</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:85</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:83</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -758,6 +815,36 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="setsession" class="tsd-anchor"></a>
+					<h3>set<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Session<span class="tsd-signature-symbol">(</span>session<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Session</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setSession</p>
+								<ul>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:112</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>inheritdoc</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> session: <span class="tsd-signature-type">Session</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="setspan" class="tsd-anchor"></a>
 					<h3>set<wbr>Span</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
@@ -766,8 +853,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setSpan</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:104</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:100</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -790,11 +878,12 @@
 					<a name="settag" class="tsd-anchor"></a>
 					<h3>set<wbr>Tag</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Tag<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Tag<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Primitive</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setTag</p>
 								<ul>
 									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:67</li>
 								</ul>
@@ -811,7 +900,7 @@
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>value: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">Primitive</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="sentry.scope.html" class="tsd-signature-type" data-tsd-kind="Class">Scope</a></h4>
@@ -827,6 +916,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setTags</p>
 								<ul>
 									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:61</li>
 								</ul>
@@ -843,7 +933,7 @@
 									<h5>tags: <span class="tsd-signature-symbol">{}</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">Primitive</span></h5>
 										</li>
 									</ul>
 								</li>
@@ -862,7 +952,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:94</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:92</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -894,8 +984,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setTransactionName</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:89</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:87</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -923,8 +1014,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.setUser</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:57</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:53</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -952,8 +1044,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ScopeInterface.update</p>
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:121</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:120</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -982,7 +1075,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:117</li>
+									<li>Defined in node_modules/@sentry/hub/dist/scope.d.ts:40</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1066,6 +1159,9 @@
 								<a href="sentry.scope.html#_scopelisteners" class="tsd-kind-icon">_scope<wbr>Listeners</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="sentry.scope.html#_session" class="tsd-kind-icon">_session</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
 								<a href="sentry.scope.html#_span" class="tsd-kind-icon">_span</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
@@ -1096,10 +1192,16 @@
 								<a href="sentry.scope.html#clearbreadcrumbs" class="tsd-kind-icon">clear<wbr>Breadcrumbs</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="sentry.scope.html#getsession" class="tsd-kind-icon">get<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="sentry.scope.html#getspan" class="tsd-kind-icon">get<wbr>Span</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="sentry.scope.html#gettransaction" class="tsd-kind-icon">get<wbr>Transaction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="sentry.scope.html#getuser" class="tsd-kind-icon">get<wbr>User</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="sentry.scope.html#setcontext" class="tsd-kind-icon">set<wbr>Context</a>
@@ -1115,6 +1217,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="sentry.scope.html#setlevel" class="tsd-kind-icon">set<wbr>Level</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="sentry.scope.html#setsession" class="tsd-kind-icon">set<wbr>Session</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="sentry.scope.html#setspan" class="tsd-kind-icon">set<wbr>Span</a>
