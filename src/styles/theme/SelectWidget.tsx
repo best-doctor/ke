@@ -1,4 +1,4 @@
-import { theme as chakraTheme } from '@chakra-ui/react'
+import { ComponentStyleConfig, theme as chakraTheme } from '@chakra-ui/react'
 import type { StyleFunctionProps } from '@chakra-ui/theme-tools'
 
 function fieldToControlFunction(fn: Function): Function {
@@ -86,4 +86,4 @@ export const SelectWidget = {
     },
   },
   sizes: Object.fromEntries(Object.entries(sizes).map(([key]) => [key, { control: sizes[key as Sizes] }])),
-}
+} as ComponentStyleConfig
