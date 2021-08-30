@@ -3,9 +3,7 @@ import { BaseDateInput, BaseDateInputProps } from './BaseDateInput'
 
 type DateInputProps = Omit<BaseDateInputProps, 'showTimeSelect' | 'filterTime'>
 
-export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
-  (props, ref): JSX.Element => {
-    const { dateFormat = 'dd.MM.yyyy', ...rest } = props
-    return <BaseDateInput {...rest} ref={ref} showTimeSelect={false} dateFormat={dateFormat} />
-  }
-)
+export const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref): JSX.Element => {
+  const { dateFormat = 'dd.MM.yyyy', ...rest } = props
+  return <BaseDateInput {...rest} ref={ref} showTimeSelect={false} dateFormat={dateFormat} />
+})

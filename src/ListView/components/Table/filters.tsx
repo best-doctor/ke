@@ -160,7 +160,7 @@ const StyledMultiSelect = styled(Select)`
 const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
   const [options, setOptions] = React.useState<any>([])
   const [storedOptions, setStoredOptions] = React.useState<Model[]>([])
-  const { name, label, filterResource, resourceName, gotoPage, provider, cacheTime } = params
+  const { name, label, filterResource, resourceName, gotoPage, provider, cacheTime, className } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -200,7 +200,7 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
 
   return (
     <StyledMultiSelect
-      className={params.className}
+      className={className}
       onChange={(value: any) => handleChange(value)}
       isMulti
       isClearable

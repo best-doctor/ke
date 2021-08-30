@@ -4,9 +4,21 @@ import { CheckboxGroup, Checkbox } from '@chakra-ui/react'
 import { ControlProps } from '../types'
 
 type CheckBoxGroupProps<T> = ControlProps<T[]> & {
+  /**
+   * Function to get key for option
+   */
   getKey: (v: T) => string
+  /**
+   * Function to get value for option
+   */
   getValue: (v: T) => string
+  /**
+   * Function to get label for option
+   */
   getLabel: (v: T) => string
+  /**
+   * Default value
+   */
   defaultValue?: string[]
 }
 
@@ -27,7 +39,7 @@ const CheckBoxGroupInner = <T extends object>(
     <div ref={ref}>
       <CheckboxGroup colorScheme="brand" defaultValue={defaultValue} onChange={(values) => handleChange(values)}>
         {value.map((v: T) => (
-          <Checkbox spacing={8} key={getKey(v)} value={getValue(v)}>
+          <Checkbox spacing={8} key={getKey(v)} value={getValue(v)} mr={4}>
             {getLabel(v)}
           </Checkbox>
         ))}

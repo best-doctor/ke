@@ -5,7 +5,13 @@ import { Input } from '@chakra-ui/react'
 import { ControlProps } from '../types'
 
 type DebounceInputProps = ControlProps<string> & {
+  /**
+   * Timeout before onChange is called
+   */
   debounceTimeout?: number
+  /**
+   * Custom element used for input
+   */
   element?: FC<unknown>
   // TODO: infer exact types for rest props from BaseDebounceInput props
   [key: string]: unknown

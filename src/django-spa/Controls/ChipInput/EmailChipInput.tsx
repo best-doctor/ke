@@ -3,8 +3,18 @@ import React, { forwardRef } from 'react'
 import { ChipInput } from './ChipInput'
 import { ControlProps } from '../types'
 
-interface EmailChipInputProps extends ControlProps<string[]> {
+export interface EmailChipInputProps extends ControlProps<string[]> {
+  /**
+  * Displayed placeholder
+  */
+  placeholder?: string
+  /**
+  ClassName of each Chip
+  */
   chipClassName?: string
+  /**
+  ClassName of input
+  */
   inputClassName?: string
 }
 

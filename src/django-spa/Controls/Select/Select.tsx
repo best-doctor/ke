@@ -17,7 +17,7 @@ const SelectInner = <T extends Option>(
 
 export const Select = forwardRef(SelectInner) as SelectProps
 
-type SelectProps = <T extends Option>(
+export type SelectProps = <T extends Option>(
   props: SelectInnerProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof SelectInner>
 

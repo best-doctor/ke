@@ -46,8 +46,16 @@
         "styled-system": "^5.1.5"
     },
     "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "@chakra-ui/provider": "^1.6.7",
+        "@chakra-ui/theme-tools": "^1.2.0",
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
+        "@storybook/addon-actions": "^6.3.7",
+        "@storybook/addon-essentials": "^6.3.7",
+        "@storybook/addon-links": "^6.3.7",
+        "@storybook/addon-postcss": "^2.0.0",
+        "@storybook/react": "^6.3.7",
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^11.2.7",
         "@testing-library/react-hooks": "^5.0.3",
@@ -73,6 +81,7 @@
         "@typescript-eslint/eslint-plugin": "^4.16.1",
         "@typescript-eslint/parser": "^4.15.2",
         "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
+        "babel-loader": "^8.2.2",
         "clean-webpack-plugin": "^3.0.0",
         "date-fns": "2.16.1",
         "effector": "21.8.5",
@@ -149,7 +158,9 @@
         "postversion": "git push && git push --tags",
         "docs": "typedoc --out docs/generated  src/index.tsx",
         "release": "standard-version --prerelease beta",
-        "release:dry": "standard-version --dry-run --prerelease beta"
+        "release:dry": "standard-version --dry-run --prerelease beta",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
     "husky": {
         "hooks": {

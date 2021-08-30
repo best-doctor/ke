@@ -4,9 +4,21 @@ import { Radio, RadioGroup as ChakraRadioGroup } from '@chakra-ui/react'
 import { ControlProps } from '../types'
 
 type RadioGroupProps<T> = ControlProps<T | undefined> & {
+  /**
+   * Radio group items
+   */
   items: T[]
+  /**
+   * Function to get key for option
+   */
   getKey: (v: T) => string
+  /**
+   * Function to get value for option
+   */
   getValue: (v: T) => string
+  /**
+   * Function to get label for option
+   */
   getLabel: (v: T) => string
 }
 
@@ -26,7 +38,7 @@ const RadioGroupInner = <T extends object>(
   return (
     <ChakraRadioGroup defaultValue={value && getValue(value)} onChange={(v) => handleChange(v)} ref={ref}>
       {items.map((v: T) => (
-        <Radio key={getKey(v)} value={getValue(v)}>
+        <Radio key={getKey(v)} value={getValue(v)} mr={4}>
           {getLabel(v)}
         </Radio>
       ))}
