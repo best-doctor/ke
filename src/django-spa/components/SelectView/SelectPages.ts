@@ -16,12 +16,12 @@ export function SelectPages<PaginationProps extends RequiredPaginationProps>({
   const [{ page }, onChange] = useSelectPagination()
   const { result } = useSelectResult()
 
-  return createElement(Pagination, ({
+  return createElement(Pagination, {
     value: page,
     totalCount: result?.total,
     onChange: (changed: number) => onChange({ page: changed }),
     ...paginationProps,
-  } as unknown) as PaginationProps)
+  } as unknown as PaginationProps)
 }
 
 type SelectPaginationProps<TargetProps extends RequiredPaginationProps> = PolymorphProps<

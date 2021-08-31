@@ -23,27 +23,20 @@ const Buttons = ({ isOpen, additionalHandler }: { isOpen: boolean; additionalHan
   </Box>
 )
 
-export const HiddenAdditionalFilter = makeSlots(
-  {
-    main: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    buttons: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    additional: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-  },
-  (slotElements) => {
-    const [additional, setAdditional] = useState(false)
-    const handleClick = (): void => {
-      setAdditional(!additional)
-    }
-    return (
-      <Flex flexWrap="wrap" mb={4}>
-        <Box flex="1 1 0%">
-          <Buttons isOpen={additional} additionalHandler={handleClick} />
-        </Box>
-        <Box flex="0 0 0%">{slotElements.main}</Box>
-        <Box flex="1 0 100%">
-          <Additional isOpen={additional}>{slotElements.additional}</Additional>
-        </Box>
-      </Flex>
-    )
+export const HiddenAdditionalFilter = makeSlots<'main' | 'buttons' | 'additional'>((slotElements) => {
+  const [additional, setAdditional] = useState(false)
+  const handleClick = (): void => {
+    setAdditional(!additional)
   }
-)
+  return (
+    <Flex flexWrap="wrap" mb={4}>
+      <Box flex="1 1 0%">
+        <Buttons isOpen={additional} additionalHandler={handleClick} />
+      </Box>
+      <Box flex="0 0 0%">{slotElements.main}</Box>
+      <Box flex="1 0 100%">
+        <Additional isOpen={additional}>{slotElements.additional}</Additional>
+      </Box>
+    </Flex>
+  )
+})

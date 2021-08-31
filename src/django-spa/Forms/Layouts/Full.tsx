@@ -1,19 +1,11 @@
+import React from 'react'
 import { makeSlots } from '@cdk/Layouts'
-import React, { PropsWithChildren } from 'react'
 import { Box } from '@chakra-ui/react'
 
-export const Full = makeSlots(
-  {
-    Label: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    Control: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    Errors: ({ children }: PropsWithChildren<{}>) =>
-      children ? <Box style={{ color: 'red' }}>{children}</Box> : <></>,
-  },
-  (slotElements) => (
-    <>
-      {slotElements.Label}
-      {slotElements.Control}
-      {slotElements.Errors}
-    </>
-  )
-)
+export const Full = makeSlots<'Label' | 'Control' | 'Errors'>((slotElements) => (
+  <>
+    {slotElements.Label}
+    {slotElements.Control}
+    {slotElements.Errors && <Box style={{ color: 'red' }}>{slotElements.Errors}</Box>}
+  </>
+))

@@ -12,29 +12,29 @@ abstract class BaseLogger<Config extends LoggerConfig, Handler extends LogHandle
 
   abstract initialize(config: Config): Handler
 
-  log(level: LogLevel, message: any): void {
+  log(level: LogLevel, message: unknown): void {
     if (level >= this.logLevel) {
       this.logger.log(level, message)
     }
   }
 
-  trace(message: any): void {
+  trace(message: unknown): void {
     this.log(LogLevel.TRACE, message)
   }
 
-  debug(message: any): void {
+  debug(message: unknown): void {
     this.log(LogLevel.DEBUG, message)
   }
 
-  info(message: any): void {
+  info(message: unknown): void {
     this.log(LogLevel.INFO, message)
   }
 
-  warning(message: any): void {
+  warning(message: unknown): void {
     this.log(LogLevel.WARNING, message)
   }
 
-  error(message: any): void {
+  error(message: unknown): void {
     this.log(LogLevel.ERROR, message)
   }
 }

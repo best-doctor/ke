@@ -16,13 +16,13 @@ export function SelectOrderedData<OrderedDataProps extends RequiredOrderedDataPr
   const { result, status } = useSelectResult()
   const [order, onOrderChange] = useSelectOrder()
 
-  return createElement(Data, ({
+  return createElement(Data, {
     data: result?.items || null,
     isLoading: status.isLoading,
     ordering: order,
     onOrderChange,
     ...dataProps,
-  } as unknown) as OrderedDataProps)
+  } as unknown as OrderedDataProps)
 }
 
 type SelectOrderedDataProps<TargetProps extends RequiredOrderedDataProps> = PolymorphProps<

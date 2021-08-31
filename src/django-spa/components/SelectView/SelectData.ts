@@ -15,11 +15,11 @@ export function SelectData<DataProps extends RequiredDataProps>({
 }: SelectDataProps<DataProps>): JSX.Element {
   const { result, status } = useSelectResult()
 
-  return createElement(Data, ({
+  return createElement(Data, {
     ...dataProps,
     data: result?.items || null,
     isLoading: status.isLoading,
-  } as unknown) as DataProps)
+  } as unknown as DataProps)
 }
 
 type SelectDataProps<TargetProps extends RequiredDataProps> = PolymorphProps<RequiredDataProps, TargetProps>

@@ -1,12 +1,10 @@
-import { useContext } from 'react'
-
 import { AnalyticsHandler } from './types'
 import { FirebaseAnalytic, FirebaseConfigType } from './adapters'
-import { analyticsConfigContext } from './AnalyticsConfig.context'
+import { useConfig } from '../../../data-provider'
+import { AspectKey } from '../enums'
 
 export const useFirebase = (): AnalyticsHandler => {
-  // TODO: Change to proper config when it's ready
-  const config = useContext(analyticsConfigContext)
+  const config = useConfig({ key: AspectKey.ANALYTICS })
 
   try {
     return new FirebaseAnalytic(config as FirebaseConfigType)

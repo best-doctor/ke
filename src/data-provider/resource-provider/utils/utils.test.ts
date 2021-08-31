@@ -42,7 +42,7 @@ describe('default resource config', () => {
 })
 
 function getFakeAxios(response: any): AxiosInstance {
-  const fakeAxios = ((() => Promise.resolve(response)) as unknown) as AxiosInstance
+  const fakeAxios = (() => Promise.resolve(response)) as unknown as AxiosInstance
   return fakeAxios
 }
 

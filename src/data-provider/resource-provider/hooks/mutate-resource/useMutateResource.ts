@@ -17,9 +17,9 @@ export function useMutateResource<ResourceData, SourceData>(
     key,
   } = useResourceConfig<ResourceData, SourceData>(userConfig)
 
-  const { requestConfig, ...mutationOptions } = useMemo(() => deepmerge(options, requestOptions), [
-    options,
-    requestOptions,
-  ])
+  const { requestConfig, ...mutationOptions } = useMemo(
+    () => deepmerge(options, requestOptions),
+    [options, requestOptions]
+  )
   return useMutation((data: SourceData) => fn(key, data, requestConfig), mutationOptions)
 }

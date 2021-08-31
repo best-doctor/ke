@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "3.17.0-beta.0",
+    "version": "4.17.0-beta.6",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -46,8 +46,16 @@
         "styled-system": "^5.1.5"
     },
     "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "@chakra-ui/provider": "^1.6.7",
+        "@chakra-ui/theme-tools": "^1.2.0",
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
+        "@storybook/addon-actions": "^6.3.7",
+        "@storybook/addon-essentials": "^6.3.7",
+        "@storybook/addon-links": "^6.3.7",
+        "@storybook/addon-postcss": "^2.0.0",
+        "@storybook/react": "^6.3.7",
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^11.2.7",
         "@testing-library/react-hooks": "^5.0.3",
@@ -73,6 +81,7 @@
         "@typescript-eslint/eslint-plugin": "^4.16.1",
         "@typescript-eslint/parser": "^4.15.2",
         "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
+        "babel-loader": "^8.2.2",
         "clean-webpack-plugin": "^3.0.0",
         "date-fns": "2.16.1",
         "effector": "21.8.5",
@@ -91,6 +100,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.0.1",
         "jest-esm-transformer": "^1.0.0",
+        "jest-fast-check": "^1.0.2",
         "lint-staged": "^10.5.4",
         "prettier": "^2.2.1",
         "react": "^17.0.2",
@@ -109,7 +119,7 @@
         "webpack-bundle-analyzer": "^4.3.0",
         "webpack-cli": "^4.5.0",
         "webpack-merge": "^5.7.3",
-        "zod": "^3.1.0"
+        "zod": "^3.8.1"
     },
     "resolutions": {
         "@grpc/grpc-js": "^1.1.8",
@@ -148,9 +158,11 @@
         "preversion": "yarn lint",
         "version": "yarn format && git add -A src",
         "postversion": "git push && git push --tags",
-        "docs": "typedoc --out docs/generated  src/index.tsx",
+        "docs": "typedoc --out docs/generated/typedoc  src/index.tsx",
         "release": "standard-version --prerelease beta",
-        "release:dry": "standard-version --dry-run --prerelease beta"
+        "release:dry": "standard-version --dry-run --prerelease beta",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook -o docs/generated/storybook"
     },
     "husky": {
         "hooks": {

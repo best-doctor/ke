@@ -34,18 +34,18 @@ export function MapFilteredSelectLegacy<T, K extends string>({
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { bbox, zoom, ...otherFilters } = filtersValue
-  const onFiltersChange = useCallback((f: Record<K, unknown>) => onFiltersValueChange({ ...filtersValue, ...f }), [
-    filtersValue,
-    onFiltersValueChange,
-  ])
-  const onZoomChange = useCallback((z: number) => onFiltersValueChange({ ...filtersValue, zoom: z }), [
-    filtersValue,
-    onFiltersValueChange,
-  ])
-  const onBboxChange = useCallback((b: string | undefined) => onFiltersValueChange({ ...filtersValue, bbox: b }), [
-    filtersValue,
-    onFiltersValueChange,
-  ])
+  const onFiltersChange = useCallback(
+    (f: Record<K, unknown>) => onFiltersValueChange({ ...filtersValue, ...f }),
+    [filtersValue, onFiltersValueChange]
+  )
+  const onZoomChange = useCallback(
+    (z: number) => onFiltersValueChange({ ...filtersValue, zoom: z }),
+    [filtersValue, onFiltersValueChange]
+  )
+  const onBboxChange = useCallback(
+    (b: string | undefined) => onFiltersValueChange({ ...filtersValue, bbox: b }),
+    [filtersValue, onFiltersValueChange]
+  )
 
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>

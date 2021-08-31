@@ -1,12 +1,11 @@
-import { useContext } from 'react'
+import { useConfig } from '../../../data-provider'
 
 import { LoggingHandler } from './types'
 import { ConsoleLogger } from './adapters'
-import { loggerConfigContext } from './LoggerConfig.context'
+import { AspectKey } from '../enums'
 
 export const useConsoleLogger = (): LoggingHandler => {
-  // TODO: Change to proper config when it's ready
-  const config = useContext(loggerConfigContext)
+  const config = useConfig({ key: AspectKey.LOGGER })
 
   return new ConsoleLogger(config)
 }

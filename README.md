@@ -14,7 +14,8 @@ ALPHA VERSION – NOT FOR PRODUCTION USE
 
 ## Usage example
 
-[API Documentation](https://best-doctor.github.io/ke/)
+[API Documentation](https://best-doctor.github.io/ke/typedoc)
+[Storybook](https://best-doctor.github.io/ke/storybook)
 
 This is an example of the future API
 

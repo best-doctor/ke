@@ -18,12 +18,12 @@ export function makeWithLayout<P, R>(
     /* eslint-disable @typescript-eslint/no-non-null-assertion */
     if (isLayoutDescriptor(layout!)) {
       const { component, ...defaultSlots } = layout
-      return (component({ children: { ...defaultSlots, ...featureData } }) as unknown) as ReactElement<
+      return component({ children: { ...defaultSlots, ...featureData } }) as unknown as ReactElement<
         PropsWithDefaultLayout<P, R>
       >
     }
 
-    return (layout!({ children: featureData }) as unknown) as ReactElement<PropsWithDefaultLayout<P, R>>
+    return layout!({ children: featureData }) as unknown as ReactElement<PropsWithDefaultLayout<P, R>>
     /* eslint-enable @typescript-eslint/no-non-null-assertion */
   }
 }

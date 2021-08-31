@@ -16,10 +16,10 @@ export const useResource = <ResourceData>(
     key,
   } = useResourceConfig<ResourceData>(userConfig)
 
-  const { requestConfig = {}, ...queryOptions } = useMemo(() => deepmerge(query, requestOptions), [
-    query,
-    requestOptions,
-  ])
+  const { requestConfig = {}, ...queryOptions } = useMemo(
+    () => deepmerge(query, requestOptions),
+    [query, requestOptions]
+  )
 
   return useQuery([key, requestConfig.lookupField, requestConfig.params], () => fn(key, requestConfig), queryOptions)
 }

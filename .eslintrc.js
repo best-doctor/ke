@@ -25,6 +25,7 @@ const baseTypescript = {
           '**/*.test.tsx',
           '**/*.spec.ts',
           '**/*.spec.tsx',
+          '**/*.stories.tsx',
           '**/fixtures.ts',
           '**/setupTests.ts',
           './*.ts',
@@ -67,6 +68,7 @@ const baseTypescript = {
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react/jsx-no-bind': ['off', {'allowFunctions': true}],
   },
 }
 
@@ -83,16 +85,6 @@ module.exports = {
     {
       files: ['**/*.ts', '**/*.tsx'],
       ...baseTypescript,
-    },
-    {
-      files: ['**/*.test.ts', '**/*.test.tsx'],
-      ...baseTypescript,
-      rules: {
-        ...baseTypescript.rules,
-        '@typescript-eslint/ban-ts-ignore': 'off',
-        '@typescript-eslint/ban-ts-comment': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-      },
     },
     {
       files: ['src/cdk/**/*.ts*', 'src/features/**/*.ts*', 'src/django-spa/components/**/*.ts*'],
@@ -112,6 +104,25 @@ module.exports = {
       rules: {
         ...baseTypescript.rules,
         'react-hooks/rules-of-hooks': 'off',
+      },
+    },
+    {
+      files: ['src/**/*.stories.ts*'],
+      ...baseTypescript,
+      rules: {
+        ...baseTypescript.rules,
+        'import/no-default-export': 'off',
+      },
+    },
+    {
+      files: ['**/*.test.ts', '**/*.test.tsx', '**/fixtures.ts*'],
+      ...baseTypescript,
+      rules: {
+        ...baseTypescript.rules,
+        '@typescript-eslint/ban-ts-ignore': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       },
     },
   ],

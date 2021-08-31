@@ -1,4 +1,5 @@
-import { theme as chakraTheme } from '@chakra-ui/react'
+import { ComponentStyleConfig, theme as chakraTheme } from '@chakra-ui/react'
+import type { StyleFunctionProps } from '@chakra-ui/theme-tools'
 
 function fieldToControlFunction(fn: Function): Function {
   return (props: Record<string, any>) => {
@@ -47,7 +48,7 @@ export const SelectWidget = {
   part: ['control', 'dropdownIndicator', 'multiValueContainer', 'multiValueLabel', 'multiValueRemove', 'singleValue'],
   defaultProps: chakraTheme.components.Input.defaultProps,
   variants: {
-    outline: (props: Record<string, any>) => ({
+    outline: (props: StyleFunctionProps) => ({
       control: {
         ...chakraTheme.components.Input.variants.outline(props).field,
         _disabled: {
@@ -85,4 +86,4 @@ export const SelectWidget = {
     },
   },
   sizes: Object.fromEntries(Object.entries(sizes).map(([key]) => [key, { control: sizes[key as Sizes] }])),
-}
+} as ComponentStyleConfig

@@ -1,4 +1,5 @@
-import { ChakraProvider, ChakraProviderProps, extendTheme, Theme, theme as chakraTheme } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme, Theme, theme as chakraTheme } from '@chakra-ui/react'
+import type { ChakraProviderProps } from '@chakra-ui/provider'
 
 import React from 'react'
 import { SelectWidget } from './theme/SelectWidget'
@@ -27,7 +28,7 @@ export const defaultTheme = extendTheme({
     LinkWidget,
     ChipInput,
   },
-})
+}) as Theme
 
 interface ThemeProviderProps extends Omit<ChakraProviderProps, 'theme'> {
   theme?: Theme

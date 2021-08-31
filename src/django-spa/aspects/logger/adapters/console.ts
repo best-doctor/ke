@@ -4,7 +4,7 @@ import { LoggerConfig, LogHandler } from '../types'
 import { LogLevel } from '../Enums'
 
 class ConsoleHandler implements LogHandler {
-  log(level: LogLevel, message: any): void {
+  log(level: LogLevel, message: unknown): void {
     if (level >= LogLevel.WARNING) {
       // eslint-disable-next-line no-console
       return console.error(message)

@@ -145,16 +145,14 @@ export {
 export {
   AnalyticsProvider,
   useAnalytics,
-  AnalyticsConfigProvider,
   useFirebase,
   LoggerProvider,
   useLogger,
-  LoggerConfigProvider,
   useConsoleLogger,
   useAccess,
-  AccessConfigProvider,
   AccessActionType,
   AccessDecision,
+  AspectKey,
 } from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'

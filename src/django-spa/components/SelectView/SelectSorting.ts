@@ -15,7 +15,7 @@ export function SelectSorting<OrderProps extends RequiredOrderProps>({
 }: SelectFiltersProps<OrderProps>): JSX.Element {
   const [order, onOrderChange] = useSelectOrder()
 
-  return createElement(Sorting, ({ ...sortingProps, value: order, onChange: onOrderChange } as unknown) as OrderProps)
+  return createElement(Sorting, { ...sortingProps, value: order, onChange: onOrderChange } as unknown as OrderProps)
 }
 
 type SelectFiltersProps<TargetProps extends RequiredOrderProps> = PolymorphProps<RequiredOrderProps, TargetProps>

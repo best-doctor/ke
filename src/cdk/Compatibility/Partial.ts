@@ -23,5 +23,5 @@ export function makePartial<Props, Predefined extends Partial<Props>>(
   source: FC<Props>,
   predefined: Predefined
 ): FC<Omit<Props, keyof Predefined>> {
-  return (props) => source(({ ...props, ...predefined } as unknown) as Props)
+  return (props) => source({ ...props, ...predefined } as unknown as Props)
 }

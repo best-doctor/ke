@@ -9,18 +9,57 @@ import { ControlProps } from '../types'
 import { ChakraDateInput } from './ChakraDateInput'
 
 export type BaseDateInputProps = ControlProps<OptionalDate> & {
+  /**
+   * Minimal date to be displayed in datepicker
+   */
   minDate?: Date
+  /**
+   * Maximal date to be displayed in datepicker
+   */
   maxDate?: Date
+  /**
+   * Function to filter available dates
+   */
   filterDate?: (v: Date) => boolean
+  /**
+   * Function to filter available times
+   */
   filterTime?: (v: Date) => boolean
+  /**
+   * Displayed date format
+   */
   dateFormat?: string
+  /**
+   * Class name for element
+   */
   className?: string
+  /**
+   * Allow input to be clearable
+   */
   isClearable?: boolean
+  /**
+   * Show time select
+   */
   showTimeSelect: boolean
+  /**
+   * Displayed placeholder
+   */
   placeholder?: string
+  /**
+   * Class name for clear button
+   */
   clearButtonClassName?: string
+  /**
+   * Class name for wrapper
+   */
   wrapperClassName?: string
+  /**
+   * Class name for popper
+   */
   popperClassName?: string
+  /**
+   * Title of time input
+   */
   timeCaption?: string
 }
 

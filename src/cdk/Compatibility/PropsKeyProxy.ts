@@ -37,6 +37,6 @@ export function makePropsKeyProxy<SP, SK extends keyof SP, TK extends string>(
     )
     const notMappedProps = omit(targetProps, [...map.values()])
 
-    return source(({ ...notMappedProps, ...mappedProps } as unknown) as SP)
+    return source({ ...notMappedProps, ...mappedProps } as unknown as SP)
   }
 }

@@ -1,21 +1,14 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { Box } from '@chakra-ui/react'
 import { makeSlots } from '@cdk/Layouts'
 
 /**
  * Макет основного содержимого для страниц-списков с поддержкой фильтрации и пагинации
  */
-export const PageList = makeSlots(
-  {
-    Filters: ({ children }: { children: ReactNode }) => <>{children}</>,
-    Data: ({ children }: { children: ReactNode }) => <>{children}</>,
-    Pagination: ({ children }: { children: ReactNode }) => <>{children}</>,
-  },
-  (slotElements) => (
-    <Box>
-      <Box>{slotElements.Filters}</Box>
-      <Box>{slotElements.Data}</Box>
-      <Box>{slotElements.Pagination}</Box>
-    </Box>
-  )
-)
+export const PageList = makeSlots<'filters' | 'data' | 'pagination'>((slotElements) => (
+  <Box>
+    <Box>{slotElements.filters}</Box>
+    <Box>{slotElements.data}</Box>
+    <Box>{slotElements.pagination}</Box>
+  </Box>
+))

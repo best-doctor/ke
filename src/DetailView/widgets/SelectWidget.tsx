@@ -134,52 +134,50 @@ interface SelectWidgetProps extends WidgetProps {
   widgetStyles?: StylesConfig<any, false>
 }
 
-const SelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>(
-  (props: SelectWidgetProps, ref): JSX.Element => {
-    const {
-      name,
-      displayValue,
-      containerStore,
-      mainDetailObject,
-      dataSource,
-      dataTarget,
-      targetPayload,
-      provider,
-      setInitialValue,
-      submitChange,
-      cacheTime,
-    } = props
-    const targetUrl = getData(dataTarget, mainDetailObject) || mainDetailObject.url
-    const context = containerStore.getState()
-    const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
+const SelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>((props: SelectWidgetProps, ref): JSX.Element => {
+  const {
+    name,
+    displayValue,
+    containerStore,
+    mainDetailObject,
+    dataSource,
+    dataTarget,
+    targetPayload,
+    provider,
+    setInitialValue,
+    submitChange,
+    cacheTime,
+  } = props
+  const targetUrl = getData(dataTarget, mainDetailObject) || mainDetailObject.url
+  const context = containerStore.getState()
+  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
-    const [value] = getSelectContent(name, mainDetailObject, displayValue, context)
+  const [value] = getSelectContent(name, mainDetailObject, displayValue, context)
 
-    setInitialValue({ [name]: value })
+  setInitialValue({ [name]: value })
 
-    const options = (): Promise<SelectObject[]> => {
-      const sourceUrl = getData(dataSource, mainDetailObject, context)
-      return provider
-        .getPage(sourceUrl, undefined, undefined, effectiveCacheTime)
-        .then(([responseOptions, ,]: [any, object, object]) => responseOptions as SelectObject[])
-    }
-
-    const handleChange = (changeValue: SelectObject): void => {
-      const widgetPayload = getPayload(changeValue?.value || null, name, targetPayload)
-
-      pushAnalytics({
-        eventName: EventNameEnum.SELECT_OPTION_CHANGE,
-        widgetType: WidgetTypeEnum.INPUT,
-        value: changeValue,
-        objectForAnalytics: props.mainDetailObject,
-        ...props,
-      })
-
-      submitChange({ url: targetUrl, payload: widgetPayload })
-    }
-
-    return <BaseSelectWidget ref={ref} data={options} handleChange={handleChange} {...props} />
+  const options = (): Promise<SelectObject[]> => {
+    const sourceUrl = getData(dataSource, mainDetailObject, context)
+    return provider
+      .getPage(sourceUrl, undefined, undefined, effectiveCacheTime)
+      .then(([responseOptions, ,]: [any, object, object]) => responseOptions as SelectObject[])
   }
-)
+
+  const handleChange = (changeValue: SelectObject): void => {
+    const widgetPayload = getPayload(changeValue?.value || null, name, targetPayload)
+
+    pushAnalytics({
+      eventName: EventNameEnum.SELECT_OPTION_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value: changeValue,
+      objectForAnalytics: props.mainDetailObject,
+      ...props,
+    })
+
+    submitChange({ url: targetUrl, payload: widgetPayload })
+  }
+
+  return <BaseSelectWidget ref={ref} data={options} handleChange={handleChange} {...props} />
+})
 
 export { SelectWidget, BaseSelectWidget }

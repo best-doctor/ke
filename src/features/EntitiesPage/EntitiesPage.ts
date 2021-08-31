@@ -8,10 +8,10 @@ export function entitiesPage<Entity, Filters>(
   defaultFilters: Partial<Filters>,
   { entitiesSource, filtersProvider, perPage = 20 }: EntitiesPageProps<Entity, Partial<Filters>>
 ): { filters: ReactElement; list: ReactElement; pagination: ReactElement } {
-  const filtersSource = useMemo(() => makeModelSource(filtersProvider, defaultFilters), [
-    filtersProvider,
-    defaultFilters,
-  ])
+  const filtersSource = useMemo(
+    () => makeModelSource(filtersProvider, defaultFilters),
+    [filtersProvider, defaultFilters]
+  )
 
   return entitiesListFeature({
     entitiesSource,
