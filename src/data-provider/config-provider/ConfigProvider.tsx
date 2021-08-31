@@ -28,9 +28,9 @@ export const ConfigProvider = <GlobalConfig extends BaseConfig>({
     [options]
   )
 
-  const value: ConfigProviderValue<GlobalConfig> = useMemo(() => ({ config: processorConfig, globalConfig }), [
-    globalConfig,
-    processorConfig,
-  ])
+  const value: ConfigProviderValue<GlobalConfig> = useMemo(
+    () => ({ config: processorConfig, globalConfig }),
+    [globalConfig, processorConfig]
+  )
   return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>
 }

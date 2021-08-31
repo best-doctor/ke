@@ -9,7 +9,7 @@ export function SelectFilters<FiltersProps extends RequiredFiltersProps>({
 }: SelectFiltersProps<FiltersProps>): JSX.Element {
   const [filters, onChange] = useSelectFilters()
 
-  return createElement(FiltersComponent, ({ ...filtersProps, value: filters, onChange } as unknown) as FiltersProps)
+  return createElement(FiltersComponent, { ...filtersProps, value: filters, onChange } as unknown as FiltersProps)
 }
 
 type SelectFiltersProps<TargetProps extends RequiredFiltersProps> = PolymorphProps<RequiredFiltersProps, TargetProps>

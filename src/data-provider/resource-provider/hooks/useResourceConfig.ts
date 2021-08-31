@@ -7,8 +7,8 @@ export function useResourceConfig<ResourceData, SourceData = ResourceData>(
   propsConfig: ResourceOptions<ResourceData, SourceData>
 ): ResourceConfig<ResourceData, SourceData> {
   const config = useDefaultResourceConfig<ResourceData>()
-  return useMemo(() => deepmerge(config, propsConfig) as ResourceConfig<ResourceData, SourceData>, [
-    config,
-    propsConfig,
-  ])
+  return useMemo(
+    () => deepmerge(config, propsConfig) as ResourceConfig<ResourceData, SourceData>,
+    [config, propsConfig]
+  )
 }

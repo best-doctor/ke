@@ -5,8 +5,8 @@ import { ControlProps } from '../types'
 
 export interface EmailChipInputProps extends ControlProps<string[]> {
   /**
-  * Displayed placeholder
-  */
+   * Displayed placeholder
+   */
   placeholder?: string
   /**
   ClassName of each Chip

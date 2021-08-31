@@ -47,8 +47,7 @@ const Template: ComponentStory<typeof RadioGroup> = (args) => {
 }
 
 export const EmptyRadioGroup = Template.bind({})
-EmptyRadioGroup.args = {
-}
+EmptyRadioGroup.args = {}
 
 export const RadioGroupWithDefault = Template.bind({})
 RadioGroupWithDefault.args = {

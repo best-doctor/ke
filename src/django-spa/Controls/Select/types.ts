@@ -19,17 +19,17 @@ export interface BaseProps<T extends Option> {
 
 export type BaseSingleProps<T extends Option> = BaseProps<T> &
   ControlProps<T> & {
-  /**
-   * Support for multiple values is select
-   */
+    /**
+     * Support for multiple values is select
+     */
     isMulti: false
   }
 
 export type BaseMultiProps<T extends Option> = BaseProps<T> &
   ControlProps<T[]> & {
-  /**
-   * Support for multiple values is select
-   */
+    /**
+     * Support for multiple values is select
+     */
     isMulti: true
   }
 

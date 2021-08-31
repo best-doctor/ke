@@ -66,10 +66,9 @@ test('On change from filters pass through onChangeParams', () => {
             <SelectFilters as={filtersSpy} />
           </SelectViewContainer>
         )
-        const filtersOnChange = (filtersSpy.mock.calls[0][0] as Record<
-          'onChange',
-          (p: Record<string, unknown>) => void
-        >).onChange
+        const filtersOnChange = (
+          filtersSpy.mock.calls[0][0] as Record<'onChange', (p: Record<string, unknown>) => void>
+        ).onChange
 
         act(() => filtersOnChange(newFilters))
 

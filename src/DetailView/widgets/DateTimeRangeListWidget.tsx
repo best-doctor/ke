@@ -56,17 +56,8 @@ const getInputPayload = (dateRanges: DateRange[]): ([string, string] | null)[] =
   })
 
 const AllDayDateTimeRangeAction = (props: DateTimeRangeActionProps): JSX.Element => {
-  const {
-    startDate,
-    endDate,
-    itemIndex,
-    setDateRanges,
-    dateRanges,
-    targetPayload,
-    targetUrl,
-    submitChange,
-    name,
-  } = props
+  const { startDate, endDate, itemIndex, setDateRanges, dateRanges, targetPayload, targetUrl, submitChange, name } =
+    props
 
   const handleButtonClick = (): void => {
     let newStartDate = null
