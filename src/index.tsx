@@ -148,7 +148,6 @@ export {
   useFirebase,
   LoggerProvider,
   useLogger,
-  LoggerConfigProvider,
   useConsoleLogger,
   useAccess,
   AccessConfigProvider,
