@@ -1,12 +1,12 @@
 import { LogLevel } from './Enums'
 
 export interface LoggingHandler {
-  log: (level: LogLevel, message: any) => void
-  trace: (message: any) => void
-  debug: (message: any) => void
-  info: (message: any) => void
-  warning: (message: any) => void
-  error: (message: any) => void
+  log: (level: LogLevel, message: unknown) => void
+  trace: (message: unknown) => void
+  debug: (message: unknown) => void
+  info: (message: unknown) => void
+  warning: (message: unknown) => void
+  error: (message: unknown) => void
 }
 
 export type LoggerConfig = {
@@ -15,5 +15,5 @@ export type LoggerConfig = {
 }
 
 export interface LogHandler {
-  log(level: LogLevel, message: any): void
+  log(level: LogLevel, message: unknown): void
 }
