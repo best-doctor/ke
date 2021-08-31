@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { fc, testProp } from 'jest-fast-check'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { renderHook, act } from '@testing-library/react-hooks'
 
 import { SelectViewContainer } from './SelectViewContainer'
@@ -14,19 +14,27 @@ import {
   selectResultArbitrary,
 } from './fixtures'
 
-testProp(
-  'Render children',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean(), fc.lorem()],
-  (params, result, isLoading, display) => {
-    const { getByText } = render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        {display}
-      </SelectViewContainer>
-    )
+test('Render children', () => {
+  fc.assert(
+    fc
+      .property(
+        selectParamsArbitrary,
+        selectResultArbitrary,
+        fc.boolean(),
+        fc.lorem(),
+        (params, result, isLoading, display) => {
+          const { getByText } = render(
+            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              {display}
+            </SelectViewContainer>
+          )
 
-    expect(getByText(display)).toBeInTheDocument()
-  }
-)
+          expect(getByText(display)).toBeInTheDocument()
+        }
+      )
+      .afterEach(cleanup)
+  )
+})
 
 testProp(
   'useSelectParams got correct value',

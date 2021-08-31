@@ -1,6 +1,6 @@
 import React from 'react'
 import { fc, testProp } from 'jest-fast-check'
-import { render, act } from '@testing-library/react'
+import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
 import { SelectViewContainer } from './SelectViewContainer'
@@ -8,22 +8,30 @@ import { SelectFilters } from './SelectFilters'
 
 import { selectParamsArbitrary, selectResultArbitrary, filtersArbitrary } from './fixtures'
 
-testProp(
-  'Use component from `as`-props',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean(), fc.lorem()],
-  (params, result, isLoading, display) => {
-    const filtersSpy = jest.fn().mockReturnValue(display)
+test('Use component from `as`-props', () => {
+  fc.assert(
+    fc
+      .property(
+        selectParamsArbitrary,
+        selectResultArbitrary,
+        fc.boolean(),
+        fc.lorem(),
+        (params, result, isLoading, display) => {
+          const filtersSpy = jest.fn().mockReturnValue(display)
 
-    const { getByText } = render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        <SelectFilters as={filtersSpy} />
-      </SelectViewContainer>
-    )
+          const { getByText } = render(
+            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <SelectFilters as={filtersSpy} />
+            </SelectViewContainer>
+          )
 
-    expect(filtersSpy).toBeCalledTimes(1)
-    expect(getByText(display)).toBeInTheDocument()
-  }
-)
+          expect(filtersSpy).toBeCalledTimes(1)
+          expect(getByText(display)).toBeInTheDocument()
+        }
+      )
+      .afterEach(cleanup)
+  )
+})
 
 testProp(
   'Pass correct props to filters component',
