@@ -1,6 +1,6 @@
 import React from 'react'
 import fc from 'fast-check'
-import { render, act } from '@testing-library/react'
+import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
 import { SelectViewContainer } from './SelectViewContainer'
@@ -10,24 +10,26 @@ import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from '
 
 test('Use component from `as`-props', () => {
   fc.assert(
-    fc.property(
-      selectParamsArbitrary,
-      selectResultArbitrary,
-      fc.boolean(),
-      fc.lorem(),
-      (params, result, isLoading, display) => {
-        const orderDataSpy = jest.fn().mockReturnValue(display)
+    fc
+      .property(
+        selectParamsArbitrary,
+        selectResultArbitrary,
+        fc.boolean(),
+        fc.lorem(),
+        (params, result, isLoading, display) => {
+          const orderDataSpy = jest.fn().mockReturnValue(display)
 
-        const { getByText } = render(
-          <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-            <SelectOrderedData as={orderDataSpy} />
-          </SelectViewContainer>
-        )
+          const { getByText } = render(
+            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <SelectOrderedData as={orderDataSpy} />
+            </SelectViewContainer>
+          )
 
-        expect(orderDataSpy).toBeCalledTimes(1)
-        expect(getByText(display)).toBeInTheDocument()
-      }
-    )
+          expect(orderDataSpy).toBeCalledTimes(1)
+          expect(getByText(display)).toBeInTheDocument()
+        }
+      )
+      .afterEach(cleanup)
   )
 })
 
