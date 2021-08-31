@@ -13,7 +13,9 @@ jobs:
       - name: install-dependencies
         uses: bahmutov/npm-install@v1
       - name: build-docs
-        run: yarn typedoc --out docs/generated src/index.tsx
+        run: yarn docs
+      - name: build-storybook
+        run: yarn build-storybook
       - name: upload-docs
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
