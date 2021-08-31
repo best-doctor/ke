@@ -1,0 +1,21 @@
+name: storybook
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.3.1
+      - name: install-dependencies
+        uses: bahmutov/npm-install@v1
+      - name: build-docs
+        run: yarn build-storybook
+      - name: upload-storybook
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages-storybook
+          folder: storybook-static
