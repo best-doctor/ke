@@ -60,9 +60,9 @@ abstract class BaseWizardStep {
   }
 
   validatedNext(props: WizardPayload): WizardState {
-    const isValid = this.validate(props)
+    const isInvalid = this.validate(props)
 
-    if (isValid) {
+    if (isInvalid) {
       return Promise.resolve('invalid_form')
     }
 
