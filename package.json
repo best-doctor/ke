@@ -100,6 +100,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.0.1",
         "jest-esm-transformer": "^1.0.0",
+        "jest-fast-check": "^1.0.2",
         "lint-staged": "^10.5.4",
         "prettier": "^2.2.1",
         "react": "^17.0.2",
