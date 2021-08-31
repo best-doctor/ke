@@ -40,5 +40,6 @@ module.exports = {
     '@chakra-ui/react': '@chakra-ui/react',
     '@chakra-ui/icons': '@chakra-ui/icons',
     'react-query': 'react-query',
+    'react-router-dom': 'react-router-dom',
   },
 }

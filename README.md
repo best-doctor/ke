@@ -465,7 +465,7 @@ After cloning this repo if you'd like to use it in another project using React
 * link all external dependencies and `ke`:
 
   ```
-  yarn link react @chakra-ui/react @bestdoctor/ke react-query
+  yarn link react @chakra-ui/react @bestdoctor/ke react-query react-router-dom
   ```
 
 Here are useful tips:
