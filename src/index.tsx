@@ -150,7 +150,6 @@ export {
   useLogger,
   useConsoleLogger,
   useAccess,
-  AccessConfigProvider,
   AccessActionType,
   AccessDecision,
   AspectKey,

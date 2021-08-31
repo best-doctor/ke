@@ -1,13 +1,12 @@
-import { useContext } from 'react'
+import {useConfig} from "../../../data-provider";
 
-import { accessConfigContext } from './AccessConfig.context'
-import { AccessPayload, User } from './types'
+import {AccessConfig, AccessPayload, User} from './types'
 import { AccessActionType } from './enums'
 import { checkAccess } from './Access'
+import {AspectKey} from "../enums";
 
 export const useAccess = (user: User, resource: string, action: AccessActionType): AccessPayload => {
-  // TODO: Remove when proper config is ready
-  const config = useContext(accessConfigContext)
+  const config = useConfig({key: AspectKey.ACCESS}) as AccessConfig
 
   return checkAccess(config, user, resource, action)
 }
