@@ -6,7 +6,7 @@ import { checkAccess } from './Access'
 import {AspectKey} from "../enums";
 
 export const useAccess = (user: User, resource: string, action: AccessActionType): AccessPayload => {
-  const config = useConfig({key: AspectKey.ACCESS}) as AccessConfig
+  const config = useConfig({key: AspectKey.ACCESS})
 
-  return checkAccess(config, user, resource, action)
+  return checkAccess(config as AccessConfig, user, resource, action)
 }
