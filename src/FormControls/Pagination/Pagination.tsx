@@ -1,27 +1,18 @@
-import React, { FC, PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 import { useApiState, useChangeEffect } from '@cdk/Hooks'
 import { makeSlots, makeWithLayout } from '@cdk/Layouts'
 
-const PaginationLayout = makeSlots(
-  {
-    ToFirst: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    ToPrev: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    Pages: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    ToNext: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-    ToLast: ({ children }: PropsWithChildren<{}>) => <>{children}</>,
-  },
-  (slotElements) => (
-    <Flex alignItems="center" fontSize="0.875em" mt={4} mb={4}>
-      <Box>{slotElements.ToFirst}</Box>
-      <Box>{slotElements.ToPrev}</Box>
-      <Box>{slotElements.Pages}</Box>
-      <Box>{slotElements.ToNext}</Box>
-      <Box>{slotElements.ToLast}</Box>
-    </Flex>
-  )
-)
+const PaginationLayout = makeSlots<'ToFirst' | 'ToPrev' | 'Pages' | 'ToNext' | 'ToLast'>((slotElements) => (
+  <Flex alignItems="center" fontSize="0.875em" mt={4} mb={4}>
+    <Box>{slotElements.ToFirst}</Box>
+    <Box>{slotElements.ToPrev}</Box>
+    <Box>{slotElements.Pages}</Box>
+    <Box>{slotElements.ToNext}</Box>
+    <Box>{slotElements.ToLast}</Box>
+  </Flex>
+))
 
 const PaginationButton = ({ disabled, onClick, element }: PaginationButtonProps): JSX.Element => (
   <Button

@@ -1,8 +1,9 @@
-import React, { ComponentType, PropsWithChildren, Key, ReactNode } from 'react'
-import { LayoutComponent, LayoutElement } from './types'
+import React, { ComponentType, Key } from 'react'
 
-export function makeList(Container: ListContainerComponent, Item: ListItemComponent): LayoutComponent<Item[]> {
-  return ({ children }): LayoutElement<Item[]> => (
+import { LayoutComponent } from './types'
+
+export function makeList(Container: ComponentType, Item: ComponentType): LayoutComponent<Item[]> {
+  return ({ children }): JSX.Element => (
     <Container>
       {children.map(([key, node]) => (
         <Item key={key}>{node}</Item>
@@ -11,8 +12,4 @@ export function makeList(Container: ListContainerComponent, Item: ListItemCompon
   )
 }
 
-type Item = [Key, ReactNode]
-
-type ListContainerComponent = ComponentType<PropsWithChildren<{}>>
-
-type ListItemComponent = ComponentType<PropsWithChildren<{}>>
+type Item = [Key, JSX.Element]
