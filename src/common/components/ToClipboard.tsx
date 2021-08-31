@@ -25,7 +25,7 @@ export const ToClipboard = ({ value, onClick, notifier, children, ...rest }: ToC
   }, [onClick, notifier, value])
 
   return (
-    <Box as="button" display="flex" alignItems="center" onClick={handleClick} {...rest}>
+    <Box as="button" type="button" display="flex" alignItems="center" onClick={handleClick} {...rest}>
       <Icon as={Copy} h={4} w={4} display="inline-block" color="blue.500" />
       {!!children && <Box ml={3}>{children}</Box>}
     </Box>
