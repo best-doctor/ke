@@ -5,7 +5,7 @@ import { mocked } from 'ts-jest/utils'
 
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { WizardStepControlPanel } from '../../components/WizardStepContainer/WizardStepControlPanel'
-import { testWizard, testProvider, testWizardStep, testNotifier } from '../../../setupTests'
+import { testWizard, testProvider, testWizardStep, testNotifier, waitForComponentToPaint } from '../../../setupTests'
 
 beforeEach(() => {
   window.scrollTo = jest.fn()
@@ -43,6 +43,8 @@ const getComponent = (): JSX.Element => {
 
 test('Wizard step control panel buttons', () => {
   const component = mount(getComponent())
+
+  waitForComponentToPaint(component)
   const buttons = component.find('button')
 
   expect(buttons.length).toBe(2)
@@ -50,6 +52,7 @@ test('Wizard step control panel buttons', () => {
 
 test.each([[0], [1]])('Wizard step control panel buttons analytics', (buttonIndex) => {
   const component = mount(getComponent())
+  waitForComponentToPaint(component)
   const buttons = component.find('button')
 
   const prevButton = buttons.get(buttonIndex)

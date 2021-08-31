@@ -15,7 +15,7 @@ import {
   ForeignKeySelectFilter,
   MaskFilter,
 } from '../components/Table/filters'
-import { testProvider } from '../../setupTests'
+import { testProvider, waitForComponentToPaint } from '../../setupTests'
 import { ResourceProvider } from '../../data-provider'
 
 const filterProps = {
@@ -48,6 +48,8 @@ test('Mask table filter rendering', () => {
 test('Select table filter rendering', () => {
   const component = mount(<SelectFilter {...filterProps} provider={testProvider} filterResource="filterResource" />)
 
+  waitForComponentToPaint(component)
+
   expect(component.find(Select).length).toEqual(1)
 })
 
@@ -55,6 +57,8 @@ test('Multi select table filter rendering', () => {
   const component = mount(
     <MultiSelectFilter {...filterProps} provider={testProvider} filterResource="filterResource" />
   )
+
+  waitForComponentToPaint(component)
 
   expect(component.find(Select).length).toEqual(1)
 })
