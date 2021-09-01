@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import { createElement, useCallback } from 'react'
 import { PolymorphProps } from '@cdk/Types'
 
 import { useSelectPagination, useSelectResult } from './Contexts'
@@ -15,11 +15,12 @@ export function SelectPages<PaginationProps extends RequiredPaginationProps>({
 }: SelectPaginationProps<PaginationProps>): JSX.Element {
   const [{ page }, onChange] = useSelectPagination()
   const { result } = useSelectResult()
+  const handleChange = useCallback((changed: number) => onChange({ page: changed }), [onChange])
 
   return createElement(Pagination, {
     value: page,
     totalCount: result?.total,
-    onChange: (changed: number) => onChange({ page: changed }),
+    onChange: handleChange,
     ...paginationProps,
   } as unknown as PaginationProps)
 }

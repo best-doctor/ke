@@ -70,3 +70,24 @@ testProp(
     expect(paramsSpy).toHaveBeenCalledWith({ ...params, pagination: { page: newPage } })
   }
 )
+
+testProp(
+  'Pass same props to pagination component on each render if external props not changed',
+  [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
+  (params, result, isLoading) => {
+    const paginationSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
+
+    const { rerender } = render(
+      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectPages as={paginationSpy} />
+      </SelectViewContainer>
+    )
+    rerender(
+      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectPages as={paginationSpy} />
+      </SelectViewContainer>
+    )
+
+    expect(paginationSpy).toBeCalledTimes(1)
+  }
+)
