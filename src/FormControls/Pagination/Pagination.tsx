@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
-import { useApiState, useChangeEffect } from '@cdk/Hooks'
 import { makeSlots, makeWithLayout } from '@cdk/Layouts'
 
 const PaginationLayout = makeSlots<'ToFirst' | 'ToPrev' | 'Pages' | 'ToNext' | 'ToLast'>((slotElements) => (
@@ -26,24 +25,24 @@ const PaginationButton = ({ disabled, onClick, element }: PaginationButtonProps)
   />
 )
 
-export const Pagination = makeWithLayout(({ value, onChange, totalCount }: PaginationProps) => {
-  const [page, { toFirst, prev, toLast, next }] = useApiState(value, {
-    toFirst: () => 1,
-    next: (p: number) => (p < totalCount ? p + 1 : p),
-    prev: (p: number) => (p > 1 ? p - 1 : p),
-    toLast: () => totalCount,
-  })
+export const Pagination = makeWithLayout(({ value: page, onChange, totalCount }: PaginationProps) => {
   const isFirst = page === 1
   const isLast = page === totalCount
 
-  useChangeEffect(() => onChange(page), [page, onChange])
-
   return {
-    ToFirst: <PaginationButton element={ChevronsLeft} disabled={isFirst} onClick={() => toFirst()} />,
-    ToPrev: <PaginationButton element={ChevronLeft} disabled={isFirst} onClick={() => prev()} />,
+    ToFirst: <PaginationButton element={ChevronsLeft} disabled={isFirst} onClick={() => onChange(1)} />,
+    ToPrev: (
+      <PaginationButton element={ChevronLeft} disabled={isFirst} onClick={() => onChange(page > 1 ? page - 1 : 1)} />
+    ),
     Pages: `${page} / ${totalCount}`,
-    ToNext: <PaginationButton element={ChevronRight} disabled={isLast} onClick={() => next()} />,
-    ToLast: <PaginationButton element={ChevronsRight} disabled={isLast} onClick={() => toLast()} />,
+    ToNext: (
+      <PaginationButton
+        element={ChevronRight}
+        disabled={isLast}
+        onClick={() => onChange(page < totalCount ? page + 1 : page)}
+      />
+    ),
+    ToLast: <PaginationButton element={ChevronsRight} disabled={isLast} onClick={() => onChange(totalCount)} />,
   }
 }, PaginationLayout)
 
