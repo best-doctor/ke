@@ -1,4 +1,4 @@
-import { Box, BoxProps, Text } from '@chakra-ui/react'
+import { Box, BoxProps, Text, TextProps } from '@chakra-ui/react'
 import React from 'react'
 import { AlertCircle, CheckCircle, HelpCircle, Icon, XCircle } from 'react-feather'
 
@@ -20,10 +20,12 @@ const MessagesBlock = ({
   messages,
   messageType,
   messageProps,
+  messageTextProps,
 }: {
   messages: string[] | undefined
   messageType: string
   messageProps?: BoxProps
+  messageTextProps?: TextProps
 }): JSX.Element => {
   if (typeof messages === 'undefined') return <></>
 
@@ -39,7 +41,9 @@ const MessagesBlock = ({
           return (
             <Box bg={messageColor} key={key} display="flex" borderRadius="4px" m={4} {...messageProps}>
               <Box as={messageIcon} size="21px" m={4} mr={0} flexShrink={0} />
-              <Text m={3}>{message}</Text>
+              <Text m={3} {...messageTextProps}>
+                {message}
+              </Text>
             </Box>
           )
         })}
