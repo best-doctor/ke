@@ -16,7 +16,7 @@
         "@emotion/styled": "^11.3.0",
         "@emotion/styled-base": "^11.0.0",
         "@react-google-maps/api": "^2.2.0",
-        "@sentry/react": "^5.19.0",
+        "@sentry/react": "^6.12.0",
         "@types/styled-system": "^5.1.11",
         "axios": "^0.21.1",
         "classnames": "^2.3.1",
