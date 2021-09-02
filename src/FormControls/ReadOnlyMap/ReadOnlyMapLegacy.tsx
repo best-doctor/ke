@@ -8,7 +8,6 @@ import { Coords, MarkerIcon } from '../../Widgets/Map/types'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 
 const StyledMapWidget = styled.div<{height: number}>`
-  padding: 5.4px;
   white-space: pre-line;
   height: ${p => p.height}px;
   border-radius: 4px;
