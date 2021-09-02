@@ -20,6 +20,7 @@ import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
 import { Provider } from '../../../admin/providers'
 import { Select } from '../../../common/components/Select'
+import { ExtendedProps } from '../../../common/components/ReactSelectCustomization'
 
 type Option = {
   text: string
@@ -55,7 +56,7 @@ type BooleanFilterProps = FilterProps & {
   falseValue?: string
   falseText?: string
 }
-export type ForeignKeySelectFilterProps = ResourceFilterProps & {
+export interface ForeignKeySelectFilterProps extends ResourceFilterProps, ExtendedProps {
   optionLabel: (value: OptionValueType | OptionValueType[]) => string
   optionValue: (value: OptionValueType | OptionValueType[]) => string
   defaultOptions?: boolean
@@ -308,6 +309,7 @@ const ForeignKeySelectFilterNew = (params: ForeignKeySelectFilterProps): JSX.Ele
     gotoPage,
     staleTime,
     className,
+    componentsClasses,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -350,6 +352,7 @@ const ForeignKeySelectFilterNew = (params: ForeignKeySelectFilterProps): JSX.Ele
           isMulti={isMulti}
           staleTime={staleTime}
           className={className}
+          componentsClasses={componentsClasses}
         />
       </Box>
     </StyledFilter>
@@ -369,6 +372,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     isMulti = false,
     gotoPage,
     className,
+    componentsClasses,
   } = params
   const history = useHistory()
   const location = useLocation()
@@ -410,6 +414,7 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
           placeholder={`Фильтр по ${label}`}
           isMulti={isMulti}
           className={className}
+          componentsClasses={componentsClasses}
         />
       </Box>
     </StyledFilter>

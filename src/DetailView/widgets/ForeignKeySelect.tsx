@@ -10,8 +10,9 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
+import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 
-type ForeignKeySelectWidgetProps = WidgetProps & {
+interface ForeignKeySelectWidgetProps extends WidgetProps, ExtendedProps {
   optionLabel: Function
   optionValue: Function
   isClearable?: boolean
@@ -77,6 +78,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
     labelContainerProps,
     staleTime,
     widgetClassName,
+    componentsClasses,
   } = props
 
   const context = containerStore.getState()
@@ -152,6 +154,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
           placeholder={placeholder}
           staleTime={staleTime}
           className={widgetClassName}
+          componentsClasses={componentsClasses}
         />
       </ValidationWrapper>
     </WidgetWrapper>
@@ -188,6 +191,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     containerProps,
     labelContainerProps,
     widgetClassName,
+    componentsClasses,
   } = props
 
   const context = containerStore.getState()
@@ -262,6 +266,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
           placeholder={placeholder}
           className={widgetClassName}
+          componentsClasses={componentsClasses}
         />
       </ValidationWrapper>
     </WidgetWrapper>

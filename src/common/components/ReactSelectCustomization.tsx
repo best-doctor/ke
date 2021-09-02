@@ -27,6 +27,7 @@ import {
 
 export interface ComponentsClassNames {
   MultiValue?: string
+  Input?: string
 }
 
 export interface ExtendedProps {
@@ -126,6 +127,12 @@ export function MultiValue<OptionType>(props: MultiValueProps<OptionType>): JSX.
   )
 }
 
+function Input({ className, ...props }: any): JSX.Element {
+  // eslint-disable-next-line react/destructuring-assignment
+  const externalClassName = (props.selectProps as ExtendedProps)?.componentsClasses?.Input
+  return <selectComponents.Input {...props} className={classNames(className, externalClassName)} />
+}
+
 export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends boolean>(
   externalStyles?: StylesConfig<OptionType, IsMulti>
 ): StylesConfig<OptionType, IsMulti> => ({
@@ -149,4 +156,4 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
   },
 })
 
-export const components = { Control, DropdownIndicator, MultiValue, SingleValue }
+export const components = { Control, DropdownIndicator, MultiValue, SingleValue, Input }
