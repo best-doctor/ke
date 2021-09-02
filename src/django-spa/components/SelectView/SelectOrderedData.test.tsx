@@ -64,10 +64,9 @@ testProp(
         <SelectOrderedData as={orderSpy} />
       </SelectViewContainer>
     )
-    const sortingOnChange = (orderSpy.mock.calls[0][0] as Record<
-      'onOrderChange',
-      (p: Record<string, string | null>) => void
-    >).onOrderChange
+    const sortingOnChange = (
+      orderSpy.mock.calls[0][0] as Record<'onOrderChange', (p: Record<string, string | null>) => void>
+    ).onOrderChange
 
     act(() => sortingOnChange(newOrder))
 

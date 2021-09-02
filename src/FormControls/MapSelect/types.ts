@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import MarkerLabel = google.maps.MarkerLabel
-import Icon = google.maps.Icon
+import { MarkerIcon } from '../../Widgets/Map/types'
 
 export type Option<T> = [OptionKey, OptionDesc, T]
 
@@ -11,7 +11,7 @@ interface OptionDesc {
   description: string
   infoView: ReactElement
   label?: string | MarkerLabel
-  icon?: string | object | Icon
+  icon?: MarkerIcon
   secondaryAction?: ReactElement
 }
 

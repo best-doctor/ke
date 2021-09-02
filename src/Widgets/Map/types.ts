@@ -1,3 +1,5 @@
+import Icon = google.maps.Icon
+
 export interface MapContext {
   apiKey?: string
 }
@@ -9,3 +11,5 @@ type LatLng = { lat: number; lng: number }
 export type MarkerOptions = {
   icon?: string
 }
+
+export type MarkerIcon = string | object | Icon

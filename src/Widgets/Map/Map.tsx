@@ -18,7 +18,7 @@ const searchBoxInputStyle: CSSProperties = {
   textOverflow: `ellipses`,
 }
 
-const mapContainerStyle = (showSearch: boolean): CSSProperties => ({
+const getMapContainerStyle = (showSearch: boolean): CSSProperties => ({
   height: `calc(100% - ${showSearch ? 45 : 0}px)`,
   width: '100%',
 })
@@ -48,6 +48,7 @@ export function Map({
   onSearchMarkerClick,
   searchMarkerRadius,
   showSearch = true,
+  containerStyle = {},
   ...other
 }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
@@ -59,6 +60,10 @@ export function Map({
   const [searchBoxMarker, setSearchBoxMarker] = useState<Marker | null>(null)
 
   const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
+  const mapContainerStyle = useMemo(
+    () => ({ ...getMapContainerStyle(showSearch), ...containerStyle }),
+    [containerStyle, showSearch]
+  )
 
   const onLoad = (ref: any): void => {
     setSearchBox(ref)
@@ -129,7 +134,7 @@ export function Map({
         onBoundsChanged={handleBoundsChanged}
         {...other}
         center={currentCenter}
-        mapContainerStyle={mapContainerStyle(showSearch)}
+        mapContainerStyle={mapContainerStyle}
         clickableIcons={false}
       >
         {children}
@@ -162,6 +167,8 @@ export type MapProps = PropsWithChildren<{
   onSearchMarkerClick?: (marker: Marker) => void
   searchMarkerRadius?: number
   showSearch?: boolean
+  containerStyle?: CSSProperties
+  options?: google.maps.MapOptions
 }>
 
 export type Marker = {

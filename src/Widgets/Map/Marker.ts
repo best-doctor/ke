@@ -1,9 +1,9 @@
 import { Marker as GoogleMarker } from '@react-google-maps/api'
 import type { FunctionComponent } from 'react'
+import MarkerLabel = google.maps.MarkerLabel
 
 import type { Coords, MarkerOptions } from './types'
-import MarkerLabel = google.maps.MarkerLabel
-import Icon = google.maps.Icon
+import { MarkerIcon } from './types'
 
 export const MapMarker = GoogleMarker as unknown as FunctionComponent<MarkerProps>
 
@@ -14,6 +14,6 @@ interface MarkerProps {
   options?: MarkerOptions
   draggable?: boolean
   onDragEnd?: (coordinates: { latLng: { lat: () => number; lng: () => number } }) => void
-  icon?: string | object | Icon
+  icon?: MarkerIcon
   label?: string | MarkerLabel
 }
