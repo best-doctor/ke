@@ -120,6 +120,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                         submitChange={submitChange}
                         analytics={analytics}
                         refreshMainDetailObject={refreshMainDetailObject}
+                        setMainDetailObject={setMainDetailObject}
                         notifier={notifier}
                       />
                     </Flex>
