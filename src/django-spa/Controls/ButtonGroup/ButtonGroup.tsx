@@ -4,7 +4,7 @@ import stringify from 'fast-json-stable-stringify'
 
 export function ButtonGroup<T>({ items, value, onChange }: ButtonGroupProps<T>): JSX.Element {
   return (
-    <ButtonContainer spacing="3">
+    <ButtonContainer spacing="1">
       {items.map(({ label, value: btnValue, styles }) => (
         <Button
           key={stringify(btnValue)}
