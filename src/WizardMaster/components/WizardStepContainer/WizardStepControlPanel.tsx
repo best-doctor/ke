@@ -23,6 +23,7 @@ type WizardStepControlPanelProps = {
   mainWizardObject: WizardObject
   analytics: BaseAnalytic | undefined
   refreshMainDetailObject: Function
+  setMainDetailObject: Function
   notifier: BaseNotifier
 }
 

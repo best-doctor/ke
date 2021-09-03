@@ -35,6 +35,7 @@ const getComponent = (): JSX.Element => {
         currentState={currentState}
         setCurrentState={jest.fn()}
         refreshMainDetailObject={jest.fn()}
+        setMainDetailObject={jest.fn()}
         notifier={testNotifier}
       />
     </ChakraProvider>
