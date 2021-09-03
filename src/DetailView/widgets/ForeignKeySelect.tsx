@@ -12,21 +12,22 @@ import { pushAnalytics } from '../../integration/analytics'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 
-interface ForeignKeySelectWidgetProps extends WidgetProps, ExtendedProps {
-  optionLabel: Function
-  optionValue: Function
-  isClearable?: boolean
-  isDisabled?: Accessor<boolean>
-  defaultOptions?: boolean
-  searchParamName?: string
-  styles?: Accessor<object>
-  optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
-  optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
-  placeholder?: string
-  containerProps?: BoxProps
-  labelContainerProps?: BoxProps
-  staleTime?: Accessor<number>
-}
+type ForeignKeySelectWidgetProps = WidgetProps &
+  ExtendedProps & {
+    optionLabel: Function
+    optionValue: Function
+    isClearable?: boolean
+    isDisabled?: Accessor<boolean>
+    defaultOptions?: boolean
+    searchParamName?: string
+    styles?: Accessor<object>
+    optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
+    optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
+    placeholder?: string
+    containerProps?: BoxProps
+    labelContainerProps?: BoxProps
+    staleTime?: Accessor<number>
+  }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
