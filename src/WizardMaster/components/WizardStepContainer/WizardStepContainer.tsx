@@ -53,7 +53,9 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     setCurrentState,
     submitChange,
   } = props
-  const { widgets: elements } = wizardStep
+  const { widgets: elements, title: stepTitle } = wizardStep
+
+  const title = stepTitle || wizard.title
 
   let { resourceName } = wizardStep
 
@@ -85,7 +87,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                     lineHeight="9"
                     data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}
                   >
-                    {wizard.title}
+                    {title}
                   </Text>
                 </Col>
               </Row>

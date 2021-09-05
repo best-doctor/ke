@@ -17,7 +17,7 @@ type WizardPayload = { [key: string]: any }
 const defaultLayout = { x: 1, y: 1, xs: 12 }
 
 abstract class BaseWizardStep {
-  title: string
+  title?: string
 
   wrapperProps?: FlexProps
 
@@ -35,7 +35,7 @@ abstract class BaseWizardStep {
 
   abstract widgets: DetailFieldDescription[]
 
-  constructor(title: string, resourceName?: string | undefined) {
+  constructor(title?: string | undefined, resourceName?: string | undefined) {
     this.title = title
     this.resourceName = resourceName
   }
