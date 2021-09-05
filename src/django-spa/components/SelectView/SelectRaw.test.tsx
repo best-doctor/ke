@@ -2,7 +2,7 @@ import React from 'react'
 import fc from 'fast-check'
 import { cleanup, render } from '@testing-library/react'
 
-import { SelectViewContainer } from './SelectViewContainer'
+import { SelectView } from './SelectView'
 import { SelectRaw } from './SelectRaw'
 
 import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
@@ -20,14 +20,9 @@ test('Use render function from `children`-props', () => {
           const onParamsChangeSpy = jest.fn()
 
           const { getByText } = render(
-            <SelectViewContainer
-              result={result}
-              params={params}
-              isLoading={isLoading}
-              onParamsChange={onParamsChangeSpy}
-            >
+            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={onParamsChangeSpy}>
               <SelectRaw>{renderSpy}</SelectRaw>
-            </SelectViewContainer>
+            </SelectView>
           )
 
           expect(renderSpy).toBeCalledTimes(1)

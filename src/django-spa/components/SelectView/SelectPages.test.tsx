@@ -3,7 +3,7 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectViewContainer } from './SelectViewContainer'
+import { SelectView } from './SelectView'
 import { SelectPages } from './SelectPages'
 
 import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
@@ -20,9 +20,9 @@ test('Use component from `as`-props', () => {
           const paginationSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
               <SelectPages as={paginationSpy} />
-            </SelectViewContainer>
+            </SelectView>
           )
 
           expect(paginationSpy).toBeCalledTimes(1)
@@ -40,9 +40,9 @@ testProp(
     const paginationSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
 
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
         <SelectPages as={paginationSpy} />
-      </SelectViewContainer>
+      </SelectView>
     )
 
     expect(omit(paginationSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -59,9 +59,9 @@ testProp(
     const paramsSpy = jest.fn()
     const paginationSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
         <SelectPages as={paginationSpy} />
-      </SelectViewContainer>
+      </SelectView>
     )
     const paginationOnChange = (paginationSpy.mock.calls[0][0] as Record<'onChange', (p: number) => void>).onChange
 

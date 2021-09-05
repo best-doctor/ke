@@ -10,8 +10,8 @@
 Пример:
 ```typescript jsx
 <SelectView dataProvider={provider}>
-  <SelectFilters as={MyFilter} configs={filterConfigs} />
+  <SelectWhere as={MyFilter} configs={filterConfigs} />
   <SelectData as={MyTable} columns={columnConfigs} />
-  <SelectPagination as={MyPagination} />
+  <SelectPages as={MyPagination} />
 </SelectView>
 ```

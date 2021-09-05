@@ -3,7 +3,7 @@ import { PolymorphProps } from '@cdk/Types'
 
 import { Filters, useSelectFilters } from './Contexts'
 
-export function SelectFilters<FiltersProps extends RequiredFiltersProps>({
+export function SelectWhere<FiltersProps extends RequiredFiltersProps>({
   as: FiltersComponent,
   ...filtersProps
 }: SelectFiltersProps<FiltersProps>): JSX.Element {

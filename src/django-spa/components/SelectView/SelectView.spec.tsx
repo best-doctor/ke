@@ -3,8 +3,8 @@ import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { SelectParams, SelectResult } from './Contexts'
-import { SelectViewContainer } from './SelectViewContainer'
-import { SelectFilters } from './SelectFilters'
+import { SelectView } from './SelectView'
+import { SelectWhere } from './SelectWhere'
 import { SelectData } from './SelectData'
 import { SelectPages } from './SelectPages'
 
@@ -120,16 +120,16 @@ function SampleSelectView({
   onParamsChange: (p: SelectParams) => void
 }): JSX.Element {
   return (
-    <SelectViewContainer result={result} isLoading={isLoading} onParamsChange={onParamsChange} params={params}>
+    <SelectView result={result} isLoading={isLoading} onParamsChange={onParamsChange} params={params}>
       <article>
         <header>
-          <SelectFilters as={SampleFilters} />
+          <SelectWhere as={SampleFilters} />
         </header>
         <SelectData as={SampleList} />
         <footer>
           <SelectPages as={SamplePagination} />
         </footer>
       </article>
-    </SelectViewContainer>
+    </SelectView>
   )
 }

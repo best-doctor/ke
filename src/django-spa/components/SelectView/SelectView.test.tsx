@@ -3,7 +3,7 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, cleanup } from '@testing-library/react'
 import { renderHook, act } from '@testing-library/react-hooks'
 
-import { SelectViewContainer } from './SelectViewContainer'
+import { SelectView } from './SelectView'
 import { useSelectParams, useSelectResult, useSelectOrder, useSelectFilters, useSelectPagination } from './Contexts'
 
 import {
@@ -24,9 +24,9 @@ test('Render children', () => {
         fc.lorem(),
         (params, result, isLoading, display) => {
           const { getByText } = render(
-            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
               {display}
-            </SelectViewContainer>
+            </SelectView>
           )
 
           expect(getByText(display)).toBeInTheDocument()
@@ -42,14 +42,9 @@ testProp(
   (params, resultData, isLoading) => {
     const handleParamsChangeSpy = jest.fn()
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer
-        result={resultData}
-        params={params}
-        isLoading={isLoading}
-        onParamsChange={handleParamsChangeSpy}
-      >
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={handleParamsChangeSpy}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
 
     const { result } = renderHook(() => useSelectParams(), { wrapper })
@@ -63,9 +58,9 @@ testProp(
   [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
   (params, resultData, isLoading) => {
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
 
     const { result } = renderHook(() => useSelectResult(), { wrapper })
@@ -79,9 +74,9 @@ testProp(
   [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
   (params, resultData, isLoading) => {
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
 
     const { result } = renderHook(() => useSelectOrder(), { wrapper })
@@ -96,14 +91,9 @@ testProp(
   (params, resultData, isLoading, changedOrder) => {
     const handleParamsChangeSpy = jest.fn()
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer
-        result={resultData}
-        params={params}
-        isLoading={isLoading}
-        onParamsChange={handleParamsChangeSpy}
-      >
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={handleParamsChangeSpy}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
     const { result } = renderHook(() => useSelectOrder(), { wrapper })
 
@@ -119,9 +109,9 @@ testProp(
   [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
   (params, resultData, isLoading) => {
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
 
     const { result } = renderHook(() => useSelectFilters(), { wrapper })
@@ -136,14 +126,9 @@ testProp(
   (params, resultData, isLoading, changedFilters) => {
     const handleParamsChangeSpy = jest.fn()
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer
-        result={resultData}
-        params={params}
-        isLoading={isLoading}
-        onParamsChange={handleParamsChangeSpy}
-      >
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={handleParamsChangeSpy}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
     const { result } = renderHook(() => useSelectFilters(), { wrapper })
 
@@ -159,9 +144,9 @@ testProp(
   [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
   (params, resultData, isLoading) => {
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
 
     const { result } = renderHook(() => useSelectPagination(), { wrapper })
@@ -176,14 +161,9 @@ testProp(
   (params, resultData, isLoading, changedPagination) => {
     const handleParamsChangeSpy = jest.fn()
     const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-      <SelectViewContainer
-        result={resultData}
-        params={params}
-        isLoading={isLoading}
-        onParamsChange={handleParamsChangeSpy}
-      >
+      <SelectView result={resultData} params={params} isLoading={isLoading} onParamsChange={handleParamsChangeSpy}>
         {children}
-      </SelectViewContainer>
+      </SelectView>
     )
     const { result } = renderHook(() => useSelectPagination(), { wrapper })
 

@@ -9,7 +9,7 @@ import { Order, useSelectOrder } from './Contexts'
  * @remarks
  * Требования к компоненту сортировки - {@link RequiredOrderProps}
  */
-export function SelectSorting<OrderProps extends RequiredOrderProps>({
+export function SelectOrder<OrderProps extends RequiredOrderProps>({
   as: Sorting,
   ...sortingProps
 }: SelectFiltersProps<OrderProps>): JSX.Element {

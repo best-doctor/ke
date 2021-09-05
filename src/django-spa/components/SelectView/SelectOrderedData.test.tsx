@@ -3,7 +3,7 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectViewContainer } from './SelectViewContainer'
+import { SelectView } from './SelectView'
 import { SelectOrderedData } from './SelectOrderedData'
 
 import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from './fixtures'
@@ -20,9 +20,9 @@ test('Use component from `as`-props', () => {
           const orderDataSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
               <SelectOrderedData as={orderDataSpy} />
-            </SelectViewContainer>
+            </SelectView>
           )
 
           expect(orderDataSpy).toBeCalledTimes(1)
@@ -40,9 +40,9 @@ testProp(
     const orderDataSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>ordered data</>)
 
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
         <SelectOrderedData as={orderDataSpy} />
-      </SelectViewContainer>
+      </SelectView>
     )
 
     expect(omit(orderDataSpy.mock.calls[0][0] as Record<string, unknown>, ['onOrderChange'])).toEqual({
@@ -60,9 +60,9 @@ testProp(
     const paramsSpy = jest.fn()
     const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
         <SelectOrderedData as={orderSpy} />
-      </SelectViewContainer>
+      </SelectView>
     )
     const sortingOnChange = (
       orderSpy.mock.calls[0][0] as Record<'onOrderChange', (p: Record<string, string | null>) => void>

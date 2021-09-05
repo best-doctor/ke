@@ -3,8 +3,8 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectViewContainer } from './SelectViewContainer'
-import { SelectFilters } from './SelectFilters'
+import { SelectView } from './SelectView'
+import { SelectWhere } from './SelectWhere'
 
 import { selectParamsArbitrary, selectResultArbitrary, filtersArbitrary } from './fixtures'
 
@@ -20,9 +20,9 @@ test('Use component from `as`-props', () => {
           const filtersSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-              <SelectFilters as={filtersSpy} />
-            </SelectViewContainer>
+            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <SelectWhere as={filtersSpy} />
+            </SelectView>
           )
 
           expect(filtersSpy).toBeCalledTimes(1)
@@ -40,9 +40,9 @@ testProp(
     const filtersSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        <SelectFilters as={filtersSpy} />
-      </SelectViewContainer>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectWhere as={filtersSpy} />
+      </SelectView>
     )
 
     expect(omit(filtersSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -58,9 +58,9 @@ testProp(
     const paramsSpy = jest.fn()
     const filtersSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
-        <SelectFilters as={filtersSpy} />
-      </SelectViewContainer>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+        <SelectWhere as={filtersSpy} />
+      </SelectView>
     )
     const filtersOnChange = (filtersSpy.mock.calls[0][0] as Record<'onChange', (p: Record<string, unknown>) => void>)
       .onChange

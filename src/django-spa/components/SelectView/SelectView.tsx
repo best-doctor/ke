@@ -12,7 +12,7 @@ const defaultOnChange = (): never => {
  * Корневой компонент для отображения списков/таблиц/etc. различных сущностей. Через него задаётся контекст,
  * которым пользуются остальные компоненты пакета
  */
-export function SelectViewContainer({
+export function SelectView({
   children,
   params,
   onParamsChange,

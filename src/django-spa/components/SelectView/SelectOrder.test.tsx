@@ -3,8 +3,8 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/Dicts'
 
-import { SelectViewContainer } from './SelectViewContainer'
-import { SelectSorting } from './SelectSorting'
+import { SelectView } from './SelectView'
+import { SelectOrder } from './SelectOrder'
 
 import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from './fixtures'
 
@@ -20,9 +20,9 @@ test('Use component from `as`-props', () => {
           const orderSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-              <SelectSorting as={orderSpy} />
-            </SelectViewContainer>
+            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <SelectOrder as={orderSpy} />
+            </SelectView>
           )
 
           expect(orderSpy).toBeCalledTimes(1)
@@ -40,9 +40,9 @@ testProp(
     const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        <SelectSorting as={orderSpy} />
-      </SelectViewContainer>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <SelectOrder as={orderSpy} />
+      </SelectView>
     )
 
     expect(omit(orderSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -58,9 +58,9 @@ testProp(
     const paramsSpy = jest.fn()
     const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
     render(
-      <SelectViewContainer result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
-        <SelectSorting as={orderSpy} />
-      </SelectViewContainer>
+      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+        <SelectOrder as={orderSpy} />
+      </SelectView>
     )
     const sortingOnChange = (
       orderSpy.mock.calls[0][0] as Record<'onChange', (p: Record<string, string | null>) => void>
