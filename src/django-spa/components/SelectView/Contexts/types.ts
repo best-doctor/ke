@@ -7,7 +7,7 @@ export interface SelectStatus {
   isLoading: boolean
 }
 
-export type Filters = Record<string, unknown>
+export type FiltersValue = Record<string, unknown>
 
 export type Order = Record<string, 'asc' | 'desc' | null>
 
@@ -16,7 +16,7 @@ export interface Pagination {
 }
 
 export interface SelectParams {
-  filters?: Filters
+  filters?: FiltersValue
   orderBy?: Order
   pagination?: Pagination
 }

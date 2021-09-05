@@ -1,7 +1,7 @@
 import { createElement } from 'react'
 import { PolymorphProps } from '@cdk/Types'
 
-import { Filters, useSelectFilters } from './Contexts'
+import { FiltersValue, useSelectFilters } from './Contexts'
 
 export function SelectWhere<FiltersProps extends RequiredFiltersProps>({
   as: FiltersComponent,
@@ -15,6 +15,6 @@ export function SelectWhere<FiltersProps extends RequiredFiltersProps>({
 type SelectFiltersProps<TargetProps extends RequiredFiltersProps> = PolymorphProps<RequiredFiltersProps, TargetProps>
 
 interface RequiredFiltersProps {
-  value: Filters | null
-  onChange: (filters: Filters) => void
+  value: FiltersValue | null
+  onChange: (filters: FiltersValue) => void
 }
