@@ -7,9 +7,9 @@ import { ReadOnlyMap } from './ReadOnlyMap'
 import { Coords, MarkerIcon } from '../../Widgets/Map/types'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 
-const StyledMapWidget = styled.div<{height: number}>`
+const StyledMapWidget = styled.div<{ height: number }>`
   white-space: pre-line;
-  height: ${p => p.height}px;
+  height: ${(p) => p.height}px;
   border-radius: 4px;
 `
 

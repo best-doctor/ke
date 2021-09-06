@@ -78,7 +78,11 @@ export function MapSelect<T>({
         )
       })}
       {openedOption && (
-        <MapInfoWindow position={openedOption[1].coords} onCloseClick={() => setOpenedOption(undefined)}>
+        <MapInfoWindow
+          position={openedOption[1].coords}
+          onCloseClick={() => setOpenedOption(undefined)}
+          options={{ maxWidth: 784 }}
+        >
           <>
             {openedOption[1].infoView}
             <Flex alignItems="center" mt={5}>

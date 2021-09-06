@@ -1,11 +1,12 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo, ReactElement } from 'react'
 import styled from 'styled-components'
-import { Box, Flex } from '@chakra-ui/react'
 
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { ListVertical } from '../../Layouts'
+import { LayoutComponent, SlotElements } from '../../cdk/Layouts'
+import { getDefaultMapLayout } from './layouts'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
@@ -30,6 +31,8 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   helpText,
   description,
   center,
+  mapLayout,
+  filtersLayoutProxy,
   mapHeight = 448,
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,31 +50,52 @@ export function MapFilteredSelectLegacy<T, K extends string>({
     [filtersValue, onFiltersValueChange]
   )
 
+  const Layout = useMemo(() => mapLayout?.(mapHeight) || getDefaultMapLayout(mapHeight), [mapHeight, mapLayout])
+
+  const mapChildren = useMemo(
+    () => ({
+      map: (
+        <MapSelect
+          value={value}
+          onChange={onChange as any}
+          options={options}
+          clusters={clusters}
+          center={center || moscowCoords}
+          zoom={zoom || 12}
+          onZoomChanged={onZoomChange}
+          onBoundsChanged={onBboxChange}
+        />
+      ),
+      filters: (
+        <Filters
+          filters={filters}
+          value={otherFilters as FiltersValue<K>}
+          onChange={onFiltersChange}
+          layout={ListVertical}
+          layoutProxy={filtersLayoutProxy}
+        />
+      ),
+    }),
+    [
+      options,
+      center,
+      clusters,
+      filters,
+      onBboxChange,
+      onChange,
+      onFiltersChange,
+      onZoomChange,
+      otherFilters,
+      value,
+      zoom,
+      filtersLayoutProxy,
+    ]
+  )
+
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <StyledMapFilterWidget>
-        <Flex height={mapHeight}>
-          <Box flex={1}>
-            <MapSelect
-              value={value}
-              onChange={onChange as any}
-              options={options}
-              clusters={clusters}
-              center={center || moscowCoords}
-              zoom={zoom || 12}
-              onZoomChanged={onZoomChange}
-              onBoundsChanged={onBboxChange}
-            />
-          </Box>
-          <Box width="300px" marginLeft="5px" height={mapHeight} overflowY="auto">
-            <Filters
-              filters={filters}
-              value={otherFilters as FiltersValue<K>}
-              onChange={onFiltersChange}
-              layout={ListVertical}
-            />
-          </Box>
-        </Flex>
+        <Layout>{mapChildren}</Layout>
       </StyledMapFilterWidget>
     </WidgetWrapper>
   )
@@ -89,4 +113,6 @@ type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   helpText: string
   description?: string | JSX.Element
   mapHeight?: number
+  mapLayout?: (mapHeight: number) => LayoutComponent<SlotElements<'map' | 'filters'>>
+  filtersLayoutProxy?: (elements: [string, ReactElement][]) => Record<string, ReactElement>
 }

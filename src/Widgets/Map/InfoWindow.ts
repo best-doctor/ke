@@ -8,4 +8,5 @@ export const MapInfoWindow = GoogleInfoWindow as unknown as FunctionComponent<In
 type InfoWindowProps = PropsWithChildren<{
   onCloseClick?: () => void
   position: Coords
+  options?: google.maps.InfoWindowOptions
 }>

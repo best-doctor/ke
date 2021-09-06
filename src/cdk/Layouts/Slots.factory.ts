@@ -6,6 +6,6 @@ export function makeSlots<K extends string>(
   return ({ children }: LayoutProps<SlotElements<K>>): JSX.Element => mapping(children)
 }
 
-type SlotElements<K extends string> = {
+export type SlotElements<K extends string> = {
   [P in K]?: JSX.Element | string
 }
