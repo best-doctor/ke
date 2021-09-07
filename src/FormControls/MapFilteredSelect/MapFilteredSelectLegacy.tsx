@@ -11,9 +11,6 @@ import { getDefaultMapLayout } from './layouts'
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
 const StyledMapFilterWidget = styled.div`
-  border-width: 1px;
-  border-radius: 3px;
-  border-color: #cbd5e0;
   padding: 5.4px;
   white-space: pre-line;
 `
