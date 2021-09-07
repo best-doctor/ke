@@ -34,6 +34,8 @@ export function MapSelect<T>({
     [setCurrentZoom, onZoomChanged]
   )
 
+  const cleanOpenedOption = useCallback(() => setOpenedOption(undefined), [])
+
   return (
     <Map
       zoom={currentZoom}
@@ -84,7 +86,7 @@ export function MapSelect<T>({
           options={{ maxWidth: 784 }}
         >
           <>
-            {openedOption[1].infoView}
+            {openedOption[1].infoView(cleanOpenedOption)}
             <Flex alignItems="center" mt={5}>
               {onChange && <Button onClick={() => onChange(openedOption[2])}>Выбрать</Button>}
               {openedOption[1].secondaryAction}

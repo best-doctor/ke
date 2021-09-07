@@ -9,7 +9,7 @@ export type OptionKey = string | number
 interface OptionDesc {
   coords: LatLng
   description: string
-  infoView: ReactElement
+  infoView: (callback: () => void) => ReactElement
   label?: string | MarkerLabel
   icon?: MarkerIcon
   secondaryAction?: ReactElement
