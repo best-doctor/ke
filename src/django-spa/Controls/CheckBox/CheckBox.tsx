@@ -1,5 +1,5 @@
 import React, { useCallback, forwardRef } from 'react'
-import { Box, Checkbox as ChakraCheckBox } from '@chakra-ui/react'
+import { Box, Checkbox as ChakraCheckBox, CheckboxProps as ChakraCheckboxProps } from '@chakra-ui/react'
 
 import { usePropState } from '../../../cdk/Hooks'
 
@@ -10,7 +10,7 @@ type CheckBoxProps = ControlProps<boolean> & {
     Text displayed next to checkbox
    */
   helpText?: string
-}
+} & Omit<ChakraCheckboxProps, 'value' | 'onChange'>
 
 export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref): JSX.Element => {
   const { value: inputValue, onChange, helpText } = props
