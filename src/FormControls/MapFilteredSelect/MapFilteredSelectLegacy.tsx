@@ -31,6 +31,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   mapLayout,
   filtersLayoutProxy,
   mapHeight = 448,
+  ...rest
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { bbox, zoom, ...otherFilters } = filtersValue
@@ -90,7 +91,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   )
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} {...rest}>
       <StyledMapFilterWidget>
         <Layout>{mapChildren}</Layout>
       </StyledMapFilterWidget>
