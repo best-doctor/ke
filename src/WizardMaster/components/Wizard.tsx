@@ -76,7 +76,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
   }
 
   return (
-    <>
+    <Box data-wizard-name={wizard.name}>
       {effectiveAllowToggle && (
         <Row>
           <Col xs={12}>
@@ -108,7 +108,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
         user={user}
         submitChange={submitChange}
       />
-    </>
+    </Box>
   )
 }
 

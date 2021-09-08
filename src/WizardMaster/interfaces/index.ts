@@ -73,6 +73,8 @@ abstract class BaseWizardStep {
 abstract class BaseWizard {
   title: string
 
+  name?: string
+
   layout?: object = defaultLayout
 
   allowToggle?: Accessor<boolean>
