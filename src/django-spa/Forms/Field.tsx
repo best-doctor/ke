@@ -4,9 +4,10 @@ import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import type { ControlProps, FieldProps } from './types'
 import { Simple } from './Layouts'
+import { Label } from '../../common/components/Label'
 
 export const Field = makeWithLayout(
-  ({ name, as, validator, label, ...other }: FieldProps<unknown, ControlProps<unknown>>) => {
+  ({ name, as, validator, label, isRequired, ...other }: FieldProps<unknown, ControlProps<unknown>>) => {
     const controlRef = useRef<ControlRefProps>(null)
     const { value, onChange } = useField(name, controlRef)
     const { errors, validate } = useFieldValidation(name, value, validator)
@@ -25,7 +26,11 @@ export const Field = makeWithLayout(
     return {
       Control: <Component ref={controlRef} value={value} onChange={handleChange} {...other} />,
       Errors: errors && errors.length ? errors[0].message : '',
-      Label: label,
+      Label: label && (
+        <Label isRequired={isRequired} mb={2} display="inline-block">
+          {label}
+        </Label>
+      ),
     }
   },
   Simple

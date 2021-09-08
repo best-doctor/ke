@@ -14,6 +14,7 @@ export interface ControlProps<T> {
 export type FieldProps<T, P> = BaseFieldProps<T, P> &
   Omit<P, keyof BaseFieldProps<T, P> | keyof ControlProps<T>> & {
     label?: ReactElement
+    isRequired?: boolean
   }
 
 export interface FormProps<K extends FieldKey, T> {
