@@ -9,8 +9,17 @@ const Additional = ({ children, isOpen }: PropsWithChildren<{ isOpen: boolean }>
       {children}
     </Flex>
   ) : null
-const Buttons = ({ isOpen, additionalHandler }: { isOpen: boolean; additionalHandler: () => void }): JSX.Element => (
-  <Box>
+
+const ButtonsWithResults = ({
+  isOpen,
+  additionalHandler,
+  results,
+}: {
+  isOpen: boolean
+  additionalHandler: () => void
+  results?: React.ReactChild
+}): JSX.Element => (
+  <Flex alignItems="center">
     <Button
       bg={isOpen ? '#C7CAD1' : '#F1F2F4'}
       leftIcon={<Filter />}
@@ -20,7 +29,8 @@ const Buttons = ({ isOpen, additionalHandler }: { isOpen: boolean; additionalHan
     >
       Фильтры
     </Button>
-  </Box>
+    {results}
+  </Flex>
 )
 
 export const HiddenAdditionalFilter = makeSlots<'main' | 'buttons' | 'additional'>((slotElements) => {
@@ -31,7 +41,7 @@ export const HiddenAdditionalFilter = makeSlots<'main' | 'buttons' | 'additional
   return (
     <Flex flexWrap="wrap" mb={4}>
       <Box flex="1 1 0%">
-        <Buttons isOpen={additional} additionalHandler={handleClick} />
+        <ButtonsWithResults isOpen={additional} additionalHandler={handleClick} />
       </Box>
       <Box flex="0 0 0%">{slotElements.main}</Box>
       <Box flex="1 0 100%">
@@ -40,3 +50,23 @@ export const HiddenAdditionalFilter = makeSlots<'main' | 'buttons' | 'additional
     </Flex>
   )
 })
+
+export const HiddenAdditionalFilterWithResults = makeSlots<'main' | 'buttons' | 'additional' | 'results'>(
+  (slotElements) => {
+    const [additional, setAdditional] = useState(false)
+    const handleClick = (): void => {
+      setAdditional(!additional)
+    }
+    return (
+      <Flex flexWrap="wrap" mb={4}>
+        <Box flex="1 1 0%">
+          <ButtonsWithResults isOpen={additional} additionalHandler={handleClick} results={slotElements.results} />
+        </Box>
+        <Box flex="0 0 0%">{slotElements.main}</Box>
+        <Box flex="1 0 100%">
+          <Additional isOpen={additional}>{slotElements.additional}</Additional>
+        </Box>
+      </Flex>
+    )
+  }
+)
