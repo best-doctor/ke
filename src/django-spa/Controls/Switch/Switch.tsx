@@ -13,7 +13,7 @@ type SwitchProps = ControlProps<boolean> & {
 } & Omit<ChakraSwitchProps, 'value' | 'onChange'>
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref): JSX.Element => {
-  const { value: inputValue, onChange, helpText } = props
+  const { value: inputValue, onChange, helpText, ...rest } = props
   const [value, setValue] = usePropState(inputValue)
 
   const handleChange = useCallback(
@@ -26,7 +26,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref): JS
 
   return (
     <Box>
-      <ChakraSwitch isChecked={value} onChange={(e) => handleChange(e.target.checked)} ref={ref}>
+      <ChakraSwitch isChecked={value} onChange={(e) => handleChange(e.target.checked)} ref={ref} {...rest}>
         {helpText || ''}
       </ChakraSwitch>
     </Box>

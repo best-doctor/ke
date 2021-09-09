@@ -13,7 +13,7 @@ type CheckBoxProps = ControlProps<boolean> & {
 } & Omit<ChakraCheckboxProps, 'value' | 'onChange'>
 
 export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref): JSX.Element => {
-  const { value: inputValue, onChange, helpText } = props
+  const { value: inputValue, onChange, helpText, ...rest } = props
   const [value, setValue] = usePropState(inputValue)
 
   const handleChange = useCallback(
@@ -26,7 +26,7 @@ export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref)
 
   return (
     <Box>
-      <ChakraCheckBox isChecked={value} onChange={(e) => handleChange(e.target.checked)} ref={ref}>
+      <ChakraCheckBox isChecked={value} onChange={(e) => handleChange(e.target.checked)} ref={ref} {...rest}>
         {helpText || ''}
       </ChakraCheckBox>
     </Box>
