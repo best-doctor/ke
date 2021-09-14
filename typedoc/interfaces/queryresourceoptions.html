@@ -81,6 +81,9 @@
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="tsd-signature-type">UseQueryOptions</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span>
+					</li>
+					<li>
+						<span class="tsd-signature-type">SharedResourceOptions</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">QueryResourceOptions</span>
@@ -112,6 +115,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#onsettled" class="tsd-kind-icon">on<wbr>Settled</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#optimisticresults" class="tsd-kind-icon">optimistic<wbr>Results</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="queryresourceoptions.html#overrideglobalonerror" class="tsd-kind-icon">override<wbr>Global<wbr>OnError</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#placeholderdata" class="tsd-kind-icon">placeholder<wbr>Data</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#queryfn" class="tsd-kind-icon">query<wbr>Fn</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#queryhash" class="tsd-kind-icon">query<wbr>Hash</a></li>
@@ -463,6 +467,17 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="overrideglobalonerror" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> override<wbr>Global<wbr>OnError</h3>
+					<div class="tsd-signature tsd-kind-icon">override<wbr>Global<wbr>OnError<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from SharedResourceOptions.overrideGlobalOnError</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/82d7f9e/src/data-provider/resource-provider/hooks/interfaces.ts#L2">src/data-provider/resource-provider/hooks/interfaces.ts:2</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="placeholderdata" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> placeholder<wbr>Data</h3>
@@ -620,7 +635,7 @@
 					<div class="tsd-signature tsd-kind-icon">request<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="requestconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">RequestConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/8399cb6/src/data-provider/resource-provider/hooks/fetch-resource/interfaces.ts#L5">src/data-provider/resource-provider/hooks/fetch-resource/interfaces.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/82d7f9e/src/data-provider/resource-provider/hooks/fetch-resource/interfaces.ts#L8">src/data-provider/resource-provider/hooks/fetch-resource/interfaces.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -841,6 +856,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="queryresourceoptions.html#optimisticresults" class="tsd-kind-icon">optimistic<wbr>Results</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="queryresourceoptions.html#overrideglobalonerror" class="tsd-kind-icon">override<wbr>Global<wbr>OnError</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="queryresourceoptions.html#placeholderdata" class="tsd-kind-icon">placeholder<wbr>Data</a>
