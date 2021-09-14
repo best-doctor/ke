@@ -17,12 +17,14 @@ interface ResourceConfigProviderProps {
 const defaultFunctions = getDefaultResourceConfig(axios)
 
 export const ResourceProvider = ({ options = {}, children }: ResourceConfigProviderProps): React.ReactElement => {
-  const { clientConfig, ...apiFunctions } = options
-
-  const api = useMemo(() => deepmerge(defaultFunctions, apiFunctions) as ResourceDefaultConfig, [apiFunctions])
+  const api = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { clientConfig, ...apiFunctions } = options
+    return deepmerge(defaultFunctions, apiFunctions) as ResourceDefaultConfig
+  }, [options])
   return (
     <ResourceConfigContext.Provider value={api}>
-      <ResourceProviderClient config={clientConfig}>{children}</ResourceProviderClient>
+      <ResourceProviderClient config={options.clientConfig}>{children}</ResourceProviderClient>
     </ResourceConfigContext.Provider>
   )
 }
