@@ -1,8 +1,11 @@
 import { MutationOptions as QueryMutationOptions, UseMutationResult } from 'react-query'
+
 import { RequestConfig } from '../../request-types'
+import { SharedResourceOptions } from '../interfaces'
 
 export interface MutationOptions<ResourceData, SourceData, TError = unknown, TContext = unknown>
-  extends QueryMutationOptions<ResourceData, TError, SourceData, TContext> {
+  extends QueryMutationOptions<ResourceData, TError, SourceData, TContext>,
+    SharedResourceOptions {
   requestConfig?: RequestConfig
 }
 

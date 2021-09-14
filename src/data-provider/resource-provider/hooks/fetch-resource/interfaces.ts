@@ -1,7 +1,10 @@
 import { FetchQueryOptions, UseQueryOptions, UseQueryResult } from 'react-query'
 import { RequestConfig } from '../../request-types'
+import { SharedResourceOptions } from '../interfaces'
 
-export interface QueryResourceOptions<ResourceData, TError = unknown> extends UseQueryOptions<ResourceData, TError> {
+export interface QueryResourceOptions<ResourceData, TError = unknown>
+  extends UseQueryOptions<ResourceData, TError>,
+    SharedResourceOptions {
   requestConfig?: RequestConfig
 }
 
