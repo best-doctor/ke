@@ -25,7 +25,7 @@ yarn-error.log*
 
 coverage
 clover.xml
-
+.vscode
 .idea
 package-lock.json
 

@@ -7,7 +7,7 @@ import { ReadOnlyWidget } from './theme/ReadOnlyWidget'
 import { LinkWidget } from './theme/LinkWidget'
 import { ChipInput } from './theme/ChipInput'
 
-export const defaultTheme = extendTheme({
+export const defaultTheme: Theme = extendTheme({
   colors: {
     brand: chakraTheme.colors.teal,
   },
@@ -28,7 +28,7 @@ export const defaultTheme = extendTheme({
     LinkWidget,
     ChipInput,
   },
-}) as Theme
+});
 
 interface ThemeProviderProps extends Omit<ChakraProviderProps, 'theme'> {
   theme?: Theme
