@@ -14,6 +14,7 @@ const orderArbitrary = fc.dictionary(
 
 const paginationArbitrary = fc.record({
   page: fc.nat(),
+  perPage: fc.nat(),
 })
 
 const paramsArbitrary = fc.record({

@@ -65,4 +65,4 @@ export const useSelectOrder = partial(useParamsSubContext, 'orderBy' as const, {
 /**
  * Возвращает текущее значение пагинации и колбэк для его изменения
  */
-export const useSelectPagination = partial(useParamsSubContext, 'pagination' as const, { page: null })
+export const useSelectPagination = partial(useParamsSubContext, 'pagination' as const, { page: null, perPage: 0 })

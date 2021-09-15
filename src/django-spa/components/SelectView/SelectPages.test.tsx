@@ -47,7 +47,7 @@ testProp(
 
     expect(omit(paginationSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
       value: params.pagination.page,
-      totalCount: result.total,
+      totalCount: Math.ceil((result?.total ?? 0) / params.pagination.perPage),
     })
   }
 )
@@ -67,6 +67,9 @@ testProp(
 
     act(() => paginationOnChange(newPage))
 
-    expect(paramsSpy).toHaveBeenCalledWith({ ...params, pagination: { page: newPage } })
+    expect(paramsSpy).toHaveBeenCalledWith({
+      ...params,
+      pagination: { page: newPage, perPage: params.pagination.perPage },
+    })
   }
 )

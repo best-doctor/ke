@@ -13,6 +13,7 @@ export type Order = Record<string, 'asc' | 'desc' | null>
 
 export interface Pagination {
   page: number | null
+  perPage: number
 }
 
 export interface SelectParams {
