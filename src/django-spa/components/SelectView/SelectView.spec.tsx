@@ -14,6 +14,7 @@ test('Correct render all components', () => {
     filters: { b: 'not test' },
     pagination: {
       page: 10,
+      perPage: 20,
     },
   }
 
@@ -34,6 +35,7 @@ test('Correct call onParamsChange callback for filters', () => {
     filters: { b: 'not test' },
     pagination: {
       page: 10,
+      perPage: 20,
     },
   }
   const { getByText } = render(
@@ -58,6 +60,7 @@ test('Correct call onParamsChange callback for pagination', () => {
     filters: { b: 'not test' },
     pagination: {
       page: 10,
+      perPage: 20,
     },
   }
   const { getByText } = render(
@@ -73,7 +76,10 @@ test('Correct call onParamsChange callback for pagination', () => {
   userEvent.click(paginationButton)
 
   expect(handleParamsChangeSpy).toHaveBeenCalledTimes(1)
-  expect(handleParamsChangeSpy).toHaveBeenCalledWith({ ...params, pagination: { page: params.pagination.page + 1 } })
+  expect(handleParamsChangeSpy).toHaveBeenCalledWith({
+    ...params,
+    pagination: { page: params.pagination.page + 1, perPage: 20 },
+  })
 })
 
 function SamplePagination({ value, onChange }: { value: number; onChange: (v: number) => void }): JSX.Element {

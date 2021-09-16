@@ -14,6 +14,7 @@ export const filtersArbitrary = fc.dictionary(fc.string(), fc.anything())
 
 export const paginationArbitrary = fc.record({
   page: fc.nat(),
+  perPage: fc.integer(1, 2147483647),
 })
 
 export const selectParamsArbitrary = fc.record({

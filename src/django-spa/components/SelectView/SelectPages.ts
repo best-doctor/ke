@@ -13,13 +13,13 @@ export function SelectPages<PaginationProps extends RequiredPaginationProps>({
   as: Pagination,
   ...paginationProps
 }: SelectPaginationProps<PaginationProps>): JSX.Element {
-  const [{ page }, onChange] = useSelectPagination()
+  const [{ page, perPage }, onChange] = useSelectPagination()
   const { result } = useSelectResult()
-  const handleChange = useCallback((changed: number) => onChange({ page: changed }), [onChange])
+  const handleChange = useCallback((changed: number) => onChange({ page: changed, perPage }), [onChange, perPage])
 
   return createElement(Pagination, {
     value: page,
-    totalCount: result?.total,
+    totalCount: Math.ceil((result?.total ?? 0) / perPage),
     onChange: handleChange,
     ...paginationProps,
   } as unknown as PaginationProps)
