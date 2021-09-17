@@ -15,5 +15,9 @@ export type MutateFn<ResourceData = unknown, SourceData = ResourceData> = (
   config?: RequestConfig
 ) => Promise<ResourceData>
 
-export interface MutationResult<ResourceData, SourceData, TError = unknown, TContext = unknown>
-  extends UseMutationResult<ResourceData, TError, SourceData, TContext> {}
+export type MutationResult<ResourceData, SourceData, TError = unknown, TContext = unknown> = UseMutationResult<
+  ResourceData,
+  TError,
+  SourceData,
+  TContext
+>
