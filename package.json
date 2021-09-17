@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke",
-    "version": "4.25.0-beta.5",
+    "version": "4.26.0-beta.1",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -28,6 +28,7 @@
         "firebase": "^7.17.1",
         "framer-motion": "^4.1.15",
         "html-react-parser": "^1.2.8",
+        "node-fetch": "^2.6.1",
         "react-charts": "^2.0.0-beta.7",
         "react-datepicker": "^4.2.0",
         "react-debounce-input": "^3.2.2",
@@ -140,7 +141,7 @@
     },
     "peerDependencies": {
         "@chakra-ui/icons": "^1.0.14",
-        "@chakra-ui/react": "^1.6.3",
+        "@chakra-ui/react": "^1.6.7",
         "date-fns": "^2.16.1",
         "effector": "^21.8.5",
         "effector-react": "^21.2.1",
