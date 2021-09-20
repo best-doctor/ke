@@ -72,7 +72,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
             ml: 0,
           }}
           {...button.style}
-          isDisabled={isDisabled}
+          isDisabled={button.isDisabled || isDisabled}
           onClick={() => {
             setIsDisabled(true)
             sendPushAnalytics(
