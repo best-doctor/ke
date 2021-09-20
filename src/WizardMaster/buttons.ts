@@ -9,6 +9,7 @@ type WizardStepButtonDescription = {
   name: string
   needValidation?: boolean
   needErrorClean?: boolean
+  isDisabled?: boolean
 }
 
 const getPrevButton = (
