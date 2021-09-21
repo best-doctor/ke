@@ -21,7 +21,7 @@ export const useFetchResource = <ResourceData = unknown>(
         fetchResource: { fn, fetch = {} },
       } = mergeWithDefaultConfig(userConfig)
 
-      const { requestConfig, ...queryOptions } = deepmerge(fetch, requestOptions)
+      const { requestConfig = {}, ...queryOptions } = deepmerge(fetch, requestOptions)
       return client.fetchQuery(
         [key, requestConfig.lookupField, requestConfig.params],
         () => fn(key, requestConfig),
