@@ -2,7 +2,12 @@ import React, { useCallback } from 'react'
 import { OptionTypeBase } from 'react-select'
 import { AsyncPaginate, LoadOptions } from 'react-select-async-paginate'
 import { StatefullProps } from '../Controls/Select/AsyncSelect'
-import { ListResponse, ResourceProps, useFetchResource } from '../../data-provider/resource-provider'
+import {
+  FetchResourceOptions,
+  ListResponse,
+  ResourceProps,
+  useFetchResource,
+} from '../../data-provider/resource-provider'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 
 export interface StatefullAsyncSelecProps<
@@ -10,7 +15,7 @@ export interface StatefullAsyncSelecProps<
   Additinal = unknown,
   IsMulti extends boolean = false
 > extends StatefullProps<OptionType, Additinal, IsMulti>,
-    ResourceProps<ListResponse<OptionType>>,
+    ResourceProps<FetchResourceOptions<ListResponse<OptionType>>>,
     ExtendedProps {
   searchParamName?: string
 }

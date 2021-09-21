@@ -37,7 +37,6 @@ describe('default resource config', () => {
     const config = getDefaultResourceConfig(axios)
     expect(config.fetchResource.fn).toBeDefined()
     expect(config.mutate.fn).toBeDefined()
-    expect(config.fetchList.fn).toBeDefined()
   })
 })
 

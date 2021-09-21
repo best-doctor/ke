@@ -1,27 +1,22 @@
 import deepmerge from 'deepmerge'
-import { useMemo } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
-import { ResourceOptionsOrKey } from '../../interfaces'
+import { QueryResourceOptions, ResourceOptionsOrKey } from '../../interfaces'
 import { useConfigResolver } from '../../../hooks/useConfigResolver'
-import { useResourceConfig } from '../useResourceConfig'
-import { QueryResourceOptions, ResourceQueryResult } from './interfaces'
+import { QueryOptions, ResourceQueryResult } from './interfaces'
 import { injectInCallback } from '../../utils/injectInCallback'
+import { useDefaultResourceConfig } from '../useDefaultResourceConfig'
 
 export const useResource = <ResourceData>(
-  userConfigOrKey: ResourceOptionsOrKey<ResourceData>,
-  requestOptions: QueryResourceOptions<ResourceData> = {}
+  userConfigOrKey: ResourceOptionsOrKey<QueryResourceOptions<ResourceData>>,
+  requestOptions: QueryOptions<ResourceData> = {}
 ): ResourceQueryResult<ResourceData> => {
   const userConfig = useConfigResolver(userConfigOrKey)
+  const { key, ...options } = userConfig
   const {
-    fetchResource: { fn, query = {} },
-    key,
-  } = useResourceConfig<ResourceData>(userConfig)
+    fetchResource: { fn },
+  } = useDefaultResourceConfig<ResourceData>()
 
-  const {
-    requestConfig = {},
-    overrideGlobalOnError,
-    ...queryOptions
-  } = useMemo(() => deepmerge(query, requestOptions), [query, requestOptions])
+  const { requestConfig = {}, overrideGlobalOnError, ...queryOptions } = deepmerge(options, requestOptions)
 
   const queryClient = useQueryClient()
   const globalOnError = queryClient.getDefaultOptions()?.queries?.onError
