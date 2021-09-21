@@ -10,7 +10,7 @@ ALPHA VERSION – NOT FOR PRODUCTION USE
 
 ## Installation
 
-`$ yarn add @bestdoctor/ke`
+`$ yarn add @bestdoctor/ke-beta`
 
 ## Usage example
 
@@ -40,7 +40,7 @@ export { httpClient }
 
 // provider.ts
 
-import { BaseProvider } from '@bestdoctor/ke'
+import { BaseProvider } from '@bestdoctor/ke-beta'
 import { httpClient } from 'client'
 
 class Provider extends BaseProvider {
@@ -79,7 +79,7 @@ import {
   ReadOnlyWidget,
   SelectWidget,
   ForeignKeySelectWidget,
-} from '@bestdoctor/ke';
+} from '@bestdoctor/ke-beta';
 import { PatientProvider } from './providers';
 
 class PatientAdmin extends BaseAdmin {
@@ -152,7 +152,7 @@ which makes all magic under the hood and get your user component.
 * `analytcs` – analytics object instance. See below for more details.
 
 ```tsx
-import { ResourceComposer } from '@bestdoctor/ke';
+import { ResourceComposer } from '@bestdoctor/ke-beta';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'provider';
 
@@ -203,7 +203,7 @@ To restrict access to an entire section, define permissions list
 in your admin class:
 
 ```tsx
-import { BaseAdmin } from '@bestdoctor/ke'
+import { BaseAdmin } from '@bestdoctor/ke-beta'
 
 class MyAdmin extends BaseAdmin {
   baseUrl = 'https://test.com'
@@ -226,7 +226,7 @@ To render a specific widget based on user permissions, use `hasPermission`
 util in detail fields settings:
 
 ```tsx
-import { hasPermission } from '@bestdoctor/ke'
+import { hasPermission } from '@bestdoctor/ke-beta'
 
 ...
 {
@@ -249,7 +249,7 @@ at the root of your application.
 
 ```tsx
 // App.tsx
-import { EnableSentry } from '@bestdoctor/ke'
+import { EnableSentry } from '@bestdoctor/ke-beta'
 
 const App = (): JSX.Element => (
   <>
@@ -264,7 +264,7 @@ You can use it via [EnableELK](https://github.com/best-doctor/ke/blob/master/src
 component
 
 ```tsx
-import { EnableELK } from '@bestdoctor/ke'
+import { EnableELK } from '@bestdoctor/ke-beta'
 
 const App = (): JSX.Element => (
   <>
@@ -285,7 +285,7 @@ You can use it or connect the service you need. To use build-in analytics
 create instance:
 
 ```ts
-import { FirebaseAnalytics } from '@bestdoctor/ke'
+import { FirebaseAnalytics } from '@bestdoctor/ke-beta'
 
 const firebaseConfig = {
     apiKey: 'secret',
@@ -389,7 +389,7 @@ pushAnalytics({
 that `ke` injects in your custom widget when renders them from admin settings.
 
 ```tsx
-import type { WidgetProps } from '@bestdoctor/ke'
+import type { WidgetProps } from '@bestdoctor/ke-beta'
 
 const CustomWidget = (props: WidgetProps): JSX.Element => {
   const handleUserAction = (): void => {
@@ -436,7 +436,7 @@ After cloning this repo if you'd like to use it in another project using React
   yarn install
   ```
 
-* create link to `@bestdoctor/ke`:
+* create link to `@bestdoctor/ke-beta`:
 
   ```bash
   yarn link
@@ -466,7 +466,7 @@ After cloning this repo if you'd like to use it in another project using React
 * link all external dependencies and `ke`:
 
   ```
-  yarn link react @chakra-ui/react @bestdoctor/ke react-query react-router-dom
+  yarn link react @chakra-ui/react @bestdoctor/ke-beta react-query react-router-dom
   ```
 
 Here are useful tips:
