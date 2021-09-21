@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ButtonDesc | @bestdoctor/ke</title>
+	<title>MutateResourceOptions | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="buttondesc.html">ButtonDesc</a>
+					<a href="mutateresourceoptions.html">MutateResourceOptions</a>
 				</li>
 			</ul>
-			<h1>Interface ButtonDesc&lt;T&gt;</h1>
+			<h1>Interface MutateResourceOptions&lt;ResourceData, SourceData&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,10 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T</h4>
+						<h4>ResourceData = <span class="tsd-signature-type">unknown</span></h4>
+					</li>
+					<li>
+						<h4>SourceData = <span class="tsd-signature-type">ResourceData</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -77,7 +80,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ButtonDesc</span>
+						<a href="mutateresourceconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">MutateResourceConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SourceData</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">MutateResourceOptions</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -88,9 +96,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="buttondesc.html#label" class="tsd-kind-icon">label</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="buttondesc.html#styles" class="tsd-kind-icon">styles</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="buttondesc.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="mutateresourceoptions.html#fn" class="tsd-kind-icon">fn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mutateresourceoptions.html#key" class="tsd-kind-icon">key</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,33 +105,24 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="label" class="tsd-anchor"></a>
-					<h3>label</h3>
-					<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReactNode</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fn" class="tsd-anchor"></a>
+					<h3>fn</h3>
+					<div class="tsd-signature tsd-kind-icon">fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutateFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="mutateresourceconfig.html">MutateResourceConfig</a>.<a href="mutateresourceconfig.html#fn">fn</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/django-spa/Controls/ButtonGroup/ButtonGroup.tsx#L30">src/django-spa/Controls/ButtonGroup/ButtonGroup.tsx:30</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/data-provider/resource-provider/interfaces.ts#L13">src/data-provider/resource-provider/interfaces.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="styles" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> styles</h3>
-					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ButtonProps</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;colorScheme&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;variant&quot;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/django-spa/Controls/ButtonGroup/ButtonGroup.tsx#L32">src/django-spa/Controls/ButtonGroup/ButtonGroup.tsx:32</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="value" class="tsd-anchor"></a>
-					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/django-spa/Controls/ButtonGroup/ButtonGroup.tsx#L31">src/django-spa/Controls/ButtonGroup/ButtonGroup.tsx:31</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/data-provider/resource-provider/interfaces.ts#L52">src/data-provider/resource-provider/interfaces.ts:52</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -143,16 +141,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="buttondesc.html" class="tsd-kind-icon">Button<wbr>Desc</a>
+						<a href="mutateresourceoptions.html" class="tsd-kind-icon">Mutate<wbr>Resource<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="buttondesc.html#label" class="tsd-kind-icon">label</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="mutateresourceoptions.html#fn" class="tsd-kind-icon">fn</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="buttondesc.html#styles" class="tsd-kind-icon">styles</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="buttondesc.html#value" class="tsd-kind-icon">value</a>
+								<a href="mutateresourceoptions.html#key" class="tsd-kind-icon">key</a>
 							</li>
 						</ul>
 					</li>

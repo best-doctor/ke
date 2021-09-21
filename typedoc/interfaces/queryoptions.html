@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>QueryResourceOptions | @bestdoctor/ke</title>
+	<title>QueryOptions | @bestdoctor/ke</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke</a>
 				</li>
 				<li>
-					<a href="queryresourceoptions.html">QueryResourceOptions</a>
+					<a href="queryoptions.html">QueryOptions</a>
 				</li>
 			</ul>
-			<h1>Interface QueryResourceOptions&lt;ResourceData&gt;</h1>
+			<h1>Interface QueryOptions&lt;ResourceData, TError&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,10 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>ResourceData = <span class="tsd-signature-type">unknown</span></h4>
+						<h4>ResourceData</h4>
+					</li>
+					<li>
+						<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -77,10 +80,18 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="queryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span>
+						<span class="tsd-signature-type">UseQueryOptions</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span>
+					</li>
+					<li>
+						<span class="tsd-signature-type">SharedResourceOptions</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">QueryResourceOptions</span>
+								<span class="target">QueryOptions</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="queryresourceoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryResourceOptions</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
@@ -93,43 +104,42 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#_defaulted" class="tsd-kind-icon">_defaulted</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#behavior" class="tsd-kind-icon">behavior</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#cachetime" class="tsd-kind-icon">cache<wbr>Time</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#enabled" class="tsd-kind-icon">enabled</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#getnextpageparam" class="tsd-kind-icon">get<wbr>Next<wbr>Page<wbr>Param</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#getpreviouspageparam" class="tsd-kind-icon">get<wbr>Previous<wbr>Page<wbr>Param</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#initialdata" class="tsd-kind-icon">initial<wbr>Data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#initialdataupdatedat" class="tsd-kind-icon">initial<wbr>Data<wbr>Updated<wbr>At</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#isdataequal" class="tsd-kind-icon">is<wbr>Data<wbr>Equal</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#keeppreviousdata" class="tsd-kind-icon">keep<wbr>Previous<wbr>Data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryresourceoptions.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#notifyonchangeprops" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#notifyonchangepropsexclusions" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props<wbr>Exclusions</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#onerror" class="tsd-kind-icon">on<wbr>Error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#onsettled" class="tsd-kind-icon">on<wbr>Settled</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#optimisticresults" class="tsd-kind-icon">optimistic<wbr>Results</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="queryresourceoptions.html#overrideglobalonerror" class="tsd-kind-icon">override<wbr>Global<wbr>OnError</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#placeholderdata" class="tsd-kind-icon">placeholder<wbr>Data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#queryfn" class="tsd-kind-icon">query<wbr>Fn</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#queryhash" class="tsd-kind-icon">query<wbr>Hash</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#querykey" class="tsd-kind-icon">query<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#querykeyhashfn" class="tsd-kind-icon">query<wbr>Key<wbr>Hash<wbr>Fn</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#refetchinterval" class="tsd-kind-icon">refetch<wbr>Interval</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#refetchintervalinbackground" class="tsd-kind-icon">refetch<wbr>Interval<wbr>InBackground</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#refetchonmount" class="tsd-kind-icon">refetch<wbr>OnMount</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#refetchonreconnect" class="tsd-kind-icon">refetch<wbr>OnReconnect</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#refetchonwindowfocus" class="tsd-kind-icon">refetch<wbr>OnWindow<wbr>Focus</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="queryresourceoptions.html#requestconfig" class="tsd-kind-icon">request<wbr>Config</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#retry" class="tsd-kind-icon">retry</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#retrydelay" class="tsd-kind-icon">retry<wbr>Delay</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#retryonmount" class="tsd-kind-icon">retry<wbr>OnMount</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#select" class="tsd-kind-icon">select</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#staletime" class="tsd-kind-icon">stale<wbr>Time</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#structuralsharing" class="tsd-kind-icon">structural<wbr>Sharing</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#suspense" class="tsd-kind-icon">suspense</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryresourceoptions.html#useerrorboundary" class="tsd-kind-icon">use<wbr>Error<wbr>Boundary</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#_defaulted" class="tsd-kind-icon">_defaulted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#behavior" class="tsd-kind-icon">behavior</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#cachetime" class="tsd-kind-icon">cache<wbr>Time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#enabled" class="tsd-kind-icon">enabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#getnextpageparam" class="tsd-kind-icon">get<wbr>Next<wbr>Page<wbr>Param</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#getpreviouspageparam" class="tsd-kind-icon">get<wbr>Previous<wbr>Page<wbr>Param</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#initialdata" class="tsd-kind-icon">initial<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#initialdataupdatedat" class="tsd-kind-icon">initial<wbr>Data<wbr>Updated<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#isdataequal" class="tsd-kind-icon">is<wbr>Data<wbr>Equal</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#keeppreviousdata" class="tsd-kind-icon">keep<wbr>Previous<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#notifyonchangeprops" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#notifyonchangepropsexclusions" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props<wbr>Exclusions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#onerror" class="tsd-kind-icon">on<wbr>Error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#onsettled" class="tsd-kind-icon">on<wbr>Settled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#optimisticresults" class="tsd-kind-icon">optimistic<wbr>Results</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="queryoptions.html#overrideglobalonerror" class="tsd-kind-icon">override<wbr>Global<wbr>OnError</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#placeholderdata" class="tsd-kind-icon">placeholder<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#queryfn" class="tsd-kind-icon">query<wbr>Fn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#queryhash" class="tsd-kind-icon">query<wbr>Hash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#querykey" class="tsd-kind-icon">query<wbr>Key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#querykeyhashfn" class="tsd-kind-icon">query<wbr>Key<wbr>Hash<wbr>Fn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#refetchinterval" class="tsd-kind-icon">refetch<wbr>Interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#refetchintervalinbackground" class="tsd-kind-icon">refetch<wbr>Interval<wbr>InBackground</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#refetchonmount" class="tsd-kind-icon">refetch<wbr>OnMount</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#refetchonreconnect" class="tsd-kind-icon">refetch<wbr>OnReconnect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#refetchonwindowfocus" class="tsd-kind-icon">refetch<wbr>OnWindow<wbr>Focus</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryoptions.html#requestconfig" class="tsd-kind-icon">request<wbr>Config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#retry" class="tsd-kind-icon">retry</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#retrydelay" class="tsd-kind-icon">retry<wbr>Delay</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#retryonmount" class="tsd-kind-icon">retry<wbr>OnMount</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#select" class="tsd-kind-icon">select</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#staletime" class="tsd-kind-icon">stale<wbr>Time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#structuralsharing" class="tsd-kind-icon">structural<wbr>Sharing</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#suspense" class="tsd-kind-icon">suspense</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="queryoptions.html#useerrorboundary" class="tsd-kind-icon">use<wbr>Error<wbr>Boundary</a></li>
 							</ul>
 						</section>
 					</div>
@@ -142,7 +152,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _defaulted</h3>
 					<div class="tsd-signature tsd-kind-icon">_defaulted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#_defaulted">_defaulted</a></p>
+						<p>Inherited from UseQueryOptions._defaulted</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:54</li>
 						</ul>
@@ -151,9 +161,9 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="behavior" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> behavior</h3>
-					<div class="tsd-signature tsd-kind-icon">behavior<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryBehavior</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">QueryKey</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">behavior<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryBehavior</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">QueryKey</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#behavior">behavior</a></p>
+						<p>Inherited from UseQueryOptions.behavior</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:38</li>
 						</ul>
@@ -164,7 +174,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache<wbr>Time</h3>
 					<div class="tsd-signature tsd-kind-icon">cache<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#cachetime">cacheTime</a></p>
+						<p>Inherited from UseQueryOptions.cacheTime</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:30</li>
 						</ul>
@@ -175,7 +185,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enabled</h3>
 					<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#enabled">enabled</a></p>
+						<p>Inherited from UseQueryOptions.enabled</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:62</li>
 						</ul>
@@ -193,7 +203,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> get<wbr>Next<wbr>Page<wbr>Param</h3>
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Next<wbr>Page<wbr>Param<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GetNextPageParamFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#getnextpageparam">getNextPageParam</a></p>
+						<p>Inherited from UseQueryOptions.getNextPageParam</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:53</li>
 						</ul>
@@ -210,7 +220,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> get<wbr>Previous<wbr>Page<wbr>Param</h3>
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Previous<wbr>Page<wbr>Param<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GetPreviousPageParamFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#getpreviouspageparam">getPreviousPageParam</a></p>
+						<p>Inherited from UseQueryOptions.getPreviousPageParam</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:48</li>
 						</ul>
@@ -227,7 +237,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> initial<wbr>Data</h3>
 					<div class="tsd-signature tsd-kind-icon">initial<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">InitialDataFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#initialdata">initialData</a></p>
+						<p>Inherited from UseQueryOptions.initialData</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:36</li>
 						</ul>
@@ -238,7 +248,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> initial<wbr>Data<wbr>Updated<wbr>At</h3>
 					<div class="tsd-signature tsd-kind-icon">initial<wbr>Data<wbr>Updated<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#initialdataupdatedat">initialDataUpdatedAt</a></p>
+						<p>Inherited from UseQueryOptions.initialDataUpdatedAt</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:37</li>
 						</ul>
@@ -249,7 +259,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> is<wbr>Data<wbr>Equal</h3>
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Data<wbr>Equal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>oldData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ResourceData</span>, newData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#isdataequal">isDataEqual</a></p>
+						<p>Inherited from UseQueryOptions.isDataEqual</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:31</li>
 						</ul>
@@ -284,7 +294,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> keep<wbr>Previous<wbr>Data</h3>
 					<div class="tsd-signature tsd-kind-icon">keep<wbr>Previous<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#keeppreviousdata">keepPreviousData</a></p>
+						<p>Inherited from UseQueryOptions.keepPreviousData</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:148</li>
 						</ul>
@@ -296,22 +306,12 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/data-provider/resource-provider/interfaces.ts#L47">src/data-provider/resource-provider/interfaces.ts:47</a></li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="notifyonchangeprops" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> notify<wbr>OnChange<wbr>Props</h3>
 					<div class="tsd-signature tsd-kind-icon">notify<wbr>OnChange<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">&quot;error&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLoading&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;data&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;status&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isError&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isIdle&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLoadingError&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isRefetchError&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isSuccess&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fetchNextPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fetchPreviousPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;hasNextPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;hasPreviousPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetchingNextPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetchingPreviousPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dataUpdatedAt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;errorUpdatedAt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;failureCount&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetched&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetchedAfterMount&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetching&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isPlaceholderData&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isPreviousData&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isStale&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;refetch&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remove&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;tracked&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#notifyonchangeprops">notifyOnChangeProps</a></p>
+						<p>Inherited from UseQueryOptions.notifyOnChangeProps</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:109</li>
 						</ul>
@@ -329,7 +329,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> notify<wbr>OnChange<wbr>Props<wbr>Exclusions</h3>
 					<div class="tsd-signature tsd-kind-icon">notify<wbr>OnChange<wbr>Props<wbr>Exclusions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">&quot;error&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLoading&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;data&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;status&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isError&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isIdle&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLoadingError&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isRefetchError&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isSuccess&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fetchNextPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fetchPreviousPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;hasNextPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;hasPreviousPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetchingNextPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetchingPreviousPage&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dataUpdatedAt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;errorUpdatedAt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;failureCount&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetched&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetchedAfterMount&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFetching&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isPlaceholderData&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isPreviousData&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isStale&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;refetch&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;remove&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#notifyonchangepropsexclusions">notifyOnChangePropsExclusions</a></p>
+						<p>Inherited from UseQueryOptions.notifyOnChangePropsExclusions</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:113</li>
 						</ul>
@@ -343,9 +343,9 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="onerror" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Error</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#onerror">onError</a></p>
+						<p>Inherited from UseQueryOptions.onError</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:121</li>
 						</ul>
@@ -360,14 +360,14 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>err: <span class="tsd-signature-type">unknown</span></h5>
+												<h5>err: <span class="tsd-signature-type">TError</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -380,9 +380,9 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="onsettled" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Settled</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Settled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ResourceData</span>, error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Settled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ResourceData</span>, error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#onsettled">onSettled</a></p>
+						<p>Inherited from UseQueryOptions.onSettled</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:125</li>
 						</ul>
@@ -397,7 +397,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ResourceData</span>, error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ResourceData</span>, error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -407,7 +407,7 @@
 												<h5>data: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ResourceData</span></h5>
 											</li>
 											<li>
-												<h5>error: <span class="tsd-signature-type">unknown</span></h5>
+												<h5>error: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TError</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -422,7 +422,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Success</h3>
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#onsuccess">onSuccess</a></p>
+						<p>Inherited from UseQueryOptions.onSuccess</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:117</li>
 						</ul>
@@ -459,7 +459,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> optimistic<wbr>Results</h3>
 					<div class="tsd-signature tsd-kind-icon">optimistic<wbr>Results<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#optimisticresults">optimisticResults</a></p>
+						<p>Inherited from UseQueryOptions.optimisticResults</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:158</li>
 						</ul>
@@ -477,7 +477,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> override<wbr>Global<wbr>OnError</h3>
 					<div class="tsd-signature tsd-kind-icon">override<wbr>Global<wbr>OnError<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#overrideglobalonerror">overrideGlobalOnError</a></p>
+						<p>Inherited from SharedResourceOptions.overrideGlobalOnError</p>
 						<ul>
 							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/data-provider/resource-provider/hooks/interfaces.ts#L2">src/data-provider/resource-provider/hooks/interfaces.ts:2</a></li>
 						</ul>
@@ -488,7 +488,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> placeholder<wbr>Data</h3>
 					<div class="tsd-signature tsd-kind-icon">placeholder<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlaceholderDataFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#placeholderdata">placeholderData</a></p>
+						<p>Inherited from UseQueryOptions.placeholderData</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:152</li>
 						</ul>
@@ -504,7 +504,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> query<wbr>Fn</h3>
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">QueryKey</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#queryfn">queryFn</a></p>
+						<p>Inherited from UseQueryOptions.queryFn</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:32</li>
 						</ul>
@@ -515,7 +515,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> query<wbr>Hash</h3>
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#queryhash">queryHash</a></p>
+						<p>Inherited from UseQueryOptions.queryHash</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:33</li>
 						</ul>
@@ -526,7 +526,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> query<wbr>Key</h3>
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#querykey">queryKey</a></p>
+						<p>Inherited from UseQueryOptions.queryKey</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:34</li>
 						</ul>
@@ -537,7 +537,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> query<wbr>Key<wbr>Hash<wbr>Fn</h3>
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Key<wbr>Hash<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryKeyHashFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">QueryKey</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#querykeyhashfn">queryKeyHashFn</a></p>
+						<p>Inherited from UseQueryOptions.queryKeyHashFn</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:35</li>
 						</ul>
@@ -548,7 +548,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> refetch<wbr>Interval</h3>
 					<div class="tsd-signature tsd-kind-icon">refetch<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#refetchinterval">refetchInterval</a></p>
+						<p>Inherited from UseQueryOptions.refetchInterval</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:72</li>
 						</ul>
@@ -565,7 +565,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> refetch<wbr>Interval<wbr>InBackground</h3>
 					<div class="tsd-signature tsd-kind-icon">refetch<wbr>Interval<wbr>InBackground<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#refetchintervalinbackground">refetchIntervalInBackground</a></p>
+						<p>Inherited from UseQueryOptions.refetchIntervalInBackground</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:77</li>
 						</ul>
@@ -582,7 +582,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> refetch<wbr>OnMount</h3>
 					<div class="tsd-signature tsd-kind-icon">refetch<wbr>OnMount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;always&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#refetchonmount">refetchOnMount</a></p>
+						<p>Inherited from UseQueryOptions.refetchOnMount</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:98</li>
 						</ul>
@@ -601,7 +601,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> refetch<wbr>OnReconnect</h3>
 					<div class="tsd-signature tsd-kind-icon">refetch<wbr>OnReconnect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;always&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#refetchonreconnect">refetchOnReconnect</a></p>
+						<p>Inherited from UseQueryOptions.refetchOnReconnect</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:91</li>
 						</ul>
@@ -620,7 +620,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> refetch<wbr>OnWindow<wbr>Focus</h3>
 					<div class="tsd-signature tsd-kind-icon">refetch<wbr>OnWindow<wbr>Focus<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;always&quot;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#refetchonwindowfocus">refetchOnWindowFocus</a></p>
+						<p>Inherited from UseQueryOptions.refetchOnWindowFocus</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:84</li>
 						</ul>
@@ -634,12 +634,11 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="requestconfig" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> request<wbr>Config</h3>
 					<div class="tsd-signature tsd-kind-icon">request<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="requestconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">RequestConfig</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#requestconfig">requestConfig</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/60ff77e/src/data-provider/resource-provider/hooks/fetch-resource/interfaces.ts#L8">src/data-provider/resource-provider/hooks/fetch-resource/interfaces.ts:8</a></li>
 						</ul>
@@ -648,9 +647,9 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="retry" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> retry</h3>
-					<div class="tsd-signature tsd-kind-icon">retry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ShouldRetryFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">retry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ShouldRetryFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#retry">retry</a></p>
+						<p>Inherited from UseQueryOptions.retry</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:28</li>
 						</ul>
@@ -667,9 +666,9 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="retrydelay" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> retry<wbr>Delay</h3>
-					<div class="tsd-signature tsd-kind-icon">retry<wbr>Delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RetryDelayFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">retry<wbr>Delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RetryDelayFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#retrydelay">retryDelay</a></p>
+						<p>Inherited from UseQueryOptions.retryDelay</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:29</li>
 						</ul>
@@ -680,7 +679,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> retry<wbr>OnMount</h3>
 					<div class="tsd-signature tsd-kind-icon">retry<wbr>OnMount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#retryonmount">retryOnMount</a></p>
+						<p>Inherited from UseQueryOptions.retryOnMount</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:103</li>
 						</ul>
@@ -697,7 +696,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> select</h3>
 					<div class="tsd-signature tsd-kind-icon">select<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ResourceData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">ResourceData</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#select">select</a></p>
+						<p>Inherited from UseQueryOptions.select</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:137</li>
 						</ul>
@@ -734,7 +733,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stale<wbr>Time</h3>
 					<div class="tsd-signature tsd-kind-icon">stale<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#staletime">staleTime</a></p>
+						<p>Inherited from UseQueryOptions.staleTime</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:67</li>
 						</ul>
@@ -751,7 +750,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> structural<wbr>Sharing</h3>
 					<div class="tsd-signature tsd-kind-icon">structural<wbr>Sharing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#structuralsharing">structuralSharing</a></p>
+						<p>Inherited from UseQueryOptions.structuralSharing</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:43</li>
 						</ul>
@@ -768,7 +767,7 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> suspense</h3>
 					<div class="tsd-signature tsd-kind-icon">suspense<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#suspense">suspense</a></p>
+						<p>Inherited from UseQueryOptions.suspense</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:143</li>
 						</ul>
@@ -784,9 +783,9 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="useerrorboundary" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> use<wbr>Error<wbr>Boundary</h3>
-					<div class="tsd-signature tsd-kind-icon">use<wbr>Error<wbr>Boundary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></div>
+					<div class="tsd-signature tsd-kind-icon">use<wbr>Error<wbr>Boundary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="queryoptions.html">QueryOptions</a>.<a href="queryoptions.html#useerrorboundary">useErrorBoundary</a></p>
+						<p>Inherited from UseQueryOptions.useErrorBoundary</p>
 						<ul>
 							<li>Defined in node_modules/react-query/types/core/types.d.ts:133</li>
 						</ul>
@@ -816,118 +815,115 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="queryresourceoptions.html" class="tsd-kind-icon">Query<wbr>Resource<wbr>Options</a>
+						<a href="queryoptions.html" class="tsd-kind-icon">Query<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#_defaulted" class="tsd-kind-icon">_defaulted</a>
+								<a href="queryoptions.html#_defaulted" class="tsd-kind-icon">_defaulted</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#behavior" class="tsd-kind-icon">behavior</a>
+								<a href="queryoptions.html#behavior" class="tsd-kind-icon">behavior</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#cachetime" class="tsd-kind-icon">cache<wbr>Time</a>
+								<a href="queryoptions.html#cachetime" class="tsd-kind-icon">cache<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#enabled" class="tsd-kind-icon">enabled</a>
+								<a href="queryoptions.html#enabled" class="tsd-kind-icon">enabled</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#getnextpageparam" class="tsd-kind-icon">get<wbr>Next<wbr>Page<wbr>Param</a>
+								<a href="queryoptions.html#getnextpageparam" class="tsd-kind-icon">get<wbr>Next<wbr>Page<wbr>Param</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#getpreviouspageparam" class="tsd-kind-icon">get<wbr>Previous<wbr>Page<wbr>Param</a>
+								<a href="queryoptions.html#getpreviouspageparam" class="tsd-kind-icon">get<wbr>Previous<wbr>Page<wbr>Param</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#initialdata" class="tsd-kind-icon">initial<wbr>Data</a>
+								<a href="queryoptions.html#initialdata" class="tsd-kind-icon">initial<wbr>Data</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#initialdataupdatedat" class="tsd-kind-icon">initial<wbr>Data<wbr>Updated<wbr>At</a>
+								<a href="queryoptions.html#initialdataupdatedat" class="tsd-kind-icon">initial<wbr>Data<wbr>Updated<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#isdataequal" class="tsd-kind-icon">is<wbr>Data<wbr>Equal</a>
+								<a href="queryoptions.html#isdataequal" class="tsd-kind-icon">is<wbr>Data<wbr>Equal</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#keeppreviousdata" class="tsd-kind-icon">keep<wbr>Previous<wbr>Data</a>
+								<a href="queryoptions.html#keeppreviousdata" class="tsd-kind-icon">keep<wbr>Previous<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#notifyonchangeprops" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#notifyonchangepropsexclusions" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props<wbr>Exclusions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#onerror" class="tsd-kind-icon">on<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#onsettled" class="tsd-kind-icon">on<wbr>Settled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#optimisticresults" class="tsd-kind-icon">optimistic<wbr>Results</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="queryoptions.html#overrideglobalonerror" class="tsd-kind-icon">override<wbr>Global<wbr>OnError</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#placeholderdata" class="tsd-kind-icon">placeholder<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#queryfn" class="tsd-kind-icon">query<wbr>Fn</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#queryhash" class="tsd-kind-icon">query<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#querykey" class="tsd-kind-icon">query<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#querykeyhashfn" class="tsd-kind-icon">query<wbr>Key<wbr>Hash<wbr>Fn</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#refetchinterval" class="tsd-kind-icon">refetch<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#refetchintervalinbackground" class="tsd-kind-icon">refetch<wbr>Interval<wbr>InBackground</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#refetchonmount" class="tsd-kind-icon">refetch<wbr>OnMount</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#refetchonreconnect" class="tsd-kind-icon">refetch<wbr>OnReconnect</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="queryoptions.html#refetchonwindowfocus" class="tsd-kind-icon">refetch<wbr>OnWindow<wbr>Focus</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="queryresourceoptions.html#key" class="tsd-kind-icon">key</a>
+								<a href="queryoptions.html#requestconfig" class="tsd-kind-icon">request<wbr>Config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#notifyonchangeprops" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props</a>
+								<a href="queryoptions.html#retry" class="tsd-kind-icon">retry</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#notifyonchangepropsexclusions" class="tsd-kind-icon">notify<wbr>OnChange<wbr>Props<wbr>Exclusions</a>
+								<a href="queryoptions.html#retrydelay" class="tsd-kind-icon">retry<wbr>Delay</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#onerror" class="tsd-kind-icon">on<wbr>Error</a>
+								<a href="queryoptions.html#retryonmount" class="tsd-kind-icon">retry<wbr>OnMount</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#onsettled" class="tsd-kind-icon">on<wbr>Settled</a>
+								<a href="queryoptions.html#select" class="tsd-kind-icon">select</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a>
+								<a href="queryoptions.html#staletime" class="tsd-kind-icon">stale<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#optimisticresults" class="tsd-kind-icon">optimistic<wbr>Results</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="queryresourceoptions.html#overrideglobalonerror" class="tsd-kind-icon">override<wbr>Global<wbr>OnError</a>
+								<a href="queryoptions.html#structuralsharing" class="tsd-kind-icon">structural<wbr>Sharing</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#placeholderdata" class="tsd-kind-icon">placeholder<wbr>Data</a>
+								<a href="queryoptions.html#suspense" class="tsd-kind-icon">suspense</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#queryfn" class="tsd-kind-icon">query<wbr>Fn</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#queryhash" class="tsd-kind-icon">query<wbr>Hash</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#querykey" class="tsd-kind-icon">query<wbr>Key</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#querykeyhashfn" class="tsd-kind-icon">query<wbr>Key<wbr>Hash<wbr>Fn</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#refetchinterval" class="tsd-kind-icon">refetch<wbr>Interval</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#refetchintervalinbackground" class="tsd-kind-icon">refetch<wbr>Interval<wbr>InBackground</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#refetchonmount" class="tsd-kind-icon">refetch<wbr>OnMount</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#refetchonreconnect" class="tsd-kind-icon">refetch<wbr>OnReconnect</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#refetchonwindowfocus" class="tsd-kind-icon">refetch<wbr>OnWindow<wbr>Focus</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="queryresourceoptions.html#requestconfig" class="tsd-kind-icon">request<wbr>Config</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#retry" class="tsd-kind-icon">retry</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#retrydelay" class="tsd-kind-icon">retry<wbr>Delay</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#retryonmount" class="tsd-kind-icon">retry<wbr>OnMount</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#select" class="tsd-kind-icon">select</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#staletime" class="tsd-kind-icon">stale<wbr>Time</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#structuralsharing" class="tsd-kind-icon">structural<wbr>Sharing</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#suspense" class="tsd-kind-icon">suspense</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="queryresourceoptions.html#useerrorboundary" class="tsd-kind-icon">use<wbr>Error<wbr>Boundary</a>
+								<a href="queryoptions.html#useerrorboundary" class="tsd-kind-icon">use<wbr>Error<wbr>Boundary</a>
 							</li>
 						</ul>
 					</li>
