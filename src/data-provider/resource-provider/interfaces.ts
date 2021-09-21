@@ -1,19 +1,16 @@
 import { AxiosInstance } from 'axios'
 
 import { FetchFn, QueryOptions, FetchOptions } from './hooks/fetch-resource/interfaces'
-import { MutateFn, MutationOptions } from './hooks/mutate-resource/interfaces'
+import { MutateFn } from './hooks/mutate-resource/interfaces'
 
 import { ResourceProviderClientConfig } from './ResourceProviderClient'
 
 export type ResourceProviderOptions = Partial<ResourceProviderConfig>
 export interface FetchResourceConfig<ResourceData> {
   fn: FetchFn<ResourceData>
-  query?: QueryOptions<ResourceData>
-  fetch?: FetchOptions<ResourceData>
 }
 export interface MutateResourceConfig<ResourceData, SourceData> {
   fn: MutateFn<ResourceData, SourceData>
-  options?: MutationOptions<ResourceData, SourceData>
 }
 
 interface ResourceQueriesConfig<ResourceData, SourceData = ResourceData> {

@@ -3,31 +3,30 @@ import { useCallback } from 'react'
 import { useQueryClient } from 'react-query'
 import { FetchResourceOptions, ResourceOptionsOrKey } from '../../interfaces'
 import { configResolver } from '../../../utils'
-import { useGetResourceConfig } from '../useGetResourceConfig'
 import { FetchOptions } from './interfaces'
+import { useDefaultResourceConfig } from '../useDefaultResourceConfig'
 
 export const useFetchResource = <ResourceData = unknown>(
   userConfigOrKey: ResourceOptionsOrKey<FetchResourceOptions<ResourceData>>
 ): ((requestOptions?: FetchOptions<ResourceData>) => Promise<ResourceData>) => {
   const userConfig = configResolver(userConfigOrKey)
-  const { mergeWithDefaultConfig } = useGetResourceConfig<ResourceData>()
+  const {
+    fetchResource: { fn },
+  } = useDefaultResourceConfig<ResourceData>()
 
   const client = useQueryClient()
 
   return useCallback(
     (requestOptions: FetchOptions<ResourceData> = {}) => {
-      const {
-        key,
-        fetchResource: { fn, fetch = {} },
-      } = mergeWithDefaultConfig(userConfig)
+      const { key, ...config } = userConfig
 
-      const { requestConfig = {}, ...queryOptions } = deepmerge(fetch, requestOptions)
+      const { requestConfig = {}, ...queryOptions } = deepmerge(config, requestOptions)
       return client.fetchQuery(
         [key, requestConfig.lookupField, requestConfig.params],
         () => fn(key, requestConfig),
         queryOptions
       )
     },
-    [client, mergeWithDefaultConfig, userConfig]
+    [client, fn, userConfig]
   )
 }
