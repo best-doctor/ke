@@ -116,14 +116,10 @@ const AsyncSelectWidgetNew = ({
     <StatefullAsyncSelect
       resource={{
         key: resourceKey,
-        fetchResource: {
-          fetch: {
-            requestConfig: {
-              params,
-            },
-            staleTime: getAccessor(staleTime),
-          },
+        requestConfig: {
+          params,
         },
+        staleTime: getAccessor(staleTime),
       }}
       value={value}
       onChange={(changeValue: ValueType<object | object[], boolean>) => handleChange(changeValue)}

@@ -1,15 +1,15 @@
 import deepmerge from 'deepmerge'
 import { useMemo } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
-import { ResourceOptionsOrKey } from '../../interfaces'
+import { QueryResourceOptions, ResourceOptionsOrKey } from '../../interfaces'
 import { useConfigResolver } from '../../../hooks/useConfigResolver'
 import { useResourceConfig } from '../useResourceConfig'
-import { QueryResourceOptions, ResourceQueryResult } from './interfaces'
+import { QueryOptions, ResourceQueryResult } from './interfaces'
 import { injectInCallback } from '../../utils/injectInCallback'
 
 export const useResource = <ResourceData>(
-  userConfigOrKey: ResourceOptionsOrKey<ResourceData>,
-  requestOptions: QueryResourceOptions<ResourceData> = {}
+  userConfigOrKey: ResourceOptionsOrKey<QueryResourceOptions<ResourceData>>,
+  requestOptions: QueryOptions<ResourceData> = {}
 ): ResourceQueryResult<ResourceData> => {
   const userConfig = useConfigResolver(userConfigOrKey)
   const {

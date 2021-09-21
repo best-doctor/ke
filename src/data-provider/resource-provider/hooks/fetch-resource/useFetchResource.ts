@@ -1,13 +1,13 @@
 import deepmerge from 'deepmerge'
 import { useCallback } from 'react'
 import { useQueryClient } from 'react-query'
-import { ResourceOptionsOrKey } from '../../interfaces'
+import { FetchResourceOptions, ResourceOptionsOrKey } from '../../interfaces'
 import { configResolver } from '../../../utils'
 import { useGetResourceConfig } from '../useGetResourceConfig'
 import { FetchOptions } from './interfaces'
 
 export const useFetchResource = <ResourceData = unknown>(
-  userConfigOrKey: ResourceOptionsOrKey<ResourceData>
+  userConfigOrKey: ResourceOptionsOrKey<FetchResourceOptions<ResourceData>>
 ): ((requestOptions?: FetchOptions<ResourceData>) => Promise<ResourceData>) => {
   const userConfig = configResolver(userConfigOrKey)
   const { mergeWithDefaultConfig } = useGetResourceConfig<ResourceData>()
