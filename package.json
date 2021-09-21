@@ -1,6 +1,6 @@
 {
-    "name": "@bestdoctor/ke",
-    "version": "4.27.0-beta.1",
+    "name": "@bestdoctor/ke-beta",
+    "version": "1.0.0",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -163,8 +163,8 @@
         "version": "yarn format && git add -A src",
         "postversion": "git push && git push --tags",
         "docs": "typedoc --out docs/generated/typedoc  src/index.tsx",
-        "release": "standard-version --prerelease beta",
-        "release:dry": "standard-version --dry-run --prerelease beta",
+        "release": "standard-version",
+        "release:dry": "standard-version --dry-run",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook -o docs/generated/storybook"
     },

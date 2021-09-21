@@ -13,7 +13,7 @@ import type { BaseResponse, ProviderOptions } from './types'
  * @example Usage
  * # Contents of `provider.ts`
  * ```ts
- * import { BaseProvider } from '@bestdoctor/ke'
+ * import { BaseProvider } from '@bestdoctor/ke-beta'
  * import { httpClient } from 'client'
  *
  * export class Provider extends BaseProvider {

@@ -17,7 +17,7 @@ It uses javascript object syntax and contains the following properties:
 ## Example
 
 ```ts
-import { MultiSelectFilter } from '@bestdoctor/ke'
+import { MultiSelectFilter } from '@bestdoctor/ke-beta'
 
 list_filters = [
   {
