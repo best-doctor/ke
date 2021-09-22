@@ -16,7 +16,7 @@ export function useMutateResource<ResourceData, SourceData>(
   } = useDefaultResourceConfig<ResourceData, SourceData>()
   const { key, ...options } = userConfig
 
-  const { requestConfig, overrideGlobalOnError, ...mutationOptions } = deepmerge(options, requestOptions)
+  const { requestConfig, overrideGlobalOnError, mutationFn, ...mutationOptions } = deepmerge(options, requestOptions)
   const queryClient = useQueryClient()
   const globalOnError = queryClient.getDefaultOptions()?.mutations?.onError
 
@@ -24,5 +24,7 @@ export function useMutateResource<ResourceData, SourceData>(
     mutationOptions.onError = injectInCallback(mutationOptions.onError, globalOnError)
   }
 
-  return useMutation((data: SourceData) => fn(key, data, requestConfig), mutationOptions)
+  const mutateFunction = mutationFn || ((data: SourceData) => fn(key, data, requestConfig))
+
+  return useMutation(mutateFunction, mutationOptions)
 }

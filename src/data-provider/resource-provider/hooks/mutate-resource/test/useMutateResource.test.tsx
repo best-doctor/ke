@@ -50,3 +50,68 @@ test('fetch должен вызваться с resourceKey в url, если url 
   await act(() => mutateAsync())
   expect(axiosMock).toBeCalledWith(expect.objectContaining({ url: 'http://test/' }))
 })
+
+test('должен вызваться fetch по-умолчанию', async () => {
+  const axiosMock = jest.fn(() => Promise.resolve({ data: {} }))
+  const config: Partial<ResourceProviderConfig> = getDefaultResourceConfig(axiosMock as any)
+  const wrapper = ({ children }: PropsWithChildren<{}>) => (
+    <ResourceProvider options={config}>{children}</ResourceProvider>
+  )
+
+  const {
+    result: {
+      current: { mutateAsync },
+    },
+  } = renderHook(() => useMutateResource<void, string>('http://test/'), { wrapper })
+  await act(() => mutateAsync('test'))
+  expect(axiosMock).toBeCalledWith(expect.objectContaining({ url: 'http://test/', data: 'test' }))
+})
+
+test('должен вызваться fetch из опций', async () => {
+  const axiosMock = jest.fn(() => Promise.resolve({ data: {} }))
+  const config: Partial<ResourceProviderConfig> = getDefaultResourceConfig(axiosMock as any)
+  const wrapper = ({ children }: PropsWithChildren<{}>) => (
+    <ResourceProvider options={config}>{children}</ResourceProvider>
+  )
+
+  const fnMock = jest.fn(() => Promise.resolve({ data: {} }))
+  const {
+    result: {
+      current: { mutateAsync },
+    },
+  } = renderHook(
+    () =>
+      useMutateResource<void, string>('http://test/', {
+        mutationFn: fnMock as any,
+      }),
+    { wrapper }
+  )
+  await act(() => mutateAsync('test'))
+  expect(axiosMock).not.toBeCalled()
+  expect(fnMock).toBeCalledWith('test')
+})
+
+test('должен вызваться fetch из конфига', async () => {
+  const axiosMock = jest.fn(() => Promise.resolve({ data: {} }))
+  const config: Partial<ResourceProviderConfig> = getDefaultResourceConfig(axiosMock as any)
+  const wrapper = ({ children }: PropsWithChildren<{}>) => (
+    <ResourceProvider options={config}>{children}</ResourceProvider>
+  )
+
+  const fnMock = jest.fn(() => Promise.resolve({ data: {} }))
+  const {
+    result: {
+      current: { mutateAsync },
+    },
+  } = renderHook(
+    () =>
+      useMutateResource<void, string>({
+        key: 'http://test/',
+        mutationFn: fnMock as any,
+      }),
+    { wrapper }
+  )
+  await act(() => mutateAsync('test'))
+  expect(axiosMock).not.toBeCalled()
+  expect(fnMock).toBeCalledWith('test')
+})
