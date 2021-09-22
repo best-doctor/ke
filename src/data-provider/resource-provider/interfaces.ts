@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios'
 
 import { FetchFn, QueryOptions, FetchOptions } from './hooks/fetch-resource/interfaces'
-import { MutateFn } from './hooks/mutate-resource/interfaces'
+import { MutateFn, MutationOptions } from './hooks/mutate-resource/interfaces'
 
 import { ResourceProviderClientConfig } from './ResourceProviderClient'
 
@@ -48,7 +48,7 @@ export interface QueryResourceOptions<ResourceData = unknown> extends QueryOptio
 }
 
 export interface MutateResourceOptions<ResourceData = unknown, SourceData = ResourceData>
-  extends MutateResourceConfig<ResourceData, SourceData> {
+  extends MutationOptions<ResourceData, SourceData> {
   key: string
 }
 
