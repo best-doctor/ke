@@ -71,10 +71,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
       const errorBlock = document.querySelector('[data-has-error="true"]')
       if (errorBlock) {
         errorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        const control = errorBlock.querySelector('input, textarea, select') as
-          | HTMLInputElement
-          | HTMLSelectElement
-          | null
+        const control = errorBlock.querySelector<HTMLInputElement | HTMLSelectElement>('input, textarea, select')
         control && control.focus()
       }
     }
