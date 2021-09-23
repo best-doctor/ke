@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
-import { useStore } from 'effector-react'
 
 import { WizardStepComponents } from './WizardStepComponents'
-import { WizardValidationErrors } from './WizardValidationErrors'
 import { WizardStepControlPanel } from './WizardStepControlPanel'
 
 import type { BaseWizardStep, BaseWizard } from '../../interfaces'
-import { containerErrorsStore, containerStore, initialStore } from '../../store'
+import { containerStore, initialStore } from '../../store'
 
 import type { BaseNotifier } from '../../../common/notifier'
 import type { Provider } from '../../../admin/providers/interfaces'
@@ -68,7 +66,19 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
   }
 
-  const errors = useStore(containerErrorsStore)
+  useEffect(() => {
+    if (show) {
+      const errorBlock = document.querySelector('[data-has-error="true"]')
+      if (errorBlock) {
+        errorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        const control = errorBlock.querySelector('input, textarea, select') as
+          | HTMLInputElement
+          | HTMLSelectElement
+          | null
+        control && control.focus()
+      }
+    }
+  })
 
   return (
     <>
@@ -108,9 +118,6 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 />
                 <Row>
                   <Col xs={12}>
-                    <Box key="errors">
-                      <WizardValidationErrors errors={errors.map(({ errorText }) => errorText)} />
-                    </Box>
                     <Flex alignItems="center" key="steps">
                       <WizardStepControlPanel
                         wizardStep={wizardStep}

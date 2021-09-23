@@ -47,7 +47,8 @@ const WidgetWrapper = ({
   labelContainerProps,
   className,
 }: WidgetWrapperProps): JSX.Element => {
-  const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
+  const error = containerErrorsStore.getState().find(({ widgetName }) => widgetName === name)
+  const hasError = !!error
   return (
     <Box {...style} data-name={name} className={className}>
       {(helpText || useClipboard) && (
@@ -61,6 +62,7 @@ const WidgetWrapper = ({
         mt={2}
         borderWidth={hasError ? 1 : 0}
         borderRadius={3}
+        data-has-error={hasError}
         {...containerProps}
       >
         {children}
@@ -68,6 +70,11 @@ const WidgetWrapper = ({
       {description && (
         <Text mt={2} fontSize="sm" lineHeight="5" color="gray.500">
           {description}
+        </Text>
+      )}
+      {!!error && (
+        <Text mt={2} fontSize="sm" lineHeight="5" color="red.500">
+          {error.errorText}
         </Text>
       )}
     </Box>
@@ -100,7 +107,8 @@ const StyledWidgetWrapper = ({
   labelContainerProps,
   className,
 }: WidgetWrapperProps): JSX.Element => {
-  const hasError = containerErrorsStore.getState().filter(({ widgetName }) => widgetName === name).length > 0
+  const error = containerErrorsStore.getState().find(({ widgetName }) => widgetName === name)
+  const hasError = !!error
   const styles = useStyles()
   const widgetWrapperStyle = { ...(styles.widgetWrapper || {}), ...(style || {}) }
   return (
@@ -120,11 +128,17 @@ const StyledWidgetWrapper = ({
         borderWidth={hasError ? 1 : 0}
         borderRadius={3}
         sx={styles.controlWrapper}
+        data-has-error={hasError}
         {...containerProps}
       >
         {children}
       </Box>
       {description && <Text sx={styles.description}>{description}</Text>}
+      {!!error && (
+        <Text mt={2} fontSize="sm" lineHeight="5" color="red.500">
+          {error.errorText}
+        </Text>
+      )}
     </Box>
   )
 }
