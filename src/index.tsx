@@ -142,6 +142,9 @@ export {
   AccessActionType,
   AccessDecision,
   AspectKey,
+  useNotifications,
+  useToastNotifications,
+  NotificationsProvider,
 } from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'
