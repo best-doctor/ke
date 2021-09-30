@@ -1,2 +1,2 @@
 export { MapFilteredSelectLegacy } from './MapFilteredSelectLegacy'
-export { getVerticalMapLayout } from './layouts'
+export { getVerticalMapLayout, getFiltersLeftMapLayout } from './layouts'

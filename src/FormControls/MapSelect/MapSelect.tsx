@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Flex } from '@chakra-ui/react'
 import { usePropState } from '@cdk/Hooks'
 
@@ -14,12 +14,39 @@ export function MapSelect<T>({
   zoom,
   center,
   onZoomChanged,
+  selectedOption: selectedOptionValue,
+  onSelectedOptionChanged,
   ...others
 }: MapSelectProps<T>): JSX.Element {
   const [currentZoom, setCurrentZoom] = useState(zoom)
   const [currentCenter, setCurrentCenter] = usePropState(center)
-  const currentOption = getOptionByValue(options, value)
-  const [openedOption, setOpenedOption] = useState(currentOption)
+
+  function getInitialSelectedOption(): Option<T> | null {
+    if (selectedOptionValue === undefined) {
+      return getOptionByValue(options, value)
+    }
+    return selectedOptionValue
+  }
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const [openedOption, _setOpenedOption] = useState<Option<T> | null>(getInitialSelectedOption)
+
+  useEffect(() => {
+    if (selectedOptionValue === undefined) {
+      return
+    }
+    _setOpenedOption(selectedOptionValue)
+  }, [options, selectedOptionValue])
+
+  const setOpenedOption = useCallback(
+    (option: Option<T> | null = null) => {
+      _setOpenedOption(option)
+      if (onSelectedOptionChanged) {
+        onSelectedOptionChanged(option)
+      }
+    },
+    [onSelectedOptionChanged]
+  )
 
   const allOptions = [...options]
   if (openedOption && !options.find((option) => option[0] === openedOption[0])) {
@@ -34,7 +61,7 @@ export function MapSelect<T>({
     [setCurrentZoom, onZoomChanged]
   )
 
-  const cleanOpenedOption = useCallback(() => setOpenedOption(undefined), [])
+  const cleanOpenedOption = useCallback(() => setOpenedOption(undefined), [setOpenedOption])
 
   return (
     <Map
@@ -98,8 +125,8 @@ export function MapSelect<T>({
   )
 }
 
-function getOptionByValue<T>(options: readonly Option<T>[], searchValue: T | undefined): Option<T> | undefined {
-  return options.find(([, , value]) => value === searchValue)
+function getOptionByValue<T>(options: readonly Option<T>[], searchValue: T | undefined): Option<T> | null {
+  return options.find(([, , value]) => value === searchValue) || null
 }
 
 function getBoundsZoomLevel(ne: LatLng, sw: LatLng, mapDim: { height: number; width: number }): number {
@@ -133,6 +160,8 @@ export type MapSelectProps<T> = MapProps & {
   options: readonly Option<T>[]
   clusters: readonly Cluster[]
   children?: never
+  selectedOption?: Option<T> | null
+  onSelectedOptionChanged?: (value: Option<T> | null) => void
 }
 
 interface Cluster {

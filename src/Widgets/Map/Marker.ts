@@ -8,7 +8,7 @@ import { MarkerIcon } from './types'
 export const MapMarker = GoogleMarker as unknown as FunctionComponent<MarkerProps>
 
 interface MarkerProps {
-  position: Coords
+  position?: Coords
   title?: string
   onClick?: () => void
   options?: MarkerOptions
