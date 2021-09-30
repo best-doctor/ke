@@ -48,6 +48,7 @@ type WidgetValueValidator = Function
 type DetailFieldDescription = {
   name: string
   required?: Accessor<boolean>
+  showWidget?: Accessor<boolean>
   widget: FunctionComponent<any> | Function
   helpText?: string
   description?: string | JSX.Element
