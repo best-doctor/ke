@@ -7,6 +7,7 @@ import { Accessor, WizardObject } from '../typing'
 
 type WidgetType = {
   widgets?: WidgetType[]
+  showWidget?: Accessor<boolean>
   required: Accessor<boolean>
   emptyCheck?: (val: unknown) => boolean
   helpText: string
@@ -52,6 +53,9 @@ const validateRequiredWidgets = (
   wizardContext: { [key: string]: any }
 ): void => {
   widgets.forEach((widget: WidgetType) => {
+    if (!getAccessorWithDefault(widget.showWidget, mainWizardObject, wizardContext, true)) {
+      return
+    }
     if (widget?.widgets) {
       validateRequiredWidgets(widget.widgets, mainWizardObject, wizardContext)
     } else {
