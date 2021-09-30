@@ -13,6 +13,7 @@ import type { DetailObject, GenericAccessor } from '../../typing'
 
 import { isValidComponent } from './isComponent'
 import { get } from './get'
+import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
 
 type MountComponentsKwargs = {
   setInitialValue: Function
@@ -72,8 +73,12 @@ const mountComponents = ({
     They are used in internal ke widgets and also can be used on client side.
     Type described in `typing.ts::WidgetProps`
   */
+  const context = containerStore?.getState()
+  const shownElements = elements.filter(({ showWidget }) =>
+    getAccessorWithDefault(showWidget, mainDetailObject, context, true)
+  )
 
-  elements.sort((firstElement, secondElement) => {
+  shownElements.sort((firstElement, secondElement) => {
     const firstY = get(firstElement, 'layout.y') as number
     const secondY = get(secondElement, 'layout.y') as number
     const firstX = get(firstElement, 'layout.x') as number
@@ -90,8 +95,8 @@ const mountComponents = ({
   let lastRow = null
   let lastColEnd = 1
 
-  for (let i = 0; i < elements.length; i++) {
-    const element = elements[i]
+  for (let i = 0; i < shownElements.length; i++) {
+    const element = shownElements[i]
     const currentRow = get(element, 'layout.y', 1) as number
     const currentCol = get(element, 'layout.x', 1) as number
     const currentWidth = get(element, 'layout.w', 12) as number
@@ -123,7 +128,6 @@ const mountComponents = ({
       <Row key={rowKey}>
         {rowColumns.map((adminElement: DetailFieldDescription, columnIndex) => {
           const { widget, name, layout, widgetAnalytics } = adminElement
-          const context = containerStore?.getState()
 
           const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject, context)
           const colProps: ColProps = getColumnProps(layout)
