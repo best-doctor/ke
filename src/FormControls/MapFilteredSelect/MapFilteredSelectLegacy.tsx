@@ -11,7 +11,6 @@ import { getDefaultMapLayout } from './layouts'
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
 const StyledMapFilterWidget = styled.div`
-  padding: 5.4px;
   white-space: pre-line;
 `
 
@@ -31,6 +30,10 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   mapLayout,
   filtersLayoutProxy,
   mapHeight = 448,
+  selectedOption: selectedOptionValue,
+  onSelectedOptionChanged,
+  onLoad,
+  showSearch,
   ...rest
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -62,6 +65,10 @@ export function MapFilteredSelectLegacy<T, K extends string>({
           zoom={zoom || 12}
           onZoomChanged={onZoomChange}
           onBoundsChanged={onBboxChange}
+          selectedOption={selectedOptionValue}
+          onSelectedOptionChanged={onSelectedOptionChanged}
+          onLoad={onLoad}
+          showSearch={showSearch}
         />
       ),
       filters: (
@@ -74,20 +81,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
         />
       ),
     }),
-    [
-      options,
-      center,
-      clusters,
-      filters,
-      onBboxChange,
-      onChange,
-      onFiltersChange,
-      onZoomChange,
-      otherFilters,
-      value,
-      zoom,
-      filtersLayoutProxy,
-    ]
+    [value, onChange, options, clusters, center, zoom, onZoomChange, onBboxChange, selectedOptionValue, onSelectedOptionChanged, onLoad, showSearch, filters, otherFilters, onFiltersChange, filtersLayoutProxy]
   )
 
   return (
@@ -101,7 +95,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
 
 type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   MapSelectProps<T>,
-  'value' | 'onChange' | 'options' | 'clusters' | 'center'
+  'value' | 'onChange' | 'options' | 'clusters' | 'center' | 'onSelectedOptionChanged' | 'selectedOption' | 'onLoad' | 'showSearch'
 > & {
   filters: readonly Filter<K>[]
   filtersValue: FiltersValue<K> & { zoom?: number; bbox?: string }

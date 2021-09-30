@@ -22,3 +22,15 @@ export const getVerticalMapLayout = (mapHeight: number): LayoutComponent<SlotEle
       </Box>
     </>
   ))
+
+export const getFiltersLeftMapLayout = (mapHeight: number): LayoutComponent<SlotElements<'map' | 'filters'>> =>
+  makeSlots<'map' | 'filters'>((slotElements) => (
+    <Flex height={mapHeight}>
+      <Box width="392px" mr={2} height={mapHeight} overflowY="auto">
+        {slotElements.filters}
+      </Box>
+      <Box position="relative" flex={1}>
+        {slotElements.map}
+      </Box>
+    </Flex>
+  ))

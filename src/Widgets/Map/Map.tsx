@@ -1,6 +1,6 @@
 import React, { CSSProperties, PropsWithChildren, useMemo, useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox, Circle } from '@react-google-maps/api'
-import { Spinner } from '@chakra-ui/react'
+import { Input, Spinner, styled } from '@chakra-ui/react'
 import { css, Global } from '@emotion/react'
 
 import { useMapContext } from './Map.context'
@@ -39,6 +39,18 @@ const circleOptions = {
   fillOpacity: 0.25,
 }
 
+const StyledAddressInput = styled(Input, {
+  baseStyle: {
+    boxShadow: `0px 2px 7px rgba(0, 0, 0, 0.15)`,
+    pos: 'absolute',
+    left: '10px',
+    top: '10px',
+    width: 'calc(100% - 10px - 82px)',
+    backgroundColor: 'white',
+    zIndex: '1',
+  },
+})
+
 export function Map({
   children,
   center,
@@ -61,7 +73,7 @@ export function Map({
 
   const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
   const mapContainerStyle = useMemo(
-    () => ({ ...getMapContainerStyle(showSearch), ...containerStyle }),
+    () => ({ ...getMapContainerStyle(showSearch === true), ...containerStyle }),
     [containerStyle, showSearch]
   )
 
@@ -120,12 +132,18 @@ export function Map({
     }
   }
 
+  const AddressSearchComponent = showSearch === 'v2' ? StyledAddressInput : 'input'
+
   return isLoaded ? (
     <>
       <Global styles={pacCss} />
       {showSearch && (
         <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-          <input type="text" placeholder="Введите адрес" style={searchBoxInputStyle} />
+          <AddressSearchComponent
+            type="text"
+            placeholder="Введите адрес"
+            style={showSearch !== 'v2' ? searchBoxInputStyle : undefined}
+          />
         </StandaloneSearchBox>
       )}
       <GoogleMap
@@ -166,9 +184,10 @@ export type MapProps = PropsWithChildren<{
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void
   searchMarkerRadius?: number
-  showSearch?: boolean
+  showSearch?: boolean | 'v2'
   containerStyle?: CSSProperties
   options?: google.maps.MapOptions
+  onLoad?: (map: google.maps.Map) => void | Promise<void>
 }>
 
 export type Marker = {

@@ -7,7 +7,7 @@ export type Option<T> = [OptionKey, OptionDesc, T]
 export type OptionKey = string | number
 
 interface OptionDesc {
-  coords: LatLng
+  coords?: LatLng
   description: string
   infoView: (callback: () => void) => ReactElement
   label?: string | MarkerLabel
