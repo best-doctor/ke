@@ -74,6 +74,7 @@ import {
   AsyncReadOnlyWidget,
   EmailChipInputWidget,
   PhoneChipInputWidget,
+  RegexInputWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -176,6 +177,7 @@ export {
   BaseSelectWidget,
   ForeignKeySelectWidget,
   InputWidget,
+  RegexInputWidget,
   DateTimeRangeWidget,
   getData,
   getAccessor,
