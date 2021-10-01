@@ -34,6 +34,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   onSelectedOptionChanged,
   onLoad,
   showSearch,
+  mapConfig,
   ...rest
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -69,6 +70,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
           onSelectedOptionChanged={onSelectedOptionChanged}
           onLoad={onLoad}
           showSearch={showSearch}
+          mapConfig={mapConfig}
         />
       ),
       filters: (
@@ -81,7 +83,25 @@ export function MapFilteredSelectLegacy<T, K extends string>({
         />
       ),
     }),
-    [value, onChange, options, clusters, center, zoom, onZoomChange, onBboxChange, selectedOptionValue, onSelectedOptionChanged, onLoad, showSearch, filters, otherFilters, onFiltersChange, filtersLayoutProxy]
+    [
+      value,
+      onChange,
+      options,
+      clusters,
+      center,
+      zoom,
+      onZoomChange,
+      onBboxChange,
+      selectedOptionValue,
+      onSelectedOptionChanged,
+      onLoad,
+      showSearch,
+      mapConfig,
+      filters,
+      otherFilters,
+      onFiltersChange,
+      filtersLayoutProxy,
+    ]
   )
 
   return (
@@ -95,7 +115,16 @@ export function MapFilteredSelectLegacy<T, K extends string>({
 
 type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   MapSelectProps<T>,
-  'value' | 'onChange' | 'options' | 'clusters' | 'center' | 'onSelectedOptionChanged' | 'selectedOption' | 'onLoad' | 'showSearch'
+  | 'value'
+  | 'onChange'
+  | 'options'
+  | 'clusters'
+  | 'center'
+  | 'onSelectedOptionChanged'
+  | 'selectedOption'
+  | 'onLoad'
+  | 'showSearch'
+  | 'mapConfig'
 > & {
   filters: readonly Filter<K>[]
   filtersValue: FiltersValue<K> & { zoom?: number; bbox?: string }
