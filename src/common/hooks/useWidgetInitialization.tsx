@@ -21,10 +21,17 @@ const getWidgetTargetUrl = (dataTarget: GenericAccessor, detailObject: DetailObj
   */
   getData(dataTarget, detailObject) || detailObject.url
 
-const useWidgetInitialization = (initializationArguments: InitializationArguments): InitializedWidgetAttributes => {
+interface UseWidgetInitializationOptions {
+  allowAllDefinedValues?: boolean
+}
+
+const useWidgetInitialization = (
+  initializationArguments: InitializationArguments,
+  options?: UseWidgetInitializationOptions
+): InitializedWidgetAttributes => {
   const { dataTarget, mainDetailObject, name, displayValue, context, dataSource, required } = initializationArguments
   const targetUrl = getWidgetTargetUrl(dataTarget, mainDetailObject)
-  const content = getWidgetContent(name, mainDetailObject, displayValue, context) || ''
+  const content = getWidgetContent(name, mainDetailObject, displayValue, context, options?.allowAllDefinedValues) || ''
   const dataResourceUrl = getData(dataSource, mainDetailObject, context)
   const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)
 
