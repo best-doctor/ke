@@ -16,6 +16,7 @@ export function MapSelect<T>({
   onZoomChanged,
   selectedOption: selectedOptionValue,
   onSelectedOptionChanged,
+  mapConfig,
   ...others
 }: MapSelectProps<T>): JSX.Element {
   const [currentZoom, setCurrentZoom] = useState(zoom)
@@ -69,6 +70,7 @@ export function MapSelect<T>({
       center={currentCenter}
       onZoomChanged={handleZoomChanged}
       searchMarkerRadius={2000}
+      options={mapConfig}
       {...others}
     >
       {allOptions.map((option) => (
@@ -162,6 +164,7 @@ export type MapSelectProps<T> = MapProps & {
   children?: never
   selectedOption?: Option<T> | null
   onSelectedOptionChanged?: (value: Option<T> | null) => void
+  mapConfig?: google.maps.MapOptions
 }
 
 interface Cluster {
