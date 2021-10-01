@@ -32,10 +32,21 @@ const getAccessorWithDefault = (
   return value
 }
 
-const getWidgetContent = (name: string, detailObject: DetailObject, handler: GenericAccessor, context = {}): any => {
+const getWidgetContent = (
+  name: string,
+  detailObject: DetailObject,
+  handler: GenericAccessor,
+  context = {},
+  allowDefinedValues?: boolean
+): any => {
   const widgetContent = getData(handler, detailObject, context)
 
-  if (!widgetContent) {
+  let shouldReturnFromDetailObject = !widgetContent
+  if (allowDefinedValues) {
+    shouldReturnFromDetailObject = widgetContent === undefined
+  }
+
+  if (shouldReturnFromDetailObject) {
     return get(detailObject, name)
   }
 

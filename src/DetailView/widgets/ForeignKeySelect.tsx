@@ -27,6 +27,7 @@ type ForeignKeySelectWidgetProps = WidgetProps &
     containerProps?: BoxProps
     labelContainerProps?: BoxProps
     staleTime?: Accessor<number>
+    allowAllDefinedValues?: Accessor<boolean>
   }
 
 const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
@@ -80,11 +81,15 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
     staleTime,
     widgetClassName,
     componentsClasses,
+    allowAllDefinedValues,
   } = props
 
   const context = containerStore.getState()
 
-  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization(
+    { ...props, context },
+    { allowAllDefinedValues: getAccessor(allowAllDefinedValues) }
+  )
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
   const selectStyle = getAccessor(styles, mainDetailObject, context)
 
@@ -193,11 +198,15 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     labelContainerProps,
     widgetClassName,
     componentsClasses,
+    allowAllDefinedValues,
   } = props
 
   const context = containerStore.getState()
 
-  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization(
+    { ...props, context },
+    { allowAllDefinedValues: getAccessor(allowAllDefinedValues) }
+  )
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
   const selectStyle = getAccessor(styles, mainDetailObject, context)
 
