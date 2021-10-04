@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useToast, Box, Spinner } from '@chakra-ui/react'
+import { useToast, Box, Spinner, Alert, AlertTitle, AlertIcon, AlertDescription } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -61,7 +61,8 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const { resourceName, admin, provider, notifier } = props
   const toast = useToast()
   const detailNotifier = notifier || new ChakraUINotifier(toast)
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [loadError, setLoadError] = useState<LoadError | null>(null)
 
   let title = `${admin.verboseName} # ${id}`
   if (admin.getPageTitle) {
@@ -89,19 +90,25 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   useEffect(() => {
     const backendResourceUrl = admin.getResource(id)
     if (needRefreshDetailObject) {
-      provider.getObject(backendResourceUrl).then(async (res) => {
-        setNeedRefreshDetailObject(false)
-        setMainDetailObject(res)
-        if (admin?.onDetailObjectLoaded !== undefined) {
-          await admin.onDetailObjectLoaded({
-            mainDetailObject: res,
-            provider,
-            context: containerStore,
-            setInitialValue,
-          })
-        }
-        setIsLoaded(true)
-      })
+      setIsLoading(true)
+      provider
+        .getObject(backendResourceUrl)
+        .then(async (res) => {
+          setNeedRefreshDetailObject(false)
+          setMainDetailObject(res)
+          if (admin?.onDetailObjectLoaded !== undefined) {
+            await admin.onDetailObjectLoaded({
+              mainDetailObject: res,
+              provider,
+              context: containerStore,
+              setInitialValue,
+            })
+          }
+        })
+        .catch((er: LoadError) => {
+          setLoadError(er)
+        })
+        .finally(() => setIsLoading(false))
     }
   }, [id, provider, admin, needRefreshDetailObject, props, mainDetailObject])
 
@@ -116,33 +123,49 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
       </Row>
       <Row>
         <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
-          {!isLoaded ? (
-            <Spinner />
-          ) : (
-            Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
-              const elements = admin[elementsKey as keyof typeof admin]
-              if (!elements) return []
+          {isLoading ? <Spinner /> : ''}
+          {!isLoading && !loadError
+            ? Object.entries(getContainersToMount()).map(([elementsKey, container]: [string, Function]) => {
+                const elements = admin[elementsKey as keyof typeof admin]
+                if (!elements) return []
 
-              return (
-                <ErrorBoundary>
-                  {container({
-                    mainDetailObject,
-                    setMainDetailObject,
-                    ViewType,
-                    elements,
-                    elementsKey,
-                    refreshMainDetailObject,
-                    ...props,
-                    notifier: detailNotifier,
-                  })}
-                </ErrorBoundary>
-              )
-            })
+                return (
+                  <ErrorBoundary>
+                    {container({
+                      mainDetailObject,
+                      setMainDetailObject,
+                      ViewType,
+                      elements,
+                      elementsKey,
+                      refreshMainDetailObject,
+                      ...props,
+                      notifier: detailNotifier,
+                    })}
+                  </ErrorBoundary>
+                )
+              })
+            : ''}
+          {!isLoading && loadError ? (
+            <Alert status="error">
+              <AlertIcon />
+              <AlertTitle mr={2}>Ошибка при выполнении запроса</AlertTitle>
+              <AlertDescription>{loadError.response?.data?.message}</AlertDescription>
+            </Alert>
+          ) : (
+            ''
           )}
         </Col>
       </Row>
     </>
   )
+}
+
+interface LoadError extends Error {
+  response?: {
+    data?: {
+      message?: string
+    }
+  }
 }
 
 export { RenderDetail }
