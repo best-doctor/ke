@@ -11,6 +11,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { GenericAccessor, OptionalDate, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 type DateRange = [OptionalDate, OptionalDate]
 
@@ -26,7 +27,7 @@ type DateTimeRangeActionProps = {
   name: string
 }
 
-type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undefined; inputCount?: number }
+export type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undefined; inputCount?: number }
 
 const StyledButton = styled.div`
   float: left;
@@ -168,8 +169,16 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     newDateRanges.splice(itemIndex + 1, 0, [null, null])
     setDateRanges(newDateRanges)
   }
+
+  const dataTestId = useTestId(props)
   return (
-    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
+    <WidgetWrapper
+      name={name}
+      style={{ ...style, zIndex: 1000 }}
+      helpText={helpText}
+      description={description}
+      data-test-id={dataTestId}
+    >
       <StyledDateTimeRangeListContainer className="date-time-list-container">
         {dateRanges.map((dateRange: DateRange, itemIndex: number) => {
           const [startDate, endDate] = dateRange

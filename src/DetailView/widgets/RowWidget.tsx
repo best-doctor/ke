@@ -3,8 +3,10 @@ import { Box, BoxProps, Flex, FlexProps } from '@chakra-ui/react'
 import { Store } from 'effector'
 
 import { getComponentFromCallable } from '../../common/utils/mountComponents'
+import { useTestId } from '../../django-spa/aspects/test-id'
+import { UseTestIdProps } from '../../django-spa/aspects/test-id/hooks/useTestId'
 
-export interface RowWidgetProps extends Record<string, any> {
+export interface RowWidgetProps extends Record<string, any>, UseTestIdProps {
   widgets: Array<any>
   style?: FlexProps
   elementWrapperStyle?: BoxProps
@@ -33,8 +35,10 @@ const RowWidget = (props: RowWidgetProps): JSX.Element => {
 
   const context = (containerStore as Store<object>).getState()
 
+  const dataTestId = useTestId(props)
+
   return (
-    <Flex data-name={name} flwxWrap="wrap" {...style}>
+    <Flex data-name={name} flwxWrap="wrap" data-test-id={dataTestId} {...style}>
       {widgets?.map((widgetElement: any) => {
         const { widget, elementWrapperStyle, ...rest } = widgetElement
         const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject, context)

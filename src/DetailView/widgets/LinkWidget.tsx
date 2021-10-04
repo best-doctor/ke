@@ -7,8 +7,9 @@ import { getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
 import type { GenericAccessor, WidgetProps } from '../../typing'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
-type LinkWidgetProps = WidgetProps & {
+export type LinkWidgetProps = WidgetProps & {
   href: GenericAccessor
   target?: string
   boxStyle?: object
@@ -44,9 +45,16 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
     })
   }
 
+  const dataTestId = useTestId(props)
   return (
     <StylesProvider value={styles}>
-      <StyledWidgetWrapper name={name} style={style} helpText={helpText || ''} description={description}>
+      <StyledWidgetWrapper
+        data-test-id={dataTestId}
+        name={name}
+        style={style}
+        helpText={helpText || ''}
+        description={description}
+      >
         <>
           {linkHref ? (
             <Link target={target} href={linkHref} onClick={() => handleClick()} sx={styles.control} {...linkProps}>

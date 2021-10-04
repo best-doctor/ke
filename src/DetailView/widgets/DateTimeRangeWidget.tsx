@@ -10,6 +10,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { OptionalDate, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 type DateTimeRangeWidgetProps = WidgetProps & { oneDayInterval?: boolean | undefined }
 
@@ -95,8 +96,16 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
       submitChange({ url: targetUrl, payload: widgetPayload })
     }
   }
+
+  const dataTestId = useTestId(props)
   return (
-    <WidgetWrapper name={name} style={{ ...style, zIndex: 1000 }} helpText={helpText} description={description}>
+    <WidgetWrapper
+      name={name}
+      style={{ ...style, zIndex: 1000 }}
+      helpText={helpText}
+      description={description}
+      data-test-id={dataTestId}
+    >
       <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />
       <Button colorScheme="brand" variant="outline" onClick={() => handleButtonClick()}>
         Весь день

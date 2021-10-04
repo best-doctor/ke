@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import type { WidgetProps } from '../../typing'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 const StyledCodeWidget = styled.pre`
   border-width: 1px;
@@ -24,8 +25,11 @@ const CodeWidget = (props: WidgetProps): JSX.Element => {
 
   const element = parse(content.toString())
 
+  const dataTestId = useTestId(props)
+
   return (
     <WidgetWrapper
+      data-test-id={dataTestId}
       name={name}
       style={style}
       helpText={helpText}

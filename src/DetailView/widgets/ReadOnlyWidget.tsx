@@ -7,10 +7,15 @@ import { StyledWidgetWrapper } from '../../common/components/WidgetWrapper'
 import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
 import { EmptyText } from '../../common/components/EmptyText'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
-const ReadOnlyWidget = (
-  props: WidgetProps & { innerStyle?: CSSProperties; className?: string; widgetClassName?: string }
-): JSX.Element => {
+export type ReadOnlyWidgetProps = WidgetProps & {
+  innerStyle?: CSSProperties
+  className?: string
+  widgetClassName?: string
+}
+
+const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
   const {
     containerStore,
     style,
@@ -32,6 +37,7 @@ const ReadOnlyWidget = (
   const styles = useMultiStyleConfig('ReadOnlyWidget', props)
 
   const controlStyles = { ...(styles.control || {}), ...(innerStyle || {}) }
+  const dataTestId = useTestId(props)
 
   return (
     <StylesProvider value={styles}>
@@ -47,6 +53,7 @@ const ReadOnlyWidget = (
         required={isRequired}
         containerProps={containerProps}
         labelContainerProps={labelContainerProps}
+        data-test-id={dataTestId}
       >
         <EmptyText sx={controlStyles} className={widgetClassName}>
           {content}

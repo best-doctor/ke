@@ -6,6 +6,7 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import type { WidgetProps } from '../../typing'
 import { getAccessor, getWidgetContent } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 /**
  * Render data  as text block with props.style and props.helpText
@@ -31,8 +32,9 @@ const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
       .then((responseData: any) => setContent(getWidgetContent(name, responseData, displayValue, context) || ''))
   }, [provider, dataResourceUrl, context, displayValue, name, effectiveCacheTime])
 
+  const dataTestId = useTestId(props)
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} data-test-id={dataTestId}>
       <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
         {content || '\u00a0'}
       </Box>

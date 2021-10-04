@@ -8,6 +8,7 @@ import { pushAnalytics } from '../../integration/analytics'
 import { TextEditor } from '../../django-spa/Controls'
 
 import type { WidgetProps } from '../../typing'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 type TextEditorProps = WidgetProps & {
   debounceValue?: number | undefined
@@ -44,8 +45,16 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
+  const dataTestId = useTestId(props)
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
+    <WidgetWrapper
+      data-test-id={dataTestId}
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={description}
+      required={isRequired}
+    >
       <TextEditor className={widgetClassName} value={content as string} onChange={handleBlur} />
     </WidgetWrapper>
   )

@@ -8,6 +8,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 /**
  * Render input-checkbox for using in forms
@@ -51,9 +52,16 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   }
 
   const style = { pt: 4, ...externalStyle }
+  const dataTestId = useTestId(props)
 
   return (
-    <WidgetWrapper containerProps={{ mt: 0 }} name={name} style={style} description={description}>
+    <WidgetWrapper
+      data-test-id={dataTestId}
+      containerProps={{ mt: 0 }}
+      name={name}
+      style={style}
+      description={description}
+    >
       <CheckBox value={value} onChange={handleChange} helpText={helpText} />
     </WidgetWrapper>
   )

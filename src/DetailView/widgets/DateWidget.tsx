@@ -8,11 +8,12 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { handleUserAction } from '../../common/utils/handleUserAction'
 
 import type { OptionalDate, WidgetProps } from '../../typing'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
-type DateWidgetProps = {
+type DateWidgetAdditionalProps = {
   minDate?: Date
   maxDate?: Date
   filterDate?: (dateValue: Date) => boolean
@@ -22,12 +23,14 @@ type DateWidgetProps = {
   wrapperClassName?: string
 }
 
+export type DateWidgetProps = WidgetProps & DateWidgetAdditionalProps
+
 /**
  * Render date picker
  *
  * @param props - widget props
  */
-const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
+const DateWidget = (props: DateWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
@@ -56,8 +59,10 @@ const DateWidget = (props: WidgetProps & DateWidgetProps): JSX.Element => {
     handleUserAction({ ...props, widgetValue, targetUrl, eventName, widgetType })
   }
 
+  const dataTestId = useTestId(props)
   return (
     <WidgetWrapper
+      data-test-id={dataTestId}
       name={name}
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}

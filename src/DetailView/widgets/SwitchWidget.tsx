@@ -8,6 +8,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
+import { useTestId } from '../../django-spa/aspects/test-id'
 
 /**
  * Render input-switch for using in forms
@@ -41,8 +42,15 @@ const SwitchWidget = (props: WidgetProps): JSX.Element => {
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
+  const dataTestId = useTestId(props)
   return (
-    <WidgetWrapper containerProps={{ mt: 0 }} name={name} style={{ pt: 4, ...style }} description={description}>
+    <WidgetWrapper
+      data-test-id={dataTestId}
+      containerProps={{ mt: 0 }}
+      name={name}
+      style={{ pt: 4, ...style }}
+      description={description}
+    >
       <Switch value={value} onChange={handleChange} helpText={helpText} />
     </WidgetWrapper>
   )
