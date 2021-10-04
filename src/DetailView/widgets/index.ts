@@ -19,6 +19,7 @@ import { AsyncReadOnlyWidget } from './AsyncReadOnlyWidget'
 import { EmailChipInputWidget } from './EmailChipInputWidget'
 import { PhoneChipInputWidget } from './PhoneChipInputWidget'
 import { RegexInputWidget } from './RegexInputWidget'
+import { SwitchWidget } from './SwitchWidget'
 
 export { RowWidget } from './RowWidget'
 
@@ -48,4 +49,5 @@ export {
   EmailChipInputWidget,
   PhoneChipInputWidget,
   RegexInputWidget,
+  SwitchWidget,
 }
