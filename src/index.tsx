@@ -75,6 +75,7 @@ import {
   EmailChipInputWidget,
   PhoneChipInputWidget,
   RegexInputWidget,
+  SwitchWidget,
 } from './DetailView/widgets'
 import { Table } from './ListView/components/Table'
 import {
@@ -261,4 +262,5 @@ export {
   ForeignKeySelectFilterProps,
   ForeignKeySelectFilterNew,
   AsyncSelectWidgetNew,
+  SwitchWidget,
 }
