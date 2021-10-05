@@ -16,7 +16,8 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
 import { components, modifyStyles } from '../../common/components/ReactSelectCustomization'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 export type SelectObject = {
   value: string

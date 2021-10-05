@@ -7,7 +7,8 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import type { Accessor, WidgetProps } from '../../typing'
 import { getAccessor, getCopyHandler } from '../utils/dataAccess'
 import { ValueValidationWrapper } from '../../common/components/ValueValidationWrapper'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<any> }): JSX.Element => {
   const {

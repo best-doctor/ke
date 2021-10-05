@@ -8,7 +8,8 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { handleUserAction } from '../../common/utils/handleUserAction'
 
 import type { OptionalDate, WidgetProps } from '../../typing'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT

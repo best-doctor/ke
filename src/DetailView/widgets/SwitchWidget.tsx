@@ -8,7 +8,8 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 /**
  * Render input-switch for using in forms

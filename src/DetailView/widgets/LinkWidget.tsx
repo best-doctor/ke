@@ -7,7 +7,8 @@ import { getWidgetContent } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
 import type { GenericAccessor, WidgetProps } from '../../typing'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 export type LinkWidgetProps = WidgetProps & {
   href: GenericAccessor

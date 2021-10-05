@@ -3,8 +3,7 @@ import { Box, BoxProps, Flex, FlexProps } from '@chakra-ui/react'
 import { Store } from 'effector'
 
 import { getComponentFromCallable } from '../../common/utils/mountComponents'
-import { useTestId } from '../../django-spa/aspects/test-id'
-import { UseTestIdProps } from '../../django-spa/aspects/test-id/hooks/useTestId'
+import { useTestId, UseTestIdProps } from '../../django-spa/aspects/test-id/TestIdProvider'
 
 export interface RowWidgetProps extends Record<string, any>, UseTestIdProps {
   widgets: Array<any>

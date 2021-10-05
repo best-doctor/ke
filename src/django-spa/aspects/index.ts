@@ -1,5 +1,6 @@
 export { AnalyticsProvider, useAnalytics, useFirebase } from './analytics'
 export { LoggerProvider, useLogger, useConsoleLogger } from './logger'
 export { useAccess, AccessActionType, AccessDecision } from './access'
-export { useNotifications, useToastNotifications, NotificationsProvider} from './notifications'
+export { TestIdGenerationProps, TestIdProvider, UseTestIdProps, useTestId } from './test-id/TestIdProvider'
+export { useNotifications, useToastNotifications, NotificationsProvider } from './notifications'
 export { AspectKey } from './enums'

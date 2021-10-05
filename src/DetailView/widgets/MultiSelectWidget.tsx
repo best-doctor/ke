@@ -9,7 +9,8 @@ import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/
 import type { Accessor, DetailObject, WidgetProps } from '../../typing'
 import { getAccessor, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 type MultiSelectValue = {
   [key: string]: string

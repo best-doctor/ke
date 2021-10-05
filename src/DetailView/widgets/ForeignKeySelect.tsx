@@ -11,7 +11,8 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 export type ForeignKeySelectWidgetProps = WidgetProps &
   ExtendedProps & {

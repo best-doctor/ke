@@ -8,7 +8,8 @@ import { pushAnalytics } from '../../integration/analytics'
 import { TextEditor } from '../../django-spa/Controls'
 
 import type { WidgetProps } from '../../typing'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 type TextEditorProps = WidgetProps & {
   debounceValue?: number | undefined

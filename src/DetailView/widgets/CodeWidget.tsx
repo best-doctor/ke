@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import type { WidgetProps } from '../../typing'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 const StyledCodeWidget = styled.pre`
   border-width: 1px;

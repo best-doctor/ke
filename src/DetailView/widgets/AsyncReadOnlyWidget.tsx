@@ -6,7 +6,7 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import type { WidgetProps } from '../../typing'
 import { getAccessor, getWidgetContent } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
 
 /**
  * Render data  as text block with props.style and props.helpText

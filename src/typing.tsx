@@ -4,7 +4,7 @@ import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import { CSSProperties } from 'react'
 import { BoxProps } from '@chakra-ui/react'
-import { TestIdGenerationProps } from './django-spa/aspects/test-id/hooks/useTestId'
+import { TestIdGenerationProps } from './django-spa/aspects/test-id/TestIdProvider'
 
 type Accessor<T> = T | Function | undefined
 

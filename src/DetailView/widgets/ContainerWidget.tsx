@@ -4,7 +4,8 @@ import { Store } from 'effector'
 
 import { mountComponents } from '../../common/utils/mountComponents'
 import { getAccessor } from '../utils/dataAccess'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 /**
  * Render props.widgets in data-grid by their layout-properties

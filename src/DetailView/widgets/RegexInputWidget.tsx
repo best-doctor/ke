@@ -5,7 +5,8 @@ import { Accessor, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 type RegexInputWidgetProps = WidgetProps & {
   regexp: RegExp

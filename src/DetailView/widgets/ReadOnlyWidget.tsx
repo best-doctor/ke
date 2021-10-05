@@ -7,7 +7,8 @@ import { StyledWidgetWrapper } from '../../common/components/WidgetWrapper'
 import type { WidgetProps } from '../../typing'
 import { getCopyHandler } from '../utils/dataAccess'
 import { EmptyText } from '../../common/components/EmptyText'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 export type ReadOnlyWidgetProps = WidgetProps & {
   innerStyle?: CSSProperties

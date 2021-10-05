@@ -2,8 +2,7 @@ import React from 'react'
 
 import { Avatar } from '@chakra-ui/react'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { useTestId } from '../../django-spa/aspects/test-id'
-import { TestIdGenerationProps } from '../../django-spa/aspects/test-id/hooks/useTestId'
+import { useTestId, TestIdGenerationProps } from '../../django-spa/aspects/test-id/TestIdProvider'
 
 interface AvatarWidgetProps extends Omit<TestIdGenerationProps, 'name'> {
   name: string

@@ -8,7 +8,8 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import type { WidgetProps } from '../../typing'
 import { handleUserAction } from '../../common/utils/handleUserAction'
 import { getAccessor } from '../utils/dataAccess'
-import { useTestId } from '../../django-spa/aspects/test-id'
+import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+
 
 const eventName = EventNameEnum.RADIO_BUTTON_CHOICE
 const widgetType = WidgetTypeEnum.ACTION
