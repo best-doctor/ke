@@ -1,6 +1,7 @@
 import React, { ChangeEvent, ReactElement, useCallback, useRef, useState } from 'react'
-import { Button, ButtonProps, List, ListIcon, ListItem, Progress } from '@chakra-ui/react'
+import { Button, ButtonProps, List, ListIcon, ListItem, Progress, Text } from '@chakra-ui/react'
 import { Loader, Paperclip } from 'react-feather'
+import Filesize from 'filesize'
 
 import { FileDescriptor, LoadingFileDescriptor } from './types'
 
@@ -9,8 +10,10 @@ export function UploadButton({
   onUpload,
   label = 'Прикрепить ещё один файл',
   buttonProps,
+  maxFileSize,
 }: UploadButtonProps): ReactElement<UploadButtonProps> {
   const [loadingFiles, setLoadingFiles] = useState<LoadingFileDescriptor[]>([])
+  const [fileErrors, setFileErrors] = useState<string[]>([])
 
   const hiddenFileInput = useRef<HTMLInputElement>(null)
 
@@ -20,6 +23,7 @@ export function UploadButton({
 
   const handleFileSelect = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
+      setFileErrors([])
       Array.from(event.target.files || []).forEach((file: File) => {
         const start = new Date()
         const key = `${file.name}-${new Date()}`
@@ -30,6 +34,15 @@ export function UploadButton({
           total: file.size,
           start,
         }
+
+        if (maxFileSize && file.size > maxFileSize) {
+          setFileErrors((prev) => [
+            ...prev,
+            `Размер файла ${file.name} превышает допустимый максимальный размер ${Filesize(maxFileSize)}`,
+          ])
+          return
+        }
+
         setLoadingFiles((prev) => [...prev, loadingFile])
 
         onSelect(file, ({ loaded, total }) => {
@@ -42,7 +55,7 @@ export function UploadButton({
       // eslint-disable-next-line no-param-reassign
       event.target.value = ''
     },
-    [onSelect, onUpload]
+    [onSelect, onUpload, maxFileSize]
   )
 
   return (
@@ -51,6 +64,14 @@ export function UploadButton({
       <Button leftIcon={<Paperclip size={18} />} size="sm" mt="5px" {...buttonProps} onClick={handleClick}>
         {label}
       </Button>
+      {fileErrors.map((error, index) => {
+        const errorIndex = index
+        return (
+          <Text color="red" key={errorIndex} fontSize="sm">
+            {error}
+          </Text>
+        )
+      })}
       <input type="file" ref={hiddenFileInput} onChange={handleFileSelect} style={{ display: 'none' }} />
     </>
   )
@@ -75,6 +96,7 @@ interface UploadButtonProps {
   label?: React.ReactChild
   onSelect: (file: File, onProgress: OnProgress) => Promise<FileDescriptor>
   onUpload: (desc: FileDescriptor) => void
+  maxFileSize?: number
 }
 
 interface UploadingListProps {
