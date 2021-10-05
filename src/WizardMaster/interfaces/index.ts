@@ -19,6 +19,8 @@ const defaultLayout = { x: 1, y: 1, xs: 12 }
 abstract class BaseWizardStep {
   title?: string
 
+  name?: string
+
   wrapperProps?: FlexProps
 
   resourceName?: string

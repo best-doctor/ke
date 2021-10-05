@@ -13,6 +13,7 @@ import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
 import { ErrorBoundary } from '../../../common/components/ErrorBoundary'
+import { useTestId } from '../../../django-spa/aspects'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -77,6 +78,8 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     }
   })
 
+  const dataTestId = useTestId()
+
   return (
     <>
       {show && (
@@ -93,6 +96,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                     fontWeight="medium"
                     lineHeight="9"
                     data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}
+                    data-test-id={`${dataTestId}--title`}
                   >
                     {title}
                   </Text>
@@ -117,6 +121,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                   <Col xs={12}>
                     <Flex alignItems="center" key="steps">
                       <WizardStepControlPanel
+                        data-test-id={`${dataTestId}--control-panel`}
                         wizardStep={wizardStep}
                         wizard={wizard}
                         provider={provider}
