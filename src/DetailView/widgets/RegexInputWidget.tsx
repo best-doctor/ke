@@ -37,7 +37,6 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
     const {
       name,
       helpText,
-      description,
       targetPayload,
       style,
       submitChange,
@@ -56,7 +55,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
     } = props
     const context = containerStore.getState()
 
-    const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+    const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
     setInitialValue({ [name]: content })
 
@@ -75,7 +74,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
         name={name}
         style={style}
         helpText={helpText}
-        description={description}
+        description={widgetDescription}
         required={isRequired}
         notifier={notifier}
         useClipboard={useClipboard}

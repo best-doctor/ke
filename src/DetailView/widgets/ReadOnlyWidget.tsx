@@ -20,7 +20,6 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
     containerStore,
     style,
     helpText,
-    description,
     useClipboard,
     copyValue,
     notifier,
@@ -32,7 +31,7 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
     widgetClassName,
   } = props
 
-  const { content, isRequired } = useWidgetInitialization({ ...props, context: containerStore.getState() })
+  const { content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
   const styles = useMultiStyleConfig('ReadOnlyWidget', props)
 
@@ -47,7 +46,7 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
         name={name}
         style={style}
         helpText={helpText}
-        description={description}
+        description={widgetDescription}
         useClipboard={useClipboard}
         copyValue={getCopyHandler(content, copyValue)}
         notifier={notifier}

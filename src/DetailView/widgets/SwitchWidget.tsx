@@ -17,11 +17,11 @@ import { useCreateTestId } from '../../django-spa/aspects'
  * @param props - widget props
  */
 const SwitchWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, description, targetPayload, submitChange, setInitialValue, containerStore, style } = props
+  const { name, helpText, targetPayload, submitChange, setInitialValue, containerStore, style } = props
 
   const context = containerStore.getState()
 
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [value, setValue] = useState<boolean>(!!content)
 
   setInitialValue({ [name]: content })
@@ -48,7 +48,7 @@ const SwitchWidget = (props: WidgetProps): JSX.Element => {
       containerProps={{ mt: 0 }}
       name={name}
       style={{ pt: 4, ...style }}
-      description={description}
+      description={widgetDescription}
       {...getDataTestId(props)}
     >
       <Switch value={value} onChange={handleChange} helpText={helpText} />

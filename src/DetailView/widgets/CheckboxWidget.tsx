@@ -20,7 +20,6 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
   const {
     name,
     helpText,
-    description,
     targetPayload,
     submitChange,
     setInitialValue,
@@ -30,7 +29,7 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
 
   const context = containerStore.getState()
 
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [value, setValue] = React.useState<boolean>(!!content)
 
   setInitialValue({ [name]: content })
@@ -59,7 +58,7 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
       containerProps={{ mt: 0 }}
       name={name}
       style={style}
-      description={description}
+      description={widgetDescription}
       {...getDataTestId(props)}
     >
       <CheckBox value={value} onChange={handleChange} helpText={helpText} />

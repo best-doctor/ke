@@ -14,7 +14,6 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
     containerStore,
     style,
     helpText,
-    description,
     useClipboard,
     copyValue,
     notifier,
@@ -27,7 +26,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
   } = props
 
   const context = containerStore.getState()
-  const { content } = useWidgetInitialization({ ...props, context })
+  const { content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const value = getAccessor(validateValue, mainDetailObject, context)
 
   const { getDataTestId } = useCreateTestId()
@@ -36,7 +35,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       useClipboard={useClipboard}
       copyValue={getCopyHandler(content, copyValue)}
       notifier={notifier}

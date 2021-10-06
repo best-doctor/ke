@@ -17,7 +17,6 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
   const {
     name,
     helpText,
-    description,
     targetPayload,
     style,
     submitChange,
@@ -30,7 +29,7 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
   } = props
   const context = containerStore.getState()
 
-  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
@@ -56,7 +55,7 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       {...getDataTestId(props)}
     >
