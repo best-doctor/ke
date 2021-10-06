@@ -148,6 +148,13 @@ export {
   useNotifications,
   useToastNotifications,
   NotificationsProvider,
+  useCreateTestId,
+  TestIdProvider,
+  WizardNameProvider,
+  WizardNameProviderProps,
+  useWizardName,
+  TestIdGenerationProps,
+  WithDataTestId,
 } from './django-spa/aspects'
 export { Select } from './common/components/Select'
 export * from './styles'

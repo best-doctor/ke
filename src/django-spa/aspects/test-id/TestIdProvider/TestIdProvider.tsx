@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 
 export interface TestIdConfig {
   enabled?: boolean
@@ -7,7 +7,6 @@ export interface TestIdConfig {
 
 export interface TestIdContextData {
   config: TestIdConfig
-  keys: Set<string>
 }
 
 export const TestIdContext = React.createContext<TestIdContextData | null>(null)
@@ -19,15 +18,11 @@ interface TestIdProviderProps {
 
 const defaultConfig: TestIdConfig = {
   enabled: true,
-  enableDuplicationsWarnings: true,
 }
 
-export const TestIdProvider: React.FC<TestIdProviderProps> = ({ config = {}, children }) => {
-  const keys = useRef(new Set<string>())
-
+export const TestIdProvider: React.FC<TestIdProviderProps> = ({ config = defaultConfig, children }) => {
   const value: TestIdContextData = useMemo(
     () => ({
-      keys: keys.current,
       config: { ...defaultConfig, ...config },
     }),
     [config]

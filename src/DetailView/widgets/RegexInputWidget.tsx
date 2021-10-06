@@ -5,8 +5,7 @@ import { Accessor, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
-
+import { useCreateTestId } from '../../django-spa/aspects'
 
 type RegexInputWidgetProps = WidgetProps & {
   regexp: RegExp
@@ -70,10 +69,9 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
 
     const Element = useMemo(() => (localProps: InputProps) => <RegexInput {...localProps} regexp={regexp} />, [regexp])
 
-    const dataTestId = useTestId(props)
+    const { getDataTestId } = useCreateTestId()
     return (
       <WidgetWrapper
-        data-test-id={dataTestId}
         name={name}
         style={style}
         helpText={helpText}
@@ -84,6 +82,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
         copyValue={handleCopyValue}
         containerProps={containerProps}
         labelContainerProps={labelContainerProps}
+        {...getDataTestId(props)}
       >
         <DebounceInput
           value={content as string}

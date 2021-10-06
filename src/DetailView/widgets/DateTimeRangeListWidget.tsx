@@ -11,8 +11,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { GenericAccessor, OptionalDate, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
-import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
-
+import { useCreateTestId } from '../../django-spa/aspects'
 
 type DateRange = [OptionalDate, OptionalDate]
 
@@ -171,14 +170,14 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     setDateRanges(newDateRanges)
   }
 
-  const dataTestId = useTestId(props)
+  const { getDataTestId } = useCreateTestId()
   return (
     <WidgetWrapper
       name={name}
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}
       description={description}
-      data-test-id={dataTestId}
+      {...getDataTestId(props)}
     >
       <StyledDateTimeRangeListContainer className="date-time-list-container">
         {dateRanges.map((dateRange: DateRange, itemIndex: number) => {

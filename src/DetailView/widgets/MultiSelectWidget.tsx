@@ -9,8 +9,7 @@ import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/
 import type { Accessor, DetailObject, WidgetProps } from '../../typing'
 import { getAccessor, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
-import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
-
+import { useCreateTestId } from '../../django-spa/aspects'
 
 type MultiSelectValue = {
   [key: string]: string
@@ -72,16 +71,16 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
     setValue(content as object[] | null)
   }, [content])
 
-  const dataTestId = useTestId(props)
+  const { getDataTestId } = useCreateTestId()
 
   return (
     <WidgetWrapper
-      data-test-id={dataTestId}
       name={name}
       style={style}
       helpText={helpText}
       description={description}
       required={isRequired}
+      {...getDataTestId(props)}
     >
       <AsyncSelectWidgetNew
         provider={provider}
@@ -152,16 +151,16 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   React.useMemo(() => {
     setValue(content as object[] | null)
   }, [content])
+  const { getDataTestId } = useCreateTestId()
 
-  const dataTestId = useTestId(props)
   return (
     <WidgetWrapper
-      data-test-id={dataTestId}
       name={name}
       style={style}
       helpText={helpText}
       description={description}
       required={isRequired}
+      {...getDataTestId(props)}
     >
       <AsyncSelectWidget
         provider={provider}

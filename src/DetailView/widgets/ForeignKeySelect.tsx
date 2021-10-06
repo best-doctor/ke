@@ -11,8 +11,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
-import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
-
+import { useCreateTestId } from '../../django-spa/aspects'
 
 export type ForeignKeySelectWidgetProps = WidgetProps &
   ExtendedProps & {
@@ -119,7 +118,8 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
   }
 
   const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value, mainDetailObject))
-  const dataTestId = useTestId(props)
+  const { getDataTestId } = useCreateTestId()
+
   return (
     <WidgetWrapper
       name={name}
@@ -132,7 +132,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
       required={isRequired}
       containerProps={containerProps}
       labelContainerProps={labelContainerProps}
-      data-test-id={dataTestId}
+      {...getDataTestId(props)}
     >
       <ValidationWrapper
         notBlockingValidators={notBlockingValidators}
@@ -237,7 +237,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   }
 
   const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value, mainDetailObject))
-  const dataTestId = useTestId(props)
+  const { getDataTestId } = useCreateTestId()
 
   return (
     <WidgetWrapper
@@ -251,7 +251,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
       required={isRequired}
       containerProps={containerProps}
       labelContainerProps={labelContainerProps}
-      data-test-id={dataTestId}
+      {...getDataTestId(props)}
     >
       <ValidationWrapper
         notBlockingValidators={notBlockingValidators}

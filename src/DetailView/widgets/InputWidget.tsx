@@ -9,8 +9,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 
 import type { Accessor, WidgetProps } from '../../typing'
-import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
-
+import { useCreateTestId } from '../../django-spa/aspects'
 
 export type InputWidgetProps = WidgetProps & {
   isTextarea?: boolean
@@ -65,7 +64,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
 
   const handleCopyValue = getCopyHandler(content, copyValue)
 
-  const dataTestId = useTestId(props)
+  const { getDataTestId } = useCreateTestId()
 
   return (
     <WidgetWrapper
@@ -79,7 +78,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
       copyValue={handleCopyValue}
       containerProps={containerProps}
       labelContainerProps={labelContainerProps}
-      data-test-id={dataTestId}
+      {...getDataTestId(props)}
     >
       <DebounceInput
         value={content as string}

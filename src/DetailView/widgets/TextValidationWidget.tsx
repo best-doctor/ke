@@ -7,8 +7,7 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import type { Accessor, WidgetProps } from '../../typing'
 import { getAccessor, getCopyHandler } from '../utils/dataAccess'
 import { ValueValidationWrapper } from '../../common/components/ValueValidationWrapper'
-import { useTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
-
+import { useCreateTestId } from '../../django-spa/aspects'
 
 const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<any> }): JSX.Element => {
   const {
@@ -31,10 +30,9 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
   const { content } = useWidgetInitialization({ ...props, context })
   const value = getAccessor(validateValue, mainDetailObject, context)
 
-  const dataTestId = useTestId(props)
+  const { getDataTestId } = useCreateTestId()
   return (
     <WidgetWrapper
-      data-test-id={dataTestId}
       name={name}
       style={style}
       helpText={helpText}
@@ -42,6 +40,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
       useClipboard={useClipboard}
       copyValue={getCopyHandler(content, copyValue)}
       notifier={notifier}
+      {...getDataTestId(props)}
     >
       <ValueValidationWrapper
         notBlockingValidators={notBlockingValidators}
