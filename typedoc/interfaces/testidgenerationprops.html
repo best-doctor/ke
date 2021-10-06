@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ControlRefProps | @bestdoctor/ke-beta</title>
+	<title>TestIdGenerationProps | @bestdoctor/ke-beta</title>
 	<meta name="description" content="Documentation for @bestdoctor/ke-beta">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@bestdoctor/ke-beta</a>
 				</li>
 				<li>
-					<a href="controlrefprops.html">ControlRefProps</a>
+					<a href="testidgenerationprops.html">TestIdGenerationProps</a>
 				</li>
 			</ul>
-			<h1>Interface ControlRefProps</h1>
+			<h1>Interface TestIdGenerationProps</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ControlRefProps</span>
+						<a href="withdatatestid.html" class="tsd-signature-type" data-tsd-kind="Interface">WithDataTestId</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">TestIdGenerationProps</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -80,8 +85,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="controlrefprops.html#focus" class="tsd-kind-icon">focus</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="controlrefprops.html#scrollintoview" class="tsd-kind-icon">scroll<wbr>Into<wbr>View</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="testidgenerationprops.html#data_test_id" class="tsd-kind-icon">data-<wbr>test-<wbr>id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="testidgenerationprops.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="testidgenerationprops.html#stepname" class="tsd-kind-icon">step<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="testidgenerationprops.html#wizardname" class="tsd-kind-icon">wizard<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,55 +96,46 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="focus" class="tsd-anchor"></a>
-					<h3>focus</h3>
-					<div class="tsd-signature tsd-kind-icon">focus<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="data_test_id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> data-<wbr>test-<wbr>id</h3>
+					<div class="tsd-signature tsd-kind-icon">data-<wbr>test-<wbr>id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="withdatatestid.html">WithDataTestId</a>.<a href="withdatatestid.html#data_test_id">data-test-id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/51bbb28/src/cdk/Forms/Fields/types.ts#L21">src/cdk/Forms/Fields/types.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/51bbb28/src/django-spa/aspects/test-id/types.ts#L1">src/django-spa/aspects/test-id/types.ts:1</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="scrollintoview" class="tsd-anchor"></a>
-					<h3>scroll<wbr>Into<wbr>View</h3>
-					<div class="tsd-signature tsd-kind-icon">scroll<wbr>Into<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<a name="name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/51bbb28/src/cdk/Forms/Fields/types.ts#L22">src/cdk/Forms/Fields/types.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/51bbb28/src/django-spa/aspects/test-id/hooks/useCreateTestId.ts#L7">src/django-spa/aspects/test-id/hooks/useCreateTestId.ts:7</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="stepname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> step<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">step<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/51bbb28/src/django-spa/aspects/test-id/hooks/useCreateTestId.ts#L8">src/django-spa/aspects/test-id/hooks/useCreateTestId.ts:8</a></li>
 						</ul>
-					</div>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="wizardname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> wizard<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">wizard<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/best-doctor/ke/blob/51bbb28/src/django-spa/aspects/test-id/hooks/useCreateTestId.ts#L9">src/django-spa/aspects/test-id/hooks/useCreateTestId.ts:9</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -154,13 +152,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="controlrefprops.html" class="tsd-kind-icon">Control<wbr>Ref<wbr>Props</a>
+						<a href="testidgenerationprops.html" class="tsd-kind-icon">Test<wbr>IdGeneration<wbr>Props</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="controlrefprops.html#focus" class="tsd-kind-icon">focus</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="testidgenerationprops.html#data_test_id" class="tsd-kind-icon">data-<wbr>test-<wbr>id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="controlrefprops.html#scrollintoview" class="tsd-kind-icon">scroll<wbr>Into<wbr>View</a>
+								<a href="testidgenerationprops.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="testidgenerationprops.html#stepname" class="tsd-kind-icon">step<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="testidgenerationprops.html#wizardname" class="tsd-kind-icon">wizard<wbr>Name</a>
 							</li>
 						</ul>
 					</li>
