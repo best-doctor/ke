@@ -4,6 +4,7 @@ import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
 import { CSSProperties } from 'react'
 import { BoxProps } from '@chakra-ui/react'
+import { TestIdGenerationProps } from './django-spa/aspects/test-id/TestIdProvider'
 
 type Accessor<T> = T | Function | undefined
 
@@ -52,7 +53,7 @@ type WidgetProps = {
   containerProps?: BoxProps
   widgetClassName?: string
   className?: string
-}
+} & Omit<TestIdGenerationProps, 'name'>
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets' | 'updated_wizards'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
-import { ForeignKeySelectWidget } from '../../widgets/ForeignKeySelect'
+import { ForeignKeySelectWidget, ForeignKeySelectWidgetProps } from '../../widgets/ForeignKeySelect'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
@@ -15,7 +15,7 @@ const detailObject = {
 
 const submitChangeMock = jest.fn()
 
-const getComponent = (): JSX.Element => (
+const getComponent = (props?: Partial<ForeignKeySelectWidgetProps>): JSX.Element => (
   <ForeignKeySelectWidget
     name="data"
     resource="test-resource"
@@ -37,6 +37,7 @@ const getComponent = (): JSX.Element => (
     setInitialValue={jest.fn()}
     submitChange={submitChangeMock}
     containerStore={mockedEffectorContainerStore}
+    {...props}
   />
 )
 
@@ -45,4 +46,28 @@ test('FK select widget properly rendered', () => {
 
   expect(component.find(WidgetWrapper).length).toEqual(1)
   expect(component.find(AsyncSelectWidget).length).toEqual(1)
+})
+
+test('FK select widget should be rendered with name test id', () => {
+  const component = shallow(getComponent({ name: 'test' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('test')
+})
+
+test('FK select widget should be rendered with wizard-name test id', () => {
+  const component = shallow(getComponent({ name: 'test', wizardName: 'wizard' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('wizard-test')
+})
+
+test('FK select widget should be rendered with wizard-step-name test id', () => {
+  const component = shallow(getComponent({ name: 'test', wizardName: 'wizard', stepName: 'step' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('wizard-step-test')
+})
+
+test('FK select widget should be rendered with step-name test id', () => {
+  const component = shallow(getComponent({ name: 'test', stepName: 'step' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('step-test')
 })

@@ -8,6 +8,7 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import type { WidgetProps } from '../../typing'
 import { handleUserAction } from '../../common/utils/handleUserAction'
 import { getAccessor } from '../utils/dataAccess'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 const eventName = EventNameEnum.RADIO_BUTTON_CHOICE
 const widgetType = WidgetTypeEnum.ACTION
@@ -60,8 +61,10 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     handleUserAction({ ...props, eventName, widgetType, widgetValue: nextValue })
   }
 
+  const { getDataTestId } = useCreateTestId()
+
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} {...getDataTestId(props)}>
       <RadioGroup
         getKey={optionValue}
         getLabel={optionLabel}

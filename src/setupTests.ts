@@ -73,12 +73,16 @@ const testProviderWithOptions = new TestProvider(undefined, {
 })
 
 class TestWizardStep extends BaseWizardStep {
+  name = 'testWizardStep'
+
   widgets = testAdmin.detail_fields
 }
 
 const testWizardStep = new TestWizardStep('test_wizard_step')
 
 class TestWizard extends BaseWizard {
+  name = 'testWizard'
+
   stateWidgetMapping = {
     begin: testWizardStep,
   }

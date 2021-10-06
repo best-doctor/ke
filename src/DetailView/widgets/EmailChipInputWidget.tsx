@@ -6,6 +6,7 @@ import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 interface EmailChipInputWidgetProps extends WidgetProps {
   chipClassName?: string
@@ -46,6 +47,8 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
+  const { getDataTestId } = useCreateTestId()
+
   return (
     <WidgetWrapper
       containerProps={containerProps}
@@ -55,6 +58,7 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
       helpText={helpText}
       description={description}
       required={isRequired}
+      {...getDataTestId(props)}
     >
       <EmailChipInput
         chipClassName={chipClassName}

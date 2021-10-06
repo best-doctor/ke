@@ -95,7 +95,7 @@ test('Select widget user change select', async () => {
 })
 
 test('Base select widget properly rendered', async () => {
-  jest.spyOn(React, 'useEffect').mockImplementation((f) => f())
+  // jest.spyOn(React, 'useEffect').mockImplementation((f) => f())
   const component = mount(getBaseSelectWidgetComponent())
   await waitForComponentToPaint(component)
   expect(component.find(Select).length).toEqual(1)

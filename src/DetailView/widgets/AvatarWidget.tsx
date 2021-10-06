@@ -2,8 +2,9 @@ import React from 'react'
 
 import { Avatar } from '@chakra-ui/react'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
+import { TestIdGenerationProps, useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
 
-type AvatarWidgetProps = {
+interface AvatarWidgetProps extends Omit<TestIdGenerationProps, 'name'> {
   name: string
   helpText: string
   style: object
@@ -18,10 +19,14 @@ type AvatarWidgetProps = {
  * @param name - name-attribute
  * @param description - description
  */
-const AvatarWidget = ({ helpText, style, name, description }: AvatarWidgetProps): JSX.Element => (
-  <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
-    <Avatar name="BD" src="" />
-  </WidgetWrapper>
-)
+const AvatarWidget = (props: AvatarWidgetProps): JSX.Element => {
+  const { helpText, style, name, description } = props
+  const { getDataTestId } = useCreateTestId()
+  return (
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} {...getDataTestId(props)}>
+      <Avatar name="BD" src="" />
+    </WidgetWrapper>
+  )
+}
 
 export { AvatarWidget }

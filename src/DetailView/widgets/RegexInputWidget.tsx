@@ -1,10 +1,11 @@
 import React, { forwardRef, useCallback, useMemo } from 'react'
-import {DebounceInput} from "react-debounce-input";
+import { DebounceInput } from 'react-debounce-input'
 import { Input, InputProps } from '@chakra-ui/react'
-import {Accessor, WidgetProps} from "../../typing";
-import {useWidgetInitialization} from "../../common/hooks/useWidgetInitialization";
-import {getAccessor, getCopyHandler, getPayload} from "../utils/dataAccess";
-import {WidgetWrapper} from "../../common/components/WidgetWrapper";
+import { Accessor, WidgetProps } from '../../typing'
+import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
+import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
+import { WidgetWrapper } from '../../common/components/WidgetWrapper'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 type RegexInputWidgetProps = WidgetProps & {
   regexp: RegExp
@@ -68,6 +69,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
 
     const Element = useMemo(() => (localProps: InputProps) => <RegexInput {...localProps} regexp={regexp} />, [regexp])
 
+    const { getDataTestId } = useCreateTestId()
     return (
       <WidgetWrapper
         name={name}
@@ -80,6 +82,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
         copyValue={handleCopyValue}
         containerProps={containerProps}
         labelContainerProps={labelContainerProps}
+        {...getDataTestId(props)}
       >
         <DebounceInput
           value={content as string}

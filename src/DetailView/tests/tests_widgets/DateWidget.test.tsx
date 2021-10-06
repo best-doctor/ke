@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker'
 
 import { DateInput } from '../../../django-spa/Controls'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
-import { DateWidget } from '../../widgets/DateWidget'
+import { DateWidget, DateWidgetProps } from '../../widgets/DateWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
 
 const submitChangeMock = jest.fn()
@@ -16,7 +16,7 @@ const detailObject = {
   url: 'https://test.com',
 }
 
-const getComponent = (): JSX.Element => (
+const getComponent = (props?: Partial<DateWidgetProps>): JSX.Element => (
   <DateWidget
     name="test"
     resource="test-resource"
@@ -36,6 +36,7 @@ const getComponent = (): JSX.Element => (
     setInitialValue={jest.fn()}
     submitChange={submitChangeMock}
     containerStore={mockedEffectorContainerStore}
+    {...props}
   />
 )
 
@@ -85,4 +86,28 @@ test('DateTimeWidget should pass dateFormat into DatePicker', () => {
   )
 
   expect(component.find(DatePicker).first().props().dateFormat).toBe('yyyy.MM.dd')
+})
+
+test('DateWidget widget should be rendered with name test id', () => {
+  const component = mount(getComponent({ name: 'test' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('test')
+})
+
+test('DateWidget widget should be rendered with wizard-name test id', () => {
+  const component = mount(getComponent({ name: 'test', wizardName: 'wizard' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('wizard-test')
+})
+
+test('DateWidget widget should be rendered with wizard-step-name test id', () => {
+  const component = mount(getComponent({ name: 'test', wizardName: 'wizard', stepName: 'step' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('wizard-step-test')
+})
+
+test('DateWidget widget should be rendered with step-name test id', () => {
+  const component = mount(getComponent({ name: 'test', stepName: 'step' }))
+
+  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('step-test')
 })

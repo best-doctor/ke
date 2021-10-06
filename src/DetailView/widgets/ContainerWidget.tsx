@@ -4,6 +4,7 @@ import { Store } from 'effector'
 
 import { mountComponents } from '../../common/utils/mountComponents'
 import { getAccessor } from '../utils/dataAccess'
+import { useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
 
 /**
  * Render props.widgets in data-grid by their layout-properties
@@ -53,8 +54,9 @@ const ContainerWidget = (props: any): JSX.Element => {
   const context = (containerStore as Store<object>).getState()
   const isContainerCollapsible = getAccessor(isCollapsible, mainDetailObject, context)
 
+  const { getDataTestId } = useCreateTestId()
   return isContainerCollapsible ? (
-    <Accordion allowToggle pt={4} {...accordionProps}>
+    <Accordion allowToggle pt={4} {...accordionProps} {...getDataTestId(props)}>
       <AccordionItem {...accordionItemProps}>
         {UserAccordionButton ? (
           <UserAccordionButton>{helpText}</UserAccordionButton>
@@ -74,7 +76,7 @@ const ContainerWidget = (props: any): JSX.Element => {
       </AccordionItem>
     </Accordion>
   ) : (
-    <Box data-name={name} {...style}>
+    <Box data-name={name} {...getDataTestId(props)} {...style}>
       {containerContent}
     </Box>
   )

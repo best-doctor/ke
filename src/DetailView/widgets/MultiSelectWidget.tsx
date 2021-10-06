@@ -9,12 +9,13 @@ import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/
 import type { Accessor, DetailObject, WidgetProps } from '../../typing'
 import { getAccessor, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 type MultiSelectValue = {
   [key: string]: string
 }
 
-type MultiSelectWidgetProps = WidgetProps & {
+export type MultiSelectWidgetProps = WidgetProps & {
   optionLabel: Function
   optionValue: Function
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
@@ -70,8 +71,17 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
     setValue(content as object[] | null)
   }, [content])
 
+  const { getDataTestId } = useCreateTestId()
+
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
+    <WidgetWrapper
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={description}
+      required={isRequired}
+      {...getDataTestId(props)}
+    >
       <AsyncSelectWidgetNew
         provider={provider}
         cacheTime={effectiveCacheTime}
@@ -141,9 +151,17 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   React.useMemo(() => {
     setValue(content as object[] | null)
   }, [content])
+  const { getDataTestId } = useCreateTestId()
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} required={isRequired}>
+    <WidgetWrapper
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={description}
+      required={isRequired}
+      {...getDataTestId(props)}
+    >
       <AsyncSelectWidget
         provider={provider}
         cacheTime={effectiveCacheTime}

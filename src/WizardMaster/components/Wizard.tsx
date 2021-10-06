@@ -13,6 +13,7 @@ import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { Accessor, DetailObject } from '../../typing'
 import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
+import { WizardNameProvider } from '../../django-spa/aspects/test-id/WizardNameProvider'
 
 type WizardProps = {
   resourceName: string
@@ -94,20 +95,21 @@ const Wizard = (props: WizardProps): JSX.Element => {
           </Col>
         </Row>
       )}
-
-      <WizardContainer
-        wizard={wizard}
-        show={isExpanded}
-        provider={provider}
-        mainDetailObject={mainDetailObject}
-        setMainDetailObject={setMainDetailObject}
-        refreshMainDetailObject={refreshMainDetailObject}
-        notifier={notifier}
-        analytics={analytics}
-        ViewType={ViewType}
-        user={user}
-        submitChange={submitChange}
-      />
+      <WizardNameProvider name={wizard.name}>
+        <WizardContainer
+          wizard={wizard}
+          show={isExpanded}
+          provider={provider}
+          mainDetailObject={mainDetailObject}
+          setMainDetailObject={setMainDetailObject}
+          refreshMainDetailObject={refreshMainDetailObject}
+          notifier={notifier}
+          analytics={analytics}
+          ViewType={ViewType}
+          user={user}
+          submitChange={submitChange}
+        />
+      </WizardNameProvider>
     </Box>
   )
 }

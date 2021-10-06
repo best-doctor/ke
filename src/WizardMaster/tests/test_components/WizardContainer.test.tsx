@@ -37,3 +37,15 @@ test('Wizard container properly mounts children', () => {
   expect(component.find('WizardStepComponents').length).toBe(1)
   expect(component.find('WizardStepControlPanel').length).toBe(1)
 })
+
+test('Wizard WizardStepControlPanel properly mounts with right test id', () => {
+  const component = mount(getComponent())
+
+  expect(component.find('WizardStepControlPanel').prop('data-test-id')).toBe('testWizard-testWizardStep--controlPanel')
+})
+
+test('Wizard WizardStepTitle properly mounts with right test id', () => {
+  const component = mount(getComponent())
+
+  expect(component.find('h2').prop('data-test-id')).toBe('testWizard-testWizardStep--title')
+})

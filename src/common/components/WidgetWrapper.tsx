@@ -19,6 +19,7 @@ interface WidgetWrapperProps {
   containerProps?: BoxProps
   labelContainerProps?: BoxProps
   className?: string
+  'data-test-id'?: string
 }
 
 /**
@@ -46,11 +47,13 @@ const WidgetWrapper = ({
   containerProps,
   labelContainerProps,
   className,
+  'data-test-id': dataTestId,
 }: WidgetWrapperProps): JSX.Element => {
   const error = containerErrorsStore.getState().find(({ widgetName }) => widgetName === name)
   const hasError = !!error
+
   return (
-    <Box {...style} data-name={name} className={className}>
+    <Box {...style} data-name={name} className={className} data-test-id={dataTestId}>
       {(helpText || useClipboard) && (
         <Flex mt={6} alignItems="center" flexShrink={0} {...labelContainerProps}>
           {helpText && <Label isRequired={required}>{helpText}</Label>}

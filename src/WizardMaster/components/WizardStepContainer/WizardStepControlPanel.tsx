@@ -12,8 +12,9 @@ import type { WizardObject } from '../../../typing'
 import { BaseNotifier } from '../../../common/notifier'
 import { validateContext } from '../../utils'
 import { clearErros } from '../../controllers'
+import { WithDataTestId } from '../../../django-spa/aspects/test-id/types'
 
-type WizardStepControlPanelProps = {
+interface WizardStepControlPanelProps extends WithDataTestId {
   wizardStep: BaseWizardStep
   wizard: BaseWizard
   submitChange: Function
@@ -46,7 +47,15 @@ const sendPushAnalytics = (
 }
 
 const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element => {
-  const { wizardStep, wizard, submitChange, currentState, setCurrentState, mainWizardObject } = props
+  const {
+    wizardStep,
+    wizard,
+    submitChange,
+    currentState,
+    setCurrentState,
+    mainWizardObject,
+    'data-test-id': dataTestId,
+  } = props
   const [isDisabled, setIsDisabled] = useState(false)
 
   const getWizardStepControlPayload = (): object => {
@@ -63,9 +72,10 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
   const buttons = getButtons.call(wizardStep, getWizardStepControlPayload())
 
   return (
-    <Flex alignItems="center" flexGrow={1} mt={8} {...wizardStep.wrapperProps}>
+    <Flex alignItems="center" flexGrow={1} mt={8} data-test-id={dataTestId} {...wizardStep.wrapperProps}>
       {buttons.map((button) => (
         <Button
+          name={button.name}
           key={button.name}
           ml={2}
           _first={{

@@ -16,6 +16,7 @@ import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/
 
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
 import { components, modifyStyles } from '../../common/components/ReactSelectCustomization'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 export type SelectObject = {
   value: string
@@ -104,6 +105,8 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
 
     const options = React.useMemo(() => resultOptions.map((option) => formatOption(option)), [resultOptions])
 
+    const { getDataTestId } = useCreateTestId()
+
     return (
       <WidgetWrapper
         name={name}
@@ -113,6 +116,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
         required={isRequired}
         containerProps={containerProps}
         labelContainerProps={labelContainerProps}
+        {...getDataTestId(props)}
       >
         <Select
           inputRef={ref}

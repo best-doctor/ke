@@ -6,6 +6,7 @@ import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 interface PhoneChipInputWidgetProps extends WidgetProps {
   chipClassName?: string
@@ -46,6 +47,8 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
     submitChange({ url: targetUrl, payload: inputPayload })
   }
 
+  const { getDataTestId } = useCreateTestId()
+
   return (
     <WidgetWrapper
       name={name}
@@ -55,6 +58,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
       required={isRequired}
       containerProps={containerProps}
       labelContainerProps={labelContainerProps}
+      {...getDataTestId(props)}
     >
       <PhoneChipInput
         chipClassName={chipClassName}
