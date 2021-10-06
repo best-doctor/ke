@@ -90,7 +90,6 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   useEffect(() => {
     const backendResourceUrl = admin.getResource(id)
     if (needRefreshDetailObject) {
-      setIsLoading(true)
       provider
         .getObject(backendResourceUrl)
         .then(async (res) => {
