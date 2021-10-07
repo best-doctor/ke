@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
+import { useStore } from 'effector-react'
 
 import { WizardStepComponents } from './WizardStepComponents'
 import { WizardStepControlPanel } from './WizardStepControlPanel'
 
 import type { BaseWizardStep, BaseWizard } from '../../interfaces'
-import { containerStore, initialStore } from '../../store'
+import { containerErrorsStore, containerStore, initialStore } from '../../store'
 
 import type { BaseNotifier } from '../../../common/notifier'
 import type { Provider } from '../../../admin/providers/interfaces'
@@ -14,6 +15,7 @@ import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
 import { ErrorBoundary } from '../../../common/components/ErrorBoundary'
 import { useCreateTestId } from '../../../django-spa/aspects'
+import { WizardValidationErrors } from './WizardValidationErrors'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -67,6 +69,8 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
   }
 
+  const errors = useStore(containerErrorsStore)
+
   useEffect(() => {
     if (show) {
       const errorBlock = document.querySelector('[data-has-error="true"]')
@@ -119,6 +123,11 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 />
                 <Row>
                   <Col xs={12}>
+                    <Box key="errors">
+                      <WizardValidationErrors
+                        errors={errors.filter((error) => !error.widgetName).map(({ errorText }) => errorText)}
+                      />
+                    </Box>
                     <Flex alignItems="center" key="steps">
                       <WizardStepControlPanel
                         wizardStep={wizardStep}

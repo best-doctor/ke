@@ -35,6 +35,7 @@ test('Wizard container properly mounts children', () => {
   const component = mount(getComponent())
 
   expect(component.find('WizardStepComponents').length).toBe(1)
+  expect(component.find('WizardValidationErrors').length).toBe(1)
   expect(component.find('WizardStepControlPanel').length).toBe(1)
 })
 
