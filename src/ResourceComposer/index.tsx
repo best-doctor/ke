@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import type { BaseAdmin } from 'admin'
 import type { Provider } from 'admin/providers/interfaces'
@@ -90,7 +90,7 @@ const ResourceComposer = ({
   ]
 
   return (
-    <Router>
+    <>
       {typeof initialPage === 'string' && <Redirect from="/" to={initialPage} />}
       {withSideBar && (
         <SideBar header="Разделы" breadcrumbsRules={breadcrumbsRules}>
@@ -121,7 +121,7 @@ const ResourceComposer = ({
         }
         return resource
       })}
-    </Router>
+    </>
   )
 }
 

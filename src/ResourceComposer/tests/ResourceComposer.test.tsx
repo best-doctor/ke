@@ -19,7 +19,6 @@ test('ResourceComposer mounts router with children', () => {
     </ResourceComposer>
   )
 
-  expect(wrapper.find('BrowserRouter').length).toEqual(1)
   expect(wrapper.find('Resource').length).toEqual(1)
   expect(wrapper.find('AdminResource').length).toEqual(2)
 })

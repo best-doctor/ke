@@ -154,21 +154,24 @@ which makes all magic under the hood and get your user component.
 ```tsx
 import { ResourceComposer } from '@bestdoctor/ke-beta';
 import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'provider';
 
 const provider = new Provider()
 
 const App = () => (
   <ChakraProvider>
-    <ResourceComposer>
-      <AdminResource
-        name="patients"
-        admin={new PatientAdmin()}
-        provider={provider}
-        user={{ name: 'name', permissions: ['admin_user'] }}
-        analytics={analyticsInstnace}
-      />
-    </ResourceComposer>
+    <BrowsserRouter>
+      <ResourceComposer>
+        <AdminResource
+          name="patients"
+          admin={new PatientAdmin()}
+          provider={provider}
+          user={{ name: 'name', permissions: ['admin_user'] }}
+          analytics={analyticsInstnace}
+        />
+      </ResourceComposer>
+    </BrowsserRouter>
   </ChakraProvider>
 )
 ```
