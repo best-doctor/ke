@@ -17,7 +17,6 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
   const {
     name,
     helpText,
-    description,
     targetPayload,
     style,
     submitChange,
@@ -30,7 +29,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
   } = props
   const context = containerStore.getState()
 
-  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
@@ -54,7 +53,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       containerProps={containerProps}
       labelContainerProps={labelContainerProps}

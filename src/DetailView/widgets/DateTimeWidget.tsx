@@ -38,7 +38,6 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
-    description,
     style,
     setInitialValue,
     containerStore,
@@ -54,7 +53,7 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null
   setInitialValue({ [name]: content })
@@ -71,7 +70,7 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
       name={name}
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       {...getDataTestId(props)}
     >

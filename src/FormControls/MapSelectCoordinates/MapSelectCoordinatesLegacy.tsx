@@ -16,7 +16,7 @@ const StyledMapWidget = styled.div`
 export const MapSelectCoordinatesLegacy = (props: WidgetProps & { isClearable?: boolean }): JSX.Element => {
   const { name, style, helpText, notifier, submitChange, targetPayload, containerStore, isClearable } = props
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const updateCoordinates = (position: Coords | null): void => {
     const widgetPayload = getPayload(position, name, targetPayload)
@@ -24,7 +24,7 @@ export const MapSelectCoordinatesLegacy = (props: WidgetProps & { isClearable?: 
   }
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier} description={widgetDescription}>
       <StyledMapWidget>
         <MapSelectCoordinates
           updateCoordinates={updateCoordinates}

@@ -31,7 +31,6 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
     optionValue,
     style,
     helpText,
-    description,
     provider,
     setInitialValue,
     submitChange,
@@ -45,7 +44,7 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object[] | null>(content as object[] | null)
@@ -78,7 +77,7 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       {...getDataTestId(props)}
     >
@@ -113,7 +112,6 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     optionValue,
     style,
     helpText,
-    description,
     provider,
     setInitialValue,
     submitChange,
@@ -126,7 +124,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object[] | null>(content as object[] | null)
@@ -158,7 +156,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       {...getDataTestId(props)}
     >

@@ -48,7 +48,6 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
     style,
     helpText,
     notifier,
-    description,
     provider,
     dataResourceUrl,
     selectedTitle = 'Selected Items',
@@ -66,7 +65,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
 
   const context = containerStore.getState()
 
-  const { targetUrl, content, isRequired } = useWidgetInitialization({
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({
     ...props,
     context,
   })
@@ -191,7 +190,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
       name={name}
       style={style}
       helpText={helpText || 'Items'}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       notifier={notifier}
       useClipboard={useClipboard}

@@ -16,14 +16,14 @@ import { useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider
  * @param props - standard widget props
  */
 const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
-  const { mainDetailObject, containerStore, style, helpText, description, name, provider, displayValue, cacheTime } =
+  const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } =
     props
 
   const [content, setContent] = useState<string>('')
 
   const context = containerStore.getState()
 
-  const { dataResourceUrl } = useWidgetInitialization({ ...props, context })
+  const { dataResourceUrl, widgetDescription } = useWidgetInitialization({ ...props, context })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
 
   const { getDataTestId } = useCreateTestId()
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} {...getDataTestId(props)}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={widgetDescription} {...getDataTestId(props)}>
       <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
         {content || '\u00a0'}
       </Box>

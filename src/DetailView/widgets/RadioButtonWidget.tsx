@@ -32,7 +32,6 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     provider,
     style,
     helpText,
-    description,
     optionLabel,
     optionValue,
     cacheTime,
@@ -41,7 +40,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   const context = containerStore.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
-  const { dataResourceUrl, content } = useWidgetInitialization({ ...props, context })
+  const { dataResourceUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [elements, setElements] = React.useState<RadioButtonElement[]>(content as RadioButtonElement[])
   const [selectedValue, setSelectedValue] = React.useState<RadioButtonElement | undefined>(undefined)
 
@@ -64,7 +63,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   const { getDataTestId } = useCreateTestId()
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} {...getDataTestId(props)}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={widgetDescription} {...getDataTestId(props)}>
       <RadioGroup
         getKey={optionValue}
         getLabel={optionLabel}

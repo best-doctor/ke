@@ -24,7 +24,6 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
   const {
     name,
     helpText,
-    description,
     targetPayload,
     style,
     submitChange,
@@ -45,7 +44,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
   } = props
   const context = containerStore.getState()
 
-  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
@@ -71,7 +70,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       notifier={notifier}
       useClipboard={useClipboard}

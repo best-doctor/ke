@@ -23,12 +23,12 @@ type ReadOnlyMapLegacyProps = WidgetProps & {
 export const ReadOnlyMapLegacy = (props: ReadOnlyMapLegacyProps): JSX.Element => {
   const { name, style, helpText, notifier, containerStore, mainDetailObject, icon, mapHeight = 480, ...rest } = props
   const context = containerStore.getState()
-  const { content } = useWidgetInitialization({ ...props, context })
+  const { content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const height = getAccessor(mapHeight, mainDetailObject, context) as number
   const markerIcon = getAccessor(icon, mainDetailObject, context)
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier} description={widgetDescription}>
       <StyledMapWidget height={height + 10}>
         <ReadOnlyMap position={content as Coords} mapHeight={height} icon={markerIcon} {...rest} />
       </StyledMapWidget>

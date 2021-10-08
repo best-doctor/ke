@@ -19,9 +19,9 @@ const StyledCodeWidget = styled.pre`
 `
 
 const CodeWidget = (props: WidgetProps): JSX.Element => {
-  const { containerStore, style, helpText, description, useClipboard, notifier, name } = props
+  const { containerStore, style, helpText, useClipboard, notifier, name } = props
 
-  const { content } = useWidgetInitialization({ ...props, context: containerStore.getState() })
+  const { content, widgetDescription } = useWidgetInitialization({ ...props, context: containerStore.getState() })
 
   const element = parse(content.toString())
 
@@ -31,7 +31,7 @@ const CodeWidget = (props: WidgetProps): JSX.Element => {
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       useClipboard={useClipboard}
       notifier={notifier}
       {...getDataTestId(props)}

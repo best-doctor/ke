@@ -18,7 +18,6 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   const {
     name,
     helpText,
-    description,
     targetPayload,
     style,
     submitChange,
@@ -28,7 +27,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, isRequired } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })
 
@@ -51,7 +50,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       required={isRequired}
       {...getDataTestId(props)}
     >

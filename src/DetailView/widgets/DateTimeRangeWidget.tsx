@@ -33,7 +33,6 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const {
     name,
     helpText,
-    description,
     targetPayload,
     style,
     submitChange,
@@ -46,7 +45,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   let iStartDate = null
   let iEndDate = null
 
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   if (content) {
     ;[iStartDate, iEndDate] = content as [string, string]
   }
@@ -103,7 +102,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
       name={name}
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       {...getDataTestId(props)}
     >
       <BaseDateTimeRangeWidget startDate={startDate} endDate={endDate} handleChangeDate={handleChangeDate} />

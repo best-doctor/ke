@@ -114,7 +114,6 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   const {
     name,
     helpText,
-    description,
     targetPayload,
     style,
     submitChange,
@@ -125,7 +124,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const value = content || getInitialValue(inputCount)
 
@@ -176,7 +175,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
       name={name}
       style={{ ...style, zIndex: 1000 }}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       {...getDataTestId(props)}
     >
       <StyledDateTimeRangeListContainer className="date-time-list-container">

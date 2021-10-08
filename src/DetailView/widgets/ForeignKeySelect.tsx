@@ -55,7 +55,6 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
     mainDetailObject,
     provider,
     helpText,
-    description,
     targetPayload,
     optionLabel,
     optionValue,
@@ -87,7 +86,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
 
   const context = containerStore.getState()
 
-  const { targetUrl, content, dataResourceUrl, isRequired } = useWidgetInitialization(
+  const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization(
     { ...props, context },
     { allowAllDefinedValues: getAccessor(allowAllDefinedValues) }
   )
@@ -125,7 +124,7 @@ const ForeignKeySelectWidgetNew = (props: ForeignKeySelectWidgetProps): JSX.Elem
       name={name}
       style={style}
       helpText={helpText}
-      description={description}
+      description={widgetDescription}
       useClipboard={useClipboard}
       copyValue={handleCopyValue}
       notifier={notifier}
