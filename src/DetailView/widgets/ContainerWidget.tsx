@@ -26,6 +26,7 @@ const ContainerWidget = (props: any): JSX.Element => {
     analytics,
     ViewType,
     containerStore,
+    containerErrorsStore,
     widgets,
     name,
     isCollapsible = false,
@@ -50,6 +51,7 @@ const ContainerWidget = (props: any): JSX.Element => {
     analytics,
     ViewType,
     containerStore,
+    containerErrorsStore,
   })
   const context = (containerStore as Store<object>).getState()
   const isContainerCollapsible = getAccessor(isCollapsible, mainDetailObject, context)

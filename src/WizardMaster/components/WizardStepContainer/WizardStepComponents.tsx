@@ -3,7 +3,7 @@ import { useStore } from 'effector-react'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { setInitialValue } from '../../controllers'
-import { containerStore } from '../../store'
+import {containerErrorsStore, containerStore} from '../../store'
 
 import { mountComponents } from '../../../common/utils/mountComponents'
 import type { BaseNotifier } from '../../../common/notifier'
@@ -62,6 +62,7 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
         analytics,
         ViewType,
         containerStore,
+        containerErrorsStore,
         setCurrentState,
       })}
     </>

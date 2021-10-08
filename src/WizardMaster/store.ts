@@ -7,4 +7,4 @@ const containerErrorsStore = createStore<ErrorElement[]>([])
 const initialStore = createStore<StoreElement>({})
 const containerStore = createStore<StoreElement>({})
 
-export { containerErrorsStore, containerStore, initialStore }
+export { containerErrorsStore, containerStore, initialStore, StoreElement, ErrorElement }

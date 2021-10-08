@@ -5,6 +5,7 @@ import type { BaseAnalytic } from 'integration/analytics'
 import { CSSProperties } from 'react'
 import { BoxProps } from '@chakra-ui/react'
 import { TestIdGenerationProps } from './django-spa/aspects/test-id/TestIdProvider'
+import {ErrorElement} from "./WizardMaster/store";
 
 type Accessor<T> = T | Function | undefined
 
@@ -40,6 +41,7 @@ type WidgetProps = {
   notBlockingValidators?: ValidatorFunction[]
   blockingValidators?: ValidatorFunction[]
   containerStore: Store<object>
+  containerErrorsStore?: Store<ErrorElement[]> | undefined
   helpText?: string
   description?: string | JSX.Element
   displayValue?: GenericAccessor

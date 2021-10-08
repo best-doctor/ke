@@ -14,6 +14,7 @@ import type { DetailObject, GenericAccessor } from '../../typing'
 import { isValidComponent } from './isComponent'
 import { get } from './get'
 import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
+import {ErrorElement, StoreElement} from "../../WizardMaster/store";
 
 type MountComponentsKwargs = {
   setInitialValue: Function
@@ -28,7 +29,8 @@ type MountComponentsKwargs = {
   user: object
   analytics: BaseAnalytic | undefined
   ViewType: string
-  containerStore?: Store<{ [key: string]: object | null }> | Store<object> | undefined
+  containerStore?: Store<StoreElement> | Store<object> | undefined
+  containerErrorsStore?: Store<ErrorElement[]> | undefined
   setCurrentState?: Function
 }
 
@@ -64,6 +66,7 @@ const mountComponents = ({
   analytics,
   ViewType,
   containerStore,
+  containerErrorsStore,
   setCurrentState,
 }: MountComponentsKwargs): JSX.Element[] => {
   /*
@@ -150,6 +153,7 @@ const mountComponents = ({
                 setInitialValue={setInitialValue}
                 submitChange={submitChange}
                 containerStore={containerStore}
+                containerErrorsStore={containerErrorsStore}
                 setCurrentState={setCurrentState}
                 {...adminElement}
               />
