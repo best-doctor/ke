@@ -1,5 +1,7 @@
-export type NotificationTitle = string
-export type NotificationDescription = string
+import { ReactNode } from 'react'
+
+export type NotificationTitle = ReactNode
+export type NotificationDescription = ReactNode
 
 export type NotificationsParams = {
   title?: NotificationTitle
