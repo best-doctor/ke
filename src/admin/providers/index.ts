@@ -28,6 +28,8 @@ import type { BaseResponse, ProviderOptions } from './types'
  * @public
  */
 export class BaseProvider implements Provider {
+  private pendingRequests: Record<string, Promise<unknown>> = {}
+
   /**
    * @param http - axios-instance used for all http requests
    * @param cache - optional cache-object for temporary store all got results by their URLs
@@ -187,10 +189,21 @@ export class BaseProvider implements Provider {
       if (cached !== undefined) return Promise.resolve(cached)
       effectiveForceCache = true
     }
-    const response = this.http.get(resourceUrl, requestConfig)
-    if (effectiveForceCache) response.then((data) => this.cache?.set(resourceUrl, data))
-    response.catch(this.onErrorHandler)
-    return response
+
+    if (!(resourceUrl in this.pendingRequests)) {
+      const response = this.http.get(resourceUrl, requestConfig)
+      this.pendingRequests[resourceUrl] = response
+      response.then(() => {
+        delete this.pendingRequests[resourceUrl]
+      })
+      if (effectiveForceCache) {
+        response.then((data) => this.cache?.set(resourceUrl, data))
+      }
+      response.catch(this.onErrorHandler)
+      return response
+    }
+
+    return this.pendingRequests[resourceUrl]
   }
 
   navigate = async (
