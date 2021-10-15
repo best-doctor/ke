@@ -1,12 +1,11 @@
 import { useCallback } from 'react'
 import { useTestIdConfig } from '../TestIdProvider/hooks/useTestIdConfig'
 import { WithDataTestId } from '../types'
-import { useWizardName } from '../WizardNameProvider'
 
 export interface TestIdGenerationProps extends WithDataTestId {
   name?: string
-  stepName?: string
-  wizardName?: string
+  prefix?: string
+  postfix?: string
 }
 
 export type UseTestIdProps = TestIdGenerationProps
@@ -17,36 +16,36 @@ export interface UseCreateTestIdResult {
 }
 
 export function useCreateTestId(config: UseTestIdProps = {}): UseCreateTestIdResult {
-  const { stepName: contextStepName, name: contextWizardName } = useWizardName()
-  const {
-    name: configName,
-    stepName: configStepName = contextStepName,
-    wizardName: configWizardName = contextWizardName,
-    'data-test-id': configDataTestId,
-  } = config
+  const { name: configName, 'data-test-id': configDataTestId, prefix: configPrefix, postfix: configPostfix } = config
 
   const { config: testIdConfig } = useTestIdConfig() ?? {}
 
   const create = useCallback(
     ({
       name = configName,
-      stepName = configStepName,
-      wizardName = configWizardName,
       'data-test-id': dataTestId = configDataTestId,
+      prefix = configPrefix,
+      postfix = configPostfix,
     }: UseTestIdProps = {}): string | undefined => {
-      let resultDataTestId: string | undefined
-
       if (testIdConfig?.enabled === false) {
-        resultDataTestId = undefined
-      } else if (dataTestId) {
-        resultDataTestId = dataTestId
-      } else {
-        resultDataTestId = [wizardName, stepName, name].filter((item) => !!item).join('-')
+        return undefined
       }
-
-      return resultDataTestId
+      if (dataTestId) {
+        return dataTestId
+      }
+      if (!name) {
+        return name
+      }
+      let testId = name
+      if (prefix) {
+        testId = prefix.concat(testId)
+      }
+      if (postfix) {
+        testId = testId.concat(postfix)
+      }
+      return testId
     },
-    [configDataTestId, configName, configStepName, configWizardName, testIdConfig?.enabled]
+    [configDataTestId, configName, configPostfix, configPrefix, testIdConfig?.enabled]
   )
 
   const getDataTestId = (options: UseTestIdProps = {}): WithDataTestId => {

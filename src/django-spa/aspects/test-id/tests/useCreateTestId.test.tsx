@@ -2,9 +2,8 @@ import React, { PropsWithChildren } from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 
 import { TestIdProvider, useCreateTestId } from '../TestIdProvider'
-import { WizardNameProvider, WizardNameProviderProps } from '../WizardNameProvider'
 
-describe('useCreateTestId без WizardNameProvider', () => {
+describe('useCreateTestId', () => {
   it('Должен рендерить test id из имени виджета', () => {
     const {
       result: { current },
@@ -14,32 +13,32 @@ describe('useCreateTestId без WizardNameProvider', () => {
     expect(current.create()).toBe('name')
   })
 
-  it('Должен рендерить test id из имени виджета и шага визарда', () => {
+  it('Должен рендерить test id с префиксом', () => {
     const {
       result: { current },
-    } = renderHook(() => useCreateTestId({ name: 'name', stepName: 'step' }), { wrapper: TestIdProvider })
-    expect(current.create()).toBe('step-name')
+    } = renderHook(() => useCreateTestId({ name: 'name', prefix: 'prefix--' }), { wrapper: TestIdProvider })
+    expect(current.create()).toBe('prefix--name')
   })
 
-  it('Должен рендерить test id из имени виджета и шага визарда и названия визарда', () => {
+  it('Должен рендерить test id с префиксом из хука', () => {
     const {
       result: { current },
-    } = renderHook(() => useCreateTestId({ name: 'name', stepName: 'step', wizardName: 'wizard' }), {
-      wrapper: TestIdProvider,
-    })
-    expect(current.create()).toBe('wizard-step-name')
+    } = renderHook(() => useCreateTestId({ prefix: 'prefix--' }), { wrapper: TestIdProvider })
+    expect(current.create({ name: 'name' })).toBe('prefix--name')
   })
 
-  it('data-test-id должен рендерить data-test-id и переопределять другие пропсы', () => {
+  it('Должен рендерить test id с постфиксом', () => {
     const {
       result: { current },
-    } = renderHook(
-      () => useCreateTestId({ name: 'name', stepName: 'step', wizardName: 'wizard', 'data-test-id': 'test-id' }),
-      {
-        wrapper: TestIdProvider,
-      }
-    )
-    expect(current.create()).toBe('test-id')
+    } = renderHook(() => useCreateTestId({ name: 'name', postfix: '--postfix' }), { wrapper: TestIdProvider })
+    expect(current.create()).toBe('name--postfix')
+  })
+
+  it('Должен рендерить test id с постфиксом из хука', () => {
+    const {
+      result: { current },
+    } = renderHook(() => useCreateTestId({ postfix: '--postfix' }), { wrapper: TestIdProvider })
+    expect(current.create({ name: 'name' })).toBe('name--postfix')
   })
 
   it('Долежн возвращать undefined, если test-id глобально выключен', () => {
@@ -52,37 +51,5 @@ describe('useCreateTestId без WizardNameProvider', () => {
     })
 
     expect(current.create()).toBeUndefined()
-  })
-})
-
-const Wrapper: React.FC<WizardNameProviderProps> = (props) => (
-  <TestIdProvider>
-    <WizardNameProvider {...props} />
-  </TestIdProvider>
-)
-
-describe('useCreateTestId с данными из WizardNameProvider', () => {
-  it('Должен рендерить test id с именем виджета из контекста', () => {
-    const {
-      result: { current },
-    } = renderHook(() => useCreateTestId({ name: 'name' }), {
-      wrapper: (props) => <Wrapper {...props} name="wizard" />,
-    })
-    expect(current.create()).toBe('wizard-name')
-  })
-
-  it('Должен рендерить test id с именем виджета и именем шага из контекста', () => {
-    const {
-      result: { current },
-    } = renderHook(() => useCreateTestId({ name: 'name' }), {
-      wrapper: ({ children }) => (
-        <Wrapper name="wizard">
-          <WizardNameProvider name="wizard" stepName="step">
-            {children}
-          </WizardNameProvider>
-        </Wrapper>
-      ),
-    })
-    expect(current.create()).toBe('wizard-step-name')
   })
 })
