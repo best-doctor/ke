@@ -18,4 +18,5 @@ test('Render detail mount', () => {
   )
 
   expect(component.find('ArrowLeft').length).toEqual(1)
+  expect(component.find('div[data-test-id="testAdmin"]').length).toEqual(1)
 })

@@ -38,6 +38,7 @@ test('Wizard main component elements', () => {
   const component = shallow(getComponent())
 
   expect(component.find('WizardContainer').length).toBe(1)
+  expect(component.find({ 'data-test-id': 'testWizard' }).length).toBe(1)
 })
 
 test('Wizard main component push analytics', () => {

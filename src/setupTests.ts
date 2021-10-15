@@ -21,6 +21,8 @@ configure({ adapter: new Adapter() })
 const testNotifier = new ChakraUINotifier(jest.fn())
 
 class TestAdmin extends BaseAdmin {
+  name = 'testAdmin'
+
   baseUrl = 'test'
 
   permissions = undefined

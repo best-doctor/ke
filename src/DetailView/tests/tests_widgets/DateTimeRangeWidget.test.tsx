@@ -72,21 +72,3 @@ test('DateTimeRangeWidget widget should be rendered with name test id', () => {
 
   expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('test')
 })
-
-test('DateTimeRangeWidget widget should be rendered with wizard-name test id', () => {
-  const component = mount(getComponent({ name: 'test', wizardName: 'wizard' }))
-
-  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('wizard-test')
-})
-
-test('DateTimeRangeWidget widget should be rendered with wizard-step-name test id', () => {
-  const component = mount(getComponent({ name: 'test', wizardName: 'wizard', stepName: 'step' }))
-
-  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('wizard-step-test')
-})
-
-test('DateTimeRangeWidget widget should be rendered with step-name test id', () => {
-  const component = mount(getComponent({ name: 'test', stepName: 'step' }))
-
-  expect(component.find(WidgetWrapper).prop('data-test-id')).toEqual('step-test')
-})

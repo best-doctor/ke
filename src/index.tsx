@@ -147,9 +147,6 @@ export {
   NotificationsProvider,
   useCreateTestId,
   TestIdProvider,
-  WizardNameProvider,
-  WizardNameProviderProps,
-  useWizardName,
   TestIdGenerationProps,
   WithDataTestId,
 } from './django-spa/aspects'

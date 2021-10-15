@@ -17,6 +17,7 @@ import { setFavicon } from '../Browser/Favicon'
 import { ErrorBoundary } from '../common/components/ErrorBoundary'
 import { containerStore } from './store'
 import { setInitialValue } from './events'
+import { useCreateTestId } from '../django-spa/aspects'
 
 const ViewType = 'detail_view'
 
@@ -111,6 +112,8 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
     }
   }, [id, provider, admin, needRefreshDetailObject, props, mainDetailObject])
 
+  const { getDataTestId } = useCreateTestId({ name: admin.name })
+
   return (
     <>
       <Row>
@@ -120,7 +123,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
           </Box>
         </Col>
       </Row>
-      <Row>
+      <Row {...getDataTestId()}>
         <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
           {isLoading ? <Spinner /> : ''}
           {!isLoading && !loadError
@@ -145,7 +148,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
               })
             : ''}
           {!isLoading && loadError ? (
-            <Alert status="error">
+            <Alert status="error" {...getDataTestId({ postfix: '--loadingError' })}>
               <AlertIcon />
               <AlertTitle mr={2}>Ошибка при выполнении запроса</AlertTitle>
               <AlertDescription>{loadError.response?.data?.message}</AlertDescription>

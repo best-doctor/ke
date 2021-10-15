@@ -13,7 +13,7 @@ import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { Accessor, DetailObject } from '../../typing'
 import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
-import { WizardNameProvider } from '../../django-spa/aspects/test-id/WizardNameProvider'
+import { useCreateTestId } from '../../django-spa/aspects'
 
 type WizardProps = {
   resourceName: string
@@ -76,8 +76,10 @@ const Wizard = (props: WizardProps): JSX.Element => {
     toggleExpanded(!isExpanded)
   }
 
+  const { getDataTestId } = useCreateTestId({ name: wizard.name })
+
   return (
-    <Box data-wizard-name={wizard.name}>
+    <Box data-wizard-name={wizard.name} {...getDataTestId()}>
       {effectiveAllowToggle && (
         <Row>
           <Col xs={12}>
@@ -95,21 +97,19 @@ const Wizard = (props: WizardProps): JSX.Element => {
           </Col>
         </Row>
       )}
-      <WizardNameProvider name={wizard.name}>
-        <WizardContainer
-          wizard={wizard}
-          show={isExpanded}
-          provider={provider}
-          mainDetailObject={mainDetailObject}
-          setMainDetailObject={setMainDetailObject}
-          refreshMainDetailObject={refreshMainDetailObject}
-          notifier={notifier}
-          analytics={analytics}
-          ViewType={ViewType}
-          user={user}
-          submitChange={submitChange}
-        />
-      </WizardNameProvider>
+      <WizardContainer
+        wizard={wizard}
+        show={isExpanded}
+        provider={provider}
+        mainDetailObject={mainDetailObject}
+        setMainDetailObject={setMainDetailObject}
+        refreshMainDetailObject={refreshMainDetailObject}
+        notifier={notifier}
+        analytics={analytics}
+        ViewType={ViewType}
+        user={user}
+        submitChange={submitChange}
+      />
     </Box>
   )
 }

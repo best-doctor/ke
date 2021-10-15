@@ -100,7 +100,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                     fontWeight="medium"
                     lineHeight="9"
                     data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}
-                    {...getDataTestId({ name: '-title' })}
+                    {...getDataTestId({ name: wizardStep.name, postfix: '--title' })}
                   >
                     {title}
                   </Text>
@@ -141,7 +141,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                         refreshMainDetailObject={refreshMainDetailObject}
                         setMainDetailObject={setMainDetailObject}
                         notifier={notifier}
-                        {...getDataTestId({ name: '-controlPanel' })}
+                        {...getDataTestId({ name: wizardStep.name, postfix: '--controlPanel' })}
                       />
                     </Flex>
                   </Col>

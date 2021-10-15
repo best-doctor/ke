@@ -24,6 +24,8 @@ export interface BaseAdmin {
 }
 
 export abstract class BaseAdmin {
+  name?: string
+
   abstract baseUrl: string
 
   abstract verboseName?: string

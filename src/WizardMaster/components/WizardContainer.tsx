@@ -11,7 +11,6 @@ import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
 import { ErrorBoundary } from '../../common/components/ErrorBoundary'
-import { WizardNameProvider } from '../../django-spa/aspects/test-id/WizardNameProvider'
 
 type WizardContainerProps = {
   wizard: BaseWizard
@@ -65,24 +64,22 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
 
   return (
     <ErrorBoundary>
-      <WizardNameProvider name={wizard.name} stepName={wizardStep.name}>
-        <WizardStepContainer
-          wizard={wizard}
-          wizardStep={wizardStep}
-          provider={provider}
-          mainWizardObject={getMainWizardObject()}
-          currentState={currentState}
-          setCurrentState={setCurrentState}
-          setMainDetailObject={setMainDetailObject}
-          refreshMainDetailObject={refreshMainDetailObject}
-          notifier={notifier}
-          analytics={analytics}
-          user={user}
-          ViewType={ViewType}
-          show={show}
-          submitChange={submitChange}
-        />
-      </WizardNameProvider>
+      <WizardStepContainer
+        wizard={wizard}
+        wizardStep={wizardStep}
+        provider={provider}
+        mainWizardObject={getMainWizardObject()}
+        currentState={currentState}
+        setCurrentState={setCurrentState}
+        setMainDetailObject={setMainDetailObject}
+        refreshMainDetailObject={refreshMainDetailObject}
+        notifier={notifier}
+        analytics={analytics}
+        user={user}
+        ViewType={ViewType}
+        show={show}
+        submitChange={submitChange}
+      />
     </ErrorBoundary>
   )
 }
