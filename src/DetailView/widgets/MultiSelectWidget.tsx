@@ -3,7 +3,7 @@ import React from 'react'
 import type { ValueType } from 'react-select'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
-import { AsyncSelectWidgetNew, AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
+import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import type { Accessor, DetailObject, WidgetProps } from '../../typing'
@@ -23,7 +23,7 @@ export type MultiSelectWidgetProps = WidgetProps & {
   staleTime?: Accessor<number>
 } & ExtendedProps
 
-const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
+const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
   const {
     name,
     mainDetailObject,
@@ -44,7 +44,10 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization({
+    ...props,
+    context,
+  })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object[] | null>(content as object[] | null)
@@ -70,85 +73,6 @@ const MultiSelectWidgetNew = (props: MultiSelectWidgetProps): JSX.Element => {
     setValue(content as object[] | null)
   }, [content])
 
-  const { getDataTestId } = useCreateTestId()
-
-  return (
-    <WidgetWrapper
-      name={name}
-      style={style}
-      helpText={helpText}
-      description={widgetDescription}
-      required={isRequired}
-      {...getDataTestId(props)}
-    >
-      <AsyncSelectWidgetNew
-        provider={provider}
-        cacheTime={effectiveCacheTime}
-        dataResourceUrl={dataResourceUrl}
-        handleChange={handleChange}
-        closeMenuOnSelect={false}
-        value={value}
-        isMulti
-        getOptionLabel={(val: object | null) => optionLabel(val, mainDetailObject)}
-        getOptionValue={optionValue}
-        getOptionLabelMenu={
-          optionLabelMenu ? (val: object | null) => optionLabelMenu(val, mainDetailObject) : undefined
-        }
-        getOptionLabelValue={
-          optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
-        }
-        staleTime={staleTime}
-        componentsClasses={componentsClasses}
-      />
-    </WidgetWrapper>
-  )
-}
-
-const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
-  const {
-    name,
-    mainDetailObject,
-    optionLabel,
-    optionValue,
-    style,
-    helpText,
-    provider,
-    setInitialValue,
-    submitChange,
-    containerStore,
-    cacheTime,
-    targetPayload,
-    optionLabelMenu,
-    optionLabelValue,
-    componentsClasses,
-  } = props
-
-  const context = containerStore.getState()
-  const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
-  const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
-
-  const [value, setValue] = React.useState<object[] | null>(content as object[] | null)
-  setInitialValue(value ? getPayload(value, name, targetPayload) : null)
-
-  const handleChange = (changeValue: ValueType<MultiSelectValue, true>): void => {
-    setValue(changeValue as MultiSelectValue[])
-
-    const widgetPayload = getPayload(changeValue, name, targetPayload)
-
-    pushAnalytics({
-      eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
-      widgetType: WidgetTypeEnum.INPUT,
-      value: widgetPayload,
-      objectForAnalytics: props.mainDetailObject,
-      ...props,
-    })
-
-    submitChange({ url: targetUrl, payload: widgetPayload })
-  }
-
-  React.useMemo(() => {
-    setValue(content as object[] | null)
-  }, [content])
   const { getDataTestId } = useCreateTestId()
 
   return (
@@ -176,10 +100,11 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
         getOptionLabelValue={
           optionLabelValue ? (val: object | null) => optionLabelValue(val, mainDetailObject) : undefined
         }
+        staleTime={staleTime}
         componentsClasses={componentsClasses}
       />
     </WidgetWrapper>
   )
 }
 
-export { MultiSelectWidgetNew, MultiSelectWidget }
+export { MultiSelectWidget }

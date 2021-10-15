@@ -55,11 +55,9 @@ import {
   SelectObject,
   BaseSelectWidget,
   ForeignKeySelectWidget,
-  ForeignKeySelectWidgetNew,
   InputWidget,
   AvatarWidget,
   MultiSelectWidget,
-  MultiSelectWidgetNew,
   DateTimeRangeWidget,
   TextEditorWidget,
   DateTimeRangeListWidget,
@@ -84,13 +82,12 @@ import {
   BaseFilter,
   DateFilter,
   DateTimeFilter,
-  ForeignKeySelectFilterNew,
   ForeignKeySelectFilterProps,
   ForeignKeySelectFilter,
   BooleanFilter,
   MaskFilter,
 } from './ListView/components/Table/filters'
-import { AsyncSelectWidgetNew, AsyncSelectWidget } from './common/components/AsyncSelectWidget'
+import { AsyncSelectWidget } from './common/components/AsyncSelectWidget'
 
 import { AsyncDualSelectWidget } from './common/components/AsyncDualSelectWidget/AsyncDualSelectWidget'
 import { ErrorBoundary } from './common/components/ErrorBoundary'
@@ -266,11 +263,7 @@ export {
   OnDetailObjectLoadedProps,
   Label,
   AsyncSelectWidget,
-  ForeignKeySelectWidgetNew,
   ForeignKeySelectFilter,
-  MultiSelectWidgetNew,
   ForeignKeySelectFilterProps,
-  ForeignKeySelectFilterNew,
-  AsyncSelectWidgetNew,
   SwitchWidget,
 }
