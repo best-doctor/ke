@@ -44,7 +44,6 @@ import {
 import { hasPermission } from './common/permissions'
 import { BaseNotifier, ChakraUINotifier } from './common/notifier'
 import { EnableELK } from './integration/EnableELK'
-import { EnableSentry } from './integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from './WizardMaster/buttons'
 import type { WidgetPayload } from './DetailView/events'
 import type { CursorPagination, PagedPagination } from './admin/providers/pagination'
@@ -128,7 +127,6 @@ export * from './Browser'
 export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
-export * as Sentry from '@sentry/react'
 export { Button } from './cdk/Controls'
 export * from './django-spa/Controls'
 export {
@@ -173,7 +171,6 @@ export {
   MaskFilter,
   StoreManager,
   AsyncDualSelectWidget,
-  EnableSentry,
   EnableELK,
   TextValidationWidget,
   LinkWidget,
