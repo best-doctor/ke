@@ -1861,16 +1861,16 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
-"@emotion/cache@^11.1.3", "@emotion/cache@^11.4.0":
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-11.4.0.tgz#293fc9d9a7a38b9aad8e9337e5014366c3b09ac0"
-  integrity sha512-Zx70bjE7LErRO9OaZrhf22Qye1y4F7iDl+ITjet0J+i+B88PrAOBkKvaAWhxsZf72tDLajwCgfCjJ2dvH77C3g==
+"@emotion/cache@^11.1.3", "@emotion/cache@^11.4.0", "@emotion/cache@^11.5.0":
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-11.5.0.tgz#a5eb78cbef8163939ee345e3ddf0af217b845e62"
+  integrity sha512-mAZ5QRpLriBtaj/k2qyrXwck6yeoz1V5lMt/jfj6igWU35yYlNKs2LziXVgvH81gnJZ+9QQNGelSsnuoAy6uIw==
   dependencies:
     "@emotion/memoize" "^0.7.4"
-    "@emotion/sheet" "^1.0.0"
+    "@emotion/sheet" "^1.0.3"
     "@emotion/utils" "^1.0.0"
     "@emotion/weak-memoize" "^0.2.5"
-    stylis "^4.0.3"
+    stylis "^4.0.10"
 
 "@emotion/core@^10.1.1":
   version "10.1.1"
@@ -1934,14 +1934,14 @@
   integrity sha512-igX9a37DR2ZPGYtV6suZ6whr8pTFtyHL3K/oLUotxpSVO2ASaprmAe2Dkq7tBo7CRY7MMDrAa9nuQP9/YG8FxQ==
 
 "@emotion/react@^11.1.1", "@emotion/react@^11.4.0":
-  version "11.4.1"
-  resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.4.1.tgz#a1b0b767b5bad57515ffb0cad9349614d27f4d57"
-  integrity sha512-pRegcsuGYj4FCdZN6j5vqCALkNytdrKw3TZMekTzNXixRg4wkLsU5QEaBG5LC6l01Vppxlp7FE3aTHpIG5phLg==
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.5.0.tgz#19b5771bbfbda5e8517e948a2d9064810f0022bd"
+  integrity sha512-MYq/bzp3rYbee4EMBORCn4duPQfgpiEB5XzrZEBnUZAL80Qdfr7CEv/T80jwaTl/dnZmt9SnTa8NkTrwFNpLlw==
   dependencies:
     "@babel/runtime" "^7.13.10"
-    "@emotion/cache" "^11.4.0"
+    "@emotion/cache" "^11.5.0"
     "@emotion/serialize" "^1.0.2"
-    "@emotion/sheet" "^1.0.2"
+    "@emotion/sheet" "^1.0.3"
     "@emotion/utils" "^1.0.0"
     "@emotion/weak-memoize" "^0.2.5"
     hoist-non-react-statics "^3.3.1"
@@ -1973,10 +1973,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-0.9.4.tgz#894374bea39ec30f489bbfc3438192b9774d32e5"
   integrity sha512-zM9PFmgVSqBw4zL101Q0HrBVTGmpAxFZH/pYx/cjJT5advXguvcgjHFTCaIO3enL/xr89vK2bh0Mfyj9aa0ANA==
 
-"@emotion/sheet@^1.0.0", "@emotion/sheet@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-1.0.2.tgz#1d9ffde531714ba28e62dac6a996a8b1089719d0"
-  integrity sha512-QQPB1B70JEVUHuNtzjHftMGv6eC3Y9wqavyarj4x4lg47RACkeSfNo5pxIOKizwS9AEFLohsqoaxGQj4p0vSIw==
+"@emotion/sheet@^1.0.0", "@emotion/sheet@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-1.0.3.tgz#00c326cd7985c5ccb8fe2c1b592886579dcfab8f"
+  integrity sha512-YoX5GyQ4db7LpbmXHMuc8kebtBGP6nZfRC5Z13OKJMixBEwdZrJ914D6yJv/P+ZH/YY3F5s89NYX2hlZAf3SRQ==
 
 "@emotion/styled-base@^10.0.27":
   version "10.0.31"
@@ -3096,70 +3096,6 @@
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.2.0.tgz#a1d635ce9a5b55f1e48fddc6acafc0e1128a6476"
   integrity sha512-QaQAfY/FdaSwPmm0JnW9AW+t0ocfUYmuso9WmeIMwTRCqcqNxc4GFe5uT0LDLmsYt/wxAeYoGWVaD8sd/Vquig==
-
-"@sentry/browser@5.30.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-5.30.0.tgz#c28f49d551db3172080caef9f18791a7fd39e3b3"
-  integrity sha512-rOb58ZNVJWh1VuMuBG1mL9r54nZqKeaIlwSlvzJfc89vyfd7n6tQ1UXMN383QBz/MS5H5z44Hy5eE+7pCrYAfw==
-  dependencies:
-    "@sentry/core" "5.30.0"
-    "@sentry/types" "5.30.0"
-    "@sentry/utils" "5.30.0"
-    tslib "^1.9.3"
-
-"@sentry/core@5.30.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-5.30.0.tgz#6b203664f69e75106ee8b5a2fe1d717379b331f3"
-  integrity sha512-TmfrII8w1PQZSZgPpUESqjB+jC6MvZJZdLtE/0hZ+SrnKhW3x5WlYLvTXZpcWePYBku7rl2wn1RZu6uT0qCTeg==
-  dependencies:
-    "@sentry/hub" "5.30.0"
-    "@sentry/minimal" "5.30.0"
-    "@sentry/types" "5.30.0"
-    "@sentry/utils" "5.30.0"
-    tslib "^1.9.3"
-
-"@sentry/hub@5.30.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-5.30.0.tgz#2453be9b9cb903404366e198bd30c7ca74cdc100"
-  integrity sha512-2tYrGnzb1gKz2EkMDQcfLrDTvmGcQPuWxLnJKXJvYTQDGLlEvi2tWz1VIHjunmOvJrB5aIQLhm+dcMRwFZDCqQ==
-  dependencies:
-    "@sentry/types" "5.30.0"
-    "@sentry/utils" "5.30.0"
-    tslib "^1.9.3"
-
-"@sentry/minimal@5.30.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-5.30.0.tgz#ce3d3a6a273428e0084adcb800bc12e72d34637b"
-  integrity sha512-BwWb/owZKtkDX+Sc4zCSTNcvZUq7YcH3uAVlmh/gtR9rmUvbzAA3ewLuB3myi4wWRAMEtny6+J/FN/x+2wn9Xw==
-  dependencies:
-    "@sentry/hub" "5.30.0"
-    "@sentry/types" "5.30.0"
-    tslib "^1.9.3"
-
-"@sentry/react@^5.19.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/react/-/react-5.30.0.tgz#320e05f766b6a26faefa8d76d1101fd50c69f541"
-  integrity sha512-dvn4mqCgbeEuUXEGp5P9PaW5j4GWTFUSdx/yG8f9IxNZv5zM+7otjog9ukrubFZvlxVxD/PrIxK0MhadfFY/Dw==
-  dependencies:
-    "@sentry/browser" "5.30.0"
-    "@sentry/minimal" "5.30.0"
-    "@sentry/types" "5.30.0"
-    "@sentry/utils" "5.30.0"
-    hoist-non-react-statics "^3.3.2"
-    tslib "^1.9.3"
-
-"@sentry/types@5.30.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-5.30.0.tgz#19709bbe12a1a0115bc790b8942917da5636f402"
-  integrity sha512-R8xOqlSTZ+htqrfteCWU5Nk0CDN5ApUTvrlvBuiH1DyP6czDZ4ktbZB0hAgBlVcK0U+qpD3ag3Tqqpa5Q67rPw==
-
-"@sentry/utils@5.30.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-5.30.0.tgz#9a5bd7ccff85ccfe7856d493bffa64cabc41e980"
-  integrity sha512-zaYmoH0NWWtvnJjC9/CBseXMtKHm/tm40sz3YfJRxeQjyzRqNQPgivpd9R/oDJCYj999mzdW382p/qi2ypjLww==
-  dependencies:
-    "@sentry/types" "5.30.0"
-    tslib "^1.9.3"
 
 "@seznam/compose-react-refs@^1.0.5":
   version "1.0.6"
@@ -9343,7 +9279,7 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -14650,7 +14586,7 @@ styled-system@^5.1.5:
     "@styled-system/variant" "^5.1.5"
     object-assign "^4.1.1"
 
-stylis@^4.0.3:
+stylis@^4.0.10, stylis@^4.0.3:
   version "4.0.10"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-4.0.10.tgz#446512d1097197ab3f02fb3c258358c3f7a14240"
   integrity sha512-m3k+dk7QeJw660eIKRRn3xPF6uuvHs/FFzjX3HQ5ove0qYsiygoAhwn5a3IYKaZPo5LrYD0rfVmtv1gNY1uYwg==
