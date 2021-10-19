@@ -23,9 +23,9 @@ export const StyledTable = makeTable(
   `,
   styled.th`
     height: 3em;
-    padding: 0.5em 3em 0.5em 0.5em;
+    padding: 10px;
   `,
   styled.td`
-    padding: 1em 3em 1em 0.5em;
+    padding: 10px;
   `
 )
