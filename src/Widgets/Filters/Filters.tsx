@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo, FC } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
-import { Field } from '@django-spa/Forms'
+import { Field } from '@components/integrators/Forms'
 import { PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import { ListVertical } from '../../Layouts'

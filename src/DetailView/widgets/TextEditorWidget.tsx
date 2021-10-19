@@ -1,11 +1,11 @@
 import React from 'react'
 
+import { TextEditor } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
-import { TextEditor } from '../../django-spa/Controls'
 
 import type { WidgetProps } from '../../typing'
 import { useCreateTestId } from '../../django-spa/aspects'
@@ -15,16 +15,7 @@ type TextEditorProps = WidgetProps & {
 }
 
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-    containerStore,
-    widgetClassName,
-  } = props
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore, widgetClassName } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })

@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode, useMemo } from 'react'
 import { Box, Center, Flex, Spacer } from '@chakra-ui/react'
 import { HeaderConfig, TableProps } from '@cdk/Tables'
-import { Field } from '@django-spa/Forms'
+import { Field } from '@components/integrators/Forms'
 import { GroupControl } from '@cdk/Controls'
 
 import { OrderDirection } from './types'

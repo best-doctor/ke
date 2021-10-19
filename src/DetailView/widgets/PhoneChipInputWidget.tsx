@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { PhoneChipInput } from '../../django-spa/Controls'
+import { PhoneChipInput } from '@components/controls'
+import { useCreateTestId } from '@aspects/test-id/TestIdProvider'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
-import { useCreateTestId } from '../../django-spa/aspects'
 
 interface PhoneChipInputWidgetProps extends WidgetProps {
   chipClassName?: string

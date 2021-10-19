@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button } from '@chakra-ui/react'
 import { Col, Row } from 'react-flexbox-grid'
 
-import { DebounceInput } from '../../django-spa/Controls'
+import { DebounceInput } from '@components/controls'
 import { MapMarker, Map } from '../../Widgets/Map'
 import { Coords } from '../../Widgets/Map/types'
 import { Marker } from '../../Widgets/Map/Map'

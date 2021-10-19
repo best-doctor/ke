@@ -44,7 +44,6 @@ import {
 import { hasPermission } from './common/permissions'
 import { BaseNotifier, ChakraUINotifier } from './common/notifier'
 import { EnableELK } from './integration/EnableELK'
-import { EnableSentry } from './integration/EnableSentry'
 import { getDefaultButtons, getPrevButton, getNextButton } from './WizardMaster/buttons'
 import type { WidgetPayload } from './DetailView/events'
 import type { CursorPagination, PagedPagination } from './admin/providers/pagination'
@@ -113,10 +112,6 @@ export * from './cdk/Layouts'
 export * from './cdk/Validation'
 export * from './Layouts'
 export * from './features'
-export * from './django-spa/Forms'
-export * from './django-spa/components'
-export * from './django-spa/layouts'
-export * from './django-spa/presenters'
 export * from './cdk/Hooks'
 export * from './utils/Funcs'
 export * from './utils/Types'
@@ -128,32 +123,11 @@ export * from './Browser'
 export { Wizard as UpdatedWizard, NextStep } from './Wizard'
 export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
-export * as Sentry from '@sentry/react'
 export { Button } from './cdk/Controls'
-export * from './django-spa/Controls'
-export {
-  AnalyticsProvider,
-  useAnalytics,
-  useFirebase,
-  LoggerProvider,
-  useLogger,
-  useConsoleLogger,
-  useAccess,
-  AccessActionType,
-  AccessDecision,
-  AspectKey,
-  useNotifications,
-  useToastNotifications,
-  NotificationsProvider,
-  useCreateTestId,
-  TestIdProvider,
-  TestIdGenerationProps,
-  WithDataTestId,
-} from './django-spa/aspects'
+export * from './django-spa'
 export { Select } from './common/components/Select'
 export * from './styles'
 export * from './data-provider'
-export * from './django-spa/StatefulControls'
 
 export {
   BaseAdmin,
@@ -173,7 +147,6 @@ export {
   MaskFilter,
   StoreManager,
   AsyncDualSelectWidget,
-  EnableSentry,
   EnableELK,
   TextValidationWidget,
   LinkWidget,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { RadioGroup } from '../../django-spa/Controls'
+import { RadioGroup } from '@components/controls'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -63,7 +63,13 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
   const { getDataTestId } = useCreateTestId()
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={widgetDescription} {...getDataTestId(props)}>
+    <WidgetWrapper
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={widgetDescription}
+      {...getDataTestId(props)}
+    >
       <RadioGroup
         getKey={optionValue}
         getLabel={optionLabel}

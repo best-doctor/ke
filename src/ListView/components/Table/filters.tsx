@@ -11,7 +11,7 @@ import type { Location, History } from 'history'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import classNames from 'classnames'
-import { DebounceInput } from '../../../django-spa/Controls'
+import { DebounceInput } from '@components/controls'
 import { pushAnalytics } from '../../../integration/analytics/utils'
 import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'

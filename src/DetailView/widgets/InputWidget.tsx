@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react'
 import { Textarea, Input, TextareaProps, StyleProps } from '@chakra-ui/react'
 
-import { DebounceInput } from '../../django-spa/Controls/DebounceInput'
+import { DebounceInput } from '@components/controls'
+import { useCreateTestId } from '@aspects/test-id/TestIdProvider'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
@@ -9,7 +10,6 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 
 import type { Accessor, WidgetProps } from '../../typing'
-import { useCreateTestId } from '../../django-spa/aspects'
 
 export type InputWidgetProps = WidgetProps & {
   isTextarea?: boolean

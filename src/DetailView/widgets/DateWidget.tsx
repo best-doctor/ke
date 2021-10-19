@@ -1,7 +1,7 @@
 import React from 'react'
 import { format } from 'date-fns'
 
-import { DateInput } from '../../django-spa/Controls'
+import { DateInput } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'

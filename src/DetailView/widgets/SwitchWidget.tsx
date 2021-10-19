@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Switch } from '../../django-spa/Controls'
+import { Switch } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'

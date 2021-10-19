@@ -9,6 +9,11 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@cdk(.*)$': '<rootDir>/src/cdk$1',
     '^@utils(.*)$': '<rootDir>/src/utils$1',
+    '^@components(.*)$': '<rootDir>/src/django-spa/components$1',
+    '^@aspects(.*)$': '<rootDir>/src/django-spa/aspects$1',
+    '^@layouts(.*)$': '<rootDir>/src/django-spa/layouts$1',
+    '^@presenters(.*)$': '<rootDir>/src/django-spa/presenters$1',
+    '^@smart-components(.*)$': '<rootDir>/src/django-spa/smart-components$1',
   },
   transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
   transform: {

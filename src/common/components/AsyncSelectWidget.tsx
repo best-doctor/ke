@@ -6,7 +6,7 @@ import type { Provider } from '../../admin/providers/interfaces'
 
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 import { components, ExtendedProps, modifyStyles } from './ReactSelectCustomization'
-import { StatefullAsyncSelect } from '../../django-spa/StatefulControls'
+import { StatefullAsyncSelect } from '../../django-spa/smart-components'
 import { Accessor } from '../../typing'
 
 interface AsyncSelectWidgetProps extends ExtendedProps {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CheckBox } from '../../django-spa/Controls'
+import { CheckBox } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
@@ -17,15 +17,7 @@ import { useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider
  * @param props - widget props
  */
 const CheckboxWidget = (props: WidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    targetPayload,
-    submitChange,
-    setInitialValue,
-    containerStore,
-    style: externalStyle,
-  } = props
+  const { name, helpText, targetPayload, submitChange, setInitialValue, containerStore, style: externalStyle } = props
 
   const context = containerStore.getState()
 

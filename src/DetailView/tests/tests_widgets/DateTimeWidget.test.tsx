@@ -3,10 +3,10 @@ import { mount, shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 
 import DatePicker from 'react-datepicker'
+import { DateTimeInput } from '../../../django-spa/components/controls'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { DateTimeWidget, DateTimeWidgetProps } from '../../widgets/DateTimeWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
-import { DateTimeInput } from '../../../django-spa/Controls'
 
 const submitChangeMock = jest.fn()
 

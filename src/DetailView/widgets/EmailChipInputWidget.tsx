@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { EmailChipInput } from '../../django-spa/Controls'
+import { EmailChipInput } from '@components/controls'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'

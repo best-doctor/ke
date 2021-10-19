@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
-import { DebounceInput } from '../../../django-spa/Controls'
+import { DebounceInput } from '../../../django-spa/components/controls'
 import { WidgetWrapper } from '../../../common/components/WidgetWrapper'
 import { InputWidget, InputWidgetProps } from '../../widgets/InputWidget'
 import { testProvider, testNotifier, mockedEffectorContainerStore } from '../../../setupTests'
