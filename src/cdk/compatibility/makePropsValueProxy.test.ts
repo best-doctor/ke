@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 
-import { makePropsValueProxy } from './PropsValueProxy'
+import { makePropsValueProxy } from './makePropsValueProxy'
 
 const propsDescArbitrary = fc.dictionary(fc.string(), fc.tuple(fc.anything(), fc.anything()))
 

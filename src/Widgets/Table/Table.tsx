@@ -1,7 +1,7 @@
 import { makeTable } from '@cdk/tables'
 import styled from 'styled-components'
 import { makeWrap } from '@cdk/wrapper'
-import { makePartial } from '@cdk/Compatibility'
+import { makePartial } from '@cdk/compatibility'
 import { Box } from '@chakra-ui/react'
 
 export const StyledTable = makeWrap(

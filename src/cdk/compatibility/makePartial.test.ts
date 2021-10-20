@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 
-import { makePartial } from './Partial'
+import { makePartial } from './makePartial'
 
 const predefinedPropsArbitrary = fc.dictionary(fc.string(), fc.anything())
 const additionalPropsArbitrary = predefinedPropsArbitrary

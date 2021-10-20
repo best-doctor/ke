@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 
-import { makePropsKeyProxy } from './PropsKeyProxy'
+import { makePropsKeyProxy } from './makePropsKeyProxy'
 
 const propsDescArbitrary = fc.dictionary(fc.string(), fc.tuple(fc.string(), fc.anything())).filter((propsDesc) => {
   const targetKeys = Object.values(propsDesc).map(([targetKey]) => targetKey)
