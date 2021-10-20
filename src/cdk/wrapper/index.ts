@@ -1,1 +1,1 @@
-export { makeWrap } from './wrap.factory'
+export { makeWrap } from './makeWrap'

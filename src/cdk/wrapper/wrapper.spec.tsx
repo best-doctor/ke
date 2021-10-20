@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { render } from '@testing-library/react'
 
-import { makeWrap } from './wrap.factory'
+import { makeWrap } from './makeWrap'
 
 test('Рендерится обёртка и оборачиваемый компонент', () => {
   const Target = ({ inner }: { inner: string }): JSX.Element => <p>Target: {inner}</p>
