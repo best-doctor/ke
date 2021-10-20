@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode, CSSProperties, ComponentType } from 'react'
-import { Box } from '@chakra-ui/react'
 
 import { CellConfig, ColumnConfig, HeaderConfig, RowConfig } from './types'
 
@@ -13,42 +12,40 @@ export function makeTable(
     const [columnConfigs, { styles: rowStyles }] = [columns, row || {}]
 
     return (
-      <Box overflowX="auto">
-        <TableComponent>
-          <thead>
-            <RowComponent>
-              {columnConfigs.map(({ name, header }, index) => {
-                const { styles, value } = normalizeHeader(header)
+      <TableComponent>
+        <thead>
+          <RowComponent>
+            {columnConfigs.map(({ name, header }, index) => {
+              const { styles, value } = normalizeHeader(header)
+              return (
+                <HeadComponent style={styles} key={name || index}>
+                  {typeof value === 'function' ? value(index) : value}
+                </HeadComponent>
+              )
+            })}
+          </RowComponent>
+        </thead>
+        <tbody>
+          {data.map((item, itemIndex) => (
+            <RowComponent
+              key={getKey ? getKey(item) : itemIndex}
+              style={typeof rowStyles === 'function' ? rowStyles(item, itemIndex) : rowStyles}
+            >
+              {columnConfigs.map(({ name, cell }, columnIndex) => {
+                const { styles, value } = normalizeCell(cell)
                 return (
-                  <HeadComponent style={styles} key={name || index}>
-                    {typeof value === 'function' ? value(index) : value}
-                  </HeadComponent>
+                  <CellComponent
+                    style={typeof styles === 'function' ? styles(item, itemIndex) : styles}
+                    key={name || columnIndex}
+                  >
+                    {typeof value === 'function' ? value(item, itemIndex) : value}
+                  </CellComponent>
                 )
               })}
             </RowComponent>
-          </thead>
-          <tbody>
-            {data.map((item, itemIndex) => (
-              <RowComponent
-                key={getKey ? getKey(item) : itemIndex}
-                style={typeof rowStyles === 'function' ? rowStyles(item, itemIndex) : rowStyles}
-              >
-                {columnConfigs.map(({ name, cell }, columnIndex) => {
-                  const { styles, value } = normalizeCell(cell)
-                  return (
-                    <CellComponent
-                      style={typeof styles === 'function' ? styles(item, itemIndex) : styles}
-                      key={name || columnIndex}
-                    >
-                      {typeof value === 'function' ? value(item, itemIndex) : value}
-                    </CellComponent>
-                  )
-                })}
-              </RowComponent>
-            ))}
-          </tbody>
-        </TableComponent>
-      </Box>
+          ))}
+        </tbody>
+      </TableComponent>
     )
   }
 }
