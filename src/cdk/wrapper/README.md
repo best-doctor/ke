@@ -7,7 +7,7 @@
 ```typescript jsx
 import { Table } from 'cool-table'
 
-import { makeWrap } from './wrap.factory'
+import { makeWrap } from './makeWrap'
 
 function StyledBox({ children }) {
   return <div class="fancy-box">{children}</div>

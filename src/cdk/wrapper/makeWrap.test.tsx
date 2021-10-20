@@ -3,7 +3,7 @@ import { testProp, fc } from 'jest-fast-check'
 import { render, cleanup } from '@testing-library/react'
 import { expectType } from 'tsd'
 
-import { makeWrap } from './wrap.factory'
+import { makeWrap } from './makeWrap'
 
 testProp(
   'Созданный компонент при рендере вызывает и обёртку',
