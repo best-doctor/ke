@@ -1,4 +1,4 @@
-import { makeTable } from '@cdk/Tables'
+import { makeTable } from '@cdk/tables'
 import styled from 'styled-components'
 
 export const StyledTable = makeTable(

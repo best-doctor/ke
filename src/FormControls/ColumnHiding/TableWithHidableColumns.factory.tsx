@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import { TableProps } from '@cdk/Tables'
+import { TableProps } from '@cdk/tables'
 import { ColumnConfig } from 'index'
 
 import { ColumnsHider } from './ColumnsHider'
