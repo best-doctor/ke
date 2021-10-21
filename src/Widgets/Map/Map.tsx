@@ -61,6 +61,7 @@ export function Map({
   searchMarkerRadius,
   showSearch = true,
   containerStyle = {},
+  searchStyle,
   ...other
 }: MapProps): JSX.Element {
   const mapConfig = useMapContext()
@@ -132,7 +133,7 @@ export function Map({
     }
   }
 
-  const AddressSearchComponent = showSearch === 'v2' ? StyledAddressInput : 'input'
+  const AddressSearchComponent = searchStyle === 'absolute' ? StyledAddressInput : 'input'
 
   return isLoaded ? (
     <>
@@ -142,7 +143,7 @@ export function Map({
           <AddressSearchComponent
             type="text"
             placeholder="Введите адрес"
-            style={showSearch !== 'v2' ? searchBoxInputStyle : undefined}
+            style={searchStyle !== 'absolute' ? searchBoxInputStyle : undefined}
           />
         </StandaloneSearchBox>
       )}
@@ -184,7 +185,8 @@ export type MapProps = PropsWithChildren<{
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void
   searchMarkerRadius?: number
-  showSearch?: boolean | 'v2'
+  showSearch?: boolean
+  searchStyle?: 'defalut' | 'absolute'
   containerStyle?: CSSProperties
   options?: google.maps.MapOptions
   onLoad?: (map: google.maps.Map) => void | Promise<void>
