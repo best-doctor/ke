@@ -7,6 +7,22 @@ import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 import { MapMarker } from './Marker'
 
+const searchBoxInputStyle: CSSProperties = {
+  boxSizing: 'border-box',
+  border: `1px solid #cbd5e0`,
+  width: `100%`,
+  height: `40px`,
+  padding: `0 12px`,
+  marginBottom: '5.4px',
+  outline: `none`,
+  textOverflow: `ellipses`,
+}
+
+const getMapContainerStyle = (showSearch: boolean): CSSProperties => ({
+  height: `calc(100% - ${showSearch ? 45 : 0}px)`,
+  width: '100%',
+})
+
 const pacCss = css`
   .pac-container {
     z-index: calc(var(--chakra-zIndices-modal) + 100);
@@ -56,7 +72,10 @@ export function Map({
   const [searchBoxMarker, setSearchBoxMarker] = useState<Marker | null>(null)
 
   const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
-  const mapContainerStyle = useMemo(() => ({ ...containerStyle, width: '100%', height: '100%' }), [containerStyle])
+  const mapContainerStyle = useMemo(
+    () => ({ ...getMapContainerStyle(showSearch === true), ...containerStyle }),
+    [containerStyle, showSearch]
+  )
 
   const onLoad = (ref: any): void => {
     setSearchBox(ref)
@@ -113,12 +132,18 @@ export function Map({
     }
   }
 
+  const AddressSearchComponent = showSearch === 'v2' ? StyledAddressInput : 'input'
+
   return isLoaded ? (
     <>
       <Global styles={pacCss} />
       {showSearch && (
         <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
-          <StyledAddressInput type="text" placeholder="Введите адрес" />
+          <AddressSearchComponent
+            type="text"
+            placeholder="Введите адрес"
+            style={showSearch !== 'v2' ? searchBoxInputStyle : undefined}
+          />
         </StandaloneSearchBox>
       )}
       <GoogleMap
@@ -159,7 +184,7 @@ export type MapProps = PropsWithChildren<{
   onBoundsChanged?: (bounds: string | undefined) => void
   onSearchMarkerClick?: (marker: Marker) => void
   searchMarkerRadius?: number
-  showSearch?: boolean
+  showSearch?: boolean | 'v2'
   containerStyle?: CSSProperties
   options?: google.maps.MapOptions
   onLoad?: (map: google.maps.Map) => void | Promise<void>
