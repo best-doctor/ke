@@ -74,8 +74,8 @@ export function Map({
 
   const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
   const mapContainerStyle = useMemo(
-    () => ({ ...getMapContainerStyle(showSearch === true), ...containerStyle }),
-    [containerStyle, showSearch]
+    () => ({ ...getMapContainerStyle(showSearch && searchStyle === 'default'), ...containerStyle }),
+    [containerStyle, searchStyle, showSearch]
   )
 
   const onLoad = (ref: any): void => {
@@ -186,7 +186,7 @@ export type MapProps = PropsWithChildren<{
   onSearchMarkerClick?: (marker: Marker) => void
   searchMarkerRadius?: number
   showSearch?: boolean
-  searchStyle?: 'defalut' | 'absolute'
+  searchStyle?: 'default' | 'absolute'
   containerStyle?: CSSProperties
   options?: google.maps.MapOptions
   onLoad?: (map: google.maps.Map) => void | Promise<void>
