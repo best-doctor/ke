@@ -6,7 +6,9 @@ import { LayoutComponent, makeSlots, SlotElements } from '../../cdk/Layouts'
 export const getDefaultMapLayout = (mapHeight: number): LayoutComponent<SlotElements<'map' | 'filters'>> =>
   makeSlots<'map' | 'filters'>((slotElements) => (
     <Flex height={mapHeight}>
-      <Box flex={1}>{slotElements.map}</Box>
+      <Box position="relative" flex={1}>
+        {slotElements.map}
+      </Box>
       <Box width="300px" marginLeft="5px" height={mapHeight} overflowY="auto">
         {slotElements.filters}
       </Box>
