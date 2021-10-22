@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import { WizardContainer } from '../../components/WizardContainer'
 import { testWizard, testProvider, testNotifier } from '../../../setupTests'
+import { SaveEventProvider } from '../../../DetailView/SaveEvent/SaveEventProvider'
 
 const getComponent = (): JSX.Element => {
   const ViewType = 'test_view'
@@ -14,19 +15,21 @@ const getComponent = (): JSX.Element => {
 
   return (
     <ChakraProvider>
-      <WizardContainer
-        wizard={testWizard}
-        provider={testProvider}
-        mainDetailObject={{ id: 100500 }}
-        setMainDetailObject={setMainDetailObject}
-        refreshMainDetailObject={refreshMainDetailObject}
-        notifier={testNotifier}
-        analytics={analytics}
-        ViewType={ViewType}
-        user={user}
-        show
-        submitChange={jest.fn()}
-      />
+      <SaveEventProvider>
+        <WizardContainer
+          wizard={testWizard}
+          provider={testProvider}
+          mainDetailObject={{ id: 100500 }}
+          setMainDetailObject={setMainDetailObject}
+          refreshMainDetailObject={refreshMainDetailObject}
+          notifier={testNotifier}
+          analytics={analytics}
+          ViewType={ViewType}
+          user={user}
+          show
+          submitChange={jest.fn()}
+        />
+      </SaveEventProvider>
     </ChakraProvider>
   )
 }
