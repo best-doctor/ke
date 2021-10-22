@@ -70,6 +70,8 @@ abstract class BaseWizardStep {
 
     return this.next(props)
   }
+
+  onSave?(props: unknown, transition: (next: string) => void): void | Promise<boolean>
 }
 
 abstract class BaseWizard {
