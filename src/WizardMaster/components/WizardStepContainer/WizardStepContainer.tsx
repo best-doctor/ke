@@ -85,6 +85,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
   })
 
   const { getDataTestId } = useCreateTestId()
+  const paddings = title ? { py: 8 } : { pb: 8 }
 
   const { on, off } = useSaveEvent()
 
@@ -121,7 +122,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
       {show && (
         <Row>
           <Col xs={12}>
-            <Box ref={wizardStepRef} py={8}>
+            <Box ref={wizardStepRef} {...paddings}>
               <Row>
                 <Col xs={12}>
                   <Text
