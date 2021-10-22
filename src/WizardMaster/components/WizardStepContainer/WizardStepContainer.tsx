@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
 import { useStore } from 'effector-react'
@@ -16,6 +16,8 @@ import type { WizardObject } from '../../../typing'
 import { ErrorBoundary } from '../../../common/components/ErrorBoundary'
 import { useCreateTestId } from '../../../django-spa/aspects'
 import { WizardValidationErrors } from './WizardValidationErrors'
+
+import { useSaveEvent } from '../../../DetailView/SaveEvent/SaveEventProvider'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -83,6 +85,36 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
   })
 
   const { getDataTestId } = useCreateTestId()
+
+  const { on, off } = useSaveEvent()
+
+  const propsRef = useRef(props)
+  useEffect(() => {
+    propsRef.current = props
+  }, [props])
+
+  useEffect(() => {
+    const handler = (): Promise<boolean> | void => {
+      if (!wizardStep?.onSave) {
+        return
+      }
+      const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
+      return wizardStep.onSave(
+        {
+          ...propsRef.current,
+          context: wizardContext,
+          updateContext: submitChange,
+        },
+        (step: string) => {
+          setCurrentState(wizard.transition(currentState, step))
+        }
+      )
+    }
+    on(handler)
+    return () => {
+      off(handler)
+    }
+  }, [currentState, off, on, setCurrentState, submitChange, wizard, wizardStep])
 
   return (
     <>

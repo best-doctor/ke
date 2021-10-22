@@ -18,6 +18,7 @@ import { ErrorBoundary } from '../common/components/ErrorBoundary'
 import { containerStore } from './store'
 import { setInitialValue } from './events'
 import { useCreateTestId } from '../django-spa/aspects'
+import { SaveEventProvider } from './SaveEvent/SaveEventProvider'
 
 const ViewType = 'detail_view'
 
@@ -115,7 +116,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const { getDataTestId } = useCreateTestId({ name: admin.name })
 
   return (
-    <>
+    <SaveEventProvider>
       <Row>
         <Col xs={12} xsOffset={0} md={10} mdOffset={1}>
           <Box padding="8px 0px">
@@ -158,7 +159,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
           )}
         </Col>
       </Row>
-    </>
+    </SaveEventProvider>
   )
 }
 
