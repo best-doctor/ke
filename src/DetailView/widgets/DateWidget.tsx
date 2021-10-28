@@ -7,8 +7,9 @@ import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { handleUserAction } from '../../common/utils/handleUserAction'
 
-import type { OptionalDate, WidgetProps } from '../../typing'
+import type { Accessor, OptionalDate, WidgetProps } from '../../typing'
 import { useCreateTestId } from '../../django-spa/aspects'
+import { getAccessor } from '../utils/dataAccess'
 
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
@@ -21,6 +22,7 @@ type DateWidgetAdditionalProps = {
   className?: string
   isClearable?: boolean
   wrapperClassName?: string
+  isDisabled?: Accessor<boolean>
 }
 
 export type DateWidgetProps = WidgetProps & DateWidgetAdditionalProps
@@ -44,10 +46,16 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
     className,
     isClearable,
     wrapperClassName,
+    allowAllDefinedValues,
+    isDisabled,
+    mainDetailObject,
   } = props
 
   const context = containerStore.getState()
-  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
+  const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization(
+    { ...props, context },
+    { allowAllDefinedValues: getAccessor(allowAllDefinedValues) }
+  )
 
   const contentDate = content ? new Date(content as string) : null
   setInitialValue({ [name]: content })
@@ -78,6 +86,7 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
         className={className}
         isClearable={isClearable}
         wrapperClassName={wrapperClassName}
+        isDisabled={getAccessor(isDisabled, mainDetailObject, context)}
       />
     </WidgetWrapper>
   )

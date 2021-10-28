@@ -5,7 +5,7 @@ import type { BaseAnalytic } from 'integration/analytics'
 import { CSSProperties } from 'react'
 import { BoxProps } from '@chakra-ui/react'
 import { TestIdGenerationProps } from './django-spa/aspects/test-id/TestIdProvider'
-import {ErrorElement} from "./WizardMaster/store";
+import { ErrorElement } from './WizardMaster/store'
 
 type Accessor<T> = T | Function | undefined
 
@@ -55,6 +55,7 @@ type WidgetProps = {
   containerProps?: BoxProps
   widgetClassName?: string
   className?: string
+  allowAllDefinedValues?: Accessor<boolean>
 } & Omit<TestIdGenerationProps, 'name'>
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets' | 'updated_wizards'
