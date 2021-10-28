@@ -61,6 +61,8 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
    * Title of time input
    */
   timeCaption?: string
+
+  isDisabled?: boolean
 }
 
 /**
@@ -113,6 +115,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
       clearButtonClassName,
       popperClassName,
       timeCaption = 'Время',
+      isDisabled,
     },
     ref
   ): JSX.Element => {
@@ -148,6 +151,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
         popperClassName={cn(pooperCss, popperClassName)}
         customInput={<ChakraDateInput ref={ref} />}
         timeCaption={timeCaption}
+        disabled={isDisabled}
       />
     )
   }
