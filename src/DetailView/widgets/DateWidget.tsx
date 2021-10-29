@@ -15,8 +15,8 @@ const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
 
 type DateWidgetAdditionalProps = {
-  minDate?: Date
-  maxDate?: Date
+  minDate?: Accessor<Date>
+  maxDate?: Accessor<Date>
   filterDate?: (dateValue: Date) => boolean
   dateFormat?: string
   className?: string
@@ -80,8 +80,8 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
         value={contentDate}
         onChange={(value: OptionalDate) => handleChange(value)}
         dateFormat={dateFormat}
-        minDate={minDate}
-        maxDate={maxDate}
+        minDate={getAccessor(minDate, mainDetailObject, context)}
+        maxDate={getAccessor(maxDate, mainDetailObject, context)}
         filterDate={filterDate}
         className={className}
         isClearable={isClearable}
