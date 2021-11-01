@@ -1,6 +1,6 @@
 import type { Effect, Store } from 'effector'
 import { combine, createEffect, createEvent, createStore, Event, forward, restore } from 'effector'
-import { AsyncReadWriteProvider } from '@cdk/Providers'
+import { AsyncReadWriteProvider } from '../Providers'
 import { FetchMeta, SourceData } from './types'
 
 export function makeModelSource<Model>(

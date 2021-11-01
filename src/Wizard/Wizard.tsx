@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 
-import { usePropState } from '../cdk/Hooks'
+import { usePropState } from '@cdk/Hooks'
 import { WizardProps } from './types'
 
 export const Wizard = <Key extends string, Action extends string>(props: WizardProps<Key, Action>): JSX.Element => {

@@ -1,6 +1,6 @@
 import React from 'react'
-import { makeSlots } from '@cdk/Layouts'
 import { Box } from '@chakra-ui/react'
+import { makeSlots } from '@cdk/Layouts'
 
 export const Full = makeSlots<'Label' | 'Control' | 'Errors'>((slotElements) => (
   <>

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useRef, useState, forwardRef, RefObject } from 'react'
 import { Tag, TagCloseButton, TagLabel, Input, Flex, Text, useMultiStyleConfig } from '@chakra-ui/react'
 
-import { usePropState } from '../../../../cdk/Hooks'
+import { usePropState } from '@cdk/Hooks'
 
 import { ControlProps } from '../types'
 

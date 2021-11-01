@@ -1,6 +1,6 @@
 import { Effect, Store, Event, combine, createEffect, createStore, restore } from 'effector'
 
-import type { Provider } from '../../admin/providers'
+import type { Provider } from '../../../admin/providers'
 import { FetchMeta, SourceData } from './types'
 
 export function makeEntitiesSource<Entity, Filters>(

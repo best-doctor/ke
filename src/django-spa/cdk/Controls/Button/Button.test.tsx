@@ -3,7 +3,7 @@ import { ChakraProvider, Button as ChakraButton } from '@chakra-ui/react'
 import { mount } from 'enzyme'
 
 import { Button } from './Button'
-import { waitForComponentToPaint } from '../../../setupTests'
+import { waitForComponentToPaint } from '../../../../setupTests'
 
 const getComponent = (onClick: () => void, isDisabled?: boolean): JSX.Element => (
   <ChakraProvider>

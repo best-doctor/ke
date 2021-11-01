@@ -1,7 +1,7 @@
 import React, { useCallback, forwardRef } from 'react'
 import { Box, Switch as ChakraSwitch, SwitchProps as ChakraSwitchProps } from '@chakra-ui/react'
 
-import { usePropState } from '../../../../cdk/Hooks'
+import { usePropState } from '@cdk/Hooks'
 
 import { ControlProps } from '../types'
 

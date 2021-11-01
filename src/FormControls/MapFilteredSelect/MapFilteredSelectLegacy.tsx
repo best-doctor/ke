@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo, ReactElement } from 'react'
 import styled from 'styled-components'
 
+import { LayoutComponent, SlotElements } from '@cdk/Layouts'
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { ListVertical } from '../../Layouts'
-import { LayoutComponent, SlotElements } from '../../cdk/Layouts'
 import { getDefaultMapLayout } from './layouts'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }

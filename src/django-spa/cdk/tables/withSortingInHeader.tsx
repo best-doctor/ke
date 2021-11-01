@@ -11,7 +11,7 @@ export function withSortingInHeader(OrderHandler: ComponentType<OrderHandlerProp
         table: restTableProps,
       }
 
-      if (orderedColumnNames.length) {
+      if (!orderedColumnNames.length) {
         return result
       }
 
@@ -22,7 +22,7 @@ export function withSortingInHeader(OrderHandler: ComponentType<OrderHandlerProp
           ? addHandler(header, OrderHandler, (ordering && ordering[name]) || null, (newDirection) => {
               onOrderChange({
                 ...ordering,
-                name: newDirection,
+                [name]: newDirection,
               })
             })
           : header,
@@ -46,7 +46,6 @@ function addHandler<P extends PropsWithChildren<{}>>(
   onOrderChange: (newDirection: OrderDirection) => void
 ): P {
   const { children, ...restHeaderProps } = headerProps
-
   return {
     ...restHeaderProps,
     children: <OrderHandler headerValue={children} orderDirection={orderDirection} onChange={onOrderChange} />,

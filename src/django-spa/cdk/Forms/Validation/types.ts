@@ -1,5 +1,5 @@
 import { Provider, ProviderProps } from 'react'
-import { RootContext } from '@cdk/ContextTree'
+import { RootContext } from '../../ContextTree'
 
 import { ValidationError, ValidationResult } from './Checks'
 

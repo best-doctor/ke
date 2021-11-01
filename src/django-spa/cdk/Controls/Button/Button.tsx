@@ -3,7 +3,7 @@ import { Button as ChakraButton } from '@chakra-ui/react'
 import type { ButtonProps } from '@chakra-ui/button/dist/types/button'
 
 import { useIsMounted, usePropState } from '@cdk/Hooks'
-import { ensurePromise } from '../../../DetailView/utils/dataAccess'
+import { ensurePromise } from '../../../../DetailView/utils/dataAccess'
 
 export const Button = (props: ButtonProps): JSX.Element => {
   const { onClick, isDisabled: initialDisabled } = props
