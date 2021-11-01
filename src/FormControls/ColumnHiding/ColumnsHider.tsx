@@ -11,7 +11,7 @@ import {
   CheckboxGroup,
   Checkbox,
 } from '@chakra-ui/react'
-import { ColumnConfig } from 'index'
+import { ColumnConfig } from '@cdk/TablesOld'
 import React, { ReactNode, ReactText, useCallback } from 'react'
 
 export function ColumnsHider<T>({ children, onChange, columns, visibleColumns }: ColumnHiderProps<T>): JSX.Element {

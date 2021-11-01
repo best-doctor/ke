@@ -1,92 +1,128 @@
-import React, { ReactElement, ReactNode, CSSProperties, ComponentType } from 'react'
+import React from 'react'
+import type { UnionToIntersection } from 'ts-essentials'
+import { compact, byKey } from '@utils/array'
+import { partial } from '@utils/Funcs'
 
-import { CellConfig, ColumnConfig, HeaderConfig, RowConfig } from './types'
+import { dataRowDescToProps, headerRowDescToProps, headerDescToProps, cellDescToProps } from './normalizers'
+import {
+  TableProps,
+  ExtraArgs,
+  ExtraArgGenerators,
+  NormalizedTableProps,
+  ExtraKey,
+  TableComponentProps,
+  TableComponents,
+  TablePlugin,
+  PluginProps,
+  PluginExtra,
+} from './types'
 
-export function makeTable(
-  TableComponent: StyledContainer | string = 'table',
-  RowComponent: StyledContainer | string = 'tr',
-  HeadComponent: StyledContainer | string = 'th',
-  CellComponent: StyledContainer | string = 'td'
-): <T>(props: TableProps<T>) => ReactElement {
-  return ({ data, getKey, row, columns }) => {
-    const [columnConfigs, { styles: rowStyles }] = [columns, row || {}]
+export function makeTable<Components extends TableComponents, Plugin extends TablePlugin>(
+  tableComponents: Components,
+  plugins: Plugin[] = []
+): <T>(
+  props: TableProps<
+    T,
+    TableComponentProps<Components> & { table: UnionToIntersection<PluginProps<Plugin>> },
+    { [K in ExtraKey]: UnionToIntersection<PluginExtra<Plugin>[K]> }
+  >
+) => JSX.Element {
+  const {
+    table: TableComponent,
+    thead: THeadComponent,
+    tbody: TBodyComponent,
+    headerRow: HeaderRowComponent,
+    dataRow: DataRowComponent,
+    headerCell: HeaderComponent,
+    dataCell: CellComponent,
+  } = tableComponents
+
+  const pluginsBefore = compact(plugins.map(({ before }) => before))
+  const pluginsAfter = compact(plugins.map(({ after }) => after))
+
+  return (props) => {
+    let procProps: TableProps = props
+    const allPluginExtraGenerators: ExtraArgGenerators[] = []
+    for (let i = 0; i < pluginsBefore.length; i++) {
+      const [pluginProps, pluginExtraGenerators] = pluginsBefore[i](procProps)
+      procProps = pluginProps
+      if (pluginExtraGenerators) {
+        allPluginExtraGenerators.push(pluginExtraGenerators)
+      }
+    }
+
+    const generatorKeys: ExtraKey[] = ['headerRow', 'headerCell', 'dataRow', 'dataCell']
+    const compactGenerators = generatorKeys.map(
+      (generatorKey) => [generatorKey, compact(byKey(allPluginExtraGenerators, generatorKey))] as const
+    )
+
+    const mergedGenerators = Object.fromEntries(
+      // TODO: нужно исправить, но пока непонятно как. Очевидно, что необходимо уточнить тип ExtraArgs, так как тм в полях могут быть только словари,
+      //  но это аффектит возвращаемы тип makeTable.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      compactGenerators.map(([key, callbacks]) => [key, partial(arrInvokeAndMerge, callbacks as any)])
+    ) as Required<ExtraArgGenerators>
+
+    let procNormalizedProps = normalizeProps(procProps, mergedGenerators)
+
+    for (let i = 0; i < pluginsAfter.length; i++) {
+      procNormalizedProps = pluginsAfter[i](procNormalizedProps)
+    }
+
+    const { table, thead, tbody } = procNormalizedProps
 
     return (
-      <TableComponent>
-        <thead>
-          <RowComponent>
-            {columnConfigs.map(({ name, header }, index) => {
-              const { styles, value } = normalizeHeader(header)
-              return (
-                <HeadComponent style={styles} key={name || index}>
-                  {typeof value === 'function' ? value(index) : value}
-                </HeadComponent>
-              )
-            })}
-          </RowComponent>
-        </thead>
-        <tbody>
-          {data.map((item, itemIndex) => (
-            <RowComponent
-              key={getKey ? getKey(item) : itemIndex}
-              style={typeof rowStyles === 'function' ? rowStyles(item, itemIndex) : rowStyles}
-            >
-              {columnConfigs.map(({ name, cell }, columnIndex) => {
-                const { styles, value } = normalizeCell(cell)
-                return (
-                  <CellComponent
-                    style={typeof styles === 'function' ? styles(item, itemIndex) : styles}
-                    key={name || columnIndex}
-                  >
-                    {typeof value === 'function' ? value(item, itemIndex) : value}
-                  </CellComponent>
-                )
-              })}
-            </RowComponent>
+      <TableComponent {...table}>
+        <THeadComponent>
+          <HeaderRowComponent {...thead.row}>
+            {thead.cells.map(([key, headerProps]) => (
+              <HeaderComponent key={key} {...headerProps} />
+            ))}
+          </HeaderRowComponent>
+        </THeadComponent>
+        <TBodyComponent>
+          {tbody.map(([rowKey, { row: rowProps, cells }]) => (
+            <DataRowComponent key={rowKey} {...rowProps}>
+              {cells.map(([cellKey, cellProps]) => (
+                <CellComponent key={cellKey} {...cellProps} />
+              ))}
+            </DataRowComponent>
           ))}
-        </tbody>
+        </TBodyComponent>
       </TableComponent>
     )
   }
 }
 
-function normalizeHeader(config: HeaderConfig | ReactNode): HeaderConfig {
-  return config && typeof config === 'object' && 'value' in config ? config : { value: config }
-}
-
-function normalizeCell<T>(
-  config: CellConfig<T> | ReactNode | keyof T | ((item: T, index: number) => ReactNode)
-): CellConfig<T> {
-  const { styles = undefined, value: keyOrValue } =
-    config && typeof config === 'object' && 'value' in config ? config : { value: config }
-
-  const value =
-    typeof keyOrValue === 'string'
-      ? (item: T) => getter(item as unknown as Record<string, string>, keyOrValue)
-      : keyOrValue
-
+export function normalizeProps<TProps, RProps, HProps, CProps, Extra extends ExtraArgs>(
+  { dataRow: dataRowDesc, headerRow: headerRowDesc, columns, getKey, data, ...tableComponentProps }: TableProps,
+  extraGenerators: ExtraArgGenerators<Extra>
+): NormalizedTableProps<TProps, RProps, HProps, CProps> {
   return {
-    styles,
-    value,
+    table: tableComponentProps as TProps,
+    thead: {
+      row: headerRowDesc ? headerRowDescToProps(headerRowDesc, extraGenerators.headerRow) : {},
+      cells: columns.map(({ name, header }, headerIndex) => [
+        name,
+        headerDescToProps(header, headerIndex, extraGenerators.headerCell),
+      ]),
+    },
+    tbody: data.map((item, rowIndex) => [
+      getKey ? getKey(item, rowIndex) : rowIndex,
+      {
+        row: dataRowDesc ? dataRowDescToProps(dataRowDesc, item, rowIndex, extraGenerators.dataRow) : {},
+        cells: columns.map(({ name, cell }, columnIndex) => [
+          name,
+          cellDescToProps(cell, item, rowIndex, columnIndex, extraGenerators.dataCell),
+        ]),
+      },
+    ]),
   }
 }
 
-function getter<T extends Record<string, string>, K extends string>(item: T, key: K): T[K] | K {
-  if (item && typeof item === 'object' && key in item) {
-    return item[key]
-  }
-  return key
+function arrInvokeAndMerge<Params extends unknown[], F extends (...p: Params) => Record<string, unknown>>(
+  funcs: F[],
+  ...params: Params
+): Record<string, unknown> {
+  return funcs.reduce((acc, f) => ({ ...acc, ...f(...params) }), {})
 }
-
-export interface TableProps<T> {
-  data: readonly T[]
-  getKey?: (item: T) => string | number
-  columns: readonly ColumnConfig<T>[]
-  row?: RowConfig<T>
-  children?: never
-}
-
-type StyledContainer = ComponentType<{
-  style?: CSSProperties
-  children: ReactNode
-}>

@@ -1,37 +1,22 @@
-import { makeTable } from '@cdk/tables'
-import styled from 'styled-components'
+import { makeTable, withSortingInHeader } from '@cdk/tables'
 import { makeWrap } from '@cdk/wrapper'
 import { makePartial } from '@cdk/compatibility'
 import { Box } from '@chakra-ui/react'
 
-export const StyledTable = makeWrap(
+import { Table, THead, TBody, DataCell, DataRow, HeaderCell, HeaderRow, OrderHandler } from './components'
+
+export const OrderedTable = makeWrap(
   makeTable(
-    styled.table`
-      text-align: left;
-      width: 100%;
-      tbody {
-        vertical-align: top;
-      }
-    `,
-    styled.tr`
-      thead & {
-        background: #f9fafa;
-        border-bottom-width: 2px;
-        border-color: #e3e5e8;
-      }
-      border-bottom-width: 1px;
-      border-color: #e3e5e8;
-      &:hover {
-        background-color: #dde6f4;
-      }
-    `,
-    styled.th`
-      height: 3em;
-      padding: 10px;
-    `,
-    styled.td`
-      padding: 10px;
-    `
+    {
+      table: Table,
+      thead: THead,
+      tbody: TBody,
+      headerRow: HeaderRow,
+      headerCell: HeaderCell,
+      dataRow: DataRow,
+      dataCell: DataCell,
+    },
+    [withSortingInHeader(OrderHandler)]
   ),
   makePartial(Box, { overflowX: 'auto' })
 )
