@@ -100,6 +100,7 @@ import { TPathRules } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
 import { WizardProps } from './WizardMaster/components/Wizard'
 
+export { useSaveEvent, SaveEventProvider } from './DetailView/SaveEvent/SaveEventProvider'
 export * from './Widgets/FilesList'
 export * from './Widgets/Map'
 export * from './Widgets/Table'

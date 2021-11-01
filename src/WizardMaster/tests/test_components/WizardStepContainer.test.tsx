@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import { WizardStepContainer } from '../../components/WizardStepContainer'
 import { testWizard, testProvider, testNotifier, testWizardStep } from '../../../setupTests'
+import { SaveEventProvider } from '../../../DetailView/SaveEvent/SaveEventProvider'
 
 jest.mock('../../utils')
 jest.mock('../../../integration/analytics/utils')
@@ -18,22 +19,24 @@ const getComponent = (): JSX.Element => {
 
   return (
     <ChakraProvider>
-      <WizardStepContainer
-        wizardStep={testWizardStep}
-        wizard={testWizard}
-        provider={testProvider}
-        mainWizardObject={{ id: 100500 }}
-        setMainDetailObject={setMainDetailObject}
-        refreshMainDetailObject={refreshMainDetailObject}
-        notifier={testNotifier}
-        analytics={analytics}
-        ViewType={ViewType}
-        user={user}
-        show
-        submitChange={jest.fn()}
-        currentState={currentState}
-        setCurrentState={jest.fn()}
-      />
+      <SaveEventProvider>
+        <WizardStepContainer
+          wizardStep={testWizardStep}
+          wizard={testWizard}
+          provider={testProvider}
+          mainWizardObject={{ id: 100500 }}
+          setMainDetailObject={setMainDetailObject}
+          refreshMainDetailObject={refreshMainDetailObject}
+          notifier={testNotifier}
+          analytics={analytics}
+          ViewType={ViewType}
+          user={user}
+          show
+          submitChange={jest.fn()}
+          currentState={currentState}
+          setCurrentState={jest.fn()}
+        />
+      </SaveEventProvider>
     </ChakraProvider>
   )
 }
