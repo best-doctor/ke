@@ -3,12 +3,13 @@ import React from 'react'
 import { CheckBox } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { getPayload } from '../utils/dataAccess'
+import { getAccessor, getPayload } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
 import { pushAnalytics } from '../../integration/analytics'
 
 import type { WidgetProps } from '../../typing'
 import { useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider'
+import { Accessor } from '../../typing'
 
 /**
  * Render input-checkbox for using in forms
@@ -16,13 +17,24 @@ import { useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider
  * else get 'data'[props.name].
  * @param props - widget props
  */
-const CheckboxWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, submitChange, setInitialValue, containerStore, style: externalStyle } = props
+const CheckboxWidget = (props: WidgetProps & { isDisabled?: Accessor<boolean> }): JSX.Element => {
+  const {
+    name,
+    helpText,
+    targetPayload,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    style: externalStyle,
+    mainDetailObject,
+    isDisabled = false,
+  } = props
 
   const context = containerStore.getState()
 
   const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [value, setValue] = React.useState<boolean>(!!content)
+  const disabled = getAccessor(isDisabled, mainDetailObject, context)
 
   setInitialValue({ [name]: content })
 
@@ -53,7 +65,7 @@ const CheckboxWidget = (props: WidgetProps): JSX.Element => {
       description={widgetDescription}
       {...getDataTestId(props)}
     >
-      <CheckBox value={value} onChange={handleChange} helpText={helpText} />
+      <CheckBox value={value} onChange={handleChange} helpText={helpText} isDisabled={disabled} />
     </WidgetWrapper>
   )
 }
