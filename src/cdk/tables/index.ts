@@ -1,2 +1,4 @@
-export { makeTable, TableProps } from './makeTable'
-export { ColumnConfig, RowConfig, HeaderConfig, CellConfig } from './types'
+export { makeTable } from './makeTable'
+export { RowConfig, HeaderConfig, CellConfig } from './normalizers'
+export { TableProps, ColumnConfig } from './types'
+export { withSortingInHeader } from './withSortingInHeader'
