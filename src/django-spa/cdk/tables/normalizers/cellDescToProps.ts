@@ -1,4 +1,4 @@
-import { isValidElement, PropsWithChildren, ReactText } from 'react'
+import { isValidElement, PropsWithChildren, ReactNode, ReactText } from 'react'
 
 import { CellConfig, CellConfigGenerator, CellDesc, CellNodeGenerator, CellProps } from './types'
 
@@ -19,18 +19,19 @@ export function cellDescToProps<T, CProps, Extra>(
     }
   }
 
-  if (isCellConfig(configOrNode)) {
-    const { value, ...restProps } = configOrNode
-    return {
-      ...restProps,
-      children: value,
-    }
-  }
+  const { value, ...restProps } = isCellConfig(configOrNode) ? configOrNode : { value: configOrNode }
 
-  return { children: configOrNode }
+  return {
+    ...restProps,
+    children: isCellNodeGenerator(value)
+      ? value(item, rowIndex, columnIndex, extraGenerator(item, rowIndex, columnIndex))
+      : value,
+  }
 }
 
-function isCellConfig<T, CProps, Extra>(cellDesc: CellDesc<T, CProps, Extra>): cellDesc is CellConfig<T, CProps> {
+function isCellConfig<T, CProps, Extra>(
+  cellDesc: CellDesc<T, CProps, Extra>
+): cellDesc is CellConfig<T, CProps, Extra> {
   return !!cellDesc && typeof cellDesc === 'object' && 'value' in cellDesc
 }
 
@@ -38,4 +39,10 @@ function isCellGenerator<T, CProps, Extra>(
   cellDesc: CellDesc<CProps, T, Extra>
 ): cellDesc is CellConfigGenerator<CProps, T, Extra> | CellNodeGenerator<T, Extra> {
   return typeof cellDesc === 'function' && !isValidElement(cellDesc)
+}
+
+function isCellNodeGenerator<T, Extra>(
+  value: ReactNode | CellNodeGenerator<T, Extra>
+): value is CellNodeGenerator<T, Extra> {
+  return typeof value === 'function' && !isValidElement(value)
 }

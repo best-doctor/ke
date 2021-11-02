@@ -1,0 +1,1 @@
+export { OrderedTable } from './OrderedTable'

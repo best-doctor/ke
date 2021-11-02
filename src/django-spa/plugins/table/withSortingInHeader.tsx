@@ -1,8 +1,7 @@
 import React, { ComponentType, PropsWithChildren, ReactNode } from 'react'
+import { TablePlugin } from '@cdk/tables'
 
-import { TablePlugin } from './types'
-
-export function withSortingInHeader(OrderHandler: ComponentType<OrderHandlerProps>): TablePlugin<SortingProps> {
+export function withSortingInHeader(OrderHandler: ComponentType<SortHandlerProps>): TablePlugin<SortingProps> {
   return {
     after: (normalizedProps) => {
       const { orderedColumnNames, ordering, onOrderChange, ...restTableProps } = normalizedProps.table
@@ -41,9 +40,9 @@ export function withSortingInHeader(OrderHandler: ComponentType<OrderHandlerProp
 
 function addHandler<P extends PropsWithChildren<{}>>(
   headerProps: P,
-  OrderHandler: ComponentType<OrderHandlerProps>,
-  orderDirection: OrderDirection,
-  onOrderChange: (newDirection: OrderDirection) => void
+  OrderHandler: ComponentType<SortHandlerProps>,
+  orderDirection: Direction,
+  onOrderChange: (newDirection: Direction) => void
 ): P {
   const { children, ...restHeaderProps } = headerProps
   return {
@@ -54,14 +53,14 @@ function addHandler<P extends PropsWithChildren<{}>>(
 
 export interface SortingProps {
   orderedColumnNames: (string | number)[]
-  ordering?: Record<string | number, OrderDirection>
-  onOrderChange: (ordering: Record<string | number, OrderDirection>) => void
+  ordering?: Record<string | number, Direction>
+  onOrderChange: (ordering: Record<string | number, Direction>) => void
 }
 
-interface OrderHandlerProps {
-  orderDirection: OrderDirection
-  onChange: (newDirection: OrderDirection) => void
+interface SortHandlerProps {
+  orderDirection: Direction
+  onChange: (newDirection: Direction) => void
   headerValue: ReactNode
 }
 
-type OrderDirection = 'asc' | 'desc' | null
+type Direction = 'asc' | 'desc' | null
