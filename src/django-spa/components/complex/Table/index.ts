@@ -1,1 +1,1 @@
-export { OrderedTable } from './OrderedTable'
+export { OrderedTable, SelectTable } from './Table'

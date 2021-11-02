@@ -15,7 +15,13 @@ export type TableProps<
   children?: never
 }
 
-export interface ColumnConfig<T, HProps, CProps, HeaderExtra, CellExtra> {
+export interface ColumnConfig<
+  T = unknown,
+  HProps = unknown,
+  CProps = unknown,
+  HeaderExtra = unknown,
+  CellExtra = unknown
+> {
   name: string | number
   header: HeaderDesc<HProps, HeaderExtra>
   cell: CellDesc<CProps, T, CellExtra>
