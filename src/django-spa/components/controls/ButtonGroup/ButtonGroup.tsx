@@ -1,13 +1,14 @@
 import React, { ReactNode } from 'react'
 import { Button, ButtonGroup as ButtonContainer, ButtonProps } from '@chakra-ui/react'
-import stringify from 'fast-json-stable-stringify'
 
 export function ButtonGroup<T>({ items, value, onChange }: ButtonGroupProps<T>): JSX.Element {
+  // Считаем массив крайне-редко изменяемым, а потому использование индекса допустимо
+  /* eslint-disable react/no-array-index-key */
   return (
     <ButtonContainer spacing="1">
-      {items.map(({ label, value: btnValue, styles }) => (
+      {items.map(({ label, value: btnValue, styles }, index) => (
         <Button
-          key={stringify(btnValue)}
+          key={index}
           onClick={() => onChange(btnValue)}
           colorScheme={btnValue === value ? 'gray' : 'brand'}
           variant="outline"
@@ -18,6 +19,7 @@ export function ButtonGroup<T>({ items, value, onChange }: ButtonGroupProps<T>):
       ))}
     </ButtonContainer>
   )
+  /* eslint-enable react/no-array-index-key */
 }
 
 interface ButtonGroupProps<T> {
