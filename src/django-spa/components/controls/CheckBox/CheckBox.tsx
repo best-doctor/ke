@@ -26,7 +26,13 @@ export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref)
 
   return (
     <Box>
-      <ChakraCheckBox isChecked={value} onChange={(e) => handleChange(e.target.checked)} ref={ref} {...rest}>
+      <ChakraCheckBox
+        verticalAlign="middle"
+        isChecked={value}
+        onChange={(e) => handleChange(e.target.checked)}
+        ref={ref}
+        {...rest}
+      >
         {helpText || ''}
       </ChakraCheckBox>
     </Box>
