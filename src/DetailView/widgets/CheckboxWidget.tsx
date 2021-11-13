@@ -17,7 +17,9 @@ import { Accessor } from '../../typing'
  * else get 'data'[props.name].
  * @param props - widget props
  */
-const CheckboxWidget = (props: WidgetProps & { isDisabled?: Accessor<boolean> }): JSX.Element => {
+const CheckboxWidget = (
+  props: WidgetProps & { isDisabled?: Accessor<boolean>; isReadOnly?: Accessor<boolean> }
+): JSX.Element => {
   const {
     name,
     helpText,
@@ -28,6 +30,7 @@ const CheckboxWidget = (props: WidgetProps & { isDisabled?: Accessor<boolean> })
     style: externalStyle,
     mainDetailObject,
     isDisabled = false,
+    isReadOnly,
   } = props
 
   const context = containerStore.getState()
@@ -65,7 +68,13 @@ const CheckboxWidget = (props: WidgetProps & { isDisabled?: Accessor<boolean> })
       description={widgetDescription}
       {...getDataTestId(props)}
     >
-      <CheckBox value={value} onChange={handleChange} helpText={helpText} isDisabled={disabled} />
+      <CheckBox
+        isReadOnly={getAccessor(isReadOnly, mainDetailObject, context)}
+        value={value}
+        onChange={handleChange}
+        helpText={helpText}
+        isDisabled={disabled}
+      />
     </WidgetWrapper>
   )
 }
