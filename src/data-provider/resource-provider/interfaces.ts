@@ -47,8 +47,12 @@ export interface QueryResourceOptions<ResourceData = unknown> extends QueryOptio
   key: string
 }
 
-export interface MutateResourceOptions<ResourceData = unknown, SourceData = ResourceData>
-  extends MutationOptions<ResourceData, SourceData> {
+export interface MutateResourceOptions<
+  ResourceData = unknown,
+  SourceData = ResourceData,
+  TError = unknown,
+  TContext = unknown
+> extends MutationOptions<ResourceData, SourceData, TError, TContext> {
   key: string
 }
 

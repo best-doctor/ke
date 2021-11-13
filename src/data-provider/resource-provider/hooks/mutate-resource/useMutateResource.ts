@@ -1,15 +1,15 @@
 import deepmerge from 'deepmerge'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, UseMutationOptions, useQueryClient } from 'react-query'
 import { MutateResourceOptions, ResourceOptionsOrKey } from '../../interfaces'
 import { useConfigResolver } from '../../../hooks/useConfigResolver'
 import { MutationOptions, MutationResult } from './interfaces'
 import { injectInCallback } from '../../utils/injectInCallback'
 import { useDefaultResourceConfig } from '../useDefaultResourceConfig'
 
-export function useMutateResource<ResourceData, SourceData>(
-  userConfigOrKey: ResourceOptionsOrKey<MutateResourceOptions<ResourceData, SourceData>>,
-  requestOptions: MutationOptions<ResourceData, SourceData> = {}
-): MutationResult<ResourceData, SourceData> {
+export function useMutateResource<ResourceData, SourceData, TError = unknown, TContext = unknown>(
+  userConfigOrKey: ResourceOptionsOrKey<MutateResourceOptions<ResourceData, SourceData, TError, TContext>>,
+  requestOptions: MutationOptions<ResourceData, SourceData, TError, TContext> = {}
+): MutationResult<ResourceData, SourceData, TError, TContext> {
   const userConfig = useConfigResolver(userConfigOrKey)
   const {
     mutate: { fn },
@@ -26,5 +26,8 @@ export function useMutateResource<ResourceData, SourceData>(
 
   const mutateFunction = mutationFn || ((data: SourceData) => fn(key, data, requestConfig))
 
-  return useMutation(mutateFunction, mutationOptions)
+  return useMutation<ResourceData, TError, SourceData, TContext>(
+    mutateFunction,
+    mutationOptions as UseMutationOptions<ResourceData, TError, SourceData, TContext>
+  )
 }

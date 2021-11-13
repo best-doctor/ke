@@ -4,6 +4,7 @@ export * from './ResourceProvider'
 export { getDefaultResourceConfig } from './utils/getDefaultResourceConfig'
 
 export { QueryOptions } from './hooks/fetch-resource/interfaces'
+export { MutationOptions } from './hooks/mutate-resource/interfaces'
 export { useMutateResource } from './hooks/mutate-resource/useMutateResource'
 export { useFetchResource } from './hooks/fetch-resource/useFetchResource'
 export { useResource } from './hooks/fetch-resource/useResource'
