@@ -36,6 +36,7 @@ const ContainerWidget = (props: any): JSX.Element => {
     accordionItemProps,
     accordionPanelProps,
     AccordionButton: UserAccordionButton,
+    setCurrentState,
   } = props
   const containerContent = mountComponents({
     setInitialValue,
@@ -52,6 +53,7 @@ const ContainerWidget = (props: any): JSX.Element => {
     ViewType,
     containerStore,
     containerErrorsStore,
+    setCurrentState,
   })
   const context = (containerStore as Store<object>).getState()
   const isContainerCollapsible = getAccessor(isCollapsible, mainDetailObject, context)
