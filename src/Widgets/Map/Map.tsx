@@ -3,10 +3,10 @@ import { GoogleMap, useLoadScript, StandaloneSearchBox, Circle } from '@react-go
 import { Input, Spinner, styled } from '@chakra-ui/react'
 import { css, Global } from '@emotion/react'
 
+import { usePropState } from '@cdk/Hooks'
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 import { MapMarker } from './Marker'
-import { usePropState } from '@cdk/Hooks'
 
 const searchBoxInputStyle: CSSProperties = {
   boxSizing: 'border-box',
