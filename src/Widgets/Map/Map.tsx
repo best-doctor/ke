@@ -6,6 +6,7 @@ import { css, Global } from '@emotion/react'
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 import { MapMarker } from './Marker'
+import { usePropState } from '@cdk/Hooks'
 
 const searchBoxInputStyle: CSSProperties = {
   boxSizing: 'border-box',
@@ -72,6 +73,8 @@ export function Map({
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>()
   const [searchBoxMarker, setSearchBoxMarker] = useState<Marker | null>(null)
 
+  const [currentCenter, setCurrentCenter] = usePropState(center)
+
   const mapContainerStyle = useMemo(
     () => ({ ...getMapContainerStyle(showSearch && searchStyle === 'default'), ...containerStyle }),
     [containerStyle, searchStyle, showSearch]
@@ -100,7 +103,7 @@ export function Map({
             label: place?.name,
           }
 
-          onBoundsChanged && onBoundsChanged(boundsToString(geometry.viewport))
+          setCurrentCenter(location)
         }
       }
       setSearchBoxMarker(marker)
@@ -152,7 +155,7 @@ export function Map({
         onZoomChanged={handleZoomChanged}
         onBoundsChanged={handleBoundsChanged}
         {...other}
-        center={center}
+        center={currentCenter}
         mapContainerStyle={mapContainerStyle}
         clickableIcons={false}
       >
