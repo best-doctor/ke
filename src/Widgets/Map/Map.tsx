@@ -6,6 +6,7 @@ import { css, Global } from '@emotion/react'
 import { useMapContext } from './Map.context'
 import type { Coords } from './types'
 import { MapMarker } from './Marker'
+import { usePropState } from '@cdk/Hooks'
 
 const searchBoxInputStyle: CSSProperties = {
   boxSizing: 'border-box',
@@ -72,7 +73,8 @@ export function Map({
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>()
   const [searchBoxMarker, setSearchBoxMarker] = useState<Marker | null>(null)
 
-  const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
+  const [currentCenter, setCurrentCenter] = usePropState(center)
+
   const mapContainerStyle = useMemo(
     () => ({ ...getMapContainerStyle(showSearch && searchStyle === 'default'), ...containerStyle }),
     [containerStyle, searchStyle, showSearch]
@@ -100,6 +102,8 @@ export function Map({
             title: place?.name,
             label: place?.name,
           }
+
+          setCurrentCenter(location)
         }
       }
       setSearchBoxMarker(marker)
@@ -124,8 +128,7 @@ export function Map({
     // eslint-disable-next-line react/no-this-in-sfc
     const changedBounds = this.getBounds()
     if (changedBounds) {
-      const { north, south, east, west } = changedBounds.toJSON()
-      boundsStr = [south, west, north, east].join(',')
+      boundsStr = boundsToString(changedBounds)
     }
     if (boundsStr !== boundsRef.current) {
       boundsRef.current = boundsStr
@@ -176,6 +179,11 @@ export function Map({
   ) : (
     <Spinner />
   )
+}
+
+function boundsToString(bounds: google.maps.LatLngBounds): string {
+  const { north, south, east, west } = bounds.toJSON()
+  return [south, west, north, east].join(',')
 }
 
 export type MapProps = PropsWithChildren<{
