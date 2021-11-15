@@ -72,7 +72,6 @@ export function Map({
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>()
   const [searchBoxMarker, setSearchBoxMarker] = useState<Marker | null>(null)
 
-  const currentCenter = useMemo(() => searchBoxMarker?.position || center, [center, searchBoxMarker])
   const mapContainerStyle = useMemo(
     () => ({ ...getMapContainerStyle(showSearch && searchStyle === 'default'), ...containerStyle }),
     [containerStyle, searchStyle, showSearch]
@@ -100,6 +99,8 @@ export function Map({
             title: place?.name,
             label: place?.name,
           }
+
+          onBoundsChanged && onBoundsChanged(boundsToString(geometry.viewport))
         }
       }
       setSearchBoxMarker(marker)
@@ -124,8 +125,7 @@ export function Map({
     // eslint-disable-next-line react/no-this-in-sfc
     const changedBounds = this.getBounds()
     if (changedBounds) {
-      const { north, south, east, west } = changedBounds.toJSON()
-      boundsStr = [south, west, north, east].join(',')
+      boundsStr = boundsToString(changedBounds)
     }
     if (boundsStr !== boundsRef.current) {
       boundsRef.current = boundsStr
@@ -152,7 +152,7 @@ export function Map({
         onZoomChanged={handleZoomChanged}
         onBoundsChanged={handleBoundsChanged}
         {...other}
-        center={currentCenter}
+        center={center}
         mapContainerStyle={mapContainerStyle}
         clickableIcons={false}
       >
@@ -176,6 +176,11 @@ export function Map({
   ) : (
     <Spinner />
   )
+}
+
+function boundsToString(bounds: google.maps.LatLngBounds): string {
+  const { north, south, east, west } = bounds.toJSON()
+  return [south, west, north, east].join(',')
 }
 
 export type MapProps = PropsWithChildren<{
