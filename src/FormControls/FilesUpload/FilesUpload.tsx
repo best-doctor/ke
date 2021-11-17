@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback } from 'react'
+import React, { ReactElement, useCallback, useEffect, useRef } from 'react'
 import { ButtonProps, LinkProps, Text } from '@chakra-ui/react'
 import Filesize from 'filesize'
 
@@ -15,13 +15,20 @@ export function FilesUpload({
   listItemIcon,
   linkProps,
   maxFileSize,
+  multiple,
 }: FilesUploadProps): ReactElement<FilesUploadProps> {
+  const valueRef = useRef(value)
+
+  useEffect(() => {
+    valueRef.current = value
+  }, [value])
+
   const handleUpload = useCallback(
-    (desc: FileDescriptor) => {
-      const newValue = [...value, desc]
+    (desc: FileDescriptor[]) => {
+      const newValue = [...valueRef.current, ...desc]
       onChange(newValue)
     },
-    [value, onChange]
+    [onChange]
   )
 
   return (
@@ -33,6 +40,7 @@ export function FilesUpload({
         onUpload={handleUpload}
         buttonProps={buttonProps}
         maxFileSize={maxFileSize}
+        multiple={multiple}
       />
       {maxFileSize && (
         <Text fontSize="sm" color="gray.500" mt={2}>
@@ -52,4 +60,5 @@ interface FilesUploadProps {
   listItemIcon?: React.ComponentType
   linkProps?: Omit<LinkProps, 'href'>
   maxFileSize?: number
+  multiple?: boolean
 }
