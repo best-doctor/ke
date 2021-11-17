@@ -4,6 +4,11 @@ import { Loader, Paperclip } from 'react-feather'
 import Filesize from 'filesize'
 import { FileDescriptor, LoadingFileDescriptor } from './types'
 
+interface CombinedFileDescriptor {
+  loadingDescriptor: LoadingFileDescriptor
+  fileDescriptor: FileDescriptor
+}
+
 export function UploadButton({
   onSelect,
   onUpload,
@@ -21,11 +26,15 @@ export function UploadButton({
     hiddenFileInput.current?.click()
   }, [])
 
+  const removeFromLoading = useCallback((key: string) => {
+    setLoadingFiles((prev) => prev.filter((desc) => desc.key !== key))
+  }, [])
+
   const handleFileSelect = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setFileErrors([])
       const uploadingPromises = Array.from(event.target.files || []).map(
-        (file: File): Promise<FileDescriptor | null> => {
+        (file: File): Promise<CombinedFileDescriptor | null> => {
           const start = new Date()
           const key = `${file.name}-${new Date()}`
           const loadingFile: LoadingFileDescriptor = {
@@ -48,29 +57,41 @@ export function UploadButton({
 
           return onSelect(file, ({ loaded, total }) => {
             setLoadingFiles((prev) => prev.map((desc) => (desc.key === key ? { ...desc, loaded, total } : desc)))
-          }).then((loadedDesc: FileDescriptor) => {
-            setLoadingFiles((prev) => prev.filter((desc) => desc.key !== key))
-            return loadedDesc
           })
+            .then((loadedDesc: FileDescriptor) => ({ loadingDescriptor: loadingFile, fileDescriptor: loadedDesc }))
+            .catch(() => {
+              removeFromLoading(key)
+              return null
+            })
         }
       )
       Promise.allSettled(uploadingPromises)
         .then((result) =>
           result
-            .filter((item): item is PromiseFulfilledResult<FileDescriptor> => item.status === 'fulfilled')
-            .map(({ value }) => value)
+            .filter((item): item is PromiseFulfilledResult<CombinedFileDescriptor> => item.status === 'fulfilled')
+            .map(({ value }) => {
+              removeFromLoading(value.loadingDescriptor.key)
+              return value.fileDescriptor
+            })
         )
         .then(onUpload)
       // eslint-disable-next-line no-param-reassign
       event.target.value = ''
     },
-    [onUpload, maxFileSize, onSelect]
+    [onUpload, maxFileSize, onSelect, removeFromLoading]
   )
 
   return (
     <>
       <UploadingList files={loadingFiles} />
-      <Button leftIcon={<Paperclip size={18} />} size="sm" mt="5px" {...buttonProps} onClick={handleClick}>
+      <Button
+        leftIcon={<Paperclip size={18} />}
+        size="sm"
+        mt="5px"
+        {...buttonProps}
+        onClick={handleClick}
+        isDisabled={buttonProps?.isDisabled || !!loadingFiles.length}
+      >
         {label}
       </Button>
       {fileErrors.map((error, index) => {
