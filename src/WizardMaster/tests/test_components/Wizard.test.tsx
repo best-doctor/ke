@@ -16,6 +16,7 @@ const getComponent = (): JSX.Element => {
   const refreshMainDetailObject = jest.fn()
   const analytics = undefined
   const user = {}
+  const activeWizardRef = { current: null }
 
   return (
     <Wizard
@@ -30,6 +31,7 @@ const getComponent = (): JSX.Element => {
       ViewType={ViewType}
       user={user}
       style={{}}
+      activeWizardRef={activeWizardRef}
     />
   )
 }

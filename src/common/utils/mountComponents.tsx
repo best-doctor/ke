@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, MutableRefObject } from 'react'
 // eslint-disable-next-line
 // @ts-ignore
 import { Row, getColumnProps, ColProps } from 'react-flexbox-grid'
@@ -14,7 +14,8 @@ import type { DetailObject, GenericAccessor } from '../../typing'
 import { isValidComponent } from './isComponent'
 import { get } from './get'
 import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
-import {ErrorElement, StoreElement} from "../../WizardMaster/store";
+import { ErrorElement, StoreElement } from '../../WizardMaster/store'
+import { WizardControl } from '../../typing'
 
 type MountComponentsKwargs = {
   setInitialValue: Function
@@ -32,6 +33,7 @@ type MountComponentsKwargs = {
   containerStore?: Store<StoreElement> | Store<object> | undefined
   containerErrorsStore?: Store<ErrorElement[]> | undefined
   setCurrentState?: Function
+  activeWizardRef?: MutableRefObject<WizardControl | null>
 }
 
 export const getComponentFromCallable = (
@@ -68,6 +70,7 @@ const mountComponents = ({
   containerStore,
   containerErrorsStore,
   setCurrentState,
+  activeWizardRef,
 }: MountComponentsKwargs): JSX.Element[] => {
   /*
     Mounts widgets, which are described in DetailFieldDescription format.
@@ -155,6 +158,7 @@ const mountComponents = ({
                 containerStore={containerStore}
                 containerErrorsStore={containerErrorsStore}
                 setCurrentState={setCurrentState}
+                activeWizardRef={activeWizardRef}
                 {...adminElement}
               />
             </Box>

@@ -2,7 +2,7 @@ import type { Store } from 'effector'
 import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
-import { CSSProperties } from 'react'
+import { CSSProperties, MutableRefObject } from 'react'
 import { BoxProps } from '@chakra-ui/react'
 import { TestIdGenerationProps } from './django-spa/aspects/test-id/TestIdProvider'
 import { ErrorElement } from './WizardMaster/store'
@@ -21,6 +21,10 @@ type DetailObject = {
 }
 
 type WizardObject = DetailObject
+
+interface WizardControl {
+  reload: () => void
+}
 
 type ValueOrPromise<T> = T | Promise<T>
 
@@ -56,6 +60,7 @@ type WidgetProps = {
   widgetClassName?: string
   className?: string
   allowAllDefinedValues?: Accessor<boolean>
+  activeWizardRef?: MutableRefObject<WizardControl | null>
 } & Omit<TestIdGenerationProps, 'name'>
 
 type FieldsTypeInAdminClass = 'detail_fields' | 'wizards' | 'additional_detail_widgets' | 'updated_wizards'
@@ -73,6 +78,7 @@ export {
   OptionalDate,
   DetailObject,
   WidgetProps,
+  WizardControl,
   FieldsTypeInAdminClass,
   WizardObject,
   ValueOrPromise,

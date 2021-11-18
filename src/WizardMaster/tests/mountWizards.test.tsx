@@ -25,6 +25,7 @@ test('Mount wizard main component', () => {
     analytics,
     user,
     mainDetailObject: { id: 100500 },
+    activeWizardRef: { current: null },
   })
   const result = element.props.children[0]
 

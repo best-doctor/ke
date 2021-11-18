@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useToast, Box, Spinner, Alert, AlertTitle, AlertIcon, AlertDescription } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
@@ -6,7 +6,7 @@ import { Row, Col } from 'react-flexbox-grid'
 import type { BaseAdmin } from 'admin'
 import type { Provider } from 'admin/providers/interfaces'
 import type { BaseAnalytic } from 'integration/analytics/base'
-import type { FieldsTypeInAdminClass } from 'typing'
+import type { FieldsTypeInAdminClass, WizardControl } from 'typing'
 
 import { mountWizards } from '../WizardMaster/mountWizards'
 import { mountWizards as updatedMountWizards } from '../Wizard/mountWizards'
@@ -65,6 +65,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   const detailNotifier = notifier || new ChakraUINotifier(toast)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [loadError, setLoadError] = useState<LoadError | null>(null)
+  const activeWizardRef = useRef<WizardControl>()
 
   let title = `${admin.verboseName} # ${id}`
   if (admin.getPageTitle) {
@@ -141,6 +142,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
                       elements,
                       elementsKey,
                       refreshMainDetailObject,
+                      activeWizardRef,
                       ...props,
                       notifier: detailNotifier,
                     })}

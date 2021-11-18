@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 import { Box, chakra } from '@chakra-ui/react'
 import { Wizard } from './components'
 
@@ -8,7 +8,7 @@ import type { WizardFieldDescription, WizardFieldElement } from '../admin/fields
 import type { BaseNotifier } from '../common/notifier'
 import type { Provider } from '../admin/providers/interfaces'
 import type { BaseAnalytic } from '../integration/analytics'
-import type { DetailObject } from '../typing'
+import type { DetailObject, WizardControl } from '../typing'
 
 type MountWizardsKwargs = {
   resourceName: string
@@ -22,6 +22,7 @@ type MountWizardsKwargs = {
   refreshMainDetailObject: Function
   analytics: BaseAnalytic | undefined
   user: object
+  activeWizardRef: MutableRefObject<WizardControl | null>
 }
 
 const WizardWrapper = chakra(Box, {
@@ -58,6 +59,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
     analytics,
     user,
     resourceName,
+    activeWizardRef,
   } = kwargs
 
   return (
@@ -84,6 +86,7 @@ const mountWizards = (kwargs: MountWizardsKwargs): JSX.Element => {
             resourceName={resourceName}
             allowToggle={wizard.allowToggle}
             isExpanded={wizard.isExpanded}
+            activeWizardRef={activeWizardRef}
           />
         )
       })}

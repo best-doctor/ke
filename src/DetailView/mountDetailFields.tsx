@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 import { Box } from '@chakra-ui/react'
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 
 import type { Provider } from 'admin/providers/interfaces'
 import type { BaseNotifier } from 'common/notifier'
 import type { BaseAnalytic } from 'integration/analytics'
-import type { DetailObject, FieldsTypeInAdminClass } from 'typing'
+import type { DetailObject, FieldsTypeInAdminClass, WizardControl } from 'typing'
 
 import { containerStore } from './store'
 import { initDetailViewControllers } from './controllers'
@@ -23,6 +23,7 @@ type MountDetailFieldsArgs = {
   analytics: BaseAnalytic | undefined
   ViewType: string
   elementsKey: FieldsTypeInAdminClass
+  activeWizardRef?: MutableRefObject<WizardControl | null>
 }
 
 const mountDetailFields = ({
@@ -37,6 +38,7 @@ const mountDetailFields = ({
   user,
   analytics,
   ViewType,
+  activeWizardRef,
 }: MountDetailFieldsArgs): JSX.Element => {
   /*
     Function mounts widgets for Detail View.
@@ -63,6 +65,7 @@ const mountDetailFields = ({
         analytics,
         ViewType,
         containerStore,
+        activeWizardRef,
       })}
     </Box>
   )

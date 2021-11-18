@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["__initial__"] }] */
 
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 
 import { containerStore } from '../store'
 import { WizardStepContainer } from './WizardStepContainer'
@@ -11,6 +11,7 @@ import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { DetailObject } from '../../typing'
 import { ErrorBoundary } from '../../common/components/ErrorBoundary'
+import { WizardControl } from '../../typing'
 
 type WizardContainerProps = {
   wizard: BaseWizard
@@ -24,6 +25,7 @@ type WizardContainerProps = {
   user: object
   show: boolean
   submitChange: Function
+  wizardRef?: MutableRefObject<WizardControl | null>
 }
 
 const putMainDetailObjectToWizardContext = (submitChange: Function, mainDetailObject: DetailObject): void => {
@@ -46,8 +48,15 @@ const WizardContainer = (props: WizardContainerProps): JSX.Element => {
     ViewType,
     show,
     submitChange,
+    wizardRef,
   } = props
   const [currentState, setCurrentState] = React.useState<string>('begin')
+
+  if (wizardRef) {
+    wizardRef.current = {
+      reload: () => setCurrentState('begin'),
+    }
+  }
 
   putMainDetailObjectToWizardContext(submitChange, mainDetailObject)
 

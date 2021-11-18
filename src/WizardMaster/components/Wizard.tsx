@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 import { Button, Box } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -11,7 +11,7 @@ import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/fireb
 import { pushAnalytics } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
-import type { Accessor, DetailObject } from '../../typing'
+import type { Accessor, DetailObject, WizardControl } from '../../typing'
 import { getAccessorWithDefault } from '../../DetailView/utils/dataAccess'
 import { useCreateTestId } from '../../django-spa/aspects'
 
@@ -29,6 +29,7 @@ type WizardProps = {
   style?: object
   allowToggle?: Accessor<boolean>
   isExpanded?: Accessor<boolean>
+  activeWizardRef: MutableRefObject<WizardControl | null>
 }
 
 const sendPushAnalytics = (resourceName: string, widgetName: string, props: WizardProps): void => {
@@ -58,6 +59,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
     resourceName,
     allowToggle: allowToggleHandler = true,
     isExpanded: isExpandedHandler,
+    activeWizardRef,
   } = props
 
   const effectiveAllowToggle = getAccessorWithDefault(allowToggleHandler, mainDetailObject, undefined, true)
@@ -109,6 +111,7 @@ const Wizard = (props: WizardProps): JSX.Element => {
         ViewType={ViewType}
         user={user}
         submitChange={submitChange}
+        wizardRef={isExpanded ? activeWizardRef : undefined}
       />
     </Box>
   )
