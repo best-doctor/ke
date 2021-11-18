@@ -59,16 +59,19 @@ export function UploadButton({
             setLoadingFiles((prev) => prev.map((desc) => (desc.key === key ? { ...desc, loaded, total } : desc)))
           })
             .then((loadedDesc: FileDescriptor) => ({ loadingDescriptor: loadingFile, fileDescriptor: loadedDesc }))
-            .catch(() => {
+            .catch((error) => {
               removeFromLoading(key)
-              return null
+              throw error
             })
         }
       )
       Promise.allSettled(uploadingPromises)
         .then((result) =>
           result
-            .filter((item): item is PromiseFulfilledResult<CombinedFileDescriptor> => item.status === 'fulfilled')
+            .filter(
+              (item): item is PromiseFulfilledResult<CombinedFileDescriptor | null> => item.status === 'fulfilled'
+            )
+            .filter((item): item is PromiseFulfilledResult<CombinedFileDescriptor> => item.value !== null)
             .map(({ value }) => {
               removeFromLoading(value.loadingDescriptor.key)
               return value.fileDescriptor
