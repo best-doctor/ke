@@ -24,7 +24,7 @@ export const Field = makeWithLayout(
     const Component: ElementType = as
 
     return {
-      Control: <Component ref={controlRef} value={value} onChange={handleChange} {...other} />,
+      Control: <Component ref={controlRef} value={value} onChange={handleChange} name={name} {...other} />,
       Errors: errors && errors.length ? errors[0].message : '',
       Label: label && (
         <Label isRequired={isRequired} mb={2} display="inline-block">

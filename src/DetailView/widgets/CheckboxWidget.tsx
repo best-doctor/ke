@@ -74,6 +74,7 @@ const CheckboxWidget = (
         onChange={handleChange}
         helpText={helpText}
         isDisabled={disabled}
+        name={name}
       />
     </WidgetWrapper>
   )

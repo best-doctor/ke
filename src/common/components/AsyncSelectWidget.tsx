@@ -31,6 +31,7 @@ interface AsyncSelectWidgetProps extends ExtendedProps {
   menuPlacement?: MenuPlacement
   className?: string
   staleTime?: Accessor<number>
+  name?: string
 }
 
 /**
@@ -73,6 +74,7 @@ const AsyncSelectWidget = ({
   className,
   staleTime,
   componentsClasses,
+  name,
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
@@ -135,6 +137,7 @@ const AsyncSelectWidget = ({
       searchParamName={searchParamName}
       cacheUniqs={cacheUniqs}
       componentsClasses={componentsClasses}
+      name={name}
     />
   )
 }

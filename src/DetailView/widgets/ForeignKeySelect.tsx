@@ -165,6 +165,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           staleTime={staleTime}
           className={widgetClassName}
           componentsClasses={componentsClasses}
+          name={name}
         />
       </ValidationWrapper>
     </WidgetWrapper>

@@ -86,6 +86,7 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
         isClearable={isClearable}
         placeholder={placeholder}
         wrapperClassName={wrapperClassName}
+        name={name}
       />
     </WidgetWrapper>
   )

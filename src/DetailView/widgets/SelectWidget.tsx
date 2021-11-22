@@ -128,6 +128,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
           components={components}
           isClearable={isClearable}
           placeholder={placeholder}
+          name={name}
         />
       </WidgetWrapper>
     )

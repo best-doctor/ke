@@ -9,6 +9,7 @@ export interface ControlProps<T> {
   value: T
   onChange: (val: T) => void
   ref?: Ref<ControlRefProps | undefined>
+  name?: string
 }
 
 export type FieldProps<T, P> = BaseFieldProps<T, P> &

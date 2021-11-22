@@ -80,6 +80,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
       {...getDataTestId(props)}
     >
       <DebounceInput
+        name={name}
         value={content as string}
         height={height || (isTextarea ? 263 : undefined)}
         debounceTimeout={debounce}
