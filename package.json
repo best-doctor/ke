@@ -1,13 +1,13 @@
 {
     "name": "@bestdoctor/ke-beta",
-    "version": "11.4.0",
+    "version": "11.5.0",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "license": "MIT",
     "dependencies": {
-        "@bestdoctor/icons": "2.0.1",
+        "@bestdoctor/icons": "2.1.0",
         "@chakra-ui/icons": "^1.0.14",
         "@chakra-ui/react": "^1.6.7",
         "@elastic/apm-rum": "^5.3.0",

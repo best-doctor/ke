@@ -10,10 +10,10 @@ interface ChakraDateInputProps extends InputProps {
 export const ChakraDateInput = forwardRef<HTMLInputElement, ChakraDateInputProps>(
   ({ className, inputClassName, ...props }, ref) => (
     <InputGroup className={className}>
-      <InputLeftElement pointerEvents="none">
+      <InputLeftElement fontSize="20px" width="44px" justifyContent="flex-start" pl="16px" pointerEvents="none">
         <Icon as={Calendar} />
       </InputLeftElement>
-      <Input className={inputClassName} {...props} ref={ref} />
+      <Input paddingStart="44px" className={inputClassName} {...props} ref={ref} />
     </InputGroup>
   )
 )
