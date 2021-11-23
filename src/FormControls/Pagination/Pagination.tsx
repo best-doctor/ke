@@ -30,26 +30,39 @@ export const Pagination = makeWithLayout(({ value: page, onChange, totalCount }:
   const isLast = page === totalCount
 
   return {
-    ToFirst: <PaginationButton element={ChevronsLeft} disabled={isFirst} onClick={() => onChange(1)} />,
+    ToFirst: (
+      <PaginationButton element={ChevronsLeft} disabled={isFirst || totalCount === 0} onClick={() => onChange(1)} />
+    ),
     ToPrev: (
-      <PaginationButton element={ChevronLeft} disabled={isFirst} onClick={() => onChange(page > 1 ? page - 1 : 1)} />
+      <PaginationButton
+        element={ChevronLeft}
+        disabled={isFirst || totalCount === 0}
+        onClick={() => onChange(page > 1 ? page - 1 : 1)}
+      />
     ),
     Pages: `${page} / ${totalCount}`,
     ToNext: (
       <PaginationButton
         element={ChevronRight}
-        disabled={isLast}
+        disabled={isLast || totalCount === 0}
         onClick={() => onChange(page < totalCount ? page + 1 : page)}
       />
     ),
-    ToLast: <PaginationButton element={ChevronsRight} disabled={isLast} onClick={() => onChange(totalCount)} />,
+    ToLast: (
+      <PaginationButton
+        element={ChevronsRight}
+        disabled={isLast || totalCount === 0}
+        onClick={() => onChange(totalCount)}
+      />
+    ),
   }
 }, PaginationLayout)
 
-interface PaginationProps {
+export interface PaginationProps {
   value: number
   onChange: (val: number) => void
   totalCount: number
+  pending: boolean
 }
 
 interface PaginationButtonProps {

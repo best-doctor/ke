@@ -31,7 +31,7 @@ export function entitiesList<Entity, ExtFilters extends { page?: number; orderin
   })
 
   const { store: $entities, fetch: entitiesFetch } = entitiesSource
-  const { data: entities, totalCount } = useStore($entities)
+  const { data: entities, totalCount, pending } = useStore($entities)
 
   filters.per_page = perPage
 
@@ -60,9 +60,10 @@ export function entitiesList<Entity, ExtFilters extends { page?: number; orderin
     }),
     list: createElement(listComponent, { data: entities, onOrderChange, ordering }),
     pagination: createElement(paginationComponent, {
-      value: filters.page || 1,
+      value: !totalCount ? 0 : filters.page || 1,
       onChange: onPageChange,
-      totalCount: Math.ceil((totalCount || 1) / perPage),
+      totalCount: Math.ceil((totalCount || 0) / perPage),
+      pending,
     }),
   }
 }
@@ -95,6 +96,7 @@ interface EntitiesSource<Entity, Filters> {
   store: Store<{
     data: Entity[]
     totalCount: number | null
+    pending: boolean
   }>
   fetch: (filters: Filters) => void
 }
@@ -125,6 +127,7 @@ type PaginationComponent = ComponentType<{
   value: number
   onChange: (page: number) => void
   totalCount: number
+  pending: boolean
 }>
 
 type Ordering = Record<number | string, 'asc' | 'desc' | null>
