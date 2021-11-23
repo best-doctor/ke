@@ -7,7 +7,7 @@
     "types": "dist/index.d.ts",
     "license": "MIT",
     "dependencies": {
-        "@bestdoctor/icons": "2.0.1",
+        "@bestdoctor/icons": "2.1.0",
         "@chakra-ui/icons": "^1.0.14",
         "@chakra-ui/react": "^1.6.7",
         "@elastic/apm-rum": "^5.3.0",

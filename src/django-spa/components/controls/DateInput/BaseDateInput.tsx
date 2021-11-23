@@ -88,10 +88,15 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
  */
 
 const clearButonCss = css`
-  &::after {
-    color: #cccccc;
-    background-color: transparent;
-    font-size: 24px;
+  &.react-datepicker__close-icon {
+    height: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding-right: 16px;
+  }
+
+  &.react-datepicker__close-icon::after {
+    font-size: 11px;
   }
 `
 
