@@ -52,6 +52,10 @@ const StyledAddressInput = styled(Input, {
   },
 })
 
+const defaultMapOptions = {
+  fullscreenControl: false,
+}
+
 export function Map({
   children,
   center,
@@ -158,6 +162,7 @@ export function Map({
         center={currentCenter}
         mapContainerStyle={mapContainerStyle}
         clickableIcons={false}
+        options={defaultMapOptions}
       >
         {children}
         {searchBoxMarker && (
