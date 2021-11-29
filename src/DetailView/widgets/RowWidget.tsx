@@ -37,14 +37,13 @@ const RowWidget = (props: RowWidgetProps): JSX.Element => {
   const { getDataTestId } = useCreateTestId()
 
   return (
-    <Flex data-name={name} flwxWrap="wrap" {...getDataTestId(props)} {...style}>
+    <Flex data-name={name} flexWrap="wrap" {...getDataTestId(props)} {...style}>
       {widgets?.map((widgetElement: any) => {
-        const { widget, elementWrapperStyle, ...rest } = widgetElement
+        const { widget, elementWrapperStyle, name: widgetName, ...rest } = widgetElement
         const ComponentToMount = getComponentFromCallable(widget, user, mainDetailObject, context)
         return (
-          <Box {...generalElementWrapperStyle} {...elementWrapperStyle}>
+          <Box key={widgetName} name={widgetName} {...generalElementWrapperStyle} {...elementWrapperStyle}>
             <ComponentToMount
-              key={name}
               resource={resourceName}
               resourceName={resourceName}
               mainDetailObject={mainDetailObject}
