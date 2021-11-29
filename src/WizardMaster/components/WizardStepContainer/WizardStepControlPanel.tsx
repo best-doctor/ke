@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Flex } from '@chakra-ui/react'
 import { Button } from '@cdk/Controls'
+import { useStore } from 'effector-react'
 import { containerErrorsStore, containerStore, initialStore } from '../../store'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseWizard, BaseWizardStep } from '../../interfaces'
@@ -58,8 +59,11 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
   } = props
   const [isDisabled, setIsDisabled] = useState(false)
 
+  const containerStoreValue = useStore(containerStore)
+  const initialStoreValue = useStore(initialStore)
+
   const getWizardStepControlPayload = (): object => {
-    const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
+    const wizardContext = { ...initialStoreValue, ...containerStoreValue }
 
     return {
       ...props,
