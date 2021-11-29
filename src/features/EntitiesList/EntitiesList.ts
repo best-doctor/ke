@@ -1,12 +1,17 @@
-import { ComponentType, createElement, ReactElement, useEffect, useMemo } from 'react'
+import { ComponentType, createElement, ReactElement, useEffect, useMemo, useRef } from 'react'
 import { useStore } from 'effector-react'
-import type { Store } from 'effector'
+import type { Store, Effect } from 'effector'
 import { useChangeEffect, useStoreApiState } from '@cdk/Hooks'
 
-export function entitiesList<Entity, ExtFilters extends { page?: number; ordering?: string; per_page?: number }>(
+export function entitiesList<
+  Entity,
+  ExtFilters extends { page?: number; ordering?: string; per_page?: number },
+  ErrorType = Error
+>(
   filtersComponent: FiltersComponent<Omit<ExtFilters, 'page' | 'ordering'>>,
   listComponent: ListComponent<Entity>,
   paginationComponent: PaginationComponent,
+  options: EntitiesListConfig<ExtFilters, ErrorType> | null,
   { entitiesSource, filtersSource, perPage = 20 }: EntitiesListProps<Entity, ExtFilters>
 ): { filters: ReactElement; list: ReactElement; pagination: ReactElement } {
   const { store: $filters, fetch: fetchFilters, update } = filtersSource
@@ -44,6 +49,24 @@ export function entitiesList<Entity, ExtFilters extends { page?: number; orderin
   useChangeEffect(() => {
     update(filters)
   }, [update, filters])
+
+  const pageApiRef = useRef({ onFiltersChange, onOrderChange, onPageChange })
+  pageApiRef.current = { onFiltersChange, onOrderChange, onPageChange }
+
+  const onError = options?.onError
+  useEffect(() => {
+    if (!onError) {
+      return
+    }
+    const handler = (_: FiltersData<ExtFilters>, { error }: { error: any }): void => {
+      onError(error as ErrorType, pageApiRef.current)
+    }
+    $filters.on(entitiesSource.fetch.fail, handler)
+
+    return () => {
+      $filters.off(entitiesSource.fetch.fail)
+    }
+  }, [$filters, entitiesSource.fetch.fail, onError])
 
   const filtersWithoutPage = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -98,7 +121,7 @@ interface EntitiesSource<Entity, Filters> {
     totalCount: number | null
     pending: boolean
   }>
-  fetch: (filters: Filters) => void
+  fetch: Effect<Filters, Entity[]>
 }
 
 interface FiltersSource<Filters> {
@@ -131,3 +154,12 @@ type PaginationComponent = ComponentType<{
 }>
 
 type Ordering = Record<number | string, 'asc' | 'desc' | null>
+
+interface ChangeFiltersApi<ExtFilters> {
+  onPageChange: (page: number) => void
+  onOrderChange: (order: Ordering) => void
+  onFiltersChange: (filters: Omit<ExtFilters, 'page' | 'ordering'>) => void
+}
+interface EntitiesListConfig<ExtFilters, E = Error> {
+  onError(error: E, api: ChangeFiltersApi<ExtFilters>): void
+}
