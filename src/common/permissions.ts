@@ -25,23 +25,13 @@ const hasPermissions = (permissions: string[], requiredPerms: string[] | undefin
 const mountElement = (
   permissions: string[],
   requiredPermissions: string[] | undefined,
-  element: JSX.Element
-): JSX.Element | null => {
-  const emptyElement = null
-
+  element: React.ReactNode
+): React.ReactNode | null => {
   if (permissionsProvided(requiredPermissions) === false) {
     return element
   }
 
-  if (permissionsProvided(requiredPermissions) === true && hasPermissions(permissions, requiredPermissions) === true) {
-    return element
-  }
-
-  if (permissionsProvided(requiredPermissions) === true && hasPermissions(permissions, requiredPermissions) === false) {
-    return emptyElement
-  }
-
-  return emptyElement
+  return hasPermissions(permissions, requiredPermissions) ? element : null
 }
 
 export { hasPermission, hasPermissions, permissionsProvided, mountElement }

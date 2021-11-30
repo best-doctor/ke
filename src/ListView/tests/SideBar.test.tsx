@@ -4,10 +4,10 @@ import { mocked } from 'ts-jest/utils'
 import { Menu } from 'react-feather'
 import { Drawer, DrawerContent, ChakraProvider } from '@chakra-ui/react'
 
-import { SideBar, SideBarElement } from '../components/SideBar'
-import { AdminResource } from '../../ResourceComposer'
+import { SideBarElement } from 'ListView/components/SidebarElement'
+import { SideBar } from '../components/SideBar'
 import { goToResourceEvent } from '../events'
-import { testAdmin, testProvider } from '../../setupTests'
+import { testAdmin } from '../../setupTests'
 
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
@@ -22,13 +22,9 @@ jest.mock('../events')
 
 const goToResourceEventMock = mocked(goToResourceEvent)
 
-const testResource = (
-  <AdminResource name="test-resource" admin={testAdmin} provider={testProvider} user={{}} analytics={undefined} />
-)
-
 const getSideBarElement = (): JSX.Element => (
   <ChakraProvider>
-    <SideBarElement resource={testResource} />
+    <SideBarElement title={testAdmin.verboseName || testAdmin.name} path={`/${testAdmin.name}/`} />
   </ChakraProvider>
 )
 

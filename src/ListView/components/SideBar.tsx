@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
   Flex,
   Button,
@@ -11,37 +11,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { Menu } from 'react-feather'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { Col, Row } from 'react-flexbox-grid'
 import { goToResourceEvent } from '../events'
 import { Breadcrumbs, TPathRules } from './Breadcrumbs/Breadcrumbs'
-
-type SideBarProps = {
-  name: string
-  admin: {
-    verboseName: string
-  }
-}
-
-type SideBarElementType = {
-  props: SideBarProps
-}
-
-const SideBarElement = ({ resource }: { resource: SideBarElementType }): JSX.Element => {
-  const { push } = useHistory()
-  const { props } = resource
-  const { name, admin } = props
-  const goToResource = (): void => {
-    push(`/${name}/`)
-    goToResourceEvent()
-  }
-  return (
-    <Button colorScheme="brand" m={2} key={name} onClick={goToResource} id="go-to-resource-button">
-      {admin.verboseName}
-    </Button>
-  )
-}
 
 const SidebarButtonContainer = styled.div`
   display: flex;
@@ -53,15 +26,12 @@ const BreadCrumbContainer = styled.div`
   padding-left: 15px;
 `
 
-const SideBar = ({
-  header,
-  children,
-  breadcrumbsRules,
-}: {
+interface ISidebarProps {
   header: string
-  children: JSX.Element[]
   breadcrumbsRules?: TPathRules
-}): JSX.Element => {
+}
+
+const SideBar: FC<ISidebarProps> = ({ header, children, breadcrumbsRules }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   goToResourceEvent.watch(onClose)
@@ -92,4 +62,4 @@ const SideBar = ({
   )
 }
 
-export { SideBar, SideBarElement }
+export { SideBar }
