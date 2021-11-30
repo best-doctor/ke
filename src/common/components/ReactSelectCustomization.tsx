@@ -23,6 +23,7 @@ import {
   MultiValueProps,
   OptionTypeBase,
   SingleValueProps,
+  MenuProps,
 } from 'react-select'
 
 export interface ComponentsClassNames {
@@ -48,6 +49,7 @@ export const Control = <OptionType, IsMulti extends boolean = false>({
   return (
     <StylesProvider value={styles}>
       <Flex
+        data-test-id="control"
         css={getStyles('control', props)}
         ref={innerRef}
         sx={{
@@ -133,6 +135,18 @@ function Input({ className, ...props }: any): JSX.Element {
   return <selectComponents.Input {...props} className={classNames(className, externalClassName)} />
 }
 
+function Menu<OptionType, IsMulti extends boolean = false>({
+  innerProps,
+  ...rest
+}: MenuProps<OptionType, IsMulti>): JSX.Element {
+  return (
+    <selectComponents.Menu
+      {...rest}
+      innerProps={{ ...innerProps, 'data-test-id': rest.selectProps.name?.concat('--menu') || 'menu' }}
+    />
+  )
+}
+
 export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends boolean>(
   externalStyles?: StylesConfig<OptionType, IsMulti>
 ): StylesConfig<OptionType, IsMulti> => ({
@@ -156,4 +170,4 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
   },
 })
 
-export const components = { Control, DropdownIndicator, MultiValue, SingleValue, Input }
+export const components = { Control, DropdownIndicator, MultiValue, SingleValue, Input, Menu }
