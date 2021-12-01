@@ -1,6 +1,6 @@
-import { hasPermissions } from 'common/permissions'
 import { getAccessor } from 'index'
 import React, { useMemo } from 'react'
+import { hasPermissions } from '../common/permissions'
 import { ResourceComposerChildType } from './types'
 import { isCompatibleResourceElement, isAdminResourceElement } from './utils'
 

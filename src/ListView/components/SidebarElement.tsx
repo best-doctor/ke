@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react'
-import { goToResourceEvent } from 'ListView/events'
 import React, { FC } from 'react'
 import { useHistory } from 'react-router-dom'
+import { goToResourceEvent } from '../events'
 
 interface ISideBarElementProps {
   title: string
