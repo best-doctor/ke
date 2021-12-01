@@ -1,8 +1,8 @@
-import { getAccessor } from 'index'
 import React, { useMemo } from 'react'
 import { hasPermissions } from '../common/permissions'
 import { ResourceComposerChildType } from './types'
 import { isCompatibleResourceElement, isAdminResourceElement } from './utils'
+import { getAccessor } from '../DetailView/utils/dataAccess'
 
 export const useResourcesMenu = (
   resources: ResourceComposerChildType | (ResourceComposerChildType | false)[] | false,

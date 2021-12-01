@@ -1,6 +1,6 @@
-import { ErrorBoundary } from 'common/components/ErrorBoundary'
 import React, { FC } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { ErrorBoundary } from '../common/components/ErrorBoundary'
 
 interface IResourceProps {
   name: string

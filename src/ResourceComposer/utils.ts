@@ -1,5 +1,5 @@
-import { ICompatibleAdminResourceProps } from 'LegacySupport/AdminResourceCompatible'
 import { ReactElement } from 'react'
+import { ICompatibleAdminResourceProps } from '../LegacySupport/AdminResourceCompatible'
 import { IAdminResourceProps } from './AdminResource'
 
 export const isAdminResourceElement = (resource: ReactElement): resource is ReactElement<IAdminResourceProps> => {

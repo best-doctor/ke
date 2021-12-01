@@ -1,11 +1,13 @@
-import { BaseAdmin } from 'admin'
-import { BaseAnalytic, BaseNotifier, getAccessor } from 'index'
-import type { Provider } from 'admin/providers/interfaces'
 import React, { FC } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { ErrorBoundary } from '../common/components/ErrorBoundary'
 import { RenderList } from '../ListView/RenderList'
 import { RenderDetail } from '../DetailView/RenderDetail'
+import { BaseAdmin } from '../admin'
+import type { Provider } from '../admin/providers/interfaces'
+import { BaseNotifier } from '../common/notifier'
+import { BaseAnalytic } from '../integration/analytics/base'
+import { getAccessor } from '../DetailView/utils/dataAccess'
 
 export interface IAdminResourceProps {
   name: string
