@@ -16,7 +16,7 @@ interface IResourceComposerProps {
   breadcrumbsRules?: TPathRules
   initialPageComponent?: React.ReactNode | null
   initialPath?: string
-  children: ResourceComposerChildType | ResourceComposerChildType[]
+  children: ResourceComposerChildType | (ResourceComposerChildType | false)[] | false
   renderMenu?: (items: { title: string; path: string }[]) => React.ReactNode
 }
 
@@ -44,8 +44,8 @@ export const ResourceComposer: FC<IResourceComposerProps> = ({
         </SideBar>
       )}
       {initialPageComponent && <Resource name="">{initialPageComponent}</Resource>}
-      {React.Children.map(children, (resource: ResourceComposerChildType) => {
-        if (isAdminResourceElement(resource)) {
+      {React.Children.map(children, (resource: ResourceComposerChildType | false) => {
+        if (resource && isAdminResourceElement(resource)) {
           const { admin } = resource.props
 
           return mountElement(permissions, admin?.permissions, resource) || ForbiddenResource
