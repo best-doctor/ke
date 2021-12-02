@@ -116,6 +116,11 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
 
   const { getDataTestId } = useCreateTestId({ name: admin.name })
 
+  useEffect(() => {
+    admin.onMount()
+    return () => admin.onUnmount()
+  }, [admin])
+
   return (
     <SaveEventProvider>
       <Row>

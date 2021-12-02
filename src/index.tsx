@@ -24,7 +24,7 @@ import {
   WidgetTypeEnum,
   FirebaseConfigType,
 } from './integration/analytics'
-import { ResourceComposer, Resource, AdminResource } from './ResourceComposer'
+import { ResourceComposer, Resource, AdminResource, MenuItemMeta } from './ResourceComposer'
 import { RenderList } from './ListView/RenderList'
 import { RenderDetail } from './DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from './WizardMaster/interfaces'
@@ -135,6 +135,7 @@ export {
   BaseProvider,
   Table,
   ResourceComposer,
+  MenuItemMeta,
   Resource,
   AdminResource,
   RenderList,

@@ -7,7 +7,7 @@ import { mountElement } from '../common/permissions'
 import { ForbiddenResource } from './ForbiddenResource'
 import { useResourcesMenu } from './hooks'
 import { Resource } from './Resource'
-import { ResourceComposerChildType } from './types'
+import { ResourceComposerChildType, MenuItemMeta } from './types'
 import { isAdminResourceElement } from './utils'
 
 interface ResourceComposerProps {
@@ -17,7 +17,7 @@ interface ResourceComposerProps {
   initialPageComponent?: React.ReactNode | null
   initialPath?: string
   children: ResourceComposerChildType | (ResourceComposerChildType | false)[] | false
-  renderMenu?: (items: { title: string; path: string }[]) => React.ReactNode
+  renderMenu?: (items: MenuItemMeta[]) => React.ReactNode
 }
 
 export const ResourceComposer: FC<ResourceComposerProps> = ({

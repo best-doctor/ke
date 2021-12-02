@@ -49,4 +49,8 @@ export abstract class BaseAdmin {
 
     return this.baseUrl
   }
+
+  onMount(): void {}
+
+  onUnmount(): void {}
 }

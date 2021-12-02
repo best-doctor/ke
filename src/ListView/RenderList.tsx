@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Flex } from '@chakra-ui/react'
 import { useLocation } from 'react-router-dom'
 
@@ -56,6 +56,11 @@ export const RenderList: React.FC<{
     const filters = FilterManager.getFilters(location.search)
     provider.getPage(resource, filters, { page }).then(processBackendResponse)
   }, [admin, provider, page, location])
+
+  useEffect(() => {
+    admin.onMount()
+    return () => admin.onUnmount()
+  }, [admin])
 
   return (
     <Flex>
