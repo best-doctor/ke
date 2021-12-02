@@ -9,11 +9,11 @@ export function makeTable(
   HeadComponent: StyledContainer | string = 'th',
   CellComponent: StyledContainer | string = 'td'
 ): <T>(props: TableProps<T>) => ReactElement {
-  return ({ data, getKey, row, columns }) => {
+  return ({ data, getKey, row, columns, className }) => {
     const [columnConfigs, { styles: rowStyles }] = [columns, row || {}]
 
     return (
-      <Box overflowX="auto">
+      <Box overflowX="auto" className={className}>
         <TableComponent>
           <thead>
             <RowComponent>
@@ -87,6 +87,7 @@ export interface TableProps<T> {
   columns: readonly ColumnConfig<T>[]
   row?: RowConfig<T>
   children?: never
+  className?: string
 }
 
 type StyledContainer = ComponentType<{
