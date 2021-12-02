@@ -26,12 +26,12 @@ const BreadCrumbContainer = styled.div`
   padding-left: 15px;
 `
 
-interface ISidebarProps {
+interface SidebarProps {
   header: string
   breadcrumbsRules?: TPathRules
 }
 
-const SideBar: FC<ISidebarProps> = ({ header, children, breadcrumbsRules }) => {
+const SideBar: FC<SidebarProps> = ({ header, children, breadcrumbsRules }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   goToResourceEvent.watch(onClose)

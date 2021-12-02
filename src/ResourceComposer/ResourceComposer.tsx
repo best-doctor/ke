@@ -10,7 +10,7 @@ import { Resource } from './Resource'
 import { ResourceComposerChildType } from './types'
 import { isAdminResourceElement } from './utils'
 
-interface IResourceComposerProps {
+interface ResourceComposerProps {
   permissions?: string[]
   withSideBar?: boolean
   breadcrumbsRules?: TPathRules
@@ -20,7 +20,7 @@ interface IResourceComposerProps {
   renderMenu?: (items: { title: string; path: string }[]) => React.ReactNode
 }
 
-export const ResourceComposer: FC<IResourceComposerProps> = ({
+export const ResourceComposer: FC<ResourceComposerProps> = ({
   children,
   withSideBar = true,
   permissions = [],

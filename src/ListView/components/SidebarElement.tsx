@@ -3,12 +3,12 @@ import React, { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { goToResourceEvent } from '../events'
 
-interface ISideBarElementProps {
+interface SideBarElementProps {
   title: string
   path: string
 }
 
-export const SideBarElement: FC<ISideBarElementProps> = ({ title, path }) => {
+export const SideBarElement: FC<SideBarElementProps> = ({ title, path }) => {
   const { push } = useHistory()
   const goToResource = (): void => {
     push(path)

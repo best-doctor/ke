@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
-import { IAdminResourceProps } from './AdminResource'
+import { AdminResourceProps } from './AdminResource'
 
 export type ResourceComposerChildType = ReactElement<
-  | IAdminResourceProps
+  | AdminResourceProps
   | {
       path: string
       title: string

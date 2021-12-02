@@ -9,7 +9,7 @@ import { BaseNotifier } from '../common/notifier'
 import { BaseAnalytic } from '../integration/analytics/base'
 import { getAccessor } from '../DetailView/utils/dataAccess'
 
-export interface IAdminResourceProps {
+export interface AdminResourceProps {
   name: string
   admin: BaseAdmin
   provider: Provider
@@ -18,7 +18,7 @@ export interface IAdminResourceProps {
   notifier?: BaseNotifier
 }
 
-export const AdminResource: FC<IAdminResourceProps> = ({ name, admin, provider, user, analytics, notifier }) => (
+export const AdminResource: FC<AdminResourceProps> = ({ name, admin, provider, user, analytics, notifier }) => (
   <Switch>
     <Redirect exact strict from={`/${name}`} to={`/${name}/`} />
     {!getAccessor(admin.hideListView) && (
