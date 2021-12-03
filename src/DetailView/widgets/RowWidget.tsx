@@ -44,6 +44,7 @@ const RowWidget = (props: RowWidgetProps): JSX.Element => {
         return (
           <Box key={widgetName} name={widgetName} {...generalElementWrapperStyle} {...elementWrapperStyle}>
             <ComponentToMount
+              name={widgetName}
               resource={resourceName}
               resourceName={resourceName}
               mainDetailObject={mainDetailObject}
