@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, ReactElement } from 'react'
+import React, { useCallback, useMemo, ReactElement, Key } from 'react'
 import styled from 'styled-components'
 
 import { LayoutComponent, SlotElements } from '@cdk/Layouts'
@@ -36,6 +36,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   showSearch,
   mapConfig,
   searchStyle,
+  filtersLayout = ListVertical,
   ...rest
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,7 +81,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
           filters={filters}
           value={otherFilters as FiltersValue<K>}
           onChange={onFiltersChange}
-          layout={ListVertical}
+          layout={filtersLayout}
           layoutProxy={filtersLayoutProxy}
         />
       ),
@@ -103,6 +104,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
       filters,
       otherFilters,
       onFiltersChange,
+      filtersLayout,
       filtersLayoutProxy,
     ]
   )
@@ -140,4 +142,5 @@ type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   mapHeight?: number
   mapLayout?: (mapHeight: number) => LayoutComponent<SlotElements<'map' | 'filters'>>
   filtersLayoutProxy?: (elements: [string, ReactElement][]) => Record<string, ReactElement>
+  filtersLayout?: LayoutComponent<[Key, JSX.Element][]>
 }
