@@ -359,9 +359,14 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
   )
 }
 
-const DateFilter = (params: FilterProps): JSX.Element => {
+interface DateTimeFilterProps extends FilterProps {
+  filterDate?: (date: Date) => boolean
+  filterTime?: (date: Date) => boolean
+}
+
+const DateFilter = (params: DateTimeFilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label, resourceName, gotoPage } = params
+  const { name, label, resourceName, gotoPage, filterDate, filterTime } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -387,14 +392,16 @@ const DateFilter = (params: FilterProps): JSX.Element => {
         selected={currentDate}
         dateFormat="yyyy-MM-dd"
         placeholderText={`Фильтр по ${label}`}
+        filterDate={filterDate}
+        filterTime={filterTime}
       />
     </StyledFilter>
   )
 }
 
-const DateTimeFilter = (params: FilterProps): JSX.Element => {
+const DateTimeFilter = (params: DateTimeFilterProps): JSX.Element => {
   const [currentDate, setCurrentDate] = React.useState<Date | null | undefined>()
-  const { name, label, resourceName, gotoPage } = params
+  const { name, label, resourceName, gotoPage, filterDate, filterTime } = params
   const history = useHistory()
   const location = useLocation()
 
@@ -421,6 +428,8 @@ const DateTimeFilter = (params: FilterProps): JSX.Element => {
         selected={currentDate}
         dateFormat="yyyy-MM-dd HH:mm:ss"
         placeholderText={`Фильтр по ${label}`}
+        filterDate={filterDate}
+        filterTime={filterTime}
       />
     </StyledFilter>
   )
