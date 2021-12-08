@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios'
 
-import { FetchFn, QueryOptions, FetchOptions } from './hooks/fetch-resource/interfaces'
+import { QueryOptions, FetchOptions, FetchFn } from './hooks/fetch-resource/interfaces'
 import { MutateFn, MutationOptions } from './hooks/mutate-resource/interfaces'
 
 import { ResourceProviderClientConfig } from './ResourceProviderClient'
@@ -56,7 +56,8 @@ export interface MutateResourceOptions<
   key: string
 }
 
-export interface FetchResourceOptions<ResourceData = unknown> extends FetchOptions<ResourceData> {
+export interface FetchResourceOptions<ResourceData = unknown, TError = unknown>
+  extends FetchOptions<ResourceData, TError> {
   key: string
 }
 
@@ -65,3 +66,5 @@ export type ResourceOptionsOrKey<T extends KeyConfig> = T | string
 export interface ResourceProps<T extends KeyConfig> {
   resource: ResourceOptionsOrKey<T>
 }
+
+export { FetchFn } from './hooks/fetch-resource/interfaces'
