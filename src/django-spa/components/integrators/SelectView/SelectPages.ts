@@ -1,5 +1,5 @@
 import { createElement, useCallback } from 'react'
-import { PolymorphProps } from '@cdk/Types'
+import { PolymorphProps } from '@cdk/types'
 
 import { useSelectPagination, useSelectResult } from './Contexts'
 

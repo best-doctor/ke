@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import { PolymorphProps } from '@cdk/Types'
+import { PolymorphProps } from '@cdk/types'
 
 import { useSelectResult } from './Contexts'
 
