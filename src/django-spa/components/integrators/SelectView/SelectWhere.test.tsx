@@ -1,7 +1,7 @@
 import React from 'react'
 import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
-import { omit } from '@utils/Dicts'
+import { omit } from '@utils/dicts'
 
 import { SelectView } from './SelectView'
 import { SelectWhere } from './SelectWhere'

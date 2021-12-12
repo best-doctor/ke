@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { omit } from '@utils/Dicts'
+import { omit } from '@utils/dicts'
 
 /**
  * Создаёт компонент-обёртку, переименовывая часть или все props перед передачей
