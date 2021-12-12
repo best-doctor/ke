@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 
-import { pick } from './Pick'
+import { pick } from './pick'
 
 const dictWithPickKeys = fc
   .dictionary(fc.string(), fc.anything())

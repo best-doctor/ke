@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 
-import { omit } from './Omit'
+import { omit } from './omit'
 
 const dictWithOmitKeys = fc
   .dictionary(fc.string(), fc.anything())
