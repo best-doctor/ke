@@ -1,6 +1,6 @@
 import fc, { Arbitrary } from 'fast-check'
 
-export const selectResultArbitrary = fc.record({
+export const listDataArbitrary = fc.record({
   items: fc.array(fc.anything()),
   total: fc.nat(),
 })
@@ -17,7 +17,7 @@ export const paginationArbitrary = fc.record({
   perPage: fc.integer(1, 2147483647),
 })
 
-export const selectParamsArbitrary = fc.record({
+export const listParamsArbitrary = fc.record({
   filters: filtersArbitrary,
   orderBy: orderByArbitrary,
   pagination: paginationArbitrary,

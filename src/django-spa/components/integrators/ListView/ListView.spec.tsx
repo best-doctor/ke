@@ -2,11 +2,11 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { SelectParams, SelectResult } from './Contexts'
-import { SelectView } from './SelectView'
-import { SelectWhere } from './SelectWhere'
-import { SelectData } from './SelectData'
-import { SelectPages } from './SelectPages'
+import { ListViewParams, ListViewData } from './Contexts'
+import { ListView } from './ListView'
+import { ListFilters } from './ListFilters'
+import { ListData } from './ListData'
+import { ListPagination } from './ListPagination'
 
 test('Correct render all components', () => {
   const data = { items: ['foo', 'bar', 'jar'], total: 100 }
@@ -19,7 +19,7 @@ test('Correct render all components', () => {
   }
 
   const { getByText } = render(
-    <SampleSelectView result={data} isLoading={false} onParamsChange={jest.fn()} params={params} />
+    <SampleListView data={data} isLoading={false} onParamsChange={jest.fn()} params={params} />
   )
 
   expect(getByText(`Filters: ${JSON.stringify(params.filters)}`)).toBeInTheDocument()
@@ -39,8 +39,8 @@ test('Correct call onParamsChange callback for filters', () => {
     },
   }
   const { getByText } = render(
-    <SampleSelectView
-      result={{ items: [], total: 100 }}
+    <SampleListView
+      data={{ items: [], total: 100 }}
       isLoading={false}
       onParamsChange={handleParamsChangeSpy}
       params={params}
@@ -64,8 +64,8 @@ test('Correct call onParamsChange callback for pagination', () => {
     },
   }
   const { getByText } = render(
-    <SampleSelectView
-      result={{ items: [], total: 100 }}
+    <SampleListView
+      data={{ items: [], total: 100 }}
       isLoading={false}
       onParamsChange={handleParamsChangeSpy}
       params={params}
@@ -114,28 +114,28 @@ function SampleList({ data }: { data: unknown[] }): JSX.Element {
   return <>{JSON.stringify(data)}</>
 }
 
-function SampleSelectView({
-  result,
+function SampleListView({
+  data,
   isLoading,
   params,
   onParamsChange,
 }: {
-  result: SelectResult
+  data: ListViewData
   isLoading: boolean
-  params: SelectParams
-  onParamsChange: (p: SelectParams) => void
+  params: ListViewParams
+  onParamsChange: (p: ListViewParams) => void
 }): JSX.Element {
   return (
-    <SelectView result={result} isLoading={isLoading} onParamsChange={onParamsChange} params={params}>
+    <ListView data={data} isLoading={isLoading} onParamsChange={onParamsChange} params={params}>
       <article>
         <header>
-          <SelectWhere as={SampleFilters} />
+          <ListFilters as={SampleFilters} />
         </header>
-        <SelectData as={SampleList} />
+        <ListData as={SampleList} />
         <footer>
-          <SelectPages as={SamplePagination} />
+          <ListPagination as={SamplePagination} />
         </footer>
       </article>
-    </SelectView>
+    </ListView>
   )
 }

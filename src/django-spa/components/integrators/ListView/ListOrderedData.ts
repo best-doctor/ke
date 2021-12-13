@@ -1,23 +1,23 @@
 import { createElement } from 'react'
 import { PolymorphProps } from '@cdk/types'
 
-import { Order, useSelectOrder, useSelectResult } from './Contexts'
+import { Order, useListOrder, useListData } from './Contexts'
 
 /**
- * Полиморфный компонент для подключения вывода данных к SelectView c поддержкой сортировки
+ * Полиморфный компонент для подключения вывода данных к ListView c поддержкой сортировки
  *
  * @remarks
  * Требования к компоненту вывода данных - {@link RequiredOrderedDataProps}
  */
-export function SelectOrderedData<OrderedDataProps extends RequiredOrderedDataProps>({
+export function ListOrderedData<OrderedDataProps extends RequiredOrderedDataProps>({
   as: Data,
   ...dataProps
-}: SelectOrderedDataProps<OrderedDataProps>): JSX.Element {
-  const { result, status } = useSelectResult()
-  const [order, onOrderChange] = useSelectOrder()
+}: ListOrderedDataProps<OrderedDataProps>): JSX.Element {
+  const { data, status } = useListData()
+  const [order, onOrderChange] = useListOrder()
 
   return createElement(Data, {
-    data: result?.items || null,
+    data: data?.items || null,
     isLoading: status.isLoading,
     ordering: order,
     onOrderChange,
@@ -25,7 +25,7 @@ export function SelectOrderedData<OrderedDataProps extends RequiredOrderedDataPr
   } as unknown as OrderedDataProps)
 }
 
-type SelectOrderedDataProps<TargetProps extends RequiredOrderedDataProps> = PolymorphProps<
+type ListOrderedDataProps<TargetProps extends RequiredOrderedDataProps> = PolymorphProps<
   RequiredOrderedDataProps,
   TargetProps
 >

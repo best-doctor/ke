@@ -3,26 +3,26 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/dicts'
 
-import { SelectView } from './SelectView'
-import { SelectWhere } from './SelectWhere'
+import { ListView } from './ListView'
+import { ListFilters } from './ListFilters'
 
-import { selectParamsArbitrary, selectResultArbitrary, filtersArbitrary } from './fixtures'
+import { listParamsArbitrary, listDataArbitrary, filtersArbitrary } from './fixtures'
 
 test('Use component from `as`-props', () => {
   fc.assert(
     fc
       .property(
-        selectParamsArbitrary,
-        selectResultArbitrary,
+        listParamsArbitrary,
+        listDataArbitrary,
         fc.boolean(),
         fc.lorem(),
-        (params, result, isLoading, display) => {
+        (params, data, isLoading, display) => {
           const filtersSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-              <SelectWhere as={filtersSpy} />
-            </SelectView>
+            <ListView data={data} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <ListFilters as={filtersSpy} />
+            </ListView>
           )
 
           expect(filtersSpy).toBeCalledTimes(1)
@@ -35,14 +35,14 @@ test('Use component from `as`-props', () => {
 
 testProp(
   'Pass correct props to filters component',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
-  (params, result, isLoading) => {
+  [listParamsArbitrary, listDataArbitrary, fc.boolean()],
+  (params, data, isLoading) => {
     const filtersSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
     render(
-      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        <SelectWhere as={filtersSpy} />
-      </SelectView>
+      <ListView data={data} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <ListFilters as={filtersSpy} />
+      </ListView>
     )
 
     expect(omit(filtersSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -53,14 +53,14 @@ testProp(
 
 testProp(
   'On change from filters pass through onChangeParams',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean(), filtersArbitrary],
-  (params, result, isLoading, newFilters) => {
+  [listParamsArbitrary, listDataArbitrary, fc.boolean(), filtersArbitrary],
+  (params, data, isLoading, newFilters) => {
     const paramsSpy = jest.fn()
     const filtersSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
     render(
-      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
-        <SelectWhere as={filtersSpy} />
-      </SelectView>
+      <ListView data={data} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+        <ListFilters as={filtersSpy} />
+      </ListView>
     )
     const filtersOnChange = (filtersSpy.mock.calls[0][0] as Record<'onChange', (p: Record<string, unknown>) => void>)
       .onChange

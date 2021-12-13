@@ -1,4 +1,4 @@
-# SelectView
+# ListView
 
 Группа компонентов для работы со списками сущностей. Прежде всего обеспечивают
 вывод, фильтрацию и сортировку.
@@ -9,9 +9,9 @@
 
 Пример:
 ```typescript jsx
-<SelectView dataProvider={provider}>
-  <SelectWhere as={MyFilter} configs={filterConfigs} />
-  <SelectData as={MyTable} columns={columnConfigs} />
-  <SelectPages as={MyPagination} />
-</SelectView>
+<ListView dataProvider={provider}>
+  <ListFilters as={MyFilter} configs={filterConfigs} />
+  <ListData as={MyTable} columns={columnConfigs} />
+  <ListPagination as={MyPagination} />
+</ListView>
 ```

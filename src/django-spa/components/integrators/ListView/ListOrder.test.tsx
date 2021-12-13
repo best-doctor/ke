@@ -3,26 +3,26 @@ import { fc, testProp } from 'jest-fast-check'
 import { render, act, cleanup } from '@testing-library/react'
 import { omit } from '@utils/dicts'
 
-import { SelectView } from './SelectView'
-import { SelectOrder } from './SelectOrder'
+import { ListView } from './ListView'
+import { ListOrder } from './ListOrder'
 
-import { selectParamsArbitrary, selectResultArbitrary, orderByArbitrary } from './fixtures'
+import { listParamsArbitrary, listDataArbitrary, orderByArbitrary } from './fixtures'
 
 test('Use component from `as`-props', () => {
   fc.assert(
     fc
       .property(
-        selectParamsArbitrary,
-        selectResultArbitrary,
+        listParamsArbitrary,
+        listDataArbitrary,
         fc.boolean(),
         fc.lorem(),
-        (params, result, isLoading, display) => {
+        (params, data, isLoading, display) => {
           const orderSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-              <SelectOrder as={orderSpy} />
-            </SelectView>
+            <ListView data={data} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <ListOrder as={orderSpy} />
+            </ListView>
           )
 
           expect(orderSpy).toBeCalledTimes(1)
@@ -35,14 +35,14 @@ test('Use component from `as`-props', () => {
 
 testProp(
   'Pass correct props to sorting component',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
-  (params, result, isLoading) => {
+  [listParamsArbitrary, listDataArbitrary, fc.boolean()],
+  (params, data, isLoading) => {
     const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>filters</>)
 
     render(
-      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        <SelectOrder as={orderSpy} />
-      </SelectView>
+      <ListView data={data} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <ListOrder as={orderSpy} />
+      </ListView>
     )
 
     expect(omit(orderSpy.mock.calls[0][0] as Record<string, unknown>, ['onChange'])).toEqual({
@@ -53,14 +53,14 @@ testProp(
 
 testProp(
   'On change from sorting pass through onChangeParams',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean(), orderByArbitrary],
-  (params, result, isLoading, newOrder) => {
+  [listParamsArbitrary, listDataArbitrary, fc.boolean(), orderByArbitrary],
+  (params, data, isLoading, newOrder) => {
     const paramsSpy = jest.fn()
     const orderSpy = jest.fn<JSX.Element, unknown[]>().mockReturnValue(<>pages</>)
     render(
-      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
-        <SelectOrder as={orderSpy} />
-      </SelectView>
+      <ListView data={data} params={params} isLoading={isLoading} onParamsChange={paramsSpy}>
+        <ListOrder as={orderSpy} />
+      </ListView>
     )
     const sortingOnChange = (
       orderSpy.mock.calls[0][0] as Record<'onChange', (p: Record<string, string | null>) => void>

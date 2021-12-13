@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
-import { SelectParamsProvider, SelectResultProvider, SelectResult, SelectParams } from './Contexts'
+import { ListParamsProvider, ListDataProvider, ListViewData, ListViewParams } from './Contexts'
 
 const defaultParams = {}
 
@@ -12,25 +12,25 @@ const defaultOnChange = (): never => {
  * Корневой компонент для отображения списков/таблиц/etc. различных сущностей. Через него задаётся контекст,
  * которым пользуются остальные компоненты пакета
  */
-export function SelectView({
+export function ListView({
   children,
   params,
   onParamsChange,
   isLoading,
-  result,
-}: PropsWithChildren<SelectViewProps>): JSX.Element {
+  data,
+}: PropsWithChildren<ListViewProps>): JSX.Element {
   return (
-    <SelectParamsProvider value={params || defaultParams} onChange={onParamsChange || defaultOnChange}>
-      <SelectResultProvider result={result} status={{ isLoading }}>
+    <ListParamsProvider value={params || defaultParams} onChange={onParamsChange || defaultOnChange}>
+      <ListDataProvider data={data} status={{ isLoading }}>
         {children}
-      </SelectResultProvider>
-    </SelectParamsProvider>
+      </ListDataProvider>
+    </ListParamsProvider>
   )
 }
 
-interface SelectViewProps {
-  result: SelectResult
+interface ListViewProps {
+  data: ListViewData
   isLoading: boolean
-  params?: SelectParams
-  onParamsChange?: (params: SelectParams) => void
+  params?: ListViewParams
+  onParamsChange?: (params: ListViewParams) => void
 }

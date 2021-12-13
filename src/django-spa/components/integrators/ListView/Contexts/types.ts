@@ -1,9 +1,9 @@
-export interface SelectResult<T = unknown> {
+export interface ListViewData<T = unknown> {
   items: T[]
   total?: number
 }
 
-export interface SelectStatus {
+export interface ListViewStatus {
   isLoading: boolean
 }
 
@@ -16,7 +16,7 @@ export interface Pagination {
   perPage: number
 }
 
-export interface SelectParams {
+export interface ListViewParams {
   filters?: FiltersValue
   orderBy?: Order
   pagination?: Pagination

@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from 'react'
 import fc, { Arbitrary } from 'fast-check'
 import { act, renderHook } from '@testing-library/react-hooks'
 
-import { SelectParamsProvider, useSelectOrder, useSelectFilters, useSelectPagination, useSelectParams } from './Params'
-import { Updatable, SelectParams } from './types'
+import { ListParamsProvider, useListOrder, useListFilters, useListPagination, useListParams } from './Params'
+import { Updatable, ListViewParams } from './types'
 
 const filtersArbitrary = fc.dictionary(fc.string(), fc.anything())
 
@@ -24,17 +24,17 @@ const paramsArbitrary = fc.record({
 })
 
 describe.each([
-  ['useSelectFilters', useSelectFilters, 'filters', filtersArbitrary],
-  ['useSelectOrder', useSelectOrder, 'orderBy', orderArbitrary],
-  ['useSelectPagination', useSelectPagination, 'pagination', paginationArbitrary],
+  ['useListFilters', useListFilters, 'filters', filtersArbitrary],
+  ['useListOrder', useListOrder, 'orderBy', orderArbitrary],
+  ['useListPagination', useListPagination, 'pagination', paginationArbitrary],
 ] as TestTuple<unknown>[])('%s', (_, hook, paramsKey, valueArbitrary) => {
   it('Get valid value from context', () => {
     fc.assert(
       fc.property(paramsArbitrary, (params) => {
         const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-          <SelectParamsProvider value={params} onChange={jest.fn()}>
+          <ListParamsProvider value={params} onChange={jest.fn()}>
             {children}
-          </SelectParamsProvider>
+          </ListParamsProvider>
         )
 
         const { result } = renderHook(() => hook(), { wrapper })
@@ -49,9 +49,9 @@ describe.each([
       fc.property(paramsArbitrary, valueArbitrary, (params, changed) => {
         const handleChangeSpy = jest.fn<void, [unknown]>()
         const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-          <SelectParamsProvider value={params} onChange={handleChangeSpy}>
+          <ListParamsProvider value={params} onChange={handleChangeSpy}>
             {children}
-          </SelectParamsProvider>
+          </ListParamsProvider>
         )
 
         const { result } = renderHook(() => hook(), { wrapper })
@@ -66,17 +66,17 @@ describe.each([
   })
 })
 
-describe('useSelectParams', () => {
+describe('useListParams', () => {
   it('Get valid value from context', () => {
     fc.assert(
       fc.property(paramsArbitrary, (params) => {
         const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-          <SelectParamsProvider value={params} onChange={jest.fn()}>
+          <ListParamsProvider value={params} onChange={jest.fn()}>
             {children}
-          </SelectParamsProvider>
+          </ListParamsProvider>
         )
 
-        const { result } = renderHook(() => useSelectParams(), { wrapper })
+        const { result } = renderHook(() => useListParams(), { wrapper })
 
         expect(result.current[0]).toBe(params)
       })
@@ -88,12 +88,12 @@ describe('useSelectParams', () => {
       fc.property(paramsArbitrary, paramsArbitrary, (params, changed) => {
         const handleChangeSpy = jest.fn()
         const wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => (
-          <SelectParamsProvider value={params} onChange={handleChangeSpy}>
+          <ListParamsProvider value={params} onChange={handleChangeSpy}>
             {children}
-          </SelectParamsProvider>
+          </ListParamsProvider>
         )
 
-        const { result } = renderHook(() => useSelectParams(), { wrapper })
+        const { result } = renderHook(() => useListParams(), { wrapper })
         act(() => {
           result.current[1](changed)
         })
@@ -105,4 +105,9 @@ describe('useSelectParams', () => {
   })
 })
 
-type TestTuple<T> = [hookName: string, hook: () => Updatable<T>, paramsKey: keyof SelectParams, arbitrary: Arbitrary<T>]
+type TestTuple<T> = [
+  hookName: string,
+  hook: () => Updatable<T>,
+  paramsKey: keyof ListViewParams,
+  arbitrary: Arbitrary<T>
+]

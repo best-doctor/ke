@@ -1,28 +1,28 @@
 import { createElement } from 'react'
 import { PolymorphProps } from '@cdk/types'
 
-import { useSelectResult } from './Contexts'
+import { useListData } from './Contexts'
 
 /**
- * Полиморфный компонент для подключения вывода данных к SelectView
+ * Полиморфный компонент для подключения вывода данных к ListView
  *
  * @remarks
  * Требования к компоненту вывода данных - {@link RequiredDataProps}
  */
-export function SelectData<DataProps extends RequiredDataProps>({
+export function ListData<DataProps extends RequiredDataProps>({
   as: Data,
   ...dataProps
-}: SelectDataProps<DataProps>): JSX.Element {
-  const { result, status } = useSelectResult()
+}: ListDataProps<DataProps>): JSX.Element {
+  const { data, status } = useListData()
 
   return createElement(Data, {
     ...dataProps,
-    data: result?.items || null,
+    data: data?.items || null,
     isLoading: status.isLoading,
   } as unknown as DataProps)
 }
 
-type SelectDataProps<TargetProps extends RequiredDataProps> = PolymorphProps<RequiredDataProps, TargetProps>
+type ListDataProps<TargetProps extends RequiredDataProps> = PolymorphProps<RequiredDataProps, TargetProps>
 
 interface RequiredDataProps {
   /** Сущности для вывода */

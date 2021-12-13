@@ -2,32 +2,32 @@ import React from 'react'
 import fc from 'fast-check'
 import { cleanup, render } from '@testing-library/react'
 
-import { SelectView } from './SelectView'
-import { SelectRaw } from './SelectRaw'
+import { ListView } from './ListView'
+import { ListRaw } from './ListRaw'
 
-import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
+import { listParamsArbitrary, listDataArbitrary } from './fixtures'
 
 test('Use render function from `children`-props', () => {
   fc.assert(
     fc
       .property(
-        selectParamsArbitrary,
-        selectResultArbitrary,
+        listParamsArbitrary,
+        listDataArbitrary,
         fc.boolean(),
         fc.lorem(),
-        (params, result, isLoading, display) => {
+        (params, data, isLoading, display) => {
           const renderSpy = jest.fn().mockReturnValue(display)
           const onParamsChangeSpy = jest.fn()
 
           const { getByText } = render(
-            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={onParamsChangeSpy}>
-              <SelectRaw>{renderSpy}</SelectRaw>
-            </SelectView>
+            <ListView data={data} params={params} isLoading={isLoading} onParamsChange={onParamsChangeSpy}>
+              <ListRaw>{renderSpy}</ListRaw>
+            </ListView>
           )
 
           expect(renderSpy).toBeCalledTimes(1)
           expect(renderSpy).toHaveBeenCalledWith({
-            result,
+            data,
             status: { isLoading },
             params,
             onParamsChange: onParamsChangeSpy,

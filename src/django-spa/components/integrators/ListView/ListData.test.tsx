@@ -2,26 +2,26 @@ import React from 'react'
 import { fc, testProp } from 'jest-fast-check'
 import { render, cleanup } from '@testing-library/react'
 
-import { SelectView } from './SelectView'
-import { SelectData } from './SelectData'
+import { ListView } from './ListView'
+import { ListData } from './ListData'
 
-import { selectParamsArbitrary, selectResultArbitrary } from './fixtures'
+import { listParamsArbitrary, listDataArbitrary } from './fixtures'
 
 test('Use component from `as`-props', () => {
   fc.assert(
     fc
       .property(
-        selectParamsArbitrary,
-        selectResultArbitrary,
+        listParamsArbitrary,
+        listDataArbitrary,
         fc.boolean(),
         fc.lorem(),
-        (params, result, isLoading, display) => {
+        (params, data, isLoading, display) => {
           const dataSpy = jest.fn().mockReturnValue(display)
 
           const { getByText } = render(
-            <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-              <SelectData as={dataSpy} />
-            </SelectView>
+            <ListView data={data} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+              <ListData as={dataSpy} />
+            </ListView>
           )
 
           expect(dataSpy).toBeCalledTimes(1)
@@ -34,19 +34,19 @@ test('Use component from `as`-props', () => {
 
 testProp(
   'Pass correct props to data component',
-  [selectParamsArbitrary, selectResultArbitrary, fc.boolean()],
-  (params, result, isLoading) => {
+  [listParamsArbitrary, listDataArbitrary, fc.boolean()],
+  (params, data, isLoading) => {
     const dataSpy = jest.fn().mockReturnValue('data')
 
     render(
-      <SelectView result={result} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
-        <SelectData as={dataSpy} />
-      </SelectView>
+      <ListView data={data} params={params} isLoading={isLoading} onParamsChange={jest.fn()}>
+        <ListData as={dataSpy} />
+      </ListView>
     )
 
     expect(dataSpy).toHaveBeenCalledWith(
       {
-        data: result.items,
+        data: data.items,
         isLoading,
       },
       {}

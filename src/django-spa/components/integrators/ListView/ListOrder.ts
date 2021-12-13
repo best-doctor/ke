@@ -1,24 +1,24 @@
 import { createElement } from 'react'
 import { PolymorphProps } from '@cdk/types'
 
-import { Order, useSelectOrder } from './Contexts'
+import { Order, useListOrder } from './Contexts'
 
 /**
- * Полиморфный компонент для подключения отдельного компонента сортировки к SelectView
+ * Полиморфный компонент для подключения отдельного компонента сортировки к ListView
  *
  * @remarks
  * Требования к компоненту сортировки - {@link RequiredOrderProps}
  */
-export function SelectOrder<OrderProps extends RequiredOrderProps>({
+export function ListOrder<OrderProps extends RequiredOrderProps>({
   as: Sorting,
   ...sortingProps
-}: SelectFiltersProps<OrderProps>): JSX.Element {
-  const [order, onOrderChange] = useSelectOrder()
+}: ListOrderProps<OrderProps>): JSX.Element {
+  const [order, onOrderChange] = useListOrder()
 
   return createElement(Sorting, { ...sortingProps, value: order, onChange: onOrderChange } as unknown as OrderProps)
 }
 
-type SelectFiltersProps<TargetProps extends RequiredOrderProps> = PolymorphProps<RequiredOrderProps, TargetProps>
+type ListOrderProps<TargetProps extends RequiredOrderProps> = PolymorphProps<RequiredOrderProps, TargetProps>
 
 interface RequiredOrderProps {
   /** Текущее состояние сортировки */

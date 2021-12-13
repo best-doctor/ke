@@ -1,31 +1,31 @@
 import { createElement, useCallback } from 'react'
 import { PolymorphProps } from '@cdk/types'
 
-import { useSelectPagination, useSelectResult } from './Contexts'
+import { useListPagination, useListData } from './Contexts'
 
 /**
- * Полиморфный компонент для подключения пагинации к SelectView
+ * Полиморфный компонент для подключения пагинации к ListView
  *
  * @remarks
  * Требования к компоненту пагинации - {@link RequiredPaginationProps}
  */
-export function SelectPages<PaginationProps extends RequiredPaginationProps>({
+export function ListPagination<PaginationProps extends RequiredPaginationProps>({
   as: Pagination,
   ...paginationProps
-}: SelectPaginationProps<PaginationProps>): JSX.Element {
-  const [{ page, perPage }, onChange] = useSelectPagination()
-  const { result } = useSelectResult()
+}: ListPaginationProps<PaginationProps>): JSX.Element {
+  const [{ page, perPage }, onChange] = useListPagination()
+  const { data } = useListData()
   const handleChange = useCallback((changed: number) => onChange({ page: changed, perPage }), [onChange, perPage])
 
   return createElement(Pagination, {
     value: page,
-    totalCount: Math.ceil((result?.total ?? 0) / perPage),
+    totalCount: Math.ceil((data?.total ?? 0) / perPage),
     onChange: handleChange,
     ...paginationProps,
   } as unknown as PaginationProps)
 }
 
-type SelectPaginationProps<TargetProps extends RequiredPaginationProps> = PolymorphProps<
+type ListPaginationProps<TargetProps extends RequiredPaginationProps> = PolymorphProps<
   RequiredPaginationProps,
   TargetProps
 >
