@@ -76,7 +76,7 @@ export function MapSelect<T>({
       {allOptions.map((option) => (
         <MapMarker
           key={option[0]}
-          position={option[1].coords}
+          position={makeUniqPosition(option, allOptions)}
           title={option[1].description}
           label={option[1].label}
           icon={option[1].icon}
@@ -125,6 +125,33 @@ export function MapSelect<T>({
       )}
     </Map>
   )
+}
+
+function shiftCoords(initial: LatLng): LatLng {
+  const shift = 0.0001
+
+  return {
+    lat: initial.lat + shift,
+    lng: initial.lng + shift,
+  }
+}
+
+function sameCoords(a: LatLng, b: LatLng): boolean {
+  return a.lat === b.lat && a.lng === b.lng
+}
+
+function makeUniqPosition(option: Option<unknown>, all: Option<unknown>[]): LatLng | undefined {
+  const { coords: optionCoords } = option[1]
+  if (!optionCoords) {
+    return undefined
+  }
+
+  const optionIndex = all.indexOf(option)
+  const areSameBeforeExists = all.find(
+    (opt, index) => index < optionIndex && opt[1].coords && sameCoords(opt[1].coords, optionCoords)
+  )
+
+  return areSameBeforeExists ? shiftCoords(optionCoords) : optionCoords
 }
 
 function getOptionByValue<T>(options: readonly Option<T>[], searchValue: T | undefined): Option<T> | null {
