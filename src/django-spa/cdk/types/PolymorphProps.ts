@@ -26,7 +26,7 @@ type AsProp<TargetProps> = {
  *   value: unknown
  * }
  *
- * type FieldProps<C extends ControlProps> = PolymorphicProps<ControlProps, C, FieldPropsBase>
+ * type FieldProps<C extends ControlProps> = PolymorphProps<ControlProps, C, FieldPropsBase>
  *
  * // <Field
  * //    as="input"
