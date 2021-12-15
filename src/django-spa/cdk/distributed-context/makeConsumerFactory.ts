@@ -1,9 +1,11 @@
-import { ComponentProps, createElement, useContext } from 'react'
+import { ComponentProps, createElement } from 'react'
+import { pick } from '@utils/dicts'
 
 import { ConsumerMaker, ContextDesc, ContextsForDesc } from './types'
+import { getContextsData } from './getContextsData'
 
 /**
- * Создаёт фабрику для создания полиморфных компонентов-потребителей даынных
+ * Создаёт фабрику для создания полиморфных компонентов-потребителей данных
  * из переданных контекстов. Задача этих компонентов получить данные из одного
  * или нескольких контекстов и передать их в целевой компонент
  *
@@ -12,8 +14,8 @@ import { ConsumerMaker, ContextDesc, ContextsForDesc } from './types'
  * коллбэку, а потом передавать в компонент TargetFoo
  * ```
  * const makeConsumer = makeConsumerFactory({
- *   first: false,
- *   second: 10,
+ *   first: createContext(false),
+ *   second: createContext(10),
  * })
  *
  * const ConsumerF = makeConsumer(['first'], ({ first }: { first: boolean }) => ({ foo: first.toString() }))
@@ -22,22 +24,16 @@ import { ConsumerMaker, ContextDesc, ContextsForDesc } from './types'
  * //  <ConsumerF as={TargetFoo} baz={7} />
  * ```
  *
+ * @see {@link makeDistributedContext} для общей картины
+ *
  * @param contexts - словарь контекстов
  */
 export function makeConsumerFactory<Desc extends ContextDesc>(contexts: ContextsForDesc<Desc>): ConsumerMaker<Desc> {
-  const contextPairs = Object.entries(contexts)
-
   return (keys, proxy) => {
-    const consumerContextPairs = contextPairs.filter(([key]) => (keys as Array<keyof Desc>).includes(key))
+    const consumerContexts = pick(contexts, keys)
 
     return ({ children, as, ...props }) => {
-      const contextData = consumerContextPairs.reduce(
-        (acc, [key, context]) => ({
-          ...acc,
-          [key]: useContext(context),
-        }),
-        {}
-      ) as Pick<Desc, typeof keys[number]>
+      const contextData = getContextsData(consumerContexts)
 
       const dataProps = proxy ? proxy(contextData) : contextData
 

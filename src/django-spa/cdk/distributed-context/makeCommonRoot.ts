@@ -1,4 +1,4 @@
-import { createElement, FC, Fragment, Provider, ReactElement } from 'react'
+import { Context, createElement, FC, Fragment, Provider, ReactElement } from 'react'
 
 import { ContextDesc, ContextsForDesc } from './types'
 
@@ -18,10 +18,13 @@ import { ContextDesc, ContextsForDesc } from './types'
  * // <Root first={true} second={12}>...</Root>
  * ```
  *
+ * @see {@link makeDistributedContext} для общей картины
+ *
  * @param contexts - словарь контекстов, для которых будет создан общий провайдер
  */
 export function makeCommonRoot<Desc extends ContextDesc>(contexts: ContextsForDesc<Desc>): FC<Desc> {
-  const providerPairs = Object.entries(contexts).map(
+  const contextPairs = Object.entries(contexts) as [keyof Desc, Context<Desc[keyof Desc]>][]
+  const providerPairs = contextPairs.map(
     ([key, ctx]) => [key, ctx.Provider] as [keyof Desc, Provider<Desc[keyof Desc]>]
   )
 
