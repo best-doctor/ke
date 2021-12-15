@@ -5,7 +5,7 @@ import React, { FC } from 'react'
 
 import { makeDistributedContext } from './makeDistributedContext'
 
-const contextDescArbitrary = fc.dictionary(fc.lorem(), fc.anything()).filter(
+const contextDescArbitrary = fc.dictionary(fc.lorem({ mode: 'words' }), fc.anything()).filter(
   (desc) =>
     Object.keys(desc)
       .map((key) => key.trim())
