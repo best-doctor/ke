@@ -17,6 +17,6 @@
  * @param arr - исходный массив однотипных словарей
  * @param key - ключ, по которому из словарей будут извлечены данные
  */
-export function byKey<T, K extends keyof T>(arr: T[], key: K): T[K][] {
+export function byKey<T, K extends keyof T>(arr: readonly T[], key: K): T[K][] {
   return arr.map((v) => v[key])
 }
