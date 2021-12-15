@@ -3,7 +3,10 @@ import { PolymorphProps } from '@cdk/types'
 
 export type ContextDesc = {}
 
-export type DistributedContextControl<Desc extends ContextDesc> = [root: FC<Desc>, makeConsumer: ConsumerMaker<Desc>]
+export type DistributedContextControl<Desc extends ContextDesc, RootProps = Desc> = [
+  root: FC<RootProps>,
+  makeConsumer: ConsumerMaker<Desc>
+]
 
 export type ContextsForDesc<Desc extends ContextDesc> = {
   [K in keyof Desc]: Context<Desc[K]>
