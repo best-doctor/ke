@@ -4,8 +4,8 @@ import { StylesProvider, useMultiStyleConfig } from '@chakra-ui/react'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { StyledWidgetWrapper } from '../../common/components/WidgetWrapper'
 
-import type { WidgetProps } from '../../typing'
-import { getCopyHandler } from '../utils/dataAccess'
+import type { Accessor, WidgetProps } from '../../typing'
+import { getAccessor, getCopyHandler } from '../utils/dataAccess'
 import { EmptyText } from '../../common/components/EmptyText'
 import { useCreateTestId } from '../../django-spa/aspects'
 
@@ -13,6 +13,7 @@ export type ReadOnlyWidgetProps = WidgetProps & {
   innerStyle?: CSSProperties
   className?: string
   widgetClassName?: string
+  isHtmlString?: Accessor<boolean>
 }
 
 const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
@@ -29,15 +30,21 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
     labelContainerProps,
     className,
     widgetClassName,
+    isHtmlString,
   } = props
 
-  const { content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context: containerStore.getState() })
+  const { content, isRequired, widgetDescription } = useWidgetInitialization({
+    ...props,
+    context: containerStore.getState(),
+  })
 
   const styles = useMultiStyleConfig('ReadOnlyWidget', props)
 
   const controlStyles = { ...(styles.control || {}), ...(innerStyle || {}) }
 
   const { getDataTestId } = useCreateTestId()
+
+  const isHtmlContent = getAccessor(isHtmlString) && typeof content === 'string'
 
   return (
     <StylesProvider value={styles}>
@@ -55,8 +62,13 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
         labelContainerProps={labelContainerProps}
         {...getDataTestId(props)}
       >
-        <EmptyText sx={controlStyles} className={widgetClassName}>
-          {content}
+        <EmptyText
+          as={isHtmlContent ? 'div' : undefined}
+          sx={controlStyles}
+          className={widgetClassName}
+          dangerouslySetInnerHTML={isHtmlContent ? { __html: content as string } : undefined}
+        >
+          {isHtmlContent ? undefined : content}
         </EmptyText>
       </StyledWidgetWrapper>
     </StylesProvider>
