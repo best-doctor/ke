@@ -70,7 +70,7 @@ export const MapSelectCoordinates = (props: MapSelectCoordinatesProps): JSX.Elem
             }}
           />
         </Col>
-        <Col xs={2}>
+        <Col xs>
           <Button
             mr={3}
             variant="outline"
@@ -81,8 +81,6 @@ export const MapSelectCoordinates = (props: MapSelectCoordinatesProps): JSX.Elem
           >
             Обновить координаты
           </Button>
-        </Col>
-        <Col xs={2}>
           {isClearable && (
             <Button
               variant="outline"
