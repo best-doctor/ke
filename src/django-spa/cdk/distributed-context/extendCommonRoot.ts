@@ -1,7 +1,7 @@
 import { createElement, FC } from 'react'
 import { omit, pick } from '@utils/dicts'
 
-import { ContextDesc, ContextsForDesc } from './types'
+import { ContextsData, ContextsRecord } from './types'
 import { makeCommonRoot } from './makeCommonRoot'
 
 /**
@@ -32,23 +32,24 @@ import { makeCommonRoot } from './makeCommonRoot'
  *
  * @param baseRoot - базовый компонент
  * @param extContexts - дополнительный контексты для инициализации
- * @param proxy -
+ * @param proxy - проксирующая функция, преобразует пропсы от корневого компонента
+ * к данным для сохранения в контекстах
  */
 export function extendCommonRoot<
-  BaseDesc extends ContextDesc,
-  ExtDesc extends ContextDesc,
-  RootProps = BaseDesc & ExtDesc
+  BaseProps extends {},
+  ExtContexts extends ContextsRecord,
+  RootProps = BaseProps & ContextsData<ExtContexts>
 >(
-  baseRoot: FC<BaseDesc>,
-  extContexts: ContextsForDesc<ExtDesc>,
-  proxy?: (rootProps: RootProps) => BaseDesc & ExtDesc
+  baseRoot: FC<BaseProps>,
+  extContexts: ExtContexts,
+  proxy?: (rootProps: RootProps) => BaseProps & ContextsData<ExtContexts>
 ): FC<RootProps> {
   const extRoot = makeCommonRoot(extContexts)
-  const extKeys = Object.keys(extContexts) as (keyof ExtDesc)[]
+  const extKeys = Object.keys(extContexts) as (keyof ExtContexts)[]
 
   return ({ children, ...props }) => {
-    const proxiedProps = proxy ? proxy(props as RootProps) : (props as unknown as BaseDesc & ExtDesc)
-    const baseElement = createElement(baseRoot, omit(proxiedProps, extKeys) as unknown as BaseDesc, children)
-    return createElement(extRoot, pick(proxiedProps, extKeys), baseElement)
+    const proxiedProps = proxy ? proxy(props as RootProps) : (props as BaseProps & ContextsData<ExtContexts>)
+    const baseElement = createElement(baseRoot, omit(proxiedProps, extKeys) as unknown as BaseProps, children)
+    return createElement(extRoot, pick(proxiedProps, extKeys) as unknown as ContextsData<ExtContexts>, baseElement)
   }
 }

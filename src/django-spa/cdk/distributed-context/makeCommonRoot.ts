@@ -1,11 +1,12 @@
-import { Context, createElement, FC, Fragment, Provider, ReactElement } from 'react'
+import { createElement, FC, Fragment, Provider, ReactElement } from 'react'
 
-import { ContextDesc, ContextsForDesc } from './types'
+import { ContextsData, ContextsRecord } from './types'
 
 /**
- * Создаёт единый компонент провайдер для словаря контекстов. Для передачи данных
- * в каждый из контекстов используются отдельные prop полученного элемента, с
- * ключом соответствующим ключу из переданного словаря
+ * Создаёт единый компонент-провайдер для нескольких контекстов. Props
+ * компонента определяются либо по соответствию ключ-значение переданного
+ * словаря, либо на основе прокси-функции, с помощью которой будут
+ * преобразовываться.
  *
  * @example
  * Создаём общего провайдера для двух контекстов
@@ -21,17 +22,22 @@ import { ContextDesc, ContextsForDesc } from './types'
  * @see {@link makeDistributedContext} для общей картины
  *
  * @param contexts - словарь контекстов, для которых будет создан общий провайдер
+ * @param proxy - коллбэк, вызываемый при рендере компонента с переданными props,
+ * длф подготовки к пробросу их в контексты.
  */
-export function makeCommonRoot<Desc extends ContextDesc>(contexts: ContextsForDesc<Desc>): FC<Desc> {
-  const contextPairs = Object.entries(contexts) as [keyof Desc, Context<Desc[keyof Desc]>][]
-  const providerPairs = contextPairs.map(
-    ([key, ctx]) => [key, ctx.Provider] as [keyof Desc, Provider<Desc[keyof Desc]>]
+export function makeCommonRoot<Contexts extends ContextsRecord, RootProps = ContextsData<Contexts>>(
+  contexts: Contexts,
+  proxy?: (props: RootProps) => ContextsData<Contexts>
+): FC<RootProps> {
+  const providerPairs = Object.entries(contexts).map(
+    ([key, ctx]) => [key, ctx.Provider] as [keyof Contexts, Provider<unknown>]
   )
 
   return ({ children, ...props }) => {
+    const proxiedProps = proxy ? proxy(props as RootProps) : (props as ContextsData<Contexts>)
     const root = providerPairs.reduce(
       (curChildren, [key, provider]): ReactElement =>
-        createElement(provider, { value: (props as Desc)[key] }, curChildren),
+        createElement(provider, { value: proxiedProps[key] }, curChildren),
       children
     ) as ReactElement | undefined
 

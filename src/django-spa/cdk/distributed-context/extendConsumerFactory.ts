@@ -1,7 +1,7 @@
 import { without } from '@utils/array'
 import { pick } from '@utils/dicts'
 
-import { ConsumerMaker, ContextDesc, ContextsForDesc } from './types'
+import { ConsumerMaker, ContextsData, ContextsRecord } from './types'
 import { getContextsData } from './getContextsData'
 
 /**
@@ -29,20 +29,20 @@ import { getContextsData } from './getContextsData'
  * @param baseMaker - базовая фабрика
  * @param extContexts - словарь дополнительных контекстов
  */
-export function extendConsumerFactory<BaseDesc extends ContextDesc, ExtDesc extends ContextDesc>(
-  baseMaker: ConsumerMaker<BaseDesc>,
-  extContexts: ContextsForDesc<ExtDesc>
-): ConsumerMaker<BaseDesc & ExtDesc> {
+export function extendConsumerFactory<BaseContexts extends ContextsRecord, ExtContexts extends ContextsRecord>(
+  baseMaker: ConsumerMaker<BaseContexts>,
+  extContexts: ExtContexts
+): ConsumerMaker<BaseContexts & ExtContexts> {
   const allExtKeys = Object.keys(extContexts)
 
   return (keys, proxy) => {
-    const baseKeys = without(keys, ...(allExtKeys as typeof keys)) as Exclude<typeof keys[number], keyof ExtDesc>[]
-    const extKeys = without(keys, ...baseKeys) as Exclude<typeof keys[number], keyof BaseDesc>[]
+    const baseKeys = without(keys, ...(allExtKeys as typeof keys)) as Exclude<typeof keys[number], keyof ExtContexts>[]
+    const extKeys = without(keys, ...baseKeys) as Exclude<typeof keys[number], keyof BaseContexts>[]
     const extConsumerContexts = pick(extContexts, extKeys)
 
     return baseMaker(baseKeys, (baseCtx) => {
       const extCtx = getContextsData(extConsumerContexts)
-      const ctx = { ...baseCtx, ...extCtx } as Pick<BaseDesc & ExtDesc, typeof keys[number]>
+      const ctx = { ...baseCtx, ...extCtx } as ContextsData<Pick<BaseContexts & ExtContexts, typeof keys[number]>>
       return proxy ? proxy(ctx) : (ctx as ReturnType<Exclude<typeof proxy, undefined>>)
     })
   }

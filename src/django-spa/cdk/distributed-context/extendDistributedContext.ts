@@ -1,7 +1,4 @@
-import { createContext } from 'react'
-import { mapValue } from '@utils/dicts'
-
-import { ContextDesc, ContextsForDesc, DistributedContextControl } from './types'
+import { ContextsControl, ContextsData, ContextsRecord } from './types'
 import { extendCommonRoot } from './extendCommonRoot'
 import { extendConsumerFactory } from './extendConsumerFactory'
 
@@ -26,7 +23,7 @@ import { extendConsumerFactory } from './extendConsumerFactory'
  *
  * const [ExtRoot, extMaker] = extendDistributedContext(
  *    [BaseRoot, baseMaker],
- *    { third: 'test' },
+ *    createContext({ third: 'test' }),
  *    (rootProps: { a: number, b: boolean, c: string}) => ({
  *      first: rootProps.a,
  *      second: rootProps.b,
@@ -44,23 +41,21 @@ import { extendConsumerFactory } from './extendConsumerFactory'
  *
  * @see {@link makeDistributedContext} - для общей картины
  *
- * @param base - корневой элемент и фабричная-функция базового распределённого контекста
- * @param extContextDefault - значения по умолчанию для дополнительного контекста
+ * @param base - базовые корень и фабричная функция для расширения
+ * @param extContexts - словарь дополнительных контекстов
  * @param proxy - проксирующая функция, преобразует пропсы от корневого компонента
  * к данным для сохранения в контекстах
  */
 export function extendDistributedContext<
-  BaseDesc extends ContextDesc,
-  ExtDesc extends ContextDesc,
-  RootProps = BaseDesc & ExtDesc
+  BaseContexts extends ContextsRecord,
+  BaseRootProps extends {},
+  ExtContexts extends ContextsRecord,
+  RootProps = BaseRootProps & ContextsData<ExtContexts>
 >(
-  base: DistributedContextControl<BaseDesc>,
-  extContextDefault: Required<ExtDesc>,
-  proxy?: (rootProps: RootProps) => BaseDesc & ExtDesc
-): DistributedContextControl<BaseDesc & ExtDesc, RootProps> {
-  const extContexts = mapValue(extContextDefault, (ctxDefault) =>
-    createContext(ctxDefault)
-  ) as unknown as ContextsForDesc<ExtDesc>
+  base: ContextsControl<BaseContexts, BaseRootProps>,
+  extContexts: ExtContexts,
+  proxy?: (rootProps: RootProps) => BaseRootProps & ContextsData<ExtContexts>
+): ContextsControl<BaseContexts & ExtContexts, RootProps> {
   const [baseRoot, baseMaker] = base
 
   return [extendCommonRoot(baseRoot, extContexts, proxy), extendConsumerFactory(baseMaker, extContexts)]

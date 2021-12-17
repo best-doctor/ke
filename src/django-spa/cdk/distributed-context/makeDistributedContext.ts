@@ -1,23 +1,19 @@
-import { createContext } from 'react'
-import { mapValue } from '@utils/dicts'
-
-import { ContextDesc, ContextsForDesc, DistributedContextControl } from './types'
+import { ContextsControl, ContextsData, ContextsRecord } from './types'
 import { makeCommonRoot } from './makeCommonRoot'
 import { makeConsumerFactory } from './makeConsumerFactory'
 
 /**
- * Создаёт несколько связанных контекстов и возвращает единый корневой
+ * Создаёт общий корневой провайдер для нескольких контекстов
  * компонент-провайдер и фабричную функцию для создания компонентов-потребителей.
  *
- * @param contextDefault - стартовые значения контекстов. Для каждого ключа будет создан
- * отдельный контекст.
+ * @param contexts - контексты, для которых будет создан общий провайдер
+ * и фабричная-функция
+ * @param proxy - прокси функция, позволяющая преобразовать передаваемые в
+ * корневой компонент props перед их пробросом в контексты
  */
-export function makeDistributedContext<Desc extends ContextDesc>(
-  contextDefault: Required<Desc>
-): DistributedContextControl<Desc> {
-  const contexts = mapValue(contextDefault, (ctxDefault) =>
-    createContext(ctxDefault)
-  ) as unknown as ContextsForDesc<Desc>
-
-  return [makeCommonRoot(contexts), makeConsumerFactory(contexts)]
+export function makeDistributedContext<Contexts extends ContextsRecord, RootProps = ContextsData<Contexts>>(
+  contexts: Contexts,
+  proxy?: (rootProps: RootProps) => ContextsData<Contexts>
+): ContextsControl<Contexts, RootProps> {
+  return [makeCommonRoot(contexts, proxy), makeConsumerFactory(contexts)]
 }

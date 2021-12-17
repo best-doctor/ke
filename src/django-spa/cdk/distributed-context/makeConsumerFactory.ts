@@ -1,7 +1,7 @@
 import { ComponentProps, createElement } from 'react'
 import { pick } from '@utils/dicts'
 
-import { ConsumerMaker, ContextDesc, ContextsForDesc } from './types'
+import { ConsumerMaker, ContextsRecord } from './types'
 import { getContextsData } from './getContextsData'
 
 /**
@@ -28,7 +28,7 @@ import { getContextsData } from './getContextsData'
  *
  * @param contexts - словарь контекстов
  */
-export function makeConsumerFactory<Desc extends ContextDesc>(contexts: ContextsForDesc<Desc>): ConsumerMaker<Desc> {
+export function makeConsumerFactory<Contexts extends ContextsRecord>(contexts: Contexts): ConsumerMaker<Contexts> {
   return (keys, proxy) => {
     const consumerContexts = pick(contexts, keys)
 

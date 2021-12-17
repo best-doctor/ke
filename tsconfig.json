@@ -33,7 +33,7 @@
       "@presenters/*": ["./django-spa/presenters/*"],
       "@smart-components/*": ["./django-spa/smart-components/*"],
       "@utils/*": ["./django-spa/utils/*"],
-      "@features": ["./features"],
+      "@features": ["./features"]
     },
     "strict": true,
     "moduleResolution": "Node",
