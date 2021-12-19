@@ -1,2 +1,2 @@
-export { makeDistributedContext } from './makeDistributedContext'
-export { extendDistributedContext } from './extendDistributedContext'
+export { makeCommonProvider } from './makeCommonProvider'
+export { makeCommonConsumer } from './makeCommonConsumer'
