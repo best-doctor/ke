@@ -20,8 +20,8 @@ export type ConsumerMaker<Contexts extends ContextsRecord> = <
 >(
   contextKeys: K[],
   proxy?: (ctx: Pick<ContextsData<Contexts>, K>) => ProxiedProps
-) => PolymorphConsumer<ProxiedProps>
+) => PolymorphComponent<ProxiedProps>
 
-type PolymorphConsumer<RequiredProps> = <TargetProps extends RequiredProps>(
+export type PolymorphComponent<RequiredProps> = <TargetProps extends RequiredProps>(
   props: PropsWithChildren<PolymorphProps<RequiredProps, TargetProps>>
 ) => ReactElement
