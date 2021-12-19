@@ -1,6 +1,6 @@
-import { Context, useContext } from 'react'
+import { useContext } from 'react'
 
-import { ContextsData } from './types'
+import { ContextsData, ContextsRecord } from './types'
 
 /**
  * Создаёт новый словарь на основе словаря контекстов, заполняя данными из
@@ -29,9 +29,7 @@ import { ContextsData } from './types'
  *
  * @param contexts - словарь контекстов
  */
-export function getContextsData<Contexts extends Record<string, Context<any>>>(
-  contexts: Contexts
-): ContextsData<Contexts> {
+export function getContextsData<Contexts extends ContextsRecord>(contexts: Contexts): ContextsData<Contexts> {
   return Object.entries(contexts).reduce(
     (acc, [key, context]) => ({
       ...acc,

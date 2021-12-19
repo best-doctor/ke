@@ -1,7 +1,7 @@
 import { ComponentProps, createElement } from 'react'
 
 import { ContextsData, ContextsRecord, PolymorphComponent } from './types'
-import { getContextsData } from './getContextsData'
+import { getContextsData } from './utils'
 
 export function makeCommonConsumer<Contexts extends ContextsRecord, ConsumerProps = ContextsData<Contexts>>(
   contexts: Contexts,
