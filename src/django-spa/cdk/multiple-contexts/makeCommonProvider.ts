@@ -25,7 +25,7 @@ import { ContextsData, ContextsRecord } from './types'
  * @param proxy - коллбэк, вызываемый при рендере компонента с переданными props,
  * длф подготовки к пробросу их в контексты.
  */
-export function makeCommonRoot<Contexts extends ContextsRecord, RootProps = ContextsData<Contexts>>(
+export function makeCommonProvider<Contexts extends ContextsRecord, RootProps = ContextsData<Contexts>>(
   contexts: Contexts,
   proxy?: (props: RootProps) => ContextsData<Contexts>
 ): FC<RootProps> {

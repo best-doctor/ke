@@ -3,7 +3,7 @@ import { fc, testProp } from 'jest-fast-check'
 import { mapValue } from '@utils/dicts'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { makeCommonRoot } from './makeCommonRoot'
+import { makeCommonProvider } from './makeCommonProvider'
 
 const contextsDataArbitrary = fc
   .array(fc.lorem({ mode: 'words' }))
@@ -22,7 +22,7 @@ testProp(
   'Данные из контекстов доступны внутри созданного компонента',
   [contextsDataArbitrary],
   ([contexts, updatedData]) => {
-    const Root = makeCommonRoot(contexts)
+    const Root = makeCommonProvider(contexts)
 
     const { result } = renderHook(
       () => {

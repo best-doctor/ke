@@ -1,5 +1,5 @@
 import { ContextsControl, ContextsData, ContextsRecord } from './types'
-import { makeCommonRoot } from './makeCommonRoot'
+import { makeCommonProvider } from './makeCommonProvider'
 import { makeConsumerFactory } from './makeConsumerFactory'
 
 /**
@@ -15,5 +15,5 @@ export function makeDistributedContext<Contexts extends ContextsRecord, RootProp
   contexts: Contexts,
   proxy?: (rootProps: RootProps) => ContextsData<Contexts>
 ): ContextsControl<Contexts, RootProps> {
-  return [makeCommonRoot(contexts, proxy), makeConsumerFactory(contexts)]
+  return [makeCommonProvider(contexts, proxy), makeConsumerFactory(contexts)]
 }

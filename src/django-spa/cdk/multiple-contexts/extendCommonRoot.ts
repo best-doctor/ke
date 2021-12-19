@@ -2,7 +2,7 @@ import { createElement, FC } from 'react'
 import { omit, pick } from '@utils/dicts'
 
 import { ContextsData, ContextsRecord } from './types'
-import { makeCommonRoot } from './makeCommonRoot'
+import { makeCommonProvider } from './makeCommonProvider'
 
 /**
  * Создаёт новый корневой компонент для инициализации контекстов на основе
@@ -44,7 +44,7 @@ export function extendCommonRoot<
   extContexts: ExtContexts,
   proxy?: (rootProps: RootProps) => BaseProps & ContextsData<ExtContexts>
 ): FC<RootProps> {
-  const extRoot = makeCommonRoot(extContexts)
+  const extRoot = makeCommonProvider(extContexts)
   const extKeys = Object.keys(extContexts) as (keyof ExtContexts)[]
 
   return ({ children, ...props }) => {
