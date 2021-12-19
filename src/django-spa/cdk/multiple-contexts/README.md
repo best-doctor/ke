@@ -1,4 +1,4 @@
-# Distributed context
+# Multiple-contexts
 
 Модуль для упрощённого создания связанных контекстов React и полиморфных
 компонентов доступа к ним.
@@ -75,24 +75,27 @@ function Simple(): ReactNode {
 ```typescript jsx
 import { useMemo, createContext } from 'react'
 
+import { makeCommonProvider } from './makeCommonProvider'
+import { makeCommonConsumer } from './makeCommonConsumer'
+
 type DataContext = unknown[]
 type Params = { isActive: boolean }
 type ParamsContext = [params: Params, onChange?: (params: Params) => void]
 
-const defaultDataContext = createContext<string[]>([])
-const defaultParamsContext = createContext<[
-  { isActive: boolean},
+const dataContext = createContext<string[]>([])
+const paramsContext = createContext<[
+  { isActive: boolean },
   (v: unknown) => void | undefined
 ]>([{ isActive: true }])
 
-const [Root, makeChildView] =
-  makeDistributedContext({
-    data: defaultDataContext,
-    params: defaultParamsContext,
+const Root =
+  makeCommonProvider({
+    data: dataContext,
+    params: paramsContext,
   })
 
-const DataView = makeChildView(['data'])
-const ParamsView = makeChildView(['params'], ({ params: [params, _] }) => ({ params }))
+const DataView = makeCommonConsumer({ data: dataContext })
+const ParamsView = makeCommonConsumer({ params: dataContext }, ({ params: [params, _] }) => ({ params }))
 
 function FilteredData({
                         data,
