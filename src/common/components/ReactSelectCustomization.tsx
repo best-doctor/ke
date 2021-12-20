@@ -147,6 +147,14 @@ function Menu<OptionType, IsMulti extends boolean = false>({
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function ClearIndicator<OptionType, IsMulti extends boolean = false>({
+  innerProps,
+  ...rest
+}: IndicatorProps<OptionType, IsMulti>) {
+  return <selectComponents.ClearIndicator {...rest} innerProps={{ ...innerProps, 'data-test-id': 'clear' }} />
+}
+
 export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends boolean>(
   externalStyles?: StylesConfig<OptionType, IsMulti>
 ): StylesConfig<OptionType, IsMulti> => ({
@@ -170,4 +178,4 @@ export const modifyStyles = <OptionType extends OptionTypeBase, IsMulti extends 
   },
 })
 
-export const components = { Control, DropdownIndicator, MultiValue, SingleValue, Input, Menu }
+export const components = { Control, DropdownIndicator, MultiValue, SingleValue, Input, Menu, ClearIndicator }

@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
-import { Box, Button, Flex } from '@chakra-ui/react'
+import React from 'react'
+import { Box, ButtonProps, Button, Flex } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 import { makeSlots, makeWithLayout } from '@cdk/Layouts'
 
 const PaginationLayout = makeSlots<'ToFirst' | 'ToPrev' | 'Pages' | 'ToNext' | 'ToLast'>((slotElements) => (
-  <Flex alignItems="center" fontSize="0.875em" mt={4} mb={4}>
+  <Flex aria-label="Пагинация" alignItems="center" fontSize="0.875em" mt={4} mb={4}>
     <Box>{slotElements.ToFirst}</Box>
     <Box>{slotElements.ToPrev}</Box>
     <Box>{slotElements.Pages}</Box>
@@ -13,15 +13,15 @@ const PaginationLayout = makeSlots<'ToFirst' | 'ToPrev' | 'Pages' | 'ToNext' | '
   </Flex>
 ))
 
-const PaginationButton = ({ disabled, onClick, element }: PaginationButtonProps): JSX.Element => (
+const PaginationButton = ({ disabled, onClick, ...rest }: PaginationButtonProps): JSX.Element => (
   <Button
-    as={element}
     size="xs"
     _hover={{ bg: undefined }}
     _focus={{ boxShadow: undefined }}
     disabled={disabled}
     bg="transparent"
     onClick={onClick}
+    {...rest}
   />
 )
 
@@ -31,29 +31,41 @@ export const Pagination = makeWithLayout(({ value: page, onChange, totalCount }:
 
   return {
     ToFirst: (
-      <PaginationButton element={ChevronsLeft} disabled={isFirst || totalCount === 0} onClick={() => onChange(1)} />
+      <PaginationButton
+        aria-label="На первую страницу"
+        disabled={isFirst || totalCount === 0}
+        onClick={() => onChange(1)}
+      >
+        <ChevronsLeft />
+      </PaginationButton>
     ),
     ToPrev: (
       <PaginationButton
-        element={ChevronLeft}
+        aria-label="На предыдущую страницу"
         disabled={isFirst || totalCount === 0}
         onClick={() => onChange(page > 1 ? page - 1 : 1)}
-      />
+      >
+        <ChevronLeft />
+      </PaginationButton>
     ),
     Pages: `${page} / ${totalCount}`,
     ToNext: (
       <PaginationButton
-        element={ChevronRight}
+        aria-label="На следующую страницу"
         disabled={isLast || totalCount === 0}
         onClick={() => onChange(page < totalCount ? page + 1 : page)}
-      />
+      >
+        <ChevronRight />
+      </PaginationButton>
     ),
     ToLast: (
       <PaginationButton
-        element={ChevronsRight}
+        aria-label="На последнюю страницу"
         disabled={isLast || totalCount === 0}
         onClick={() => onChange(totalCount)}
-      />
+      >
+        <ChevronsRight />
+      </PaginationButton>
     ),
   }
 }, PaginationLayout)
@@ -65,8 +77,7 @@ export interface PaginationProps {
   pending: boolean
 }
 
-interface PaginationButtonProps {
-  element: FC<unknown>
+interface PaginationButtonProps extends Omit<ButtonProps, 'disabled' | 'onClick'> {
   disabled: boolean
   onClick: () => void
 }
