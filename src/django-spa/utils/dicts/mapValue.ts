@@ -3,7 +3,7 @@
  *
  * @example
  * ```
- * const result = omit({a: 1, b: 2, c: 3}, (v) => v.toString())
+ * const result = mapValue({a: 1, b: 2, c: 3}, (v) => v.toString())
  * // result = { a: '1', b: '2', c: '3' }
  * ```
  *

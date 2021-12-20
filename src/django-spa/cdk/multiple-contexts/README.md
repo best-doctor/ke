@@ -1,4 +1,4 @@
-# Distributed context
+# Multiple-contexts
 
 Модуль для упрощённого создания связанных контекстов React и полиморфных
 компонентов доступа к ним.
@@ -68,30 +68,34 @@ function Simple(): ReactNode {
 ## Описание модуля
 
 Основная функция модуля: `makeDistributedContext`. В зависимости от параметров
-она может создать один или несколько React-контекстов, и вернёт корневой компонент
-для их инициализации, а также фабричную-функцию для создания
-компонентов-consumer'ов. Несколько контекстов имеют смысл, когда не всем вашим
-consumer нужны все данные, тогда разделение их на несколько контекстов позволит
-подписывать consumer только на нужные, и перерендeривать их реже.
+она может создать для одного или нескольких React-контекстов корневой компонент
+их инициализации, а также фабричную-функцию для создания
+компонентов-consumer'ов.
 
 ```typescript jsx
-import { useMemo } from 'react'
+import { useMemo, createContext } from 'react'
+
+import { makeCommonProvider } from './makeCommonProvider'
+import { makeCommonConsumer } from './makeCommonConsumer'
 
 type DataContext = unknown[]
 type Params = { isActive: boolean }
 type ParamsContext = [params: Params, onChange?: (params: Params) => void]
 
-const defaultDataContext = []
-const defaultParamsContext = [{ isActive: true }]
+const dataContext = createContext<string[]>([])
+const paramsContext = createContext<[
+  { isActive: boolean },
+  (v: unknown) => void | undefined
+]>([{ isActive: true }])
 
-const [Root, makeChildView] =
-  makeDistributedContext<{ data: DataContext; params: ParamsContext }>({
-    data: defaultDataContext,
-    params: defaultParamsContext,
+const Root =
+  makeCommonProvider({
+    data: dataContext,
+    params: paramsContext,
   })
 
-const DataView = makeChildView(['data'])
-const ParamsView = makeChildView(['params'], ({ params: [params, _] }) => ({ params }))
+const DataView = makeCommonConsumer({ data: dataContext })
+const ParamsView = makeCommonConsumer({ params: dataContext }, ({ params: [params, _] }) => ({ params }))
 
 function FilteredData({
                         data,
