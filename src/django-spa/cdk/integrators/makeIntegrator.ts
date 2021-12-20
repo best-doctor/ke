@@ -25,11 +25,14 @@ import { Integrator } from './types'
  * @param root - корневой компонент
  * @param inners - словарь вложенных компонентов
  */
-export function makeIntegrator<Root extends ComponentType, Inners extends Record<string, ComponentType>>(
+export function makeIntegrator<Root extends ComponentType<any>, Inners extends Record<string, ComponentType<any>>>(
   root: Root,
   inners: Inners
 ): Integrator<Root, Inners> {
   const capitalizedInners = mapKey(inners, (key) => (key as string).charAt(0).toUpperCase() + (key as string).slice(1))
-
-  return { ...root, ...capitalizedInners } as Integrator<Root, Inners>
+  const clonedRoot = (root as CallableFunction).bind({}) as Root
+  Object.entries(capitalizedInners).forEach(([key, value]) => {
+    ;(clonedRoot as Record<string, unknown>)[key] = value
+  })
+  return clonedRoot as Integrator<Root, Inners>
 }
