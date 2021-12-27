@@ -3,7 +3,7 @@ import { partial } from '@utils/Funcs'
 
 import { fieldsBuilder } from './FieldsBuilder'
 import { Field } from './Field'
-import { ListVertical } from '../../../../Layouts'
+import { ListVertical } from '../../../Layouts'
 
 export { Form } from './Form'
 export { Field } from './Field'

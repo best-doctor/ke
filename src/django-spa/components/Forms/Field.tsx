@@ -4,7 +4,7 @@ import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
 
 import type { ControlProps, FieldProps } from './types'
 import { Simple } from './Layouts'
-import { Label } from '../../../../common/components/Label'
+import { Label } from '../../../common/components/Label'
 
 export const Field = makeWithLayout(
   ({ name, as, validator, label, isRequired, ...other }: FieldProps<unknown, ControlProps<unknown>>) => {

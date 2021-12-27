@@ -1,6 +1,7 @@
 import { ComponentProps, createElement } from 'react'
+import { PolymorphComponent } from '~types'
 
-import { ContextsData, ContextsRecord, PolymorphComponent } from './types'
+import { ContextsData, ContextsRecord } from './types'
 import { getContextsData } from './utils'
 
 /**

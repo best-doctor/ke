@@ -26,6 +26,7 @@
     "jsx": "react",
     "paths": {
       "@cdk/*": ["./django-spa/cdk/*"],
+      "~types": ["./django-spa/types"],
       "@plugins/*": ["./django-spa/plugins/*"],
       "@components/*": ["./django-spa/components/*"],
       "@aspects/*": ["./django-spa/aspects/*"],

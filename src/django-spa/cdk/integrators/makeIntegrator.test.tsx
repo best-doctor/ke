@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { testProp, fc } from 'jest-fast-check'
 import { render, cleanup } from '@testing-library/react'
+import { expectType } from 'tsd'
 
 import { makeIntegrator } from './makeIntegrator'
-import { expectType } from 'tsd'
 
 const innersArbitrary = fc
   .array(fc.lorem({ mode: 'words' }))

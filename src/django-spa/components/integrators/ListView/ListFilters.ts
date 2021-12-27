@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import { PolymorphProps } from '@cdk/types'
+import { PolymorphProps } from '~types'
 
 import { FiltersValue, useListFilters } from './Contexts'
 

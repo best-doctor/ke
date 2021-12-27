@@ -2,8 +2,9 @@ import React, { createContext, FC, PropsWithChildren, ReactElement } from 'react
 import { testProp, fc } from 'jest-fast-check'
 import { render } from '@testing-library/react'
 import { mapValue } from '@utils/dicts'
-import { makeCommonConsumer } from '@cdk/multiple-contexts/makeCommonConsumer'
 import { expectType } from 'tsd'
+
+import { makeCommonConsumer } from './makeCommonConsumer'
 
 const contexts = {
   first: createContext<unknown>(undefined),

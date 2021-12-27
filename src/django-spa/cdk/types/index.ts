@@ -1,1 +1,0 @@
-export { PolymorphProps } from './PolymorphProps'

@@ -1,5 +1,5 @@
 import { createElement, useCallback } from 'react'
-import { PolymorphProps } from '@cdk/types'
+import { PolymorphProps } from '~types'
 
 import { useListPagination, useListData } from './Contexts'
 

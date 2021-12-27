@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import { PolymorphProps } from '@cdk/types'
+import { PolymorphProps } from '~types'
 
 import { FiltersValue } from './types'
 import { useWhereFilters } from './WherePanel.context'
