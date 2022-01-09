@@ -1,9 +1,18 @@
 import { useCallback } from 'react'
 import { makeCommonConsumer } from '@cdk/multiple-contexts'
+import { PolymorphComponent } from '~types'
 
 import { dataContext, paramsContext, statusContext } from './contexts'
 
-export const Pagination = makeCommonConsumer(
+/**
+ * Полиморфный компонент для вывода компонента пагинации связанных данных
+ */
+export const Pagination: PolymorphComponent<{
+  currentPage: number
+  totalPages: number
+  onChange: (page: number) => void
+  isLoading?: boolean
+}> = makeCommonConsumer(
   {
     dataCtx: dataContext,
     paramsCtx: paramsContext,

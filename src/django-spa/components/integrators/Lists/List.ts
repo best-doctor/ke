@@ -15,6 +15,16 @@ const listContexts = {
 
 const Root = makeCommonProvider(listContexts)
 
+/**
+ * Компонент-интегратор для управления списком записей получаемых с сервера в стандартной связке:
+ *  - элементы
+ *  - фильтры
+ *  - сортировка
+ *  - пагинация
+ *  - текущий статус получения данных
+ *
+ *  В корневой элемент передаются параметры запроса и данные полученные по этому запросу
+ */
 export const ListIntegrator = makeIntegrator(Root, {
   Filters,
   Data,
@@ -22,4 +32,7 @@ export const ListIntegrator = makeIntegrator(Root, {
   Pagination,
 })
 
+/**
+ * Фабричная функция для создания кастомных компонентов потребителей для интегратора {@link ListIntegrator}
+ */
 export const makeListConsumer = makeConsumerFactory(listContexts)
