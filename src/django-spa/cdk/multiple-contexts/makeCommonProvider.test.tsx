@@ -3,9 +3,9 @@ import { fc, testProp } from 'jest-fast-check'
 import { mapValue } from '@utils/dicts'
 import { renderHook } from '@testing-library/react-hooks'
 import { expectType } from 'tsd'
+import { render } from '@testing-library/react'
 
 import { makeCommonProvider } from './makeCommonProvider'
-import { render } from '@testing-library/react'
 
 const contextsDataArbitrary = fc
   .array(fc.lorem({ mode: 'words' }))
