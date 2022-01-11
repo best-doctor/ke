@@ -44,6 +44,7 @@ const MessagesBlock = ({
               key={key}
               display="flex"
               borderRadius="4px"
+              justifyContent="center"
               p={3}
               mt={4}
               sx={{
