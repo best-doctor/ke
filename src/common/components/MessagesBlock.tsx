@@ -39,9 +39,22 @@ const MessagesBlock = ({
         .map((message: string, index) => {
           const key = index
           return (
-            <Box bg={messageColor} key={key} display="flex" borderRadius="4px" m={4} {...messageProps}>
-              <Box as={messageIcon} size="21px" m={4} mr={0} flexShrink={0} />
-              <Text m={3} {...messageTextProps}>
+            <Box
+              bg={messageColor}
+              key={key}
+              display="flex"
+              borderRadius="4px"
+              p={3}
+              mt={4}
+              sx={{
+                '& + &': {
+                  mt: 2,
+                },
+              }}
+              {...messageProps}
+            >
+              <Box as={messageIcon} size="21px" mt="1px" flexShrink={0} />
+              <Text ml={2} {...messageTextProps}>
                 {message}
               </Text>
             </Box>
