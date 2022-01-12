@@ -126,7 +126,7 @@ export { setDefaultLocale, registerLocale } from 'react-datepicker'
 export { SyncReadWriteStoreProvider } from './Providers'
 export { Button } from './django-spa/cdk/Controls'
 export * from './django-spa'
-export { Select } from './common/components/Select'
+export { Select, SelectProps, OptionTypeBase } from './common/components/Select'
 export * from './styles'
 export * from './data-provider'
 
