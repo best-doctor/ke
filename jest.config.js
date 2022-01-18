@@ -17,6 +17,7 @@ module.exports = {
     '^@presenters(.*)$': '<rootDir>/src/django-spa/presenters$1',
     '^@smart-components(.*)$': '<rootDir>/src/django-spa/smart-components$1',
   },
+  modulePathIgnorePatterns: ['<rootDir>/.rollup.cache'],
   transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
   transform: {
     js: 'jest-esm-transformer',

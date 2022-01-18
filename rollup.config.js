@@ -31,7 +31,7 @@ export default {
       },
     }),
     json(),
-    typescript({ tsconfig: './tsconfig.json', sourceMap: false }),
+    typescript({ tsconfig: './tsconfig.json', sourceMap: false, exclude: ['**/*.test.ts', '**/*.test.tsx'] }),
     styles(),
     production &&
       cleaner({

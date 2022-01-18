@@ -1,6 +1,7 @@
 import React, { ErrorInfo } from 'react'
 import styled from '@emotion/styled'
 import { Heading } from '@chakra-ui/react'
+import { loggerContext } from '../../django-spa/aspects/logger/Logger.context'
 
 interface ErrorBoundaryProps {
   errorTitle?: string
@@ -25,6 +26,12 @@ const StyledErrorInfo = styled.pre`
 `
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  // eslint-disable-next-line react/static-property-placement
+  static contextType = loggerContext
+
+  // eslint-disable-next-line react/static-property-placement
+  context!: React.ContextType<typeof loggerContext>
+
   private errorTitle: string | undefined
 
   constructor(props: Readonly<ErrorBoundaryProps>) {
@@ -38,6 +45,9 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
       error,
       errorInfo,
     })
+
+    // eslint-disable-next-line react/destructuring-assignment
+    this.context?.error?.(error)
   }
 
   render(): React.ReactNode {
