@@ -6,8 +6,8 @@ import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRan
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getPayload } from '../utils/dataAccess'
 import { getNewDateRange } from '../utils/dateUtils'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../../integration/analytics'
+
+import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import type { OptionalDate, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { useCreateTestId } from '../../django-spa/aspects'
@@ -30,16 +30,7 @@ const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string,
  * @param props - widget props
  */
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
-  const {
-    name,
-    helpText,
-    targetPayload,
-    style,
-    submitChange,
-    setInitialValue,
-    oneDayInterval,
-    containerStore,
-  } = props
+  const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props
 
   const context = containerStore.getState()
   let iStartDate = null

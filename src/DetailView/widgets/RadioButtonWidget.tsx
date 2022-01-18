@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { RadioGroup } from '@components/controls'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 

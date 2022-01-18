@@ -3,7 +3,7 @@ import { useStore } from 'effector-react'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { setInitialValue } from '../../controllers'
-import {containerErrorsStore, containerStore} from '../../store'
+import { containerErrorsStore, containerStore } from '../../store'
 
 import { mountComponents } from '../../../common/utils/mountComponents'
 import type { BaseNotifier } from '../../../common/notifier'
@@ -19,7 +19,7 @@ type WizardStepComponentsProps = {
   setMainDetailObject: Function
   refreshMainDetailObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   user: object
   ViewType: string
   submitChange: Function

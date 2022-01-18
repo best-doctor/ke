@@ -20,7 +20,7 @@ type MountDetailFieldsArgs = {
   refreshMainDetailObject: Function
   notifier: BaseNotifier
   user: object
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   ViewType: string
   elementsKey: FieldsTypeInAdminClass
   activeWizardRef?: MutableRefObject<WizardControl | null>

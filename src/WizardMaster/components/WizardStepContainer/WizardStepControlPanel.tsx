@@ -7,8 +7,7 @@ import { containerErrorsStore, containerStore, initialStore } from '../../store'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseWizard, BaseWizardStep } from '../../interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
-import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../../../integration/analytics'
+import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics'
 import type { WizardObject } from '../../../typing'
 import { BaseNotifier } from '../../../common/notifier'
 import { validateContext } from '../../utils'
@@ -23,7 +22,7 @@ interface WizardStepControlPanelProps extends WithDataTestId {
   setCurrentState: Function
   provider: Provider
   mainWizardObject: WizardObject
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   refreshMainDetailObject: Function
   setMainDetailObject: Function
   notifier: BaseNotifier

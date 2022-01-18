@@ -27,7 +27,7 @@ export const RenderList: React.FC<{
   admin: BaseAdmin
   provider: Provider
   user: any
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
 }> = ({ resourceName, admin, provider, user, analytics }) => {
   document.title = `${admin.verboseName}`
   setFavicon(admin.favicon || '')

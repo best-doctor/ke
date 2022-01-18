@@ -28,7 +28,7 @@ type MountComponentsKwargs = {
   refreshMainDetailObject: Function
   notifier: BaseNotifier
   user: object
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   ViewType: string
   containerStore?: Store<StoreElement> | Store<object> | undefined
   containerErrorsStore?: Store<ErrorElement[]> | undefined

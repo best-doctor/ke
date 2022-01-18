@@ -7,8 +7,6 @@ import { useWidgetInitialization } from '../../common/hooks/useWidgetInitializat
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../../integration/analytics'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 import { useCreateTestId } from '../../django-spa/aspects'
@@ -32,9 +30,6 @@ export type ForeignKeySelectWidgetProps = WidgetProps &
     allowAllDefinedValues?: Accessor<boolean>
     provider?: Provider
   }
-
-const eventName = EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE
-const widgetType = WidgetTypeEnum.INPUT
 
 /**
  * Render select-input with async loaded options from backend
@@ -104,14 +99,6 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
 
   const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(changeValue)
-
-    pushAnalytics({
-      eventName,
-      widgetType,
-      value: changeValue,
-      objectForAnalytics: props.mainDetailObject,
-      ...props,
-    })
 
     const widgetPayload = getPayload(changeValue, name, targetPayload)
 

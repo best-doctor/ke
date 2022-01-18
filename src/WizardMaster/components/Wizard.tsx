@@ -7,8 +7,7 @@ import { WizardContainer } from './WizardContainer'
 
 import type { BaseNotifier } from '../../common/notifier'
 import type { Provider } from '../../admin/providers/interfaces'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../../integration/analytics'
+import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import type { BaseWizard } from '../interfaces'
 import type { BaseAnalytic } from '../../integration/analytics/base'
 import type { Accessor, DetailObject, WizardControl } from '../../typing'
@@ -23,7 +22,7 @@ type WizardProps = {
   setMainDetailObject: Function
   refreshMainDetailObject: Function
   notifier: BaseNotifier
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   ViewType: string
   user: object
   style?: object

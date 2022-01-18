@@ -6,8 +6,7 @@ import { useCreateTestId } from '@aspects/test-id/TestIdProvider'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
-import { pushAnalytics } from '../../integration/analytics'
+import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 
 import type { Accessor, WidgetProps } from '../../typing'
 

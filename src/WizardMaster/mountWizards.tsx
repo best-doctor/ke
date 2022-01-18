@@ -20,7 +20,7 @@ type MountWizardsKwargs = {
   provider: Provider
   setMainDetailObject: Function
   refreshMainDetailObject: Function
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   user: object
   activeWizardRef: MutableRefObject<WizardControl | null>
 }

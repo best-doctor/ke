@@ -12,10 +12,9 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import classNames from 'classnames'
 import { DebounceInput } from '@components/controls'
-import { pushAnalytics } from '../../../integration/analytics/utils'
-import { EventNameEnum } from '../../../integration/analytics/firebase/enums'
+import { EventNameEnum, pushAnalytics, getCommonFilterAnalyticsPayload } from '../../../integration/analytics'
 import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
-import { getCommonFilterAnalyticsPayload } from '../../../integration/analytics/firebase/utils'
+
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
 import { Provider } from '../../../admin/providers'

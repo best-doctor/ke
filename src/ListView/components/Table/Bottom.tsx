@@ -1,16 +1,13 @@
 import React from 'react'
 import { Flex, Text } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
-
 import type { BaseAnalytic } from '../../../integration/analytics'
-
 import { pushAnalytics } from '../../../integration/analytics/utils'
-import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
-
+import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics'
 import { TableIconButton } from './styles'
 
 type BottonProps = {
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   resourceName: string
   pageIndex: number
   canPreviousPage: boolean

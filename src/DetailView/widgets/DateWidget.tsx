@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { DateInput } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics/firebase/enums'
+import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import { handleUserAction } from '../../common/utils/handleUserAction'
 
 import type { Accessor, OptionalDate, WidgetProps } from '../../typing'

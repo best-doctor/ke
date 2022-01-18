@@ -14,16 +14,7 @@ import type {
 } from './admin/fields/FieldDescription'
 import { BaseForm } from './admin/adminForm'
 import type { WizardState, WizardPayload, WizardStepButtonDescription } from './WizardMaster/interfaces'
-import {
-  FirebaseAnalytic,
-  FirebaseEventPayload,
-  FirebaseEvent,
-  BaseAnalytic,
-  pushAnalytics,
-  EventNameEnum,
-  WidgetTypeEnum,
-  FirebaseConfigType,
-} from './integration/analytics'
+
 import { ResourceComposer, Resource, AdminResource, MenuItemMeta } from './ResourceComposer'
 import { RenderList } from './ListView/RenderList'
 import { RenderDetail } from './DetailView/RenderDetail'
@@ -100,6 +91,7 @@ import { TPathRules } from './ListView/components/Breadcrumbs/Breadcrumbs'
 import { StyleDateTime } from './common/components/BaseDateTimeRangeWidget'
 import { WizardProps } from './WizardMaster/components/Wizard'
 
+export { WidgetTypeEnum, pushAnalytics, EventNameEnum, BaseAnalytic } from './integration/analytics'
 export { useSaveEvent, SaveEventProvider } from './DetailView/SaveEvent/SaveEventProvider'
 export * from './Widgets/FilesList'
 export * from './Widgets/Map'
@@ -166,14 +158,6 @@ export {
   getPayload,
   AvatarWidget,
   hasPermission,
-  FirebaseAnalytic,
-  FirebaseEventPayload,
-  FirebaseEvent,
-  BaseAnalytic,
-  pushAnalytics,
-  EventNameEnum,
-  WidgetTypeEnum,
-  FirebaseConfigType,
   ListFieldDescription,
   DetailFieldDescription,
   ListFilterDescription,

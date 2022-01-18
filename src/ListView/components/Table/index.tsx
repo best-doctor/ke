@@ -28,7 +28,7 @@ type TableProps = {
   setBackendPage?: (page: number) => void
   user: any
   filterable: boolean
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   provider?: Provider
 }
 

@@ -5,8 +5,7 @@ import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/react'
 import type { ListFilterDescription, ListFilterTemplateDescription } from 'admin/fields/FieldDescription'
 import type { BaseAnalytic } from 'integration/analytics'
 
-import { pushAnalytics } from '../../../integration/analytics/utils'
-import { EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics/firebase/enums'
+import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics'
 import { FilterManager } from '../../../common/filterManager'
 import type { Provider } from '../../../admin/providers/interfaces'
 import { getAccessor } from '../../../DetailView/utils/dataAccess'
@@ -16,7 +15,7 @@ type FilterBlockProps = {
   listFilters?: ListFilterDescription[]
   listFilterTemplates?: ListFilterTemplateDescription[]
   user: any
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   provider?: Provider
   gotoPage?: (page: number) => void
 }

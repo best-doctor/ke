@@ -14,7 +14,7 @@ export interface AdminResourceProps {
   admin: BaseAdmin
   provider: Provider
   user: object
-  analytics: BaseAnalytic | undefined
+  analytics?: BaseAnalytic
   notifier?: BaseNotifier
 }
 
