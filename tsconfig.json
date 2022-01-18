@@ -2,6 +2,7 @@
   "include": [
     "src"
   ],
+  "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": "src",
     "lib": [
@@ -13,11 +14,13 @@
     "module": "ES6",
     "target": "ES5",
     "outDir": "dist",
+    "rootDir": "src",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "declaration": true,
+    "declarationDir": ".",
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
