@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { render } from '@testing-library/react'
 
-import { SelectListIntegrator } from './SelectList'
+import { ListIntegrator } from './ListIntegrator'
 
 test('Все целевые компоненты рендерятся', () => {
   const data = {
@@ -20,24 +20,17 @@ test('Все целевые компоненты рендерятся', () => {
       itemsPerPage: 10,
     },
   }
-  const selected = ['b']
 
   const { getByText } = render(
-    <SelectListIntegrator
-      data={data}
-      status={status}
-      params={[params, () => undefined]}
-      selected={[selected, () => undefined]}
-    >
-      <SelectListIntegrator.Filters as={TestFilters} />
-      <SelectListIntegrator.Data as={TestData} add={2} />
-      <SelectListIntegrator.Selected as={TestSelected} />
-      <SelectListIntegrator.Pagination as={TestPagination} />
-    </SelectListIntegrator>
+    <ListIntegrator data={data} status={status} params={[params, () => undefined]}>
+      <ListIntegrator.Filters as={TestFilters} />
+      <ListIntegrator.Data as={TestData} add={2} />
+      <ListIntegrator.Pagination as={TestPagination} />
+    </ListIntegrator>
   )
 
   expect(getByText(JSON.stringify(params.filters))).toBeInTheDocument()
-  expect(getByText(JSON.stringify(data.items.concat(selected)))).toBeInTheDocument()
+  expect(getByText(JSON.stringify(data.items))).toBeInTheDocument()
   expect(getByText(params.pagination.currentPage)).toBeInTheDocument()
 })
 
@@ -45,22 +38,10 @@ function TestFilters<Filters>({ filters }: { filters: Filters; onChange: (change
   return <div>{JSON.stringify(filters)}</div>
 }
 
-function TestData({
-  items,
-  selected,
-}: {
-  items: string[]
-  selected: string[]
-  isLoading: boolean
-  add: number
-}): ReactElement {
-  return <div>{JSON.stringify(items.concat(selected))}</div>
+function TestData({ items }: { items: string[]; isLoading: boolean; add: number }): ReactElement {
+  return <div>{JSON.stringify(items)}</div>
 }
 
 function TestPagination({ currentPage }: { currentPage: number; totalPages: number }): ReactElement {
   return <div>{currentPage}</div>
-}
-
-function TestSelected({ selected }: { selected: string[]; isLoading: boolean }): ReactElement {
-  return <div>{JSON.stringify(selected)}</div>
 }

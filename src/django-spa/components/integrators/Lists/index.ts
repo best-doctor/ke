@@ -1,2 +1,2 @@
-export { ListIntegrator, makeListConsumer } from './List'
-export { SelectListIntegrator, makeSelectListConsumer } from './SelectList'
+export { ListIntegrator, makeListConsumer } from './ListIntegrator'
+export { SelectListIntegrator, makeSelectListConsumer } from './SelectListIntegrator'
