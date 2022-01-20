@@ -32,7 +32,7 @@ export default {
     }),
     json(),
     typescript({ tsconfig: './tsconfig.json', sourceMap: false, exclude: ['**/*.test.ts', '**/*.test.tsx'] }),
-    styles(),
+    styles({ mode: 'extract' }),
     production &&
       cleaner({
         targets: ['./build/'],
