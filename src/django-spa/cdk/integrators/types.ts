@@ -1,12 +1,14 @@
-import { ComponentType } from 'react'
+import { ComponentProps, ComponentType } from 'react'
 
-export type Integrator<Root extends ComponentType, Inners extends Record<string, ComponentType>> = Root & {
-  [K in keyof Inners as Capitalize<string & K>]: Inners[K]
+export type Integrator<
+  Root extends ComponentType<any> = ComponentType,
+  Inners extends InnerComponents = InnerComponents
+> = Root & {
+  [K in keyof Inners]: Inners[K]
 }
 
-export type InnerMaker<Context extends IntegratorContext, ExtArgs extends unknown[], R> = <K extends keyof Context>(
-  contextKeys: K[],
-  ...args: ExtArgs
-) => R
+export type IntegratorInners<Int> = Int extends Integrator<any, infer Inners> ? Inners : never
 
-export type IntegratorContext = Record<string, any>
+export type IntegratorProps<Int> = Int extends Integrator<infer Root, any> ? ComponentProps<Root> : never
+
+export type InnerComponents = Record<string, ComponentType<any>>
