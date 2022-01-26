@@ -10,6 +10,6 @@
  * @param dict - исходный словарь
  * @param keys - ключи для переноса в новый словарь
  */
-export function pick<T, K extends keyof T>(dict: T, keys: K[]): Pick<T, K> {
+export function pick<T, K extends keyof T>(dict: T, keys: readonly K[]): Pick<T, K> {
   return Object.fromEntries(keys.map((key) => [key, dict[key]])) as Pick<T, K>
 }

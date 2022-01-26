@@ -37,6 +37,7 @@
       "@presenters/*": ["./django-spa/presenters/*"],
       "@smart-components/*": ["./django-spa/smart-components/*"],
       "@utils/*": ["./django-spa/utils/*"],
+      "@test-utils/*": ["./django-spa/test-utils/*"],
       "@features": ["./features"]
     },
     "strict": true,

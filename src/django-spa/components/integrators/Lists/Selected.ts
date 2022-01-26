@@ -8,7 +8,7 @@ import { dataContext, statusContext, selectedContext } from './contexts'
  */
 export const Selected: PolymorphComponent<{
   selected: unknown[]
-  onSelectedChange?: (selected: unknown[]) => void
+  onSelectedChange?: (selected: never[]) => void
   total?: number
   isLoading?: boolean
 }> = makeCommonConsumer(

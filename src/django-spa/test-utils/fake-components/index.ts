@@ -1,0 +1,1 @@
+export { makeFakeComponent } from './makeFakeComponent'

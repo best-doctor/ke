@@ -1,7 +1,11 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { render } from '@testing-library/react'
+import { makeFakeComponent } from '@test-utils/fake-components'
 
 import { FiltersIntegrator } from './FiltersIntegrator'
+
+const [TestFilters, makeFiltersContent] = makeFakeComponent('TestFilters')
+const [TestPredefined, makePredefinedContent] = makeFakeComponent('TestPredefined')
 
 test('Все целевые компоненты рендерятся', () => {
   const filters = [1, 2, 'test']
@@ -13,14 +17,6 @@ test('Все целевые компоненты рендерятся', () => {
     </FiltersIntegrator>
   )
 
-  expect(getByText(JSON.stringify(filters))).toBeInTheDocument()
-  expect(getByText(`Predefined - ${JSON.stringify(filters)}`)).toBeInTheDocument()
+  expect(getByText(makeFiltersContent({ filters }))).toBeInTheDocument()
+  expect(getByText(makePredefinedContent({ value: filters }))).toBeInTheDocument()
 })
-
-function TestFilters<Filters>({ filters }: { filters: Filters; onChange: (changed: Filters) => void }): ReactElement {
-  return <div>{JSON.stringify(filters)}</div>
-}
-
-function TestPredefined<Filters>({ value }: { value: Filters; onChange: (changed: Filters) => void }): ReactElement {
-  return <div>Predefined - {JSON.stringify(value)}</div>
-}

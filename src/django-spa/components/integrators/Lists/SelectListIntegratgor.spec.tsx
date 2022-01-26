@@ -1,6 +1,16 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { render } from '@testing-library/react'
 
+import {
+  TestFilters,
+  testFiltersContent,
+  TestPagination,
+  testPaginationContent,
+  TestSelectData,
+  testSelectDataContent,
+  TestSelected,
+  testSelectedContent,
+} from './fixtures'
 import { SelectListIntegrator } from './SelectListIntegrator'
 
 test('Все целевые компоненты рендерятся', () => {
@@ -30,37 +40,23 @@ test('Все целевые компоненты рендерятся', () => {
       selected={[selected, () => undefined]}
     >
       <SelectListIntegrator.Filters as={TestFilters} />
-      <SelectListIntegrator.Data as={TestData} add={2} />
+      <SelectListIntegrator.Data as={TestSelectData} />
       <SelectListIntegrator.Selected as={TestSelected} />
       <SelectListIntegrator.Pagination as={TestPagination} />
     </SelectListIntegrator>
   )
 
-  expect(getByText(JSON.stringify(params.filters))).toBeInTheDocument()
-  expect(getByText(JSON.stringify(data.items.concat(selected)))).toBeInTheDocument()
-  expect(getByText(params.pagination.currentPage)).toBeInTheDocument()
+  expect(getByText(testFiltersContent({ filters: params.filters, isLoading: status.isLoading }))).toBeInTheDocument()
+  expect(
+    getByText(testSelectDataContent({ items: data.items, selected, isLoading: status.isLoading }))
+  ).toBeInTheDocument()
+  expect(getByText(testSelectedContent({ selected }))).toBeInTheDocument()
+  expect(
+    getByText(
+      testPaginationContent({
+        currentPage: params.pagination.currentPage,
+        totalPages: data.total / params.pagination.itemsPerPage,
+      })
+    )
+  )
 })
-
-function TestFilters<Filters>({ filters }: { filters: Filters; onChange: (changed: Filters) => void }): ReactElement {
-  return <div>{JSON.stringify(filters)}</div>
-}
-
-function TestData({
-  items,
-  selected,
-}: {
-  items: string[]
-  selected: string[]
-  isLoading: boolean
-  add: number
-}): ReactElement {
-  return <div>{JSON.stringify(items.concat(selected))}</div>
-}
-
-function TestPagination({ currentPage }: { currentPage: number; totalPages: number }): ReactElement {
-  return <div>{currentPage}</div>
-}
-
-function TestSelected({ selected }: { selected: string[]; isLoading: boolean }): ReactElement {
-  return <div>{JSON.stringify(selected)}</div>
-}

@@ -1,7 +1,15 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { render } from '@testing-library/react'
 
 import { ListIntegrator } from './ListIntegrator'
+import {
+  TestData,
+  testDataContent,
+  TestFilters,
+  testFiltersContent,
+  TestPagination,
+  testPaginationContent,
+} from './fixtures'
 
 test('Все целевые компоненты рендерятся', () => {
   const data = {
@@ -24,24 +32,19 @@ test('Все целевые компоненты рендерятся', () => {
   const { getByText } = render(
     <ListIntegrator data={data} status={status} params={[params, () => undefined]}>
       <ListIntegrator.Filters as={TestFilters} />
-      <ListIntegrator.Data as={TestData} add={2} />
+      <ListIntegrator.Data as={TestData} />
       <ListIntegrator.Pagination as={TestPagination} />
     </ListIntegrator>
   )
 
-  expect(getByText(JSON.stringify(params.filters))).toBeInTheDocument()
-  expect(getByText(JSON.stringify(data.items))).toBeInTheDocument()
-  expect(getByText(params.pagination.currentPage)).toBeInTheDocument()
+  expect(getByText(testFiltersContent({ filters: params.filters, isLoading: status.isLoading }))).toBeInTheDocument()
+  expect(getByText(testDataContent({ items: data.items, isLoading: status.isLoading }))).toBeInTheDocument()
+  expect(
+    getByText(
+      testPaginationContent({
+        currentPage: params.pagination.currentPage,
+        totalPages: data.total / params.pagination.itemsPerPage,
+      })
+    )
+  ).toBeInTheDocument()
 })
-
-function TestFilters<Filters>({ filters }: { filters: Filters; onChange: (changed: Filters) => void }): ReactElement {
-  return <div>{JSON.stringify(filters)}</div>
-}
-
-function TestData({ items }: { items: string[]; isLoading: boolean; add: number }): ReactElement {
-  return <div>{JSON.stringify(items)}</div>
-}
-
-function TestPagination({ currentPage }: { currentPage: number; totalPages: number }): ReactElement {
-  return <div>{currentPage}</div>
-}

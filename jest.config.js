@@ -11,6 +11,7 @@ module.exports = {
     '^~types(.*)$': '<rootDir>/src/django-spa/types$1',
     '^@plugins(.*)$': '<rootDir>/src/django-spa/plugins$1',
     '^@utils(.*)$': '<rootDir>/src/django-spa/utils$1',
+    '^@test-utils(.*)$': '<rootDir>/src/django-spa/test-utils$1',
     '^@components(.*)$': '<rootDir>/src/django-spa/components$1',
     '^@aspects(.*)$': '<rootDir>/src/django-spa/aspects$1',
     '^@layouts(.*)$': '<rootDir>/src/django-spa/layouts$1',
