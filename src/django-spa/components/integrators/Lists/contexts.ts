@@ -6,13 +6,13 @@ import { DataContext, ParamsContext, SelectedContext, StatusContext } from './ty
  * Контекст для массива элементов, к которым рендерится список, а так же для
  * напрямую связанной с этим информацией
  */
-export const dataContext = createContext<DataContext>({ items: [], total: 0 })
+export const dataContext = createContext<Readonly<DataContext>>({ items: [], total: 0 })
 
 /**
  * Контекст с фильтрами и прочими параметрами, для которых был получен массив
  * элементов, а так же функцией для их обновления
  */
-export const paramsContext = createContext<ParamsContext>([
+export const paramsContext = createContext<Readonly<ParamsContext>>([
   {
     filters: {},
     order: {},
@@ -27,9 +27,9 @@ export const paramsContext = createContext<ParamsContext>([
 /**
  * Контекст с данными по текущему статусу элементов в компоненте
  */
-export const statusContext = createContext<StatusContext>({ isLoading: false, isNotLoaded: true })
+export const statusContext = createContext<Readonly<StatusContext>>({ isLoading: false, isNotLoaded: true })
 
 /**
  * Контекст с списком выбранных элементов из всего массива, и функцией для обновления этого списка
  */
-export const selectedContext = createContext<SelectedContext>([[], () => undefined])
+export const selectedContext = createContext<Readonly<SelectedContext>>([[], () => undefined])
