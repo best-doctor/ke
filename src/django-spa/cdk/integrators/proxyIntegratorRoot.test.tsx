@@ -45,7 +45,7 @@ test('Корректный тип результата', () => {
     First: jest.fn(),
     Second: jest.fn(),
   }
-  const Base = undefined as unknown as Integrator<typeof root, typeof inners>
+  const Base = {} as Integrator<typeof root, typeof inners>
 
   expectType<FC<{ c: boolean; d: string }> & { First: FC<{ a: string }>; Second: FC<{ z: boolean }> }>(
     proxyIntegratorRoot(Base, (_props: { c: boolean; d: string }) => ({ a: '1', b: 2 }))
