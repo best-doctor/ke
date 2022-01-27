@@ -1,5 +1,5 @@
 export * from './integrators'
 export * from './controls'
-export * from './complex'
+export * from './chakra'
 export * from './Forms'
 export * from './patterns'
