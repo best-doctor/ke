@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* Это legacy */
 import React from 'react'
 import parse from 'html-react-parser'
 import styled from 'styled-components'

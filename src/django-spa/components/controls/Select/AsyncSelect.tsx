@@ -25,6 +25,6 @@ export interface AsyncSelectProps<OptionType, Additional = any, IsMulti extends 
 export function AsyncSelect<T extends Option, Additional = any, IsMulti extends boolean = false>(
   props: AsyncSelectProps<T, Additional, IsMulti>
 ): React.ReactElement {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/jsx-props-no-spreading
   return <AsyncPaginate {...(props as any)} />
 }

@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useRef, useState } from 'react'
 import { useToast, Box, Spinner, Alert, AlertTitle, AlertIcon, AlertDescription } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'

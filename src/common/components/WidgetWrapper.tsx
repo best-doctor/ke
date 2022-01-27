@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { Box, BoxProps, Flex, Text, useStyles } from '@chakra-ui/react'
 

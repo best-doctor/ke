@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react'
 import InputMask, { Props as InputMaskProps } from 'react-input-mask'
 import { Box } from '@chakra-ui/react'

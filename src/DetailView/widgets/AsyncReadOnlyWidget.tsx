@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* Это legacy */
 import { Box } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
@@ -16,8 +18,7 @@ import { useCreateTestId } from '../../django-spa/aspects/test-id/TestIdProvider
  * @param props - standard widget props
  */
 const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
-  const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } =
-    props
+  const { mainDetailObject, containerStore, style, helpText, name, provider, displayValue, cacheTime } = props
 
   const [content, setContent] = useState<string>('')
 
@@ -34,7 +35,13 @@ const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
 
   const { getDataTestId } = useCreateTestId()
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={widgetDescription} {...getDataTestId(props)}>
+    <WidgetWrapper
+      name={name}
+      style={style}
+      helpText={helpText}
+      description={widgetDescription}
+      {...getDataTestId(props)}
+    >
       <Box borderWidth="1px" borderRadius="3px" borderColor="#cbd5e0" padding="5.4px" whiteSpace="pre-line">
         {content || '\u00a0'}
       </Box>

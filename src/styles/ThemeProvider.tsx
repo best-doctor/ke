@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import { ChakraProvider, extendTheme, Theme, theme as chakraTheme } from '@chakra-ui/react'
 import type { ChakraProviderProps } from '@chakra-ui/provider'
 

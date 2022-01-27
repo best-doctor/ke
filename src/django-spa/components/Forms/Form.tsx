@@ -15,8 +15,8 @@ export function Form<K extends FieldKey, T>({
   } = useForm(data, onFormChange, validator)
 
   return (
-    <Root {...props}>
-      <ErrorsRoot {...errorsProps}>
+    <Root value={props.value}>
+      <ErrorsRoot value={errorsProps.value}>
         <form>{children}</form>
       </ErrorsRoot>
     </Root>

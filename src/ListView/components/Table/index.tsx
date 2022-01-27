@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactNode } from 'react'
 import { Flex, Text } from '@chakra-ui/react'
 import { usePagination, useTable, useFilters, ActionType, TableState } from 'react-table'

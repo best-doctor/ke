@@ -10,6 +10,8 @@ testProp('Values correctly converted', [propsArbitrary, propsArbitrary], (predef
   const SourceComponent = jest.fn().mockReturnValue('test')
   const PartialComponent = makePartial(SourceComponent, predefinedProps)
 
+  // Фактически это компонент-обёртка
+  // eslint-disable-next-line react/jsx-props-no-spreading
   render(<PartialComponent {...additionalProps} />)
 
   expect(SourceComponent).toHaveBeenCalledTimes(1)

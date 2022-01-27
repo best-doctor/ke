@@ -11,6 +11,8 @@ export default {
 
 const Template: ComponentStory<typeof Switch> = (args) => (
   <ThemeProvider>
+    {/* Это обёртка */}
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
     <Switch {...args} />
   </ThemeProvider>
 )

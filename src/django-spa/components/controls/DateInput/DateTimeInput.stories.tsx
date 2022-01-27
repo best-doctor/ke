@@ -12,6 +12,8 @@ export default {
 
 const Template: ComponentStory<typeof DateTimeInput> = (args) => (
   <ThemeProvider>
+    {/* Это обёртка */}
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
     <DateTimeInput {...args} />
   </ThemeProvider>
 )

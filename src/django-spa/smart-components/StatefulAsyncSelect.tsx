@@ -59,6 +59,7 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
     },
     [fetchResource, searchParamName]
   )
-
+  // Это обёртка
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <AsyncPaginate {...(props as any)} loadOptions={handleLoadOptoins} />
 }

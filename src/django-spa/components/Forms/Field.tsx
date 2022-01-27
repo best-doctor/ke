@@ -24,6 +24,8 @@ export const Field = makeWithLayout(
     const Component: ElementType = as
 
     return {
+      // Это обёртка
+      // eslint-disable-next-line react/jsx-props-no-spreading
       Control: <Component ref={controlRef} value={value} onChange={handleChange} name={name} {...other} />,
       Errors: errors && errors.length ? errors[0].message : '',
       Label: label && (

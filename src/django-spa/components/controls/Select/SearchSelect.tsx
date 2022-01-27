@@ -7,6 +7,8 @@ const SearchSelectInner = <T extends Option>(
   { value, onChange, ...other }: SearchSelectInnerProps<T>,
   ref?: React.ForwardedRef<HTMLDivElement>
 ): JSX.Element => (
+  // Это обёртка
+  /* eslint-disable react/jsx-props-no-spreading */
   <BaseSelect
     value={value}
     onChange={onChange as (v: T | readonly T[] | undefined | null) => void}

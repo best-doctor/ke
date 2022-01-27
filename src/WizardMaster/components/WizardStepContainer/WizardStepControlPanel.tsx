@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react'
 
 import { Flex } from '@chakra-ui/react'

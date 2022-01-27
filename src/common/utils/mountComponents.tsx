@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Fragment, MutableRefObject } from 'react'
 // eslint-disable-next-line
 // @ts-ignore

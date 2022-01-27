@@ -20,8 +20,8 @@ export function GroupControl({ value, onChange, children }: GroupControlProps): 
   } = useForm(value, controlChange)
 
   return (
-    <Root {...props}>
-      <ErrorsRoot {...errorsProps}>{children}</ErrorsRoot>
+    <Root value={props.value}>
+      <ErrorsRoot value={errorsProps.value}>{children}</ErrorsRoot>
     </Root>
   )
 }

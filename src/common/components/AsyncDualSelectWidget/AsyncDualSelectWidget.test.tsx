@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* Это legacy */
 import React, { ComponentProps } from 'react'
 import { fireEvent, render, waitFor, findByText, getByText, queryByText } from '@testing-library/react'
 import { AsyncDualSelectWidget } from './AsyncDualSelectWidget'

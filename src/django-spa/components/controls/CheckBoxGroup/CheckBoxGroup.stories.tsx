@@ -25,6 +25,8 @@ const Template: ComponentStory<typeof CheckBoxGroup> = (args) => {
   const getLabel = (v: ObjWithLabelAndValue): string => v?.label
   return (
     <ThemeProvider>
+      {/* Это обёртка */}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <CheckBoxGroup {...args} value={value} getKey={getKey} getValue={getValue} getLabel={getLabel} />
     </ThemeProvider>
   )

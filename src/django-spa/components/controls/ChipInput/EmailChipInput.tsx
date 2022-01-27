@@ -20,6 +20,8 @@ export interface EmailChipInputProps extends ControlProps<string[]> {
 
 export const EmailChipInput = forwardRef<HTMLInputElement, EmailChipInputProps>(
   (props, ref): JSX.Element => (
+    // Это обёртка
+    /* eslint-disable react/jsx-props-no-spreading */
     <ChipInput
       {...props}
       ref={ref}

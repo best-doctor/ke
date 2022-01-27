@@ -24,6 +24,8 @@ export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>((props, ref)
     [setValue, onChange]
   )
 
+  // Это обёртка
+  /* eslint-disable react/jsx-props-no-spreading */
   return (
     <Box>
       <ChakraCheckBox

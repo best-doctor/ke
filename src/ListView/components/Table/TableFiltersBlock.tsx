@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Flex, Text, Box, Collapse, Button } from '@chakra-ui/react'

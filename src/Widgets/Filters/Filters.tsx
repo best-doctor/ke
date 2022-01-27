@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactElement, useMemo, FC } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
