@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { CSSProperties } from 'react'
 import styled from 'styled-components'
 import { Accessor, WidgetProps } from '../../typing'

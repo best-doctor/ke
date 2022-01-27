@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useMemo, ReactElement, Key } from 'react'
 import styled from 'styled-components'
 

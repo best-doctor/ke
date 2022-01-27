@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useRef } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'

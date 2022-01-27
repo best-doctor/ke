@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { forwardRef, useCallback, useMemo } from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Input, InputProps } from '@chakra-ui/react'

@@ -11,7 +11,7 @@ export function Arr<T>({ name, getKey, validator, children: makeNodeItem }: ArrP
   }
 
   const {
-    errorsRoot: [ErrorsRoot, errorsProps],
+    errorsRoot: [ErrorsRoot, { value: errorValue }],
     arrayValidate,
     recursiveValidate,
   } = useArrayValidation(value, validator)
@@ -25,7 +25,7 @@ export function Arr<T>({ name, getKey, validator, children: makeNodeItem }: ArrP
     [onChange, arrayValidate]
   )
 
-  const [Root, props] = useArray(value, handleChange, getKey)
+  const [Root, { value: rootValue }] = useArray(value, handleChange, getKey)
 
   const fieldValidate = useCallback(
     async (v: unknown) => {
@@ -47,8 +47,8 @@ export function Arr<T>({ name, getKey, validator, children: makeNodeItem }: ArrP
   useFieldValidation(name, value, fieldValidate)
 
   return (
-    <Root {...props}>
-      <ErrorsRoot {...errorsProps}>
+    <Root value={rootValue}>
+      <ErrorsRoot value={errorValue}>
         {value.map((item: T, index) => (
           <ArrItem key={getKey(item, index)}>{makeNodeItem(item, index)}</ArrItem>
         ))}

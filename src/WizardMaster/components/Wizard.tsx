@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { MutableRefObject } from 'react'
 import { Button, Box } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'

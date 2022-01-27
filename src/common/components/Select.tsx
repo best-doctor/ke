@@ -12,5 +12,7 @@ export const Select = <
   styles,
   ...props
 }: Props<OptionType, IsMulti>): JSX.Element => (
+  // Это обёртка
+  // eslint-disable-next-line react/jsx-props-no-spreading
   <BaseSelect components={{ ...components, ...externalComponents }} styles={modifyStyles(styles)} {...props} />
 )

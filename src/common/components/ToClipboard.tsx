@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import { Box, BoxProps, Icon } from '@chakra-ui/react'
 import { Copy } from '@bestdoctor/icons'
 import React, { useCallback } from 'react'

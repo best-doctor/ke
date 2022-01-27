@@ -11,6 +11,8 @@ export default {
 
 const Template: ComponentStory<typeof TextEditor> = (args) => (
   <ThemeProvider>
+    {/* Это обёртка */}
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
     <TextEditor {...args} />
   </ThemeProvider>
 )

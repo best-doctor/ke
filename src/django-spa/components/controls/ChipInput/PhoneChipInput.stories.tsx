@@ -11,6 +11,8 @@ export default {
 
 const Template: ComponentStory<typeof EmailChipInput> = (args) => (
   <ThemeProvider>
+    {/* Это обёртка */}
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
     <EmailChipInput {...args} />
   </ThemeProvider>
 )

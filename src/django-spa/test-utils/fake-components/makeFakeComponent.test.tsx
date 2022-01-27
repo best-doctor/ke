@@ -1,3 +1,5 @@
+// Тестируем на динамических пропсах
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { fc } from 'jest-fast-check'
 import { render, cleanup } from '@testing-library/react'

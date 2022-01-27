@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Flex } from '@chakra-ui/react'
 import { usePropState } from '@cdk/Hooks'

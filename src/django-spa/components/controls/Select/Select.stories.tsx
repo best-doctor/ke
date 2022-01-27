@@ -20,6 +20,7 @@ const Template: ComponentStory<typeof Select> = (args) => {
   const [v, setV] = useState(value)
   return (
     <ThemeProvider>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Select {...args} value={v as Record<string, string | null>} isMulti={false} onChange={setV} />
     </ThemeProvider>
   )
@@ -30,6 +31,7 @@ const TemplateMulti: ComponentStory<typeof Select> = (args) => {
   const [v, setV] = useState(value)
   return (
     <ThemeProvider>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Select {...args} value={v as Record<string, string | null>[]} isMulti onChange={setV} />
     </ThemeProvider>
   )

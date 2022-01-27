@@ -49,8 +49,8 @@ export function Group({ name, children, validator }: GroupProps): JSX.Element {
   useFieldValidation(name, value, fieldValidate)
 
   return (
-    <Root {...props}>
-      <ErrorsRoot {...errorsProps}>{children}</ErrorsRoot>
+    <Root value={props.value}>
+      <ErrorsRoot value={errorsProps.value}>{children}</ErrorsRoot>
     </Root>
   )
 }

@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { Link, useMultiStyleConfig, StylesProvider, LinkProps } from '@chakra-ui/react'
 
@@ -17,16 +19,7 @@ export type LinkWidgetProps = WidgetProps & {
 }
 
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
-  const {
-    name,
-    mainDetailObject,
-    href,
-    helpText,
-    style,
-    containerStore,
-    target = '_blank',
-    linkProps,
-  } = props
+  const { name, mainDetailObject, href, helpText, style, containerStore, target = '_blank', linkProps } = props
 
   const context = containerStore.getState()
   const { content, widgetDescription } = useWidgetInitialization({ ...props, context })

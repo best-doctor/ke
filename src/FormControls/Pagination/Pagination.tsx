@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { Box, ButtonProps, Button, Flex } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'

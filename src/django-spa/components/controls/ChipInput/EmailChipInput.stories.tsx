@@ -11,6 +11,8 @@ export default {
 
 const Template: ComponentStory<typeof PhoneChipInput> = (args) => (
   <ThemeProvider>
+    {/* Это обёртка */}
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
     <PhoneChipInput {...args} />
   </ThemeProvider>
 )

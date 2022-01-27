@@ -1,3 +1,5 @@
+// Это high-ordered function, поэтому мы заранее не знаем пропсы компонентов
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import type { UnionToIntersection } from 'ts-essentials'
 import { compact, byKey } from '@utils/array'

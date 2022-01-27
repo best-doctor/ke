@@ -26,6 +26,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref): JS
 
   return (
     <Box>
+      {/* Это обёртка */}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <ChakraSwitch isChecked={value} onChange={(e) => handleChange(e.target.checked)} ref={ref} {...rest}>
         {helpText || ''}
       </ChakraSwitch>

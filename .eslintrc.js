@@ -48,8 +48,7 @@ const baseTypescript = {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'react/prop-types': 'off',
     'class-methods-use-this': 'off',
-    // We need this to write generic code in components mounting
-    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-props-no-spreading': 'error',
     // Non-null assertion operator makes strict typechecking useless
     '@typescript-eslint/no-non-null-assertion': 'error',
     // TypeScript handles it better
@@ -68,7 +67,7 @@ const baseTypescript = {
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react/jsx-no-bind': ['off', {'allowFunctions': true}],
+    'react/jsx-no-bind': ['off', { allowFunctions: true }],
   },
 }
 

@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import styled from 'styled-components'
 import { Flex, IconButton } from '@chakra-ui/react'
