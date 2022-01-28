@@ -32,6 +32,8 @@ const Template: ComponentStory<typeof RadioGroup> = (args) => {
   const getValue = (v: ObjWithLabelAndValue): string => v?.value
   const getLabel = (v: ObjWithLabelAndValue): string => v?.label
   const { value } = args
+  // Это обёртка
+  /* eslint-disable react/jsx-props-no-spreading */
   return (
     <ThemeProvider>
       <RadioGroup

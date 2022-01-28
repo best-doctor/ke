@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* Это legacy */
 import React from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { mount } from 'enzyme'

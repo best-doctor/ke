@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { CSSProperties, PropsWithChildren, useMemo, useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, StandaloneSearchBox, Circle } from '@react-google-maps/api'
 import { Input, Spinner, styled } from '@chakra-ui/react'

@@ -21,5 +21,7 @@ export const Button = (props: ButtonProps): JSX.Element => {
     }
   }
 
+  // Подавлено, так как компонент-обёртка
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <ChakraButton {...props} isDisabled={isDisabled} onClick={handleClick} />
 }

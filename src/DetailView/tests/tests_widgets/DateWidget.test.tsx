@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* Это legacy */
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'

@@ -21,6 +21,8 @@ function makeAdapter<E extends keyof HTMLControls>(
   return forwardRef<HTMLControls[E], AdapterProps<E>>(({ value, onChange, ...other }, ref) => {
     const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value), [onChange])
     const Element = element as string
+    // Это обёртка
+    // eslint-disable-next-line react/jsx-props-no-spreading
     return <Element ref={ref} value={value} onChange={handleChange} {...other} />
   })
 }

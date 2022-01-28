@@ -1,3 +1,5 @@
+// Это обёртка
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 
 import { EmailChipInput } from '@components/controls'

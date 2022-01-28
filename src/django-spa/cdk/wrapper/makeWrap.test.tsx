@@ -59,6 +59,8 @@ test('Props из нового компонента пробрасываются 
         const target = jest.fn().mockReturnValue(<div>TARGET</div>)
 
         const Wrapped = makeWrap(target, wrapper)
+        // Тестируем на динамических пропсах
+        /* eslint-disable react/jsx-props-no-spreading */
         render(<Wrapped {...props} />)
 
         expect(target).toHaveBeenCalledWith(props, {})

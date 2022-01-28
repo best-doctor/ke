@@ -52,6 +52,8 @@ testProp(
 
     render(
       <Wrapper first={contextsData.first} second={contextsData.second}>
+        {/* Тестируем на динамических пропсах */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Consumer as={targetSpy} {...extProps} />
       </Wrapper>
     )

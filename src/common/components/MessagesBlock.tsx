@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import { Box, BoxProps, Text, TextProps } from '@chakra-ui/react'
 import React from 'react'
 import { AlertCircle, CheckCircle, HelpCircle, Icon, XCircle } from 'react-feather'

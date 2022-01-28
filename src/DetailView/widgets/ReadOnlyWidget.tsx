@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { CSSProperties } from 'react'
 import { StylesProvider, useMultiStyleConfig } from '@chakra-ui/react'
 

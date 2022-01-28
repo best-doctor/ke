@@ -33,6 +33,8 @@ testProp(
         return Object.fromEntries(pairs)
       },
       {
+        // Тестируем на динамических пропсах
+        // eslint-disable-next-line react/jsx-props-no-spreading
         wrapper: ({ children }) => <Root {...updatedData}>{children}</Root>,
       }
     )

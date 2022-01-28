@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import { Text, TextProps, useMultiStyleConfig } from '@chakra-ui/react'
 import React from 'react'
 

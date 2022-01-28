@@ -26,6 +26,8 @@ export const DebounceInput = forwardRef<HTMLInputElement, DebounceInputProps>(
       [onChange]
     )
 
+    // Это обёртка
+    /* eslint-disable react/jsx-props-no-spreading */
     return (
       <BaseDebounceInput
         value={value}

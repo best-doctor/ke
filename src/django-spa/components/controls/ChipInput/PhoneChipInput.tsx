@@ -20,6 +20,8 @@ export interface PhoneChipInputProps extends ControlProps<string[]> {
 
 export const PhoneChipInput = forwardRef<HTMLInputElement, PhoneChipInputProps>(
   (props, ref): JSX.Element => (
+    // Это обёртка
+    /* eslint-disable react/jsx-props-no-spreading */
     <ChipInput
       {...props}
       ref={ref}

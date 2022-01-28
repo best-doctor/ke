@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { forwardRef } from 'react'
 import { Textarea, Input, TextareaProps, StyleProps } from '@chakra-ui/react'
 

@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { forwardRef, useEffect, useState } from 'react'
 import Select, { StylesConfig, ValueType } from 'react-select'
 import type { Store } from 'effector'

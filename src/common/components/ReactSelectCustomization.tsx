@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable no-underscore-dangle */
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading, @typescript-eslint/no-unsafe-member-access, no-underscore-dangle */
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   css as chakraCss,

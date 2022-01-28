@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react'
 
 import type { Accessor, DetailObject, WidgetProps } from 'typing'

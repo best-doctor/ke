@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactElement } from 'react'
 import { List, ListIcon, ListItem, IconButton, Link, LinkProps } from '@chakra-ui/react'
 import { Paperclip, X } from 'react-feather'

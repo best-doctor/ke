@@ -1,3 +1,5 @@
+// Это легаси
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { ChangeEvent, ReactElement, useCallback, useRef, useState } from 'react'
 import { Button, ButtonProps, List, ListIcon, ListItem, Progress, Text } from '@chakra-ui/react'
 import { Loader, Paperclip } from 'react-feather'

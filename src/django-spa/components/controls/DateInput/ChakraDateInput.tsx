@@ -20,6 +20,8 @@ export const ChakraDateInput = forwardRef<HTMLInputElement, ChakraDateInputProps
       >
         <Icon as={Calendar} />
       </InputLeftElement>
+      {/* Это обёртка */}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Input paddingStart="44px" className={inputClassName} {...props} ref={ref} />
     </InputGroup>
   )

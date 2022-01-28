@@ -6,17 +6,14 @@ export function ButtonGroup<T>({ items, value, onChange }: ButtonGroupProps<T>):
   /* eslint-disable react/no-array-index-key */
   return (
     <ButtonContainer spacing="1">
-      {items.map(({ label, value: btnValue, styles }, index) => (
-        <Button
-          key={index}
-          onClick={() => onChange(btnValue)}
-          colorScheme={btnValue === value ? 'gray' : 'brand'}
-          variant="outline"
-          {...styles}
-        >
-          {label}
-        </Button>
-      ))}
+      {items.map(({ label, value: btnValue, styles }, index) => {
+        const { variant = 'outline', colorScheme = btnValue === value ? 'gray' : 'brand' } = styles ?? {}
+        return (
+          <Button key={index} onClick={() => onChange(btnValue)} colorScheme={colorScheme} variant={variant}>
+            {label}
+          </Button>
+        )
+      })}
     </ButtonContainer>
   )
   /* eslint-enable react/no-array-index-key */
