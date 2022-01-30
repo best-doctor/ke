@@ -1,3 +1,5 @@
+import { ReactChild, ReactElement } from 'react'
+
 import { LayoutComponent, LayoutProps } from './types'
 
 /**
@@ -14,12 +16,12 @@ import { LayoutComponent, LayoutProps } from './types'
  * @param mapping - функция, строящая итоговый элемент
  */
 export function makeSlots<K extends string, Props = {}>(
-  mapping: (elements: SlotElements<K>, props?: Props) => JSX.Element
+  mapping: (elements: SlotElements<K>, props?: Props) => ReactElement
 ): LayoutComponent<SlotElements<K>, Props> {
-  return ({ children, ...props }: LayoutProps<SlotElements<K>, Props>): JSX.Element =>
+  return ({ children, ...props }: LayoutProps<SlotElements<K>, Props>): ReactElement =>
     mapping(children, props as unknown as Props)
 }
 
 export type SlotElements<K extends string> = {
-  [P in K]?: JSX.Element | string
+  [P in K]?: ReactChild
 }

@@ -2,6 +2,7 @@ import { testProp, fc } from 'jest-fast-check'
 import { expectNotType, expectType } from 'tsd'
 
 import { makeSlots } from './makeSlots'
+import { ReactChild } from 'react'
 
 const slotsArbitrary = fc.dictionary(fc.string(), fc.string())
 const propsArbitrary = fc
@@ -27,12 +28,12 @@ test('У создаваемого макета ожидаемый тип', () =>
     makeSlots<'foo' | 'bar'>(jest.fn())
   )
 
-  expectType<(props: { children: { foo?: JSX.Element } }) => JSX.Element>(
-    makeSlots(jest.fn() as (slots: { foo?: JSX.Element | string }) => JSX.Element)
+  expectType<(props: { children: { foo?: ReactChild } }) => JSX.Element>(
+    makeSlots(jest.fn() as (slots: { foo?: ReactChild }) => JSX.Element)
   )
 
-  expectType<(props: { children: { foo?: JSX.Element }; bar: string }) => JSX.Element>(
-    makeSlots(jest.fn() as (slots: { foo?: JSX.Element | string }, props?: { bar: string }) => JSX.Element)
+  expectType<(props: { children: { foo?: ReactChild }; bar: string }) => JSX.Element>(
+    makeSlots(jest.fn() as (slots: { foo?: ReactChild }, props?: { bar: string }) => JSX.Element)
   )
 
   expectNotType<(props: { children: { foo: JSX.Element; bar: JSX.Element } }) => JSX.Element>(

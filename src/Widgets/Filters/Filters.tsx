@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useMemo, FC } from 'react'
+import React, { ReactElement, useMemo, FC, Key } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
 import { Field } from '@components/Forms'
@@ -19,17 +19,17 @@ export function Filters<K extends string>({
 }: FiltersProps<K, any>): ReactElement<FiltersProps<K, any>> {
   const layoutChildren = useMemo(
     () =>
-      filters.map(
-        ({ control, name, ...other }) =>
-          [name, <Field name={name} as={control} {...other} />] as [key: K, field: ReactElement]
-      ),
+      filters.map(({ control, name, ...other }) => ({
+        key: name,
+        content: <Field name={name} as={control} {...other} />,
+      })),
     [filters]
   )
 
   const handleChange = (v: Record<K, unknown>): void => {
     onChange({ ...v, page: undefined })
   }
-  // TODO: Rewrite this component to use makeWithLayout
+
   const Layout = layout as FC
   return (
     <GroupControl value={value} onChange={handleChange}>
@@ -42,7 +42,7 @@ interface BaseFiltersProps<K extends string, LayoutChildren> {
   filters: readonly Filter<K>[]
   value: FiltersValue<K>
   onChange: (v: FiltersValue<K>) => void
-  layoutProxy?: (elements: [string, ReactElement][]) => LayoutChildren
+  layoutProxy?: (elements: { key: Key; content: ReactElement }[]) => LayoutChildren
 }
 export type FiltersProps<K extends string, LayoutChildren> = PropsWithDefaultLayout<
   BaseFiltersProps<K, LayoutChildren>,

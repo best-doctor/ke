@@ -143,6 +143,6 @@ type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   description?: string | JSX.Element
   mapHeight?: number
   mapLayout?: (mapHeight: number) => LayoutComponent<SlotElements<'map' | 'filters'>>
-  filtersLayoutProxy?: (elements: [string, ReactElement][]) => Record<string, ReactElement>
-  filtersLayout?: LayoutComponent<[Key, JSX.Element][]>
+  filtersLayoutProxy?: (elements: { key: Key; content: ReactElement }[]) => Record<string, ReactElement>
+  filtersLayout?: LayoutComponent<{ key: Key; content: ReactElement }[]>
 }
