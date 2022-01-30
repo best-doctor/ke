@@ -2,7 +2,30 @@ import { ReactElement } from 'react'
 
 import { Component, LayoutComponent } from './types'
 
+/**
+ * Создаёт компонент на основе feature-функции c дополнительным атрибутом layout.
+ * Результат работы функции передаётся в компонент макета переданного через
+ * атрибут layout, что даёт нам возможность для одной и той же логики использовать
+ * в рендере разные макеты.
+ *
+ * @deprecated
+ * Избыточное усложнение. Так же не позволяет управлять макетом из бизнес логики,
+ * что, зачастую необходимо. Лучше использовать другие варианты декомпозиции.
+ *
+ * @param featureFunc - основная логика компонента
+ */
 export function makeWithLayout<P, R>(featureFunc: FeatureFunc<P, R>): Component<PropsWithLayout<P, R>>
+/**
+ * Создаёт компонент на основе feature-функции и макета c дополнительным необязательным
+ * атрибутом layout.
+ *
+ * @deprecated
+ * Избыточное усложнение. Так же не позволяет управлять макетом из бизнес логики,
+ * что, зачастую необходимо. Лучше использовать другие варианты декомпозиции.
+ *
+ * @param featureFunc - основная логика компонента
+ * @param defaultLayout - макет для рендера по-умолчанию
+ */
 export function makeWithLayout<P, R>(
   featureFunc: FeatureFunc<P, R>,
   defaultLayout: LayoutComponent<R> | LayoutDescriptor<R>
