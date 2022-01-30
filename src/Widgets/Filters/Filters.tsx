@@ -4,7 +4,7 @@ import React, { ReactElement, useMemo, FC } from 'react'
 
 import { GroupControl } from '@cdk/Controls'
 import { Field } from '@components/Forms'
-import { PropsWithDefaultLayout } from '@cdk/Layouts'
+import { PropsWithDefaultLayout } from '@cdk/layouts'
 
 import { ListVertical } from '../../Layouts'
 

@@ -3,7 +3,7 @@
 import React from 'react'
 import { Box, ButtonProps, Button, Flex } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
-import { makeSlots, makeWithLayout } from '@cdk/Layouts'
+import { makeSlots, makeWithLayout } from '@cdk/layouts'
 
 const PaginationLayout = makeSlots<'ToFirst' | 'ToPrev' | 'Pages' | 'ToNext' | 'ToLast'>((slotElements) => (
   <Flex aria-label="Пагинация" alignItems="center" fontSize="0.875em" mt={4} mb={4}>

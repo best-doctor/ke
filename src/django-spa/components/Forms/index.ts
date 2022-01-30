@@ -1,4 +1,4 @@
-import { makeWithLayout } from '@cdk/Layouts'
+import { makeWithLayout } from '@cdk/layouts'
 import { partial } from '@utils/Funcs'
 
 import { fieldsBuilder } from './FieldsBuilder'

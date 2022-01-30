@@ -1,6 +1,6 @@
 import React, { ElementType, useCallback, useRef } from 'react'
 import { ControlRefProps, useField, useFieldValidation } from '@cdk/Forms'
-import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/Layouts'
+import { makeWithLayout, PropsWithDefaultLayout } from '@cdk/layouts'
 
 import type { ControlProps, FieldProps } from './types'
 import { Simple } from './Layouts'

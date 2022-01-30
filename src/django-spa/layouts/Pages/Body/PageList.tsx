@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import { makeSlots } from '@cdk/Layouts'
+import { makeSlots } from '@cdk/layouts'
 
 /**
  * Макет основного содержимого для страниц-списков с поддержкой фильтрации и пагинации

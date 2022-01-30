@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Flex } from '@chakra-ui/react'
 
-import { LayoutComponent, makeSlots, SlotElements } from '@cdk/Layouts'
+import { LayoutComponent, makeSlots, SlotElements } from '@cdk/layouts'
 
 export const getDefaultMapLayout = (mapHeight: number): LayoutComponent<SlotElements<'map' | 'filters'>> =>
   makeSlots<'map' | 'filters'>((slotElements) => (

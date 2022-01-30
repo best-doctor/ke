@@ -3,7 +3,7 @@
 import React, { useCallback, useMemo, ReactElement, Key } from 'react'
 import styled from 'styled-components'
 
-import { LayoutComponent, SlotElements } from '@cdk/Layouts'
+import { LayoutComponent, SlotElements } from '@cdk/layouts'
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
 import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
