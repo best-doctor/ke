@@ -1,8 +1,8 @@
+import { ReactChild } from 'react'
 import { testProp, fc } from 'jest-fast-check'
 import { expectNotType, expectType } from 'tsd'
 
 import { makeSlots } from './makeSlots'
-import { ReactChild } from 'react'
 
 const slotsArbitrary = fc.dictionary(fc.string(), fc.string())
 const propsArbitrary = fc
