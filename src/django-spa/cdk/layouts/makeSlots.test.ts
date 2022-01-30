@@ -1,7 +1,7 @@
 import { testProp, fc } from 'jest-fast-check'
 import { expectNotType, expectType } from 'tsd'
 
-import { makeSlots } from './Slots.factory'
+import { makeSlots } from './makeSlots'
 
 const slotsArbitrary = fc.dictionary(fc.string(), fc.string())
 const propsArbitrary = fc
