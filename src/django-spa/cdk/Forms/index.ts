@@ -1,4 +1,4 @@
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { useRecord } from './Fields'
 import { useForm as genericUseForm } from './Form.hook'

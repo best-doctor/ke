@@ -1,5 +1,5 @@
 import React, { createContext, PropsWithChildren, useContext, useMemo } from 'react'
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { Defined, ListViewParams, Updatable } from './types'
 

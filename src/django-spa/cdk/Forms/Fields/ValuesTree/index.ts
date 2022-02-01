@@ -1,4 +1,4 @@
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 import { useLeaf, useArrayRoot, useRecordRoot } from '../../../ContextTree'
 
 import { ValuesContext } from './ValuesTree.context'

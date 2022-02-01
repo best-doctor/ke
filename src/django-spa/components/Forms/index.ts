@@ -1,5 +1,5 @@
 import { makeWithLayout } from '@cdk/Layouts'
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { fieldsBuilder } from './FieldsBuilder'
 import { Field } from './Field'

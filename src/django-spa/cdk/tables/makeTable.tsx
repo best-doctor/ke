@@ -3,7 +3,7 @@
 import React from 'react'
 import type { UnionToIntersection } from 'ts-essentials'
 import { compact, byKey } from '@utils/array'
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { dataRowDescToProps, headerRowDescToProps, headerDescToProps, cellDescToProps } from './normalizers'
 import {

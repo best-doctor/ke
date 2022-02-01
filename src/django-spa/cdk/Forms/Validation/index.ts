@@ -1,4 +1,4 @@
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { useFieldValidation as fieldValidationGeneric } from './Field.hook'
 import { useRecordValidation as recordValidationGeneric } from './Record.hook'
