@@ -1,4 +1,4 @@
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { useValuesArray, useValuesLeaf, useValuesRecord } from './ValuesTree'
 import { useRecord as genericUseRecord } from './Record.hook'

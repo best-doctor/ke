@@ -1,4 +1,4 @@
-import { partial } from '@utils/Funcs'
+import { partial } from '@utils/funcs'
 
 import { ValidationError, ValidationResult } from './types'
 import { useCheck } from './Base.hook'
