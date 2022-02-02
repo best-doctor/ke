@@ -35,3 +35,6 @@ docs/generated/storybook
 
 .rollup.cache
 tsconfig.tsbuildinfo
+
+.yalc
+yalc.lock

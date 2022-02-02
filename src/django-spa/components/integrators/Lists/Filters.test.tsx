@@ -21,8 +21,13 @@ testProp(
         </statusContext.Provider>
       </paramsContext.Provider>
     )
+
+    // TODO: Разобраться с типами и поправить
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const calledProps = targetSpy.mock.calls[0][0]
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { filters, isLoading, onChange } = calledProps
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     onChange(changedFilters)
 
     expect(targetSpy).toHaveBeenCalledTimes(1)

@@ -22,6 +22,7 @@ test('DateTimeInput properly handle event', () => {
   const component = mount(getComponent())
 
   act(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     component.find(DatePicker).first().props().onChange(new Date('2021-01-02T00:00:00'), undefined)
   })
 

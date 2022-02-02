@@ -46,6 +46,8 @@ export const ChipInput = forwardRef<HTMLInputElement, ChipInputProps>((props, re
   const [chips, setChips] = usePropState<string[]>(inputValue)
   const [value, setValue] = useState<string>('')
   const [error, setError] = useState<string>('')
+  // TODO: Исправить
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const inputRef = (ref as RefObject<HTMLInputElement>) ?? useRef<HTMLInputElement>(null)
 
   const isValid = useCallback(

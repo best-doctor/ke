@@ -58,7 +58,7 @@ export function entitiesList<
     if (!onError) {
       return
     }
-    const handler = (_: FiltersData<ExtFilters>, { error }: { error: any }): void => {
+    const handler = (_: FiltersData<ExtFilters>, { error }: { error: unknown }): void => {
       onError(error as ErrorType, pageApiRef.current)
     }
     $filters.on(entitiesSource.fetch.fail, handler)
