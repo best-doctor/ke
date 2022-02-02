@@ -2,7 +2,7 @@ import { createContext } from 'react'
 import fc from 'fast-check'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useRecordRoot } from './RecordRoot.hook'
+import { useRecordRoot } from './useRecordRoot'
 import { RootContext } from './types'
 
 const recordArbitrary = fc.dictionary(fc.string(), fc.anything())

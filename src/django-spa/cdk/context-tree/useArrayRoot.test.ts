@@ -2,7 +2,7 @@ import { createContext } from 'react'
 import fc from 'fast-check'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useArrayRoot } from './ArrayRoot.hook'
+import { useArrayRoot } from './useArrayRoot'
 import { RootContext } from './types'
 
 const arrayArbitrary = fc.array(fc.anything())

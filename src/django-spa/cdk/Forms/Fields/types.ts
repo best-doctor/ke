@@ -1,5 +1,5 @@
 import { Provider, ProviderProps, RefObject } from 'react'
-import { RootContext } from '../../ContextTree'
+import { RootContext } from '../../context-tree'
 
 export type RootProviderDesc = [Provider<RootContext>, ProviderProps<RootContext>]
 

@@ -2,7 +2,7 @@ import { createContext, createElement } from 'react'
 import fc from 'fast-check'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useLeaf } from './Leaf.hook'
+import { useLeaf } from './useLeaf'
 import { RootContext } from './types'
 
 const keyArbitrary = fc.oneof(fc.string(), fc.integer({ min: 0 }))

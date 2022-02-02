@@ -1,5 +1,5 @@
 import { partial } from '@utils/funcs'
-import { useLeaf, useArrayRoot, useRecordRoot } from '../../../ContextTree'
+import { useLeaf, useArrayRoot, useRecordRoot } from '../../../context-tree'
 
 import { ErrorsContext } from './ErrorsTree.context'
 

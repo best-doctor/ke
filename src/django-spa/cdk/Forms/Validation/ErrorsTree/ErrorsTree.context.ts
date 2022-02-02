@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { RootContext } from '../../../ContextTree'
+import { RootContext } from '../../../context-tree'
 
 export const ErrorsContext = createContext<RootContext>([defaultContextFunc, defaultContextFunc])
 
