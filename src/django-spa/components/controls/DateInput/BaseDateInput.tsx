@@ -1,9 +1,8 @@
-import React, { useCallback, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
-import { format } from 'date-fns'
-
 import { css } from '@emotion/css'
 import cn from 'classnames'
+
 import { OptionalDate } from './types'
 import { ControlProps } from '../types'
 import { ChakraDateInput } from './ChakraDateInput'
@@ -100,7 +99,7 @@ const clearButonCss = css`
   }
 `
 
-const pooperCss = css`
+const popperCss = css`
   z-index: 1001;
 `
 
@@ -126,42 +125,27 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
       name,
     },
     ref
-  ): JSX.Element => {
-    const [date, setDate] = React.useState<OptionalDate>(value)
-    if (format(value || new Date(), dateFormat) !== format(date || new Date(), dateFormat)) {
-      setDate(value)
-    }
-
-    const handleChange = useCallback(
-      (v: OptionalDate) => {
-        setDate(v)
-        onChange(v)
-      },
-      [onChange]
-    )
-
-    return (
-      <DatePicker
-        className={className}
-        clearButtonClassName={cn(clearButonCss, clearButtonClassName)}
-        wrapperClassName={wrapperClassName}
-        selected={date}
-        onChange={handleChange}
-        dateFormat={dateFormat}
-        minDate={minDate}
-        maxDate={maxDate}
-        filterDate={filterDate}
-        filterTime={filterTime}
-        showDisabledMonthNavigation
-        isClearable={isClearable}
-        showTimeSelect={showTimeSelect}
-        placeholderText={placeholder}
-        popperClassName={cn(pooperCss, popperClassName)}
-        customInput={<ChakraDateInput ref={ref} />}
-        timeCaption={timeCaption}
-        disabled={isDisabled}
-        name={name}
-      />
-    )
-  }
+  ): JSX.Element => (
+    <DatePicker
+      className={className}
+      clearButtonClassName={cn(clearButonCss, clearButtonClassName)}
+      wrapperClassName={wrapperClassName}
+      selected={value}
+      onChange={onChange}
+      dateFormat={dateFormat}
+      minDate={minDate}
+      maxDate={maxDate}
+      filterDate={filterDate}
+      filterTime={filterTime}
+      showDisabledMonthNavigation
+      isClearable={isClearable}
+      showTimeSelect={showTimeSelect}
+      placeholderText={placeholder}
+      popperClassName={cn(popperCss, popperClassName)}
+      customInput={<ChakraDateInput ref={ref} />}
+      timeCaption={timeCaption}
+      disabled={isDisabled}
+      name={name}
+    />
+  )
 )
