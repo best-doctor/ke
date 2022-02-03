@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { useCallback, forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
 import { css } from '@emotion/css'
 import cn from 'classnames'
@@ -86,7 +86,7 @@ export type BaseDateInputProps = ControlProps<OptionalDate> & {
  * @param timeCaption - title of time input
  */
 
-const clearButonCss = css`
+const clearButtonCss = css`
   &.react-datepicker__close-icon {
     height: auto;
     top: 50%;
@@ -125,27 +125,36 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(
       name,
     },
     ref
-  ): JSX.Element => (
-    <DatePicker
-      className={className}
-      clearButtonClassName={cn(clearButonCss, clearButtonClassName)}
-      wrapperClassName={wrapperClassName}
-      selected={value}
-      onChange={onChange}
-      dateFormat={dateFormat}
-      minDate={minDate}
-      maxDate={maxDate}
-      filterDate={filterDate}
-      filterTime={filterTime}
-      showDisabledMonthNavigation
-      isClearable={isClearable}
-      showTimeSelect={showTimeSelect}
-      placeholderText={placeholder}
-      popperClassName={cn(popperCss, popperClassName)}
-      customInput={<ChakraDateInput ref={ref} />}
-      timeCaption={timeCaption}
-      disabled={isDisabled}
-      name={name}
-    />
-  )
+  ): JSX.Element => {
+    const handleChange = useCallback(
+      (v: OptionalDate) => {
+        onChange(v)
+      },
+      [onChange]
+    )
+
+    return (
+      <DatePicker
+        className={className}
+        clearButtonClassName={cn(clearButtonCss, clearButtonClassName)}
+        wrapperClassName={wrapperClassName}
+        selected={value}
+        onChange={handleChange}
+        dateFormat={dateFormat}
+        minDate={minDate}
+        maxDate={maxDate}
+        filterDate={filterDate}
+        filterTime={filterTime}
+        showDisabledMonthNavigation
+        isClearable={isClearable}
+        showTimeSelect={showTimeSelect}
+        placeholderText={placeholder}
+        popperClassName={cn(popperCss, popperClassName)}
+        customInput={<ChakraDateInput ref={ref} />}
+        timeCaption={timeCaption}
+        disabled={isDisabled}
+        name={name}
+      />
+    )
+  }
 )
