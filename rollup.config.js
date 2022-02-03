@@ -12,9 +12,9 @@ export default {
   output: {
     file: './dist/index.js',
     format: 'umd',
-    name: 'bundle',
     sourcemap: true,
     name: 'ke',
+    assetFileNames: '[name][extname]',
   },
   plugins: [
     nodeResolve({ jsnext: true }),
