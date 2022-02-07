@@ -1,6 +1,6 @@
 {
     "name": "@bestdoctor/ke-beta",
-    "version": "11.22.0",
+    "version": "11.22.1",
     "description": "BestDoctor back-office UI constructor",
     "author": "pro100filipp",
     "main": "dist/index.js",
@@ -115,7 +115,7 @@
         "tsd": "^0.17.0",
         "typedoc": "^0.20.26",
         "typescript": "~4.1.5",
-        "zod": "^3.8.1"
+        "zod": "^3.11.6"
     },
     "resolutions": {
         "@grpc/grpc-js": "^1.1.8",
