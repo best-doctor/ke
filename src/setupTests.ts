@@ -57,8 +57,7 @@ class TestAdmin extends BaseAdmin {
 
 const testAdmin = new TestAdmin()
 
-const mockedHTTP = axios.create({})
-mockedHTTP.defaults = { baseURL: 'https://test.com/' }
+const mockedHTTP = axios.create({ baseURL: 'https://test.com/' })
 
 class TestProvider extends BaseProvider {
   constructor(cache?: ResponseCache, options?: ProviderOptions) {
