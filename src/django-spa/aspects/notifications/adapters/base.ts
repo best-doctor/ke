@@ -1,7 +1,4 @@
-import {
-  NotificationsConfig,
-  NotificationsHandler, NotificationsParams,
-} from '../types'
+import { NotificationsConfig, NotificationsHandler, NotificationsParams } from '../types'
 
 interface Handler {
   notify: (params: NotificationsParams) => void
@@ -11,7 +8,9 @@ interface Handler {
   error: (params: NotificationsParams) => void
 }
 
-abstract class BaseNotification<Config extends NotificationsConfig, THandler extends Handler> implements NotificationsHandler {
+abstract class BaseNotification<Config extends NotificationsConfig, THandler extends Handler>
+  implements NotificationsHandler
+{
   notificationHandler: THandler
 
   constructor(config: Config) {

@@ -1,11 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
-import {
-  CreateStandAloneToastParam,
-  createStandaloneToast, IToast,
-} from "@chakra-ui/react";
-import {BaseNotification} from './base'
-import { NotificationsHandler } from "../types"
-import { NotificationStatus } from "../Enums"
+import { CreateStandAloneToastParam, createStandaloneToast, IToast } from '@chakra-ui/react'
+import { BaseNotification } from './base'
+import { NotificationsHandler } from '../types'
+import { NotificationStatus } from '../Enums'
 
 type ToastConfigType = CreateStandAloneToastParam
 
@@ -21,19 +18,19 @@ class ToastHandler implements NotificationsHandler {
   }
 
   info(params: IToast): void {
-    this.toast({status: NotificationStatus.INFO, ...params})
+    this.toast({ status: NotificationStatus.INFO, ...params })
   }
 
   warning(params: IToast): void {
-    this.toast({status: NotificationStatus.WARNING, ...params})
+    this.toast({ status: NotificationStatus.WARNING, ...params })
   }
 
   success(params: IToast): void {
-    this.toast({status: NotificationStatus.SUCCESS, ...params})
+    this.toast({ status: NotificationStatus.SUCCESS, ...params })
   }
 
   error(params: IToast): void {
-    this.toast({status: NotificationStatus.ERROR, ...params})
+    this.toast({ status: NotificationStatus.ERROR, ...params })
   }
 }
 

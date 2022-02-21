@@ -1,9 +1,4 @@
-import {
-  getAccessor,
-  getAccessorWithDefault,
-  getData,
-  getWidgetContent
-} from '../../DetailView/utils/dataAccess'
+import { getAccessor, getAccessorWithDefault, getData, getWidgetContent } from '../../DetailView/utils/dataAccess'
 
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
@@ -35,7 +30,8 @@ const useWidgetInitialization = (
   initializationArguments: InitializationArguments,
   options?: UseWidgetInitializationOptions
 ): InitializedWidgetAttributes => {
-  const { dataTarget, mainDetailObject, name, displayValue, context, dataSource, required, description } = initializationArguments
+  const { dataTarget, mainDetailObject, name, displayValue, context, dataSource, required, description } =
+    initializationArguments
   const targetUrl = getWidgetTargetUrl(dataTarget, mainDetailObject)
   const content = getWidgetContent(name, mainDetailObject, displayValue, context, options?.allowAllDefinedValues) || ''
   const dataResourceUrl = getData(dataSource, mainDetailObject, context)
