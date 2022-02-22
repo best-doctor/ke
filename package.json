@@ -33,7 +33,7 @@
     "react-helmet": "^6.1.0",
     "react-input-mask": "^2.0.4",
     "react-query": "^3.19.0",
-    "react-router-dom": "^5.2.1",
+    "react-router-dom": "^6.2.1",
     "react-rte": "0.16.3",
     "react-select": "^4.3.1",
     "react-select-async-paginate": "0.5.3",
@@ -140,7 +140,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.19.0",
-    "react-router-dom": "^5.2.1",
+    "react-router-dom": "^6.2.1",
     "zod": "^3.0.0-beta.4"
   },
   "scripts": {
