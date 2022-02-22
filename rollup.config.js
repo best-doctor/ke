@@ -1,7 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
 import styles from 'rollup-plugin-styles'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
+import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import cleaner from 'rollup-plugin-cleaner'
 
