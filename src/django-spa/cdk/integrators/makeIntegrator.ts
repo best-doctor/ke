@@ -29,7 +29,7 @@ export function makeIntegrator<Root extends ComponentType<any>, Inners extends R
 ): Integrator<Root, Inners> {
   const clonedRoot = (root as CallableFunction).bind({}) as Root
   Object.entries(inners).forEach(([key, value]) => {
-    ;(clonedRoot as Record<string, unknown>)[key] = value
+    ;(clonedRoot as unknown as Record<string, unknown>)[key] = value
   })
   return clonedRoot as Integrator<Root, Inners>
 }

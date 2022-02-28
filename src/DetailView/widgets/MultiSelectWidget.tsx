@@ -64,7 +64,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
       eventName: EventNameEnum.FOREIGN_KEY_SELECT_OPTION_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: widgetPayload,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 

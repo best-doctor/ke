@@ -31,12 +31,12 @@ export default {
       },
     }),
     json(),
-    typescript({ tsconfig: './tsconfig.json', sourceMap: false, exclude: ['**/*.test.ts', '**/*.test.tsx'] }),
+    typescript({ tsconfig: './tsconfig.json', exclude: ['**/*.test.ts', '**/*.test.tsx'] }),
     styles({ mode: 'extract' }),
     production &&
       cleaner({
         targets: ['./build/'],
       }),
   ],
-  external: ['react', 'react-dom', '@chakra-ui/react', '@chakra-ui/icons', 'react-query', 'react-router-dom'],
+  external: /node_modules/,
 }

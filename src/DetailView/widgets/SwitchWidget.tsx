@@ -18,7 +18,8 @@ import { useCreateTestId } from '../../django-spa/aspects'
  * @param props - widget props
  */
 const SwitchWidget = (props: WidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, submitChange, setInitialValue, containerStore, style } = props
+  const { name, helpText, targetPayload, submitChange, setInitialValue, containerStore, style, mainDetailObject } =
+    props
 
   const context = containerStore.getState()
 
@@ -34,7 +35,7 @@ const SwitchWidget = (props: WidgetProps): JSX.Element => {
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: v,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 

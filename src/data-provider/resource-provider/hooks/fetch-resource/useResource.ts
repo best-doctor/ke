@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge'
-import { useQuery, useQueryClient } from 'react-query'
+import { QueryKey, useQuery, useQueryClient } from 'react-query'
 import { QueryResourceOptions, ResourceOptionsOrKey } from '../../interfaces'
 import { useConfigResolver } from '../../../hooks/useConfigResolver'
 import { QueryOptions, ResourceQueryResult } from './interfaces'
@@ -25,5 +25,9 @@ export const useResource = <ResourceData>(
     queryOptions.onError = injectInCallback(queryOptions.onError, globalOnError)
   }
 
-  return useQuery([key, requestConfig.lookupField, requestConfig.params], () => fn(key, requestConfig), queryOptions)
+  return useQuery(
+    [key, requestConfig.lookupField, requestConfig.params] as QueryKey,
+    () => fn(key, requestConfig),
+    queryOptions
+  )
 }

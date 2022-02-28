@@ -116,6 +116,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     name,
     helpText,
     targetPayload,
+    mainDetailObject,
     style,
     submitChange,
     setInitialValue,
@@ -140,7 +141,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
       eventName: EventNameEnum.DATE_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: changeValue,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 

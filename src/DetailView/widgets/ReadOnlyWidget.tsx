@@ -68,7 +68,7 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
           as={isHtmlContent ? 'div' : undefined}
           sx={controlStyles}
           className={widgetClassName}
-          dangerouslySetInnerHTML={isHtmlContent ? { __html: content as string } : undefined}
+          dangerouslySetInnerHTML={isHtmlContent ? { __html: content } : undefined}
         >
           {isHtmlContent ? undefined : content}
         </EmptyText>

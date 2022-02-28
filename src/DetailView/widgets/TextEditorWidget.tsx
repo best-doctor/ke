@@ -16,7 +16,17 @@ type TextEditorProps = WidgetProps & {
 }
 
 const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, containerStore, widgetClassName } = props
+  const {
+    name,
+    helpText,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    containerStore,
+    widgetClassName,
+    mainDetailObject,
+  } = props
 
   const context = containerStore.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
@@ -28,7 +38,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 

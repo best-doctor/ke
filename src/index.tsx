@@ -34,7 +34,6 @@ import {
 } from './DetailView/utils/dataAccess'
 import { hasPermission } from './common/permissions'
 import { BaseNotifier, ChakraUINotifier } from './common/notifier'
-import { EnableELK } from './integration/EnableELK'
 import { getDefaultButtons, getPrevButton, getNextButton } from './WizardMaster/buttons'
 import type { WidgetPayload } from './DetailView/events'
 import type { CursorPagination, PagedPagination } from './admin/providers/pagination'
@@ -141,7 +140,6 @@ export {
   MaskFilter,
   StoreManager,
   AsyncDualSelectWidget,
-  EnableELK,
   TextValidationWidget,
   LinkWidget,
   SelectWidget,

@@ -28,6 +28,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
     labelContainerProps,
     chipClassName,
     inputClassName,
+    mainDetailObject,
   } = props
   const context = containerStore.getState()
 
@@ -40,7 +41,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: newChips,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 
