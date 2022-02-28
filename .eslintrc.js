@@ -1,5 +1,8 @@
 const baseTypescript = {
   extends: ['plugin:import/typescript'],
+  rules: {
+    '@typescript-eslint/no-unsafe-argument': 'off',
+  },
   parserOptions: {
     project: './tsconfig.spec.json',
   },

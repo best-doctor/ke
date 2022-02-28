@@ -106,7 +106,7 @@ export function MultiValue<OptionType>(props: MultiValueProps<OptionType>): JSX.
     <ClassNames>
       {({ css, cx: emotionCx }) => (
         <Tag data={data} sx={multiValueContainer} {...innerProps} className={classNames(className, externalClassName)}>
-          <TagLabel data={data} sx={multiValueLabel} className={className}>
+          <TagLabel sx={multiValueLabel} className={className}>
             {children}
           </TagLabel>
           <TagCloseButton

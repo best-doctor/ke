@@ -144,7 +144,7 @@ export class BaseProvider implements Provider {
       const response: BaseResponse = await this.http.post(resourceUrl, payload, requestConfig)
       return response.data?.data
     } catch (error) {
-      this.onErrorHandler(error)
+      this.onErrorHandler(error as Error)
       throw error
     }
   }
@@ -155,7 +155,7 @@ export class BaseProvider implements Provider {
       const response: BaseResponse = await this.http.put(resourceUrl, payload, requestConfig)
       return response.data.data
     } catch (error) {
-      this.onErrorHandler(error)
+      this.onErrorHandler(error as Error)
       throw error
     }
   }
@@ -166,7 +166,7 @@ export class BaseProvider implements Provider {
       const response: BaseResponse = await this.http.patch(resourceUrl, payload, requestConfig)
       return response.data.data
     } catch (error) {
-      this.onErrorHandler(error)
+      this.onErrorHandler(error as Error)
       throw error
     }
   }
@@ -176,7 +176,7 @@ export class BaseProvider implements Provider {
     try {
       await this.http.delete(resourceUrl, requestConfig)
     } catch (error) {
-      this.onErrorHandler(error)
+      this.onErrorHandler(error as Error)
       throw error
     }
   }

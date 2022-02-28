@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button as ChakraButton } from '@chakra-ui/react'
-import type { ButtonProps } from '@chakra-ui/button/dist/types/button'
+import type { ButtonProps } from '@chakra-ui/button'
 
 import { useIsMounted, usePropState } from '@cdk/Hooks'
 import { ensurePromise } from '../../../../DetailView/utils/dataAccess'

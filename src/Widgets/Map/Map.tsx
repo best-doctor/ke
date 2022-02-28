@@ -95,10 +95,10 @@ export function Map({
       const places = searchBox.getPlaces()
 
       let marker: Marker | null = null
-      if (places.length > 0) {
+      if (places && places.length > 0) {
         const place = places[0]
         const { geometry } = place
-        if (geometry != null) {
+        if (geometry?.location) {
           const location = {
             lat: geometry.location.lat(),
             lng: geometry.location.lng(),
@@ -121,7 +121,7 @@ export function Map({
   function handleZoomChanged(this: google.maps.Map): void {
     // eslint-disable-next-line react/no-this-in-sfc
     const changedZoom = this.getZoom()
-    if (changedZoom !== zoomRef.current) {
+    if (changedZoom && changedZoom !== zoomRef.current) {
       zoomRef.current = changedZoom
       onZoomChanged && onZoomChanged(zoomRef.current)
     }

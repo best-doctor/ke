@@ -32,7 +32,17 @@ const getInputPayload = (dateFrom: OptionalDate, dateTo: OptionalDate): [string,
  * @param props - widget props
  */
 const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
-  const { name, helpText, targetPayload, style, submitChange, setInitialValue, oneDayInterval, containerStore } = props
+  const {
+    name,
+    helpText,
+    targetPayload,
+    style,
+    submitChange,
+    setInitialValue,
+    oneDayInterval,
+    containerStore,
+    mainDetailObject,
+  } = props
 
   const context = containerStore.getState()
   let iStartDate = null
@@ -54,7 +64,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
       eventName: EventNameEnum.DATE_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: changeValue,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 

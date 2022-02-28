@@ -20,7 +20,7 @@ export default {
   argTypes: {
     value: {
       type: {
-        label: 'string',
+        name: 'string',
         value: 'string',
       },
     },

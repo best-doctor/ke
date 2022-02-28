@@ -32,7 +32,7 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
       eventName: EventNameEnum.LINK_CLICK,
       widgetType: WidgetTypeEnum.ACTION,
       value: linkHref,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
   }

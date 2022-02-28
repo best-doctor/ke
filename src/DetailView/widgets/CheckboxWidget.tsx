@@ -48,7 +48,7 @@ const CheckboxWidget = (
       eventName: EventNameEnum.INPUT_CHANGE,
       widgetType: WidgetTypeEnum.INPUT,
       value: v,
-      objectForAnalytics: props.mainDetailObject,
+      objectForAnalytics: mainDetailObject,
       ...props,
     })
 
