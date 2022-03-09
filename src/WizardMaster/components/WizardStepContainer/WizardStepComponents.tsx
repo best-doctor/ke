@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStore } from 'effector-react'
 
 import type { DetailFieldDescription } from 'admin/fields/FieldDescription'
 import { setInitialValue } from '../../controllers'
@@ -27,8 +26,6 @@ type WizardStepComponentsProps = {
 }
 
 const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => {
-  const state = useStore(containerStore)
-
   const {
     elements,
     resourceName,
@@ -43,8 +40,6 @@ const WizardStepComponents = (props: WizardStepComponentsProps): JSX.Element => 
     submitChange,
     setCurrentState,
   } = props
-
-  React.useEffect(() => {}, [state])
 
   return (
     <>

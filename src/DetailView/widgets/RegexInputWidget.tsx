@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { forwardRef, useCallback, useMemo } from 'react'
+import React, { forwardRef, useCallback, useEffect, useMemo } from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Input, InputProps } from '@chakra-ui/react'
 import { Accessor, WidgetProps } from '../../typing'
@@ -59,7 +59,9 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
 
     const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
-    setInitialValue({ [name]: content })
+    useEffect(() => {
+      setInitialValue({ [name]: content })
+    }, [setInitialValue, name, content])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
       const inputPayload = getPayload(e.target.value, name, targetPayload)

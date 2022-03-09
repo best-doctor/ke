@@ -6,14 +6,7 @@ import type { Store } from 'effector'
 
 import { BoxProps } from '@chakra-ui/react'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
-import {
-  getAccessor,
-  getData,
-  getPayload,
-  getWidgetContent,
-  applyCallback,
-  getAccessorWithDefault,
-} from '../utils/dataAccess'
+import { getAccessor, getData, getPayload, getWidgetContent, getAccessorWithDefault } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
 
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
@@ -88,7 +81,9 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
     const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)
 
     const [resultOptions, setResultOptions] = useState<SelectObject[]>([])
-    setInitialValue({ [name]: value })
+    useEffect(() => {
+      setInitialValue({ [name]: value })
+    }, [setInitialValue, name, value])
 
     const widgetStyles = {
       menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
@@ -96,8 +91,16 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
     }
 
     useEffect(() => {
+      let rendered = true
       const responseOptions = getAccessor(data, mainDetailObject, context)
-      return applyCallback(responseOptions, setResultOptions)
+      Promise.resolve(responseOptions).then((opts) => {
+        if (rendered) {
+          setResultOptions(opts)
+        }
+      })
+      return () => {
+        rendered = false
+      }
     }, [data, mainDetailObject, context])
 
     const formatOption = (option: { value: any; label?: string; text?: string }): { value: any; label: string } => ({
@@ -161,7 +164,9 @@ const SelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>((props: Se
 
   const [value] = getSelectContent(name, mainDetailObject, displayValue, context)
 
-  setInitialValue({ [name]: value })
+  useEffect(() => {
+    setInitialValue({ [name]: value })
+  }, [setInitialValue, name, value])
 
   const options = (): Promise<SelectObject[]> => {
     const sourceUrl = getData(dataSource, mainDetailObject, context)

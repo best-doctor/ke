@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* Это legacy */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { format } from 'date-fns'
 
 import { DateTimeInput } from '@components/controls'
@@ -58,7 +58,9 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null
-  setInitialValue({ [name]: content })
+  useEffect(() => {
+    setInitialValue({ [name]: content })
+  }, [setInitialValue, name, content])
 
   const handleChange = (value: OptionalDate): void => {
     const widgetValue = value ? format(value, "yyyy-MM-dd'T'HH:mm:ss") : ''

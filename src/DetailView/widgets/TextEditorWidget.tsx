@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { TextEditor } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -31,7 +31,9 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
   const context = containerStore.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
-  setInitialValue({ [name]: content })
+  useEffect(() => {
+    setInitialValue({ [name]: content })
+  }, [setInitialValue, name, content])
 
   const handleBlur = (value: string): void => {
     pushAnalytics({

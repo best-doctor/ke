@@ -69,10 +69,12 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     resourceName = ''
   }
 
-  if (show) {
-    const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
-    wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
-  }
+  useEffect(() => {
+    if (show) {
+      const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
+      wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
+    }
+  }, [show, wizardStep, props, submitChange])
 
   const errors = useStore(containerErrorsStore)
 
