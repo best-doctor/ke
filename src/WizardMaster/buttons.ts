@@ -6,6 +6,7 @@ type WizardStepButtonDescription = {
   style: Style
   handler: (props: any) => Promise<string>
   label: string | undefined
+  onHandlingLabel?: string
   name: string
   needValidation?: boolean
   needErrorClean?: boolean

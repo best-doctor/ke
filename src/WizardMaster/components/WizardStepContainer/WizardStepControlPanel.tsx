@@ -58,7 +58,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
     mainWizardObject,
     'data-test-id': dataTestId,
   } = props
-  const [isDisabled, setIsDisabled] = useState(false)
+  const [isHandling, setIsHandling] = useState(false)
 
   const containerStoreValue = useStore(containerStore)
   const initialStoreValue = useStore(initialStore)
@@ -87,9 +87,9 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
             ml: 0,
           }}
           {...button.style}
-          isDisabled={button.isDisabled || isDisabled}
+          isDisabled={button.isDisabled || isHandling}
           onClick={() => {
-            setIsDisabled(true)
+            setIsHandling(true)
             sendPushAnalytics(
               wizardStep.resourceName ? wizardStep.resourceName : '',
               `wizard_${button.name}_step`,
@@ -114,10 +114,10 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
                   setCurrentState(wizard.transition(currentState, action))
                 }
               })
-              .finally(() => setIsDisabled(false))
+              .finally(() => setIsHandling(false))
           }}
         >
-          {button.label}
+          {isHandling ? button.onHandlingLabel ?? button.label : button.label}
         </Button>
       ))}
       {wizardStep.customButtons}
