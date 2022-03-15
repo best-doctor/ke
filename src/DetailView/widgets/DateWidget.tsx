@@ -2,7 +2,6 @@
 /* Это legacy */
 import React, { useEffect } from 'react'
 import { format } from 'date-fns'
-import { useStore } from 'effector-react'
 
 import { DateInput } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -13,6 +12,7 @@ import { handleUserAction } from '../../common/utils/handleUserAction'
 import type { Accessor, OptionalDate, WidgetProps } from '../../typing'
 import { useCreateTestId } from '../../django-spa/aspects'
 import { getAccessor } from '../utils/dataAccess'
+import { useStore } from 'effector-react'
 
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
