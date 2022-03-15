@@ -12,7 +12,6 @@ import { handleUserAction } from '../../common/utils/handleUserAction'
 import type { Accessor, OptionalDate, WidgetProps } from '../../typing'
 import { useCreateTestId } from '../../django-spa/aspects'
 import { getAccessor } from '../utils/dataAccess'
-import { useStore } from 'effector-react'
 
 const eventName = EventNameEnum.DATETIME_CHANGE
 const widgetType = WidgetTypeEnum.INPUT
@@ -54,7 +53,7 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
     mainDetailObject,
   } = props
 
-  const context = useStore(containerStore)
+  const context = containerStore.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization(
     { ...props, context },
     { allowAllDefinedValues: getAccessor(allowAllDefinedValues) }
@@ -67,8 +66,10 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
 
   const handleChange = (value: OptionalDate): void => {
     const widgetValue = value ? format(value, 'yyyy-MM-dd') : ''
+
     handleUserAction({ ...props, widgetValue, targetUrl, eventName, widgetType })
   }
+
   const { getDataTestId } = useCreateTestId()
   return (
     <WidgetWrapper
