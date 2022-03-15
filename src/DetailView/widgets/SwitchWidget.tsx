@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Switch } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -26,9 +26,7 @@ const SwitchWidget = (props: WidgetProps): JSX.Element => {
   const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [value, setValue] = useState<boolean>(!!content)
 
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChange = (v: boolean): void => {
     setValue(v)

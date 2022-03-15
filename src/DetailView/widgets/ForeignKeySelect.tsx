@@ -93,10 +93,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   const selectStyle = getAccessor(styles, mainDetailObject, context)
 
   const [value, setValue] = React.useState<object | null>(content as object | null)
-
-  useEffect(() => {
-    setInitialValue(value ? getPayload(value, name, targetPayload) : null)
-  }, [setInitialValue, value, name, targetPayload])
+  setInitialValue(value ? getPayload(value, name, targetPayload) : null)
 
   useEffect(() => {
     setValue(content as object | null)

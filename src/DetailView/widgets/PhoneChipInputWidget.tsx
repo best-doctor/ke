@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { PhoneChipInput } from '@components/controls'
 import { useCreateTestId } from '@aspects/test-id/TestIdProvider'
@@ -34,9 +34,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChange = (newChips: string[]): void => {
     pushAnalytics({

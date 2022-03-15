@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* Это legacy */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { format } from 'date-fns'
 
 import { DateInput } from '@components/controls'
@@ -60,9 +60,7 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
   )
 
   const contentDate = content ? new Date(content as string) : null
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChange = (value: OptionalDate): void => {
     const widgetValue = value ? format(value, 'yyyy-MM-dd') : ''

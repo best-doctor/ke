@@ -1,6 +1,6 @@
 // Это обёртка
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { EmailChipInput } from '@components/controls'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
@@ -34,9 +34,7 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChange = (newChips: string[]): void => {
     pushAnalytics({

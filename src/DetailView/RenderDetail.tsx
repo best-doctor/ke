@@ -141,7 +141,7 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
                 if (!elements) return []
 
                 return (
-                  <ErrorBoundary key={elementsKey}>
+                  <ErrorBoundary>
                     {container({
                       mainDetailObject,
                       setMainDetailObject,

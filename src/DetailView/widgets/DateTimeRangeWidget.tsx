@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* Это legacy */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button } from '@chakra-ui/react'
 import { format } from 'date-fns'
 
@@ -55,9 +55,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
   const [startDate, setStartDate] = React.useState<OptionalDate>(iStartDate ? new Date(iStartDate) : null)
   const [endDate, setEndDate] = React.useState<OptionalDate>(iEndDate ? new Date(iEndDate) : null)
 
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChangeDate = (date: OptionalDate, dateKind: string, save = true): void => {
     const changeValue = date ? format(date, "yyyy-MM-dd'T'HH:mm:ss") : ''

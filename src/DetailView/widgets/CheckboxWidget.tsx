@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* Это legacy */
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { CheckBox } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
@@ -39,9 +39,7 @@ const CheckboxWidget = (
   const [value, setValue] = React.useState<boolean>(!!content)
   const disabled = getAccessor(isDisabled, mainDetailObject, context)
 
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChange = (v: boolean): void => {
     setValue(v)

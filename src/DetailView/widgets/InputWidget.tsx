@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef } from 'react'
 import { Textarea, Input, TextareaProps, StyleProps } from '@chakra-ui/react'
 
 import { DebounceInput } from '@components/controls'
@@ -47,9 +47,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
-  useEffect(() => {
-    setInitialValue({ [name]: content })
-  }, [setInitialValue, name, content])
+  setInitialValue({ [name]: content })
 
   const handleChange = (value: string): void => {
     pushAnalytics({
