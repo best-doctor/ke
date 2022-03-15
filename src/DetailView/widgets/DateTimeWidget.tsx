@@ -2,13 +2,13 @@
 /* Это legacy */
 import React, { useEffect } from 'react'
 import { format } from 'date-fns'
-import { useStore } from 'effector-react'
 
 import { DateTimeInput } from '@components/controls'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 import { handleUserAction } from '../../common/utils/handleUserAction'
+
 import type { OptionalDate, WidgetProps } from '../../typing'
 import { useCreateTestId } from '../../django-spa/aspects'
 
@@ -54,7 +54,7 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
     wrapperClassName,
   } = props
 
-  const context = useStore(containerStore)
+  const context = containerStore.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null

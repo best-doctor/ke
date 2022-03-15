@@ -2,13 +2,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { forwardRef, useEffect } from 'react'
 import { Textarea, Input, TextareaProps, StyleProps } from '@chakra-ui/react'
-import { useStore } from 'effector-react'
 
 import { DebounceInput } from '@components/controls'
 import { useCreateTestId } from '@aspects/test-id/TestIdProvider'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
+import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../integration/analytics'
 
 import type { Accessor, WidgetProps } from '../../typing'
 
@@ -43,7 +43,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
     labelContainerProps,
     inputProps,
   } = props
-  const context = useStore(containerStore)
+  const context = containerStore.getState()
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
@@ -52,10 +52,20 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
   }, [setInitialValue, name, content])
 
   const handleChange = (value: string): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value,
+      objectForAnalytics: props.mainDetailObject,
+      ...props,
+    })
+
     const inputPayload = getPayload(value, name, targetPayload)
     submitChange({ url: targetUrl, payload: inputPayload })
   }
+
   const handleCopyValue = getCopyHandler(content, copyValue)
+
   const { getDataTestId } = useCreateTestId()
 
   return (

@@ -3,8 +3,6 @@
 import React, { forwardRef, useCallback, useEffect, useMemo } from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Input, InputProps } from '@chakra-ui/react'
-import { useStore } from 'effector-react'
-
 import { Accessor, WidgetProps } from '../../typing'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { getAccessor, getCopyHandler, getPayload } from '../utils/dataAccess'
@@ -57,7 +55,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
       labelContainerProps,
       regexp,
     } = props
-    const context = useStore(containerStore)
+    const context = containerStore.getState()
 
     const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 

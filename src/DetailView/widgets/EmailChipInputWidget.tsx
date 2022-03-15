@@ -1,10 +1,10 @@
 // Это обёртка
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react'
-import { useStore } from 'effector-react'
 
 import { EmailChipInput } from '@components/controls'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
+import { EventNameEnum, pushAnalytics, WidgetTypeEnum } from '../../integration/analytics'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../utils/dataAccess'
@@ -28,8 +28,9 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
     containerProps,
     chipClassName,
     inputClassName,
+    mainDetailObject,
   } = props
-  const context = useStore(containerStore)
+  const context = containerStore.getState()
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
@@ -38,6 +39,14 @@ export const EmailChipInputWidget = (props: EmailChipInputWidgetProps): JSX.Elem
   }, [setInitialValue, name, content])
 
   const handleChange = (newChips: string[]): void => {
+    pushAnalytics({
+      eventName: EventNameEnum.INPUT_CHANGE,
+      widgetType: WidgetTypeEnum.INPUT,
+      value: newChips,
+      objectForAnalytics: mainDetailObject,
+      ...props,
+    })
+
     const inputPayload = getPayload(newChips, name, targetPayload)
     submitChange({ url: targetUrl, payload: inputPayload })
   }

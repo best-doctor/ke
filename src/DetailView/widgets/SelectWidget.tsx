@@ -3,12 +3,12 @@
 import React, { forwardRef, useEffect, useState } from 'react'
 import Select, { StylesConfig, ValueType } from 'react-select'
 import type { Store } from 'effector'
-import { useStore } from 'effector-react'
-import { BoxProps } from '@chakra-ui/react'
 
+import { BoxProps } from '@chakra-ui/react'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { getAccessor, getData, getPayload, getWidgetContent, getAccessorWithDefault } from '../utils/dataAccess'
 import { EventNameEnum, WidgetTypeEnum, pushAnalytics } from '../../integration/analytics'
+
 import type { GenericAccessor, DetailObject, WidgetProps, Accessor, ValueOrPromise } from '../../typing'
 import { components, modifyStyles } from '../../common/components/ReactSelectCustomization'
 import { useCreateTestId } from '../../django-spa/aspects'
@@ -75,7 +75,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
       widgetStyles: extenrnalStyles,
     } = props
 
-    const context = useStore(containerStore)
+    const context = containerStore.getState()
 
     const [value, label] = getSelectContent(name, mainDetailObject, displayValue, context)
     const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)

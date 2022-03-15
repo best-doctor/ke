@@ -1,10 +1,10 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react'
-import { useStore } from 'effector-react'
-import type { Accessor, DetailObject, WidgetProps } from 'typing'
-import { BoxProps } from '@chakra-ui/react'
 
+import type { Accessor, DetailObject, WidgetProps } from 'typing'
+
+import { BoxProps } from '@chakra-ui/react'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
@@ -83,7 +83,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     allowAllDefinedValues,
   } = props
 
-  const context = useStore(containerStore)
+  const context = containerStore.getState()
 
   const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization(
     { ...props, context },
@@ -92,16 +92,25 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
   const selectStyle = getAccessor(styles, mainDetailObject, context)
 
+  const [value, setValue] = React.useState<object | null>(content as object | null)
+
   useEffect(() => {
-    setInitialValue(content ? getPayload(content, name, targetPayload) : null)
-  }, [setInitialValue, content, name, targetPayload])
+    setInitialValue(value ? getPayload(value, name, targetPayload) : null)
+  }, [setInitialValue, value, name, targetPayload])
+
+  useEffect(() => {
+    setValue(content as object | null)
+  }, [content])
 
   const handleChangeValue = (changeValue: React.ChangeEvent<HTMLInputElement>): void => {
+    setValue(changeValue)
+
     const widgetPayload = getPayload(changeValue, name, targetPayload)
+
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
 
-  const handleCopyValue = getCopyHandler(content, copyValue, () => optionLabel(content, mainDetailObject))
+  const handleCopyValue = getCopyHandler(value, copyValue, () => optionLabel(value, mainDetailObject))
   const { getDataTestId } = useCreateTestId()
 
   return (
@@ -130,7 +139,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           cacheTime={effectiveCacheTime}
           dataResourceUrl={dataResourceUrl}
           handleChange={handleChangeValue}
-          value={content as object | null}
+          value={value}
           isClearable={isClearable}
           defaultOptions={defaultOptions}
           getOptionLabel={(val: object | null) => optionLabel(val, mainDetailObject)}
