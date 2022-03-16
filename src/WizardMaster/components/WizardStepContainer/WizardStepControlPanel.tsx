@@ -9,7 +9,6 @@ import { containerErrorsStore, containerStore, initialStore } from '../../store'
 import type { Provider } from '../../../admin/providers/interfaces'
 import type { BaseWizard, BaseWizardStep } from '../../interfaces'
 import type { BaseAnalytic } from '../../../integration/analytics/base'
-import { pushAnalytics, EventNameEnum, WidgetTypeEnum } from '../../../integration/analytics'
 import type { WizardObject } from '../../../typing'
 import { BaseNotifier } from '../../../common/notifier'
 import { validateContext } from '../../utils'
@@ -30,24 +29,6 @@ interface WizardStepControlPanelProps extends WithDataTestId {
   notifier: BaseNotifier
 }
 
-const sendPushAnalytics = (
-  resourceName: string,
-  widgetName: string,
-  currentState: string,
-  props: WizardStepControlPanelProps
-): void => {
-  pushAnalytics({
-    eventName: EventNameEnum.BUTTON_CLICK,
-    widgetType: WidgetTypeEnum.ACTION,
-    widgetName,
-    objectForAnalytics: props.mainWizardObject,
-    viewType: 'wizard',
-    resource: resourceName,
-    value: currentState,
-    ...props,
-  })
-}
-
 const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element => {
   const {
     wizardStep,
@@ -58,7 +39,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
     mainWizardObject,
     'data-test-id': dataTestId,
   } = props
-  const [isHandling, setIsHandling] = useState(false)
+  const [buttonInHandling, setButtonInHandling] = useState<string | null>(null)
 
   const containerStoreValue = useStore(containerStore)
   const initialStoreValue = useStore(initialStore)
@@ -87,17 +68,11 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
             ml: 0,
           }}
           {...button.style}
-          isDisabled={button.isDisabled || isHandling}
-          isLoading={isHandling}
+          isDisabled={button.isDisabled || !!buttonInHandling}
+          isLoading={button.name === buttonInHandling}
           loadingText={button.onHandlingLabel ?? button.label}
           onClick={() => {
-            setIsHandling(true)
-            sendPushAnalytics(
-              wizardStep.resourceName ? wizardStep.resourceName : '',
-              `wizard_${button.name}_step`,
-              currentState,
-              props
-            )
+            setButtonInHandling(button.name)
 
             if (button.needErrorClean) {
               clearErros()
@@ -116,7 +91,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
                   setCurrentState(wizard.transition(currentState, action))
                 }
               })
-              .finally(() => setIsHandling(false))
+              .finally(() => setButtonInHandling(null))
           }}
         >
           {button.label}
