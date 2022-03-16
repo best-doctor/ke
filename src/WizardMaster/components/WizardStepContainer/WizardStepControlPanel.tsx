@@ -88,6 +88,8 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
           }}
           {...button.style}
           isDisabled={button.isDisabled || isHandling}
+          isLoading={isHandling}
+          loadingText={button.onHandlingLabel ?? button.label}
           onClick={() => {
             setIsHandling(true)
             sendPushAnalytics(
@@ -117,7 +119,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
               .finally(() => setIsHandling(false))
           }}
         >
-          {isHandling ? button.onHandlingLabel ?? button.label : button.label}
+          {button.label}
         </Button>
       ))}
       {wizardStep.customButtons}
