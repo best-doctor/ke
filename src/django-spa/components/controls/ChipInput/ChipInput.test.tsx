@@ -1,7 +1,7 @@
 import React from 'react'
 import fc from 'fast-check'
 import { mount } from 'enzyme'
-import { Tag, TagCloseButton, TagLabel, ChakraProvider } from '@chakra-ui/react'
+import { Tag, TagLabel, ChakraProvider } from '@chakra-ui/react'
 
 import { ChipInput } from './ChipInput'
 
@@ -99,23 +99,6 @@ test('Chip Input validation error', () => {
       expect(chipInput.find('.error').first().text()).toEqual(errorText)
       expect(handleChange).toBeCalledTimes(0)
     })
-  )
-})
-
-test('Chip Input remove button removes chip', () => {
-  fc.assert(
-    fc.property(
-      arrayArbitrary.chain((v) => fc.tuple(fc.constant(v), fc.integer({ min: 0, max: v.length - 1 }))),
-      ([content, index]) => {
-        const handleChange = jest.fn()
-        const chipInput = mount(getComponent(content, handleChange))
-
-        chipInput.find(TagCloseButton).at(index).simulate('click')
-
-        expect(chipInput.find(Tag).length).toEqual(content.length - 1)
-        expect(handleChange).toBeCalledWith(content.filter((_, contentIndex) => contentIndex !== index))
-      }
-    )
   )
 })
 

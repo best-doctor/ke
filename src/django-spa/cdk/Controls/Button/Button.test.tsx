@@ -36,19 +36,3 @@ test('Button is disabled is passed from props', () => {
 
   expect(button.find(ChakraButton).props().isDisabled).toEqual(true)
 })
-
-test('Button is disabled during promise', async () => {
-  jest.useFakeTimers()
-  const mockedOnClick = jest.fn() as () => void
-  const button = mount(getComponent(() => setInterval((): void => mockedOnClick(), 1000)))
-  waitForComponentToPaint(button)
-
-  button.find(ChakraButton).simulate('click')
-
-  expect(button.find(ChakraButton).props().isDisabled).toEqual(true)
-  jest.advanceTimersByTime(1001)
-  await new Promise((res) => process.nextTick(res))
-  button.update()
-  expect(mockedOnClick).toBeCalledTimes(1)
-  expect(button.find(ChakraButton).props().isDisabled).toEqual(false)
-})
