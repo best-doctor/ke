@@ -2,19 +2,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, BoxProps, Text, TextProps } from '@chakra-ui/react'
 import React from 'react'
-import { AlertCircle, CheckCircle, HelpCircle, Icon, XCircle } from 'react-feather'
+import { AlertCircle, CheckCircle, HelpCircle, Icon } from 'react-feather'
 
 const messageTypeMapping: { [key: string]: string } = {
   success: '#65BBBB',
   warning: '#FFEAB3',
-  error: '#FC6363',
+  error: '#FEB2B2',
   info: '#81C2FE',
 }
 
 const messageIconMapping: { [key: string]: Icon } = {
   success: CheckCircle,
   warning: AlertCircle,
-  error: XCircle,
+  error: AlertCircle,
   info: HelpCircle,
 }
 
