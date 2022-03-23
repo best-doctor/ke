@@ -34,7 +34,7 @@ const useValidation = (
     makeCheck(blockingValidators, changeValue, setErrorMessage, provider, detailObject, context)
     makeCheck(notBlockingValidators, changeValue, setInfoMessage, provider, detailObject, context)
 
-    if (!errorMessages.length) return callback(changeValue)
+    return callback(changeValue)
   }
 
   return {
