@@ -24,7 +24,7 @@ const MessagesBlock = ({
   messageProps,
   messageTextProps,
 }: {
-  messages: string[] | undefined
+  messages: (string | JSX.Element)[] | undefined
   messageType: string
   messageProps?: BoxProps
   messageTextProps?: TextProps
@@ -37,8 +37,8 @@ const MessagesBlock = ({
   return (
     <>
       {messages
-        .filter((message: string | null) => message !== null)
-        .map((message: string, index) => {
+        .filter((message: string | JSX.Element | null) => message !== null)
+        .map((message: string | JSX.Element, index) => {
           const key = index
           return (
             <Box
