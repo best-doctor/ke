@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { LatLng } from '@components/map'
+
 import { WidgetProps } from '../../typing'
 import { getPayload } from '../../DetailView/utils/dataAccess'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { MapSelectCoordinates } from './MapSelectCoordinates'
-import { Coords } from '../../Widgets/Map/types'
 
 const StyledMapWidget = styled.div`
   padding: 5.4px;
@@ -18,7 +19,7 @@ export const MapSelectCoordinatesLegacy = (props: WidgetProps & { isClearable?: 
   const context = containerStore.getState()
   const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
 
-  const updateCoordinates = (position: Coords | null): void => {
+  const updateCoordinates = (position: LatLng | null): void => {
     const widgetPayload = getPayload(position, name, targetPayload)
     submitChange({ url: targetUrl, payload: widgetPayload })
   }
@@ -28,7 +29,7 @@ export const MapSelectCoordinatesLegacy = (props: WidgetProps & { isClearable?: 
       <StyledMapWidget>
         <MapSelectCoordinates
           updateCoordinates={updateCoordinates}
-          initialPosition={content as Coords}
+          initialPosition={content as LatLng}
           mapHeight={480}
           isClearable={isClearable}
         />

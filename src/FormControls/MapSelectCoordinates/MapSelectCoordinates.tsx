@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button } from '@chakra-ui/react'
 import { Col, Row } from 'react-flexbox-grid'
-
+import { makePartial } from '@cdk/compatibility'
 import { DebounceInput } from '@components/controls'
-import { MapMarker, Map } from '../../Widgets/Map'
-import { Coords } from '../../Widgets/Map/types'
-import { Marker } from '../../Widgets/Map/Map'
+import { Map, MapMarker, LatLng, Place } from '@components/map'
+
 import { Label } from '../../common/components/Label'
+import { SearchMarker } from './SearchMarker'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
 type MapSelectCoordinatesProps = {
-  initialPosition: Coords | null
-  updateCoordinates: (position: Coords | null) => void
+  initialPosition: LatLng | null
+  updateCoordinates: (position: LatLng | null) => void
   mapHeight: number
   isClearable?: boolean
 }
@@ -27,15 +27,15 @@ export const MapSelectCoordinates = (props: MapSelectCoordinatesProps): JSX.Elem
 
   const [lat, setLat] = useState<number | undefined>(initialPosition?.lat)
   const [lng, setLng] = useState<number | undefined>(initialPosition?.lng)
-  const [position, setPosition] = useState<Coords | null>(initialPosition)
+  const [position, setPosition] = useState<LatLng | null>(initialPosition)
 
-  const onDragEnd = (coordinates: { latLng: { lat: () => number; lng: () => number } }): void => {
-    setLat(coordinates.latLng.lat())
-    setLng(coordinates.latLng.lng())
+  const handlePositionChange = (p: LatLng | undefined): void => {
+    setLat(p?.lat)
+    setLng(p?.lng)
   }
 
-  const onSearchMarkerClick = (marker: Marker): void => {
-    setPosition(marker.position)
+  const onSearchMarkerClick = (place: Place): void => {
+    place.position && setPosition(place.position)
   }
 
   useEffect(() => {
@@ -96,8 +96,14 @@ export const MapSelectCoordinates = (props: MapSelectCoordinatesProps): JSX.Elem
         </Col>
       </Row>
       <Box height={mapHeight} mt={6}>
-        <Map center={position || moscowCoords} zoom={12} onSearchMarkerClick={onSearchMarkerClick}>
-          {position && <MapMarker key="selectMarker" position={position} draggable onDragEnd={onDragEnd} />}
+        <Map
+          center={position || moscowCoords}
+          zoom={12}
+          controls={{ search: { marker: makePartial(SearchMarker, { onClick: onSearchMarkerClick }) } }}
+        >
+          {position && (
+            <MapMarker key="selectMarker" position={position} draggable onPositionChange={handlePositionChange} />
+          )}
         </Map>
       </Box>
     </>

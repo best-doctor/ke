@@ -2,11 +2,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { CSSProperties } from 'react'
 import styled from 'styled-components'
+import { LatLng, MarkerIcon } from '@components/map'
+
 import { Accessor, WidgetProps } from '../../typing'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ReadOnlyMap } from './ReadOnlyMap'
-import { Coords, MarkerIcon } from '../../Widgets/Map/types'
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 
 const StyledMapWidget = styled.div<{ height: number }>`
@@ -32,7 +33,7 @@ export const ReadOnlyMapLegacy = (props: ReadOnlyMapLegacyProps): JSX.Element =>
   return (
     <WidgetWrapper name={name} style={style} helpText={helpText} notifier={notifier} description={widgetDescription}>
       <StyledMapWidget height={height + 10}>
-        <ReadOnlyMap position={content as Coords} mapHeight={height} icon={markerIcon} {...rest} />
+        <ReadOnlyMap position={content as LatLng} mapHeight={height} icon={markerIcon} {...rest} />
       </StyledMapWidget>
     </WidgetWrapper>
   )

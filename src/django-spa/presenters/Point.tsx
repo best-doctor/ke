@@ -1,20 +1,17 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-import { MapMarker, Map, MapProps } from '../../Widgets/Map'
-import { Coords, MarkerIcon } from '../../Widgets/Map/types'
+import { MapMarker, Map, MapProps, LatLng, MarkerIcon } from '@components/map'
 
-interface PointProps extends Pick<MapProps, 'containerStyle' | 'zoom' | 'options'> {
-  position: Coords
+interface PointProps extends Pick<MapProps, 'containerStyle' | 'zoom' | 'controls'> {
+  position: LatLng
   icon?: MarkerIcon
   zoom?: number
 }
 
-const defaultOptions = { keyboardShortcuts: false }
+const defaultControls = { keyboardShortcuts: false }
 
-export const Point = ({ position, icon, zoom = 12, options, ...rest }: PointProps): JSX.Element => (
-  // Это обёртка
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  <Map center={position} zoom={zoom} showSearch={false} options={{ ...defaultOptions, ...options }} {...rest}>
+export const Point = ({ position, icon, zoom = 12, controls, containerStyle }: PointProps): ReactElement => (
+  <Map center={position} zoom={zoom} controls={{ ...defaultControls, ...controls }} containerStyle={containerStyle}>
     {position && <MapMarker key="selectMarker" position={position} icon={icon} />}
   </Map>
 )

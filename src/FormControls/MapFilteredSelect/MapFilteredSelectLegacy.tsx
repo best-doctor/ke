@@ -2,12 +2,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useMemo, ReactElement, Key } from 'react'
 import styled from 'styled-components'
-
 import { LayoutComponent, SlotElements } from '@cdk/Layouts'
+import { MapSelect, MapSelectProps } from '@components/map'
+import { omit } from '@utils/dicts'
+
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
-import { MapSelect, MapSelectProps } from '../MapSelect'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { ListVertical } from '../../Layouts'
+
 import { getDefaultMapLayout } from './layouts'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }
@@ -19,6 +21,7 @@ const StyledMapFilterWidget = styled.div`
 export function MapFilteredSelectLegacy<T, K extends string>({
   value,
   onChange,
+  getKey,
   options,
   clusters,
   filters,
@@ -28,31 +31,21 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   style,
   helpText,
   description,
-  center,
+  initialCenter,
   mapLayout,
   filtersLayoutProxy,
   mapHeight = 448,
-  selectedOption: selectedOptionValue,
-  onSelectedOptionChanged,
   onLoad,
-  showSearch,
-  mapConfig,
-  searchStyle,
   filtersLayout = ListVertical,
   ...rest
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { bbox, zoom, ...otherFilters } = filtersValue
   const onFiltersChange = useCallback(
     (f: Record<K, unknown>) => onFiltersValueChange({ ...filtersValue, ...f }),
     [filtersValue, onFiltersValueChange]
   )
-  const onZoomChange = useCallback(
-    (z: number) => onFiltersValueChange({ ...filtersValue, zoom: z }),
-    [filtersValue, onFiltersValueChange]
-  )
-  const onBboxChange = useCallback(
-    (b: string | undefined) => onFiltersValueChange({ ...filtersValue, bbox: b }),
+
+  const onViewChange = useCallback(
+    ({ zoom: z, bounds }) => onFiltersValueChange({ ...filtersValue, zoom: z, bbox: bounds }),
     [filtersValue, onFiltersValueChange]
   )
 
@@ -62,26 +55,21 @@ export function MapFilteredSelectLegacy<T, K extends string>({
     () => ({
       map: (
         <MapSelect
+          getKey={getKey}
           value={value}
           onChange={onChange as any}
           options={options}
           clusters={clusters}
-          center={center || moscowCoords}
-          zoom={zoom || 12}
-          onZoomChanged={onZoomChange}
-          onBoundsChanged={onBboxChange}
-          selectedOption={selectedOptionValue}
-          onSelectedOptionChanged={onSelectedOptionChanged}
+          initialCenter={initialCenter || moscowCoords}
+          initialZoom={filtersValue.zoom || 12}
+          onViewChange={onViewChange}
           onLoad={onLoad}
-          showSearch={showSearch}
-          mapConfig={mapConfig}
-          searchStyle={searchStyle}
         />
       ),
       filters: (
         <Filters
           filters={filters}
-          value={otherFilters as FiltersValue<K>}
+          value={omit(filtersValue, ['bbox', 'zoom']) as FiltersValue<K>}
           onChange={onFiltersChange}
           layout={filtersLayout}
           layoutProxy={filtersLayoutProxy}
@@ -91,20 +79,14 @@ export function MapFilteredSelectLegacy<T, K extends string>({
     [
       value,
       onChange,
+      getKey,
       options,
       clusters,
-      center,
-      zoom,
-      onZoomChange,
-      onBboxChange,
-      selectedOptionValue,
-      onSelectedOptionChanged,
+      initialCenter,
       onLoad,
-      showSearch,
-      mapConfig,
-      searchStyle,
       filters,
-      otherFilters,
+      filtersValue,
+      onViewChange,
       onFiltersChange,
       filtersLayout,
       filtersLayoutProxy,
@@ -122,17 +104,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
 
 type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
   MapSelectProps<T>,
-  | 'value'
-  | 'onChange'
-  | 'options'
-  | 'clusters'
-  | 'center'
-  | 'onSelectedOptionChanged'
-  | 'selectedOption'
-  | 'onLoad'
-  | 'showSearch'
-  | 'mapConfig'
-  | 'searchStyle'
+  'getKey' | 'value' | 'onChange' | 'options' | 'clusters' | 'initialCenter' | 'onLoad'
 > & {
   filters: readonly Filter<K>[]
   filtersValue: FiltersValue<K> & { zoom?: number; bbox?: string }

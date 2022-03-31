@@ -1,13 +1,11 @@
 import React, { CSSProperties } from 'react'
 import { Box } from '@chakra-ui/react'
-
-import { MapMarker, Map } from '../../Widgets/Map'
-import { Coords, MarkerIcon } from '../../Widgets/Map/types'
+import { MapMarker, Map, LatLng, MarkerIcon } from '@components/map'
 
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
 type ReadOnlyMapProps = {
-  position: Coords | null
+  position: LatLng | null
   mapHeight: number
   icon?: MarkerIcon
   zoom?: number
@@ -22,8 +20,7 @@ export const ReadOnlyMap = (props: ReadOnlyMapProps): JSX.Element => {
       <Map
         center={position || moscowCoords}
         zoom={zoom}
-        showSearch={false}
-        options={{ disableDefaultUI: true, draggable: false, keyboardShortcuts: false }}
+        controls={{ draggable: false, keyboardShortcuts: false }}
         containerStyle={mapContainerStyle}
       >
         {position && <MapMarker key="selectMarker" position={position} icon={icon} />}
