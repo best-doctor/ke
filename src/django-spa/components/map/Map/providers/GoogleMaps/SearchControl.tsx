@@ -24,7 +24,7 @@ const defaultInputStyle: CSSProperties = {
   top: '10px',
   zIndex: '1',
 
-  width: '100%',
+  width: '70%',
   height: '40px',
 }
 

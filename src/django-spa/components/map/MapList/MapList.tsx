@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useMemo, useState } from 'react'
 import { makePartial } from '@cdk/compatibility'
 
-import { Map, MapMarker, MapCluster, LatLng, MapProps, LatLngBounds } from '../Map'
+import { Map, MapMarker, MapCluster, LatLng, MapProps, LatLngBounds, ViewParams } from '../Map'
 
 import { MapListCluster, MapListItem } from './types'
 import { getBoundsZoomLevel, makeUniqPosition } from './utils'
@@ -14,7 +14,7 @@ export interface MapListProps<T extends MapListItem> extends Pick<MapProps, 'con
   initialOpenedKey?: string
   initialZoom?: number
   items: T[]
-  onViewChange?: (view: { zoom?: number; bounds?: LatLngBounds }) => void
+  onViewChange?: (view: Partial<ViewParams>) => void
   searchMarkerRadius?: number
 }
 
@@ -38,13 +38,18 @@ export const MapList = <T extends MapListItem>({
   const handleItemClick = (item: T): void => setActiveKey(getKey(item))
   const handleInfoClose = (): void => setActiveKey(undefined)
 
-  const handleClusterClick = ({ bbox, center: clusterCenter }: MapListCluster): void => {
+  const handleClusterClick = ({ bounds: clusterBounds, center: clusterCenter }: MapListCluster): void => {
     setZoom((prev) => {
-      if (!bbox) {
+      if (!clusterBounds) {
         return (prev || 1) + 2
       }
-      const [latSW, lngSW, latNE, lngNE] = bbox
-      return getBoundsZoomLevel({ lat: latNE, lng: lngNE }, { lat: latSW, lng: lngSW }, { height: 400, width: 1000 })
+      const { south, east, west, north } = clusterBounds
+      const calcZoom = getBoundsZoomLevel(
+        { lat: north, lng: east },
+        { lat: south, lng: west },
+        { height: 400, width: 1000 }
+      )
+      return Math.max((prev || 0) + 1, calcZoom)
     })
     setCenter(clusterCenter)
   }
@@ -61,7 +66,7 @@ export const MapList = <T extends MapListItem>({
   const handleZoomChange = useCallback(
     (z: number | undefined) => {
       setZoom(z)
-      onViewChange && onViewChange({ zoom: z, bounds })
+      onViewChange?.({ zoom: z, bounds })
     },
     [bounds, onViewChange]
   )
@@ -69,7 +74,7 @@ export const MapList = <T extends MapListItem>({
   const handleBoundsChange = useCallback(
     (b: LatLngBounds | undefined) => {
       setBounds(b)
-      onViewChange && onViewChange({ zoom, bounds: b })
+      onViewChange?.({ zoom, bounds: b })
     },
     [zoom, onViewChange]
   )
@@ -98,6 +103,7 @@ export const MapList = <T extends MapListItem>({
           title={i.title}
           icon={i.icon}
           info={i.info}
+          infoSize={i.infoSize}
           onClick={() => handleItemClick(i)}
           onInfoClose={handleInfoClose}
           isInfoOpened={activeKey !== undefined && getKey(i) === activeKey}
@@ -107,7 +113,7 @@ export const MapList = <T extends MapListItem>({
         <MapCluster
           key={`${c.center.lat}-${c.center.lng}`}
           center={c.center}
-          label={c.count.toString()}
+          label={c.label}
           onClick={() => handleClusterClick(c)}
         />
       ))}

@@ -18,7 +18,9 @@ export interface MapProps {
 }
 
 const controlsDefault: MapControls = {}
-const searchDefault: SearchOptions = {}
+const searchDefault: SearchOptions = {
+  placeholder: 'Введите адрес',
+}
 
 export const Map: FC<MapProps> = ({
   center,
@@ -31,13 +33,13 @@ export const Map: FC<MapProps> = ({
   containerStyle,
   children,
 }) => {
-  const distinctCenterChange = useDistinctCallback(onCenterChange, latlngUndefinedIsEqual)
+  const distinctCenterChange = useDistinctCallback(onCenterChange, latlngUndefinedIsEqual, center)
   function handleCenterChanged(this: google.maps.Map): void {
     // eslint-disable-next-line react/no-this-in-sfc
     distinctCenterChange(this.getCenter()?.toJSON())
   }
 
-  const distinctZoomChange = useDistinctCallback(onZoomChange)
+  const distinctZoomChange = useDistinctCallback(onZoomChange, undefined, zoom)
   function handleZoomChanged(this: google.maps.Map): void {
     // eslint-disable-next-line react/no-this-in-sfc
     distinctZoomChange(this.getZoom())
@@ -55,7 +57,7 @@ export const Map: FC<MapProps> = ({
     placeholder: searchPlaceholder,
     inputStyle: searchStyle,
     marker: SearchMarker,
-  } = typeof search === 'object' ? search : searchDefault
+  } = typeof search === 'object' ? { ...searchDefault, ...search } : searchDefault
   const [foundPlace, setFoundPlace] = useState<Place | undefined>()
   const handlePlaceChange = useCallback(
     (place: Place | undefined) => {

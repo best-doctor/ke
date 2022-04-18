@@ -95,7 +95,7 @@ export { useSaveEvent, SaveEventProvider } from './DetailView/SaveEvent/SaveEven
 export * from './Widgets/FilesList'
 export * from './Widgets/Table'
 export * from './Widgets/Charts'
-export { Filters as UpdatedFilters } from './Widgets/Filters'
+export { Filters as UpdatedFilters, Filter as FilterConfig } from './Widgets/Filters'
 export * from './FormControls'
 export * from './django-spa/cdk/compatibility'
 export * from './django-spa/cdk/Providers'

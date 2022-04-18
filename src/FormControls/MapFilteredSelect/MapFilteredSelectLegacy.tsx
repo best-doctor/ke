@@ -1,9 +1,9 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useCallback, useMemo, ReactElement, Key } from 'react'
+import React, { useCallback, useMemo, ReactElement, Key, CSSProperties } from 'react'
 import styled from 'styled-components'
 import { LayoutComponent, SlotElements } from '@cdk/Layouts'
-import { MapSelect, MapSelectProps } from '@components/map'
+import { MapSelect, MapSelectProps, ViewParams } from '@components/map'
 import { omit } from '@utils/dicts'
 
 import { Filter, FiltersValue, Filters } from '../../Widgets/Filters'
@@ -12,11 +12,33 @@ import { ListVertical } from '../../Layouts'
 
 import { getDefaultMapLayout } from './layouts'
 
+type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
+  MapSelectProps<T>,
+  'getKey' | 'value' | 'onChange' | 'options' | 'clusters' | 'initialCenter' | 'onLoad'
+> & {
+  description?: string | JSX.Element
+  filters: readonly Filter<K>[]
+  filtersLayout?: LayoutComponent<[Key, JSX.Element][]>
+  filtersLayoutProxy?: (elements: [string, ReactElement][]) => Record<string, ReactElement>
+  filtersValue: FiltersValue<K> & Partial<ViewParams>
+  helpText: string
+  mapHeight?: number
+  mapLayout?: (mapHeight: number) => LayoutComponent<SlotElements<'map' | 'filters'>>
+  name: string
+  onFiltersValueChange: (v: FiltersValue<K> & Partial<ViewParams>) => void
+  style: any
+}
+
 const moscowCoords = { lat: 55.75, lng: 37.61 }
 
 const StyledMapFilterWidget = styled.div`
   white-space: pre-line;
 `
+
+const mapContainerStyle: CSSProperties = {
+  height: '100%',
+  width: '100%',
+}
 
 export function MapFilteredSelectLegacy<T, K extends string>({
   value,
@@ -37,7 +59,6 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   mapHeight = 448,
   onLoad,
   filtersLayout = ListVertical,
-  ...rest
 }: MapFilteredSelectLegacyProps<T, K>): JSX.Element {
   const onFiltersChange = useCallback(
     (f: Record<K, unknown>) => onFiltersValueChange({ ...filtersValue, ...f }),
@@ -45,7 +66,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   )
 
   const onViewChange = useCallback(
-    ({ zoom: z, bounds }) => onFiltersValueChange({ ...filtersValue, zoom: z, bbox: bounds }),
+    ({ zoom: z, bounds }: Partial<ViewParams>) => onFiltersValueChange({ ...filtersValue, zoom: z, bounds }),
     [filtersValue, onFiltersValueChange]
   )
 
@@ -55,9 +76,10 @@ export function MapFilteredSelectLegacy<T, K extends string>({
     () => ({
       map: (
         <MapSelect
+          containerStyle={mapContainerStyle}
           getKey={getKey}
           value={value}
-          onChange={onChange as any}
+          onChange={onChange}
           options={options}
           clusters={clusters}
           initialCenter={initialCenter || moscowCoords}
@@ -69,7 +91,7 @@ export function MapFilteredSelectLegacy<T, K extends string>({
       filters: (
         <Filters
           filters={filters}
-          value={omit(filtersValue, ['bbox', 'zoom']) as FiltersValue<K>}
+          value={omit(filtersValue, ['bounds', 'zoom']) as FiltersValue<K>}
           onChange={onFiltersChange}
           layout={filtersLayout}
           layoutProxy={filtersLayoutProxy}
@@ -94,27 +116,10 @@ export function MapFilteredSelectLegacy<T, K extends string>({
   )
 
   return (
-    <WidgetWrapper name={name} style={style} helpText={helpText} description={description} {...rest}>
+    <WidgetWrapper name={name} style={style} helpText={helpText} description={description}>
       <StyledMapFilterWidget>
         <Layout>{mapChildren}</Layout>
       </StyledMapFilterWidget>
     </WidgetWrapper>
   )
-}
-
-type MapFilteredSelectLegacyProps<T, K extends string> = Pick<
-  MapSelectProps<T>,
-  'getKey' | 'value' | 'onChange' | 'options' | 'clusters' | 'initialCenter' | 'onLoad'
-> & {
-  filters: readonly Filter<K>[]
-  filtersValue: FiltersValue<K> & { zoom?: number; bbox?: string }
-  onFiltersValueChange: (v: FiltersValue<K> & { zoom?: number; bbox?: string }) => void
-  name: string
-  style: any
-  helpText: string
-  description?: string | JSX.Element
-  mapHeight?: number
-  mapLayout?: (mapHeight: number) => LayoutComponent<SlotElements<'map' | 'filters'>>
-  filtersLayoutProxy?: (elements: [string, ReactElement][]) => Record<string, ReactElement>
-  filtersLayout?: LayoutComponent<[Key, JSX.Element][]>
 }

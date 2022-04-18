@@ -8,12 +8,12 @@ type MapProviderProps = GoogleProviderProps | YandexProviderProps
 
 interface GoogleProviderProps {
   provider: 'google'
-  providerProps: ComponentProps<typeof GoogleProvider>
+  providerProps: Omit<ComponentProps<typeof GoogleProvider>, 'children'>
 }
 
 interface YandexProviderProps {
   provider: 'yandex'
-  providerProps: ComponentProps<typeof YandexProvider>
+  providerProps: Omit<ComponentProps<typeof YandexProvider>, 'children'>
 }
 
 const providerToRootComponent = {

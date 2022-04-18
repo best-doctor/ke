@@ -12,6 +12,11 @@ export interface LatLngBounds {
   west: number
 }
 
+export interface ViewParams {
+  zoom: number
+  bounds: LatLngBounds
+}
+
 export interface Place {
   address?: string
   title?: string
@@ -65,4 +70,11 @@ export interface MapControls {
   streetView?: boolean
   draggable?: boolean
   keyboardShortcuts?: boolean
+}
+
+export interface InfoSize {
+  maxHeight?: number
+  maxWidth?: number
+  minHeight?: number
+  minWidth?: number
 }

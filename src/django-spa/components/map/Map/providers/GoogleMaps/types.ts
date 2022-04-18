@@ -66,3 +66,10 @@ export interface MapControls {
   draggable?: boolean
   keyboardShortcuts?: boolean
 }
+
+export interface InfoSize {
+  maxHeight?: number
+  maxWidth?: number
+  minHeight?: number
+  minWidth?: number
+}

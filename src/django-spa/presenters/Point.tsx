@@ -2,9 +2,11 @@ import React, { ReactElement } from 'react'
 
 import { MapMarker, Map, MapProps, LatLng, MarkerIcon } from '@components/map'
 
-interface PointProps extends Pick<MapProps, 'containerStyle' | 'zoom' | 'controls'> {
-  position: LatLng
+interface PointProps {
+  controls?: MapProps['controls']
+  containerStyle?: MapProps['containerStyle']
   icon?: MarkerIcon
+  position: LatLng
   zoom?: number
 }
 

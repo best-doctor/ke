@@ -1,1 +1,5 @@
+export { Map, MapProps } from './Map'
+export { MapMarker, MapMarkerProps } from './MapMarker'
 export { MapProvider } from './MapProvider'
+export { MapCircle, MapCircleProps } from './MapCircle'
+export { MapCluster, MapClusterProps } from './MapCluster'

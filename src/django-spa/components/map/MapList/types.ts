@@ -1,9 +1,9 @@
-import { MapMarkerProps, LatLng } from '../Map'
+import { MapMarkerProps, LatLng, LatLngBounds } from '../Map'
 
 export interface MapListCluster {
-  count: number
+  label: string
   center: LatLng
-  bbox?: [latSW: number, lngSW: number, latNE: number, lngNe: number]
+  bounds: LatLngBounds
 }
 
-export type MapListItem = Pick<MapMarkerProps, 'position' | 'label' | 'title' | 'info' | 'icon'>
+export type MapListItem = Pick<MapMarkerProps, 'position' | 'label' | 'title' | 'info' | 'infoSize' | 'icon'>

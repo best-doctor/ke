@@ -1,6 +1,8 @@
 import { CSSProperties } from 'react'
 
 import { Map as GoogleMap } from './providers/GoogleMaps'
+import { Map as YandexMap } from './providers/YandexMaps'
+
 import { LatLng, LatLngBounds, MapControls } from './types'
 import { makeSwitchableMapComponent } from './makeSwitchableMapComponent'
 
@@ -17,4 +19,5 @@ export interface MapProps {
 
 export const Map = makeSwitchableMapComponent<MapProps>({
   google: GoogleMap,
+  yandex: YandexMap,
 })

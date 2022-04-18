@@ -1,4 +1,5 @@
 import { MapCircle as GoogleMapCircle } from './providers/GoogleMaps'
+import { MapCircle as YandexMapCircle } from './providers/YandexMaps'
 
 import { LatLng } from './types'
 import { makeSwitchableMapComponent } from './makeSwitchableMapComponent'
@@ -17,4 +18,5 @@ export interface MapCircleProps {
 
 export const MapCircle = makeSwitchableMapComponent<MapCircleProps>({
   google: GoogleMapCircle,
+  yandex: YandexMapCircle,
 })

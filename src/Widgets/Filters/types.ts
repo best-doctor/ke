@@ -7,7 +7,7 @@ export interface Filter<K extends string> {
   control: ComponentType<ControlProps>
 }
 
-export type FiltersValue<K extends string> = Record<K, unknown>
+export type FiltersValue<K extends string> = Record<K, any>
 
 interface ControlProps {
   value: unknown
