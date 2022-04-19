@@ -95,11 +95,12 @@ export const MapSelectCoordinates = (props: MapSelectCoordinatesProps): JSX.Elem
           )}
         </Col>
       </Row>
-      <Box height={mapHeight} mt={6}>
+      <Box height={mapHeight} mt={6} position="relative">
         <Map
           center={position || moscowCoords}
           zoom={12}
           controls={{ search: { marker: makePartial(SearchMarker, { onClick: onSearchMarkerClick }) } }}
+          containerStyle={{ height: mapHeight, width: '100%' }}
         >
           {position && (
             <MapMarker key="selectMarker" position={position} draggable onPositionChange={handlePositionChange} />
