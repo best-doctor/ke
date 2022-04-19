@@ -35,7 +35,7 @@ export const MapSelect = <T,>({
         const key = getKey(v)
         return {
           ...marker,
-          info: marker.info(valueKey !== undefined && key === valueKey, () => onChange(v)),
+          info: marker.info(valueKey !== undefined && key === valueKey, onChange ? () => onChange(v) : undefined),
           key,
         }
       }),
