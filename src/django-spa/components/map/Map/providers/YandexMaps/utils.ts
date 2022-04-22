@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import type ymaps from 'yandex-maps'
 
-import { LatLngBoundsDict, LatLngBoundsTuple, LatLngDict, LatLngTuple } from './types'
+import { LatLngBoundsDict, LatLngBoundsTuple, LatLngDict, LatLngTuple, MarkerIcon, MarkerSymbol } from './types'
 
 export function toLatLngTuple({ lat, lng }: LatLngDict): LatLngTuple {
   return [lat, lng]
@@ -58,4 +58,8 @@ export function makeLayout(
   })
 
   return Layout
+}
+
+export function getIconColor(icon?: MarkerIcon | MarkerSymbol | string): string | undefined {
+  return icon && typeof icon !== 'string' && 'fillColor' in icon ? icon?.fillColor : undefined
 }

@@ -5,7 +5,7 @@ import { useDistinctCallback } from '@cdk/Hooks'
 import type ymaps from 'yandex-maps'
 
 import { InfoSize, LatLngDict, LatLngTuple, MarkerIcon, MarkerLabel, MarkerSymbol } from './types'
-import { latLngTupleIsEqualUndefined, makeLayout, toLatLngDict } from './utils'
+import { getIconColor, latLngTupleIsEqualUndefined, makeLayout, toLatLngDict } from './utils'
 import { useAddEventsCallback } from './useAddEventsCallback'
 import { useBalloonSize } from './useBalloonSize'
 
@@ -43,23 +43,30 @@ export const MapMarker = withYMaps<MapMarkerProps & { ymaps: Pick<typeof ymaps, 
     label,
     title,
     ymaps: { templateLayoutFactory },
+    icon,
   }) => {
     const [balloonNode, setBalloonNode] = useState<HTMLElement>()
+
     const balloonSize = useBalloonSize(balloonNode, infoSize)
     const balloonContentLayout = useMemo(
       () => makeLayout(templateLayoutFactory, setBalloonNode),
       [templateLayoutFactory]
     )
+
+    const fillColor = getIconColor(icon)
+
     const { lat, lng } = position
     const geometry: LatLngTuple = useMemo(() => [lat, lng], [lat, lng])
     const options: ymaps.IPlacemarkOptions = useMemo(
       () => ({
+        preset: 'islands#dotIcon',
         draggable,
         balloonContentLayout,
         hasBalloon: !!info,
+        iconColor: fillColor,
         ...balloonSize,
       }),
-      [draggable, balloonContentLayout, info, balloonSize]
+      [draggable, balloonContentLayout, info, balloonSize, fillColor]
     )
     const properties = useMemo(
       () => ({
