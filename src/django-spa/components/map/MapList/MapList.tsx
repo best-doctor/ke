@@ -1,4 +1,5 @@
-import React, { ReactElement, useCallback, useMemo, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
+import { usePrevious } from '@chakra-ui/react'
 import { makePartial } from '@cdk/compatibility'
 
 import { Map, MapMarker, MapCluster, LatLng, MapProps, LatLngBounds, ViewParams } from '../Map'
@@ -34,6 +35,22 @@ export const MapList = <T extends MapListItem>({
   const [zoom, setZoom] = useState(initialZoom)
   const [bounds, setBounds] = useState<LatLngBounds>()
   const [activeKey, setActiveKey] = useState<string | undefined>(initialOpenedKey)
+
+  const prevCenter = usePrevious(initialCenter)
+
+  useEffect(() => {
+    if (prevCenter !== initialCenter) {
+      setCenter(initialCenter)
+    }
+  }, [initialCenter, prevCenter])
+
+  const prevValue = usePrevious(initialOpenedKey)
+
+  useEffect(() => {
+    if (prevValue !== initialOpenedKey) {
+      setActiveKey(initialOpenedKey)
+    }
+  }, [initialOpenedKey, prevValue])
 
   const handleItemClick = (item: T): void => setActiveKey(getKey(item))
   const handleInfoClose = (): void => setActiveKey(undefined)
