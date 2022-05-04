@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { Circle, CircleGeometry } from 'react-yandex-maps'
+import { Circle, CircleGeometry, Placemark } from 'react-yandex-maps'
 import type ymaps from 'yandex-maps'
 
 import { LatLngDict } from './types'
@@ -30,5 +30,10 @@ export const MapCircle: FC<MapCircleProps> = ({ center, radius, options }) => {
     }),
     [strokeColor, strokeOpacity, strokeWeight, fillColor, fillOpacity]
   )
-  return <Circle geometry={geometry} options={circleOptions} />
+  return (
+    <>
+      <Circle geometry={geometry} options={circleOptions} />
+      <Placemark geometry={toLatLngTuple(center)} options={{ preset: 'islands#blueGovernmentIcon' }} />
+    </>
+  )
 }
