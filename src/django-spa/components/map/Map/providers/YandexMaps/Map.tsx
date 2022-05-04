@@ -109,7 +109,7 @@ export const Map: FC<MapProps> = ({
   const behaviorsDict = useMemo(
     () => ({
       drag: draggable ?? true,
-      scrollZoom: false,
+      scrollZoom: true,
       dblClickZoom: true,
       multiTouch: true,
       ruler: true,
