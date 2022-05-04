@@ -20,6 +20,7 @@ export interface Place {
   address?: string
   title?: string
   position?: LatLngDict
+  geometry?: { _coordinates: LatLngTuple }
 }
 
 export interface MarkerLabel {

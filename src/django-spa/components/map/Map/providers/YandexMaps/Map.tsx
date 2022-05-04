@@ -133,11 +133,14 @@ export const Map: FC<MapProps> = ({
     inputStyle: searchStyle,
     marker: SearchMarker,
   } = typeof search === 'object' ? search : searchDefault
-  const [foundPlace, setFoundPlace] = useState<Place | undefined>()
+  const [foundPosition, setFoundPosition] = useState<LatLngDict | undefined>()
   const handlePlaceChange = useCallback(
     (place: Place | undefined) => {
-      setFoundPlace(place)
-      onCenterChange && place?.position && onCenterChange(place.position)
+      // eslint-disable-next-line no-underscore-dangle
+      const coordinates = place?.geometry?._coordinates
+      const latLng = coordinates ? { lat: coordinates[0], lng: coordinates[1] } : undefined
+      setFoundPosition(latLng)
+      onCenterChange && latLng && onCenterChange(latLng)
     },
     [onCenterChange]
   )
@@ -156,7 +159,7 @@ export const Map: FC<MapProps> = ({
       )}
       {fullscreen && <FullscreenControl />}
       {mapType && <TypeSelector />}
-      {foundPlace && SearchMarker && <SearchMarker place={foundPlace} />}
+      {foundPosition && SearchMarker && <SearchMarker place={{ position: foundPosition }} />}
       <ZoomControl />
       {children}
     </YandexMap>

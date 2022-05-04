@@ -27,7 +27,7 @@ export const MapList = <T extends MapListItem>({
   initialZoom,
   initialOpenedKey,
   getKey,
-  searchMarkerRadius,
+  searchMarkerRadius = 2000,
   onViewChange,
   onLoad,
 }: MapListProps<T>): ReactElement => {
