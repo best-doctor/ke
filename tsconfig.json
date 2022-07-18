@@ -20,7 +20,7 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "declaration": true,
-    "declarationDir": ".",
+    "declarationDir": "./dist",
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
@@ -41,7 +41,7 @@
       "@features": ["./features"]
     },
     "strict": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
