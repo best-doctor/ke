@@ -1,7 +1,7 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { CSSProperties } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { LatLng, MarkerIcon } from '@components/map'
 
 import { Accessor, WidgetProps } from '../../typing'

@@ -2,7 +2,8 @@
 /* Это legacy */
 import React from 'react'
 import parse from 'html-react-parser'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
+
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import type { WidgetProps } from '../../typing'

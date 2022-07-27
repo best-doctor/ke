@@ -1,7 +1,7 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useMemo, ReactElement, Key, CSSProperties } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { LayoutComponent, SlotElements } from '@cdk/Layouts'
 import { MapSelect, MapSelectProps, ViewParams } from '@components/map'
 import { omit } from '@utils/dicts'

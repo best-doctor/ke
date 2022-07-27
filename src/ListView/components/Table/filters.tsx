@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import InputMask, { Props as InputMaskProps } from 'react-input-mask'
 import { Box } from '@chakra-ui/react'
 
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import DatePicker from 'react-datepicker'
 import { useHistory, useLocation } from 'react-router-dom'
 import { format } from 'date-fns'
@@ -20,7 +20,7 @@ import { AsyncSelectWidget } from '../../../common/components/AsyncSelectWidget'
 import { FilterManager } from '../../../common/filterManager'
 import { Accessor } from '../../../typing'
 import { Provider } from '../../../admin/providers'
-import { Select } from '../../../common/components/Select'
+import { OptionTypeBase, Select } from '../../../common/components/Select'
 import { ExtendedProps } from '../../../common/components/ReactSelectCustomization'
 
 type Option = {
@@ -35,7 +35,6 @@ type IdType = {
   id: string
 }
 
-type OptionIdType = Option & IdType
 type OptionValueType = Option & ValueType
 type DatePickerValue = Date | [Date | null, Date | null] | null
 
@@ -207,8 +206,8 @@ const MultiSelectFilter = (params: ResourceFilterProps): JSX.Element => {
       isMulti
       isClearable
       options={options}
-      getOptionLabel={(option: OptionIdType) => option.text}
-      getOptionValue={(option: OptionIdType) => option.id}
+      getOptionLabel={(option: OptionTypeBase) => option.text}
+      getOptionValue={(option: OptionTypeBase) => option.id}
       placeholder={`Фильтр по ${label}`}
     />
   )

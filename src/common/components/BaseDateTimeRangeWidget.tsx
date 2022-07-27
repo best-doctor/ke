@@ -1,8 +1,7 @@
 import React from 'react'
-
+import styled from '@emotion/styled'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import styled from 'styled-components'
 
 type BaseDateTimeRangeWidgetProps = {
   startDate: Date | null

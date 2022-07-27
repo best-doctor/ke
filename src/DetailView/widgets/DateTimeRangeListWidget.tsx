@@ -2,8 +2,8 @@
 /* Это legacy */
 import React from 'react'
 import { Button } from '@chakra-ui/react'
-import styled from 'styled-components'
 import { format } from 'date-fns'
+import styled from '@emotion/styled'
 
 import { BaseDateTimeRangeWidget } from '../../common/components/BaseDateTimeRangeWidget'
 import { WidgetWrapper } from '../../common/components/WidgetWrapper'

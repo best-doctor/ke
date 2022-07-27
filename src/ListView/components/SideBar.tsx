@@ -11,7 +11,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { Menu } from 'react-feather'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { Col, Row } from 'react-flexbox-grid'
 import { goToResourceEvent } from '../events'
 import { Breadcrumbs, TPathRules } from './Breadcrumbs/Breadcrumbs'
