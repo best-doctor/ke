@@ -1,5 +1,5 @@
 import { makeTable } from '@cdk/TablesOld'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 export const StyledTable = makeTable(
   styled.table`

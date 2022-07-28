@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { Box, Button, Text } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import * as Icon from 'react-feather'
 
 const defaultSideContainerWidth = '200px'
