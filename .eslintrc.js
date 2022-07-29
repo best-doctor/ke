@@ -17,6 +17,7 @@ module.exports = {
     node: true,
     jest: true,
   },
+  ignorePatterns: ['**/*.stories.tsx', '**/*.stories.ts'],
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
