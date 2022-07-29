@@ -12,7 +12,7 @@ import type { BaseAnalytic } from '../../../integration/analytics/base'
 import type { WizardObject } from '../../../typing'
 import { BaseNotifier } from '../../../common/notifier'
 import { validateContext } from '../../utils'
-import { clearErros } from '../../controllers'
+import { clearErrors } from '../../controllers'
 import { WithDataTestId } from '../../../django-spa/aspects/test-id/types'
 
 interface WizardStepControlPanelProps extends WithDataTestId {
@@ -75,7 +75,7 @@ const WizardStepControlPanel = (props: WizardStepControlPanelProps): JSX.Element
             setButtonInHandling(button.name)
 
             if (button.needErrorClean) {
-              clearErros()
+              clearErrors()
             }
             if (button.needValidation) {
               validateContext(widgets, mainWizardObject)

@@ -20,7 +20,7 @@ import { useCreateTestId } from '../../../django-spa/aspects'
 import { WizardValidationErrors } from './WizardValidationErrors'
 
 import { useSaveEvent } from '../../../DetailView/SaveEvent/SaveEventProvider'
-import { clearErros } from '../../events'
+import { clearErrors } from '../../events'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -76,7 +76,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
 
   const errors = useStore(containerErrorsStore)
 
-  useEffect(() => () => clearErros(), [])
+  useEffect(() => () => clearErrors(), [])
 
   useEffect(() => {
     if (show) {
