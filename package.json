@@ -1,10 +1,16 @@
 {
   "name": "@bestdoctor/ke-beta",
-  "version": "13.0.11",
+  "version": "13.0.13",
   "description": "BestDoctor back-office UI constructor",
   "author": "pro100filipp",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
