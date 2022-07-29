@@ -48,10 +48,13 @@ export function useCreateTestId(config: UseTestIdProps = {}): UseCreateTestIdRes
     [configDataTestId, configName, configPostfix, configPrefix, testIdConfig?.enabled]
   )
 
-  const getDataTestId = (options: UseTestIdProps = {}): WithDataTestId => {
-    const dataTestId = create(options)
-    return { 'data-test-id': dataTestId }
-  }
+  const getDataTestId = useCallback(
+    (options: UseTestIdProps = {}): WithDataTestId => {
+      const dataTestId = create(options)
+      return { 'data-test-id': dataTestId }
+    },
+    [create]
+  )
 
   return { getDataTestId, create }
 }

@@ -20,7 +20,7 @@ import { RenderList } from './ListView/RenderList'
 import { RenderDetail } from './DetailView/RenderDetail'
 import { BaseWizardStep, BaseWizard } from './WizardMaster/interfaces'
 import { SuccessDisplay, ErrorDisplay } from './WizardMaster/commonSteps'
-import { pushError, clearErros } from './WizardMaster/events'
+import { pushError, clearErrors } from './WizardMaster/events'
 import { useWidgetInitialization } from './common/hooks/useWidgetInitialization'
 import { StoreManager } from './common/store'
 import { handleUserAction } from './common/utils/handleUserAction'
@@ -195,7 +195,7 @@ export {
   PagedPagination,
   CursorPagination,
   pushError,
-  clearErros,
+  clearErrors,
   MessagesBlock,
   Filter,
   EmailChipInputWidget,

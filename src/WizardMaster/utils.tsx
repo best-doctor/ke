@@ -1,5 +1,5 @@
 import { containerStore, initialStore } from './store'
-import { clearErros, pushError, submitChange } from './controllers'
+import { clearErrors, pushError, submitChange } from './controllers'
 import type { BaseWizard } from './interfaces'
 import type { WizardFieldElement, DetailFieldDescription } from '../admin/fields/FieldDescription'
 import { getAccessorWithDefault } from '../DetailView/utils/dataAccess'
@@ -69,7 +69,7 @@ const validateRequiredWidgets = (
 }
 
 const validateContext = (widgets: any, mainWizardObject: WizardObject): void => {
-  clearErros()
+  clearErrors()
 
   const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
 

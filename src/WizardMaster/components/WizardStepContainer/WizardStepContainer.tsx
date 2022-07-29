@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { Row, Col } from 'react-flexbox-grid'
 import { useStore } from 'effector-react'
@@ -20,7 +20,7 @@ import { useCreateTestId } from '../../../django-spa/aspects'
 import { WizardValidationErrors } from './WizardValidationErrors'
 
 import { useSaveEvent } from '../../../DetailView/SaveEvent/SaveEventProvider'
-import { clearErros } from '../../events'
+import { clearErrors } from '../../events'
 
 type WizardStepContainerRef = HTMLDivElement | null
 
@@ -40,6 +40,8 @@ type WizardViewContainerProps = {
   show: boolean
   submitChange: Function
 }
+
+const headerDataGrid = { x: 1, y: 0, w: 10, h: 1, static: true }
 
 const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
   const wizardStepRef = React.useRef<WizardStepContainerRef>(null)
@@ -69,14 +71,20 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
     resourceName = ''
   }
 
-  if (show) {
-    const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
-    wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
-  }
+  useEffect(() => {
+    if (show) {
+      const wizardContext = { ...initialStore.getState(), ...containerStore.getState() }
+      wizardStep.beforeShow({ ...props, context: wizardContext, updateContext: submitChange })
+    }
+  }, [props, show, submitChange, wizardStep, wizardStep.beforeShow])
 
   const errors = useStore(containerErrorsStore)
+  const errorMessages = useMemo(
+    () => errors.filter((error) => !error.widgetName).map(({ errorText }) => errorText),
+    [errors]
+  )
 
-  useEffect(() => () => clearErros(), [])
+  useEffect(() => () => clearErrors(), [])
 
   useEffect(() => {
     if (show) {
@@ -90,7 +98,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
   })
 
   const { getDataTestId } = useCreateTestId()
-  const paddings = title ? { py: 8 } : { pb: 8 }
+  const paddings = useMemo(() => (title ? { py: 8 } : { pb: 8 }), [title])
 
   const { on, off } = useSaveEvent()
 
@@ -137,7 +145,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                     color="black"
                     fontWeight="medium"
                     lineHeight="9"
-                    data-grid={{ x: 1, y: 0, w: 10, h: 1, static: true }}
+                    data-grid={headerDataGrid}
                     {...getDataTestId({ name: wizardStep.name, postfix: '--title' })}
                   >
                     {title}
@@ -162,9 +170,7 @@ const WizardStepContainer = (props: WizardViewContainerProps): JSX.Element => {
                 <Row>
                   <Col xs={12}>
                     <Box key="errors">
-                      <WizardValidationErrors
-                        errors={errors.filter((error) => !error.widgetName).map(({ errorText }) => errorText)}
-                      />
+                      <WizardValidationErrors errors={errorMessages} />
                     </Box>
                     <Flex alignItems="center" key="steps">
                       <WizardStepControlPanel
