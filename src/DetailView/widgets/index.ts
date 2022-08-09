@@ -2,7 +2,7 @@ import { TextValidationWidget } from './TextValidationWidget'
 import { LinkWidget } from './LinkWidget'
 import { SelectWidget, BaseSelectWidget, SelectObject } from './SelectWidget'
 import { ForeignKeySelectWidget } from './ForeignKeySelect'
-import { InputWidget } from './InputWidget'
+import { InputWidget, InputWidgetProps } from './InputWidget'
 import { AvatarWidget } from './AvatarWidget'
 import { MultiSelectWidget } from './MultiSelectWidget'
 import { DateTimeRangeWidget } from './DateTimeRangeWidget'
@@ -31,6 +31,7 @@ export {
   BaseSelectWidget,
   ForeignKeySelectWidget,
   InputWidget,
+  InputWidgetProps,
   AvatarWidget,
   MultiSelectWidget,
   DateTimeRangeWidget,
