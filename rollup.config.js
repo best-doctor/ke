@@ -8,14 +8,23 @@ const production = !process.env.ROLLUP_WATCH
 
 export default {
   input: './src/index.tsx',
-  output: {
-    dir: './dist',
-    format: 'esm',
-    preserveModules: true,
-    sourcemap: true,
-    name: 'ke',
-    assetFileNames: '[name][extname]',
-  },
+  output: [
+    {
+      file: './dist/index.js',
+      format: 'umd',
+      sourcemap: true,
+      name: 'ke',
+      assetFileNames: '[name][extname]',
+    },
+    {
+      dir: './dist/es',
+      format: 'esm',
+      preserveModules: true,
+      sourcemap: true,
+      name: 'ke',
+      assetFileNames: '[name][extname]',
+    },
+  ],
   plugins: [
     nodeResolve({ jsnext: true }),
     commonjs({
