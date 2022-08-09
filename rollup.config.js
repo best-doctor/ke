@@ -22,7 +22,11 @@ export default {
       include: 'node_modules/**',
     }),
     json(),
-    typescript({ tsconfig: './tsconfig.json', exclude: ['**/*.test.ts', '**/*.test.tsx'] }),
+    typescript({
+      tsconfig: './tsconfig.json',
+      exclude: ['**/*.test.ts', '**/*.test.tsx'],
+      sourceMap: false,
+    }),
     production &&
       cleaner({
         targets: ['./build/'],
