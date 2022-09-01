@@ -3,7 +3,6 @@ import { mount } from 'enzyme'
 import { AsyncPaginate } from 'react-select-async-paginate'
 
 import { AsyncSelectWidget } from '../components/AsyncSelectWidget'
-import { testProvider } from '../../setupTests'
 import { ThemeProvider } from '../../styles'
 import { ResourceProvider } from '../../data-provider'
 
@@ -11,7 +10,6 @@ test('Async select widget properly rendered', () => {
   const component = mount(
     <ResourceProvider>
       <AsyncSelectWidget
-        provider={testProvider}
         dataResourceUrl="https://test.com"
         handleChange={jest.fn()}
         value={{}}
@@ -29,7 +27,6 @@ test('Async select widget should pass menuPlacement to AsyncPaginate component',
     <ThemeProvider>
       <ResourceProvider>
         <AsyncSelectWidget
-          provider={testProvider}
           dataResourceUrl="https://test.com"
           handleChange={jest.fn()}
           value={{}}

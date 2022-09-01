@@ -33,7 +33,6 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     optionValue,
     style,
     helpText,
-    provider,
     setInitialValue,
     submitChange,
     containerStore,
@@ -87,7 +86,6 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
       {...getDataTestId(props)}
     >
       <AsyncSelectWidget
-        provider={provider}
         cacheTime={effectiveCacheTime}
         dataResourceUrl={dataResourceUrl}
         handleChange={handleChange}

@@ -300,7 +300,6 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     name,
     label,
     resourceName,
-    provider,
     filterResource,
     optionLabel,
     optionValue,
@@ -340,7 +339,6 @@ const ForeignKeySelectFilter = (params: ForeignKeySelectFilterProps): JSX.Elemen
     <StyledFilter>
       <Box className="styled-filter">
         <AsyncSelectWidget
-          provider={provider}
           dataResourceUrl={filterResource}
           handleChange={handleChange}
           value={value}
