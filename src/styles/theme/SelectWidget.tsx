@@ -40,7 +40,7 @@ const sizes = {
     minHeight: 6,
     borderRadius: 'sm',
   },
-}
+} as const
 
 type Sizes = keyof typeof sizes
 

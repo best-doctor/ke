@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
 import type { ValueType, MenuPlacement } from 'react-select'
-
-import type { Provider } from '../../admin/providers/interfaces'
 
 import { getAccessor } from '../../DetailView/utils/dataAccess'
 import { components, ExtendedProps, modifyStyles } from './ReactSelectCustomization'
@@ -10,7 +8,6 @@ import { StatefullAsyncSelect } from '../../django-spa/smart-components'
 import { Accessor } from '../../typing'
 
 interface AsyncSelectWidgetProps extends ExtendedProps {
-  provider?: Provider
   dataResourceUrl: string
   handleChange: Function
   value: object | null
@@ -37,7 +34,6 @@ interface AsyncSelectWidgetProps extends ExtendedProps {
 /**
  * Create select component with async loading options filtered by input text
  *
- * @param provider - used for requests to backend
  * @param dataResourceUrl - options resource URL
  * @param handleChange - callback for select value changes
  * @param value - initial value
@@ -78,27 +74,30 @@ const AsyncSelectWidget = ({
 }: AsyncSelectWidgetProps): JSX.Element => {
   const debounceValue = 500
 
-  const widgetStyles = {
-    ...{
-      menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
-    },
-    ...(styles !== undefined ? styles : {}),
-  }
+  const widgetStyles = useMemo(
+    () => ({
+      ...{
+        menuPortal: (base: object) => ({ ...base, zIndex: 9999 }),
+      },
+      ...(styles !== undefined ? styles : {}),
+    }),
+    [styles]
+  )
 
   const additionalValuesFromAccessor = getAccessor(additionalValues)
 
-  const formatOptionLabel = (
-    option: object | object[] | null,
-    { context }: { context: 'menu' | 'value' }
-  ): string | null => {
-    if (!option) {
-      return option
-    }
-    if (context === 'menu') {
-      return getOptionLabelMenu ? getOptionLabelMenu(option) : getOptionLabel(option)
-    }
-    return getOptionLabelValue ? getOptionLabelValue(option) : getOptionLabel(option)
-  }
+  const formatOptionLabel = useCallback(
+    (option: object | object[] | null, { context }: { context: 'menu' | 'value' }): string | null => {
+      if (!option) {
+        return option
+      }
+      if (context === 'menu') {
+        return getOptionLabelMenu ? getOptionLabelMenu(option) : getOptionLabel(option)
+      }
+      return getOptionLabelValue ? getOptionLabelValue(option) : getOptionLabel(option)
+    },
+    [getOptionLabel, getOptionLabelMenu, getOptionLabelValue]
+  )
 
   const { resourceKey, params } = useMemo(() => {
     const url = new URL(dataResourceUrl)

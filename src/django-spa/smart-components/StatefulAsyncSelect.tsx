@@ -16,7 +16,10 @@ import {
 } from '../../data-provider/resource-provider'
 import { ExtendedProps } from '../../common/components/ReactSelectCustomization'
 
-export type StatefullProps<OptionType, Additional, IsMulti extends boolean> = SelectProps<OptionType, IsMulti> &
+export type StatefullProps<OptionType extends OptionTypeBase, Additional, IsMulti extends boolean> = SelectProps<
+  OptionType,
+  IsMulti
+> &
   Omit<UseAsyncPaginateParams<OptionType, Additional>, 'loadOptions'> &
   ComponentProps & {
     useComponents?: typeof useComponents
@@ -40,7 +43,7 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
 }: StatefullAsyncSelecProps<OptionType, number>): React.ReactElement => {
   const fetchResource = useFetchResource<ListResponse<OptionType>>(resource)
 
-  const handleLoadOptoins: LoadOptions<OptionType, number> = useCallback(
+  const handleLoadOptions: LoadOptions<OptionType, number> = useCallback(
     async (search: string, _, page = 0) => {
       const data = await fetchResource({
         requestConfig: {
@@ -61,5 +64,5 @@ export const StatefullAsyncSelect = <OptionType extends OptionTypeBase>({
   )
   // Это обёртка
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <AsyncPaginate {...(props as any)} loadOptions={handleLoadOptoins} />
+  return <AsyncPaginate {...(props as any)} loadOptions={handleLoadOptions} />
 }

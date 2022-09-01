@@ -1,10 +1,11 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react'
-
-import type { Accessor, DetailObject, WidgetProps } from 'typing'
-
+import type { MenuPlacement } from 'react-select'
 import { BoxProps } from '@chakra-ui/react'
+
+import type { Accessor, DetailObject, WidgetProps } from '../../typing'
+
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { ValidationWrapper } from '../../common/components/ValidationWrapper'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
@@ -31,6 +32,7 @@ export type ForeignKeySelectWidgetProps = WidgetProps &
     staleTime?: Accessor<number>
     allowAllDefinedValues?: Accessor<boolean>
     provider?: Provider
+    menuPlacement?: MenuPlacement
   }
 
 /**
@@ -81,6 +83,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
     widgetClassName,
     componentsClasses,
     allowAllDefinedValues,
+    menuPlacement,
   } = props
 
   const context = containerStore.getState()
@@ -132,7 +135,6 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
         context={context as Record<string, unknown>}
       >
         <AsyncSelectWidget
-          provider={provider}
           cacheTime={effectiveCacheTime}
           dataResourceUrl={dataResourceUrl}
           handleChange={handleChangeValue}
@@ -155,6 +157,7 @@ const ForeignKeySelectWidget = (props: ForeignKeySelectWidgetProps): JSX.Element
           className={widgetClassName}
           componentsClasses={componentsClasses}
           name={name}
+          menuPlacement={menuPlacement}
         />
       </ValidationWrapper>
     </WidgetWrapper>
