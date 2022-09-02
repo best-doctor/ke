@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 
-import type { ValueType } from 'react-select'
+import type { MenuPlacement, ValueType } from 'react-select'
 
 import { useWidgetInitialization } from '../../common/hooks/useWidgetInitialization'
 import { AsyncSelectWidget } from '../../common/components/AsyncSelectWidget'
@@ -23,6 +23,7 @@ export type MultiSelectWidgetProps = WidgetProps & {
   optionLabelMenu?: (option: unknown, mainObject: DetailObject) => string
   optionLabelValue?: (option: unknown, mainObject: DetailObject) => string
   staleTime?: Accessor<number>
+  menuPlacement?: MenuPlacement
 } & ExtendedProps
 
 const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
@@ -42,6 +43,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     optionLabelValue,
     staleTime,
     componentsClasses,
+    menuPlacement,
   } = props
 
   const context = containerStore.getState()
@@ -102,6 +104,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
         }
         staleTime={staleTime}
         componentsClasses={componentsClasses}
+        menuPlacement={menuPlacement}
       />
     </WidgetWrapper>
   )
