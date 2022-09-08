@@ -22,7 +22,7 @@ import { FC } from 'react'
  * @param source - исходный компонент
  * @param map - карта преобразований вида (ключ, функция-конвертер)
  */
-export function makePropsValueProxy<SP, SK extends keyof SP, TV>(
+export function makePropsValueProxy<SP extends {}, SK extends keyof SP, TV>(
   source: FC<SP>,
   map: ReadonlyMap<SK, (val: unknown) => TV>
 ): FC<Omit<SP, SK> & Record<SK, TV>> {

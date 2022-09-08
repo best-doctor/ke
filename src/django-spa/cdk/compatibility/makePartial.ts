@@ -19,7 +19,7 @@ import { FC, createElement, ComponentType } from 'react'
  * @param source - исходный компонент
  * @param predefined - словарь с зафиксированными props
  */
-export function makePartial<Props, Predefined extends Partial<Props>>(
+export function makePartial<Props extends {}, Predefined extends Partial<Props>>(
   source: ComponentType<Props>,
   predefined: Predefined
 ): FC<Omit<Props, keyof Predefined>> {

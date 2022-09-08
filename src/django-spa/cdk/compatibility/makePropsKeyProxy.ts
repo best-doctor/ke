@@ -23,7 +23,7 @@ import { omit } from '@utils/dicts'
  * @param source - исходный компонент
  * @param map - карта переименований вида (исходный ключ, новый ключ)
  */
-export function makePropsKeyProxy<SP, SK extends keyof SP, TK extends string>(
+export function makePropsKeyProxy<SP extends {}, SK extends keyof SP, TK extends string>(
   source: FC<SP>,
   map: ReadonlyMap<SK, TK>
 ): FC<Omit<SP, SK> & Record<TK, SP[SK]>> {
