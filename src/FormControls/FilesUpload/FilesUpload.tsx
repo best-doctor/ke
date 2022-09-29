@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useEffect, useRef } from 'react'
 import { ButtonProps, LinkProps, Text } from '@chakra-ui/react'
-import Filesize from 'filesize'
+import { filesize } from 'filesize'
 
 import { FileDescriptor } from './types'
 import { FilesList } from './FilesList'
@@ -44,7 +44,7 @@ export function FilesUpload({
       />
       {maxFileSize && (
         <Text fontSize="sm" color="gray.500" mt={2}>
-          Максимальный размер файла - {Filesize(maxFileSize)}
+          Максимальный размер файла - {filesize(maxFileSize)}
         </Text>
       )}
     </>

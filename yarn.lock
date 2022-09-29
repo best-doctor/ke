@@ -7977,10 +7977,10 @@ filesize@6.1.0:
   resolved "https://registry.yarnpkg.com/filesize/-/filesize-6.1.0.tgz#e81bdaa780e2451d714d71c0d7a4f3238d37ad00"
   integrity sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg==
 
-filesize@^9.0.11:
-  version "9.0.11"
-  resolved "https://registry.yarnpkg.com/filesize/-/filesize-9.0.11.tgz#4ac3a42c084232dd9b2a1da0107f32d42fcfa5e4"
-  integrity sha512-gTAiTtI0STpKa5xesyTA9hA3LX4ga8sm2nWRcffEa1L/5vQwb4mj2MdzMkoHoGv4QzfDshQZuYscQSf8c4TKOA==
+filesize@^10.0.1:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-10.0.2.tgz#d14c79d85d3a93d81522eb00c416f7a2d8f156d1"
+  integrity sha512-SOUAfVx6Myimq+YqkxbKpiRI4zB5v6wI7EKBrGxFtDcvalEffCyws+t7OeCUvMElkRNTK03XZ/3zU2AU8QnJkQ==
 
 fill-range@^4.0.0:
   version "4.0.0"

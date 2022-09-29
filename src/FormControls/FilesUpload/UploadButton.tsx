@@ -1,9 +1,7 @@
-// Это легаси
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { ChangeEvent, ReactElement, useCallback, useRef, useState } from 'react'
 import { Button, ButtonProps, List, ListIcon, ListItem, Progress, Text } from '@chakra-ui/react'
 import { Loader, Paperclip } from 'react-feather'
-import Filesize from 'filesize'
+import { filesize } from 'filesize'
 import { FileDescriptor, LoadingFileDescriptor } from './types'
 
 interface CombinedFileDescriptor {
@@ -50,7 +48,7 @@ export function UploadButton({
           if (maxFileSize && file.size > maxFileSize) {
             setFileErrors((prev) => [
               ...prev,
-              `Размер файла ${file.name} превышает допустимый максимальный размер ${Filesize(maxFileSize)}`,
+              `Размер файла ${file.name} превышает допустимый максимальный размер ${filesize(maxFileSize)}`,
             ])
             return Promise.resolve(null)
           }
@@ -93,6 +91,8 @@ export function UploadButton({
         leftIcon={<Paperclip size={18} />}
         size="sm"
         mt="5px"
+        // Это легаси
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...buttonProps}
         onClick={handleClick}
         isDisabled={buttonProps?.isDisabled || !!loadingFiles.length}
