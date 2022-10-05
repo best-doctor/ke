@@ -29,7 +29,7 @@ type ValueValidationWrapperProps = {
  * @param value - value to validate, will be passed as first param to validators
  * @param context - current context
  */
-const ValueValidationWrapper = ({
+const ValueValidationWrapper: React.FC<ValueValidationWrapperProps> = ({
   children,
   blockingValidators,
   notBlockingValidators,
@@ -37,7 +37,7 @@ const ValueValidationWrapper = ({
   detailObject,
   value,
   context,
-}: ValueValidationWrapperProps): JSX.Element => {
+}) => {
   const { infoMessages, errorMessages } = useValueValidation(
     blockingValidators,
     notBlockingValidators,

@@ -9,7 +9,6 @@ import type { Provider } from '../../admin/providers/interfaces'
 import type { DetailObject, ValidatorFunction } from '../../typing'
 
 type ValidationWrapperProps = {
-  children: JSX.Element
   blockingValidators: ValidatorFunction[]
   notBlockingValidators: ValidatorFunction[]
   provider: Provider
@@ -28,14 +27,14 @@ type ValidationWrapperProps = {
  * @param detailObject - addition object, will be passed as third param to validators
  * @param context - current context
  */
-const ValidationWrapper = ({
+const ValidationWrapper: React.FC<ValidationWrapperProps> = ({
   children,
   blockingValidators,
   notBlockingValidators,
   provider,
   detailObject,
   context,
-}: ValidationWrapperProps): JSX.Element => {
+}) => {
   const { props } = children as { props: { handleChange?: Function; onChange?: Function; onClick: Function } }
   const { handleChange, onChange, onClick } = props
   const originalHandler = handleChange || onChange || onClick

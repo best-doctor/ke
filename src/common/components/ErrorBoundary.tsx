@@ -60,11 +60,10 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             {this.errorTitle || 'Что-то пошло не так.'}
           </Heading>
           <StyledDetails>
-            <>
-              <Heading as="h5" size="sm">
-                {error && error.toString()}
-              </Heading>
-            </>
+            <Heading as="h5" size="sm">
+              {error?.toString()}
+            </Heading>
+
             <StyledErrorInfo>{errorInfo.componentStack}</StyledErrorInfo>
           </StyledDetails>
         </div>

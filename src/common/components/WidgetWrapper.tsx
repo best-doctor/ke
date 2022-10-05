@@ -11,7 +11,6 @@ import { Label } from './Label'
 interface WidgetWrapperProps {
   style: object
   helpText?: string
-  children: JSX.Element[] | JSX.Element
   copyValue?: Function
   useClipboard?: boolean
   notifier?: BaseNotifier
@@ -36,7 +35,7 @@ interface WidgetWrapperProps {
  * @param name - name data-attribute
  * @param description - description
  */
-const WidgetWrapper = ({
+const WidgetWrapper: React.FC<WidgetWrapperProps> = ({
   style,
   helpText,
   children,
@@ -50,7 +49,7 @@ const WidgetWrapper = ({
   labelContainerProps,
   className,
   'data-test-id': dataTestId,
-}: WidgetWrapperProps): JSX.Element => {
+}) => {
   const error = containerErrorsStore.getState().find(({ widgetName }) => widgetName === name)
   const hasError = !!error
 
