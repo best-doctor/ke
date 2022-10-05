@@ -9,6 +9,7 @@ import type { Provider } from '../../admin/providers/interfaces'
 import type { DetailObject, ValidatorFunction } from '../../typing'
 
 type ValidationWrapperProps = {
+  children: JSX.Element
   blockingValidators: ValidatorFunction[]
   notBlockingValidators: ValidatorFunction[]
   provider: Provider

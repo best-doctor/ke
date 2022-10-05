@@ -47,15 +47,13 @@ const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
         description={widgetDescription}
         {...getDataTestId(props)}
       >
-        <>
-          {linkHref ? (
-            <Link target={target} href={linkHref} onClick={() => handleClick()} sx={styles.control} {...linkProps}>
-              {content || 'Ссылка'}
-            </Link>
-          ) : (
-            '-'
-          )}
-        </>
+        {linkHref ? (
+          <Link target={target} href={linkHref} onClick={() => handleClick()} sx={styles.control} {...linkProps}>
+            {content || 'Ссылка'}
+          </Link>
+        ) : (
+          '-'
+        )}
       </StyledWidgetWrapper>
     </StylesProvider>
   )

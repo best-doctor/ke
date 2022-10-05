@@ -97,7 +97,7 @@ const WidgetWrapper: React.FC<WidgetWrapperProps> = ({
  * @param name - name data-attribute
  * @param description - description
  */
-const StyledWidgetWrapper = ({
+const StyledWidgetWrapper: React.FC<WidgetWrapperProps> = ({
   style,
   helpText,
   children,
@@ -110,7 +110,7 @@ const StyledWidgetWrapper = ({
   containerProps,
   labelContainerProps,
   className,
-}: WidgetWrapperProps): JSX.Element => {
+}) => {
   const error = containerErrorsStore.getState().find(({ widgetName }) => widgetName === name)
   const hasError = !!error
   const styles = useStyles()
