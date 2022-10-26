@@ -488,4 +488,3 @@ In general, the rules for describing development commits are [here](https://www.
 To check commits, we use [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
 I also recommend reading the [Angular contributing guide](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#commit)
 if you want to learn more about regular commits and see examples.
-
