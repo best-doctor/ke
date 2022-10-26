@@ -4,35 +4,39 @@ import { Box, BoxProps, Text, TextProps } from '@chakra-ui/react'
 import React from 'react'
 import { AlertCircle, CheckCircle, HelpCircle, Icon } from 'react-feather'
 
-const messageTypeMapping: { [key: string]: string } = {
+const messageTypeMapping: Record<MessageType, string> = {
   success: '#65BBBB',
   warning: '#FFEAB3',
   error: '#FEB2B2',
   info: '#81C2FE',
 }
 
-const messageIconMapping: { [key: string]: Icon } = {
+const messageIconMapping: Record<MessageType, Icon> = {
   success: CheckCircle,
   warning: AlertCircle,
   error: AlertCircle,
   info: HelpCircle,
 }
 
+export type MessageType = 'success' | 'warning' | 'error' | 'info'
+
 const MessagesBlock = ({
   messages,
   messageType,
   messageProps,
   messageTextProps,
+  iconType,
 }: {
   messages: (string | JSX.Element)[] | undefined
-  messageType: string
+  messageType: MessageType
+  iconType?: MessageType
   messageProps?: BoxProps
   messageTextProps?: TextProps
 }): JSX.Element => {
   if (typeof messages === 'undefined') return <></>
 
   const messageColor = messageTypeMapping[messageType]
-  const messageIcon = messageIconMapping[messageType]
+  const messageIcon = messageIconMapping[iconType || messageType]
 
   return (
     <>
