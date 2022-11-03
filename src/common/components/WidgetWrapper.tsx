@@ -9,7 +9,7 @@ import { ToClipboard } from './ToClipboard'
 import { Label } from './Label'
 
 interface WidgetWrapperProps {
-  style: object
+  style?: object
   helpText?: string
   copyValue?: Function
   useClipboard?: boolean
@@ -36,7 +36,7 @@ interface WidgetWrapperProps {
  * @param description - description
  */
 const WidgetWrapper: React.FC<WidgetWrapperProps> = ({
-  style,
+  style = {},
   helpText,
   children,
   copyValue,
