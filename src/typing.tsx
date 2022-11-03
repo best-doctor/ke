@@ -39,7 +39,7 @@ type WidgetProps = {
   setMainDetailObject: Function
   notifier: BaseNotifier
   viewType: string
-  style: CSSProperties
+  style?: CSSProperties
   setInitialValue: Function
   submitChange: Function
   notBlockingValidators?: ValidatorFunction[]

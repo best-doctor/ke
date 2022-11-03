@@ -9,7 +9,7 @@ import { TestIdGenerationProps, useCreateTestId } from '../../django-spa/aspects
 interface AvatarWidgetProps extends Omit<TestIdGenerationProps, 'name'> {
   name: string
   helpText: string
-  style: object
+  style?: object
   description?: string | JSX.Element
 }
 

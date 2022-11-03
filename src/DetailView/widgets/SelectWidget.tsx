@@ -32,7 +32,7 @@ type BaseSelectWidgetProps = {
   description?: string | JSX.Element
   displayValue?: GenericAccessor
   data: Accessor<ValueOrPromise<SelectObject[]>>
-  style: object
+  style?: object
   setInitialValue: Function
   handleChange: Function
   containerStore: Store<object>
