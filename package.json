@@ -1,6 +1,6 @@
 {
   "name": "@bestdoctor/ke-beta",
-  "version": "13.2.0",
+  "version": "13.2.1",
   "description": "BestDoctor back-office UI constructor",
   "author": "pro100filipp",
   "main": "dist/index.js",
@@ -16,7 +16,6 @@
   "dependencies": {
     "deepmerge": "^4.2.2",
     "filesize": "^10.0.5",
-    "react-charts": "2.1.0",
     "react-datepicker": "^4.2.0",
     "react-debounce-input": "^3.2.2",
     "react-helmet": "^6.1.0",

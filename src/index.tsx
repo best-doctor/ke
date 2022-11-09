@@ -95,7 +95,6 @@ export { WidgetTypeEnum, pushAnalytics, EventNameEnum, BaseAnalytic } from './in
 export { useSaveEvent, SaveEventProvider } from './DetailView/SaveEvent/SaveEventProvider'
 export * from './Widgets/FilesList'
 export * from './Widgets/Table'
-export * from './Widgets/Charts'
 export { Filters as UpdatedFilters, Filter as FilterConfig } from './Widgets/Filters'
 export * from './FormControls'
 export * from './django-spa/cdk/compatibility'
