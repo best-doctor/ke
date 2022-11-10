@@ -4,14 +4,16 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 import { usePropState } from '@cdk/Hooks'
 import { WizardProps } from './types'
 
-export const Wizard = <Key extends string, Action extends string>(props: WizardProps<Key, Action>): JSX.Element => {
+export const Wizard = <Key extends string, Action extends string, StepData extends object>(
+  props: WizardProps<Key, Action, StepData>
+): JSX.Element => {
   const { start, steps, onFinish, onRestart, name, map } = props
   const [currentStep, setCurrentStep] = useState(start.step)
   const [currentData, setCurrentData] = usePropState(start.data)
   const [currentForm, setCurrentForm] = useState<ReactNode>(null)
 
   const next = useCallback(
-    (action: Action, newData: object, submit): void => {
+    (action: Action, newData: StepData, submit): void => {
       const possibleActions = map[currentStep]
       const newStep = possibleActions[action]
       if (newStep === undefined) {

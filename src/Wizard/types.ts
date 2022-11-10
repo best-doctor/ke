@@ -1,21 +1,21 @@
 import { ReactNode } from 'react'
 
-interface WizardProps<Key extends string, Action extends string, StepData extends object = {}> {
+interface WizardProps<Key extends string, Action extends string, StepData extends object> {
   map: Record<Key, Partial<Record<Action, Key>>>
   steps: Record<Key, (args: StepArgs<Action, StepData>) => ReactNode>
-  start: Start<Key>
+  start: Start<Key, StepData>
   name: string
   onStepChange: (stepKey: Key, data: StepData) => void
   onFinish: (data: StepData) => void
   onRestart: () => void
 }
 
-interface Start<Key, StepData extends object = {}> {
+interface Start<Key, StepData> {
   step: Key
   data: StepData
 }
 
-interface StepArgs<Action, StepData extends object = {}> {
+interface StepArgs<Action, StepData> {
   data: StepData
   next: NextStep<Action, StepData>
   restart: () => void
@@ -23,10 +23,6 @@ interface StepArgs<Action, StepData extends object = {}> {
   onChange: (data: StepData) => void
 }
 
-type NextStep<Action, StepData extends object = {}> = (
-  nextKey: Action,
-  data: StepData,
-  submit?: (data: unknown) => void
-) => void
+type NextStep<Action, StepData> = (nextKey: Action, data: StepData, submit?: (data: unknown) => void) => void
 
 export { WizardProps, NextStep, StepArgs }
