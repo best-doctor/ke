@@ -1,2 +1,2 @@
 export { Wizard } from './Wizard'
-export { NextStep } from './types'
+export { NextStep, StepArgs } from './types'

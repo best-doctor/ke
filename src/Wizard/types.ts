@@ -25,4 +25,4 @@ interface StepArgs<Action> {
 
 type NextStep<Action> = (nextKey: Action, data: object, submit?: (data: unknown) => void) => void
 
-export { WizardProps, NextStep }
+export { WizardProps, NextStep, StepArgs }
