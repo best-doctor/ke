@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import React, { useCallback, useState } from 'react'
 
 import { usePropState } from '@cdk/Hooks'
@@ -48,7 +48,10 @@ export const Wizard = <Key extends string, Action extends string, StepData exten
 
   return (
     <Box>
-      {name}
+      <Text as="h2" key="header" fontSize="3xl" color="black" fontWeight="medium" lineHeight="9">
+        {name}
+      </Text>
+
       <FormElement data={currentData} next={next} restart={restart} finish={finish} onChange={onChange} />
     </Box>
   )
