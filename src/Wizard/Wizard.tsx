@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react'
-import React, { ReactNode, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { usePropState } from '@cdk/Hooks'
-import { WizardProps } from './types'
+import { StepArgs, WizardProps } from './types'
 
 export const Wizard = <Key extends string, Action extends string, StepData extends object>(
   props: WizardProps<Key, Action, StepData>
@@ -10,7 +10,6 @@ export const Wizard = <Key extends string, Action extends string, StepData exten
   const { start, steps, onFinish, onRestart, name, map } = props
   const [currentStep, setCurrentStep] = useState(start.step)
   const [currentData, setCurrentData] = usePropState(start.data)
-  const [currentForm, setCurrentForm] = useState<ReactNode>(null)
 
   const next = useCallback(
     (action: Action, newData: StepData, submit): void => {
@@ -45,14 +44,12 @@ export const Wizard = <Key extends string, Action extends string, StepData exten
     [currentData, setCurrentData]
   )
 
-  useEffect(() => {
-    setCurrentForm(steps[currentStep]({ data: currentData, next, restart, finish, onChange }))
-  }, [currentData, currentStep, next, finish, restart, steps, onChange])
+  const FormElement: React.FC<StepArgs<Action, StepData>> = steps[currentStep]
 
   return (
     <Box>
       {name}
-      {currentForm}
+      <FormElement data={currentData} next={next} restart={restart} finish={finish} onChange={onChange} />
     </Box>
   )
 }

@@ -1,8 +1,8 @@
-import { ReactNode } from 'react'
+import { FC } from 'react'
 
-interface WizardProps<Key extends string, Action extends string, StepData extends object> {
+export interface WizardProps<Key extends string, Action extends string, StepData extends object> {
   map: Record<Key, Partial<Record<Action, Key>>>
-  steps: Record<Key, (args: StepArgs<Action, StepData>) => ReactNode>
+  steps: Record<Key, FC<StepArgs<Action, StepData>>>
   start: Start<Key, StepData>
   name: string
   onStepChange: (stepKey: Key, data: StepData) => void
@@ -15,7 +15,7 @@ interface Start<Key, StepData> {
   data: StepData
 }
 
-interface StepArgs<Action, StepData> {
+export interface StepArgs<Action, StepData> {
   data: StepData
   next: NextStep<Action, StepData>
   restart: () => void
@@ -23,6 +23,4 @@ interface StepArgs<Action, StepData> {
   onChange: (data: StepData) => void
 }
 
-type NextStep<Action, StepData> = (nextKey: Action, data: StepData, submit?: (data: unknown) => void) => void
-
-export { WizardProps, NextStep, StepArgs }
+export type NextStep<Action, StepData> = (nextKey: Action, data: StepData, submit?: (data: unknown) => void) => void
