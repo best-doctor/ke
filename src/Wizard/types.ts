@@ -5,7 +5,6 @@ export interface WizardProps<Key extends string, Action extends string, StepData
   steps: Record<Key, FC<StepArgs<Action, StepData>>>
   start: Start<Key, StepData>
   name: string
-  onStepChange: (stepKey: Key, data: StepData) => void
   onFinish: (data: StepData) => void
   onRestart: () => void
 }
