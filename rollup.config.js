@@ -3,6 +3,8 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import cleaner from 'rollup-plugin-cleaner'
+import replace from 'rollup-plugin-replace'
+import { terser } from 'rollup-plugin-terser'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -26,10 +28,14 @@ export default {
     },
   ],
   plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development'),
+    }),
     nodeResolve({ jsnext: true }),
     commonjs({
       include: 'node_modules/**',
     }),
+    terser(),
     json(),
     typescript({
       tsconfig: './tsconfig.json',
