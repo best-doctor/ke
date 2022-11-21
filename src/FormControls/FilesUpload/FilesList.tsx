@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useCallback } from 'react'
 import { List, ListIcon, ListItem, IconButton, Link, LinkProps } from '@chakra-ui/react'
 import { Paperclip, X } from 'react-feather'
 
@@ -13,16 +13,39 @@ const listItemCss = css`
   }
 `
 
+type FilesListProps = {
+  value: readonly FileDescriptor[]
+  listItemIcon?: React.ComponentType
+  linkProps?: Omit<LinkProps, 'href'>
+} & (
+  | {
+      isReadOnly: true
+      onChange: undefined
+    }
+  | {
+      isReadOnly?: false
+      onChange: (value: FileDescriptor[]) => void
+    }
+)
+
 export function FilesList({
   value,
   onChange,
   listItemIcon = Paperclip,
   linkProps,
+  isReadOnly = false,
 }: FilesListProps): ReactElement<FilesListProps> {
-  const deleteFile = (file: FileDescriptor): void => {
-    const restFiles = value.filter((f) => f.uuid !== file.uuid)
-    onChange(restFiles)
-  }
+  const deleteFile = useCallback(
+    (file: FileDescriptor): void => {
+      if (!onChange) {
+        return
+      }
+
+      const restFiles = value.filter((f) => f.uuid !== file.uuid)
+      onChange(restFiles)
+    },
+    [onChange, value]
+  )
 
   return (
     <List>
@@ -36,23 +59,18 @@ export function FilesList({
           ) : (
             file.name
           )}
-          <IconButton
-            aria-label="Удалить"
-            variant="unstyled"
-            size="xs"
-            icon={<X color="red" size={16} />}
-            ml={2}
-            onClick={() => deleteFile(file)}
-          />
+          {!isReadOnly && (
+            <IconButton
+              aria-label="Удалить"
+              variant="unstyled"
+              size="xs"
+              icon={<X color="red" size={16} />}
+              ml={2}
+              onClick={() => deleteFile(file)}
+            />
+          )}
         </ListItem>
       ))}
     </List>
   )
-}
-
-interface FilesListProps {
-  value: readonly FileDescriptor[]
-  onChange: (value: FileDescriptor[]) => void
-  listItemIcon?: React.ComponentType
-  linkProps?: Omit<LinkProps, 'href'>
 }
