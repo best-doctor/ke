@@ -64,7 +64,7 @@ export function FilesList({
               aria-label="Удалить"
               variant="unstyled"
               size="xs"
-              icon={<X color="red" size={16} />}
+              icon={<X color="red" size={16} style={{ margin: '0 auto' }} />}
               ml={2}
               onClick={() => deleteFile(file)}
             />
