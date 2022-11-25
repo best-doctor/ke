@@ -8,6 +8,6 @@ export interface LoadingFileDescriptor {
   key: string
   name: string
   loaded: number
-  total: number
+  total?: number
   start: Date
 }

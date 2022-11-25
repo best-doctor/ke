@@ -1,4 +1,4 @@
-const esModules = ['react-icons', 'lodash-es'].join('|')
+const esModules = ['react-icons', 'lodash-es', 'axios'].join('|')
 
 module.exports = {
   preset: 'ts-jest',

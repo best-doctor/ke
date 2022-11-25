@@ -125,7 +125,7 @@ function UploadingList({ files }: UploadingListProps): ReactElement<UploadingLis
         <ListItem key={file.key}>
           <ListIcon as={Loader} />
           {file.name}
-          <Progress hasStripe isAnimated value={Math.floor((file.loaded / file.total) * 100)} />
+          <Progress hasStripe isAnimated value={Math.floor((file.loaded / (file.total || file.loaded)) * 100)} />
         </ListItem>
       ))}
     </List>
@@ -145,4 +145,4 @@ interface UploadingListProps {
   files: LoadingFileDescriptor[]
 }
 
-export type OnProgress = (event: { loaded: number; total: number }) => void
+export type OnProgress = (event: { loaded: number; total?: number }) => void
