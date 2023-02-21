@@ -1,6 +1,6 @@
 // Это легаси
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useToast, Box, Spinner, Alert, AlertTitle, AlertIcon, AlertDescription } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
@@ -88,13 +88,19 @@ const RenderDetail = (props: RenderDetailProps): JSX.Element => {
   }
   setFavicon(favicon)
 
-  const refreshMainDetailObject = (): void => {
+  const refreshMainDetailObject = useCallback(() => {
     setNeedRefreshDetailObject(true)
-  }
+  }, [])
+
+  // update data if id has changed
+  useEffect(() => {
+    refreshMainDetailObject()
+  }, [id, refreshMainDetailObject])
 
   useEffect(() => {
-    const backendResourceUrl = admin.getResource(id)
     if (needRefreshDetailObject) {
+      const backendResourceUrl = admin.getResource(id)
+
       provider
         .getObject(backendResourceUrl)
         .then(async (res) => {
