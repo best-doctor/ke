@@ -35,7 +35,7 @@ type BaseSelectWidgetProps = {
   style?: object
   setInitialValue: Function
   handleChange: Function
-  containerStore: Store<object>
+  containerStore: Store<object> | undefined
   required?: Accessor<boolean>
   isDisabled?: boolean
   isClearable?: boolean
@@ -49,7 +49,7 @@ const getSelectContent = (
   name: string,
   detailObject: DetailObject,
   displayValue: GenericAccessor,
-  context: {}
+  context: object | undefined
 ): [string, string] => {
   // TODO Remove this
   try {
@@ -82,7 +82,7 @@ const BaseSelectWidget = forwardRef<HTMLSelectElement, BaseSelectWidgetProps>(
       widgetStyles: extenrnalStyles,
     } = props
 
-    const context = containerStore.getState()
+    const context = containerStore?.getState()
 
     const [value, label] = getSelectContent(name, mainDetailObject, displayValue, context)
     const isRequired = getAccessorWithDefault(required, mainDetailObject, context, false)
@@ -156,7 +156,7 @@ const SelectWidget = forwardRef<HTMLSelectElement, SelectWidgetProps>((props: Se
     cacheTime,
   } = props
   const targetUrl = getData(dataTarget, mainDetailObject) || mainDetailObject.url
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const [value] = getSelectContent(name, mainDetailObject, displayValue, context)

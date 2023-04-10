@@ -125,7 +125,7 @@ const DateTimeRangeListWidget = (props: DateTimeRangeWidgetProps): JSX.Element =
     inputCount = 1,
   } = props
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const value = content || getInitialValue(inputCount)

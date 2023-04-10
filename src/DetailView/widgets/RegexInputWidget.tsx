@@ -55,7 +55,7 @@ export const RegexInputWidget = forwardRef<HTMLInputElement, RegexInputWidgetPro
       labelContainerProps,
       regexp,
     } = props
-    const context = containerStore.getState()
+    const context = containerStore?.getState()
 
     const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 

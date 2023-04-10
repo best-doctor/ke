@@ -33,7 +33,7 @@ const CheckboxWidget = (
     isReadOnly,
   } = props
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
 
   const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [value, setValue] = React.useState<boolean>(!!content)

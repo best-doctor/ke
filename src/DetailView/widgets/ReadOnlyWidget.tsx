@@ -37,7 +37,7 @@ const ReadOnlyWidget = (props: ReadOnlyWidgetProps): JSX.Element => {
 
   const { content, isRequired, widgetDescription } = useWidgetInitialization({
     ...props,
-    context: containerStore.getState(),
+    context: containerStore?.getState(),
   })
 
   const styles = useMultiStyleConfig('ReadOnlyWidget', props)

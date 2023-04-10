@@ -39,7 +39,7 @@ const RadioButtonWidget = (props: RadioButtonWidgetProps): JSX.Element => {
     cacheTime,
     getSelectedValue,
   } = props
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
 
   const { dataResourceUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })

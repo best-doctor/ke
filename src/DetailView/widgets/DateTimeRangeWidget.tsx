@@ -44,7 +44,7 @@ const DateTimeRangeWidget = (props: DateTimeRangeWidgetProps): JSX.Element => {
     mainDetailObject,
   } = props
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   let iStartDate = null
   let iEndDate = null
 

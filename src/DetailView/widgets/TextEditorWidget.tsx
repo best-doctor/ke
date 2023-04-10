@@ -28,7 +28,7 @@ const TextEditorWidget = (props: TextEditorProps): JSX.Element => {
     mainDetailObject,
   } = props
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   setInitialValue({ [name]: content })

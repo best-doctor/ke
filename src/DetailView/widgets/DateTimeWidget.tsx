@@ -54,7 +54,7 @@ const DateTimeWidget = (props: DateTimeWidgetProps): JSX.Element => {
     wrapperClassName,
   } = props
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 
   const contentDate = content ? new Date(content as string) : null

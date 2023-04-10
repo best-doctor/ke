@@ -27,7 +27,7 @@ const TextValidationWidget = (props: WidgetProps & { validateValue?: Accessor<an
     validateValue,
   } = props
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
   const { content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const value = getAccessor(validateValue, mainDetailObject, context)
 

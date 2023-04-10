@@ -22,7 +22,7 @@ const AsyncReadOnlyWidget = (props: WidgetProps): JSX.Element => {
 
   const [content, setContent] = useState<string>('')
 
-  const context = containerStore.getState()
+  const context = containerStore?.getState()
 
   const { dataResourceUrl, widgetDescription } = useWidgetInitialization({ ...props, context })
   const effectiveCacheTime = getAccessor(cacheTime, mainDetailObject, context)
