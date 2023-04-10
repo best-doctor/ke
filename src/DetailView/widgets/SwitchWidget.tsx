@@ -21,7 +21,7 @@ const SwitchWidget = (props: WidgetProps): JSX.Element => {
   const { name, helpText, targetPayload, submitChange, setInitialValue, containerStore, style, mainDetailObject } =
     props
 
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
 
   const { targetUrl, content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const [value, setValue] = useState<boolean>(!!content)

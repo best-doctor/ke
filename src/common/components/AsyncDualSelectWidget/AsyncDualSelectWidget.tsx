@@ -63,7 +63,7 @@ const AsyncDualSelectWidget = (props: DualSelectWidgetProps): JSX.Element => {
     useClipboard,
   } = props
 
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({
     ...props,

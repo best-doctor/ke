@@ -21,7 +21,7 @@ export type LinkWidgetProps = WidgetProps & {
 const LinkWidget = (props: LinkWidgetProps): JSX.Element => {
   const { name, mainDetailObject, href, helpText, style, containerStore, target = '_blank', linkProps } = props
 
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
   const { content, widgetDescription } = useWidgetInitialization({ ...props, context })
   const linkHref = getWidgetContent(name, mainDetailObject, href, context)
 

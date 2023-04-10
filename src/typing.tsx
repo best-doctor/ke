@@ -44,7 +44,7 @@ type WidgetProps = {
   submitChange: Function
   notBlockingValidators?: ValidatorFunction[]
   blockingValidators?: ValidatorFunction[]
-  containerStore: Store<object> | undefined
+  containerStore: Store<object>
   containerErrorsStore?: Store<ErrorElement[]> | undefined
   helpText?: string
   description?: string | JSX.Element

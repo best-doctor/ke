@@ -46,7 +46,7 @@ const MultiSelectWidget = (props: MultiSelectWidgetProps): JSX.Element => {
     menuPlacement,
   } = props
 
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
   const { targetUrl, content, dataResourceUrl, isRequired, widgetDescription } = useWidgetInitialization({
     ...props,
     context,

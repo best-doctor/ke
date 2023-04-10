@@ -30,7 +30,7 @@ export const PhoneChipInputWidget = (props: PhoneChipInputWidgetProps): JSX.Elem
     inputClassName,
     mainDetailObject,
   } = props
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 

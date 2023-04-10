@@ -43,7 +43,7 @@ const InputWidget = forwardRef<HTMLInputElement, InputWidgetProps>((props: Input
     labelContainerProps,
     inputProps,
   } = props
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
 
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization({ ...props, context })
 

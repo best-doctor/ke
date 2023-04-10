@@ -3,7 +3,7 @@ import { getAccessor, getAccessorWithDefault, getData, getWidgetContent } from '
 import type { GenericAccessor, DetailObject, WidgetProps } from '../../typing'
 
 type InitializationParameters = {
-  context: object | undefined // store for wizards and common detail view widgets
+  context: object // store for wizards and common detail view widgets
 }
 
 type InitializationArguments = WidgetProps & InitializationParameters

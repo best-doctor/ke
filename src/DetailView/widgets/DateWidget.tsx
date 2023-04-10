@@ -53,7 +53,7 @@ const DateWidget = (props: DateWidgetProps): JSX.Element => {
     mainDetailObject,
   } = props
 
-  const context = containerStore?.getState()
+  const context = containerStore.getState()
   const { targetUrl, content, isRequired, widgetDescription } = useWidgetInitialization(
     { ...props, context },
     { allowAllDefinedValues: getAccessor(allowAllDefinedValues) }
